@@ -25,6 +25,7 @@ namespace Solcery.Editor.CI.WebGl
             Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
+            DocketUtils.DockerImageUp();
         }
 
         [MenuItem("Build/WebGl/Release")]
