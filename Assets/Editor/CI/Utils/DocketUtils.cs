@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace Solcery.Editor.CI.Utils
 {
@@ -16,6 +17,7 @@ namespace Solcery.Editor.CI.Utils
 
         private static void RunExecutable(string name)
         {
+            Debug.Log($"Execute \"{name}\"");
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -23,11 +25,24 @@ namespace Solcery.Editor.CI.Utils
                     FileName = "/bin/sh",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     Arguments = BuildUtils.GetOutputPath(BuildSettings.DefaultPathDevelopCI) + name
                 }
             };
+            
+            process.OutputDataReceived += OutputHandler;
+            process.ErrorDataReceived += OutputHandler;
             process.Start();
-            process.WaitForExit();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+        }
+        
+        private static void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine) 
+        {
+            if (!string.IsNullOrEmpty(outLine.Data))
+            {
+                Debug.Log(outLine.Data);
+            }
         }
     }
 }
