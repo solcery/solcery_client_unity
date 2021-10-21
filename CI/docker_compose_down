@@ -1,3 +1,4 @@
 #!/bin/bash
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 PROJECT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 docker-compose -f "$PROJECT"/docker-compose.yaml down
