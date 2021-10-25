@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Solcery.Utils;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Solcery
 {
     public enum EntityTypes
     {
-        bool_value,
-        int_value,
-        string_value,
+        empty,
+        value_bool,
+        value_int,
+        value_string,
         brick_value_const,
         brick_condition_const,
         brick_condition_not,
@@ -26,15 +26,55 @@ namespace Solcery
     {
         public readonly EntityTypes EntityType;
 
+        public static EntityData Parse(JObject json)
+        {
+            return json.GetEnum<EntityTypes>("type") switch
+            {
+                EntityTypes.value_bool => ValueData.Parse(json),
+                EntityTypes.value_int => ValueData.Parse(json),
+                EntityTypes.value_string => ValueData.Parse(json),
+                EntityTypes.brick_value_const => BrickData.Parse(json),
+                EntityTypes.brick_condition_and => BrickData.Parse(json),
+                EntityTypes.brick_condition_const => BrickData.Parse(json),
+                EntityTypes.brick_condition_equal => BrickData.Parse(json),
+                EntityTypes.brick_condition_greater_than => BrickData.Parse(json),
+                EntityTypes.brick_condition_lesser_than => BrickData.Parse(json),
+                EntityTypes.brick_condition_not => BrickData.Parse(json),
+                EntityTypes.brick_condition_or => BrickData.Parse(json),
+                _ => EmptyData.Create()
+            };
+        }
+
         protected EntityData(EntityTypes entityType)
         {
             EntityType = entityType;
         }
     }
 
+    public class EmptyData : EntityData
+    {
+        public static EntityData Create()
+        {
+            return new EmptyData();
+        }
+        
+        private EmptyData() : base(EntityTypes.empty) { }
+    }
+
 
     public abstract class ValueData : EntityData
     {
+        public new static EntityData Parse(JObject json)
+        {
+            return json.GetEnum<EntityTypes>("type") switch
+            {
+                EntityTypes.value_bool => BoolValueData.Create(json.GetValue<bool>("value")),
+                EntityTypes.value_int => IntValueData.Create(json.GetValue<int>("value")),
+                EntityTypes.value_string => StringValueData.Create(json.GetValue<string>("value")),
+                _ => EmptyData.Create()
+            };
+        }
+        
         protected ValueData(EntityTypes entityType) : base(entityType) { }
     }
 
@@ -47,7 +87,7 @@ namespace Solcery
             return new BoolValueData(value);
         }
         
-        private BoolValueData(bool value) : base(EntityTypes.bool_value)
+        private BoolValueData(bool value) : base(EntityTypes.value_bool)
         {
             Value = value;
         }
@@ -62,7 +102,7 @@ namespace Solcery
             return new IntValueData(value);
         }
         
-        private IntValueData(int value) : base(EntityTypes.int_value)
+        private IntValueData(int value) : base(EntityTypes.value_int)
         {
             Value = value;
         }
@@ -77,7 +117,7 @@ namespace Solcery
             return new StringValueData(value);
         }
         
-        private StringValueData(string value) : base(EntityTypes.string_value)
+        private StringValueData(string value) : base(EntityTypes.value_string)
         {
             Value = value;
         }
@@ -87,9 +127,18 @@ namespace Solcery
     {
         public readonly List<EntityData> Parameters;
 
-        public static BrickData Parse(JObject json)
+        public new static BrickData Parse(JObject json)
         {
-            
+            var result = new BrickData(json.GetEnum<EntityTypes>("type"));
+            var paramsArray = json.GetValue<JArray>("params");
+            foreach (var paramToken in paramsArray)
+            {
+                if (paramToken is JObject paramObject)
+                {
+                    result.AddParameter(EntityData.Parse(paramObject));
+                }
+            }
+            return result;
         }
 
         public static BrickData Create(EntityTypes entityType)
@@ -336,52 +385,13 @@ namespace Solcery
 
     public class TestAsync : MonoBehaviour
     {
-        private Action _task;
-        
-        private async void Update()
+        private void Start()
         {
-            if (_task != null)
-            {
-                return;
-            }
-            
-            Debug.Log("Update");
-
-            // var ts = await UniTask.Run<Action>(() =>
-            // {
-            //     var rnd = new Random(100);
-            //     var result = 0;
-            //     for (var i = 0; i < 100000000; i++)
-            //     {
-            //         result += rnd.Next(0, 10000);
-            //     }
-            //
-            //     return () =>
-            //     {
-            //         Debug.Log($"Result {result}");
-            //     };
-            // });
-            //
-            // ts.Invoke();
-
-            _task = await UniTask.Create(() =>
-            {
-                var rnd = new Random(100);
-                var result = 0;
-                for (var i = 0; i < 100000000; i++)
-                {
-                    result += rnd.Next(0, 10000);
-                    UniTask.WaitForEndOfFrame();
-                }
-                
-                return new UniTask<Action>(() =>
-                {
-                    Debug.Log($"Result {result}");
-                });
-            });
-            
-            _task.Invoke();
-            _task = null;
+            // var json = JObject.Parse(Resources.Load<TextAsset>("test").text);
+            // var brickData = BrickData.Parse(json);
+            // var brick = BrickFabric.Create(brickData) as Condition;
+            // var result = brick.Run(brickData.Parameters, null);
+            // Debug.Log($"Brick run result {result}");
         }
     }
 }
