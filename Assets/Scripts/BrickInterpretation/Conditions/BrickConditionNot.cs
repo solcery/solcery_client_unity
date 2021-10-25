@@ -14,7 +14,10 @@ namespace Solcery.BrickInterpretation.Conditions
                 && BrickService.GetInstance().Create(brickTypeName) is BrickCondition condition 
                 && parameterObject.TryGetValue("params", out JArray @params))
             {
-                return !condition.Run(@params, context);
+                var result = !condition.Run(@params, context);
+                BrickService.GetInstance().Free(condition);
+                
+                return result;
             }
             
             throw new Exception($"BrickConditionNot Run has error! Parameters {parameters}");

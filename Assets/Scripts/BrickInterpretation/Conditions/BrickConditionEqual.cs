@@ -19,7 +19,12 @@ namespace Solcery.BrickInterpretation.Conditions
                 && BrickService.GetInstance().Create(brickTypeName2) is BrickValue condition2 
                 && parameterObject2.TryGetValue("params", out JArray @params2))
             {
-                return condition1.Run(@params1, context) == condition2.Run(@params2, context);
+                var c1 = condition1.Run(@params1, context);
+                var c2 = condition2.Run(@params2, context);
+                BrickService.GetInstance().Free(condition1);
+                BrickService.GetInstance().Free(condition2);
+                
+                return c1 == c2;
             }
             
             throw new Exception($"BrickConditionEqual Run has error! Parameters {parameters}");
