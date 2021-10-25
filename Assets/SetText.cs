@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,11 @@ namespace Solcery
 #if DEV
             text.text = "Dev";
 #endif
+        }
+
+        private void Update()
+        {
+            Debug.Log("Check update");
         }
     }
 }

@@ -1,0 +1,42 @@
+{
+	"type": "brick_condition_and",
+	"params":
+	[
+		{
+			"type": "brick_condition_equal",
+			"params":
+			[
+				{
+					"type": "brick_value_const",
+					"params":
+					[
+						{
+							"type": "int_value",
+							"value": 10
+						}
+					]
+				},
+				{
+					"type": "brick_value_const",
+					"params":
+					[
+						{
+							"type": "int_value",
+							"value": 10
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "brick_condition_const",
+			"params":
+			[
+				{
+					"type": "bool_value",
+					"value": 10
+				}
+			]
+		}
+	]
+}
