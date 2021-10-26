@@ -1,10 +1,14 @@
+using System;
+using Newtonsoft.Json.Linq;
+
 namespace Solcery.BrickInterpretation
 {
     public interface IBrickService
     {
-        void Registration(Brick brick);
+        void RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1);
+        void ExecuteActionBrick(JToken json, IContext context);
+        int ExecuteValueBrick(JToken json, IContext context);
+        bool ExecuteConditionBrick(JToken json, IContext context);
         void Cleanup();
-        bool TryCreate<T>(string brickTypeName, out T brick) where T : Brick;
-        void Free(Brick brick);
     }
 }

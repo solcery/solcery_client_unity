@@ -1,24 +1,37 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Solcery.BrickInterpretation.Actions;
+using Solcery.BrickInterpretation.Conditions;
+using Solcery.BrickInterpretation.Values;
+using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation
 {
-    public class BrickService : Service<BrickService>, IBrickService
+    public class BrickService : IBrickService
     {
-        private Dictionary<string, Type> _brickTypeNameToType;
-        private Dictionary<string, Stack<Brick>> _brickPool;
+        private readonly Dictionary<string, Func<string, Brick>> _brickTypeNameToType;
+        private readonly Dictionary<string, Stack<Brick>> _brickPool;
 
-        public BrickService()
+        public static IBrickService Create()
         {
-            _brickTypeNameToType = new Dictionary<string, Type>(20);
+            return new BrickService();
+        }
+
+        private BrickService()
+        {
+            _brickTypeNameToType = new Dictionary<string, Func<string, Brick>>(20);
             _brickPool = new Dictionary<string, Stack<Brick>>(20);
         }
 
-        public void Registration(Brick brick)
+        public void RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1)
         {
-            _brickTypeNameToType.Add(brick.BrickTypeName(), brick.GetType());
-            _brickPool.Add(brick.BrickTypeName(), new Stack<Brick>(10));
-            _brickPool[brick.BrickTypeName()].Push(brick);
+            _brickTypeNameToType.Add(brickTypeName, created);
+            _brickPool.Add(brickTypeName, new Stack<Brick>(capacity));
+            for (var i = 0; i < capacity; i++)
+            {
+                _brickPool[brickTypeName].Push(created.Invoke(brickTypeName));
+            }
         }
 
         public void Cleanup()
@@ -27,50 +40,106 @@ namespace Solcery.BrickInterpretation
             _brickPool.Clear();
         }
 
-        public bool TryCreate<T>(string brickTypeName, out T brick) where T : Brick
+        private T CreateBrick<T>(string brickTypeName) where T : Brick
         {
-            brick = null;
-
             if (!_brickTypeNameToType.ContainsKey(brickTypeName))
             {
-                return false;
+                return null;
             }
 
-            Brick br;
-
-            if (_brickPool.ContainsKey(brickTypeName) && _brickPool[brickTypeName].Count > 0)
-            {
-                br = _brickPool[brickTypeName].Pop();
-            }
-            else
-            {
-                br = (Brick) Activator.CreateInstance(_brickTypeNameToType[brickTypeName]);
-            }
+            var br = _brickPool.ContainsKey(brickTypeName) && _brickPool[brickTypeName].Count > 0
+                ? _brickPool[brickTypeName].Pop()
+                : _brickTypeNameToType[brickTypeName].Invoke(brickTypeName);
 
             if (br is T brT)
             {
-                brick = brT;
-                return true;
+                return brT;
             }
             
-            Free(br);
-            return false;
+            FreeBrick(br);
+            return null;
         }
 
-        public void Free(Brick brick)
+        private void FreeBrick(Brick brick)
         {
             if (brick == null)
             {
                 return;
             }
 
-            if (!_brickPool.ContainsKey(brick.BrickTypeName()))
+            if (!_brickPool.ContainsKey(brick.TypeName))
             {
-                _brickPool[brick.BrickTypeName()] = new Stack<Brick>(10);
+                _brickPool[brick.TypeName] = new Stack<Brick>(10);
             }
             
             brick.Reset();
-            _brickPool[brick.BrickTypeName()].Push(brick);
+            _brickPool[brick.TypeName].Push(brick);
+        }
+
+        public void ExecuteActionBrick(JToken json, IContext context)
+        {
+            BrickAction brick = null;
+            
+            try
+            {
+                if (json is JObject obj 
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
+                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                {
+                    brick = CreateBrick<BrickAction>(brickTypeName);
+                    brick.Run(this, parameters, context);
+                }
+            }
+            finally
+            {
+                FreeBrick(brick);
+            }
+        }
+
+        public int ExecuteValueBrick(JToken json, IContext context)
+        {
+            var result = 0;
+            BrickValue brick = null;
+
+            try
+            {
+                if (json is JObject obj 
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
+                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                {
+                    brick = CreateBrick<BrickValue>(brickTypeName);
+                    result = brick.Run(this, parameters, context);
+                }
+            }
+            finally
+            {
+                FreeBrick(brick);
+            }
+
+            return result;
+        }
+
+        public bool ExecuteConditionBrick(JToken json, IContext context)
+        {
+            var result = false;
+            BrickCondition brick = null;
+            
+            try
+            {
+                if (json is JObject obj 
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
+                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                {
+                    brick = CreateBrick<BrickCondition>(brickTypeName);
+                    result = brick.Run(this, parameters, context);
+                }
+            }
+            finally
+            {
+                FreeBrick(brick);
+            }
+
+            return result;
         }
     }
 }

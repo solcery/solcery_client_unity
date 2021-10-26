@@ -1,33 +1,26 @@
-using System;
 using Newtonsoft.Json.Linq;
-using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Actions
 {
-    public class BrickActionSet : BrickAction
+    public sealed class BrickActionSet : BrickAction
     {
-        public override string BrickTypeName()
+        public static BrickAction Create(string typeName)
         {
-            return "brick_action_set";
+            return new BrickActionSet(typeName);
+        }
+
+        private BrickActionSet(string typeName)
+        {
+            TypeName = typeName;
         }
 
         public override void Reset() { }
 
-        public override void Run(JArray parameters, IContext context)
+        public override void Run(IBrickService brickService, JArray parameters, IContext context)
         {
             foreach (var parameterToken in parameters)
             {
-                if (BrickUtils.TryGetBrickTypeName(parameterToken, out var brickTypeName)
-                    && BrickUtils.TryGetBrickParameters(parameterToken, out var @params)
-                    && BrickService.GetInstance().TryCreate(brickTypeName, out BrickAction action))
-                {
-                    action.Run(@params, context);
-                    BrickService.GetInstance().Free(action);
-                }
-                else
-                {
-                    throw new Exception($"BrickActionSet Run has error! Parameters {parameterToken}");
-                }
+                brickService.ExecuteActionBrick(parameterToken, context);
             }
         }
     }

@@ -2,15 +2,19 @@ using Newtonsoft.Json.Linq;
 
 namespace Solcery.BrickInterpretation.Actions
 {
-    public class BrickActionVoid : BrickAction
+    public sealed class BrickActionVoid : BrickAction
     {
-        public override string BrickTypeName()
+        public static BrickAction Create(string typeName)
         {
-            return "brick_action_void";
+            return new BrickActionVoid(typeName);
         }
 
+        private BrickActionVoid(string typeName)
+        {
+            TypeName = typeName;
+        }
+        
         public override void Reset() { }
-
-        public override void Run(JArray parameters, IContext context) { }
+        public override void Run(IBrickService brickService, JArray parameters, IContext context) { }
     }
 }

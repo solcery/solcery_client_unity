@@ -4,9 +4,19 @@ using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Conditions
 {
-    public class BrickConditionConst : BrickCondition
+    public sealed class BrickConditionConst : BrickCondition
     {
-        public override bool Run(JArray parameters, IContext context)
+        public static BrickCondition Create(string typeName)
+        {
+            return new BrickConditionConst(typeName);
+        }
+
+        private BrickConditionConst(string typeName)
+        {
+            TypeName = typeName;
+        }
+        
+        public override bool Run(IBrickService brickService, JArray parameters, IContext context)
         {
             if (parameters.Count > 0 
                 && parameters[0] is JObject valueObject 
@@ -16,11 +26,6 @@ namespace Solcery.BrickInterpretation.Conditions
             }
 
             throw new ArgumentException($"BrickConditionConst Run has exception! Parameters {parameters}");
-        }
-
-        public override string BrickTypeName()
-        {
-            return "brick_condition_const";
         }
 
         public override void Reset() { }
