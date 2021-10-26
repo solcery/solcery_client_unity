@@ -10,10 +10,9 @@ namespace Solcery.BrickInterpretation.Conditions
         {
             foreach (var parameterToken in parameters)
             {
-                if (parameterToken is JObject parameterObject 
-                    && parameterObject.TryGetValue("type", out string brickTypeName) 
-                    && BrickService.GetInstance().Create(brickTypeName) is BrickCondition condition 
-                    && parameterObject.TryGetValue("params", out JArray @params))
+                if (BrickUtils.TryGetBrickTypeName(parameterToken, out var brickTypeName)
+                    && BrickUtils.TryGetBrickParameters(parameterToken, out var @params)
+                    && BrickService.GetInstance().TryCreate(brickTypeName, out BrickCondition condition))
                 {
                     var result = condition.Run(@params, context);
                     BrickService.GetInstance().Free(condition);

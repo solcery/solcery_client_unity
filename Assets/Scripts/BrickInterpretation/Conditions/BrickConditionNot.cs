@@ -9,10 +9,9 @@ namespace Solcery.BrickInterpretation.Conditions
         public override bool Run(JArray parameters, IContext context)
         {
             if (parameters.Count > 0 
-                && parameters[0] is JObject parameterObject 
-                && parameterObject.TryGetValue("type", out string brickTypeName) 
-                && BrickService.GetInstance().Create(brickTypeName) is BrickCondition condition 
-                && parameterObject.TryGetValue("params", out JArray @params))
+                && BrickUtils.TryGetBrickTypeName(parameters[0], out var brickTypeName)
+                && BrickUtils.TryGetBrickParameters(parameters[0], out var @params)
+                && BrickService.GetInstance().TryCreate(brickTypeName, out BrickCondition condition))
             {
                 var result = !condition.Run(@params, context);
                 BrickService.GetInstance().Free(condition);

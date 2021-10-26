@@ -9,22 +9,26 @@ namespace Solcery.BrickInterpretation.Conditions
     {
         public override bool Run(JArray parameters, IContext context)
         {
-            if (parameters.Count >= 2 
-                && parameters[0] is JObject parameterObject1 
-                && parameterObject1.TryGetValue("type", out string brickTypeName1) 
-                && BrickService.GetInstance().Create(brickTypeName1) is BrickValue condition1 
-                && parameterObject1.TryGetValue("params", out JArray @params1)
-                && parameters[1] is JObject parameterObject2 
-                && parameterObject2.TryGetValue("type", out string brickTypeName2) 
-                && BrickService.GetInstance().Create(brickTypeName2) is BrickValue condition2 
-                && parameterObject2.TryGetValue("params", out JArray @params2))
+            if (parameters.Count > 1 
+                && BrickUtils.TryGetBrickTypeName(parameters[0], out var brickTypeName1)
+                && BrickUtils.TryGetBrickParameters(parameters[0], out var @params1)
+                && BrickUtils.TryGetBrickTypeName(parameters[1], out var brickTypeName2)
+                && BrickUtils.TryGetBrickParameters(parameters[1], out var @params2))
             {
-                var c1 = condition1.Run(@params1, context);
-                var c2 = condition2.Run(@params2, context);
-                BrickService.GetInstance().Free(condition1);
-                BrickService.GetInstance().Free(condition2);
+                BrickService.GetInstance().TryCreate(brickTypeName1, out BrickValue value1);
+                BrickService.GetInstance().TryCreate(brickTypeName2, out BrickValue value2);
+
+                if (value1 != null && value2 != null)
+                {
+                    var v1 = value1.Run(@params1, context);
+                    BrickService.GetInstance().Free(value1);
+                    var v2 = value2.Run(@params2, context);
+                    BrickService.GetInstance().Free(value2);
+                    return v1 <= v2;
+                }
                 
-                return c1 <= c2;
+                BrickService.GetInstance().Free(value1);
+                BrickService.GetInstance().Free(value2);
             }
             
             throw new Exception($"BrickConditionLesserThan Run has error! Parameters {parameters}");

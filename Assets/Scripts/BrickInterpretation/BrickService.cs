@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Solcery.BrickInterpretation
 {
-    public class BrickService : Service<BrickService>
+    public class BrickService : Service<BrickService>, IBrickService
     {
         private Dictionary<string, Type> _brickTypeNameToType;
         private Dictionary<string, Stack<Brick>> _brickPool;
@@ -27,25 +27,34 @@ namespace Solcery.BrickInterpretation
             _brickPool.Clear();
         }
 
-        public Brick Create(string brickTypeName)
+        public bool TryCreate<T>(string brickTypeName, out T brick) where T : Brick
         {
+            brick = null;
+
             if (!_brickTypeNameToType.ContainsKey(brickTypeName))
             {
-                return null;
+                return false;
             }
-            
+
+            Brick br;
+
             if (_brickPool.ContainsKey(brickTypeName) && _brickPool[brickTypeName].Count > 0)
             {
-                return _brickPool[brickTypeName].Pop();
+                br = _brickPool[brickTypeName].Pop();
+            }
+            else
+            {
+                br = (Brick) Activator.CreateInstance(_brickTypeNameToType[brickTypeName]);
+            }
+
+            if (br is T brT)
+            {
+                brick = brT;
+                return true;
             }
             
-            return (Brick) Activator.CreateInstance(_brickTypeNameToType[brickTypeName]);
-        }
-
-        public bool TryCreate(string brickTypeName, out Brick brick)
-        {
-            brick = Create(brickTypeName);
-            return brick != null;
+            Free(br);
+            return false;
         }
 
         public void Free(Brick brick)
