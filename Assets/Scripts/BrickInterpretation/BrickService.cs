@@ -24,7 +24,7 @@ namespace Solcery.BrickInterpretation
             _brickPool = new Dictionary<string, Stack<Brick>>(20);
         }
 
-        public void RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1)
+        void IBrickService.RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1)
         {
             _brickTypeNameToType.Add(brickTypeName, created);
             _brickPool.Add(brickTypeName, new Stack<Brick>(capacity));
@@ -34,7 +34,7 @@ namespace Solcery.BrickInterpretation
             }
         }
 
-        public void Cleanup()
+        void IBrickService.Cleanup()
         {
             _brickTypeNameToType.Clear();
             _brickPool.Clear();
@@ -76,7 +76,7 @@ namespace Solcery.BrickInterpretation
             _brickPool[brick.TypeName].Push(brick);
         }
 
-        public void ExecuteActionBrick(JToken json, IContext context)
+        void IBrickService.ExecuteActionBrick(JToken json, IContext context)
         {
             BrickAction brick = null;
             
@@ -96,7 +96,7 @@ namespace Solcery.BrickInterpretation
             }
         }
 
-        public int ExecuteValueBrick(JToken json, IContext context)
+        int IBrickService.ExecuteValueBrick(JToken json, IContext context)
         {
             var result = 0;
             BrickValue brick = null;
@@ -119,7 +119,7 @@ namespace Solcery.BrickInterpretation
             return result;
         }
 
-        public bool ExecuteConditionBrick(JToken json, IContext context)
+        bool IBrickService.ExecuteConditionBrick(JToken json, IContext context)
         {
             var result = false;
             BrickCondition brick = null;
