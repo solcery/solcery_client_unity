@@ -9,5 +9,7 @@ namespace Solcery.Services.Transport
         event Action<JObject> EventReceivingGameState;
         void CallUnityLoaded();
         void SendCommand(JObject command);
+        void Cleanup();
+        void Destroy();
     }
 }

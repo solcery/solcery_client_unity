@@ -10,5 +10,6 @@ namespace Solcery.BrickInterpretation
         int ExecuteValueBrick(JToken json, IContext context);
         bool ExecuteConditionBrick(JToken json, IContext context);
         void Cleanup();
+        void Destroy();
     }
 }

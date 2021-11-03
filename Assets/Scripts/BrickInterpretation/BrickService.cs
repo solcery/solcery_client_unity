@@ -24,7 +24,7 @@ namespace Solcery.BrickInterpretation
             _brickPool = new Dictionary<string, Stack<Brick>>(20);
         }
 
-        void IBrickService.RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1)
+        void IBrickService.RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity)
         {
             _brickTypeNameToType.Add(brickTypeName, created);
             _brickPool.Add(brickTypeName, new Stack<Brick>(capacity));
@@ -35,6 +35,16 @@ namespace Solcery.BrickInterpretation
         }
 
         void IBrickService.Cleanup()
+        {
+            Cleanup();
+        }
+        
+        void IBrickService.Destroy()
+        {
+            Cleanup();
+        }
+
+        private void Cleanup()
         {
             _brickTypeNameToType.Clear();
             _brickPool.Clear();

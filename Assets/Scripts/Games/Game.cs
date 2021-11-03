@@ -5,10 +5,11 @@ using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
 using Solcery.Services.GameContent;
 using Solcery.Services.Transport;
+using UnityEngine;
 
 namespace Solcery.Games
 {
-    public class Game : IGame
+    public class Game : IGame, IGameOnReceivingGameContent
     {
         ITransportService IGame.TransportService => _transportService;
         IBrickService IGame.BrickService => _brickService;
@@ -30,26 +31,38 @@ namespace Solcery.Games
         void IGame.Init()
         {
             CreateServices();
-            InitServices();
-            
-            _model = PlayModel.Create();
+            CreateModel();
+            _transportService.CallUnityLoaded();
         }
 
         private void CreateServices()
         {
 #if UNITY_EDITOR
-            _transportService = EditorTransportService.Create();
+            _transportService = EditorTransportService.Create(this);
 #else
-            _transportService = WebGlTransportService.Create();
+            _transportService = WebGlTransportService.Create(this);
 #endif
             
             _brickService = BrickService.Create();
-            _gameContentService = GameContentService.Create();
+            _gameContentService = GameContentService.Create(_transportService);
         }
 
-        private void InitServices()
+        private void CreateModel()
         {
+            _model = PlayModel.Create();
+        }
+        
+        void IGameOnReceivingGameContent.OnReceivingGameContent()
+        {
+            Cleanup();
+            Init();
+        }
+
+        private void Init()
+        {
+            _model.Init();
             RegistrationBrickTypes();
+            _gameContentService.Init();
         }
 
         private void RegistrationBrickTypes()
@@ -70,14 +83,29 @@ namespace Solcery.Games
             _brickService.RegistrationBrickType("brick_condition_lesser_than", BrickConditionLesserThan.Create);
         }
 
+        private void Cleanup()
+        {
+            _model.Destroy();
+            _gameContentService.Cleanup();
+            _brickService.Cleanup();
+            _transportService.Cleanup();
+        }
+
         void IGame.Update(float dt)
         {
-            throw new System.NotImplementedException();
+            _model.Update(dt);
         }
 
         void IGame.Destroy()
         {
-            throw new System.NotImplementedException();
+            _model.Destroy();
+            _model = null;
+            _gameContentService.Destroy();
+            _gameContentService = null;
+            _brickService.Destroy();
+            _brickService = null;
+            _transportService.Destroy();
+            _transportService = null;
         }
 
     }

@@ -55,5 +55,15 @@ namespace Solcery.Services.Transport
         {
             throw new NotImplementedException();
         }
+        
+        void ITransportService.Cleanup()
+        {
+            throw new NotImplementedException();
+        }
+        
+        void ITransportService.Destroy()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
