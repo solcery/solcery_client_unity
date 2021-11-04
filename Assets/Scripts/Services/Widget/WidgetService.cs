@@ -7,6 +7,7 @@ namespace Solcery.Services.Widget
     {
         private readonly IWidgetsProvider _widgetsProvider;
         private readonly IModel _model;
+        private readonly PoolProvider _poolProvider;
         
         public static WidgetService Create(IWidgetsProvider widgetsProvider, IModel model)
         {
@@ -17,6 +18,7 @@ namespace Solcery.Services.Widget
         {
             _widgetsProvider = widgetsProvider;
             _model = model;
+            _poolProvider = new PoolProvider("UiPool");
         }
 
         public UiBaseWidget GetUiWidget(UiWidgetTypes type, UiBaseWidget parent)
@@ -24,33 +26,30 @@ namespace Solcery.Services.Widget
             var gameObject = _widgetsProvider.GetUiWidget(type);
             if (gameObject != null)
             {
-                var widget = Object.Instantiate(gameObject).GetComponent<UiBaseWidget>();
-                widget.Init(_model.World, parent);
-                return widget;
+                return _poolProvider.GetFromPool<UiBaseWidget>(gameObject, parent);
             }
-            else
-            {
-                Debug.LogError($"Can't get ui widget for type {type}");
-                return null;
-            }
+            Debug.LogError($"Can't get ui widget for type {type}");
+            return null;
         }
 
         public void ReturnUiWidget(UiBaseWidget widget)
         {
-            widget.Clear();
-            // todo will support pooling
+            _poolProvider.ReturnToPool(widget);
         }
 
         public void Init()
         {
+            _poolProvider.Init(_model.World);
         }
 
         public void Cleanup()
         {
+            _poolProvider.ReturnAllToPool();
         }
 
         public void Destroy()
         {
+            _poolProvider.Dispose();
         }
     }
 }

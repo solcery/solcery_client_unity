@@ -1,28 +1,17 @@
 using Leopotam.EcsLite;
+using Solcery.Services.Widget;
 using UnityEngine;
 
 namespace Solcery
 {
-    public class UiBaseWidget : MonoBehaviour, IVisible
+    public class UiBaseWidget : PoolObject, IVisible
     {
         public RectTransform RectTransform;
         
-        protected EcsWorld EcsWorld;
-        
-        public virtual void Init(EcsWorld world, UiBaseWidget parent)
+        public override void Init(EcsWorld world)
         {
-            EcsWorld = world;
-            if (parent != null)
-            {
-                transform.SetParent(parent.transform);
-            }
-            // todo delete it after transform will support
+            base.Init(world);
             transform.position = Vector3.zero;
-        }
-        
-        public virtual void Clear()
-        {
-            EcsWorld = null;
         }
         
         public virtual void SetVisible(bool value)

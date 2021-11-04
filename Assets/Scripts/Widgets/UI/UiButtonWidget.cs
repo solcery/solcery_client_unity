@@ -9,9 +9,9 @@ namespace Solcery
         public Image Image;
         public Text Text;
 
-        public override void Init(EcsWorld world, UiBaseWidget parent)
+        public override void Init(EcsWorld world)
         {
-            base.Init(world, parent);
+            base.Init(world);
             Button.onClick.AddListener(OnButtonClick);
         }
         
