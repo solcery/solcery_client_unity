@@ -1,10 +1,14 @@
 using Solcery.Games;
+using Solcery.Services.Widget;
 using UnityEngine;
 
 namespace Solcery
 {
     public class GameApplication : MonoBehaviour
     {
+        [SerializeField]
+        public UiWidgetSettings _uiWidgetSettings;
+        
         private IGame _game;
 
         private static GameApplication _instance;
@@ -22,7 +26,7 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create();
+            _game = Games.Game.Create(_uiWidgetSettings);
             _game.Init();
         }
 

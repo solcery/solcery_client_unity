@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0fca8d41bdd4622931b17a324cab56, type: 3}
+  m_Name: UiWidgetSettings
+  m_EditorClassIdentifier: 
+  _widgets:
+  - Type: 0
+    GameObject: {fileID: 2183881193887231316, guid: 8960d9607d23349e982f8e4b9137d7fb, type: 3}
+  - Type: 1
+    GameObject: {fileID: 6984650120684039151, guid: 4b91d6d241aa1498cba6077ffa67a79d, type: 3}

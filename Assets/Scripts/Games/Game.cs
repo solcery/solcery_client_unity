@@ -5,7 +5,8 @@ using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
 using Solcery.Services.GameContent;
 using Solcery.Services.Transport;
-using UnityEngine;
+using Solcery.Services.Ui;
+using Solcery.Services.Widget;
 
 namespace Solcery.Games
 {
@@ -15,23 +16,29 @@ namespace Solcery.Games
         IBrickService IGame.BrickService => _brickService;
         IGameContentService IGame.GameContentService => _gameContentService;
         IModel IGame.Model => _model;
-        
+
         private ITransportService _transportService;
         private IBrickService _brickService;
         private IModel _model;
         private IGameContentService _gameContentService;
+        private IUiService _uiService;
+        private IWidgetService _widgetService;
+        private IWidgetsProvider _widgetsProvider;
 
-        public static IGame Create()
+        public static IGame Create(IWidgetsProvider widgetsProvider)
         {
-            return new Game();
+            return new Game(widgetsProvider);
         }
-        
-        private Game() { }
-        
+
+        private Game(IWidgetsProvider widgetsProvider)
+        {
+            _widgetsProvider = widgetsProvider;
+        }
+
         void IGame.Init()
         {
-            CreateServices();
             CreateModel();
+            CreateServices();
             _transportService.CallUnityLoaded();
         }
 
@@ -42,16 +49,18 @@ namespace Solcery.Games
 #else
             _transportService = WebGlTransportService.Create(this);
 #endif
-            
+
             _brickService = BrickService.Create();
             _gameContentService = GameContentService.Create(_transportService);
+            _widgetService = WidgetService.Create(_widgetsProvider, _model);
+            _uiService = UiService.Create(_gameContentService, _widgetService, _model);
         }
 
         private void CreateModel()
         {
             _model = PlayModel.Create();
         }
-        
+
         void IGameOnReceivingGameContent.OnReceivingGameContent()
         {
             Cleanup();
@@ -63,6 +72,8 @@ namespace Solcery.Games
             _model.Init();
             RegistrationBrickTypes();
             _gameContentService.Init();
+            _widgetService.Init();
+            _uiService.Init();
         }
 
         private void RegistrationBrickTypes()
@@ -89,6 +100,8 @@ namespace Solcery.Games
             _gameContentService.Cleanup();
             _brickService.Cleanup();
             _transportService.Cleanup();
+            _widgetService.Cleanup();
+            _uiService.Cleanup();
         }
 
         void IGame.Update(float dt)
@@ -106,7 +119,10 @@ namespace Solcery.Games
             _brickService = null;
             _transportService.Destroy();
             _transportService = null;
+            _widgetService.Destroy();
+            _widgetService = null;
+            _uiService.Destroy();
+            _uiService = null;
         }
-
     }
 }

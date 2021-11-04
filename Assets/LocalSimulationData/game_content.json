@@ -1,7 +1,43 @@
 {
 	"ui":
 	{
-
+		"guid": 1,
+		"ui_widget_type": "canvas",
+		"transform":
+		{
+			"position":
+			{
+				"x": 0,
+				"y": 0,
+				"z": 0
+			}
+		},
+		"childs":
+		[
+			{
+				"guid": 2,
+				"ui_widget_type": "button",
+				"transform":
+				{
+					"position":
+					{
+						"x": 10,
+						"y": 10,
+						"z": 0
+					}
+				},
+				"triggers":
+				[
+					{
+						"event": "on_click",
+						"action":
+						{
+							"type": "brick_action_next_turn"
+						}
+					}
+				]
+			}
+		]
 	},
 	"game":
 	{
