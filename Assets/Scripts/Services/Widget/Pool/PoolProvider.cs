@@ -12,14 +12,13 @@ namespace Solcery.Services.Widget
         private readonly Dictionary<PoolObject, Pool> _given;
         private EcsWorld _world;
         
-        public PoolProvider(string poolName, bool editorMode = false)
+        public PoolProvider(string poolName)
         {
             _pools = new Dictionary<GameObject, Pool>();
             _given = new Dictionary<PoolObject, Pool>();
-            
+
             var go = new GameObject(poolName);
-            if(!editorMode)
-                Object.DontDestroyOnLoad(go);
+            Object.DontDestroyOnLoad(go);
             _root = go.transform;
         }
 
@@ -118,11 +117,9 @@ namespace Solcery.Services.Widget
             _given.Clear();
         }
 
+        // 3) решить вопрос с ошибкой тут
         public void Dispose()
         {
-            if (_root == null)
-                return;
-
             foreach (var pool in _pools.Values)
             {
                 pool.Clear();
@@ -132,8 +129,11 @@ namespace Solcery.Services.Widget
             _pools.Clear();
             _given.Clear();
 
-            Object.DestroyImmediate(_root.gameObject);
-            _root = null;
+            if (_root != null && _root.gameObject != null)
+            {
+                Object.DestroyImmediate(_root.gameObject);
+                _root = null;
+            }
         }
 
         private void CheckGiven()
