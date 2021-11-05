@@ -50,7 +50,7 @@ namespace Solcery.Services.Ui
                 var gui = obj["guid"]!.Value<int>();
                 var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
                 var widget = _widgetService.GetUiWidget(type, parent);
-                //  todo will support transform data
+                widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
                 CreateUiEntity(gui, widget);
                 if (obj.TryGetValue("childs", out var childs))
                 {
