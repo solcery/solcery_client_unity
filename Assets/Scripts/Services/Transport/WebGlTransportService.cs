@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Solcery.Services.Transport
 {
-    public class WebGlTransportService : ITransportService
+    public sealed class WebGlTransportService : ITransportService
     {
         private readonly List<Action<JObject>> _listEventReceivingGameContent;
         private readonly List<Action<JObject>> _listEventReceivingGameState;

@@ -2,7 +2,7 @@ using Leopotam.EcsLite;
 
 namespace Solcery.Models
 {
-    public class PlayModel : IModel
+    public sealed class PlayModel : IModel
     {
         public EcsWorld World { get; private set; }
         
