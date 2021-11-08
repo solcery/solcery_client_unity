@@ -40,25 +40,31 @@ namespace Solcery.Services.Ui
 
         private void OnReceivingUi(JObject obj)
         {
-            CreateUiWidget(obj);
+            CreateUiElement(obj);
         }
 
-        private void CreateUiWidget(JObject obj, UiBaseWidget parent = null)
+        private UiBaseWidget GetUiWidget(JObject obj, UiBaseWidget parent = null)
+        {
+            var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
+            var widget = _widgetService.GetUiWidget(type, parent);
+            widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
+            return widget;
+        }
+
+        private void CreateUiElement(JObject obj, UiBaseWidget parent = null)
         {
             try
             {
-                var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
-                var widget = _widgetService.GetUiWidget(type, parent);
-                widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
+                var widget = GetUiWidget(obj, parent);
+                CreateUiEntity(obj, widget);
                 if (obj.TryGetValue("childs", out var childs))
                 {
                     foreach (var child in childs.Children())
                     {
-                       CreateUiWidget(child as JObject, widget);
+                        CreateUiElement(child as JObject, widget);
                     }
                 }
                 
-                CreateUiEntity(obj, widget);
             }
             catch (Exception ex)
             {
@@ -66,6 +72,7 @@ namespace Solcery.Services.Ui
             }
         }
 
+        
         private void CreateUiEntity(JObject obj, UiBaseWidget widget)
         {
             var world = _model.World;
