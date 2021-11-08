@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Actions
 {
@@ -15,6 +16,10 @@ namespace Solcery.BrickInterpretation.Actions
         }
         
         public override void Reset() { }
-        public override void Run(IBrickService brickService, JArray parameters, IContext context) { }
+
+        public override void Run(IBrickService brickService, JArray parameters, IContext context)
+        {
+            Debug.Log("BrickActionVoid Run!");
+        }
     }
 }

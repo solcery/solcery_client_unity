@@ -77,7 +77,7 @@ namespace Solcery.Games
 
         private void Init()
         {
-            _model.Init();
+            _model.Init(this);
             RegistrationBrickTypes();
             _gameContentService.Init();
             _gameContentPrepareDataService.Init();

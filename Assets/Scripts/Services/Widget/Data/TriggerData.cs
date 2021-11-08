@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Utils;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Data
 {
     public class TriggerData
     {
-        public TriggerTypes Type;
-        // todo use object if will need
-        public string Action;
+        public readonly TriggerTypes Type;
+        public readonly List<JObject> Actions;
     
         public static TriggerData Parse(JObject obj)
         {
@@ -16,9 +17,14 @@ namespace Solcery.Services.Widget
         private TriggerData(JObject obj)
         {
             Type = obj["event"]!.ToObject<TriggerTypes>();
-            if (obj.TryGetValue("action", out var action))
+
+            Actions = new List<JObject>();
+            if (obj.TryGetValue("actions", out JArray actionsArray))
             {
-                Action = action["type"]!.Value<string>();
+                foreach (var action in actionsArray)
+                {
+                    Actions.Add((JObject)action);
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Solcery.Games;
 
 namespace Solcery.Models
 {
@@ -6,7 +7,7 @@ namespace Solcery.Models
     {
         public EcsWorld World { get; }
 
-        public void Init();
+        public void Init(IGame game);
         public void Update(float dt);
         public void Destroy();
     }

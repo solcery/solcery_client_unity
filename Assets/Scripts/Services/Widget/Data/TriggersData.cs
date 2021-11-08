@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Data
 {
     public class TriggersData
     {

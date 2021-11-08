@@ -93,9 +93,9 @@ namespace Solcery.BrickInterpretation
             try
             {
                 if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName))
                 {
+                    BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickAction>(brickTypeName);
                     brick.Run(this, parameters, context);
                 }
@@ -114,9 +114,9 @@ namespace Solcery.BrickInterpretation
             try
             {
                 if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName))
                 {
+                    BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickValue>(brickTypeName);
                     result = brick.Run(this, parameters, context);
                 }
@@ -137,9 +137,9 @@ namespace Solcery.BrickInterpretation
             try
             {
                 if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && BrickUtils.TryGetBrickTypeName(obj, out var brickTypeName))
                 {
+                    BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickCondition>(brickTypeName);
                     result = brick.Run(this, parameters, context);
                 }
