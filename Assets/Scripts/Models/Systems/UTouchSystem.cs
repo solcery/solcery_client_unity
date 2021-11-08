@@ -1,7 +1,8 @@
 using Leopotam.EcsLite;
+using Solcery.Models.Components;
 using UnityEngine;
 
-namespace Solcery
+namespace Solcery.Models.Systems
 {
     sealed class UiTouchSystem : IEcsRunSystem
     {

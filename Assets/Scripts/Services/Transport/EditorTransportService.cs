@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using Solcery.BrickInterpretation;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
 using UnityEngine;
@@ -43,14 +44,14 @@ namespace Solcery.Services.Transport
 
         private IGameOnReceivingGameContent _gameOnReceivingGameContent;
         
-        public static ITransportService Create(IGameOnReceivingGameContent gameOnReceivingGameContent)
+        public static ITransportService Create(IGameOnReceivingGameContent gameOnReceivingGameContent, IBrickService brickService)
         {
-            return new EditorTransportService(gameOnReceivingGameContent);
+            return new EditorTransportService(gameOnReceivingGameContent, brickService);
         }
 
-        private EditorTransportService(IGameOnReceivingGameContent gameOnReceivingGameContent)
+        private EditorTransportService(IGameOnReceivingGameContent gameOnReceivingGameContent, IBrickService brickService)
         {
-            _localSimulation = EditorLocalSimulationService.Create();
+            _localSimulation = EditorLocalSimulationService.Create(brickService);
             _gameOnReceivingGameContent = gameOnReceivingGameContent;
             _listEventReceivingGameContent = new List<Action<JObject>>();
             _listEventReceivingGameState = new List<Action<JObject>>();

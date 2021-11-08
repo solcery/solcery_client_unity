@@ -1,7 +1,9 @@
-using Solcery.Services.Widget;
+using Solcery.Services.Widget.Data;
+using Solcery.Services.Widget.Pool;
+using Solcery.Widgets.Attributes;
 using UnityEngine;
 
-namespace Solcery
+namespace Solcery.Widgets.UI
 {
     public class UiBaseWidget : PoolObject, IVisible
     {

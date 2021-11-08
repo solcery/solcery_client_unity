@@ -1,4 +1,6 @@
 using Solcery.Models;
+using Solcery.Services.Widget.Pool;
+using Solcery.Widgets.UI;
 using UnityEngine;
 
 namespace Solcery.Services.Widget

@@ -1,9 +1,8 @@
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 using UnityEngine;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Data
 {
     public class TransformData
     {

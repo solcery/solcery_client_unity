@@ -1,3 +1,4 @@
+using Solcery.Widgets.UI;
 using UnityEngine;
 
 namespace Solcery.Services.Widget

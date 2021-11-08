@@ -51,13 +51,12 @@ namespace Solcery.Games
 
         private void CreateServices()
         {
+            _brickService = BrickService.Create();
 #if UNITY_EDITOR
-            _transportService = EditorTransportService.Create(this);
+            _transportService = EditorTransportService.Create(this, _brickService);
 #else
             _transportService = WebGlTransportService.Create(this);
 #endif
-
-            _brickService = BrickService.Create();
             _gameContentService = GameContentService.Create(_transportService);
             _gameContentPrepareDataService = GameContentPrepareDataService.Create(_gameContentService, _model);
             _gameStateService = GameStateService.Create(_transportService, _model);

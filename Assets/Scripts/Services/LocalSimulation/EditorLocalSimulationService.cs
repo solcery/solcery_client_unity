@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.BrickInterpretation;
 
 namespace Solcery.Services.LocalSimulation
 {
@@ -21,15 +22,17 @@ namespace Solcery.Services.LocalSimulation
         }
 
         private readonly List<Action<JObject>> _listOnUpdateGameState;
+        private IBrickService _brickService;
 
-        public static IEditorLocalSimulationService Create()
+        public static IEditorLocalSimulationService Create(IBrickService brickService)
         {
-            return new EditorLocalSimulationService();
+            return new EditorLocalSimulationService(brickService);
         }
         
-        private EditorLocalSimulationService()
+        private EditorLocalSimulationService(IBrickService brickService)
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
+            _brickService = brickService;
         }
 
         public void Init(JObject gameState)

@@ -1,3 +1,5 @@
+using Solcery.Widgets.UI;
+
 namespace Solcery.Services.Widget
 {
     public interface IWidgetService

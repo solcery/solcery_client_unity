@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 
-namespace Solcery
+namespace Solcery.Models.Systems
 {
     public class UiUpdateSystem : IEcsRunSystem
     {

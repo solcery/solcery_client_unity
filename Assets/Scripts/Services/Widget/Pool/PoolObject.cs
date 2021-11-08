@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Pool
 {
     public class PoolObject : MonoBehaviour
     {

@@ -1,4 +1,6 @@
-namespace Solcery
+using Solcery.Widgets.UI;
+
+namespace Solcery.Models.Components
 {
     struct UiWidgetComponent
     {

@@ -1,4 +1,4 @@
-namespace Solcery 
+namespace Solcery.Models.Components 
 {
     struct UiComponent
     {

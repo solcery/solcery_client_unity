@@ -3,19 +3,19 @@ using Leopotam.EcsLite;
 using ModestTree;
 using UnityEngine;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Pool
 {
     public class PoolProvider
     {
         private Transform _root;
-        private readonly Dictionary<GameObject, Pool> _pools;
-        private readonly Dictionary<PoolObject, Pool> _given;
+        private readonly Dictionary<GameObject, Widget.Pool.Pool> _pools;
+        private readonly Dictionary<PoolObject, Widget.Pool.Pool> _given;
         private EcsWorld _world;
         
         public PoolProvider(string poolName)
         {
-            _pools = new Dictionary<GameObject, Pool>();
-            _given = new Dictionary<PoolObject, Pool>();
+            _pools = new Dictionary<GameObject, Widget.Pool.Pool>();
+            _given = new Dictionary<PoolObject, Widget.Pool.Pool>();
 
             var go = new GameObject(poolName);
             Object.DontDestroyOnLoad(go);
@@ -34,7 +34,7 @@ namespace Solcery.Services.Widget
                 return;
             }
             
-            _pools.Add(prefab, new Pool(prefab, _root.transform, preloadCount, _world));
+            _pools.Add(prefab, new Widget.Pool.Pool(prefab, _root.transform, preloadCount, _world));
         }
 
         public T GetFromPool<T>(GameObject prefab, bool active = true) where T : PoolObject

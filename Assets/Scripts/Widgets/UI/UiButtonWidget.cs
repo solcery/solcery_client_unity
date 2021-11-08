@@ -1,7 +1,9 @@
 using Leopotam.EcsLite;
+using Solcery.Models.Components;
+using Solcery.Widgets.Attributes;
 using UnityEngine.UI;
 
-namespace Solcery
+namespace Solcery.Widgets.UI
 {
     public class UiButtonWidget : UiBaseWidget, IIntractable
     {

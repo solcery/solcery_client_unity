@@ -4,7 +4,7 @@ using Leopotam.EcsLite;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Solcery.Services.Widget
+namespace Solcery.Services.Widget.Pool
 {
     public class Pool : IDisposable
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Solcery.UI
+namespace Solcery.Widgets.UI
 {
     public class UiCanvasWidget : UiBaseWidget
     {

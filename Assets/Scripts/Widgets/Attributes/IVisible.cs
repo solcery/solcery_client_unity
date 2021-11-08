@@ -1,4 +1,4 @@
-namespace Solcery
+namespace Solcery.Widgets.Attributes
 {
     public interface IVisible
     {

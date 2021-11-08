@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Solcery.Models.Systems;
 
 namespace Solcery.Models
 {
