@@ -23,11 +23,11 @@ namespace Solcery.Services.Widget.Data
             }
             if (obj.ContainsKey("rotation"))
             {
-                Position = obj.GetVector3("rotation");
+                Rotation = obj.GetVector3("rotation");
             }
             if (obj.ContainsKey("scale"))
             {
-                Position = obj.GetVector3("scale");
+                Scale = obj.GetVector3("scale");
             }
         }
     }

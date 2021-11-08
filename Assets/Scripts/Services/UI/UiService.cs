@@ -43,26 +43,31 @@ namespace Solcery.Services.Ui
 
         private void OnReceivingUi(JObject obj)
         {
-            CreateUiWidget(obj);
+            CreateUiElement(obj);
         }
 
-        private void CreateUiWidget(JObject obj, UiBaseWidget parent = null)
+        private UiBaseWidget GetUiWidget(JObject obj, UiBaseWidget parent = null)
+        {
+            var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
+            var widget = _widgetService.GetUiWidget(type, parent);
+            widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
+            return widget;
+        }
+
+        private void CreateUiElement(JObject obj, UiBaseWidget parent = null)
         {
             try
             {
-                var gui = obj["guid"]!.Value<int>();
-                var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
-                var widget = _widgetService.GetUiWidget(type, parent);
-                widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
-                CreateUiEntity(gui, widget);
+                var widget = GetUiWidget(obj, parent);
+                CreateUiEntity(obj, widget);
                 if (obj.TryGetValue("childs", out var childs))
                 {
                     foreach (var child in childs.Children())
                     {
-                       CreateUiWidget(child as JObject, widget);
+                        CreateUiElement(child as JObject, widget);
                     }
                 }
-
+                
             }
             catch (Exception ex)
             {
@@ -70,19 +75,30 @@ namespace Solcery.Services.Ui
             }
         }
 
-        private void CreateUiEntity(int guid, UiBaseWidget widget)
+        
+        private void CreateUiEntity(JObject obj, UiBaseWidget widget)
         {
             var world = _model.World;
             
             var entity = _model.World.NewEntity();
             
+            // ui
             var uiComponents = world.GetPool<UiComponent>();
             ref var uiComponent = ref uiComponents.Add(entity);
-            uiComponent.Guid = guid;
+            uiComponent.Guid = obj["guid"]!.Value<int>();;
 
+            // widget
             var uiWidgetComponents = world.GetPool<UiWidgetComponent>();
             ref var uiWidgetComponent = ref uiWidgetComponents.Add(entity);
             uiWidgetComponent.Widget = widget;
+            
+            // triggers
+            if (obj.TryGetValue("triggers", out var triggers))
+            {
+                var triggersComponents = world.GetPool<TriggersComponent>();
+                ref var triggersComponent = ref triggersComponents.Add(entity);
+                triggersComponent.Triggers = TriggersData.Parse(triggers);
+            }
         }
     }
 }
