@@ -10,6 +10,7 @@ namespace Solcery.Services.GameContent
         public event Action<JObject> EventOnReceivingGame;
 
         public void Init();
+        public void Update();
         public void Cleanup();
         public void Destroy();
     }

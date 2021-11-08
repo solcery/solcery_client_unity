@@ -1,6 +1,8 @@
 using Solcery.BrickInterpretation;
 using Solcery.Models;
 using Solcery.Services.GameContent;
+using Solcery.Services.GameContent.PrepareData;
+using Solcery.Services.GameState;
 using Solcery.Services.Transport;
 
 namespace Solcery.Games
@@ -10,6 +12,8 @@ namespace Solcery.Games
         public ITransportService TransportService { get; }
         public IBrickService BrickService { get; }
         public IGameContentService GameContentService { get; }
+        public IGameContentPrepareDataService GameContentPrepareDataService { get; }
+        public IGameStateService GameStateService { get; }
         public IModel Model { get; }
 
         public void Init();

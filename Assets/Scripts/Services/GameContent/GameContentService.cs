@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Transport;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Services.GameContent
 {
-    public class GameContentService : IGameContentService
+    public sealed class GameContentService : IGameContentService
     {
         event Action IGameContentService.EventOnReceivingGameContent
         {
@@ -51,6 +52,7 @@ namespace Solcery.Services.GameContent
         private readonly List<Action> _listEventOnReceivingGameContent;
         private readonly List<Action<JObject>> _listEventOnReceivingUi;
         private readonly List<Action<JObject>> _listEventOnReceivingGame;
+        private JObject _gameContentJson;
 
         public static IGameContentService Create(ITransportService transportService)
         {
@@ -63,6 +65,7 @@ namespace Solcery.Services.GameContent
             _listEventOnReceivingGameContent = new List<Action>();
             _listEventOnReceivingUi = new List<Action<JObject>>();
             _listEventOnReceivingGame = new List<Action<JObject>>();
+            _gameContentJson = null;
         }
 
         void IGameContentService.Init()
@@ -70,8 +73,26 @@ namespace Solcery.Services.GameContent
             _transportService.EventReceivingGameContent += OnEventReceivingGameContent;
         }
 
+        public void Update()
+        {
+            if (_gameContentJson == null)
+            {
+                return;
+            }
+
+            ApplyGameContentJson(_gameContentJson);
+            _gameContentJson = null;
+        }
+
         private void OnEventReceivingGameContent(JObject obj)
         {
+            _gameContentJson = obj;
+        }
+
+        private void ApplyGameContentJson(JObject obj)
+        {
+            Debug.Log($"Game content\n {obj}");
+            
             CallAllAction(_listEventOnReceivingGameContent);
 
             var executeOrders = new[]
@@ -119,6 +140,7 @@ namespace Solcery.Services.GameContent
             _listEventOnReceivingGameContent.Clear();
             _listEventOnReceivingUi.Clear();
             _listEventOnReceivingGame.Clear();
+            _gameContentJson = null;
         }
 
         void IGameContentService.Destroy()
