@@ -1,7 +1,8 @@
 using System;
 using Newtonsoft.Json.Linq;
 using Solcery.Models;
-using Solcery.Models.Components;
+using Solcery.Models.Triggers;
+using Solcery.Models.Ui;
 using Solcery.Services.GameContent;
 using Solcery.Services.Widget;
 using Solcery.Services.Widget.Data;
@@ -83,19 +84,19 @@ namespace Solcery.Services.Ui
             var entity = _model.World.NewEntity();
             
             // ui
-            var uiComponents = world.GetPool<UiComponent>();
+            var uiComponents = world.GetPool<ComponentUi>();
             ref var uiComponent = ref uiComponents.Add(entity);
             uiComponent.Guid = obj["guid"]!.Value<int>();;
 
             // widget
-            var uiWidgetComponents = world.GetPool<UiWidgetComponent>();
+            var uiWidgetComponents = world.GetPool<ComponentUiWidget>();
             ref var uiWidgetComponent = ref uiWidgetComponents.Add(entity);
             uiWidgetComponent.Widget = widget;
             
             // triggers
             if (obj.TryGetValue("triggers", out var triggers))
             {
-                var triggersComponents = world.GetPool<TriggersComponent>();
+                var triggersComponents = world.GetPool<ComponentTriggers>();
                 ref var triggersComponent = ref triggersComponents.Add(entity);
                 triggersComponent.Triggers = TriggersData.Parse(triggers);
             }

@@ -1,8 +1,8 @@
 using Solcery.Widgets.UI;
 
-namespace Solcery.Models.Components
+namespace Solcery.Models.Ui
 {
-    struct UiWidgetComponent
+    struct ComponentUiWidget
     {
         public UiBaseWidget Widget;
     }

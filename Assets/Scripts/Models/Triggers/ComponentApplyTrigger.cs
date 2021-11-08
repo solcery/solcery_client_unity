@@ -1,8 +1,8 @@
 using Solcery.Services.Widget;
 
-namespace Solcery
+namespace Solcery.Models.Triggers
 {
-    public struct ApplyTriggerComponent
+    public struct ComponentApplyTrigger
     {
         public TriggerTypes Type;
     }
