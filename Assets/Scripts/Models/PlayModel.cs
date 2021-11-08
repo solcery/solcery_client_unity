@@ -19,7 +19,7 @@ namespace Solcery.Models
         {
             World = new EcsWorld();
             _systems = new EcsSystems(World);
-            _systems.Add(new UiTouchSystem());
+            _systems.Add(new ApplyTriggerSystem());
             _systems.Add(new UiUpdateSystem());
             
             // TODO сюда добавляем новые системы и тд

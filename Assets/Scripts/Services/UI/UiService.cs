@@ -47,11 +47,9 @@ namespace Solcery.Services.Ui
         {
             try
             {
-                var gui = obj["guid"]!.Value<int>();
                 var type = obj["ui_widget_type"]!.ToObject<UiWidgetTypes>();
                 var widget = _widgetService.GetUiWidget(type, parent);
                 widget.ApplyTransform(TransformData.Parse(obj["transform"]!.Value<JObject>()));
-                CreateUiEntity(gui, widget);
                 if (obj.TryGetValue("childs", out var childs))
                 {
                     foreach (var child in childs.Children())
@@ -59,7 +57,8 @@ namespace Solcery.Services.Ui
                        CreateUiWidget(child as JObject, widget);
                     }
                 }
-
+                
+                CreateUiEntity(obj, widget);
             }
             catch (Exception ex)
             {
@@ -67,19 +66,29 @@ namespace Solcery.Services.Ui
             }
         }
 
-        private void CreateUiEntity(int guid, UiBaseWidget widget)
+        private void CreateUiEntity(JObject obj, UiBaseWidget widget)
         {
             var world = _model.World;
             
             var entity = _model.World.NewEntity();
             
+            // ui
             var uiComponents = world.GetPool<UiComponent>();
             ref var uiComponent = ref uiComponents.Add(entity);
-            uiComponent.Guid = guid;
+            uiComponent.Guid = obj["guid"]!.Value<int>();;
 
+            // widget
             var uiWidgetComponents = world.GetPool<UiWidgetComponent>();
             ref var uiWidgetComponent = ref uiWidgetComponents.Add(entity);
             uiWidgetComponent.Widget = widget;
+            
+            // triggers
+            if (obj.TryGetValue("triggers", out var triggers))
+            {
+                var triggersComponents = world.GetPool<TriggersComponent>();
+                ref var triggersComponent = ref triggersComponents.Add(entity);
+                triggersComponent.Triggers = TriggersData.Parse(triggers);
+            }
         }
     }
 }

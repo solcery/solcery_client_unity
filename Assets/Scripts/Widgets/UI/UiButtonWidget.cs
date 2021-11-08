@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Solcery.Services.Widget;
 using UnityEngine.UI;
 
 namespace Solcery
@@ -23,15 +24,15 @@ namespace Solcery
 
         private void OnButtonClick()
         {
-            var uiWidgetComponent = EcsWorld.GetPool<UiWidgetComponent>();
-            var uiClickComponents = EcsWorld.GetPool<UiClickComponent>();
+            var uiWidgetComponents = EcsWorld.GetPool<UiWidgetComponent>();
             var filter = EcsWorld.Filter<UiWidgetComponent>().End();
             foreach (var entity in filter)
             {
-                ref var weapon = ref uiWidgetComponent.Get(entity);
-                if (weapon.Widget == this)
+                ref var uiWidgetComponent = ref uiWidgetComponents.Get(entity);
+                if (uiWidgetComponent.Widget == this)
                 {
-                    uiClickComponents.Add(entity);
+                    ref var applyComponent = ref EcsWorld.GetPool<ApplyTriggerComponent>().Add(entity);
+                    applyComponent.Type = TriggerTypes.OnClick;
                 }
             }
         }

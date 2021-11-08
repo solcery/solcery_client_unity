@@ -21,8 +21,8 @@
 				{
 					"position":
 					{
-						"x": 10,
-						"y": 10,
+						"x": 0,
+						"y": 0,
 						"z": 0
 					}
 				},
@@ -36,6 +36,17 @@
 						}
 					}
 				]
+			},
+			{
+				"guid": 3,
+				"ui_widget_type": "button",
+				"transform": {
+					"position": {
+						"x": 300,
+						"y": 0,
+						"z": 0
+					}
+				}
 			}
 		]
 	},
