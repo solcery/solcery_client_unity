@@ -117,7 +117,6 @@ namespace Solcery.Services.Widget
             _given.Clear();
         }
 
-        // 3) решить вопрос с ошибкой тут
         public void Dispose()
         {
             foreach (var pool in _pools.Values)
