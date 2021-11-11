@@ -9,7 +9,7 @@ namespace Solcery.Models.Triggers
     
     internal sealed class SystemApplyTrigger : ISystemApplyTrigger
     {
-        private EcsFilter _applyTriggerComponentFilter;
+        private EcsFilter _filterApplyTriggerComponent;
         private IBrickService _brickService;
 
         public static ISystemApplyTrigger Create(IBrickService brickService)
@@ -24,14 +24,14 @@ namespace Solcery.Models.Triggers
         
         public void Init(EcsSystems systems)
         {
-            _applyTriggerComponentFilter = systems.GetWorld().Filter<ComponentApplyTrigger>().End();
+            _filterApplyTriggerComponent = systems.GetWorld().Filter<ComponentApplyTrigger>().End();
         }
         
         public void Run(EcsSystems systems)
         {
             var applyTriggerComponents = systems.GetWorld().GetPool<ComponentApplyTrigger>();
             var triggerComponents = systems.GetWorld().GetPool<ComponentTriggers>();
-            foreach (var entity in _applyTriggerComponentFilter)
+            foreach (var entity in _filterApplyTriggerComponent)
             {
                 if (triggerComponents.Has(entity))
                 {

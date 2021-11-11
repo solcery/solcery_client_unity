@@ -7,8 +7,8 @@ using Solcery.Services.GameContent;
 using Solcery.Services.GameContent.PrepareData;
 using Solcery.Services.GameState;
 using Solcery.Services.Transport;
-using Solcery.Services.Ui;
-using Solcery.Services.Widget;
+using Solcery.Widgets.Canvas;
+using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
 {
@@ -28,29 +28,28 @@ namespace Solcery.Games
         private IGameContentService _gameContentService;
         private IGameContentPrepareDataService _gameContentPrepareDataService;
         private IGameStateService _gameStateService;
-        private IUiService _uiService;
-        private IWidgetService _widgetService;
-        private IWidgetsProvider _widgetsProvider;
+        private IWidgetFactory _widgetFactory;
 
-        public static IGame Create(IWidgetsProvider widgetsProvider)
+        public static IGame Create(IWidgetCanvas widgetCanvas)
         {
-            return new Game(widgetsProvider);
+            return new Game(widgetCanvas);
         }
 
-        private Game(IWidgetsProvider widgetsProvider)
-        {
-            _widgetsProvider = widgetsProvider;
-        }
-
-        void IGame.Init()
+        private Game(IWidgetCanvas widgetCanvas)
         {
             CreateModel();
-            CreateServices();
-            _transportService.CallUnityLoaded();
+            CreateServices(widgetCanvas);
         }
-
-        private void CreateServices()
+        
+        private void CreateModel()
         {
+            _model = PlayModel.Create();
+        }
+        
+        private void CreateServices(IWidgetCanvas widgetCanvas)
+        {
+            _widgetFactory = WidgetFactory.Create(widgetCanvas);
+            
             _brickService = BrickService.Create();
 #if UNITY_EDITOR
             _transportService = EditorTransportService.Create(this, _brickService);
@@ -58,15 +57,13 @@ namespace Solcery.Games
             _transportService = WebGlTransportService.Create(this);
 #endif
             _gameContentService = GameContentService.Create(_transportService);
-            _gameContentPrepareDataService = GameContentPrepareDataService.Create(_gameContentService, _model);
+            _gameContentPrepareDataService = GameContentPrepareDataService.Create(_gameContentService, _widgetFactory, _model);
             _gameStateService = GameStateService.Create(_transportService, _model);
-            _widgetService = WidgetService.Create(_widgetsProvider, _model);
-            _uiService = UiService.Create(_gameContentService, _widgetService, _model);
         }
 
-        private void CreateModel()
+        void IGame.Init()
         {
-            _model = PlayModel.Create();
+            _transportService.CallUnityLoaded();
         }
 
         void IGameOnReceivingGameContent.OnReceivingGameContent()
@@ -82,8 +79,6 @@ namespace Solcery.Games
             _gameContentService.Init();
             _gameContentPrepareDataService.Init();
             _gameStateService.Init();
-            _widgetService.Init();
-            _uiService.Init();
         }
 
         private void RegistrationBrickTypes()
@@ -111,8 +106,8 @@ namespace Solcery.Games
             _gameContentService.Cleanup();
             _brickService.Cleanup();
             _transportService.Cleanup();
-            _widgetService.Cleanup();
-            _uiService.Cleanup();
+            
+            _widgetFactory.Cleanup();
         }
 
         void IGame.Update(float dt)
@@ -136,10 +131,11 @@ namespace Solcery.Games
             _brickService = null;
             _transportService.Destroy();
             _transportService = null;
-            _widgetService.Destroy();
-            _widgetService = null;
-            _uiService.Destroy();
-            _uiService = null;
+
+            
+            // TODO: удаляем последней, так как в разных объектах могут быть ссылки на виджеты
+            _widgetFactory.Destroy();
+            _widgetFactory = null;
         }
     }
 }

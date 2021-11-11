@@ -1,5 +1,5 @@
 using Solcery.Games;
-using Solcery.Services.Widget;
+using Solcery.Widgets.Canvas;
 using UnityEngine;
 
 namespace Solcery
@@ -7,7 +7,9 @@ namespace Solcery
     public class GameApplication : MonoBehaviour
     {
         [SerializeField]
-        public UiWidgetSettings _uiWidgetSettings;
+        private Transform gameCanvas;
+        [SerializeField]
+        private RectTransform uiCanvas;
         
         private IGame _game;
 
@@ -26,7 +28,7 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create(_uiWidgetSettings);
+            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas));
             _game.Init();
         }
 

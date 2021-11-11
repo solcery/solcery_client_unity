@@ -1,4 +1,4 @@
-using Solcery.Services.Widget;
+using Solcery.Widgets.Data;
 
 namespace Solcery.Models.Triggers
 {

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Transport;
-using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Services.GameContent
@@ -95,21 +94,26 @@ namespace Solcery.Services.GameContent
             
             CallAllAction(_listEventOnReceivingGameContent);
 
-            var executeOrders = new[]
+            foreach (var action in _listEventOnReceivingGame)
             {
-                new Tuple<string, List<Action<JObject>>>("ui", _listEventOnReceivingUi),
-                new Tuple<string, List<Action<JObject>>>("game", _listEventOnReceivingGame)
-            };
-
-            foreach (var (key, actions) in executeOrders)
-            {
-                if (!obj.TryGetValue(key, out JObject @params))
-                {
-                    continue;
-                }
-
-                CallAllActionWithParams(actions, @params);
+                action.Invoke(obj);
             }
+
+            // var executeOrders = new[]
+            // {
+            //     new Tuple<string, List<Action<JObject>>>("cardTypes", _listEventOnReceivingUi),
+            //     new Tuple<string, List<Action<JObject>>>("game", _listEventOnReceivingGame)
+            // };
+            //
+            // foreach (var (key, actions) in executeOrders)
+            // {
+            //     if (!obj.TryGetValue(key, out JObject @params))
+            //     {
+            //         continue;
+            //     }
+            //
+            //     CallAllActionWithParams(actions, @params);
+            // }
         }
 
         private void CallAllAction(List<Action> listOfActions)
@@ -120,13 +124,13 @@ namespace Solcery.Services.GameContent
             }
         }
 
-        private void CallAllActionWithParams(List<Action<JObject>> listOfActions, JObject @params)
-        {
-            foreach (var action in listOfActions)
-            {
-                action.Invoke(@params);
-            }
-        }
+        // private void CallAllActionWithParams(List<Action<JObject>> listOfActions, JObject @params)
+        // {
+        //     foreach (var action in listOfActions)
+        //     {
+        //         action.Invoke(@params);
+        //     }
+        // }
         
         void IGameContentService.Cleanup()
         {

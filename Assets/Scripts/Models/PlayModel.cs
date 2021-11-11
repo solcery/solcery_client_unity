@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
+using Solcery.Models.Places;
 using Solcery.Models.Triggers;
-using Solcery.Models.Ui;
 
 namespace Solcery.Models
 {
@@ -21,12 +21,16 @@ namespace Solcery.Models
         void IModel.Init(IGame game)
         {
             World = new EcsWorld();
+
             _systems = new EcsSystems(World);
+            _systems.Add(SystemPlaceWidgetsUpdate.Create());
             _systems.Add(SystemApplyTrigger.Create(game.BrickService));
-            _systems.Add(SystemUiUpdate.Create());
-            
             // TODO сюда добавляем новые системы и тд
             
+#if UNITY_EDITOR
+            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+#endif
+
             _systems.Init();
         }
 
