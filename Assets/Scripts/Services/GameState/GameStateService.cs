@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models;
 using Solcery.Models.Entities;
 using Solcery.Models.Game;
+using Solcery.Models.GameState;
 using Solcery.Services.Transport;
 using Solcery.Utils;
 using UnityEngine;
@@ -74,7 +75,11 @@ namespace Solcery.Services.GameState
 
         private void ApplyGameState(JObject obj)
         {
-            // TODO: тут инитим гейм стейт, работаем с можелью и тд
+            // TODO: тут инитим гейм стейт, работаем с моделью и тд
+            // Сообщим системам о том что у нас обновился гейм стейт
+            {
+                _model.World.GetPool<ComponentGameStateUpdateTag>().Add(_model.World.NewEntity());
+            }
             
             // Пропарсим игровые аттрибуты
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Solcery.Models.Entities;
 
@@ -11,6 +12,7 @@ namespace Solcery.Models.Places
     {
         private EcsFilter _filterPlaceWithWidget;
         private EcsFilter _filterEntities;
+        private EcsFilter _filterGameStateUpdate;
 
         public static ISystemPlaceWidgetsUpdate Create()
         {
@@ -19,31 +21,46 @@ namespace Solcery.Models.Places
         
         private SystemPlaceWidgetsUpdate() { }
         
-        public void Init(EcsSystems systems)
+        void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
             _filterEntities = systems.GetWorld().Filter<ComponentEntityTag>().End();
         }
         
-        public void Run(EcsSystems systems)
+        void IEcsRunSystem.Run(EcsSystems systems)
         {
+            if (_filterGameStateUpdate.GetEntitiesCount() <= 0)
+            {
+                return;
+            }
+
+            var entitiesInPlace = new Dictionary<int, List<int>>();
+            // Подготовим набор entity в place
             foreach (var entityIndex in _filterEntities)
             {
                 var entityPlaceId = systems.GetWorld().GetPool<ComponentEntityAttributes>().Get(entityIndex)
                     .Attributes["place"];
 
-                foreach (var placeIndex in _filterPlaceWithWidget)
+                if (!entitiesInPlace.ContainsKey(entityPlaceId))
                 {
-                    var placeId = systems.GetWorld().GetPool<ComponentPlaceId>().Get(placeIndex).Id;
-
-                    if (placeId == entityPlaceId)
-                    {
-                        systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget
-                            .UpdateWidget(systems.GetWorld(), entityIndex);
-                        break;
-                    }
+                    entitiesInPlace.Add(entityPlaceId, new List<int>());
+                }
+                
+                entitiesInPlace[entityPlaceId].Add(entityIndex);
+            }
+            
+            // Пробежим по place с widget
+            foreach (var placeIndex in _filterPlaceWithWidget)
+            {
+                if (entitiesInPlace.TryGetValue(systems.GetWorld().GetPool<ComponentPlaceId>().Get(placeIndex).Id,
+                    out var entityIds))
+                {
+                    systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget
+                        .UpdateWidget(systems.GetWorld(), entityIds.ToArray());
                 }
             }
+            
+            entitiesInPlace.Clear();
         }
     }
 }

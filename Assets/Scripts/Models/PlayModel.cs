@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
+using Solcery.Models.GameState;
 using Solcery.Models.Places;
 using Solcery.Models.Triggers;
 
@@ -30,6 +31,9 @@ namespace Solcery.Models
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif
+            
+            // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
+            _systems.Add(SystemGameStateRemoveUpdateTag.Create());
 
             _systems.Init();
         }

@@ -22,12 +22,12 @@ namespace Solcery.Models.Triggers
             _brickService = brickService;
         }
         
-        public void Init(EcsSystems systems)
+        void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterApplyTriggerComponent = systems.GetWorld().Filter<ComponentApplyTrigger>().End();
         }
         
-        public void Run(EcsSystems systems)
+        void IEcsRunSystem.Run(EcsSystems systems)
         {
             var applyTriggerComponents = systems.GetWorld().GetPool<ComponentApplyTrigger>();
             var triggerComponents = systems.GetWorld().GetPool<ComponentTriggers>();
