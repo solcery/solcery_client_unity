@@ -13,7 +13,7 @@ namespace Solcery.Widgets.Pool
         private readonly Transform _parent;
         private readonly Stack<PoolObject> _cache;
 
-        public Pool(GameObject prefab, Transform parent, int preLoadCount, EcsWorld world)
+        public Pool(GameObject prefab, Transform parent, int preLoadCount)
         {
             _prefab = prefab;
             _parent = parent;

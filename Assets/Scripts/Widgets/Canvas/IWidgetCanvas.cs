@@ -1,3 +1,4 @@
+using Solcery.Widgets.Pool;
 using UnityEngine;
 
 namespace Solcery.Widgets.Canvas
@@ -6,6 +7,7 @@ namespace Solcery.Widgets.Canvas
     {
         Transform GetWorldCanvas();
         RectTransform GetUiCanvas();
+        WidgetPool GetWidgetPool();
         void Destroy();
     }
 }

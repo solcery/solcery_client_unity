@@ -2,6 +2,7 @@ namespace Solcery.Widgets
 {
     public enum WidgetTypes
     {
-        None
+        None = -1,
+        Button = 4
     }
 }

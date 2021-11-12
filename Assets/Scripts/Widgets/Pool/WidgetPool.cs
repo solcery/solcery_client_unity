@@ -5,26 +5,20 @@ using UnityEngine;
 
 namespace Solcery.Widgets.Pool
 {
-    public class PoolProvider
+    public class WidgetPool
     {
         private Transform _root;
-        private readonly Dictionary<GameObject, Widgets.Pool.Pool> _pools;
-        private readonly Dictionary<PoolObject, Widgets.Pool.Pool> _given;
-        private EcsWorld _world;
+        private readonly Dictionary<GameObject, Pool> _pools;
+        private readonly Dictionary<PoolObject, Pool> _given;
         
-        public PoolProvider(string poolName)
+        public WidgetPool(string poolName)
         {
-            _pools = new Dictionary<GameObject, Widgets.Pool.Pool>();
-            _given = new Dictionary<PoolObject, Widgets.Pool.Pool>();
+            _pools = new Dictionary<GameObject, Pool>();
+            _given = new Dictionary<PoolObject, Pool>();
 
             var go = new GameObject(poolName);
             Object.DontDestroyOnLoad(go);
             _root = go.transform;
-        }
-
-        public void Init(EcsWorld world)
-        {
-            _world = world;
         }
 
         public void CreatePool(GameObject prefab, int preloadCount = 0)
@@ -34,7 +28,7 @@ namespace Solcery.Widgets.Pool
                 return;
             }
             
-            _pools.Add(prefab, new Widgets.Pool.Pool(prefab, _root.transform, preloadCount, _world));
+            _pools.Add(prefab, new Pool(prefab, _root.transform, preloadCount));
         }
 
         public T GetFromPool<T>(GameObject prefab, bool active = true) where T : PoolObject
@@ -42,7 +36,7 @@ namespace Solcery.Widgets.Pool
             return GetFromPool<T>(prefab, null, active);
         }
 
-        public T GetFromPool<T>(GameObject prefab, PoolObject parent, bool active = true) where T : PoolObject
+        public T GetFromPool<T>(GameObject prefab, Transform parent, bool active = true) where T : PoolObject
         {
             if (!_pools.ContainsKey(prefab))
             {
@@ -64,7 +58,6 @@ namespace Solcery.Widgets.Pool
             {
                 result.transform.SetParent(null);
             }
-            result.Init(_world);
             return result as T;
         }
         

@@ -1,3 +1,4 @@
+using Solcery.Widgets.Pool;
 using UnityEngine;
 
 namespace Solcery.Widgets.Canvas
@@ -6,7 +7,8 @@ namespace Solcery.Widgets.Canvas
     {
         private Transform _worldCanvas;
         private RectTransform _uiCanvas;
-
+        private WidgetPool _widgetPool;
+        
         public static IWidgetCanvas Create(Transform worldCanvas, RectTransform uiCanvas)
         {
             return new WidgetCanvas(worldCanvas, uiCanvas);
@@ -16,6 +18,7 @@ namespace Solcery.Widgets.Canvas
         {
             _worldCanvas = worldCanvas;
             _uiCanvas = uiCanvas;
+            _widgetPool = new WidgetPool("widget_pool");
         }
         
         Transform IWidgetCanvas.GetWorldCanvas()
@@ -28,6 +31,11 @@ namespace Solcery.Widgets.Canvas
             return _uiCanvas;
         }
 
+        WidgetPool IWidgetCanvas.GetWidgetPool()
+        {
+            return _widgetPool;
+        }
+        
         void IWidgetCanvas.Destroy()
         {
             _worldCanvas = null;

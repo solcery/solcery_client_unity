@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
+using Solcery.Widgets.Button;
 using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets.Factory
@@ -34,6 +35,9 @@ namespace Solcery.Widgets.Factory
             {
                 case WidgetTypes.None:
                     return false;
+                case WidgetTypes.Button:
+                    widget = new WidgetButton(_widgetCanvas, jsonData);
+                    return true;
             }
 
             return false;
