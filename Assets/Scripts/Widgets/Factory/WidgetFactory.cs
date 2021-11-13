@@ -1,7 +1,8 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
-using Solcery.Widgets.Button;
+using Solcery.Widgets.Area;
 using Solcery.Widgets.Canvas;
+using Solcery.Widgets.Deck;
 
 namespace Solcery.Widgets.Factory
 {
@@ -30,14 +31,22 @@ namespace Solcery.Widgets.Factory
             }
 
             var widgetType = (WidgetTypes) layout;
-
-            switch (widgetType)
+            var placeViewData = new WidgetPlaceViewData();
+            if (placeViewData.TryParse(jsonData))
             {
-                case WidgetTypes.None:
-                    return false;
-                case WidgetTypes.Button:
-                    widget = new WidgetButton(_widgetCanvas, jsonData);
-                    return true;
+                switch (widgetType)
+                {
+                    case WidgetTypes.None:
+                        return false;
+                    case WidgetTypes.Button:
+                    case WidgetTypes.Title:
+                    case WidgetTypes.Picture:
+                        widget = new WidgetArea(_widgetCanvas, placeViewData);
+                        return true;
+                    case WidgetTypes.LayedOut:
+                        widget = new WidgetDeck(_widgetCanvas, placeViewData);
+                        return true;
+                }
             }
 
             return false;
