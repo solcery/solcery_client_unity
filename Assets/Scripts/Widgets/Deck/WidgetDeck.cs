@@ -1,11 +1,9 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Entities;
-using Solcery.Models.Triggers;
 using Solcery.Widgets.Attributes;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Card;
-using Solcery.Widgets.Data;
 using UnityEngine;
 
 namespace Solcery.Widgets.Deck
@@ -15,7 +13,7 @@ namespace Solcery.Widgets.Deck
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly WidgetPlaceViewData _viewData;
         private readonly GameObject _gameObject;
-
+    
         private WidgetDeckView _deckView;
         public override WidgetViewBase View => _deckView;
         
@@ -33,7 +31,7 @@ namespace Solcery.Widgets.Deck
             _deckView.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
         }
 
-        protected override void AddInternalWidget(EcsWorld world, int entityId, JObject data)
+        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
         {
             var card = WidgetCard.Create(data, _widgetCanvas);
             if (card != null)
@@ -44,7 +42,10 @@ namespace Solcery.Widgets.Deck
                     click.OnClick = () => { OnClick(world, entityId); };
                 }
                 card.ApplyAttributes(world, entityId);
+                return card;
             }
+            
+            return null;
         }
     }
 }

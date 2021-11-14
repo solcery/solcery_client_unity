@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Widgets.Attributes;
@@ -11,6 +12,7 @@ namespace Solcery.Widgets.Area
     {
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly WidgetPlaceViewData _viewData;
+        private readonly List<Widget> _subWidgets;
 
         public override WidgetViewBase View { get; } = null;
         
@@ -18,21 +20,25 @@ namespace Solcery.Widgets.Area
         {
             _widgetCanvas = widgetCanvas;
             _viewData = viewData;
+            _subWidgets = new List<Widget>();
         }
         
-        protected override void AddInternalWidget(EcsWorld world, int entityId, JObject data)
+        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
         {
-            var card = WidgetButton.Create(data, _widgetCanvas);
-            if (card != null)
+            var button = WidgetButton.Create(data, _widgetCanvas);
+            if (button != null)
             {
-                card.View.SetParent(_widgetCanvas.GetUiCanvas());
-                card.View.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
-                if (card.View is IIntractable click)
+                button.View.SetParent(_widgetCanvas.GetUiCanvas());
+                button.View.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
+                if (button.View is IIntractable click)
                 {
                     click.OnClick = () => { OnClick(world, entityId); };
                 }
-                card.ApplyAttributes(world, entityId);
+                button.ApplyAttributes(world, entityId);
+                return button;
             }
+
+            return null;
         }
     }
 }

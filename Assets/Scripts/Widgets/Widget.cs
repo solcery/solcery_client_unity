@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Entities;
@@ -10,6 +11,7 @@ namespace Solcery.Widgets
     public abstract class Widget
     {
         public abstract WidgetViewBase View { get; }
+        public readonly List<Widget> Widgets = new List<Widget>();
 
         public void UpdateWidget(EcsWorld world, int[] entityIds)
         {
@@ -23,9 +25,21 @@ namespace Solcery.Widgets
                 {
                     if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))
                     {
-                        AddInternalWidget(world, entityId, data);
+                        var widget = AddInternalWidget(world, entityId, data);
+                        if (widget != null)
+                        {
+                            Widgets.Add(widget);
+                        }
                     }
                 }
+            }
+        }
+        
+        public virtual void ClearInternalWidgets()
+        {
+            foreach (var widget in Widgets)
+            {
+                widget.ClearInternalWidgets();
             }
         }
 
@@ -47,7 +61,7 @@ namespace Solcery.Widgets
             }        
         }
 
-        protected abstract void AddInternalWidget(EcsWorld world, int entityId, JObject data);
+        protected abstract Widget AddInternalWidget(EcsWorld world, int entityId, JObject data);
         
         protected void OnClick(EcsWorld world, int entityId)
         {

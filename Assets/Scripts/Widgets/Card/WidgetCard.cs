@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Widgets.Canvas;
@@ -11,10 +10,10 @@ namespace Solcery.Widgets.Card
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly WidgetCartViewData _viewData;
         private readonly GameObject _gameObject;
-        
+
         private WidgetCardView _cardView;
         public override WidgetViewBase View => _cardView;
-        
+
         public static WidgetCard Create(JObject jsonData, IWidgetCanvas widgetCanvas)
         {
             var viewData = new WidgetCartViewData();
@@ -22,7 +21,7 @@ namespace Solcery.Widgets.Card
             {
                 return new WidgetCard(viewData, widgetCanvas);
             }
-            
+
             return null;
         }
 
@@ -33,16 +32,24 @@ namespace Solcery.Widgets.Card
             _gameObject = (GameObject) Resources.Load("ui/card");
             CreateView();
         }
-        
+
         private void CreateView()
         {
             _cardView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetCardView>(_gameObject);
             _cardView.Text.text = _viewData.Name;
             _cardView.Init();
         }
-        
-        protected override void AddInternalWidget(EcsWorld world, int entityId, JObject data)
+
+        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
         {
+            return null;
+        }
+
+        public override void ClearInternalWidgets()
+        {
+            _cardView.Clear();
+            _widgetCanvas.GetWidgetPool().ReturnToPool(_cardView);
+            _cardView = null;
         }
     }
 }
