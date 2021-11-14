@@ -41,6 +41,7 @@ namespace Solcery.Widgets
             {
                 widget.ClearInternalWidgets();
             }
+            Widgets.Clear();
         }
 
         public void ApplyAttributes(EcsWorld world, int entityId)
