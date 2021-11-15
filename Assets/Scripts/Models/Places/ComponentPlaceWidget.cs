@@ -3,13 +3,13 @@ using Solcery.Widgets;
 
 namespace Solcery.Models.Places
 {
-    public struct ComponentPlaceWidget// : IEcsAutoReset<ComponentPlaceWidget>
+    public struct ComponentPlaceWidget : IEcsAutoReset<ComponentPlaceWidget>
     {
         public Widget Widget;
 
-/*        public void AutoReset(ref ComponentPlaceWidget c)
+        public void AutoReset(ref ComponentPlaceWidget c)
         {
-            Widget = null;
-        }*/
+            c.Widget = null;
+        }
     }
 }

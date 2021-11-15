@@ -57,8 +57,9 @@ namespace Solcery.Models.Places
                 if (entitiesInPlace.TryGetValue(systems.GetWorld().GetPool<ComponentPlaceId>().Get(placeIndex).Id,
                     out var entityIds))
                 {
-                    systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget
-                        .UpdateWidget(systems.GetWorld(), entityIds.ToArray());
+                    var widget = systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget;
+                    widget.ClearInternalWidgets(systems.GetWorld(), entityIds.ToArray());
+                    widget.UpdateWidget(systems.GetWorld(), entityIds.ToArray());
                 }
             }
             

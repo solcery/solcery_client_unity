@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RectTransform: {fileID: 3200764471413365605}
   Button: {fileID: 1454105546520647339}
+  Text: {fileID: 1390077856167742350}
 --- !u!1 &4912667227569937220
 GameObject:
   m_ObjectHideFlags: 0
