@@ -45,7 +45,7 @@ namespace Solcery.Widgets.Card
             return null;
         }
 
-        public override void ClearInternalWidgets()
+        protected override void ClearInternalView()
         {
             _cardView.Clear();
             _widgetCanvas.GetWidgetPool().ReturnToPool(_cardView);

@@ -11,8 +11,8 @@ namespace Solcery.Widgets.Button
         private readonly WidgetButtonViewData _viewData;
         private readonly GameObject _gameObject;
         
-        private WidgetViewButton _butonView;
-        public override WidgetViewBase View => _butonView;
+        private WidgetViewButton _buttonView;
+        public override WidgetViewBase View => _buttonView;
         
         public static WidgetButton Create(JObject jsonData, IWidgetCanvas widgetCanvas)
         {
@@ -35,9 +35,9 @@ namespace Solcery.Widgets.Button
         
         private void CreateView()
         {
-            _butonView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject, _widgetCanvas.GetUiCanvas());
-            _butonView.Text.text = _viewData.Name;
-            _butonView.Init();
+            _buttonView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject, _widgetCanvas.GetUiCanvas());
+            _buttonView.Text.text = _viewData.Name;
+            _buttonView.Init();
         }
 
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
@@ -45,11 +45,11 @@ namespace Solcery.Widgets.Button
             return null;
         }
 
-        public override void ClearInternalWidgets()
+        protected override void ClearInternalView()
         {
-            _butonView.Clear();
-            _widgetCanvas.GetWidgetPool().ReturnToPool(_butonView);
-            _butonView = null;
+            _buttonView.Clear();
+            _widgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
+            _buttonView = null;
         }
     }
 }

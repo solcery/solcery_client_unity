@@ -1,5 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
+using Solcery.Models.Attributes;
+using Solcery.Models.Attributes.Highlighted;
 using Solcery.Models.GameState;
 using Solcery.Models.Places;
 using Solcery.Models.Triggers;
@@ -25,6 +27,8 @@ namespace Solcery.Models
 
             _systems = new EcsSystems(World);
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
+            _systems.Add(SystemAttributesWidgetsUpdate.Create());
+            _systems.Add(SystemApplyAttributeHighlighted.Create());
             _systems.Add(SystemApplyTrigger.Create(game.BrickService));
             // TODO сюда добавляем новые системы и тд
             

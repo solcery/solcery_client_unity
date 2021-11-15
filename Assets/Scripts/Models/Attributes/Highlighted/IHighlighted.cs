@@ -1,4 +1,4 @@
-namespace Solcery.Widgets.Attributes
+namespace Solcery.Models.Attributes.Highlighted
 {
     public interface IHighlighted
     {

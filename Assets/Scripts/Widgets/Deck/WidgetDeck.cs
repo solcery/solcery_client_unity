@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Widgets.Attributes;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Card;
 using UnityEngine;
@@ -37,15 +35,17 @@ namespace Solcery.Widgets.Deck
             if (card != null)
             {
                 card.View.SetParent(_deckView.Content);
-                if (card.View is IIntractable click)
-                {
-                    click.OnClick = () => { OnClick(world, entityId); };
-                }
-                card.ApplyAttributes(world, entityId);
                 return card;
             }
             
             return null;
+        }
+
+        protected override void ClearInternalView()
+        {
+            _deckView.Clear();
+            _widgetCanvas.GetWidgetPool().ReturnToPool(_deckView);
+            _deckView = null;
         }
     }
 }

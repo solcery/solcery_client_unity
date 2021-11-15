@@ -1,12 +1,12 @@
 using System;
-using Leopotam.EcsLite;
-using Solcery.Widgets.Attributes;
+using Solcery.Models.Attributes.Highlighted;
+using Solcery.Models.Attributes.Interactable;
 using TMPro;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets.Card
 {
-    public class WidgetCardView : WidgetViewBase, IHighlighted, IIntractable
+    public class WidgetCardView : WidgetViewBase, IHighlighted, IInteractable
     {
         public TextMeshProUGUI Text;
         public UnityEngine.UI.Button Button;
@@ -32,7 +32,7 @@ namespace Solcery.Widgets.Card
         {
         }
 
-        public void SetIntractable(bool value)
+        public void SetInteractable(bool value)
         {
             Button.interactable = value;
         }

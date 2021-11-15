@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Entities;
-using Solcery.Models.Triggers;
-using Solcery.Widgets.Attributes;
-using Solcery.Widgets.Data;
+using Solcery.Models.Places;
 
 namespace Solcery.Widgets
 {
     public abstract class Widget
     {
         public abstract WidgetViewBase View { get; }
-        public readonly List<Widget> Widgets = new List<Widget>();
+        private readonly List<Widget> _widgets = new List<Widget>();
 
         public void UpdateWidget(EcsWorld world, int[] entityIds)
         {
@@ -28,49 +26,33 @@ namespace Solcery.Widgets
                         var widget = AddInternalWidget(world, entityId, data);
                         if (widget != null)
                         {
-                            Widgets.Add(widget);
+                            _widgets.Add(widget);
+                            world.GetPool<ComponentPlaceWidgetView>().Add(entityId).View = widget.View;
                         }
                     }
                 }
             }
         }
         
-        public virtual void ClearInternalWidgets()
+        public void ClearInternalWidgets(EcsWorld world, int[] entityIds)
         {
-            foreach (var widget in Widgets)
+            var widgetViewPool = world.GetPool<ComponentPlaceWidgetView>();
+            foreach (var entityId in entityIds)
             {
-                widget.ClearInternalWidgets();
-            }
-            Widgets.Clear();
-        }
-
-        public void ApplyAttributes(EcsWorld world, int entityId)
-        {            
-            var attributes = world.GetPool<ComponentEntityAttributes>();
-            if (View == null || !attributes.Has(entityId))
-            {
-                return;
-            }
-            foreach (var attribute in attributes.Get(entityId).Attributes)
-            {
-                switch (attribute.Key)
+                if (widgetViewPool.Has(entityId))
                 {
-                    case "highlighted":
-                        (View as IHighlighted)?.SetHighlighted(attribute.Value == 1);
-                        break;
+                    widgetViewPool.Del(entityId);
                 }
-            }        
+            }
+
+            foreach (var widget in _widgets)
+            {
+                widget.ClearInternalView();
+            }
+            _widgets.Clear();
         }
 
         protected abstract Widget AddInternalWidget(EcsWorld world, int entityId, JObject data);
-        
-        protected void OnClick(EcsWorld world, int entityId)
-        {
-            var triggerPool = world.GetPool<ComponentApplyTrigger>();
-            if (!triggerPool.Has(entityId))
-            {
-                triggerPool.Add(entityId).Type = TriggerTypes.OnClick;
-            }
-        }
+        protected abstract void ClearInternalView();
     }
 }

@@ -1,10 +1,10 @@
 using System;
-using Solcery.Widgets.Attributes;
+using Solcery.Models.Attributes.Interactable;
 using TMPro;
 
 namespace Solcery.Widgets.Button
 {
-    public class WidgetViewButton : WidgetViewBase, IIntractable
+    public class WidgetViewButton : WidgetViewBase, IInteractable
     {
         public UnityEngine.UI.Button Button;
         public TextMeshProUGUI Text;
@@ -25,7 +25,7 @@ namespace Solcery.Widgets.Button
             Button.onClick.RemoveAllListeners();
         }
         
-        public void SetIntractable(bool value)
+        public void SetInteractable(bool value)
         {
             Button.interactable = value;
         }
