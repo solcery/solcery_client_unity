@@ -3,6 +3,7 @@ using Solcery.Utils;
 using Solcery.Widgets.Area;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Deck;
+using Solcery.Widgets.Stack;
 
 namespace Solcery.Widgets.Factory
 {
@@ -42,6 +43,9 @@ namespace Solcery.Widgets.Factory
                     case WidgetTypes.Title:
                     case WidgetTypes.Picture:
                         widget = new WidgetArea(_widgetCanvas, placeViewData);
+                        return true;
+                    case WidgetTypes.Stacked:
+                        widget = new WidgetStack(_widgetCanvas, placeViewData);
                         return true;
                     case WidgetTypes.LayedOut:
                         widget = new WidgetDeck(_widgetCanvas, placeViewData);

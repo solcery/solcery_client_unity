@@ -18,7 +18,7 @@ namespace Solcery.Widgets
         
         public void SetParent(Transform parent)
         {
-            transform.SetParent(parent);
+            transform.SetParent(parent, false);
         }
         
         public void ApplyAnchor(Vector2 min, Vector2 max)
