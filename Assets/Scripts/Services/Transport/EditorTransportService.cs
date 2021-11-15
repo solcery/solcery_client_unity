@@ -1,6 +1,4 @@
 #if UNITY_EDITOR
-using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
@@ -13,57 +11,23 @@ namespace Solcery.Services.Transport
     public sealed class EditorTransportService : ITransportService
     {
         private IEditorLocalSimulationService _localSimulation;
-        private readonly List<Action<JObject>> _listEventReceivingGameContent;
-        private readonly List<Action<JObject>> _listEventReceivingGameState;
-
-        event Action<JObject> ITransportService.EventReceivingGameContent
-        {
-            add
-            {
-                if (!_listEventReceivingGameContent.Contains(value))
-                {
-                    _listEventReceivingGameContent.Add(value);
-                }
-            }
-            
-            remove => _listEventReceivingGameContent.Remove(value);
-        }
-
-        event Action<JObject> ITransportService.EventReceivingGameState
-        {
-            add
-            {
-                if (!_listEventReceivingGameState.Contains(value))
-                {
-                    _listEventReceivingGameState.Add(value);
-                }
-            }
-
-            remove => _listEventReceivingGameState.Remove(value);
-        }
-
-        private IGameOnReceivingGameContent _gameOnReceivingGameContent;
+        private IGameOnReceivingData _gameOnReceivingData;
         
-        public static ITransportService Create(IGameOnReceivingGameContent gameOnReceivingGameContent, IBrickService brickService)
+        public static ITransportService Create(IGameOnReceivingData gameOnReceivingData, IBrickService brickService)
         {
-            return new EditorTransportService(gameOnReceivingGameContent, brickService);
+            return new EditorTransportService(gameOnReceivingData, brickService);
         }
 
-        private EditorTransportService(IGameOnReceivingGameContent gameOnReceivingGameContent, IBrickService brickService)
+        private EditorTransportService(IGameOnReceivingData gameOnReceivingData, IBrickService brickService)
         {
             _localSimulation = EditorLocalSimulationService.Create(brickService);
-            _gameOnReceivingGameContent = gameOnReceivingGameContent;
-            _listEventReceivingGameContent = new List<Action<JObject>>();
-            _listEventReceivingGameState = new List<Action<JObject>>();
+            _gameOnReceivingData = gameOnReceivingData;
         }
         
         void ITransportService.CallUnityLoaded()
         {
-            _gameOnReceivingGameContent.OnReceivingGameContent();
-
             var pathToGameContent = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_content.json");
-            var dataContent = JObject.Parse(File.ReadAllText(pathToGameContent));
-            CallAllActionWithParams(_listEventReceivingGameContent, dataContent);
+            _gameOnReceivingData.OnReceivingGameContent(JObject.Parse(File.ReadAllText(pathToGameContent)));
             
             var pathToGameState = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_state.json");
             var gameState = JObject.Parse(File.ReadAllText(pathToGameState));
@@ -71,17 +35,9 @@ namespace Solcery.Services.Transport
             _localSimulation.Init(gameState);
         }
 
-        private void OnUpdateGameState(JObject gameState)
+        private void OnUpdateGameState(JObject gameStateJson)
         {
-            CallAllActionWithParams(_listEventReceivingGameState, gameState);
-        }
-
-        private void CallAllActionWithParams(List<Action<JObject>> listActions, JObject @params)
-        {
-            foreach (var action in listActions)
-            {
-                action.Invoke(@params);
-            }
+            _gameOnReceivingData.OnReceivingGameState(gameStateJson);
         }
 
         void ITransportService.SendCommand(JObject command)
@@ -99,15 +55,13 @@ namespace Solcery.Services.Transport
             Cleanup();
             _localSimulation.Destroy();
             _localSimulation = null;
-            _gameOnReceivingGameContent = null;
+            _gameOnReceivingData = null;
         }
 
         private void Cleanup()
         {
             _localSimulation.EventOnUpdateGameState -= OnUpdateGameState;
             _localSimulation.Cleanup();
-            _listEventReceivingGameContent.Clear();
-            _listEventReceivingGameState.Clear();
         }
     }
 }

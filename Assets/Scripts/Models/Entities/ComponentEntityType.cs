@@ -6,7 +6,6 @@ namespace Solcery.Models.Entities
     {
         public int Type;
 
-
         public void AutoReset(ref ComponentEntityType c)
         {
             c.Type = -1;

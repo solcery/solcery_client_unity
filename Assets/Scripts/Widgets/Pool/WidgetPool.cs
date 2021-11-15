@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Leopotam.EcsLite;
-using ModestTree;
 using UnityEngine;
 
 namespace Solcery.Widgets.Pool
@@ -65,7 +63,7 @@ namespace Solcery.Widgets.Pool
         {
             if (poolObject.gameObject == null)
             {
-                Log.Error("Object to push to the pool is null!");
+                Debug.LogError("Object to push to the pool is null!");
                 return;
             }
 
@@ -78,7 +76,7 @@ namespace Solcery.Widgets.Pool
             else
             {
                 Object.Destroy(poolObject.gameObject);
-                Log.Error("No pool for " + poolObject.name + " available. Object will be destroyed!");
+                Debug.LogError("No pool for " + poolObject.name + " available. Object will be destroyed!");
             }
             
 #if DEVELOPMENT_BUILD || UNITY_EDITOR
@@ -134,7 +132,7 @@ namespace Solcery.Widgets.Pool
             {
                 if (give.Key == null)
                 {
-                    Log.Error($"Something wrong with {give.Value.Name} in pool!");
+                    Debug.LogError($"Something wrong with {give.Value.Name} in pool!");
                 }
             }
         }        

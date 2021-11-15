@@ -1,34 +1,42 @@
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
-using Solcery.Services.GameContent;
-using Solcery.Services.GameContent.PrepareData;
-using Solcery.Services.GameState;
 using Solcery.Services.Transport;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
 {
-    public sealed class Game : IGame, IGameOnReceivingGameContent
+    public sealed class Game : IGame, IGameOnReceivingData
     {
         ITransportService IGame.TransportService => _transportService;
         IBrickService IGame.BrickService => _brickService;
-        IGameContentService IGame.GameContentService => _gameContentService;
-        IGameContentPrepareDataService IGame.GameContentPrepareDataService => _gameContentPrepareDataService;
-        IGameStateService IGame.GameStateService => _gameStateService;
-
         IModel IGame.Model => _model;
+        IWidgetFactory IGame.WidgetFactory => _widgetFactory;
+
+        JObject IGame.GameContent => _gameContentJson;
+
+        JObject IGame.GameStatePopAndClear
+        {
+            get
+            {
+                var lastGameContent = _gameStates.Count > 0 ? _gameStates.Pop() : null;
+                _gameStates.Clear();
+                return lastGameContent;
+            }
+        }
 
         private ITransportService _transportService;
         private IBrickService _brickService;
         private IModel _model;
-        private IGameContentService _gameContentService;
-        private IGameContentPrepareDataService _gameContentPrepareDataService;
-        private IGameStateService _gameStateService;
         private IWidgetFactory _widgetFactory;
+
+        private JObject _gameContentJson;
+        private Stack<JObject> _gameStates;
 
         public static IGame Create(IWidgetCanvas widgetCanvas)
         {
@@ -37,6 +45,7 @@ namespace Solcery.Games
 
         private Game(IWidgetCanvas widgetCanvas)
         {
+            _gameStates = new Stack<JObject>();
             CreateModel();
             CreateServices(widgetCanvas);
         }
@@ -51,14 +60,13 @@ namespace Solcery.Games
             _widgetFactory = WidgetFactory.Create(widgetCanvas);
             
             _brickService = BrickService.Create();
+            RegistrationBrickTypes();
+            
 #if UNITY_EDITOR
             _transportService = EditorTransportService.Create(this, _brickService);
 #else
             _transportService = WebGlTransportService.Create(this);
 #endif
-            _gameContentService = GameContentService.Create(_transportService);
-            _gameContentPrepareDataService = GameContentPrepareDataService.Create(_gameContentService, _widgetFactory, _model);
-            _gameStateService = GameStateService.Create(_transportService, _model);
         }
 
         void IGame.Init()
@@ -66,19 +74,21 @@ namespace Solcery.Games
             _transportService.CallUnityLoaded();
         }
 
-        void IGameOnReceivingGameContent.OnReceivingGameContent()
+        void IGameOnReceivingData.OnReceivingGameContent(JObject gameContentJson)
         {
             Cleanup();
-            Init();
+            _gameContentJson = gameContentJson;
+            Init(gameContentJson);
         }
 
-        private void Init()
+        void IGameOnReceivingData.OnReceivingGameState(JObject gameStateJson)
         {
-            _model.Init(this);
-            RegistrationBrickTypes();
-            _gameContentService.Init();
-            _gameContentPrepareDataService.Init();
-            _gameStateService.Init();
+            _gameStates.Push(gameStateJson);
+        }
+
+        private void Init(JObject gameContentJson)
+        {
+            _model.Init(this, gameContentJson);
         }
 
         private void RegistrationBrickTypes()
@@ -102,18 +112,13 @@ namespace Solcery.Games
         private void Cleanup()
         {
             _model.Destroy();
-            _gameContentPrepareDataService.Cleanup();
-            _gameContentService.Cleanup();
             _brickService.Cleanup();
             _transportService.Cleanup();
-            
             _widgetFactory.Cleanup();
         }
 
         void IGame.Update(float dt)
         {
-            _gameContentService.Update();
-            _gameStateService.Update();
             _model.Update(dt);
         }
 
@@ -121,17 +126,11 @@ namespace Solcery.Games
         {
             _model.Destroy();
             _model = null;
-            _gameStateService.Destroy();
-            _gameStateService = null;
-            _gameContentPrepareDataService.Destroy();
-            _gameContentPrepareDataService = null;
-            _gameContentService.Destroy();
-            _gameContentService = null;
+            
             _brickService.Destroy();
             _brickService = null;
             _transportService.Destroy();
             _transportService = null;
-
             
             // TODO: удаляем последней, так как в разных объектах могут быть ссылки на виджеты
             _widgetFactory.Destroy();

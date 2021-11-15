@@ -22,7 +22,6 @@ namespace Solcery
 
         private void Awake()
         {
-            DontDestroyOnLoad(this);
             _instance = this;
         }
 

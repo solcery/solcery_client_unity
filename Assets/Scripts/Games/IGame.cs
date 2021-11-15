@@ -1,9 +1,8 @@
+using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Models;
-using Solcery.Services.GameContent;
-using Solcery.Services.GameContent.PrepareData;
-using Solcery.Services.GameState;
 using Solcery.Services.Transport;
+using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
 {
@@ -11,10 +10,10 @@ namespace Solcery.Games
     {
         public ITransportService TransportService { get; }
         public IBrickService BrickService { get; }
-        public IGameContentService GameContentService { get; }
-        public IGameContentPrepareDataService GameContentPrepareDataService { get; }
-        public IGameStateService GameStateService { get; }
         public IModel Model { get; }
+        public IWidgetFactory WidgetFactory { get; }
+        public JObject GameContent { get; }
+        public JObject GameStatePopAndClear { get; }
 
         public void Init();
         public void Update(float dt);
