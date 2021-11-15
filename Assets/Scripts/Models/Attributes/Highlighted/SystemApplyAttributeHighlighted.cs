@@ -9,7 +9,7 @@ namespace Solcery.Models.Attributes.Highlighted
     
     internal sealed class SystemApplyAttributeHighlighted : ISystemApplyAttributeHighlighted
     {
-        private EcsFilter _filterWidgetViewComponent;
+        private EcsFilter _filterViewComponent;
         
         public static ISystemApplyAttributeHighlighted Create()
         {
@@ -18,14 +18,14 @@ namespace Solcery.Models.Attributes.Highlighted
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filterWidgetViewComponent = systems.GetWorld().Filter<ComponentPlaceWidgetView>().Inc<ComponentAttributeHighlighted>().End();
+            _filterViewComponent = systems.GetWorld().Filter<ComponentEntityView>().Inc<ComponentAttributeHighlighted>().End();
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
-            var widgetViewComponents = systems.GetWorld().GetPool<ComponentPlaceWidgetView>();
+            var widgetViewComponents = systems.GetWorld().GetPool<ComponentEntityView>();
             var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeHighlighted>();
-            foreach (var entity in _filterWidgetViewComponent)
+            foreach (var entity in _filterViewComponent)
             {
                 var view = widgetViewComponents.Get(entity).View;
                 if (view is IHighlighted value)

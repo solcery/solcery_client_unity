@@ -27,7 +27,7 @@ namespace Solcery.Widgets
                         if (widget != null)
                         {
                             _widgets.Add(widget);
-                            world.GetPool<ComponentPlaceWidgetView>().Add(entityId).View = widget.View;
+                            world.GetPool<ComponentEntityView>().Add(entityId).View = widget.View;
                         }
                     }
                 }
@@ -36,12 +36,12 @@ namespace Solcery.Widgets
         
         public void ClearInternalWidgets(EcsWorld world, int[] entityIds)
         {
-            var widgetViewPool = world.GetPool<ComponentPlaceWidgetView>();
+            var viewPool = world.GetPool<ComponentEntityView>();
             foreach (var entityId in entityIds)
             {
-                if (widgetViewPool.Has(entityId))
+                if (viewPool.Has(entityId))
                 {
-                    widgetViewPool.Del(entityId);
+                    viewPool.Del(entityId);
                 }
             }
 
