@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Solcery.Models.GameState;
 using Solcery.Models.Places;
 
 namespace Solcery.Models.Attributes.Highlighted
@@ -10,6 +11,7 @@ namespace Solcery.Models.Attributes.Highlighted
     internal sealed class SystemApplyAttributeHighlighted : ISystemApplyAttributeHighlighted
     {
         private EcsFilter _filterViewComponent;
+        private EcsFilter _filterGameStateUpdate;
         
         public static ISystemApplyAttributeHighlighted Create()
         {
@@ -19,10 +21,16 @@ namespace Solcery.Models.Attributes.Highlighted
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterViewComponent = systems.GetWorld().Filter<ComponentEntityView>().Inc<ComponentAttributeHighlighted>().End();
+            _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
+            if (_filterGameStateUpdate.GetEntitiesCount() <= 0)
+            {
+                return;
+            }
+            
             var widgetViewComponents = systems.GetWorld().GetPool<ComponentEntityView>();
             var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeHighlighted>();
             foreach (var entity in _filterViewComponent)
@@ -32,8 +40,6 @@ namespace Solcery.Models.Attributes.Highlighted
                 {
                     value.SetHighlighted(attributeComponents.Get(entity).Value);
                 }
-
-                attributeComponents.Del(entity);
             }
         }
     }

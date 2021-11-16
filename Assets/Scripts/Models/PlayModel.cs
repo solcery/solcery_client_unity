@@ -2,7 +2,6 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.GameContent;
-using Solcery.Models.Attributes;
 using Solcery.Models.Attributes.Highlighted;
 using Solcery.Models.Attributes.Interactable;
 using Solcery.Models.GameState;
@@ -36,7 +35,6 @@ namespace Solcery.Models
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
-            _systems.Add(SystemAttributesWidgetsUpdate.Create());
             _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
             _systems.Add(SystemApplyTrigger.Create(game.BrickService));
@@ -48,6 +46,8 @@ namespace Solcery.Models
             
             // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
             _systems.Add(SystemGameStateRemoveUpdateTag.Create());
+            
+            
 
             _systems.Init();
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Solcery.Models.Attributes.Place;
 using Solcery.Models.Entities;
 using Solcery.Models.GameState;
 
@@ -25,7 +26,7 @@ namespace Solcery.Models.Places
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
-            _filterEntities = systems.GetWorld().Filter<ComponentEntityTag>().End();
+            _filterEntities = systems.GetWorld().Filter<ComponentEntityTag>().Inc<ComponentAttributePlace>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
         
@@ -40,8 +41,7 @@ namespace Solcery.Models.Places
             // Подготовим набор entity в place
             foreach (var entityIndex in _filterEntities)
             {
-                var entityPlaceId = systems.GetWorld().GetPool<ComponentEntityAttributes>().Get(entityIndex)
-                    .Attributes["place"];
+                var entityPlaceId = systems.GetWorld().GetPool<ComponentAttributePlace>().Get(entityIndex).Value;
 
                 if (!entitiesInPlace.ContainsKey(entityPlaceId))
                 {

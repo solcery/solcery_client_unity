@@ -4,12 +4,16 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Entities;
 using Solcery.Models.Game;
+using Solcery.Models.GameState.StaticAttributes;
+using Solcery.Models.GameState.StaticAttributes.Highlighted;
+using Solcery.Models.GameState.StaticAttributes.Interactable;
+using Solcery.Models.GameState.StaticAttributes.Place;
 using Solcery.Utils;
 
 
 namespace Solcery.Models.GameState
 {
-    public interface ISystemGameStateUpdate : IEcsInitSystem, IEcsRunSystem { }
+    public interface ISystemGameStateUpdate : IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem{ }
 
     public sealed class SystemGameStateUpdate : ISystemGameStateUpdate
     {
@@ -17,6 +21,7 @@ namespace Solcery.Models.GameState
         
         private EcsFilter _filterGameAttributes;
         private EcsFilter _filterEntities;
+        private IStaticAttributes _staticAttributes;
         
         public static ISystemGameStateUpdate Create(IGame game)
         {
@@ -33,6 +38,11 @@ namespace Solcery.Models.GameState
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentEntityTag>().End();
+            
+            _staticAttributes = StaticAttributes.StaticAttributes.Create();
+            _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
+            _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
+            _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -142,7 +152,14 @@ namespace Solcery.Models.GameState
             world.GetPool<ComponentEntityType>().Get(entityIndex).Type = entityData.GetValue<int>("tplId");
             
             ref var attributesComponent = ref world.GetPool<ComponentEntityAttributes>().Get(entityIndex);
-            UpdateAttributes(entityData.GetValue<JArray>("attrs"), attributesComponent.Attributes);
+            var attributeArray = entityData.GetValue<JArray>("attrs");
+            UpdateAttributes(attributeArray, attributesComponent.Attributes);
+            _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributeArray);
+        }
+
+        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        {
+            _staticAttributes.Cleanup();
         }
     }
 }
