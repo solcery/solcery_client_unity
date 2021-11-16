@@ -27,7 +27,7 @@ namespace Solcery.Widgets.Area
             if (button != null)
             {
                 button.View.SetParent(_widgetCanvas.GetUiCanvas());
-                button.View.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
+                button.View.ApplyPlaceViewData(_viewData);
                 return button;
             }
 

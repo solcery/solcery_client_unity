@@ -2,12 +2,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Solcery.Widgets.Button
 {
-    public class WidgetButtonViewData
+    public class WidgetButtonViewData : WidgetViewDataBase
     {
         public string Name { get; private set; }
 
-        public bool TryParse(JObject jsonData)
+        public override bool TryParse(JObject jsonData)
         {
+            base.TryParse(jsonData);
             if (!jsonData.TryGetValue("name", out var name))
             {
                 return false;

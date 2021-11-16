@@ -1,10 +1,10 @@
-using Leopotam.EcsLite;
+using Solcery.Widgets.Deck;
 using Solcery.Widgets.Pool;
 using UnityEngine;
 
 namespace Solcery.Widgets
 {
-    public class WidgetViewBase : PoolObject
+    public abstract class WidgetViewBase : PoolObject
     {
         public RectTransform RectTransform;
         
@@ -20,11 +20,7 @@ namespace Solcery.Widgets
         {
             transform.SetParent(parent, false);
         }
-        
-        public void ApplyAnchor(Vector2 min, Vector2 max)
-        {
-            RectTransform.anchorMin = min;
-            RectTransform.anchorMax = max;
-        }        
+
+        public abstract void ApplyPlaceViewData(WidgetPlaceViewData viewData);
     }
 }

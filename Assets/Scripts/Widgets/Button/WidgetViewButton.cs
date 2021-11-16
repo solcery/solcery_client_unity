@@ -1,5 +1,6 @@
 using System;
 using Solcery.Models.Attributes.Interactable;
+using Solcery.Widgets.Deck;
 using TMPro;
 
 namespace Solcery.Widgets.Button
@@ -28,6 +29,12 @@ namespace Solcery.Widgets.Button
         public void SetInteractable(bool value)
         {
             Button.interactable = value;
+        }
+
+        public override void ApplyPlaceViewData(WidgetPlaceViewData viewData)
+        {
+            RectTransform.anchorMin = viewData.AnchorMin;
+            RectTransform.anchorMax = viewData.AnchorMax;
         }
     }
 }

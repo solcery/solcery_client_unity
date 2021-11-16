@@ -36,7 +36,8 @@ namespace Solcery.Widgets.Card
         private void CreateView()
         {
             _cardView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetCardView>(_gameObject);
-            _cardView.Text.text = _viewData.Name;
+            _cardView.Name.text = _viewData.Name;
+            _cardView.Description.text = _viewData.Description;
             _cardView.Init();
         }
 

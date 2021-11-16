@@ -27,7 +27,7 @@ namespace Solcery.Widgets.Stack
         private void CreateView()
         {
             _stackView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetStackView>(_gameObject, _widgetCanvas.GetUiCanvas());
-            _stackView.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
+            _stackView.ApplyPlaceViewData(_viewData);
         }
         
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
@@ -36,6 +36,7 @@ namespace Solcery.Widgets.Stack
             if (card != null)
             {
                 card.View.SetParent(_stackView.Content);
+                card.View.ApplyPlaceViewData(_viewData);
                 return card;
             }
             

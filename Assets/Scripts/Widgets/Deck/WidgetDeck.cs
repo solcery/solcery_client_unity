@@ -26,7 +26,7 @@ namespace Solcery.Widgets.Deck
         private void CreateView()
         {
             _deckView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetDeckView>(_gameObject, _widgetCanvas.GetUiCanvas());
-            _deckView.ApplyAnchor(_viewData.AnchorMin, _viewData.AnchorMax);
+            _deckView.ApplyPlaceViewData(_viewData);
         }
 
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
@@ -35,6 +35,7 @@ namespace Solcery.Widgets.Deck
             if (card != null)
             {
                 card.View.SetParent(_deckView.Content);
+                card.View.ApplyPlaceViewData(_viewData);
                 return card;
             }
             
