@@ -5,16 +5,18 @@ using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
+using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
 {
-    public sealed class Game : IGame, IGameOnReceivingData
+    public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
         ITransportService IGame.TransportService => _transportService;
         IBrickService IGame.BrickService => _brickService;
+        IServiceResource IGame.ServiceResource => _serviceResource;
         IModel IGame.Model => _model;
         IWidgetFactory IGame.WidgetFactory => _widgetFactory;
 
@@ -32,6 +34,7 @@ namespace Solcery.Games
 
         private ITransportService _transportService;
         private IBrickService _brickService;
+        private IServiceResource _serviceResource;
         private IModel _model;
         private IWidgetFactory _widgetFactory;
 
@@ -57,8 +60,6 @@ namespace Solcery.Games
         
         private void CreateServices(IWidgetCanvas widgetCanvas)
         {
-            _widgetFactory = WidgetFactory.Create(widgetCanvas);
-            
             _brickService = BrickService.Create();
             RegistrationBrickTypes();
             
@@ -67,6 +68,9 @@ namespace Solcery.Games
 #else
             _transportService = WebGlTransportService.Create(this);
 #endif
+
+            _widgetFactory = WidgetFactory.Create(widgetCanvas);
+            _serviceResource = ServiceResource.Create(this);
         }
 
         void IGame.Init()
@@ -74,14 +78,19 @@ namespace Solcery.Games
             _transportService.CallUnityLoaded();
         }
 
-        void IGameOnReceivingData.OnReceivingGameContent(JObject gameContentJson)
+        void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
             Cleanup();
             _gameContentJson = gameContentJson;
-            Init(gameContentJson);
+            _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
+        }
+        
+        void IGameResourcesCallback.OnResourcesLoad()
+        {
+            Init(_gameContentJson);
         }
 
-        void IGameOnReceivingData.OnReceivingGameState(JObject gameStateJson)
+        void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
             _gameStates.Push(gameStateJson);
         }
@@ -115,6 +124,7 @@ namespace Solcery.Games
             _brickService.Cleanup();
             _transportService.Cleanup();
             _widgetFactory.Cleanup();
+            _serviceResource.Cleanup();
         }
 
         void IGame.Update(float dt)
@@ -131,10 +141,12 @@ namespace Solcery.Games
             _brickService = null;
             _transportService.Destroy();
             _transportService = null;
-            
-            // TODO: удаляем последней, так как в разных объектах могут быть ссылки на виджеты
+
+            // TODO: удаляем последними, так как в разных объектах могут быть ссылки на виджеты и ресурсы
             _widgetFactory.Destroy();
             _widgetFactory = null;
+            _serviceResource.Destroy();
+            _serviceResource = null;
         }
     }
 }

@@ -11,23 +11,23 @@ namespace Solcery.Services.Transport
     public sealed class EditorTransportService : ITransportService
     {
         private IEditorLocalSimulationService _localSimulation;
-        private IGameOnReceivingData _gameOnReceivingData;
+        private IGameTransportCallbacks _gameTransportCallbacks;
         
-        public static ITransportService Create(IGameOnReceivingData gameOnReceivingData, IBrickService brickService)
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IBrickService brickService)
         {
-            return new EditorTransportService(gameOnReceivingData, brickService);
+            return new EditorTransportService(gameTransportCallbacks, brickService);
         }
 
-        private EditorTransportService(IGameOnReceivingData gameOnReceivingData, IBrickService brickService)
+        private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IBrickService brickService)
         {
             _localSimulation = EditorLocalSimulationService.Create(brickService);
-            _gameOnReceivingData = gameOnReceivingData;
+            _gameTransportCallbacks = gameTransportCallbacks;
         }
         
         void ITransportService.CallUnityLoaded()
         {
             var pathToGameContent = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_content.json");
-            _gameOnReceivingData.OnReceivingGameContent(JObject.Parse(File.ReadAllText(pathToGameContent)));
+            _gameTransportCallbacks.OnReceivingGameContent(JObject.Parse(File.ReadAllText(pathToGameContent)));
             
             var pathToGameState = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_state.json");
             var gameState = JObject.Parse(File.ReadAllText(pathToGameState));
@@ -37,7 +37,7 @@ namespace Solcery.Services.Transport
 
         private void OnUpdateGameState(JObject gameStateJson)
         {
-            _gameOnReceivingData.OnReceivingGameState(gameStateJson);
+            _gameTransportCallbacks.OnReceivingGameState(gameStateJson);
         }
 
         void ITransportService.SendCommand(JObject command)
@@ -55,7 +55,7 @@ namespace Solcery.Services.Transport
             Cleanup();
             _localSimulation.Destroy();
             _localSimulation = null;
-            _gameOnReceivingData = null;
+            _gameTransportCallbacks = null;
         }
 
         private void Cleanup()
