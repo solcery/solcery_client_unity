@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Models;
+using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Widgets.Factory;
 
@@ -10,6 +11,7 @@ namespace Solcery.Games
     {
         public ITransportService TransportService { get; }
         public IBrickService BrickService { get; }
+        public IServiceResource ServiceResource { get; }
         public IModel Model { get; }
         public IWidgetFactory WidgetFactory { get; }
         public JObject GameContent { get; }
