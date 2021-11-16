@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Attributes.Interactable;
 using Solcery.Models.Entities;
 using Solcery.Models.Game;
 using Solcery.Models.GameState.StaticAttributes;
 using Solcery.Models.GameState.StaticAttributes.Highlighted;
 using Solcery.Models.GameState.StaticAttributes.Interactable;
 using Solcery.Models.GameState.StaticAttributes.Place;
+using Solcery.Models.Triggers;
 using Solcery.Utils;
 
 
@@ -21,6 +23,7 @@ namespace Solcery.Models.GameState
         
         private EcsFilter _filterGameAttributes;
         private EcsFilter _filterEntities;
+        private EcsFilter _filterEntityTypes;
         private IStaticAttributes _staticAttributes;
         
         public static ISystemGameStateUpdate Create(IGame game)
@@ -38,7 +41,7 @@ namespace Solcery.Models.GameState
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentEntityTag>().End();
-            
+            _filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
             _staticAttributes = StaticAttributes.StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
@@ -134,6 +137,16 @@ namespace Solcery.Models.GameState
             }
         }
         
+        private void UpdateTriggers(int typeId, EcsWorld world, int entityIndex)
+        {
+            ref var types = ref world.GetPool<ComponentEntityTypes>().Get(_filterEntityTypes.GetRawEntities()[0]);
+            if (types.Types.TryGetValue(typeId, out var data))
+            {
+                world.GetPool<ComponentTriggers>().Add(entityIndex).Triggers = TriggersData.Parse(data);
+                world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+            }
+        }
+
         private void CreateEntity(EcsWorld world, JObject entityData)
         {
             var entityIndex = world.NewEntity();
@@ -149,8 +162,13 @@ namespace Solcery.Models.GameState
         private void UpdateEntity(EcsWorld world, int entityIndex, JObject entityData)
         {
             world.GetPool<ComponentEntityId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
-            world.GetPool<ComponentEntityType>().Get(entityIndex).Type = entityData.GetValue<int>("tplId");
+            var typeId = entityData.GetValue<int>("tplId");
+            world.GetPool<ComponentEntityType>().Get(entityIndex).Type = typeId;
+
+            // triggers
+            UpdateTriggers(typeId, world, entityIndex);
             
+            // attributes
             ref var attributesComponent = ref world.GetPool<ComponentEntityAttributes>().Get(entityIndex);
             var attributeArray = entityData.GetValue<JArray>("attrs");
             UpdateAttributes(attributeArray, attributesComponent.Attributes);

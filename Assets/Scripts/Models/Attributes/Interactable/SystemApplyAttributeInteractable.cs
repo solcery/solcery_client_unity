@@ -2,7 +2,6 @@ using Leopotam.EcsLite;
 using Solcery.Models.GameState;
 using Solcery.Models.Places;
 using Solcery.Models.Triggers;
-using Solcery.Widgets.Data;
 
 namespace Solcery.Models.Attributes.Interactable
 {

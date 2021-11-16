@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.BrickInterpretation;
+using UnityEngine;
 
 namespace Solcery.Models.Triggers
 {
@@ -37,12 +38,10 @@ namespace Solcery.Models.Triggers
                 {
                     ref var triggersComponent = ref triggerComponents.Get(entity);
                     ref var applyTriggerComponent = ref applyTriggerComponents.Get(entity);
-                    if (triggersComponent.Triggers.TryGetValue(applyTriggerComponent.Type, out var triggerData))
+                    if (triggersComponent.Triggers.TryGetValue(applyTriggerComponent.Type, out var brick))
                     {
-                        foreach (var brick in triggerData.Actions)
-                        {
-                            _brickService.ExecuteActionBrick(brick, null);
-                        }
+                        _brickService.ExecuteActionBrick(brick, null);
+                        Debug.Log($"Brick \"{brick["name"]}\" was executed!");
                     }
                 }
 
