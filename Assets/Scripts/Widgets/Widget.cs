@@ -3,13 +3,23 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Entities;
 using Solcery.Models.Places;
+using Solcery.Services.Resources;
+using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets
 {
     public abstract class Widget
     {
+        protected IWidgetCanvas WidgetCanvas;
+        protected IServiceResource ServiceResource;
         public abstract WidgetViewBase View { get; }
         private readonly List<Widget> _widgets = new List<Widget>();
+        
+        protected Widget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
+        {
+            WidgetCanvas = widgetCanvas;
+            ServiceResource = serviceResource;
+        }
 
         public void UpdateWidget(EcsWorld world, int[] entityIds)
         {

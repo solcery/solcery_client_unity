@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Card;
 using Solcery.Widgets.Deck;
@@ -9,16 +10,14 @@ namespace Solcery.Widgets.Stack
 {
     public class WidgetStack : Widget
     {
-        private readonly IWidgetCanvas _widgetCanvas;
         private readonly WidgetPlaceViewData _viewData;
         private readonly GameObject _gameObject;
 
         private WidgetStackView _stackView;
         public override WidgetViewBase View => _stackView;
         
-        public WidgetStack(IWidgetCanvas widgetCanvas, WidgetPlaceViewData viewData)
+        public WidgetStack(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetPlaceViewData viewData) : base(widgetCanvas, serviceResource)
         {
-            _widgetCanvas = widgetCanvas;
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/stack");
             CreateView();
@@ -26,13 +25,13 @@ namespace Solcery.Widgets.Stack
         
         private void CreateView()
         {
-            _stackView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetStackView>(_gameObject, _widgetCanvas.GetUiCanvas());
+            _stackView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetStackView>(_gameObject, WidgetCanvas.GetUiCanvas());
             _stackView.ApplyPlaceViewData(_viewData);
         }
         
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
         {
-            var card = WidgetCard.Create(data, _widgetCanvas);
+            var card = WidgetCard.Create(WidgetCanvas, ServiceResource, data);
             if (card != null)
             {
                 card.View.SetParent(_stackView.Content);
@@ -46,7 +45,7 @@ namespace Solcery.Widgets.Stack
         protected override void ClearInternalView()
         {
             _stackView.Clear();
-            _widgetCanvas.GetWidgetPool().ReturnToPool(_stackView);
+            WidgetCanvas.GetWidgetPool().ReturnToPool(_stackView);
             _stackView = null;
         }
     }

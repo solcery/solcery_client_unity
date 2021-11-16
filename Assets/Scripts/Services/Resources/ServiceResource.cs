@@ -11,7 +11,7 @@ namespace Solcery.Services.Resources
     {
         private IGameResourcesCallback _gameResourcesCallback;
         private ITextureLoadUriTask _task;
-        private Dictionary<string, Texture2D> _textures;
+        private readonly Dictionary<string, Texture2D> _textures;
 
         public static IServiceResource Create(IGameResourcesCallback gameResourcesCallback)
         {
@@ -56,6 +56,11 @@ namespace Solcery.Services.Resources
             
             _task?.Destroy();
             _gameResourcesCallback?.OnResourcesLoad();
+        }
+
+        public bool GetTextureByKey(string key, out Texture2D texture)
+        {
+            return _textures.TryGetValue(key, out texture);
         }
 
         void IServiceResource.Cleanup()

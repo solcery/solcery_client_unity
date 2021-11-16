@@ -69,8 +69,8 @@ namespace Solcery.Games
             _transportService = WebGlTransportService.Create(this);
 #endif
 
-            _widgetFactory = WidgetFactory.Create(widgetCanvas);
             _serviceResource = ServiceResource.Create(this);
+            _widgetFactory = WidgetFactory.Create(widgetCanvas, _serviceResource);
         }
 
         void IGame.Init()

@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 using UnityEngine;
 
@@ -7,27 +8,25 @@ namespace Solcery.Widgets.Button
 {
     public class WidgetButton : Widget
     {
-        private readonly IWidgetCanvas _widgetCanvas;
         private readonly WidgetButtonViewData _viewData;
         private readonly GameObject _gameObject;
         
         private WidgetViewButton _buttonView;
         public override WidgetViewBase View => _buttonView;
         
-        public static WidgetButton Create(JObject jsonData, IWidgetCanvas widgetCanvas)
+        public static WidgetButton Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject jsonData)
         {
             var viewData = new WidgetButtonViewData();
             if (viewData.TryParse(jsonData))
             {
-                return new WidgetButton(viewData, widgetCanvas);
+                return new WidgetButton(widgetCanvas, serviceResource, viewData);
             }
             
             return null;
         }
         
-        private WidgetButton(WidgetButtonViewData viewData, IWidgetCanvas widgetCanvas)
+        private WidgetButton(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetButtonViewData viewData) : base(widgetCanvas, serviceResource)
         {
-            _widgetCanvas = widgetCanvas;
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/button");
             CreateView();
@@ -35,7 +34,7 @@ namespace Solcery.Widgets.Button
         
         private void CreateView()
         {
-            _buttonView = _widgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject, _widgetCanvas.GetUiCanvas());
+            _buttonView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject);
             _buttonView.Text.text = _viewData.Name;
             _buttonView.Init();
         }
@@ -48,7 +47,7 @@ namespace Solcery.Widgets.Button
         protected override void ClearInternalView()
         {
             _buttonView.Clear();
-            _widgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
+            WidgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
             _buttonView = null;
         }
     }

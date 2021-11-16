@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using Solcery.Services.Resources;
 using Solcery.Utils;
 using Solcery.Widgets.Area;
 using Solcery.Widgets.Canvas;
@@ -11,15 +12,17 @@ namespace Solcery.Widgets.Factory
     {
         // TODO: его нужно передать в виджет при создании, для размещения виджета на нужном лейауте
         private IWidgetCanvas _widgetCanvas;
+        private IServiceResource _serviceResource;
 
-        public static IWidgetFactory Create(IWidgetCanvas widgetCanvas)
+        public static IWidgetFactory Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
-            return new WidgetFactory(widgetCanvas);
+            return new WidgetFactory(widgetCanvas, serviceResource);
         }
 
-        private WidgetFactory(IWidgetCanvas widgetCanvas)
+        private WidgetFactory(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
             _widgetCanvas = widgetCanvas;
+            _serviceResource = serviceResource;
         }
         
         bool IWidgetFactory.TryCreateWidget(JObject jsonData, out Widget widget)
@@ -42,13 +45,13 @@ namespace Solcery.Widgets.Factory
                     case WidgetTypes.Button:
                     case WidgetTypes.Title:
                     case WidgetTypes.Picture:
-                        widget = new WidgetArea(_widgetCanvas, placeViewData);
+                        widget = new WidgetArea(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
                     case WidgetTypes.Stacked:
-                        widget = new WidgetStack(_widgetCanvas, placeViewData);
+                        widget = new WidgetStack(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
                     case WidgetTypes.LayedOut:
-                        widget = new WidgetDeck(_widgetCanvas, placeViewData);
+                        widget = new WidgetDeck(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
                 }
             }
