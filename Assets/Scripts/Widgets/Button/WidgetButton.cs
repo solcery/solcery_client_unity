@@ -14,18 +14,7 @@ namespace Solcery.Widgets.Button
         private WidgetViewButton _buttonView;
         public override WidgetViewBase View => _buttonView;
         
-        public static WidgetButton Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject jsonData)
-        {
-            var viewData = new WidgetButtonViewData();
-            if (viewData.TryParse(jsonData))
-            {
-                return new WidgetButton(widgetCanvas, serviceResource, viewData);
-            }
-            
-            return null;
-        }
-        
-        private WidgetButton(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetButtonViewData viewData) : base(widgetCanvas, serviceResource)
+        public WidgetButton(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetButtonViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/button");

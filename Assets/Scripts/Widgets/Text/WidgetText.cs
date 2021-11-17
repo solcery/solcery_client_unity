@@ -14,18 +14,7 @@ namespace Solcery.Widgets.Text
         private WidgetTextView _textView;
         public override WidgetViewBase View => _textView;
 
-        public static WidgetText Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject jsonData)
-        {
-            var viewData = new WidgetTextViewData();
-            if (viewData.TryParse(jsonData))
-            {
-                return new WidgetText(widgetCanvas, serviceResource, viewData);
-            }
-            
-            return null;
-        }
-        
-        private WidgetText(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetTextViewData viewData) : base(widgetCanvas, serviceResource)
+        public WidgetText(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetTextViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/text");
