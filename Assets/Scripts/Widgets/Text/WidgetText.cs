@@ -35,7 +35,7 @@ namespace Solcery.Widgets.Text
         private void CreateView()
         {
             _textView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetTextView>(_gameObject);
-            _textView.Description = _textView.Description;
+            _textView.Description.text = _viewData.Description;
             _textView.Init();
         }
         
