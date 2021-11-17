@@ -36,7 +36,7 @@ namespace Solcery.Widgets.Picture
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _pictureView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_pictureView);

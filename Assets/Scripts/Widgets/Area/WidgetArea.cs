@@ -38,7 +38,7 @@ namespace Solcery.Widgets.Area
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
         }
     }

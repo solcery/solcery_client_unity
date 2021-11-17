@@ -10,8 +10,8 @@ namespace Solcery.Widgets
 {
     public abstract class Widget
     {
-        protected IWidgetCanvas WidgetCanvas;
-        protected IServiceResource ServiceResource;
+        protected readonly IWidgetCanvas WidgetCanvas;
+        protected readonly IServiceResource ServiceResource;
         public abstract WidgetViewBase View { get; }
         private readonly List<Widget> _widgets = new List<Widget>();
         
@@ -57,12 +57,12 @@ namespace Solcery.Widgets
 
             foreach (var widget in _widgets)
             {
-                widget.ClearInternalView();
+                widget.ClearView();
             }
             _widgets.Clear();
         }
 
         protected abstract Widget AddInternalWidget(EcsWorld world, int entityId, JObject data);
-        protected abstract void ClearInternalView();
+        protected abstract void ClearView();
     }
 }

@@ -33,7 +33,7 @@ namespace Solcery.Widgets.Text
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _textView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_textView);

@@ -33,7 +33,7 @@ namespace Solcery.Widgets.Button
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _buttonView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
