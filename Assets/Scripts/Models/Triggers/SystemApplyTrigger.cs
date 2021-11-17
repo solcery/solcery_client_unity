@@ -11,7 +11,7 @@ namespace Solcery.Models.Triggers
     internal sealed class SystemApplyTrigger : ISystemApplyTrigger
     {
         private EcsFilter _filterApplyTriggerComponent;
-        private IBrickService _brickService;
+        private readonly IBrickService _brickService;
 
         public static ISystemApplyTrigger Create(IBrickService brickService)
         {
