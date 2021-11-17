@@ -49,8 +49,14 @@
       "dependencies": {},
       "hash": "f8fb1468e91dd89681ade447b5d8fbec283e8865"
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.addressables": {
-      "version": "1.18.16",
+      "version": "1.18.19",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -129,7 +135,7 @@
       }
     },
     "com.unity.test-framework": {
-      "version": "1.1.29",
+      "version": "1.1.30",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -149,7 +155,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.5.6",
+      "version": "1.5.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
