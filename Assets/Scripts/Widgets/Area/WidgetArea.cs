@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Button;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Creator;
-using Solcery.Widgets.Deck;
 using Solcery.Widgets.Picture;
 using Solcery.Widgets.Text;
 

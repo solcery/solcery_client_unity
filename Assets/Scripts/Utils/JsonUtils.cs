@@ -8,6 +8,11 @@ namespace Solcery.Utils
 {
     public static class JsonUtils
     {
+        public static bool HasKey(this JObject token, string key)
+        {
+            return token.ContainsKey(key);
+        }
+        
         public static T GetValue<T>(this JObject token, string key)
         {
             if (token == null || !token.TryGetValue(key, StringComparison.Ordinal, out var value))

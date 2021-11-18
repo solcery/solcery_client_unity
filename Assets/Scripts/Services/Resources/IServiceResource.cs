@@ -6,7 +6,8 @@ namespace Solcery.Services.Resources
     public interface IServiceResource
     {
         void PreloadResourcesFromGameContent(JObject gameContentJson);
-        public bool GetTextureByKey(string key, out Texture2D texture);
+        bool TryGetTextureForKey(string key, out Texture2D texture);
+        bool TryGetWidgetPrefabForKey(string key, out GameObject prefab);
         void Cleanup();
         void Destroy();
     }

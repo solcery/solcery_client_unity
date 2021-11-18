@@ -1,6 +1,6 @@
 namespace Solcery.Widgets
 {
-    public enum WidgetTypes
+    public enum WidgetPlaceTypes
     {
         None = -1,
         Stacked = 0,

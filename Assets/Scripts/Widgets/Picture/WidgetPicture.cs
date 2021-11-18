@@ -17,14 +17,14 @@ namespace Solcery.Widgets.Picture
         public WidgetPicture(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetPictureViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
-            _gameObject = (GameObject) Resources.Load("ui/picture");
+            ServiceResource.TryGetWidgetPrefabForKey("ui/picture", out _gameObject);
             CreateView();
         }
 
         private void CreateView()
         {
             _pictureView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetPictureView>(_gameObject);
-            if (ServiceResource.GetTextureByKey(_viewData.Picture, out var texture))
+            if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
             {
                 _pictureView.Image.material.mainTexture = texture;
             }

@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Solcery.Widgets.Deck
+namespace Solcery.Widgets
 {
     public class WidgetPlaceViewData : WidgetViewDataBase
     {

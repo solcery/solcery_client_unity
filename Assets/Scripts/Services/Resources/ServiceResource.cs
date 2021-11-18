@@ -1,8 +1,15 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Services.Resources.Loaders.Textures;
-using Solcery.Utils;
+using Solcery.Services.Resources.Loaders;
+using Solcery.Services.Resources.Loaders.Multi;
+using Solcery.Services.Resources.Loaders.Texture;
+using Solcery.Services.Resources.Loaders.WidgetPrefab;
+using Solcery.Services.Resources.Patterns;
+using Solcery.Services.Resources.Patterns.Texture;
+using Solcery.Services.Resources.Patterns.Widgets.Button;
+using Solcery.Services.Resources.Patterns.Widgets.Picture;
+using Solcery.Services.Resources.Patterns.Widgets.Text;
 using UnityEngine;
 
 namespace Solcery.Services.Resources
@@ -10,8 +17,9 @@ namespace Solcery.Services.Resources
     public sealed class ServiceResource : IServiceResource
     {
         private IGameResourcesCallback _gameResourcesCallback;
-        private ITextureLoadUriTask _task;
+        private IMultiLoadTask _task;
         private readonly Dictionary<string, Texture2D> _textures;
+        private readonly Dictionary<string, GameObject> _prefabs;
 
         public static IServiceResource Create(IGameResourcesCallback gameResourcesCallback)
         {
@@ -21,30 +29,61 @@ namespace Solcery.Services.Resources
         private ServiceResource(IGameResourcesCallback gameResourcesCallback)
         {
             _textures = new Dictionary<string, Texture2D>();
+            _prefabs = new Dictionary<string, GameObject>();
             _gameResourcesCallback = gameResourcesCallback;
         }
 
         void IServiceResource.PreloadResourcesFromGameContent(JObject gameContentJson)
         {
-            var imageUriList = new List<string>();
-            if (gameContentJson.TryGetValue("cardTypes", out JObject ct) 
-                && ct.TryGetValue("objects", out JArray entityTypeArray))
+            var patternsProcessor = PatternsProcessor.Create();
+            patternsProcessor.PatternRegistration(PatternUriTexture.Create());
+            patternsProcessor.PatternRegistration(PatternButton.Create());
+            patternsProcessor.PatternRegistration(PatternText.Create());
+            patternsProcessor.PatternRegistration(PatternPicture.Create());
+            patternsProcessor.ProcessGameContent(gameContentJson);
+
+            _task = MultiLoadTask.Create();
+            _task.Completed += OnCompletedAllTask;
+
+            if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.UriTexture, out var imageUriList))
             {
-                foreach (var entityTypeToken in entityTypeArray)
-                {
-                    if (entityTypeToken is JObject entityTypeObject)
-                    {
-                        var pictureUri = entityTypeObject.GetValue<string>("picture");
-                        if (pictureUri != null)
-                        {
-                            imageUriList.Add(pictureUri);
-                        }
-                    }
-                }
+                _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
             }
 
-            _task = TextureLoadUriTask.Create(imageUriList);
-            _task.Run(OnImagesLoaded);
+            {
+                var widgetList = new List<PatternData>();
+
+                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetButton, out var buttonWidgetList))
+                {
+                    widgetList.AddRange(buttonWidgetList);
+                }
+
+                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetText, out var textWidgetList))
+                {
+                    widgetList.AddRange(textWidgetList);
+                }
+
+                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetPicture, out var pictureWidgetList))
+                {
+                    widgetList.AddRange(pictureWidgetList);
+                }
+                
+                _task.AddTask(TaskLoadWidgetPrefab.Create(widgetList, OnWidgetPrefabLoaded));
+            }
+
+            _task.Run();
+        }
+
+        private void OnCompletedAllTask(bool result, ILoadTask task)
+        {
+            if (_task == task)
+            {
+                _task.Completed -= OnCompletedAllTask;
+                _task.Destroy();
+                _task = null;
+            }
+
+            _gameResourcesCallback?.OnResourcesLoad();
         }
 
         private void OnImagesLoaded(Dictionary<string, Texture2D> obj)
@@ -53,14 +92,24 @@ namespace Solcery.Services.Resources
             {
                 _textures.Add(kv.Key, kv.Value);
             }
-            
-            _task?.Destroy();
-            _gameResourcesCallback?.OnResourcesLoad();
+        }
+        
+        private void OnWidgetPrefabLoaded(Dictionary<string, GameObject> obj)
+        {
+            foreach (var kv in obj)
+            {
+                _prefabs.Add(kv.Key, kv.Value);
+            }
         }
 
-        public bool GetTextureByKey(string key, out Texture2D texture)
+        bool IServiceResource.TryGetTextureForKey(string key, out Texture2D texture)
         {
             return _textures.TryGetValue(key, out texture);
+        }
+
+        bool IServiceResource.TryGetWidgetPrefabForKey(string key, out GameObject prefab)
+        {
+            return _prefabs.TryGetValue(key, out prefab);
         }
 
         void IServiceResource.Cleanup()
@@ -72,6 +121,9 @@ namespace Solcery.Services.Resources
         {
             _task?.Destroy();
             _task = null;
+            
+            _prefabs.Clear();
+            _textures.Clear();
         }
 
         void IServiceResource.Destroy()

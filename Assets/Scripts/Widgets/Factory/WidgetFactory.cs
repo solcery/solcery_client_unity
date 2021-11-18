@@ -34,23 +34,23 @@ namespace Solcery.Widgets.Factory
                 return false;
             }
 
-            var widgetType = (WidgetTypes) layout;
+            var widgetType = (WidgetPlaceTypes) layout;
             var placeViewData = new WidgetPlaceViewData();
             if (placeViewData.TryParse(jsonData))
             {
                 switch (widgetType)
                 {
-                    case WidgetTypes.None:
+                    case WidgetPlaceTypes.None:
                         return false;
-                    case WidgetTypes.Button:
-                    case WidgetTypes.Title:
-                    case WidgetTypes.Picture:
+                    case WidgetPlaceTypes.Button:
+                    case WidgetPlaceTypes.Title:
+                    case WidgetPlaceTypes.Picture:
                         widget = new WidgetArea(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
-                    case WidgetTypes.Stacked:
+                    case WidgetPlaceTypes.Stacked:
                         widget = new WidgetStack(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
-                    case WidgetTypes.LayedOut:
+                    case WidgetPlaceTypes.LayedOut:
                         widget = new WidgetDeck(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
                 }

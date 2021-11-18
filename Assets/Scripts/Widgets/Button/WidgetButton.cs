@@ -17,7 +17,7 @@ namespace Solcery.Widgets.Button
         public WidgetButton(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetButtonViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
-            _gameObject = (GameObject) Resources.Load("ui/button");
+            ServiceResource.TryGetWidgetPrefabForKey("ui/button", out _gameObject);
             CreateView();
         }
         

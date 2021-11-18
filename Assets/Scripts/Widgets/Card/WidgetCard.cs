@@ -37,7 +37,7 @@ namespace Solcery.Widgets.Card
             _cardView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetCardView>(_gameObject);
             _cardView.Name.text = _viewData.Name;
             _cardView.Description.text = _viewData.Description;
-            if (ServiceResource.GetTextureByKey(_viewData.Picture, out var texture))
+            if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
             {
                 _cardView.Image.material.mainTexture = texture;
             }

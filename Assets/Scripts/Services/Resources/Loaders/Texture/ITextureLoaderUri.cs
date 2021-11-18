@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Solcery.Services.Resources.Loaders.Textures
+namespace Solcery.Services.Resources.Loaders.Texture
 {
     public interface ITextureLoaderUri
     {

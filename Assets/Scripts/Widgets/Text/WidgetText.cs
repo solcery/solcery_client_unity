@@ -17,7 +17,7 @@ namespace Solcery.Widgets.Text
         public WidgetText(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetTextViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
-            _gameObject = (GameObject) Resources.Load("ui/text");
+            ServiceResource.TryGetWidgetPrefabForKey("ui/text", out _gameObject);
             CreateView();
         }
 

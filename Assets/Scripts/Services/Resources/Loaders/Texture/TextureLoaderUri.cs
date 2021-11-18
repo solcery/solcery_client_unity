@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Solcery.Services.Resources.Loaders.Textures
+namespace Solcery.Services.Resources.Loaders.Texture
 {
     public sealed class TextureLoaderUri : ITextureLoaderUri
     {
