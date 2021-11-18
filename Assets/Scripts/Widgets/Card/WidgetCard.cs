@@ -8,24 +8,13 @@ namespace Solcery.Widgets.Card
 {
     public class WidgetCard : Widget
     {
-        private readonly WidgetCartViewData _viewData;
+        private readonly WidgetCardViewData _viewData;
         private readonly GameObject _gameObject;
 
         private WidgetCardView _cardView;
         public override WidgetViewBase View => _cardView;
-
-        public static WidgetCard Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject jsonData)
-        {
-            var viewData = new WidgetCartViewData();
-            if (viewData.TryParse(jsonData))
-            {
-                return new WidgetCard(widgetCanvas, serviceResource, viewData);
-            }
-
-            return null;
-        }
-
-        private WidgetCard(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetCartViewData viewData) : base(widgetCanvas, serviceResource)
+        
+        public WidgetCard(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetCardViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/card");

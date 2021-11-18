@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Card;
+using Solcery.Widgets.Creator;
 using UnityEngine;
 
 namespace Solcery.Widgets.Deck
@@ -10,6 +11,7 @@ namespace Solcery.Widgets.Deck
     public class WidgetDeck : Widget
     {
         private readonly WidgetPlaceViewData _viewData;
+        private readonly WidgetsCreator _creator;
         private readonly GameObject _gameObject;
     
         private WidgetDeckView _deckView;
@@ -18,6 +20,8 @@ namespace Solcery.Widgets.Deck
         public WidgetDeck(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetPlaceViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
+            _creator = WidgetsCreator.Create();
+            _creator.Register(WidgetCreatorCard.Create(widgetCanvas, serviceResource));
             _gameObject = (GameObject) Resources.Load("ui/deck");
             CreateView();
         }
@@ -30,12 +34,12 @@ namespace Solcery.Widgets.Deck
 
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
         {
-            var card = WidgetCard.Create(WidgetCanvas, ServiceResource, data);
-            if (card != null)
+            var widget = _creator.CreateWidget(data);
+            if (widget != null)
             {
-                card.View.SetParent(_deckView.Content);
-                card.View.ApplyPlaceViewData(_viewData);
-                return card;
+                widget.View.SetParent(_deckView.Content);
+                widget.View.ApplyPlaceViewData(_viewData);
+                return widget;
             }
             
             return null;

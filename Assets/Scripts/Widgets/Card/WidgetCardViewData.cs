@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Solcery.Widgets.Card
 {
-    public class WidgetCartViewData : WidgetViewDataBase
+    public class WidgetCardViewData : WidgetViewDataBase
     {
         public string Picture { get; private set; }
         public string Name { get; private set; }
