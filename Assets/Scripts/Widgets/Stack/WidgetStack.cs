@@ -22,7 +22,7 @@ namespace Solcery.Widgets.Stack
         {
             _viewData = viewData;
             _creator = WidgetsCreator.Create();
-            _creator.Register(WidgetCreatorCard.Create(widgetCanvas, serviceResource));
+            _creator.Register(new WidgetCreatorCard(widgetCanvas, serviceResource));
             _gameObject = (GameObject) Resources.Load("ui/stack");
             CreateView();
         }

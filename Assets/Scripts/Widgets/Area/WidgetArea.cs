@@ -19,9 +19,9 @@ namespace Solcery.Widgets.Area
         {
             _viewData = viewData;
             _creator = WidgetsCreator.Create();
-            _creator.Register(WidgetCreatorButton.Create(widgetCanvas, serviceResource));
-            _creator.Register(WidgetCreatorPicture.Create(widgetCanvas, serviceResource));
-            _creator.Register(WidgetCreatorText.Create(widgetCanvas, serviceResource));
+            _creator.Register(new WidgetCreatorButton(widgetCanvas, serviceResource));
+            _creator.Register(new WidgetCreatorPicture(widgetCanvas, serviceResource));
+            _creator.Register(new WidgetCreatorText(widgetCanvas, serviceResource));
         }
 
         protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
