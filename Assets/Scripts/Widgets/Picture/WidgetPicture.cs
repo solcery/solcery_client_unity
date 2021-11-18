@@ -14,18 +14,7 @@ namespace Solcery.Widgets.Picture
         private WidgetPictureView _pictureView;
         public override WidgetViewBase View => _pictureView;
 
-        public static WidgetPicture Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject jsonData)
-        {
-            var viewData = new WidgetPictureViewData();
-            if (viewData.TryParse(jsonData))
-            {
-                return new WidgetPicture(widgetCanvas, serviceResource, viewData);
-            }
-            
-            return null;
-        }
-        
-        private WidgetPicture(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetPictureViewData viewData) : base(widgetCanvas, serviceResource)
+        public WidgetPicture(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, WidgetPictureViewData viewData) : base(widgetCanvas, serviceResource)
         {
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/picture");
@@ -47,7 +36,7 @@ namespace Solcery.Widgets.Picture
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _pictureView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_pictureView);

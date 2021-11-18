@@ -49,7 +49,7 @@ namespace Solcery.Widgets.Card
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _cardView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_cardView);

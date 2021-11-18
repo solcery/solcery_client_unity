@@ -41,7 +41,7 @@ namespace Solcery.Widgets.Deck
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _deckView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_deckView);

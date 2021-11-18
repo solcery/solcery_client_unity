@@ -42,7 +42,7 @@ namespace Solcery.Widgets.Stack
             return null;
         }
 
-        protected override void ClearInternalView()
+        protected override void ClearView()
         {
             _stackView.Clear();
             WidgetCanvas.GetWidgetPool().ReturnToPool(_stackView);
