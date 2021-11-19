@@ -15,7 +15,7 @@ namespace Solcery.Games
     public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
         ITransportService IGame.TransportService => _transportService;
-        IBrickService IGame.BrickService => _brickService;
+        IServiceBricks IGame.ServiceBricks => _serviceBricks;
         IServiceResource IGame.ServiceResource => _serviceResource;
         IModel IGame.Model => _model;
         IWidgetFactory IGame.WidgetFactory => _widgetFactory;
@@ -33,7 +33,7 @@ namespace Solcery.Games
         }
 
         private ITransportService _transportService;
-        private IBrickService _brickService;
+        private IServiceBricks _serviceBricks;
         private IServiceResource _serviceResource;
         private IModel _model;
         private IWidgetFactory _widgetFactory;
@@ -60,11 +60,11 @@ namespace Solcery.Games
         
         private void CreateServices(IWidgetCanvas widgetCanvas)
         {
-            _brickService = BrickService.Create();
+            _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
 #if UNITY_EDITOR
-            _transportService = EditorTransportService.Create(this, _brickService);
+            _transportService = EditorTransportService.Create(this, _serviceBricks);
 #else
             _transportService = WebGlTransportService.Create(this);
 #endif
@@ -103,25 +103,25 @@ namespace Solcery.Games
         private void RegistrationBrickTypes()
         {
             // Value bricks
-            _brickService.RegistrationBrickType("brick_value_const", BrickValueConst.Create);
+            _serviceBricks.RegistrationBrickType("brick_value_const", BrickValueConst.Create);
             // Action bricks
-            _brickService.RegistrationBrickType("brick_action_void", BrickActionVoid.Create);
-            _brickService.RegistrationBrickType("brick_action_set", BrickActionSet.Create);
-            _brickService.RegistrationBrickType("brick_action_conditional", BrickActionConditional.Create);
+            _serviceBricks.RegistrationBrickType("brick_action_void", BrickActionVoid.Create);
+            _serviceBricks.RegistrationBrickType("brick_action_set", BrickActionSet.Create);
+            _serviceBricks.RegistrationBrickType("brick_action_conditional", BrickActionConditional.Create);
             // Condition bricks
-            _brickService.RegistrationBrickType("brick_condition_const", BrickConditionConst.Create);
-            _brickService.RegistrationBrickType("brick_condition_not", BrickConditionNot.Create);
-            _brickService.RegistrationBrickType("brick_condition_and", BrickConditionAnd.Create);
-            _brickService.RegistrationBrickType("brick_condition_or", BrickConditionOr.Create);
-            _brickService.RegistrationBrickType("brick_condition_equal", BrickConditionEqual.Create);
-            _brickService.RegistrationBrickType("brick_condition_greater_than", BrickConditionGreaterThan.Create);
-            _brickService.RegistrationBrickType("brick_condition_lesser_than", BrickConditionLesserThan.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_const", BrickConditionConst.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_not", BrickConditionNot.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_and", BrickConditionAnd.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_or", BrickConditionOr.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_equal", BrickConditionEqual.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_greater_than", BrickConditionGreaterThan.Create);
+            _serviceBricks.RegistrationBrickType("brick_condition_lesser_than", BrickConditionLesserThan.Create);
         }
 
         private void Cleanup()
         {
             _model.Destroy();
-            _brickService.Cleanup();
+            _serviceBricks.Cleanup();
             _transportService.Cleanup();
             _widgetFactory.Cleanup();
             _serviceResource.Cleanup();
@@ -137,8 +137,8 @@ namespace Solcery.Games
             _model.Destroy();
             _model = null;
             
-            _brickService.Destroy();
-            _brickService = null;
+            _serviceBricks.Destroy();
+            _serviceBricks = null;
             _transportService.Destroy();
             _transportService = null;
 

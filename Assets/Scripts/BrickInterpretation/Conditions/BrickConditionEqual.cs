@@ -14,10 +14,10 @@ namespace Solcery.BrickInterpretation.Conditions
             TypeName = typeName;
         }
         
-        public override bool Run(IBrickService brickService, JArray parameters, IContext context)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {
-            var v1 = brickService.ExecuteValueBrick(parameters[0], context);
-            var v2 = brickService.ExecuteValueBrick(parameters[1], context);
+            var v1 = serviceBricks.ExecuteValueBrick(parameters[0], context);
+            var v2 = serviceBricks.ExecuteValueBrick(parameters[1], context);
             return v1 == v2;
         }
 

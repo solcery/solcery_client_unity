@@ -11,16 +11,16 @@ namespace Solcery.Models.Triggers
     internal sealed class SystemApplyTrigger : ISystemApplyTrigger
     {
         private EcsFilter _filterApplyTriggerComponent;
-        private readonly IBrickService _brickService;
+        private readonly IServiceBricks _serviceBricks;
 
-        public static ISystemApplyTrigger Create(IBrickService brickService)
+        public static ISystemApplyTrigger Create(IServiceBricks serviceBricks)
         {
-            return new SystemApplyTrigger(brickService);
+            return new SystemApplyTrigger(serviceBricks);
         }
 
-        private SystemApplyTrigger(IBrickService brickService)
+        private SystemApplyTrigger(IServiceBricks serviceBricks)
         {
-            _brickService = brickService;
+            _serviceBricks = serviceBricks;
         }
         
         void IEcsInitSystem.Init(EcsSystems systems)
@@ -40,7 +40,7 @@ namespace Solcery.Models.Triggers
                     ref var applyTriggerComponent = ref applyTriggerComponents.Get(entity);
                     if (triggersComponent.Triggers.TryGetValue(applyTriggerComponent.Type, out var brick))
                     {
-                        _brickService.ExecuteActionBrick(brick, null);
+                        _serviceBricks.ExecuteActionBrick(brick, null);
                         Debug.Log($"Brick \"{brick["name"]}\" was executed!");
                     }
                 }

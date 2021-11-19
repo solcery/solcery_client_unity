@@ -22,17 +22,17 @@ namespace Solcery.Services.LocalSimulation
         }
 
         private readonly List<Action<JObject>> _listOnUpdateGameState;
-        private IBrickService _brickService;
+        private IServiceBricks _serviceBricks;
 
-        public static IEditorLocalSimulationService Create(IBrickService brickService)
+        public static IEditorLocalSimulationService Create(IServiceBricks serviceBricks)
         {
-            return new EditorLocalSimulationService(brickService);
+            return new EditorLocalSimulationService(serviceBricks);
         }
         
-        private EditorLocalSimulationService(IBrickService brickService)
+        private EditorLocalSimulationService(IServiceBricks serviceBricks)
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
-            _brickService = brickService;
+            _serviceBricks = serviceBricks;
         }
 
         public void Init(JObject gameState)

@@ -8,23 +8,23 @@ using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation
 {
-    public class BrickService : IBrickService
+    public class ServiceBricks : IServiceBricks
     {
         private readonly Dictionary<string, Func<string, Brick>> _brickTypeNameToType;
         private readonly Dictionary<string, Stack<Brick>> _brickPool;
 
-        public static IBrickService Create()
+        public static IServiceBricks Create()
         {
-            return new BrickService();
+            return new ServiceBricks();
         }
 
-        private BrickService()
+        private ServiceBricks()
         {
             _brickTypeNameToType = new Dictionary<string, Func<string, Brick>>(20);
             _brickPool = new Dictionary<string, Stack<Brick>>(20);
         }
 
-        void IBrickService.RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity)
+        void IServiceBricks.RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity)
         {
             _brickTypeNameToType.Add(brickTypeName, created);
             _brickPool.Add(brickTypeName, new Stack<Brick>(capacity));
@@ -34,12 +34,12 @@ namespace Solcery.BrickInterpretation
             }
         }
 
-        void IBrickService.Cleanup()
+        void IServiceBricks.Cleanup()
         {
             Cleanup();
         }
         
-        void IBrickService.Destroy()
+        void IServiceBricks.Destroy()
         {
             Cleanup();
         }
@@ -86,7 +86,7 @@ namespace Solcery.BrickInterpretation
             _brickPool[brick.TypeName].Push(brick);
         }
 
-        void IBrickService.ExecuteActionBrick(JToken json, IContext context)
+        void IServiceBricks.ExecuteActionBrick(JToken json, IContext context)
         {
             BrickAction brick = null;
             
@@ -106,7 +106,7 @@ namespace Solcery.BrickInterpretation
             }
         }
 
-        int IBrickService.ExecuteValueBrick(JToken json, IContext context)
+        int IServiceBricks.ExecuteValueBrick(JToken json, IContext context)
         {
             var result = 0;
             BrickValue brick = null;
@@ -129,7 +129,7 @@ namespace Solcery.BrickInterpretation
             return result;
         }
 
-        bool IBrickService.ExecuteConditionBrick(JToken json, IContext context)
+        bool IServiceBricks.ExecuteConditionBrick(JToken json, IContext context)
         {
             var result = false;
             BrickCondition brick = null;

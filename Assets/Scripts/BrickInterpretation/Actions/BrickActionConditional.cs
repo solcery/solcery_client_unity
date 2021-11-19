@@ -17,14 +17,14 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IBrickService brickService, JArray parameters, IContext context)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {
             if (parameters.Count <= 2)
             {
                 throw new Exception($"BrickActionConditional Run has error! Parameters {parameters}");
             }
 
-            brickService.ExecuteActionBrick(brickService.ExecuteConditionBrick(parameters[0], context) 
+            serviceBricks.ExecuteActionBrick(serviceBricks.ExecuteConditionBrick(parameters[0], context) 
                 ? parameters[1] 
                 : parameters[2], 
                 context);

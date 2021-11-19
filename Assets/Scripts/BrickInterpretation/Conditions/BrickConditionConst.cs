@@ -16,7 +16,7 @@ namespace Solcery.BrickInterpretation.Conditions
             TypeName = typeName;
         }
         
-        public override bool Run(IBrickService brickService, JArray parameters, IContext context)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {
             if (parameters.Count > 0 
                 && parameters[0] is JObject valueObject 

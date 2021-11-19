@@ -37,7 +37,7 @@ namespace Solcery.Models
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
             _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
-            _systems.Add(SystemApplyTrigger.Create(game.BrickService));
+            _systems.Add(SystemApplyTrigger.Create(game.ServiceBricks));
             // TODO сюда добавляем новые системы и тд
             
 #if UNITY_EDITOR

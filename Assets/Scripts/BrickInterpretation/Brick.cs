@@ -10,6 +10,6 @@ namespace Solcery.BrickInterpretation
 
     public abstract class Brick<T> : Brick
     {
-        public abstract T Run(IBrickService brickService, JArray parameters, IContext context);
+        public abstract T Run(IServiceBricks serviceBricks, JArray parameters, IContext context);
     }
 }

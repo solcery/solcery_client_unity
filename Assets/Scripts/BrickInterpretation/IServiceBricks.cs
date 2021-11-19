@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Solcery.BrickInterpretation
 {
-    public interface IBrickService
+    public interface IServiceBricks
     {
         void RegistrationBrickType(string brickTypeName, Func<string, Brick> created, int capacity = 1);
         void ExecuteActionBrick(JToken json, IContext context);

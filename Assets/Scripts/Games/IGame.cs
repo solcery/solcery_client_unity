@@ -10,7 +10,7 @@ namespace Solcery.Games
     public interface IGame
     {
         public ITransportService TransportService { get; }
-        public IBrickService BrickService { get; }
+        public IServiceBricks ServiceBricks { get; }
         public IServiceResource ServiceResource { get; }
         public IModel Model { get; }
         public IWidgetFactory WidgetFactory { get; }

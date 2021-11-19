@@ -13,14 +13,14 @@ namespace Solcery.Services.Transport
         private IEditorLocalSimulationService _localSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         
-        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IBrickService brickService)
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
         {
-            return new EditorTransportService(gameTransportCallbacks, brickService);
+            return new EditorTransportService(gameTransportCallbacks, serviceBricks);
         }
 
-        private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IBrickService brickService)
+        private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
         {
-            _localSimulation = EditorLocalSimulationService.Create(brickService);
+            _localSimulation = EditorLocalSimulationService.Create(serviceBricks);
             _gameTransportCallbacks = gameTransportCallbacks;
         }
         

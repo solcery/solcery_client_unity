@@ -16,9 +16,9 @@ namespace Solcery.BrickInterpretation.Conditions
             TypeName = typeName;
         }
         
-        public override bool Run(IBrickService brickService, JArray parameters, IContext context)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {
-            return !brickService.ExecuteConditionBrick(parameters[0], context);
+            return !serviceBricks.ExecuteConditionBrick(parameters[0], context);
         }
 
         public override void Reset() { }
