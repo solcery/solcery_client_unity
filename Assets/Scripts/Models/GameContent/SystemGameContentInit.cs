@@ -45,6 +45,7 @@ namespace Solcery.Models.GameContent
                             // TODO: тут пробуем создать виджет, если нет то ок, не будет компонента
                             if (_game.WidgetFactory.TryCreateWidget(placeObject, out var widget))
                             {
+                                widget.CreateView();
                                 world.GetPool<ComponentPlaceWidget>().Add(entityIndex).Widget = widget;
                             }
                         }

@@ -18,26 +18,27 @@ namespace Solcery.Widgets.Button
         {
             _viewData = viewData;
             ServiceResource.TryGetWidgetPrefabForKey("ui/button", out _gameObject);
-            CreateView();
         }
         
-        private void CreateView()
+        public override WidgetViewBase CreateView()
         {
-            _buttonView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject);
-            _buttonView.Text.text = _viewData.Name;
-            _buttonView.Init();
+            if (_buttonView == null)
+            {
+                _buttonView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetViewButton>(_gameObject);
+                _buttonView.Text.text = _viewData.Name;
+                _buttonView.Init();
+            }
+            return _buttonView;
         }
 
-        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
+        public override void ClearView()
         {
-            return null;
-        }
-
-        protected override void ClearView()
-        {
-            _buttonView.Clear();
-            WidgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
-            _buttonView = null;
+            if (_buttonView != null)
+            {
+                _buttonView.Clear();
+                WidgetCanvas.GetWidgetPool().ReturnToPool(_buttonView);
+                _buttonView = null;
+            }
         }
     }
 }

@@ -18,31 +18,34 @@ namespace Solcery.Widgets.Card
         {
             _viewData = viewData;
             _gameObject = (GameObject) Resources.Load("ui/card");
-            CreateView();
         }
 
-        private void CreateView()
+        public override WidgetViewBase CreateView()
         {
-            _cardView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetCardView>(_gameObject);
-            _cardView.Name.text = _viewData.Name;
-            _cardView.Description.text = _viewData.Description;
-            if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
+            if (_cardView == null)
             {
-                _cardView.Image.material.mainTexture = texture;
+                _cardView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetCardView>(_gameObject);
+                _cardView.Name.text = _viewData.Name;
+                _cardView.Description.text = _viewData.Description;
+                if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
+                {
+                    _cardView.Image.material.mainTexture = texture;
+                }
+
+                _cardView.Init();
             }
-            _cardView.Init();
+
+            return _cardView;
         }
 
-        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
+        public override void ClearView()
         {
-            return null;
-        }
-
-        protected override void ClearView()
-        {
-            _cardView.Clear();
-            WidgetCanvas.GetWidgetPool().ReturnToPool(_cardView);
-            _cardView = null;
+            if (_cardView != null)
+            {
+                _cardView.Clear();
+                WidgetCanvas.GetWidgetPool().ReturnToPool(_cardView);
+                _cardView = null;
+            }
         }
     }
 }

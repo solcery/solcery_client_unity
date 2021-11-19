@@ -1,5 +1,3 @@
-using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 using UnityEngine;
@@ -18,29 +16,32 @@ namespace Solcery.Widgets.Picture
         {
             _viewData = viewData;
             ServiceResource.TryGetWidgetPrefabForKey("ui/picture", out _gameObject);
-            CreateView();
         }
 
-        private void CreateView()
+        public override WidgetViewBase CreateView()
         {
-            _pictureView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetPictureView>(_gameObject);
-            if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
+            if (_pictureView == null)
             {
-                _pictureView.Image.material.mainTexture = texture;
+                _pictureView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetPictureView>(_gameObject);
+                if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
+                {
+                    _pictureView.Image.material.mainTexture = texture;
+                }
+
+                _pictureView.Init();
             }
-            _pictureView.Init();
-        }
-        
-        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
-        {
-            return null;
+
+            return _pictureView;
         }
 
-        protected override void ClearView()
+        public override void ClearView()
         {
-            _pictureView.Clear();
-            WidgetCanvas.GetWidgetPool().ReturnToPool(_pictureView);
-            _pictureView = null;
+            if (_pictureView == null)
+            {
+                _pictureView.Clear();
+                WidgetCanvas.GetWidgetPool().ReturnToPool(_pictureView);
+                _pictureView = null;
+            }
         }
     }
 }
