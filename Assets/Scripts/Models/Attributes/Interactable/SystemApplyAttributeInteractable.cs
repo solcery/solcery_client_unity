@@ -11,7 +11,7 @@ namespace Solcery.Models.Attributes.Interactable
     
     internal sealed class SystemApplyAttributeInteractable : ISystemApplyAttributeInteractable
     {
-        private EcsFilter _filterViewComponent;
+        private EcsFilter _filterSubWidgetComponent;
         private EcsFilter _filterGameStateUpdate;
         
         public static SystemApplyAttributeInteractable Create()
@@ -21,7 +21,7 @@ namespace Solcery.Models.Attributes.Interactable
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filterViewComponent = systems.GetWorld().Filter<ComponentEntityView>().Inc<ComponentAttributeInteractable>().End();
+            _filterSubWidgetComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().Inc<ComponentAttributeInteractable>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
 
@@ -32,11 +32,11 @@ namespace Solcery.Models.Attributes.Interactable
                 return;
             }
             
-            var widgetViewComponents = systems.GetWorld().GetPool<ComponentEntityView>();
+            var subWidgetComponents = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
             var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeInteractable>();
-            foreach (var entity in _filterViewComponent)
+            foreach (var entity in _filterSubWidgetComponent)
             {
-                var view = widgetViewComponents.Get(entity).View;
+                var view = subWidgetComponents.Get(entity).Widget.View;
                 if (view is IInteractable value)
                 {
                     value.OnClick = () => { OnClick(systems.GetWorld(), entity); };

@@ -1,5 +1,3 @@
-using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 using UnityEngine;
@@ -18,26 +16,28 @@ namespace Solcery.Widgets.Text
         {
             _viewData = viewData;
             ServiceResource.TryGetWidgetPrefabForKey("ui/text", out _gameObject);
-            CreateView();
         }
 
-        private void CreateView()
+        public override WidgetViewBase CreateView()
         {
-            _textView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetTextView>(_gameObject);
-            _textView.Description.text = _viewData.Description;
-            _textView.Init();
-        }
-        
-        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
-        {
-            return null;
+            if (_textView == null)
+            {
+                _textView = WidgetCanvas.GetWidgetPool().GetFromPool<WidgetTextView>(_gameObject);
+                _textView.Description.text = _viewData.Description;
+                _textView.Init();
+            }
+
+            return _textView;
         }
 
-        protected override void ClearView()
+        public override void ClearView()
         {
-            _textView.Clear();
-            WidgetCanvas.GetWidgetPool().ReturnToPool(_textView);
-            _textView = null;
+            if (_textView != null)
+            {
+                _textView.Clear();
+                WidgetCanvas.GetWidgetPool().ReturnToPool(_textView);
+                _textView = null;
+            }
         }    
     }
 }

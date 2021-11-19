@@ -1,4 +1,3 @@
-using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Button;
@@ -24,20 +23,17 @@ namespace Solcery.Widgets.Area
             _creator.Register(new WidgetCreatorText(widgetCanvas, serviceResource));
         }
 
-        protected override Widget AddInternalWidget(EcsWorld world, int entityId, JObject data)
+        protected override Widget AddSubWidget(JObject data)
         {
             var widget = _creator.CreateWidget(data);
             if (widget != null)
             {
-                widget.View.SetParent(WidgetCanvas.GetUiCanvas());
-                widget.View.ApplyPlaceViewData(_viewData);
+                var view = widget.CreateView();
+                view.SetParent(WidgetCanvas.GetUiCanvas());
+                view.ApplyPlaceViewData(_viewData);
             }
 
             return null;
-        }
-
-        protected override void ClearView()
-        {
         }
     }
 }

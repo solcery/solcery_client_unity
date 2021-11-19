@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Entities;
@@ -8,20 +7,19 @@ using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets
 {
-    public abstract class Widget
+    public abstract class Widget : IWidget
     {
         protected readonly IWidgetCanvas WidgetCanvas;
         protected readonly IServiceResource ServiceResource;
         public abstract WidgetViewBase View { get; }
-        private readonly List<Widget> _widgets = new List<Widget>();
-        
+
         protected Widget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
             WidgetCanvas = widgetCanvas;
             ServiceResource = serviceResource;
         }
 
-        public void UpdateWidget(EcsWorld world, int[] entityIds)
+        public void UpdateSubWidgets(EcsWorld world, int[] entityIds)
         {
             var typesFilter = world.Filter<ComponentEntityTypes>().End();
             ref var types = ref world.GetPool<ComponentEntityTypes>().Get(typesFilter.GetRawEntities()[0]);
@@ -33,36 +31,42 @@ namespace Solcery.Widgets
                 {
                     if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))
                     {
-                        var widget = AddInternalWidget(world, entityId, data);
+                        var widget = AddSubWidget(data);
                         if (widget != null)
                         {
-                            _widgets.Add(widget);
-                            world.GetPool<ComponentEntityView>().Add(entityId).View = widget.View;
+                            world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = widget;
                         }
                     }
                 }
             }
         }
         
-        public void ClearInternalWidgets(EcsWorld world, int[] entityIds)
+        public void ClearSubWidgets(EcsWorld world, int[] entityIds)
         {
-            var viewPool = world.GetPool<ComponentEntityView>();
+            var subWidgetPool = world.GetPool<ComponentPlaceSubWidget>();
             foreach (var entityId in entityIds)
             {
-                if (viewPool.Has(entityId))
+                if (subWidgetPool.Has(entityId))
                 {
-                    viewPool.Del(entityId);
+                    var subWidget = subWidgetPool.Get(entityId);
+                    subWidget.Widget.ClearView();
+                    subWidgetPool.Del(entityId);
                 }
             }
-
-            foreach (var widget in _widgets)
-            {
-                widget.ClearView();
-            }
-            _widgets.Clear();
+        }
+        
+        protected virtual Widget AddSubWidget(JObject data)
+        {
+            return null;
         }
 
-        protected abstract Widget AddInternalWidget(EcsWorld world, int entityId, JObject data);
-        protected abstract void ClearView();
+        public virtual WidgetViewBase CreateView()
+        {
+            return null;
+        }
+
+        public virtual void ClearView()
+        {
+        }
     }
 }
