@@ -11,6 +11,7 @@ using Solcery.Services.Resources.Patterns.Widgets.Button;
 using Solcery.Services.Resources.Patterns.Widgets.Picture;
 using Solcery.Services.Resources.Patterns.Widgets.Text;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Solcery.Services.Resources
 {
@@ -121,8 +122,13 @@ namespace Solcery.Services.Resources
         {
             _task?.Destroy();
             _task = null;
-            
+
+            foreach (var prefab in _prefabs)
+            {
+                Addressables.Release(prefab.Value);
+            }
             _prefabs.Clear();
+            
             _textures.Clear();
         }
 

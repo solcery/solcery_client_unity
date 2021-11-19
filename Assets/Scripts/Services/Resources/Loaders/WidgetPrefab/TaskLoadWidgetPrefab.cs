@@ -10,8 +10,10 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
     {
         public event Action<bool, ILoadTask> Completed;
 
-        private List<string> _widgetResourcePathList;
+        private List<IPrefabLoader> _prefabLoaders;
         private Action<Dictionary<string, GameObject>> _callback;
+        private int _completedLoaderCount;
+        private Dictionary<string, GameObject> _widgetPrefabs;
 
         public static ILoadTask Create(List<PatternData> patternDataList, Action<Dictionary<string, GameObject>> callback)
         {
@@ -35,28 +37,56 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         private TaskLoadWidgetPrefab(List<string> widgetResourcePaths, Action<Dictionary<string, GameObject>> callback)
         {
             _callback = callback;
-            _widgetResourcePathList = new List<string>(widgetResourcePaths);
+            _prefabLoaders = new List<IPrefabLoader>();
+            _completedLoaderCount = 0;
+            _widgetPrefabs = new Dictionary<string, GameObject>(widgetResourcePaths.Count);
+            
+            foreach (var widgetResourcePath in widgetResourcePaths)
+            {
+                _prefabLoaders.Add(PrefabLoader.Create(widgetResourcePath));
+            }
         }
 
         void ILoadTask.Run()
         {
-            var widgetPrefabs = new Dictionary<string, GameObject>();
-            
-            foreach (var widgetResourcePath in _widgetResourcePathList)
+            _completedLoaderCount = 0;
+            foreach (var prefabLoader in _prefabLoaders)
             {
-                widgetPrefabs.Add(widgetResourcePath, UnityEngine.Resources.Load<GameObject>(widgetResourcePath));
+                prefabLoader.Load(OnPrefabLoaded);
             }
+        }
+
+        private void OnPrefabLoaded(IPrefabLoader obj)
+        {
+            ++_completedLoaderCount;
             
-            _callback?.Invoke(widgetPrefabs);
-            Completed?.Invoke(true, this);
+            _widgetPrefabs.Add(obj.Name, obj.Prefab);
+
+            if (_prefabLoaders.Count <= _completedLoaderCount)
+            {
+                _callback?.Invoke(_widgetPrefabs);
+                Completed?.Invoke(true, this);
+            }
         }
 
         void ILoadTask.Destroy()
         {
             _callback = null;
             
-            _widgetResourcePathList?.Clear();
-            _widgetResourcePathList = null;
+            _widgetPrefabs?.Clear();
+            _widgetPrefabs = null;
+
+            if (_prefabLoaders != null)
+            {
+                foreach (var prefabLoader in _prefabLoaders)
+                {
+                    prefabLoader.Destroy();
+                }
+                
+                _prefabLoaders.Clear();
+            }
+
+            _prefabLoaders = null;
         }
     }
 }
