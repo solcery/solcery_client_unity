@@ -10,6 +10,7 @@ namespace Solcery.BrickInterpretation
 {
     public class ServiceBricks : IServiceBricks
     {
+        private readonly Dictionary<int, JToken> _customBricks;
         private readonly Dictionary<string, Func<string, Brick>> _brickTypeNameToType;
         private readonly Dictionary<string, Stack<Brick>> _brickPool;
 
@@ -20,6 +21,7 @@ namespace Solcery.BrickInterpretation
 
         private ServiceBricks()
         {
+            _customBricks = new Dictionary<int, JToken>();
             _brickTypeNameToType = new Dictionary<string, Func<string, Brick>>(20);
             _brickPool = new Dictionary<string, Stack<Brick>>(20);
         }
@@ -34,6 +36,25 @@ namespace Solcery.BrickInterpretation
             }
         }
 
+        void IServiceBricks.RegistrationCustomBricksData(JArray customBricksJson)
+        {
+            _customBricks.Clear();
+
+            foreach (var customBrickToken in customBricksJson)
+            {
+                if(customBrickToken is JObject customBrickObject)
+                {
+                    var id = 10000 + customBrickObject.GetValue<int>("id");
+                    _customBricks.Add(id, customBrickObject.GetValue<JObject>("brick"));
+                }
+            }
+        }
+
+        private bool IsCustomBrick(int subtype)
+        {
+            return _customBricks.ContainsKey(subtype);
+        }
+
         void IServiceBricks.Cleanup()
         {
             Cleanup();
@@ -46,6 +67,7 @@ namespace Solcery.BrickInterpretation
 
         private void Cleanup()
         {
+            _customBricks.Clear();
             _brickTypeNameToType.Clear();
             _brickPool.Clear();
         }

@@ -7,6 +7,7 @@ using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
+using Solcery.Utils;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Factory;
 
@@ -82,6 +83,13 @@ namespace Solcery.Games
         {
             Cleanup();
             _gameContentJson = gameContentJson;
+
+            if (gameContentJson.TryGetValue("customBricks", out JObject customBricks) &&
+                customBricks.TryGetValue("objects", out JArray customBricksArray))
+            {
+                _serviceBricks.RegistrationCustomBricksData(customBricksArray);
+            }
+            
             _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
         }
         
