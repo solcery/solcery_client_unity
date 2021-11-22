@@ -6,15 +6,12 @@ namespace Solcery.BrickInterpretation.Values
 {
     public sealed class BrickValueConst : BrickValue
     {
-        public static BrickValueConst Create(string typeName)
+        public static BrickValueConst Create(int type, int subType)
         {
-            return new BrickValueConst(typeName);
+            return new BrickValueConst(type, subType);
         }
         
-        private BrickValueConst(string typeName)
-        {
-            TypeName = typeName;
-        }
+        private BrickValueConst(int type, int subType) : base(type, subType) { }
         
         public override int Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {

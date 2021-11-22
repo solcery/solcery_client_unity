@@ -5,15 +5,12 @@ namespace Solcery.BrickInterpretation.Actions
 {
     public sealed class BrickActionVoid : BrickAction
     {
-        public static BrickAction Create(string typeName)
+        public static BrickAction Create(int type, int subType)
         {
-            return new BrickActionVoid(typeName);
+            return new BrickActionVoid(type, subType);
         }
-
-        private BrickActionVoid(string typeName)
-        {
-            TypeName = typeName;
-        }
+        
+        private BrickActionVoid(int type, int subType) : base(type, subType) { }
         
         public override void Reset() { }
 

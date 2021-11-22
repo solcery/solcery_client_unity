@@ -111,19 +111,19 @@ namespace Solcery.Games
         private void RegistrationBrickTypes()
         {
             // Value bricks
-            _serviceBricks.RegistrationBrickType("brick_value_const", BrickValueConst.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Const, BrickValueConst.Create);
             // Action bricks
-            _serviceBricks.RegistrationBrickType("brick_action_void", BrickActionVoid.Create);
-            _serviceBricks.RegistrationBrickType("brick_action_set", BrickActionSet.Create);
-            _serviceBricks.RegistrationBrickType("brick_action_conditional", BrickActionConditional.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Set, BrickActionSet.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Conditional, BrickActionConditional.Create);
             // Condition bricks
-            _serviceBricks.RegistrationBrickType("brick_condition_const", BrickConditionConst.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_not", BrickConditionNot.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_and", BrickConditionAnd.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_or", BrickConditionOr.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_equal", BrickConditionEqual.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_greater_than", BrickConditionGreaterThan.Create);
-            _serviceBricks.RegistrationBrickType("brick_condition_lesser_than", BrickConditionLesserThan.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Const, BrickConditionConst.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Not, BrickConditionNot.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.And, BrickConditionAnd.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Or, BrickConditionOr.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Equal, BrickConditionEqual.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.GreaterThan, BrickConditionGreaterThan.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.LesserThan, BrickConditionLesserThan.Create);
         }
 
         private void Cleanup()

@@ -4,15 +4,12 @@ namespace Solcery.BrickInterpretation.Conditions
 {
     public sealed class BrickConditionLesserThan : BrickCondition
     {
-        public static BrickCondition Create(string typeName)
+        public static BrickCondition Create(int type, int subType)
         {
-            return new BrickConditionLesserThan(typeName);
+            return new BrickConditionLesserThan(type, subType);
         }
 
-        private BrickConditionLesserThan(string typeName)
-        {
-            TypeName = typeName;
-        }
+        private BrickConditionLesserThan(int type, int subType) : base(type, subType) { }
         
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {

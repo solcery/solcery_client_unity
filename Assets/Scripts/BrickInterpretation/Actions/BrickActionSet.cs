@@ -4,16 +4,12 @@ namespace Solcery.BrickInterpretation.Actions
 {
     public sealed class BrickActionSet : BrickAction
     {
-        public static BrickAction Create(string typeName)
+        public static BrickAction Create(int type, int subType)
         {
-            return new BrickActionSet(typeName);
+            return new BrickActionSet(type, subType);
         }
-
-        private BrickActionSet(string typeName)
-        {
-            TypeName = typeName;
-        }
-
+        
+        private BrickActionSet(int type, int subType) : base(type, subType) { }
         public override void Reset() { }
 
         public override void Run(IServiceBricks serviceBricks, JArray parameters, IContext context)

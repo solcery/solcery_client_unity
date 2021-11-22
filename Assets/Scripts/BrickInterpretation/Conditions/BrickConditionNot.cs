@@ -1,20 +1,15 @@
-using System;
 using Newtonsoft.Json.Linq;
-using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Conditions
 {
     public sealed class BrickConditionNot : BrickCondition
     {
-        public static BrickCondition Create(string typeName)
+        public static BrickCondition Create(int type, int subType)
         {
-            return new BrickConditionNot(typeName);
+            return new BrickConditionNot(type, subType);
         }
 
-        private BrickConditionNot(string typeName)
-        {
-            TypeName = typeName;
-        }
+        private BrickConditionNot(int type, int subType) : base(type, subType) { }
         
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {

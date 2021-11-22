@@ -5,15 +5,12 @@ namespace Solcery.BrickInterpretation.Actions
 {
     public sealed class BrickActionConditional : BrickAction
     {
-        public static BrickActionConditional Create(string typeName)
+        public static BrickAction Create(int type, int subType)
         {
-            return new BrickActionConditional(typeName);
+            return new BrickActionConditional(type, subType);
         }
-
-        private BrickActionConditional(string typeName)
-        {
-            TypeName = typeName;
-        }
+        
+        private BrickActionConditional(int type, int subType) : base(type, subType) { }
 
         public override void Reset() { }
 

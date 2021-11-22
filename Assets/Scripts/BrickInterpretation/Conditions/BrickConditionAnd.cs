@@ -4,15 +4,12 @@ namespace Solcery.BrickInterpretation.Conditions
 {
     public sealed class BrickConditionAnd : BrickCondition
     {
-        public static BrickCondition Create(string typeName)
+        public static BrickCondition Create(int type, int subType)
         {
-            return new BrickConditionAnd(typeName);
+            return new BrickConditionAnd(type, subType);
         }
 
-        private BrickConditionAnd(string typeName)
-        {
-            TypeName = typeName;
-        }
+        private BrickConditionAnd(int type, int subType) : base(type, subType) { }
         
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
         {
