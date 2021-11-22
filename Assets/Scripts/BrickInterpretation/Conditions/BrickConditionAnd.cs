@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 
 namespace Solcery.BrickInterpretation.Conditions
@@ -11,11 +12,11 @@ namespace Solcery.BrickInterpretation.Conditions
 
         private BrickConditionAnd(int type, int subType) : base(type, subType) { }
         
-        public override bool Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             foreach (var parameterToken in parameters)
             {
-                var result = !serviceBricks.ExecuteConditionBrick(parameterToken, context);
+                var result = !serviceBricks.ExecuteConditionBrick(parameterToken, world);
                     
                 if (result)
                 {

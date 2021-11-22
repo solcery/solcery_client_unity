@@ -1,4 +1,5 @@
 using System;
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 
@@ -13,7 +14,7 @@ namespace Solcery.BrickInterpretation.Values
         
         private BrickValueConst(int type, int subType) : base(type, subType) { }
         
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
                 && parameters[0] is JObject valueObject 

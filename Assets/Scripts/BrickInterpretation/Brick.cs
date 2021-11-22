@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 
 namespace Solcery.BrickInterpretation
@@ -21,7 +22,7 @@ namespace Solcery.BrickInterpretation
 
     public abstract class Brick<T> : Brick
     {
-        public abstract T Run(IServiceBricks serviceBricks, JArray parameters, IContext context);
+        public abstract T Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world);
 
         protected Brick(int type, int subType) : base(type, subType) { }
     }

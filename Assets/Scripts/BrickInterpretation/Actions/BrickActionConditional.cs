@@ -1,4 +1,5 @@
 using System;
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 
 namespace Solcery.BrickInterpretation.Actions
@@ -14,17 +15,17 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count <= 2)
             {
                 throw new Exception($"BrickActionConditional Run has error! Parameters {parameters}");
             }
 
-            serviceBricks.ExecuteActionBrick(serviceBricks.ExecuteConditionBrick(parameters[0], context) 
+            serviceBricks.ExecuteActionBrick(serviceBricks.ExecuteConditionBrick(parameters[0], world) 
                 ? parameters[1] 
                 : parameters[2], 
-                context);
+                world);
         }
     }
 }

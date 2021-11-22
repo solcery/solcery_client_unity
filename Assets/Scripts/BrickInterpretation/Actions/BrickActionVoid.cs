@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Solcery.BrickInterpretation.Actions
         
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, IContext context)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             Debug.Log("BrickActionVoid Run!");
         }

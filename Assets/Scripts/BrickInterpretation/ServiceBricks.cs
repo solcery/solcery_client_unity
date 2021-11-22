@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
@@ -149,7 +150,7 @@ namespace Solcery.BrickInterpretation
             _poolOfBricks[brick.Type][brick.SubType].Push(brick);
         }
 
-        void IServiceBricks.ExecuteActionBrick(JToken json, IContext context)
+        void IServiceBricks.ExecuteActionBrick(JToken json, EcsWorld world)
         {
             BrickAction brick = null;
             
@@ -160,7 +161,7 @@ namespace Solcery.BrickInterpretation
                 {
                     BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickAction>(typeSubType.Item1, typeSubType.Item2);
-                    brick.Run(this, parameters, context);
+                    brick.Run(this, parameters, world);
                 }
             }
             finally
@@ -169,7 +170,7 @@ namespace Solcery.BrickInterpretation
             }
         }
 
-        int IServiceBricks.ExecuteValueBrick(JToken json, IContext context)
+        int IServiceBricks.ExecuteValueBrick(JToken json, EcsWorld world)
         {
             var result = 0;
             BrickValue brick = null;
@@ -181,7 +182,7 @@ namespace Solcery.BrickInterpretation
                 {
                     BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickValue>(typeSubType.Item1, typeSubType.Item2);
-                    result = brick.Run(this, parameters, context);
+                    result = brick.Run(this, parameters, world);
                 }
             }
             finally
@@ -192,7 +193,7 @@ namespace Solcery.BrickInterpretation
             return result;
         }
 
-        bool IServiceBricks.ExecuteConditionBrick(JToken json, IContext context)
+        bool IServiceBricks.ExecuteConditionBrick(JToken json, EcsWorld world)
         {
             var result = false;
             BrickCondition brick = null;
@@ -204,7 +205,7 @@ namespace Solcery.BrickInterpretation
                 {
                     BrickUtils.TryGetBrickParameters(obj, out var parameters);
                     brick = CreateBrick<BrickCondition>(typeSubType.Item1, typeSubType.Item2);
-                    result = brick.Run(this, parameters, context);
+                    result = brick.Run(this, parameters, world);
                 }
             }
             finally
