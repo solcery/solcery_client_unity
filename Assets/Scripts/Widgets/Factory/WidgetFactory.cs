@@ -25,7 +25,7 @@ namespace Solcery.Widgets.Factory
             _serviceResource = serviceResource;
         }
         
-        bool IWidgetFactory.TryCreateWidget(JObject jsonData, out Widget widget)
+        bool IWidgetFactory.TryCreateWidget(JObject jsonData, out IWidget widget)
         {
             widget = null;
             
@@ -69,11 +69,13 @@ namespace Solcery.Widgets.Factory
             // TODO: тут удаляем все что заинитили на создании
             Cleanup();
             _widgetCanvas = null;
+            _serviceResource = null;
         }
 
         private void Cleanup()
         {
             // TODO: тут нужно будет почистить пулы виджетов
+            _widgetCanvas.GetWidgetPool().ReturnAllToPool();
         }
     }
 }
