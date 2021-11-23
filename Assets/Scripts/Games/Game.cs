@@ -112,10 +112,18 @@ namespace Solcery.Games
         {
             // Value bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Const, BrickValueConst.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Variable, BrickValueVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IfThenElse, BrickValueIfThenElse.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Add, BrickValueAdd.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Sub, BrickValueSub.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Div, BrickValueDiv.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Mod, BrickValueMod.Create);
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Set, BrickActionSet.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Conditional, BrickActionConditional.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ForLoop, BrickActionForLoop.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetVariable, BrickActionSetVariable.Create);
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Const, BrickConditionConst.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Not, BrickConditionNot.Create);

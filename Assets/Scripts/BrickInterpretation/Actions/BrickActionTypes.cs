@@ -4,6 +4,9 @@ namespace Solcery.BrickInterpretation.Actions
     {
         Void = 0,
         Set,
-        Conditional
+        Conditional,
+        ForLoop,
+        Argument,
+        SetVariable
     }
 }
