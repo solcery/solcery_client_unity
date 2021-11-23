@@ -17,15 +17,13 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            if (parameters.Count <= 2)
+            if (parameters.Count <= 2 
+                || serviceBricks.ExecuteConditionBrick(parameters[0], world, out var conditionResult))
             {
                 throw new Exception($"BrickActionConditional Run has error! Parameters {parameters}");
             }
 
-            serviceBricks.ExecuteActionBrick(serviceBricks.ExecuteConditionBrick(parameters[0], world) 
-                ? parameters[1] 
-                : parameters[2], 
-                world);
+            serviceBricks.ExecuteActionBrick(conditionResult ? parameters[1] : parameters[2], world);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 
@@ -14,7 +15,12 @@ namespace Solcery.BrickInterpretation.Conditions
         
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            return !serviceBricks.ExecuteConditionBrick(parameters[0], world);
+            if (serviceBricks.ExecuteConditionBrick(parameters[0], world, out var result))
+            {
+                return !result;
+            }
+            
+            throw new Exception($"BrickConditionNot Run parameters {parameters}!");
         }
 
         public override void Reset() { }

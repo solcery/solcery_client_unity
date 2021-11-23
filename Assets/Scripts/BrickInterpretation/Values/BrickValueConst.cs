@@ -1,7 +1,6 @@
 using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Values
 {
@@ -17,10 +16,9 @@ namespace Solcery.BrickInterpretation.Values
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
-                && parameters[0] is JObject valueObject 
-                && valueObject.TryGetValue("value", out int value))
+                && parameters[0] is JObject valueObject)
             {
-                return value;
+                return serviceBricks.GetValueInt(valueObject, world);
             }
 
             throw new ArgumentException($"BrickValueConst Run has exception! Parameters {parameters}");
