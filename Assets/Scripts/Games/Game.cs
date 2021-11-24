@@ -125,6 +125,7 @@ namespace Solcery.Games
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.TwoActions, BrickActionTwoActions.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Argument, BrickActionArgument.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Set, BrickActionSet.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Conditional, BrickActionConditional.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ForLoop, BrickActionForLoop.Create);

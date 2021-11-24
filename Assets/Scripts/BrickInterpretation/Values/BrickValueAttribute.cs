@@ -2,6 +2,7 @@ using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Context;
+using Solcery.Models.Entities;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Values
@@ -21,10 +22,15 @@ namespace Solcery.BrickInterpretation.Values
                 && parameters[0] is JObject attrNameObject
                 && attrNameObject.TryGetValue("value", out string attrName))
             {
-                ref var contextVars = ref world.GetPool<ComponentContextAttrs>().GetRawDenseItems()[0];
-                if (contextVars.TryGet(attrName, out int attr))
+                ref var contextObject = ref world.GetPool<ComponentContextObject>().GetRawDenseItems()[0];
+                var attrsPool = world.GetPool<ComponentEntityAttributes>();
+                if (contextObject.TryGet(out int entityId))
                 {
-                    return attr;
+                    var attrs = attrsPool.Get(entityId).Attributes;
+                    if (attrs != null && attrs.TryGetValue(attrName, out var attr))
+                    {
+                        return attr;
+                    }
                 }
             }
 
