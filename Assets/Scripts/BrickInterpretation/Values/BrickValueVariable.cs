@@ -2,12 +2,13 @@ using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Context;
+using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Values
 {
     public class BrickValueVariable : BrickValue
     {
-        public static BrickValueVariable Create(int type, int subType)
+        public static BrickValue Create(int type, int subType)
         {
             return new BrickValueVariable(type, subType);
         }
@@ -17,15 +18,14 @@ namespace Solcery.BrickInterpretation.Values
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count >= 1 
-                && parameters[0] is JObject varName)
+                && parameters[0] is JObject varNameObject
+                && varNameObject.TryGetValue("value", out string varName))
             {
                 ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                if (contextVars.TryGetVar(varName.Value<string>(), out var value))
+                if (contextVars.TryGet(varName, out int value))
                 {
-                    return (int)value;
+                    return value;
                 }
-
-                return 0;
             }
 
             throw new ArgumentException($"BrickValueVariable Run has exception! Parameters {parameters}");

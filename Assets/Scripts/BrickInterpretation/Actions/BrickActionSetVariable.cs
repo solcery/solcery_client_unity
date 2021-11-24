@@ -25,7 +25,7 @@ namespace Solcery.BrickInterpretation.Actions
                 serviceBricks.ExecuteValueBrick(parameters[1], world, out var v1))
             {
                 ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                contextVars.SetVar(varName.Value<string>(), v1);
+                contextVars.Set(varName.Value<string>(), v1);
             }
             
             throw new Exception($"BrickActionSetVariable Run parameters {parameters}!");

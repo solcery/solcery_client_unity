@@ -27,7 +27,7 @@ namespace Solcery.BrickInterpretation.Actions
                 for (var i = 0; i < v1; i++)
                 {
                     ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                    contextVars.SetVar(counter.Value<string>(), i);
+                    contextVars.Set(counter.Value<string>(), i);
                     serviceBricks.ExecuteActionBrick(parameters[1], world);
                 }
             }

@@ -6,7 +6,7 @@ namespace Solcery.BrickInterpretation.Values
 {
     public class BrickValueIfThenElse : BrickValue
     {
-        public static BrickValueIfThenElse Create(int type, int subType)
+        public static BrickValue Create(int type, int subType)
         {
             return new BrickValueIfThenElse(type, subType);
         }

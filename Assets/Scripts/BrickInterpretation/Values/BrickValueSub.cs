@@ -6,7 +6,7 @@ namespace Solcery.BrickInterpretation.Values
 {
     public class BrickValueSub : BrickValue
     {
-        public static BrickValueSub Create(int type, int subType)
+        public static BrickValue Create(int type, int subType)
         {
             return new BrickValueSub(type, subType);
         }

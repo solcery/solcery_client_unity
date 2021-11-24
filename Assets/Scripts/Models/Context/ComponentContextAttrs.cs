@@ -5,12 +5,41 @@ namespace Solcery.Models.Context
 {
     public struct ComponentContextAttrs : IEcsAutoReset<ComponentContextAttrs>
     {
-        public Dictionary<string, object> Attrs;
+        private Dictionary<string, object> _attrs;
+        
+        public void Set(string key, object value)
+        {
+            if (!_attrs.ContainsKey(key))
+            {
+                _attrs.Add(key, value);
+                return;
+            }
+            
+            _attrs[key] = value;
+        }
+
+        public bool TryGet(string key, out object value)
+        {
+            return _attrs.TryGetValue(key, out value);
+        }
+
+        public bool TryGet<T>(string key, out T value)
+        {
+            if (_attrs.TryGetValue(key, out var val) 
+                && val is T valT)
+            {
+                value = valT;
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
         
         public void AutoReset(ref ComponentContextAttrs c)
         {
-            Attrs ??= new Dictionary<string, object>();
-            Attrs.Clear();
+            _attrs ??= new Dictionary<string, object>();
+            _attrs.Clear();
         }
     }
 }

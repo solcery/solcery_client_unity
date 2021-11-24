@@ -5,29 +5,41 @@ namespace Solcery.Models.Context
 {
     public struct ComponentContextVars : IEcsAutoReset<ComponentContextVars>
     {
-        public Dictionary<string, object> Vars;
+        private Dictionary<string, object> _vars;
 
-        public void SetVar(string key, object value)
+        public void Set(string key, object value)
         {
-            if (Vars.ContainsKey(key))
+            if (!_vars.ContainsKey(key))
             {
-                Vars[key] = value;
+                _vars.Add(key, value);
+                return;
             }
-            else
-            {
-                Vars.Add(key, value);
-            }
+            
+            _vars[key] = value;
         }
 
-        public bool TryGetVar(string key, out object value)
+        public bool TryGet(string key, out object value)
         {
-            return Vars.TryGetValue(key, out value);
+            return _vars.TryGetValue(key, out value);
+        }
+
+        public bool TryGet<T>(string key, out T value)
+        {
+            if (_vars.TryGetValue(key, out var val) 
+                && val is T valT)
+            {
+                value = valT;
+                return true;
+            }
+
+            value = default;
+            return false;
         }
         
         public void AutoReset(ref ComponentContextVars c)
         {
-            Vars ??= new Dictionary<string, object>();
-            Vars.Clear();
+            _vars ??= new Dictionary<string, object>();
+            _vars.Clear();
         }
     }
 }
