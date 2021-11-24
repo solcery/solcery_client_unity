@@ -1,5 +1,5 @@
 {
-    "name": "TestAssembly",
+    "name": "PlayModeTestAssembly",
     "rootNamespace": "Solcery",
     "references": [
         "UnityEngine.TestRunner",

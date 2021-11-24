@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
+using Solcery.Models.Context;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation
@@ -176,16 +177,36 @@ namespace Solcery.BrickInterpretation
             _poolOfBricks[brick.Type][brick.SubType].Push(brick);
         }
 
+        private Dictionary<string, JToken> CreateCustomArgs(JArray customParameters)
+        {
+            var arg = new Dictionary<string, JToken>(customParameters.Count);
+            
+            foreach (var customParameterToken in customParameters)
+            {
+                if (customParameterToken is JObject customParameterObject 
+                    && customParameterObject.TryGetValue("name", out string name)
+                    && customParameterObject.TryGetValue("value", out JObject brick))
+                {
+                    arg.Add(name, brick);
+                }
+            }
+
+            return arg;
+        }
+
         private bool ExecuteActionCustomBrick(JToken json, EcsWorld world)
         {
             var completed = false;
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var parameters)
+                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
             {
+                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
+                args.Push(CreateCustomArgs(customParameters));
                 completed = ExecuteActionBrick(customBrickToken, world);
+                args.Pop();
             }
 
             return completed;
@@ -198,10 +219,13 @@ namespace Solcery.BrickInterpretation
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var parameters)
+                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
             {
+                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
+                args.Push(CreateCustomArgs(customParameters));
                 completed = ExecuteValueBrick(customBrickToken, world, out result);
+                args.Pop();
             }
 
             return completed;
@@ -214,10 +238,13 @@ namespace Solcery.BrickInterpretation
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var parameters)
+                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
             {
+                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
+                args.Push(CreateCustomArgs(customParameters));
                 completed = ExecuteConditionBrick(customBrickToken, world, out result);
+                args.Pop();
             }
 
             return completed;

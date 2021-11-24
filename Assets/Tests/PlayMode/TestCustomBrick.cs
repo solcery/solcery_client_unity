@@ -9,7 +9,7 @@ using Solcery.BrickInterpretation.Values;
 using Solcery.Utils;
 using UnityEngine;
 
-namespace Solcery.Tests
+namespace Solcery.Tests.PlayMode
 {
     public class TestCustomBrick
     {
