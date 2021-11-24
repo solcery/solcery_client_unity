@@ -4,11 +4,28 @@ namespace Solcery.Models.Context
 {
     public struct ComponentContextObject : IEcsAutoReset<ComponentContextObject>
     {
-        public object Object;
+        private object _object;
+
+        public void Set(object @object)
+        {
+            _object = @object;
+        }
+
+        public bool TryGet<T>(out T @object)
+        {
+            if (_object is T objT)
+            {
+                @object = objT;
+                return true;
+            }
+
+            @object = default;
+            return false;
+        }
         
         public void AutoReset(ref ComponentContextObject c)
         {
-            c.Object = null;
+            c._object = null;
         }
     }
 }

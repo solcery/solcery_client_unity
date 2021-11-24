@@ -35,6 +35,16 @@ namespace Solcery.Models.Context
             value = default;
             return false;
         }
+
+        public void Remove(string key)
+        {
+            if (!_attrs.ContainsKey(key))
+            {
+                return;
+            }
+
+            _attrs.Remove(key);
+        }
         
         public void AutoReset(ref ComponentContextAttrs c)
         {

@@ -3,29 +3,29 @@ using Leopotam.EcsLite;
 
 namespace Solcery.Models.Context
 {
-    public struct ComponentContextVars : IEcsAutoReset<ComponentContextVars>
+    public struct ComponentContextArgs : IEcsAutoReset<ComponentContextAttrs>
     {
-        private Dictionary<string, object> _vars;
-
+        private Dictionary<string, object> _args;
+        
         public void Set(string key, object value)
         {
-            if (!_vars.ContainsKey(key))
+            if (!_args.ContainsKey(key))
             {
-                _vars.Add(key, value);
+                _args.Add(key, value);
                 return;
             }
             
-            _vars[key] = value;
+            _args[key] = value;
         }
 
         public bool TryGet(string key, out object value)
         {
-            return _vars.TryGetValue(key, out value);
+            return _args.TryGetValue(key, out value);
         }
 
         public bool TryGet<T>(string key, out T value)
         {
-            if (_vars.TryGetValue(key, out var val) 
+            if (_args.TryGetValue(key, out var val) 
                 && val is T valT)
             {
                 value = valT;
@@ -35,21 +35,21 @@ namespace Solcery.Models.Context
             value = default;
             return false;
         }
-        
+
         public void Remove(string key)
         {
-            if (!_vars.ContainsKey(key))
+            if (!_args.ContainsKey(key))
             {
                 return;
             }
 
-            _vars.Remove(key);
+            _args.Remove(key);
         }
         
-        public void AutoReset(ref ComponentContextVars c)
+        public void AutoReset(ref ComponentContextAttrs c)
         {
-            _vars ??= new Dictionary<string, object>();
-            _vars.Clear();
+            _args ??= new Dictionary<string, object>();
+            _args.Clear();
         }
     }
 }

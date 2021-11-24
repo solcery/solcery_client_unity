@@ -2,6 +2,7 @@ using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Context;
+using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Actions
 {
@@ -20,12 +21,13 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            if (parameters.Count >= 2 && 
-                parameters[0] is JObject varName &&
-                serviceBricks.ExecuteValueBrick(parameters[1], world, out var v1))
+            if (parameters.Count >= 2
+                && parameters[0] is JObject varNameObject 
+                && varNameObject.TryGetValue("value", out string varName)
+                && serviceBricks.ExecuteValueBrick(parameters[1], world, out var v1))
             {
                 ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                contextVars.Set(varName.Value<string>(), v1);
+                contextVars.Set(varName, v1);
             }
             
             throw new Exception($"BrickActionSetVariable Run parameters {parameters}!");

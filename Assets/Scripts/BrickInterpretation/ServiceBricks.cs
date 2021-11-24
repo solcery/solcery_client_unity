@@ -314,9 +314,7 @@ namespace Solcery.BrickInterpretation
         {
             if (json is JObject obj)
             {
-                if (obj.TryGetValue("name", out string name)
-                    && name == "value"
-                    && obj.TryGetValue("value", out bool value))
+                if (obj.TryGetValue("value", out bool value))
                 {
                     return value;
                 }
@@ -334,9 +332,7 @@ namespace Solcery.BrickInterpretation
         {
             if (json is JObject obj)
             {
-                if (obj.TryGetValue("name", out string name)
-                    && name == "value"
-                    && obj.TryGetValue("value", out int value))
+                if (obj.TryGetValue("value", out int value))
                 {
                     return value;
                 }
