@@ -2,13 +2,13 @@ namespace Solcery.BrickInterpretation.Conditions
 {
     public enum BrickConditionTypes
     {
-        Const = 0,
+        Constant = 0,
         Not,
-        Equal,
-        GreaterThan,
-        LesserThan,
-        And,
-        Or,
-        Argument
+        Equal = 2,
+        GreaterThan = 3,
+        LesserThan = 4,
+        Argument = 5,
+        Or = 6,
+        And = 7
     }
 }

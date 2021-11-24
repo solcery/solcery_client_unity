@@ -2,17 +2,19 @@ namespace Solcery.BrickInterpretation.Values
 {
     public enum BrickValueTypes
     {
-        Const = 0,
-        Variable,
-        Attribute,
-        Argument,
-        IfThenElse,
-        Add,
-        Sub,
-        Div,
-        Mod,
+        Constant = 0,
+        Variable = 1,
+        Attribute = 2,
+        Argument = 3,
+        IfThenElse = 4,
+        Addition = 5,
+        Subtraction = 6,
+        Multiplication = 7,
+        Division = 8,
+        Modulo = 9,
         Random = 10,
-        CardId,
-        CardTypeId
+        CardId = 11,
+        CardTypeId = 12,
+        GameAttribute = 13
     }
 }

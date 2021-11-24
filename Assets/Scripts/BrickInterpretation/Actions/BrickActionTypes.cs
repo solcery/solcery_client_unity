@@ -3,13 +3,15 @@ namespace Solcery.BrickInterpretation.Actions
     public enum BrickActionTypes
     {
         Void = 0,
-        TwoActions,
-        Set,
-        Conditional,
+        TwoActions = 1,
+        IfThenElse = 2,
+        Loop = 3,
         Argument = 4,
-        ForLoop,
-        SetVariable,
+        Iterator = 5,
+        SetVariable = 6,
         SetAttribute = 7,
-        UseCard = 8
+        UseCard = 8,
+        SetGameAttribute = 9,
+        ConsoleLog = 256
     }
 }
