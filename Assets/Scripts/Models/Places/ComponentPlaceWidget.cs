@@ -5,7 +5,7 @@ namespace Solcery.Models.Places
 {
     public struct ComponentPlaceWidget : IEcsAutoReset<ComponentPlaceWidget>
     {
-        public Widget Widget;
+        public IWidget Widget;
 
         public void AutoReset(ref ComponentPlaceWidget c)
         {

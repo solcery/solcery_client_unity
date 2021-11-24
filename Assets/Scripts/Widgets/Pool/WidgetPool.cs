@@ -88,8 +88,11 @@ namespace Solcery.Widgets.Pool
         {
             foreach (var pool in _given)
             {
-                pool.Key.Clear();
-                pool.Value.Push(pool.Key);
+                if (pool.Key != null)
+                {
+                    pool.Key.Clear();
+                    pool.Value.Push(pool.Key);
+                }
             }
             _given.Clear();
         }
