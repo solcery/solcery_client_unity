@@ -38,7 +38,7 @@ namespace Solcery.BrickInterpretation.Actions
                 }
             }
 
-            throw new Exception($"BrickValueSetAttribute Run parameters {parameters}!");
+            throw new Exception($"BrickActionSetAttribute Run parameters {parameters}!");
         }        
     }
 }
