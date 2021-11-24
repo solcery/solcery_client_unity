@@ -4,10 +4,11 @@ namespace Solcery.BrickInterpretation.Conditions
     {
         Const = 0,
         Not,
-        And,
-        Or,
         Equal,
         GreaterThan,
-        LesserThan
+        LesserThan,
+        And,
+        Or,
+        Argument
     }
 }

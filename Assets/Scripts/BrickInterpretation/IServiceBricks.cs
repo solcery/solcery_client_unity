@@ -16,8 +16,6 @@ namespace Solcery.BrickInterpretation
         bool ExecuteActionBrick(JToken json, EcsWorld world);
         bool ExecuteValueBrick(JToken json, EcsWorld world, out int result);
         bool ExecuteConditionBrick(JToken json, EcsWorld world, out bool result);
-        bool GetValueBool(JToken json, EcsWorld world);
-        int GetValueInt(JToken json, EcsWorld world);
         void Cleanup();
         void Destroy();
     }

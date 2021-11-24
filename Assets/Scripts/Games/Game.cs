@@ -114,18 +114,22 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Const, BrickValueConst.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Variable, BrickValueVariable.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Attribute, BrickValueAttribute.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Argument, BrickValueArgument.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IfThenElse, BrickValueIfThenElse.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Add, BrickValueAdd.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Sub, BrickValueSub.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Div, BrickValueDiv.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Mod, BrickValueMod.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.Random, BrickValueRandom.Create);
             
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.TwoActions, BrickActionTwoActions.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Set, BrickActionSet.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Conditional, BrickActionConditional.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ForLoop, BrickActionForLoop.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetVariable, BrickActionSetVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.UseCard, BrickActionUseCard.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Const, BrickConditionConst.Create);
@@ -135,6 +139,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Equal, BrickConditionEqual.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.GreaterThan, BrickConditionGreaterThan.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.LesserThan, BrickConditionLesserThan.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Argument, BrickConditionArgument.Create);
         }
 
         private void Cleanup()

@@ -10,6 +10,9 @@ namespace Solcery.BrickInterpretation.Values
         Add,
         Sub,
         Div,
-        Mod
+        Mod,
+        Random = 10,
+        CardId,
+        CardTypeId
     }
 }

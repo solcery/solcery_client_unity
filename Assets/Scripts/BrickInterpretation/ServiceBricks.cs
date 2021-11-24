@@ -76,16 +76,6 @@ namespace Solcery.BrickInterpretation
             return ExecuteConditionBrick(json, world, out result);
         }
         
-        bool IServiceBricks.GetValueBool(JToken json, EcsWorld world)
-        {
-            return GetValueBool(json, world);
-        }
-
-        int IServiceBricks.GetValueInt(JToken json, EcsWorld world)
-        {
-            return GetValueInt(json, world);
-        }
-        
         #endregion
 
         #region Private method implementation
@@ -310,42 +300,6 @@ namespace Solcery.BrickInterpretation
             return completed || ExecuteConditionCustomBrick(json, world, out result);
         }
 
-        private bool GetValueBool(JToken json, EcsWorld world)
-        {
-            if (json is JObject obj)
-            {
-                if (obj.TryGetValue("value", out bool value))
-                {
-                    return value;
-                }
-
-                if (ExecuteConditionBrick(json, world, out value))
-                {
-                    return value;
-                }
-            }
-
-            throw new Exception($"GetValueBool json {json}!");
-        }
-
-        private int GetValueInt(JToken json, EcsWorld world)
-        {
-            if (json is JObject obj)
-            {
-                if (obj.TryGetValue("value", out int value))
-                {
-                    return value;
-                }
-
-                if (ExecuteValueBrick(json, world, out value))
-                {
-                    return value;
-                }
-            }
-
-            throw new Exception($"GetValueInt json {json}!");
-        }
-        
         #endregion
     }
 }
