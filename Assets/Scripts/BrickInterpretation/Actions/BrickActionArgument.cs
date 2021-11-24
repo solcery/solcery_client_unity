@@ -4,18 +4,20 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models.Context;
 using Solcery.Utils;
 
-namespace Solcery.BrickInterpretation.Values
+namespace Solcery.BrickInterpretation.Actions
 {
-    public sealed class BrickValueArgument : BrickValue
+    public sealed class BrickActionArgument : BrickAction
     {
-        public static BrickValue Create(int type, int subType)
+        public static BrickAction Create(int type, int subType)
         {
-            return new BrickValueArgument(type, subType);
+            return new BrickActionArgument(type, subType);
         }
         
-        private BrickValueArgument(int type, int subType) : base(type, subType) { }
+        public BrickActionArgument(int type, int subType) : base(type, subType) { }
 
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Reset() { }
+
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
                 && parameters[0] is JObject valueObject
@@ -25,17 +27,15 @@ namespace Solcery.BrickInterpretation.Values
                 var args = contextArgs.Pop();
                 if (args.TryGetValue(argName, out var brickToken) && brickToken is JObject brickObject)
                 {
-                    if (serviceBricks.ExecuteValueBrick(brickObject, world, out var result))
+                    if (serviceBricks.ExecuteActionBrick(brickObject, world))
                     {
                         contextArgs.Push(args);
-                        return result;
+                        return;
                     }
                 }
             }
 
-            throw new ArgumentException($"BrickValueArgument Run has exception! Parameters {parameters}");
+            throw new ArgumentException($"BrickConditionArgument Run has exception! Parameters {parameters}");
         }
-
-        public override void Reset() { }
     }
 }

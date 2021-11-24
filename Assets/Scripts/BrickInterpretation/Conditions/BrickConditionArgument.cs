@@ -22,10 +22,12 @@ namespace Solcery.BrickInterpretation.Conditions
                 && valueObject.TryGetValue("value", out string argName))
             {
                 ref var contextArgs = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
-                if (contextArgs.TryGet(argName, out JObject brick))
+                var args = contextArgs.Pop();
+                if (args.TryGetValue(argName, out var brickToken) && brickToken is JObject brickObject)
                 {
-                    if (serviceBricks.ExecuteConditionBrick(brick, world, out var result))
+                    if (serviceBricks.ExecuteConditionBrick(brickObject, world, out var result))
                     {
+                        contextArgs.Push(args);
                         return result;
                     }
                 }
