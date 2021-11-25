@@ -27,7 +27,7 @@ namespace Solcery.BrickInterpretation.Values
                 {
                     ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
                     var attrsPool = world.GetPool<ComponentEntityAttributes>();
-                    if (contextObject.TryGet(out int entityId))
+                    if (contextObject.TryPeek(out int entityId))
                     {
                         var attrs = attrsPool.Get(entityId).Attributes;
                         if (attrs != null && attrs.TryGetValue(attrName, out var attr))

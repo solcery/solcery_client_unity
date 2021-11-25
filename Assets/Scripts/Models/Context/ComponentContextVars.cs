@@ -48,8 +48,8 @@ namespace Solcery.Models.Context
         
         public void AutoReset(ref ComponentContextVars c)
         {
-            _vars ??= new Dictionary<string, object>();
-            _vars.Clear();
+            c._vars ??= new Dictionary<string, object>();
+            c._vars.Clear();
         }
     }
 }

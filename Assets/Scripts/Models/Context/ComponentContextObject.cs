@@ -1,22 +1,45 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 
 namespace Solcery.Models.Context
 {
     public struct ComponentContextObject : IEcsAutoReset<ComponentContextObject>
     {
-        private object _object;
+        private Stack<object> _objects;
 
-        public void Set(object @object)
+        public void Push(object @object)
         {
-            _object = @object;
+            _objects.Push(@object);
         }
 
-        public bool TryGet<T>(out T @object)
+        public bool TryPop<T>(out T @object)
         {
-            if (_object is T objT)
+            if (_objects.Count > 0)
             {
-                @object = objT;
-                return true;
+                var obj = _objects.Pop();
+                if (obj is T objT)
+                {
+                    @object = objT;
+                    return true;
+                }
+                
+                _objects.Push(obj);
+            }
+
+            @object = default;
+            return false;
+        }
+
+        public bool TryPeek<T>(out T @object)
+        {
+            if (_objects.Count > 0)
+            {
+                var obj = _objects.Peek();
+                if (obj is T objT)
+                {
+                    @object = objT;
+                    return true;
+                }
             }
 
             @object = default;
@@ -25,7 +48,8 @@ namespace Solcery.Models.Context
         
         public void AutoReset(ref ComponentContextObject c)
         {
-            c._object = null;
+            c._objects ??= new Stack<object>();
+            c._objects.Clear();
         }
     }
 }

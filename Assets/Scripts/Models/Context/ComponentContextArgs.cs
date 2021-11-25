@@ -20,8 +20,8 @@ namespace Solcery.Models.Context
         
         public void AutoReset(ref ComponentContextArgs c)
         {
-            _argsStack ??= new Stack<Dictionary<string, JToken>>();
-            _argsStack.Clear();
+            c._argsStack ??= new Stack<Dictionary<string, JToken>>();
+            c._argsStack.Clear();
         }
     }
 }
