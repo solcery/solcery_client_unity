@@ -13,9 +13,7 @@ namespace Solcery.BrickInterpretation.Actions
             return new BrickActionForLoop(type, subType);
         }
 
-        private BrickActionForLoop(int type, int subType) : base(type, subType)
-        {
-        }
+        private BrickActionForLoop(int type, int subType) : base(type, subType) { }
 
         public override void Reset() { }
 
@@ -26,12 +24,26 @@ namespace Solcery.BrickInterpretation.Actions
                 && parameters[2] is JObject counterObject
                 && counterObject.TryGetValue("value", out string counterVarName))
             {
-                ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                
-                for (var i = 0; i < v1; i++)
+                var filter = world.Filter<ComponentContextVars>().End();
+                foreach (var entityId in filter)
                 {
-                    contextVars.Set(counterVarName, i);
-                    serviceBricks.ExecuteActionBrick(parameters[1], world);
+                    var failIteration = 0;
+                    ref var contextVars = ref world.GetPool<ComponentContextVars>().Get(entityId);
+                    for (var i = 0; i < v1; i++)
+                    {
+                        contextVars.Set(counterVarName, i);
+                        if (!serviceBricks.ExecuteActionBrick(parameters[1], world))
+                        {
+                            failIteration++;
+                        }
+                    }
+
+                    if (failIteration < 0)
+                    {
+                        return;
+                    }
+                    
+                    break;
                 }
             }
 

@@ -26,8 +26,13 @@ namespace Solcery.BrickInterpretation.Actions
                 && varNameObject.TryGetValue("value", out string varName)
                 && serviceBricks.ExecuteValueBrick(parameters[1], world, out var v1))
             {
-                ref var contextVars = ref world.GetPool<ComponentContextVars>().GetRawDenseItems()[0];
-                contextVars.Set(varName, v1);
+                var filter = world.Filter<ComponentContextVars>().End();
+                foreach (var entityId in filter)
+                {
+                    ref var contextVars = ref world.GetPool<ComponentContextVars>().Get(entityId);
+                    contextVars.Set(varName, v1);
+                    return;
+                }
             }
             
             throw new Exception($"BrickActionSetVariable Run parameters {parameters}!");

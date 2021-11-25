@@ -74,9 +74,12 @@ namespace Solcery.Models.GameState
             }
             else
             {
-                ref var gameAttributesComponent = ref world.GetPool<ComponentGameAttributes>()
-                    .Get(_filterGameAttributes.GetRawEntities()[0]);
-                UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
+                foreach (var entityId in _filterGameAttributes)
+                {
+                    ref var gameAttributesComponent = ref world.GetPool<ComponentGameAttributes>().Get(entityId);
+                    UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
+                    break;
+                }
             }
             
             // Update game entity

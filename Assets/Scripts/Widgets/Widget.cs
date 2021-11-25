@@ -21,23 +21,29 @@ namespace Solcery.Widgets
 
         public void UpdateSubWidgets(EcsWorld world, int[] entityIds)
         {
-            var typesFilter = world.Filter<ComponentEntityTypes>().End();
-            ref var types = ref world.GetPool<ComponentEntityTypes>().Get(typesFilter.GetRawEntities()[0]);
+            var filter = world.Filter<ComponentEntityTypes>().End();
 
-            foreach (var entityId in entityIds)
+            foreach (var uniqEntityId in filter)
             {
-                var typePool = world.GetPool<ComponentEntityType>();
-                if (typePool.Has(entityId))
+                ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityId);
+                
+                foreach (var entityId in entityIds)
                 {
-                    if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))
+                    var typePool = world.GetPool<ComponentEntityType>();
+                    if (typePool.Has(entityId))
                     {
-                        var widget = AddSubWidget(data);
-                        if (widget != null)
+                        if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))
                         {
-                            world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = widget;
+                            var widget = AddSubWidget(data);
+                            if (widget != null)
+                            {
+                                world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = widget;
+                            }
                         }
                     }
                 }
+                
+                break;
             }
         }
         

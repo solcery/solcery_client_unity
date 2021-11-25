@@ -25,16 +25,21 @@ namespace Solcery.BrickInterpretation.Actions
                 && attrNameObject.TryGetValue("value", out string attrName) 
                 && serviceBricks.ExecuteValueBrick(parameters[1], world, out var v1))
             {
-                ref var contextObject = ref world.GetPool<ComponentContextObject>().GetRawDenseItems()[0];
-                var attrsPool = world.GetPool<ComponentEntityAttributes>();
-                if (contextObject.TryGet(out int entityId))
+                var filter = world.Filter<ComponentContextObject>().End();
+                foreach (var uniqEntityId in filter)
                 {
-                    var attrs = attrsPool.Get(entityId).Attributes;
-                    if (attrs.ContainsKey(attrName))
+                    ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
+                    var attrsPool = world.GetPool<ComponentEntityAttributes>();
+                    if (contextObject.TryGet(out int entityId))
                     {
-                        attrs[attrName] = v1;
-                        return;
+                        var attrs = attrsPool.Get(entityId).Attributes;
+                        if (attrs.ContainsKey(attrName))
+                        {
+                            attrs[attrName] = v1;
+                            return;
+                        }
                     }
+                    break;
                 }
             }
 

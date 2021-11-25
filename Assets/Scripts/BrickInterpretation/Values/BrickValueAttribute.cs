@@ -22,15 +22,20 @@ namespace Solcery.BrickInterpretation.Values
                 && parameters[0] is JObject attrNameObject
                 && attrNameObject.TryGetValue("value", out string attrName))
             {
-                ref var contextObject = ref world.GetPool<ComponentContextObject>().GetRawDenseItems()[0];
-                var attrsPool = world.GetPool<ComponentEntityAttributes>();
-                if (contextObject.TryGet(out int entityId))
+                var filter = world.Filter<ComponentContextObject>().End();
+                foreach (var uniqEntityId in filter)
                 {
-                    var attrs = attrsPool.Get(entityId).Attributes;
-                    if (attrs != null && attrs.TryGetValue(attrName, out var attr))
+                    ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
+                    var attrsPool = world.GetPool<ComponentEntityAttributes>();
+                    if (contextObject.TryGet(out int entityId))
                     {
-                        return attr;
+                        var attrs = attrsPool.Get(entityId).Attributes;
+                        if (attrs != null && attrs.TryGetValue(attrName, out var attr))
+                        {
+                            return attr;
+                        }
                     }
+                    break;
                 }
             }
 

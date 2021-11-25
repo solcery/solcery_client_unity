@@ -197,16 +197,22 @@ namespace Solcery.BrickInterpretation
         private bool ExecuteActionCustomBrick(JToken json, EcsWorld world)
         {
             var completed = false;
+            var filter = world.Filter<ComponentContextArgs>().End();
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
                 && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
-                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
+                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
+                && filter.GetEntitiesCount() > 0)
             {
-                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
-                args.Push(CreateCustomArgs(customParameters));
-                completed = ExecuteActionBrick(customBrickToken, world);
-                args.Pop();
+                foreach (var entityId in filter)
+                {
+                    ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
+                    args.Push(CreateCustomArgs(customParameters));
+                    completed = ExecuteActionBrick(customBrickToken, world);
+                    args.Pop();
+                    break;
+                }
             }
 
             return completed;
@@ -216,16 +222,22 @@ namespace Solcery.BrickInterpretation
         {
             result = 0;
             var completed = false;
+            var filter = world.Filter<ComponentContextArgs>().End();
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
                 && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
-                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
+                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
+                && filter.GetEntitiesCount() > 0)
             {
-                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
-                args.Push(CreateCustomArgs(customParameters));
-                completed = ExecuteValueBrick(customBrickToken, world, out result);
-                args.Pop();
+                foreach (var entityId in filter)
+                {
+                    ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
+                    args.Push(CreateCustomArgs(customParameters));
+                    completed = ExecuteValueBrick(customBrickToken, world, out result);
+                    args.Pop();
+                    break;
+                }
             }
 
             return completed;
@@ -235,16 +247,22 @@ namespace Solcery.BrickInterpretation
         {
             result = false;
             var completed = false;
+            var filter = world.Filter<ComponentContextArgs>().End();
             
             if (json is JObject obj
                 && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
                 && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
-                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken))
+                && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
+                && filter.GetEntitiesCount() > 0)
             {
-                ref var args = ref world.GetPool<ComponentContextArgs>().GetRawDenseItems()[0];
-                args.Push(CreateCustomArgs(customParameters));
-                completed = ExecuteConditionBrick(customBrickToken, world, out result);
-                args.Pop();
+                foreach (var entityId in filter)
+                {
+                    ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
+                    args.Push(CreateCustomArgs(customParameters));
+                    completed = ExecuteConditionBrick(customBrickToken, world, out result);
+                    args.Pop();
+                    break;
+                }
             }
 
             return completed;
