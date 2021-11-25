@@ -6,6 +6,7 @@ using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
+using Solcery.Models.Context;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -45,6 +46,8 @@ namespace Solcery.Tests.PlayMode
         {
             var world = new EcsWorld();
             Assert.True(world != null);
+            var entityId = world.NewEntity();
+            world.GetPool<ComponentContextArgs>().Add(entityId);
             var brickJson = LoadTestBrick(Path.GetFullPath($"{Application.dataPath}/Tests/Bricks/custom_brick.json"));
             Assert.True(brickJson != null);
             Assert.True(_serviceBricks.ExecuteValueBrick(brickJson, world, out var result));
