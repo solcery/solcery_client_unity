@@ -1,5 +1,21 @@
 {
   "type": 2,
-  "subtype": 10139,
-  "params": []
+  "subtype": 10136,
+  "params": [
+    {
+      "name":"Number",
+      "value":
+      {
+        "name": "Value.Constant",
+        "type": 2,
+        "subtype": 0,
+        "params": [
+          {
+            "name": "value",
+            "value": 10
+          }
+        ]
+      }
+    }
+  ]
 }

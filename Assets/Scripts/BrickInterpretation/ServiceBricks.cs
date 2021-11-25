@@ -12,7 +12,7 @@ namespace Solcery.BrickInterpretation
 {
     public class ServiceBricks : IServiceBricks
     {
-        private readonly Dictionary<int, JToken> _customBricks;
+        private readonly Dictionary<int, JObject> _customBricks;
 
         private readonly Dictionary<int, Dictionary<int, Func<int, int, Brick>>> _creationFuncForTypesSubtypes;
         private readonly Dictionary<int, Dictionary<int, Stack<Brick>>> _poolOfBricks;
@@ -25,7 +25,7 @@ namespace Solcery.BrickInterpretation
 
         private ServiceBricks()
         {
-            _customBricks = new Dictionary<int, JToken>();
+            _customBricks = new Dictionary<int, JObject>();
             _creationFuncForTypesSubtypes = new Dictionary<int, Dictionary<int, Func<int, int, Brick>>>(3);
             _poolOfBricks = new Dictionary<int, Dictionary<int, Stack<Brick>>>(3);
         }
@@ -62,19 +62,19 @@ namespace Solcery.BrickInterpretation
             Cleanup();
         }
         
-        bool IServiceBricks.ExecuteActionBrick(JToken json, EcsWorld world)
+        bool IServiceBricks.ExecuteActionBrick(JObject brickObject, EcsWorld world)
         {
-            return ExecuteActionBrick(json, world);
+            return ExecuteActionBrick(brickObject, world);
         }
         
-        bool IServiceBricks.ExecuteValueBrick(JToken json, EcsWorld world, out int result)
+        bool IServiceBricks.ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result)
         {
-            return ExecuteValueBrick(json, world, out result);
+            return ExecuteValueBrick(brickObject, world, out result);
         }
         
-        bool IServiceBricks.ExecuteConditionBrick(JToken json, EcsWorld world, out bool result)
+        bool IServiceBricks.ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result)
         {
-            return ExecuteConditionBrick(json, world, out result);
+            return ExecuteConditionBrick(brickObject, world, out result);
         }
         
         #endregion
@@ -87,10 +87,12 @@ namespace Solcery.BrickInterpretation
 
             foreach (var customBrickToken in customBricksJson)
             {
-                if(customBrickToken is JObject customBrickObject)
+                if(customBrickToken is JObject customBrickObject 
+                   && customBrickObject.TryGetValue("id", out int brickId)
+                   && customBrickObject.TryGetValue("brick", out JObject brick))
                 {
-                    var id = 10000 + customBrickObject.GetValue<int>("id");
-                    _customBricks.Add(id, customBrickObject.GetValue<JObject>("brick"));
+                    var id = 10000 + brickId;
+                    _customBricks.Add(id, brick);
                 }
             }
         }
@@ -177,15 +179,13 @@ namespace Solcery.BrickInterpretation
             _poolOfBricks[brick.Type][brick.SubType].Push(brick);
         }
 
-        private Dictionary<string, JToken> CreateCustomArgs(JArray customParameters)
+        private Dictionary<string, JObject> CreateCustomArgs(JArray customParameters)
         {
-            var arg = new Dictionary<string, JToken>(customParameters.Count);
+            var arg = new Dictionary<string, JObject>(customParameters.Count);
             
             foreach (var customParameterToken in customParameters)
             {
-                if (customParameterToken is JObject customParameterObject 
-                    && customParameterObject.TryGetValue("name", out string name)
-                    && customParameterObject.TryGetValue("value", out JObject brick))
+                if (customParameterToken.TryParseBrickParameter(out var name, out JObject brick))
                 {
                     arg.Add(name, brick);
                 }
@@ -194,14 +194,13 @@ namespace Solcery.BrickInterpretation
             return arg;
         }
 
-        private bool ExecuteActionCustomBrick(JToken json, EcsWorld world)
+        private bool ExecuteActionCustomBrick(JObject brickObject, EcsWorld world)
         {
             var completed = false;
             var filter = world.Filter<ComponentContextArgs>().End();
             
-            if (json is JObject obj
-                && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
+            if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
+                && brickObject.TryGetBrickParameters(out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
                 && filter.GetEntitiesCount() > 0)
             {
@@ -218,15 +217,14 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteValueCustomBrick(JToken json, EcsWorld world, out int result)
+        private bool ExecuteValueCustomBrick(JObject brickObject, EcsWorld world, out int result)
         {
             result = 0;
             var completed = false;
             var filter = world.Filter<ComponentContextArgs>().End();
             
-            if (json is JObject obj
-                && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
+            if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
+                && brickObject.TryGetBrickParameters(out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
                 && filter.GetEntitiesCount() > 0)
             {
@@ -243,15 +241,14 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteConditionCustomBrick(JToken json, EcsWorld world, out bool result)
+        private bool ExecuteConditionCustomBrick(JObject brickObject, EcsWorld world, out bool result)
         {
             result = false;
             var completed = false;
             var filter = world.Filter<ComponentContextArgs>().End();
             
-            if (json is JObject obj
-                && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
-                && BrickUtils.TryGetBrickParameters(obj, out var customParameters)
+            if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
+                && brickObject.TryGetBrickParameters(out var customParameters)
                 && _customBricks.TryGetValue(typeSubType.Item2, out var customBrickToken)
                 && filter.GetEntitiesCount() > 0)
             {
@@ -268,17 +265,16 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteActionBrick(JToken json, EcsWorld world)
+        private bool ExecuteActionBrick(JObject brickObject, EcsWorld world)
         {
             var completed = false;
             BrickAction brick = null;
 
             try
             {
-                if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
+                if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
                     && !IsCustomBrick(typeSubType.Item2)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickAction>(typeSubType.Item1, typeSubType.Item2);
                     brick.Run(this, parameters, world);
@@ -290,10 +286,10 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteActionCustomBrick(json, world);
+            return completed || ExecuteActionCustomBrick(brickObject, world);
         }
 
-        private bool ExecuteValueBrick(JToken json, EcsWorld world, out int result)
+        private bool ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result)
         {
             result = 0;
             var completed = false;
@@ -301,10 +297,9 @@ namespace Solcery.BrickInterpretation
 
             try
             {
-                if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
+                if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
                     && !IsCustomBrick(typeSubType.Item2)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickValue>(typeSubType.Item1, typeSubType.Item2);
                     result = brick.Run(this, parameters, world);
@@ -316,10 +311,10 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteValueCustomBrick(json, world, out result);
+            return completed || ExecuteValueCustomBrick(brickObject, world, out result);
         }
 
-        private bool ExecuteConditionBrick(JToken json, EcsWorld world, out bool result)
+        private bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result)
         {
             result = false;
             var completed = false;
@@ -327,10 +322,9 @@ namespace Solcery.BrickInterpretation
             
             try
             {
-                if (json is JObject obj 
-                    && BrickUtils.TryGetBrickTypeSubType(obj, out var typeSubType)
+                if (brickObject.TryGetBrickTypeSubType(out var typeSubType)
                     && !IsCustomBrick(typeSubType.Item2)
-                    && BrickUtils.TryGetBrickParameters(obj, out var parameters))
+                    && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickCondition>(typeSubType.Item1, typeSubType.Item2);
                     result = brick.Run(this, parameters, world);
@@ -342,7 +336,7 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteConditionCustomBrick(json, world, out result);
+            return completed || ExecuteConditionCustomBrick(brickObject, world, out result);
         }
 
         #endregion

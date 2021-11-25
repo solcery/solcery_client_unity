@@ -19,20 +19,21 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            if (parameters.Count >= 3 
-                && serviceBricks.ExecuteValueBrick(parameters[0], world, out var v1) 
-                && parameters[2] is JObject counterObject
-                && counterObject.TryGetValue("value", out string counterVarName))
+            if (parameters.Count >= 3
+                && parameters[0].TryParseBrickParameter(out _, out JObject counterBrick)
+                && serviceBricks.ExecuteValueBrick(counterBrick, world, out var counter) 
+                && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick)
+                && parameters[2].TryParseBrickParameter(out _, out string counterVarName))
             {
                 var filter = world.Filter<ComponentContextVars>().End();
                 foreach (var entityId in filter)
                 {
                     var failIteration = 0;
                     ref var contextVars = ref world.GetPool<ComponentContextVars>().Get(entityId);
-                    for (var i = 0; i < v1; i++)
+                    for (var i = 0; i < counter; i++)
                     {
                         contextVars.Set(counterVarName, i);
-                        if (!serviceBricks.ExecuteActionBrick(parameters[1], world))
+                        if (!serviceBricks.ExecuteActionBrick(actionBrick, world))
                         {
                             failIteration++;
                         }

@@ -17,8 +17,7 @@ namespace Solcery.BrickInterpretation.Conditions
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
-                && parameters[0] is JObject valueObject
-                && valueObject.TryGetValue("value", out bool value))
+                && parameters[0].TryParseBrickParameter(out _, out bool value))
             {
                 return value;
             }

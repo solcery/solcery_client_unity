@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace Solcery.Models.Triggers
                 {
                     ref var triggersComponent = ref triggerComponents.Get(entity);
                     ref var applyTriggerComponent = ref applyTriggerComponents.Get(entity);
-                    if (triggersComponent.Triggers.TryGetValue(applyTriggerComponent.Type, out var brick))
+                    if (triggersComponent.Triggers.TryGetValue(applyTriggerComponent.Type, out JObject brick))
                     {
                         _serviceBricks.ExecuteActionBrick(brick, null);
                         Debug.Log($"Brick \"{brick["name"]}\" was executed!");

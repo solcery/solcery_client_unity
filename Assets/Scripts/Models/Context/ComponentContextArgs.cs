@@ -6,21 +6,21 @@ namespace Solcery.Models.Context
 {
     public struct ComponentContextArgs : IEcsAutoReset<ComponentContextArgs>
     {
-        private Stack<Dictionary<string, JToken>> _argsStack;
+        private Stack<Dictionary<string, JObject>> _argsStack;
 
-        public Dictionary<string, JToken> Pop()
+        public Dictionary<string, JObject> Pop()
         {
             return _argsStack.Pop();
         }
 
-        public void Push(Dictionary<string, JToken> args)
+        public void Push(Dictionary<string, JObject> args)
         {
             _argsStack.Push(args);
         }
         
         public void AutoReset(ref ComponentContextArgs c)
         {
-            c._argsStack ??= new Stack<Dictionary<string, JToken>>();
+            c._argsStack ??= new Stack<Dictionary<string, JObject>>();
             c._argsStack.Clear();
         }
     }

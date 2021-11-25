@@ -5,9 +5,9 @@ namespace Solcery.Models.Context
 {
     public struct ComponentContextVars : IEcsAutoReset<ComponentContextVars>
     {
-        private Dictionary<string, object> _vars;
+        private Dictionary<string, int> _vars;
 
-        public void Set(string key, object value)
+        public void Set(string key, int value)
         {
             if (!_vars.ContainsKey(key))
             {
@@ -18,22 +18,9 @@ namespace Solcery.Models.Context
             _vars[key] = value;
         }
 
-        public bool TryGet(string key, out object value)
+        public bool TryGet(string key, out int value)
         {
             return _vars.TryGetValue(key, out value);
-        }
-
-        public bool TryGet<T>(string key, out T value)
-        {
-            if (_vars.TryGetValue(key, out var val) 
-                && val is T valT)
-            {
-                value = valT;
-                return true;
-            }
-
-            value = default;
-            return false;
         }
         
         public void Remove(string key)
@@ -48,7 +35,7 @@ namespace Solcery.Models.Context
         
         public void AutoReset(ref ComponentContextVars c)
         {
-            c._vars ??= new Dictionary<string, object>();
+            c._vars ??= new Dictionary<string, int>();
             c._vars.Clear();
         }
     }

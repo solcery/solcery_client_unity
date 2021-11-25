@@ -51,7 +51,7 @@ namespace Solcery.Tests.PlayMode
             var brickJson = LoadTestBrick(Path.GetFullPath($"{Application.dataPath}/Tests/Bricks/custom_brick.json"));
             Assert.True(brickJson != null);
             Assert.True(_serviceBricks.ExecuteValueBrick(brickJson, world, out var result));
-            Assert.True(result == 10);
+            Assert.True(result == 20);
         }
 
         private void RegistrationOrdinaryBricks()

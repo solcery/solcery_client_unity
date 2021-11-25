@@ -1,6 +1,7 @@
 using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Conditions
 {
@@ -17,7 +18,8 @@ namespace Solcery.BrickInterpretation.Conditions
         {
             foreach (var parameterToken in parameters)
             {
-                if (!serviceBricks.ExecuteConditionBrick(parameterToken, world, out var result))
+                if (!parameterToken.TryParseBrickParameter(out _, out JObject conditionBrick) 
+                    || !serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var result))
                 {
                     throw new Exception($"BrickConditionAnd Run parameters {parameters}");
                 }

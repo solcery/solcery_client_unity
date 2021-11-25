@@ -19,10 +19,8 @@ namespace Solcery.BrickInterpretation.Actions
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count >= 2 
-                && parameters[0] is JObject actionObject1
-                && actionObject1.TryGetValue("value", out JObject actionBrick1)
-                && parameters[1] is JObject actionObject2
-                && actionObject2.TryGetValue("value", out JObject actionBrick2)
+                && parameters[0].TryParseBrickParameter(out _, out JObject actionBrick1)
+                && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick2)
                 && serviceBricks.ExecuteActionBrick(actionBrick1, world)
                 && serviceBricks.ExecuteActionBrick(actionBrick2, world))
             {

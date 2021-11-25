@@ -18,10 +18,8 @@ namespace Solcery.BrickInterpretation.Values
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count >= 2 
-                && parameters[0] is JObject brickFromObject 
-                && brickFromObject.TryGetValue("from", out JObject brickFrom)
-                && parameters[1] is JObject brickToObject 
-                && brickToObject.TryGetValue("to", out JObject brickTo)
+                && parameters[0].TryParseBrickParameter(out _, out JObject brickFrom)
+                && parameters[1].TryParseBrickParameter(out _, out JObject brickTo)
                 && serviceBricks.ExecuteValueBrick(brickFrom, world, out var from)
                 && serviceBricks.ExecuteValueBrick(brickTo, world, out var to))
             {

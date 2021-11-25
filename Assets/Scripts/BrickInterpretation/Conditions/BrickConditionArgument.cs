@@ -18,15 +18,14 @@ namespace Solcery.BrickInterpretation.Conditions
         public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
-                && parameters[0] is JObject valueObject
-                && valueObject.TryGetValue("value", out string argName))
+                && parameters[0].TryParseBrickParameter(out _, out string argName))
             {
                 var filter = world.Filter<ComponentContextArgs>().End();
                 foreach (var entityId in filter)
                 {
                     ref var contextArgs = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     var args = contextArgs.Pop();
-                    if (args.TryGetValue(argName, out var brickToken) && brickToken is JObject brickObject)
+                    if (args.TryGetValue(argName, out var brickObject))
                     {
                         if (serviceBricks.ExecuteConditionBrick(brickObject, world, out var result))
                         {

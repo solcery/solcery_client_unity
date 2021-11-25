@@ -1,6 +1,7 @@
 using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Actions
 {
@@ -17,11 +18,17 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            if (parameters.Count >= 3)
+            if (parameters.Count >= 3 
+                && parameters[0] is JObject ifObject
+                && parameters[1] is JObject thenObject
+                && parameters[2] is JObject elseObject
+                && ifObject.TryGetValue("value", out JObject ifBrick)
+                && thenObject.TryGetValue("value", out JObject thenBrick)
+                && elseObject.TryGetValue("value", out JObject elseBrick))
             {
-                if (serviceBricks.ExecuteConditionBrick(parameters[0], world, out var result))
+                if (serviceBricks.ExecuteConditionBrick(ifBrick, world, out var result))
                 {
-                    serviceBricks.ExecuteActionBrick(result ? parameters[1] : parameters[2], world);
+                    serviceBricks.ExecuteActionBrick(result ? thenBrick : elseBrick, world);
                     return;
                 }
             }

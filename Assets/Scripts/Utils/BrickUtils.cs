@@ -5,7 +5,7 @@ namespace Solcery.Utils
 {
     public static class BrickUtils
     {
-        public static bool TryGetBrickTypeSubType(JToken token, out Tuple<int, int> typeSupType)
+        public static bool TryGetBrickTypeSubType(this JToken token, out Tuple<int, int> typeSupType)
         {
             typeSupType = null;
 
@@ -20,10 +20,17 @@ namespace Solcery.Utils
             return false;
         }
 
-        public static bool TryGetBrickParameters(JToken token, out JArray brickParameters)
+        public static bool TryGetBrickParameters(this JToken token, out JArray brickParameters)
         {
             brickParameters = null;
             return token is JObject obj && obj.TryGetValue("params", out brickParameters);
+        }
+
+        public static bool TryParseBrickParameter<T>(this JToken token, out string name, out T value)
+        {
+            name = null;
+            value = default;
+            return token is JObject obj && obj.TryGetValue("name", out name) && obj.TryGetValue("value", out value);
         }
     }
 }

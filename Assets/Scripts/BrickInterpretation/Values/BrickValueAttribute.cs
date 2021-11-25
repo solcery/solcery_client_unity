@@ -18,9 +18,8 @@ namespace Solcery.BrickInterpretation.Values
 
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
-            if (parameters.Count >= 1 
-                && parameters[0] is JObject attrNameObject
-                && attrNameObject.TryGetValue("value", out string attrName))
+            if (parameters.Count > 0 
+                && parameters[0].TryParseBrickParameter(out _, out string attrName))
             {
                 var filter = world.Filter<ComponentContextObject>().End();
                 foreach (var uniqEntityId in filter)

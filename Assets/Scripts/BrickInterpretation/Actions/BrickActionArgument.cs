@@ -20,8 +20,7 @@ namespace Solcery.BrickInterpretation.Actions
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
-                && parameters[0] is JObject valueObject
-                && valueObject.TryGetValue("value", out string argName))
+                && parameters[0].TryParseBrickParameter(out _, out string argName))
             {
                 var filter = world.Filter<ComponentContextArgs>().End();
 
