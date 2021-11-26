@@ -4,6 +4,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
+using Solcery.BrickInterpretation.Values;
 using Solcery.Models.Context;
 using Solcery.Models.Entities;
 using Solcery.Models.Game;
@@ -118,6 +119,28 @@ namespace Solcery.Tests.PlayMode
             ExecuteValueBrick("GetAttribute");
             TestUtils.TryPopObject<object>(_world, out _);
         }    
+        
+        [Test]
+        public void TestOrdinaryValueBricksCardIdPasses()
+        {
+            var entityId = _world.NewEntity();
+            ref var cardId = ref _world.GetPool<ComponentEntityId>().Add(entityId);
+            cardId.Id = 11;
+            TestUtils.PushObject(_world, entityId);
+            ExecuteValueBrick("CardId");
+            TestUtils.TryPopObject<object>(_world, out _);
+        }   
+        
+        [Test]
+        public void TestOrdinaryValueBricksCardTypeIdPasses()
+        {
+            var entityId = _world.NewEntity();
+            ref var cardId = ref _world.GetPool<ComponentEntityType>().Add(entityId);
+            cardId.Type = 12;
+            TestUtils.PushObject(_world, entityId);
+            ExecuteValueBrick("CardTypeId");
+            TestUtils.TryPopObject<object>(_world, out _);
+        }          
         #endregion
         
         private void ExecuteValueBrick(string brickName)

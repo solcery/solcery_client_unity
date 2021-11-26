@@ -480,5 +480,25 @@
       ]
     },
     "result": 1
+  },
+  "CardId":
+  {
+    "brick":
+    {
+      "type": 2,
+      "subtype": 11,
+      "params": []
+    },
+    "result": 11
+  },
+  "CardTypeId":
+  {
+    "brick":
+    {
+      "type": 2,
+      "subtype": 12,
+      "params": []
+    },
+    "result": 12
   }
 }
