@@ -464,5 +464,21 @@
       ]
     },
     "result": 12
+  },
+  "GetAttribute":
+  {
+    "brick":
+    {
+      "type": 2,
+      "subtype": 13,
+      "params":
+      [
+        {
+          "name": "attr_name",
+          "value": "finished"
+        }
+      ]
+    },
+    "result": 1
   }
 }

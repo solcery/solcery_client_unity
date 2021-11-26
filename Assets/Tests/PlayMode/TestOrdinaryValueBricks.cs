@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Context;
 using Solcery.Models.Entities;
+using Solcery.Models.Game;
 using UnityEngine;
 using Solcery.Utils;
 
@@ -106,7 +107,17 @@ namespace Solcery.Tests.PlayMode
         {
             ExecuteValueBrick("Random");
         }
-        
+         
+        [Test]
+        public void TestOrdinaryValueBricksGameAttributePasses()
+        {
+            var entityId = _world.NewEntity();
+            ref var attrs = ref _world.GetPool<ComponentGameAttributes>().Add(entityId);
+            attrs.Attributes.Add("finished", 1);
+            TestUtils.PushObject(_world, entityId);
+            ExecuteValueBrick("GetAttribute");
+            TestUtils.TryPopObject<object>(_world, out _);
+        }    
         #endregion
         
         private void ExecuteValueBrick(string brickName)
