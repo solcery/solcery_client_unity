@@ -20,10 +20,10 @@ namespace Solcery.BrickInterpretation.Actions
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count >= 3
-                && parameters[0].TryParseBrickParameter(out _, out JObject counterBrick)
+                && parameters[0].TryParseBrickParameter(out _, out string counterVarName)
+                && parameters[1].TryParseBrickParameter(out _, out JObject counterBrick)
                 && serviceBricks.ExecuteValueBrick(counterBrick, world, out var counter) 
-                && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick)
-                && parameters[2].TryParseBrickParameter(out _, out string counterVarName))
+                && parameters[2].TryParseBrickParameter(out _, out JObject actionBrick))
             {
                 var filter = world.Filter<ComponentContextVars>().End();
                 foreach (var entityId in filter)
@@ -39,7 +39,7 @@ namespace Solcery.BrickInterpretation.Actions
                         }
                     }
 
-                    if (failIteration < 0)
+                    if (failIteration <= 0)
                     {
                         return;
                     }

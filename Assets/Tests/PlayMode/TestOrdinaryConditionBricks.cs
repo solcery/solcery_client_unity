@@ -41,64 +41,64 @@ namespace Solcery.Tests.PlayMode
         #region Tests
 
         [Test]
-        public void TestOrdinaryBricksConstantPasses()
+        public void TestOrdinaryConditionBricksConstantPasses()
         {
             ExecuteConditionBrick("Constant");
         }
         
         [Test]
-        public void TestOrdinaryBricksNotPasses()
+        public void TestOrdinaryConditionBricksNotPasses()
         {
             ExecuteConditionBrick("Not");
         }
         
         [Test]
-        public void TestOrdinaryBricksEqualPasses()
+        public void TestOrdinaryConditionBricksEqualPasses()
         {
             ExecuteConditionBrick("Equal");
         }
         
         [Test]
-        public void TestOrdinaryBricksGreaterThanPasses()
+        public void TestOrdinaryConditionBricksGreaterThanPasses()
         {
             ExecuteConditionBrick("GreaterThan");
         }
         
         [Test]
-        public void TestOrdinaryBricksLesserThanPasses()
+        public void TestOrdinaryConditionBricksLesserThanPasses()
         {
             ExecuteConditionBrick("LesserThan");
         }
         
         [Test]
-        public void TestOrdinaryBricksArgumentPasses()
+        public void TestOrdinaryConditionBricksArgumentPasses()
         {
             ExecuteConditionBrick("Argument");
         }
         
         [Test]
-        public void TestOrdinaryBricksOrPasses()
+        public void TestOrdinaryConditionBricksOrPasses()
         {
             ExecuteConditionBrick("Or");
         }
         
         [Test]
-        public void TestOrdinaryBricksAndPasses()
+        public void TestOrdinaryConditionBricksAndPasses()
         {
             ExecuteConditionBrick("And");
         }
         
         #endregion
         
-        private void ExecuteConditionBrick(string conditionBrickName)
+        private void ExecuteConditionBrick(string brickName)
         {
-            if (_ordinaryBricks.TryGetValue(conditionBrickName, out JObject conditionBrickObject)
-                && conditionBrickObject.TryGetValue("brick", out JObject conditionBrick)
-                && conditionBrickObject.TryGetValue("result", out bool result))
+            if (_ordinaryBricks.TryGetValue(brickName, out JObject brickObject)
+                && brickObject.TryGetValue("brick", out JObject brick)
+                && brickObject.TryGetValue("result", out bool result))
             {
                 var hasArgs = false;
                 var argsEntityId = -1;
-                if (conditionBrickObject.TryGetValue("arguments", out JArray argumentArray))
+                if (brickObject.TryGetValue("arguments", out JArray argumentArray))
                 {
                     var filter = _world.Filter<ComponentContextArgs>().End();
                     foreach (var entityId in filter)
@@ -112,22 +112,21 @@ namespace Solcery.Tests.PlayMode
                     hasArgs = true;
                 }
                 
-                var er = _serviceBricks.ExecuteConditionBrick(conditionBrick, _world, out var ebr);
+                var er = _serviceBricks.ExecuteConditionBrick(brick, _world, out var ebr);
 
                 if (hasArgs)
                 {
                     _world.GetPool<ComponentContextArgs>().Get(argsEntityId).Pop();
                 }
                 
-                Assert.True(er, "ExecuteConditionBrick {0} execute error! Brick json {1}", conditionBrickName,
-                    conditionBrick);
+                Assert.True(er, "ExecuteConditionBrick {0} execute error! Brick json {1}", brickName, brick);
                 Assert.True(result == ebr,
                     "ExecuteConditionBrick {0} execute result error! Expected Result {1}, but execute result {2}",
-                    conditionBrickName, result, ebr);
+                    brickName, result, ebr);
                 return;
             }
 
-            throw new Exception($"ExecuteConditionBrick {conditionBrickName} has error!");
+            throw new Exception($"ExecuteConditionBrick {brickName} has error!");
         }
     }
 }

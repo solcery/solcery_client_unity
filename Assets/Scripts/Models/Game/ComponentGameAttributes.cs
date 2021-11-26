@@ -10,6 +10,7 @@ namespace Solcery.Models.Game
 
         public void AutoReset(ref ComponentGameAttributes c)
         {
+            c.Attributes ??= new Dictionary<string, int>();
             c.Attributes?.Clear();
         }
     }

@@ -9,6 +9,7 @@ namespace Solcery.Models.Entities
 
         public void AutoReset(ref ComponentEntityAttributes c)
         {
+            c.Attributes ??= new Dictionary<string, int>();
             c.Attributes?.Clear();
         }
     }

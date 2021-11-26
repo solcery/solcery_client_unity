@@ -80,5 +80,37 @@ namespace Solcery.Tests.PlayMode
 
             return argsTemp;
         }
+
+        public static void SetVariable(EcsWorld world, string key, int value)
+        {
+            var filter = world.Filter<ComponentContextVars>().End();
+            foreach (var entityId in filter)
+            {
+                world.GetPool<ComponentContextVars>().Get(entityId).Set(key, value);
+                break;
+            }
+        }
+
+        public static void PushObject(EcsWorld world, object @object)
+        {
+            var filter = world.Filter<ComponentContextObject>().End();
+            foreach (var entityId in filter)
+            {
+                world.GetPool<ComponentContextObject>().Get(entityId).Push(@object);
+                break;
+            }
+        }
+
+        public static bool TryPopObject<T>(EcsWorld world, out T obj)
+        {
+            var filter = world.Filter<ComponentContextObject>().End();
+            foreach (var entityId in filter)
+            {
+                return world.GetPool<ComponentContextObject>().Get(entityId).TryPop<T>(out obj);
+            }
+
+            obj = default;
+            return false;
+        }
     }
 }
