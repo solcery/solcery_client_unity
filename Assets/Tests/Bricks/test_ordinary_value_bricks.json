@@ -1,2 +1,468 @@
 {
+  "Constant": {
+    "brick": {
+      "type": 2,
+      "subtype": 0,
+      "params": [
+        {
+          "name": "lolo",
+          "value": 10
+        }
+      ]
+    },
+    "result": 10
+  },
+  "Variable": {
+    "variables": [
+      {
+        "name": "targetPlace",
+        "value": 12
+      }
+    ],
+    "brick": {
+      "name": "Value.Variable",
+      "type": 2,
+      "subtype": 1,
+      "params": [
+        {
+          "name": "var_name",
+          "value": "targetPlace"
+        }
+      ]
+    },
+    "result": 12
+  },
+  "Attribute": {
+    "attributes": [
+      {
+        "name": "block",
+        "value": 25
+      }
+    ],
+    "brick": {
+      "name": "Value.Attribute",
+      "type": 2,
+      "subtype": 2,
+      "params": [
+        {
+          "name": "attr_name",
+          "value": "block"
+        }
+      ]
+    },
+    "result": 25
+  },
+  "Argument":
+  {
+    "arguments":
+    [
+      {
+        "name": "New place",
+        "value":
+        {
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": 39
+            }
+          ]
+        }
+      }
+    ],
+    "brick":
+    {
+      "name": "Value.Argument",
+      "type": 2,
+      "subtype": 3,
+      "params": [
+        {
+          "name": "name",
+          "value": "New place"
+        }
+      ]
+    },
+    "result": 39
+  },
+  "IfThenElse":
+  {
+    "attributes": [
+      {
+        "name": "attr1",
+        "value": 10
+      },
+      {
+        "name": "attr2",
+        "value": 13
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 4,
+      "params": 
+      [
+        {
+          "name": "cond",
+          "value":
+          {
+            "type": 1,
+            "subtype": 0,
+            "params": [
+              {
+                "name": "lolo",
+                "value": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "val1",
+          "value":
+          {
+            "name": "Value.Attribute",
+            "type": 2,
+            "subtype": 2,
+            "params": [
+              {
+                "name": "attr_name",
+                "value": "attr1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "val2",
+          "value":
+          {
+            "name": "Value.Attribute",
+            "type": 2,
+            "subtype": 2,
+            "params": [
+              {
+                "name": "attr_name",
+                "value": "attr2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 13
+  },
+  "Addition":
+  {
+    "variables": [
+      {
+        "name": "arg1",
+        "value": 5
+      },
+      {
+        "name": "arg2",
+        "value": 5
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 5,
+      "params":
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 10
+  },
+  "Subtraction":
+  {
+    "variables": [
+      {
+        "name": "arg1",
+        "value": 8
+      },
+      {
+        "name": "arg2",
+        "value": 2
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 6,
+      "params":
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 6
+  },
+  "Multiplication":
+  {
+    "variables": [
+      {
+        "name": "arg1",
+        "value": 2
+      },
+      {
+        "name": "arg2",
+        "value": 2
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 7,
+      "params":
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 4
+  },
+  "Division":
+  {
+    "variables": [
+      {
+        "name": "arg1",
+        "value": 4
+      },
+      {
+        "name": "arg2",
+        "value": 2
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 8,
+      "params":
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "arg2"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 2
+  },
+  "Modulo":
+  {
+    "attributes": [
+      {
+        "name": "block",
+        "value": 25
+      }
+    ],
+    "variables": [
+      {
+        "name": "targetPlace",
+        "value": 12
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 9,
+      "params": 
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "targetPlace"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Attribute",
+            "type": 2,
+            "subtype": 2,
+            "params": [
+              {
+                "name": "attr_name",
+                "value": "block"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 12
+  },
+  "Random":
+  {
+    "variables": [
+      {
+        "name": "from",
+        "value": 12
+      },
+      {
+        "name": "to",
+        "value": 12
+      }
+    ],
+    "brick":
+    {
+      "type": 2,
+      "subtype": 10,
+      "params":
+      [
+        {
+          "name": "par1",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "from"
+              }
+            ]
+          }
+        },
+        {
+          "name": "par2",
+          "value":
+          {
+            "name": "Value.Variable",
+            "type": 2,
+            "subtype": 1,
+            "params": [
+              {
+                "name": "var_name",
+                "value": "to"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "result": 12
+  }
 }

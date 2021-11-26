@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Context;
+using Solcery.Models.Entities;
 using UnityEngine;
 using Solcery.Utils;
 
@@ -112,6 +113,52 @@ namespace Solcery.Tests.PlayMode
                     hasArgs = true;
                 }
                 
+                if (brickObject.TryGetValue("variables", out JArray variableArray))
+                {
+                    var filter = _world.Filter<ComponentContextVars>().End();
+                    foreach (var entityId in filter)
+                    {
+                        ref var vars = ref _world.GetPool<ComponentContextVars>().Get(entityId);
+                        foreach (var variableToken in variableArray)
+                        {
+                            if (variableToken is JObject variableObject
+                                && variableObject.TryParseBrickParameter(out var key, out int value))
+                            {
+                                vars.Set(key, value);
+                            }
+                        }
+                        break;
+                    }
+                }
+                
+                var hasAttrs = false;
+                var attrsEntityId = -1;
+                var objectEntityId = -1;
+                if (brickObject.TryGetValue("attributes", out JArray attributesArray))
+                {
+                    attrsEntityId = _world.NewEntity();
+                    ref var attrs = ref _world.GetPool<ComponentEntityAttributes>().Add(attrsEntityId);
+                    foreach (var attributeToken in attributesArray)
+                    {
+                        if (attributeToken is JObject attributeObject 
+                            && attributeObject.TryParseBrickParameter(out var key, out int value))
+                        {
+                            attrs.Attributes.Add(key, value);
+                        }
+                    }
+                    
+                    var filter = _world.Filter<ComponentContextObject>().End();
+                    foreach (var entityId in filter)
+                    {
+                        objectEntityId = entityId;
+                        break;
+                    }
+                    
+                    _world.GetPool<ComponentContextObject>().Get(objectEntityId).Push(attrsEntityId);
+                    
+                    hasAttrs = true;
+                }
+                
                 var er = _serviceBricks.ExecuteConditionBrick(brick, _world, out var ebr);
 
                 if (hasArgs)
@@ -119,10 +166,17 @@ namespace Solcery.Tests.PlayMode
                     _world.GetPool<ComponentContextArgs>().Get(argsEntityId).Pop();
                 }
                 
+                if (hasAttrs)
+                {
+                    _world.GetPool<ComponentContextObject>().Get(objectEntityId).TryPop<int>(out _);
+                    _world.DelEntity(attrsEntityId);
+                }
+                
                 Assert.True(er, "ExecuteConditionBrick {0} execute error! Brick json {1}", brickName, brick);
                 Assert.True(result == ebr,
                     "ExecuteConditionBrick {0} execute result error! Expected Result {1}, but execute result {2}",
                     brickName, result, ebr);
+                Assert.Pass("Brick name \"{0}\" Expected Result \"{1}\" execute result \"{2}\"", brickName, result, ebr);
                 return;
             }
 

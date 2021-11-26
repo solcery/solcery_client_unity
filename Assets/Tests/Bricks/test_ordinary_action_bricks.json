@@ -183,6 +183,13 @@
   },
   "SetVariable":
   {
+    "variables":
+    [
+      {
+        "name": "i",
+        "value": 12
+      }
+    ],
     "brick":
     {
       "type": 0,
@@ -213,6 +220,20 @@
   },
   "SetAttribute":
   {
+    "variables":
+    [
+      {
+        "name": "i",
+        "value": 1
+      }
+    ],
+    "attributes":
+    [
+      {
+        "name": "hp",
+        "value": 0
+      }
+    ],
     "brick":
     {
       "type": 0,

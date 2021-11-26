@@ -22,7 +22,10 @@ namespace Solcery.BrickInterpretation.Values
                 && serviceBricks.ExecuteValueBrick(valueBrick1, world, out var value1) 
                 && serviceBricks.ExecuteValueBrick(valueBrick2, world, out var value2))
             {
-                return value1 / value2;
+                if (value2 != 0)
+                {
+                    return value1 / value2;
+                }
             }
 
             throw new ArgumentException($"BrickValueDiv Run has exception! Parameters {parameters}");
