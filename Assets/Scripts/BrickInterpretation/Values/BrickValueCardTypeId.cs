@@ -24,9 +24,9 @@ namespace Solcery.BrickInterpretation.Values
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             var filter = world.Filter<ComponentContextObject>().End();
-            foreach (var uniqEntityId in filter)
+            foreach (var uniqEntityType in filter)
             {
-                ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
+                ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityType);
                 if (contextObject.TryPeek(out int entityId))
                 {
                     return world.GetPool<ComponentEntityType>().Get(entityId).Type;

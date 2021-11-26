@@ -142,11 +142,14 @@ namespace Solcery.Models.GameState
         
         private void UpdateTriggers(int typeId, EcsWorld world, int entityIndex)
         {
-            ref var types = ref world.GetPool<ComponentEntityTypes>().Get(_filterEntityTypes.GetRawEntities()[0]);
-            if (types.Types.TryGetValue(typeId, out var data))
+            foreach (var uniqEntityTypes in _filterEntityTypes)
             {
-                world.GetPool<ComponentTriggers>().Add(entityIndex).Triggers = TriggersData.Parse(data);
-                world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+                ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
+                if (types.Types.TryGetValue(typeId, out var data))
+                {
+                    world.GetPool<ComponentTriggers>().Add(entityIndex).Triggers = TriggersData.Parse(data);
+                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+                }
             }
         }
 
