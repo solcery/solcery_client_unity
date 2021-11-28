@@ -47,6 +47,7 @@ namespace Solcery.Tests.PlayMode
             serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.IfThenElse, BrickActionIfThenElse.Create);
             serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetAttribute, BrickActionSetAttribute.Create);
             serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetGameAttribute, BrickActionSetGameAttribute.Create);
+            serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Iterator, BrickActionIterator.Create);
 
             // Condition bricks
             serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
