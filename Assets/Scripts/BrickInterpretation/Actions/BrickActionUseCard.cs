@@ -33,6 +33,7 @@ namespace Solcery.BrickInterpretation.Actions
                         if (types.Types.TryGetValue(type, out var data))
                         {
                             serviceBricks.ExecuteActionBrick(data["action"] as JObject, world);
+                            return;
                         }
                     }
                 }
