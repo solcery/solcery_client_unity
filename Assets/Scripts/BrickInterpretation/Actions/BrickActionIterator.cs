@@ -31,38 +31,36 @@ namespace Solcery.BrickInterpretation.Actions
                 var filterEntityIds = world.Filter<ComponentEntityId>().End();
                 var selectedObjects = new List<int>();
                 var resultObjects = new List<int>();
-                foreach (var uniqEntityId in filterObjects)
+                foreach (var uniqObjectEntityId in filterObjects)
                 {
-                    ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
+                    ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqObjectEntityId);
                     var oldEntityIdExist = contextObject.TryPop<int>(out var oldEntityId);
                     foreach (var entityId in filterEntityIds)
                     {
-                        selectedObjects.Add(world.GetPool<ComponentEntityId>().Get(entityId).Id);
+                        selectedObjects.Add(entityId);
                     }
 
                     // todo shuffle selectedObjects
 
                     for (var i = 0; i < selectedObjects.Count && resultObjects.Count < limit; i++)
                     {
-                        contextObject.Push(selectedObjects[i]);
-                        if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var conditionResult))
+                        var entityId = selectedObjects[i];
+                        contextObject.Push(entityId);
+                        if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var conditionResult) &&
+                            conditionResult)
                         {
-                            if (conditionResult && contextObject.TryPeek<int>(out var obj))
-                            {
-                                resultObjects.Add(obj);
-                                limit--;
-                            }
+                            resultObjects.Add(entityId);
+                            limit--;
                         }
 
                         contextObject.TryPop<int>(out _);
                     }
 
-                    foreach (var result in resultObjects)
+                    foreach (var entityId in resultObjects)
                     {
-                        contextObject.Push(result);
+                        contextObject.Push(entityId);
                         serviceBricks.ExecuteActionBrick(actionBrick, world);
                         contextObject.TryPop<int>(out _);
-
                     }
 
                     if (oldEntityIdExist)

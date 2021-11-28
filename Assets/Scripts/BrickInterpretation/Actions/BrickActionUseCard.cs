@@ -21,9 +21,9 @@ namespace Solcery.BrickInterpretation.Actions
         {
             var filterObjects = world.Filter<ComponentContextObject>().End();
             var filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
-            foreach (var uniqEntityType in filterObjects)
+            foreach (var uniqEntityId in filterObjects)
             {
-                ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityType);
+                ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
                 if (contextObject.TryPeek(out int entityId))
                 {
                     var type = world.GetPool<ComponentEntityType>().Get(entityId).Type;
