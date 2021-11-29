@@ -112,6 +112,23 @@ namespace Solcery.Tests.PlayMode
             ExecuteActionBrick("ConsoleLog");
         }
         
+        [Test]
+        public void TestOrdinaryActionBricksIteratorPasses()
+        {
+            var entityId1 = _world.NewEntity();
+            ref var cardId1 = ref _world.GetPool<ComponentEntityId>().Add(entityId1);
+            cardId1.Id = 1;
+            var entityId2 = _world.NewEntity();
+            ref var cardId2 = ref _world.GetPool<ComponentEntityId>().Add(entityId2);
+            cardId2.Id = 2;
+            var entityId3 = _world.NewEntity();
+            ref var cardId3 = ref _world.GetPool<ComponentEntityId>().Add(entityId3);
+            cardId3.Id = 3;
+            TestUtils.PushObject(_world, entityId3);
+            ExecuteActionBrick("Iterator");
+            TestUtils.TryPopObject<object>(_world, out _);
+        }
+        
         #endregion
         
         private void ExecuteActionBrick(string brickName)

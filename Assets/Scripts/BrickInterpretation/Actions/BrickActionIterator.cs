@@ -40,9 +40,10 @@ namespace Solcery.BrickInterpretation.Actions
                         selectedObjects.Add(entityId);
                     }
 
-                    // todo shuffle selectedObjects
+                    selectedObjects.Shuffle();
 
-                    for (var i = 0; i < selectedObjects.Count && resultObjects.Count < limit; i++)
+                    var count = limit < selectedObjects.Count ? limit : selectedObjects.Count;
+                    for (var i = 0; i < count; i++)
                     {
                         var entityId = selectedObjects[i];
                         contextObject.Push(entityId);
@@ -50,7 +51,6 @@ namespace Solcery.BrickInterpretation.Actions
                             conditionResult)
                         {
                             resultObjects.Add(entityId);
-                            limit--;
                         }
 
                         contextObject.TryPop<int>(out _);
