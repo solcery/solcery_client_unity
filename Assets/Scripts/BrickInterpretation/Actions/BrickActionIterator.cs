@@ -40,7 +40,7 @@ namespace Solcery.BrickInterpretation.Actions
                         selectedObjects.Add(entityId);
                     }
 
-                    // todo shuffle selectedObjects
+                    selectedObjects.Shuffle();
 
                     var count = limit < selectedObjects.Count ? limit : selectedObjects.Count;
                     for (var i = 0; i < count; i++)
