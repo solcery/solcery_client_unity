@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Entities;
-using Solcery.Models.Places;
+using Solcery.Models.Play.Entities;
+using Solcery.Models.Play.Places;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 

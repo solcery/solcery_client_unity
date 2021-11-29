@@ -5,6 +5,7 @@ using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models;
+using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
@@ -18,7 +19,7 @@ namespace Solcery.Games
         ITransportService IGame.TransportService => _transportService;
         IServiceBricks IGame.ServiceBricks => _serviceBricks;
         IServiceResource IGame.ServiceResource => _serviceResource;
-        IModel IGame.Model => _model;
+        IPlayModel IGame.PlayModel => _playModel;
         IWidgetFactory IGame.WidgetFactory => _widgetFactory;
 
         JObject IGame.GameContent => _gameContentJson;
@@ -36,7 +37,7 @@ namespace Solcery.Games
         private ITransportService _transportService;
         private IServiceBricks _serviceBricks;
         private IServiceResource _serviceResource;
-        private IModel _model;
+        private IPlayModel _playModel;
         private IWidgetFactory _widgetFactory;
 
         private JObject _gameContentJson;
@@ -56,7 +57,7 @@ namespace Solcery.Games
         
         private void CreateModel()
         {
-            _model = PlayModel.Create();
+            _playModel = PlayPlayModel.Create();
         }
         
         private void CreateServices(IWidgetCanvas widgetCanvas)
@@ -105,7 +106,7 @@ namespace Solcery.Games
 
         private void Init(JObject gameContentJson)
         {
-            _model.Init(this, gameContentJson);
+            _playModel.Init(this, gameContentJson);
         }
 
         private void RegistrationBrickTypes()
@@ -152,7 +153,7 @@ namespace Solcery.Games
 
         private void Cleanup()
         {
-            _model.Destroy();
+            _playModel.Destroy();
             _serviceBricks.Cleanup();
             _transportService.Cleanup();
             _widgetFactory.Cleanup();
@@ -161,13 +162,13 @@ namespace Solcery.Games
 
         void IGame.Update(float dt)
         {
-            _model.Update(dt);
+            _playModel.Update(dt);
         }
 
         void IGame.Destroy()
         {
-            _model.Destroy();
-            _model = null;
+            _playModel.Destroy();
+            _playModel = null;
             
             _serviceBricks.Destroy();
             _serviceBricks = null;

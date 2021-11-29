@@ -1,6 +1,6 @@
 using System;
-using Solcery.Models.Attributes.Highlighted;
-using Solcery.Models.Attributes.Interactable;
+using Solcery.Models.Play.Attributes.Highlighted;
+using Solcery.Models.Play.Attributes.Interactable;
 using Solcery.Widgets.Deck;
 using TMPro;
 using UnityEngine;

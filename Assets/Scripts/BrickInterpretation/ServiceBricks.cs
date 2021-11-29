@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
-using Solcery.Models.Context;
+using Solcery.Models.Shared.Context;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation

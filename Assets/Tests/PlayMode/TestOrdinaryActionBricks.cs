@@ -4,9 +4,9 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
-using Solcery.Models.Context;
-using Solcery.Models.Entities;
-using Solcery.Models.Game;
+using Solcery.Models.Play.Entities;
+using Solcery.Models.Play.Game;
+using Solcery.Models.Shared.Context;
 using UnityEngine;
 using Solcery.Utils;
 

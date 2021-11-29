@@ -1,5 +1,5 @@
 using System;
-using Solcery.Models.Attributes.Interactable;
+using Solcery.Models.Play.Attributes.Interactable;
 using Solcery.Widgets.Deck;
 using TMPro;
 

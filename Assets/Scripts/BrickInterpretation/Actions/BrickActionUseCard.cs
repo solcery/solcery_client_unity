@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Context;
-using Solcery.Models.Entities;
+using Solcery.Models.Play.Entities;
+using Solcery.Models.Shared.Context;
 using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Actions

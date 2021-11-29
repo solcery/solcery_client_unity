@@ -6,7 +6,7 @@ using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
-using Solcery.Models.Context;
+using Solcery.Models.Shared.Context;
 using Solcery.Utils;
 
 namespace Solcery.Tests.PlayMode
