@@ -18,6 +18,17 @@ namespace Solcery.Tests.PlayMode
             return JObject.Parse(File.ReadAllText(path));
         }
         
+        public static void RegistrationCustomBricks(IServiceBricks serviceBricks, string path)
+        {
+            var customBricks = LoadTestBrick(path);
+
+            if (customBricks.TryGetValue("customBricks", out JObject customBricksObject) 
+                && customBricksObject.TryGetValue("objects", out JArray bricksArray))
+            {
+                serviceBricks.RegistrationCustomBricksData(bricksArray);
+            }
+        }
+        
         public static void RegistrationOrdinaryBricks(IServiceBricks serviceBricks)
         {
             // Value bricks
