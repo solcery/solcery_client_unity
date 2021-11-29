@@ -67,6 +67,8 @@ namespace Solcery.BrickInterpretation.Actions
                     {
                         contextObject.Push(oldEntityId);
                     }
+                    
+                    break;
                 }
 
                 return;
