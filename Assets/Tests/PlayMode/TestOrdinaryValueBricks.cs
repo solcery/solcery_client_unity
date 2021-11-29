@@ -116,7 +116,7 @@ namespace Solcery.Tests.PlayMode
             ref var attrs = ref _world.GetPool<ComponentGameAttributes>().Add(entityId);
             attrs.Attributes.Add("finished", 1);
             TestUtils.PushObject(_world, entityId);
-            ExecuteValueBrick("GetAttribute");
+            ExecuteValueBrick("GameAttribute");
             TestUtils.TryPopObject<object>(_world, out _);
         }    
         
@@ -140,7 +140,8 @@ namespace Solcery.Tests.PlayMode
             TestUtils.PushObject(_world, entityId);
             ExecuteValueBrick("CardTypeId");
             TestUtils.TryPopObject<object>(_world, out _);
-        }          
+        }    
+        
         #endregion
         
         private void ExecuteValueBrick(string brickName)
