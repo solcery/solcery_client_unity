@@ -315,5 +315,47 @@
         }  
       ]
     }
+  },
+  "Iterator": {
+    "brick": {
+      "type": 0,
+      "subtype": 5,
+      "params": [
+        {
+          "name": "condition",
+          "value": {
+            "type": 1,
+            "subtype": 0,
+            "params": [
+              {
+                "name": "any",
+                "value": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "action",
+          "value": {
+            "type": 0,
+            "subtype": 0,
+            "params": []
+          }
+        },
+        {
+          "name": "value",
+          "value": {
+            "type": 2,
+            "subtype": 0,
+            "params": [
+              {
+                "name": "any",
+                "value": 2
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 }
