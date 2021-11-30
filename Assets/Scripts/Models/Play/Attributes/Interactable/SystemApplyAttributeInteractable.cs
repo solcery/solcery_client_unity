@@ -1,8 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Game.State;
-using Solcery.Models.Play.GameState;
 using Solcery.Models.Play.Places;
-using Solcery.Models.Play.Triggers;
+using Solcery.Models.Shared.Attributes.Interactable;
 
 namespace Solcery.Models.Play.Attributes.Interactable
 {
@@ -48,11 +47,7 @@ namespace Solcery.Models.Play.Attributes.Interactable
 
         private void OnClick(EcsWorld world, int entityId)
         {
-            var triggerPool = world.GetPool<ComponentApplyTrigger>();
-            if (!triggerPool.Has(entityId))
-            {
-                triggerPool.Add(entityId).Type = TriggerTypes.OnClick;
-            }
+            
         }
     }
 }

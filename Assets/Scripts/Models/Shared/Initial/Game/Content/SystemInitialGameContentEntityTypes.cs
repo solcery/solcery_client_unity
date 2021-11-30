@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Play.Entities;
+using Solcery.Models.Shared.Entities;
 using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Initial.Game.Content

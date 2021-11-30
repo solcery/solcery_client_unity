@@ -4,10 +4,8 @@ using Solcery.Games;
 using Solcery.Models.Play.Attributes.Highlighted;
 using Solcery.Models.Play.Attributes.Interactable;
 using Solcery.Models.Play.Game.State;
-using Solcery.Models.Play.GameState;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
-using Solcery.Models.Play.Triggers;
 using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
@@ -28,8 +26,8 @@ namespace Solcery.Models.Play
         void IPlayModel.Init(IGame game, JObject gameContentJson)
         {
             World = new EcsWorld();
-            
             _systems = new EcsSystems(World);
+            
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
             _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
@@ -41,7 +39,6 @@ namespace Solcery.Models.Play
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
             _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
-            _systems.Add(SystemApplyTrigger.Create(game.ServiceBricks));
             // TODO сюда добавляем новые системы и тд
             
 #if UNITY_EDITOR

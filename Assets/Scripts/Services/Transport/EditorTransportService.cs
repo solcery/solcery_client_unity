@@ -10,7 +10,7 @@ namespace Solcery.Services.Transport
 {
     public sealed class EditorTransportService : ITransportService
     {
-        private IServiceEditorLocalSimulation _localSimulation;
+        private IServiceLocalSimulation _localSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         
         public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
@@ -20,7 +20,7 @@ namespace Solcery.Services.Transport
 
         private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
         {
-            _localSimulation = ServiceEditorLocalSimulation.Create(serviceBricks);
+            _localSimulation = ServiceLocalSimulation.Create(serviceBricks);
             _gameTransportCallbacks = gameTransportCallbacks;
         }
         
@@ -43,7 +43,7 @@ namespace Solcery.Services.Transport
 
         void ITransportService.SendCommand(JObject command)
         {
-            _localSimulation.ApplyCommand(command);
+            _localSimulation.PushCommand(command);
         }
         
         void ITransportService.Update(float dt)

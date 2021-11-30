@@ -5,10 +5,10 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Values;
-using Solcery.Models.Play.Entities;
 using Solcery.Models.Play.Game;
-using Solcery.Models.Play.Game.Attributes;
 using Solcery.Models.Shared.Context;
+using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Game.Attributes;
 using UnityEngine;
 using Solcery.Utils;
 

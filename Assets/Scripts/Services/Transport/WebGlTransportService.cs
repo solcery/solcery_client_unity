@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json.Linq;
+using Solcery.Services.Commands;
 
 namespace Solcery.Services.Transport
 {

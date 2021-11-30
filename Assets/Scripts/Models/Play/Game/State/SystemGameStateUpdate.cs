@@ -3,13 +3,13 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.Attributes.Interactable;
-using Solcery.Models.Play.Entities;
-using Solcery.Models.Play.Game.Attributes;
-using Solcery.Models.Play.Game.State.StaticAttributes.Highlighted;
-using Solcery.Models.Play.Game.State.StaticAttributes.Interactable;
-using Solcery.Models.Play.Game.State.StaticAttributes.Place;
-using Solcery.Models.Play.GameState.StaticAttributes;
-using Solcery.Models.Play.Triggers;
+using Solcery.Models.Shared.Attributes.Interactable;
+using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Game.Attributes;
+using Solcery.Models.Shared.Game.StaticAttributes;
+using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
+using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
+using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Utils;
 
 namespace Solcery.Models.Play.Game.State
@@ -41,7 +41,7 @@ namespace Solcery.Models.Play.Game.State
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentEntityTag>().End();
             _filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
-            _staticAttributes = Play.GameState.StaticAttributes.StaticAttributes.Create();
+            _staticAttributes = StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
@@ -139,14 +139,13 @@ namespace Solcery.Models.Play.Game.State
             }
         }
         
-        private void UpdateTriggers(int typeId, EcsWorld world, int entityIndex)
+        private void UpdateInteractable(int typeId, EcsWorld world, int entityIndex)
         {
             foreach (var uniqEntityTypes in _filterEntityTypes)
             {
                 ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
-                if (types.Types.TryGetValue(typeId, out var data))
+                if (types.Types.ContainsKey(typeId))
                 {
-                    world.GetPool<ComponentTriggers>().Add(entityIndex).Triggers = TriggersData.Parse(data);
                     world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
                 }
             }
@@ -170,8 +169,8 @@ namespace Solcery.Models.Play.Game.State
             var typeId = entityData.GetValue<int>("tplId");
             world.GetPool<ComponentEntityType>().Get(entityIndex).Type = typeId;
 
-            // triggers
-            UpdateTriggers(typeId, world, entityIndex);
+            // interactable
+            UpdateInteractable(typeId, world, entityIndex);
             
             // attributes
             ref var attributesComponent = ref world.GetPool<ComponentEntityAttributes>().Get(entityIndex);

@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Shared.Attributes.Highlighted;
 
 namespace Solcery.Models.Play.Attributes.Highlighted
 {

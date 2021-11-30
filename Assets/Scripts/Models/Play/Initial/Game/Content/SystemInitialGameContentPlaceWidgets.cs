@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Shared.Places;
 using Solcery.Utils;
 
 namespace Solcery.Models.Play.Initial.Game.Content

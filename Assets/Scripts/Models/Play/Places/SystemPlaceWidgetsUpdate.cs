@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
-using Solcery.Models.Play.Attributes.Place;
-using Solcery.Models.Play.Entities;
 using Solcery.Models.Play.Game.State;
-using Solcery.Models.Play.GameState;
+using Solcery.Models.Shared.Attributes.Place;
+using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Places;
 
 namespace Solcery.Models.Play.Places
 {
