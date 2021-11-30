@@ -7,6 +7,7 @@ using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models.Play.Entities;
 using Solcery.Models.Play.Game;
+using Solcery.Models.Play.Game.Attributes;
 using Solcery.Models.Shared.Context;
 using UnityEngine;
 using Solcery.Utils;

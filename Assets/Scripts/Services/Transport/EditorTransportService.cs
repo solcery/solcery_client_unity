@@ -27,12 +27,13 @@ namespace Solcery.Services.Transport
         void ITransportService.CallUnityLoaded()
         {
             var pathToGameContent = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_content.json");
-            _gameTransportCallbacks.OnReceivingGameContent(JObject.Parse(File.ReadAllText(pathToGameContent)));
+            var gameContent = JObject.Parse(File.ReadAllText(pathToGameContent));
+            _gameTransportCallbacks.OnReceivingGameContent(gameContent);
             
             var pathToGameState = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_state.json");
             var gameState = JObject.Parse(File.ReadAllText(pathToGameState));
             _localSimulation.EventOnUpdateGameState += OnUpdateGameState;
-            _localSimulation.Init(gameState);
+            _localSimulation.Init(gameContent, gameState);
         }
 
         private void OnUpdateGameState(JObject gameStateJson)
@@ -43,6 +44,11 @@ namespace Solcery.Services.Transport
         void ITransportService.SendCommand(JObject command)
         {
             _localSimulation.ApplyCommand(command);
+        }
+        
+        void ITransportService.Update(float dt)
+        {
+            _localSimulation.Update(dt);
         }
 
         void ITransportService.Cleanup()

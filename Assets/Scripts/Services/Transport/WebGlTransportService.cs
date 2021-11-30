@@ -23,6 +23,11 @@ namespace Solcery.Services.Transport
         {
             throw new NotImplementedException();
         }
+
+        void ITransportService.Update(float dt)
+        {
+            
+        }
         
         void ITransportService.Cleanup()
         {

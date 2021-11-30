@@ -4,7 +4,6 @@ using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
-using Solcery.Models;
 using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
@@ -162,6 +161,7 @@ namespace Solcery.Games
 
         void IGame.Update(float dt)
         {
+            _transportService.Update(dt);
             _playModel.Update(dt);
         }
 

@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
+using Solcery.Models.Simulation;
 
 namespace Solcery.Services.LocalSimulation
 {
     public sealed class ServiceEditorLocalSimulation : IServiceEditorLocalSimulation
     {
+        private ISimulationModel _simulationModel;
+        private readonly Queue<JObject> _commands;
+
         event Action<JObject> IServiceEditorLocalSimulation.EventOnUpdateGameState
         {
             add
@@ -33,20 +37,39 @@ namespace Solcery.Services.LocalSimulation
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
             _serviceBricks = serviceBricks;
+            _commands = new Queue<JObject>();
+            _simulationModel = SimulationModel.Create();
         }
 
-        void IServiceEditorLocalSimulation.Init(JObject gameState)
+        void IServiceEditorLocalSimulation.Init(JObject gameContent, JObject gameState)
         {
+            _simulationModel.Init(this, gameContent, gameState);
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 
         void IServiceEditorLocalSimulation.ApplyCommand(JObject command)
         {
+            _commands.Enqueue(command);
         }
 
         void IServiceEditorLocalSimulation.ApplySimulatedGameState(JObject gameState)
         {
+            CallAllActionWithParams(_listOnUpdateGameState, gameState);
+        }
+
+        void IServiceEditorLocalSimulation.Update(float dt)
+        {
+            if (_commands.Count <= 0)
+            {
+                return;
+            }
             
+            dt /= _commands.Count;
+            while (_commands.Count > 0)
+            {
+                var command = _commands.Dequeue();
+                _simulationModel?.Update(dt);
+            }
         }
 
         void IServiceEditorLocalSimulation.Cleanup()
@@ -57,6 +80,7 @@ namespace Solcery.Services.LocalSimulation
         private void Cleanup()
         {
             _listOnUpdateGameState.Clear();
+            _commands.Clear();
         }
 
         void IServiceEditorLocalSimulation.Destroy()

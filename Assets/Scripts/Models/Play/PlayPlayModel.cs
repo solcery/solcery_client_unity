@@ -3,10 +3,12 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.Attributes.Highlighted;
 using Solcery.Models.Play.Attributes.Interactable;
-using Solcery.Models.Play.GameContent;
+using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.GameState;
+using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Play.Triggers;
+using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
 {
@@ -29,7 +31,9 @@ namespace Solcery.Models.Play
             
             _systems = new EcsSystems(World);
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
-            _systems.Add(SystemGameContentInit.Create(game));
+            _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
+            _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
+            _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));

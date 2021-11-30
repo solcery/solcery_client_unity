@@ -2,6 +2,7 @@ using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Game;
+using Solcery.Models.Play.Game.Attributes;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Values

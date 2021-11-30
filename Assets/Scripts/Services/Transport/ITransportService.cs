@@ -6,6 +6,7 @@ namespace Solcery.Services.Transport
     {
         void CallUnityLoaded();
         void SendCommand(JObject command);
+        void Update(float dt);
         void Cleanup();
         void Destroy();
     }

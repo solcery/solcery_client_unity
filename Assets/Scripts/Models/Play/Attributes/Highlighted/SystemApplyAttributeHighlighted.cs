@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-using Solcery.Models.Play.GameState;
+using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Places;
 
 namespace Solcery.Models.Play.Attributes.Highlighted

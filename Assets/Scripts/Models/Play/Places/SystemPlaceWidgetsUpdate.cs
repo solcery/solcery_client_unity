@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Attributes.Place;
 using Solcery.Models.Play.Entities;
+using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.GameState;
 
 namespace Solcery.Models.Play.Places

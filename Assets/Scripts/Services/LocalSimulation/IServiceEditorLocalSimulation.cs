@@ -8,9 +8,10 @@ namespace Solcery.Services.LocalSimulation
     {
         public event Action<JObject> EventOnUpdateGameState; 
 
-        public void Init(JObject gameState);
+        public void Init(JObject gameContent, JObject gameState);
         public void ApplyCommand(JObject command);
         public void ApplySimulatedGameState(JObject gameState);
+        public void Update(float dt);
         public void Cleanup();
         public void Destroy();
     }
