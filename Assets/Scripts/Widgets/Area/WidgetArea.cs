@@ -31,6 +31,7 @@ namespace Solcery.Widgets.Area
                 var view = widget.CreateView();
                 view.SetParent(WidgetCanvas.GetUiCanvas());
                 view.ApplyPlaceViewData(_viewData);
+                return widget;
             }
 
             return null;
