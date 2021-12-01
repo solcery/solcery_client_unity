@@ -6,6 +6,7 @@ using Solcery.Models.Play.Attributes.Interactable;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Triggers;
 using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
@@ -37,8 +38,10 @@ namespace Solcery.Models.Play
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
-            _systems.Add(SystemApplyAttributeInteractable.Create(game.TransportService));
+            _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
+            _systems.Add(SystemTriggerWidgetsUpdate.Create());
+            _systems.Add(SystemTriggerWidgetsApply.Create(game.TransportService));
             // TODO сюда добавляем новые системы и тд
             
 #if UNITY_EDITOR

@@ -1,10 +1,7 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Attributes.Interactable;
-using Solcery.Models.Shared.Entities;
-using Solcery.Services.Transport;
 
 namespace Solcery.Models.Play.Attributes.Interactable
 {
@@ -14,18 +11,16 @@ namespace Solcery.Models.Play.Attributes.Interactable
     
     internal sealed class SystemApplyAttributeInteractable : ISystemApplyAttributeInteractable
     {
-        private ITransportService _transportService;
         private EcsFilter _filterSubWidgetComponent;
         private EcsFilter _filterGameStateUpdate;
         
-        public static SystemApplyAttributeInteractable Create(ITransportService transportService)
+        public static SystemApplyAttributeInteractable Create()
         {
-            return new SystemApplyAttributeInteractable(transportService);
+            return new SystemApplyAttributeInteractable();
         }
 
-        private SystemApplyAttributeInteractable(ITransportService transportService)
+        private SystemApplyAttributeInteractable()
         {
-            _transportService = transportService;
         }
         
         void IEcsInitSystem.Init(EcsSystems systems)
@@ -44,26 +39,14 @@ namespace Solcery.Models.Play.Attributes.Interactable
             var world = systems.GetWorld();
             var subWidgetComponents = world.GetPool<ComponentPlaceSubWidget>();
             var attributeComponents = world.GetPool<ComponentAttributeInteractable>();
-            var entityIdPool = world.GetPool<ComponentEntityId>();
             foreach (var entityId in _filterSubWidgetComponent)
             {
                 var view = subWidgetComponents.Get(entityId).Widget.View;
                 if (view is IInteractable value)
                 {
-                    value.OnClick = () => { OnClick(entityIdPool.Get(entityId).Id); };
                     value.SetInteractable(attributeComponents.Get(entityId).Value);
                 }
             }
-        }
-
-        private void OnClick(int entityId)
-        {
-            _transportService.SendCommand(new JObject
-            {
-                ["entity_id"] = new JValue(entityId),
-                ["trigger_type"] = new JValue(1),
-                ["trigger_target_entity_type"] = new JValue(1)
-            });
         }
     }
 }

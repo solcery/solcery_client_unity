@@ -11,6 +11,7 @@ namespace Solcery.Widgets
     {
         protected readonly IWidgetCanvas WidgetCanvas;
         protected readonly IServiceResource ServiceResource;
+        
         public abstract WidgetViewBase View { get; }
 
         protected Widget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
@@ -34,10 +35,10 @@ namespace Solcery.Widgets
                     {
                         if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))
                         {
-                            var widget = AddSubWidget(data);
-                            if (widget != null)
+                            var subWidget = AddSubWidget(data);
+                            if (subWidget != null)
                             {
-                                world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = widget;
+                                world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = subWidget;
                             }
                         }
                     }
