@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Attributes.Interactable;
+using Solcery.Models.Shared.Entities;
 using Solcery.Services.Transport;
 
 namespace Solcery.Models.Play.Attributes.Interactable
@@ -39,16 +40,18 @@ namespace Solcery.Models.Play.Attributes.Interactable
             {
                 return;
             }
-            
-            var subWidgetComponents = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
-            var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeInteractable>();
-            foreach (var entity in _filterSubWidgetComponent)
+
+            var world = systems.GetWorld();
+            var subWidgetComponents = world.GetPool<ComponentPlaceSubWidget>();
+            var attributeComponents = world.GetPool<ComponentAttributeInteractable>();
+            var entityIdPool = world.GetPool<ComponentEntityId>();
+            foreach (var entityId in _filterSubWidgetComponent)
             {
-                var view = subWidgetComponents.Get(entity).Widget.View;
+                var view = subWidgetComponents.Get(entityId).Widget.View;
                 if (view is IInteractable value)
                 {
-                    value.OnClick = () => { OnClick(entity); };
-                    value.SetInteractable(attributeComponents.Get(entity).Value);
+                    value.OnClick = () => { OnClick(entityIdPool.Get(entityId).Id); };
+                    value.SetInteractable(attributeComponents.Get(entityId).Value);
                 }
             }
         }

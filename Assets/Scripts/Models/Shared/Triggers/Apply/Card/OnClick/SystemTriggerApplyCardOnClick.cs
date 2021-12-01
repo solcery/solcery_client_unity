@@ -18,6 +18,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         private EcsFilter _filterTriggers;
         private EcsFilter _filterContext;
         private EcsFilter _filterEntityTypes;
+        private EcsFilter _filterEntities;
 
         public static ISystemTriggerApplyCardOnClick Create(IServiceBricks serviceBricks)
         {
@@ -41,42 +42,51 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                 .Inc<ComponentContextVars>().End();
 
             _filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
+
+            _filterEntities = world.Filter<ComponentEntityTag>().Inc<ComponentEntityId>().Inc<ComponentEntityType>()
+                .End();
         }
         
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
             var triggerTargetEntityIdPool = world.GetPool<ComponentTriggerTargetEntityId>();
+            var entityIdPool = world.GetPool<ComponentEntityId>();
             var entityTypePool = world.GetPool<ComponentEntityType>();
             var entityTypesPool = world.GetPool<ComponentEntityTypes>();
-            
+
             foreach (var triggerEntityId in _filterTriggers)
             {
-                var targetEntityId = triggerTargetEntityIdPool.Get(triggerEntityId).TargetEntityId;
+                var targetObjectId = triggerTargetEntityIdPool.Get(triggerEntityId).TargetEntityId;
 
-                if (!entityTypePool.Has(targetEntityId))
+                foreach (var entityId in _filterEntities)
                 {
-                    continue;
-                }
+                    if (entityIdPool.Get(entityId).Id != targetObjectId)
+                    {
+                        continue;
+                    }
 
-                var entityType = entityTypePool.Get(targetEntityId).Type;
-                var entityTypesId = -1;
-                foreach (var etid in _filterEntityTypes)
-                {
-                    entityTypesId = etid;
+                    var entityType = entityTypePool.Get(entityId).Type;
+                    var entityTypesId = -1;
+                    foreach (var etid in _filterEntityTypes)
+                    {
+                        entityTypesId = etid;
+                        break;
+                    }
+                
+                    if (entityTypesId == -1 || 
+                        !entityTypesPool.Get(entityTypesId).Types.TryGetValue(entityType, out var entityTypeData) 
+                        || !entityTypeData.TryGetValue("action", out JObject brick))
+                    {
+                        continue;
+                    }
+
+                    InitContext(entityId, world);
+                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteActionBrick(brick, world)}");
+                    DestroyContext(world);
+                    
                     break;
                 }
-                
-                if (entityTypesId == -1 || 
-                    !entityTypesPool.Get(entityTypesId).Types.TryGetValue(entityType, out var entityTypeData) 
-                    || !entityTypeData.TryGetValue("action", out JObject brick))
-                {
-                    continue;
-                }
-
-                InitContext(targetEntityId, world);
-                Debug.Log($"Action brick execute status {_serviceBricks.ExecuteActionBrick(brick, world)}");
-                DestroyContext(world);
             }
         }
 

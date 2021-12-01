@@ -20,7 +20,8 @@ namespace Solcery.BrickInterpretation.Actions
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
         {
             if (parameters.Count > 0 
-                && parameters[0].TryParseBrickParameter(out _, out string log))
+                && parameters[0] is JObject logObject
+                && logObject.TryGetValue("value", out string log))
             {
                 Debug.Log(log);
                 return;
