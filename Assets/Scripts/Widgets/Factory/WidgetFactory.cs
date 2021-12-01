@@ -67,7 +67,7 @@ namespace Solcery.Widgets.Factory
         void IWidgetFactory.Destroy()
         {
             // TODO: тут удаляем все что заинитили на создании
-            Cleanup();
+            Destroy();
             _widgetCanvas = null;
             _serviceResource = null;
         }
@@ -76,6 +76,11 @@ namespace Solcery.Widgets.Factory
         {
             // TODO: тут нужно будет почистить пулы виджетов
             _widgetCanvas.GetWidgetPool().ReturnAllToPool();
+        }
+
+        private void Destroy()
+        {
+            _widgetCanvas.GetWidgetPool().Dispose();
         }
     }
 }
