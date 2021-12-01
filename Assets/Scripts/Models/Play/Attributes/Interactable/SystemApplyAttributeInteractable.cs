@@ -1,7 +1,9 @@
 using Leopotam.EcsLite;
+using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Attributes.Interactable;
+using Solcery.Services.Transport;
 
 namespace Solcery.Models.Play.Attributes.Interactable
 {
@@ -11,12 +13,18 @@ namespace Solcery.Models.Play.Attributes.Interactable
     
     internal sealed class SystemApplyAttributeInteractable : ISystemApplyAttributeInteractable
     {
+        private ITransportService _transportService;
         private EcsFilter _filterSubWidgetComponent;
         private EcsFilter _filterGameStateUpdate;
         
-        public static SystemApplyAttributeInteractable Create()
+        public static SystemApplyAttributeInteractable Create(ITransportService transportService)
         {
-            return new SystemApplyAttributeInteractable();
+            return new SystemApplyAttributeInteractable(transportService);
+        }
+
+        private SystemApplyAttributeInteractable(ITransportService transportService)
+        {
+            _transportService = transportService;
         }
         
         void IEcsInitSystem.Init(EcsSystems systems)
@@ -39,15 +47,20 @@ namespace Solcery.Models.Play.Attributes.Interactable
                 var view = subWidgetComponents.Get(entity).Widget.View;
                 if (view is IInteractable value)
                 {
-                    value.OnClick = () => { OnClick(systems.GetWorld(), entity); };
+                    value.OnClick = () => { OnClick(entity); };
                     value.SetInteractable(attributeComponents.Get(entity).Value);
                 }
             }
         }
 
-        private void OnClick(EcsWorld world, int entityId)
+        private void OnClick(int entityId)
         {
-            
+            _transportService.SendCommand(new JObject
+            {
+                ["entity_id"] = new JValue(entityId),
+                ["trigger_type"] = new JValue(1),
+                ["trigger_target_entity_type"] = new JValue(1)
+            });
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Solcery.BrickInterpretation
         bool ExecuteActionBrick(JObject brickObject, EcsWorld world);
         bool ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result);
         bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result);
-        void Cleanup();
         void Destroy();
     }
 }

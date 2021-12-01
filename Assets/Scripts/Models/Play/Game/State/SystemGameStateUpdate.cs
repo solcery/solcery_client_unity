@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Play.Attributes.Interactable;
 using Solcery.Models.Shared.Attributes.Interactable;
 using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
@@ -102,7 +101,7 @@ namespace Solcery.Models.Play.Game.State
                     continue;
                 }
 
-                UpdateEntity(world, entityId, entityHashMap[entityId]);
+                UpdateEntity(world, entityIndex, entityHashMap[entityId]);
                 entityHashMap.Remove(entityId);
             }
 
@@ -146,7 +145,10 @@ namespace Solcery.Models.Play.Game.State
                 ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
                 if (types.Types.ContainsKey(typeId))
                 {
-                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+                    if (!world.GetPool<ComponentAttributeInteractable>().Has(entityIndex))
+                    {
+                        world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+                    }
                 }
             }
         }

@@ -37,7 +37,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
-            _systems.Add(SystemApplyAttributeInteractable.Create());
+            _systems.Add(SystemApplyAttributeInteractable.Create(game.TransportService));
             _systems.Add(SystemApplyAttributeHighlighted.Create());
             // TODO сюда добавляем новые системы и тд
             

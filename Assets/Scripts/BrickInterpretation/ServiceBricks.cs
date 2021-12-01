@@ -51,12 +51,7 @@ namespace Solcery.BrickInterpretation
         {
             RegistrationBrickType((int)type, (int)subType, created, capacity);
         }
-        
-        void IServiceBricks.Cleanup()
-        {
-            Cleanup();
-        }
-        
+
         void IServiceBricks.Destroy()
         {
             Cleanup();

@@ -153,7 +153,6 @@ namespace Solcery.Games
         private void Cleanup()
         {
             _playModel.Destroy();
-            _serviceBricks.Cleanup();
             _transportService.Cleanup();
             _widgetFactory.Cleanup();
             _serviceResource.Cleanup();
