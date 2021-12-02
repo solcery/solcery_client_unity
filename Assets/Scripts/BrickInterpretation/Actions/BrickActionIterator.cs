@@ -42,18 +42,21 @@ namespace Solcery.BrickInterpretation.Actions
 
                     selectedObjects.Shuffle();
 
-                    var count = limit < selectedObjects.Count ? limit : selectedObjects.Count;
-                    for (var i = 0; i < count; i++)
+                    limit = limit < selectedObjects.Count ? limit : selectedObjects.Count;
+                    var index = 0;
+                    while (limit > 0 && index < selectedObjects.Count)
                     {
-                        var entityId = selectedObjects[i];
+                        var entityId = selectedObjects[index];
                         contextObject.Push(entityId);
                         if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var conditionResult) &&
                             conditionResult)
                         {
                             resultObjects.Add(entityId);
+                            --limit;
                         }
 
                         contextObject.TryPop<int>(out _);
+                        ++index;
                     }
 
                     foreach (var entityId in resultObjects)
