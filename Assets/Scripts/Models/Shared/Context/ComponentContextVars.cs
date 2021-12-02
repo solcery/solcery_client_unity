@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
-using UnityEngine;
 
 namespace Solcery.Models.Shared.Context
 {
@@ -10,8 +9,6 @@ namespace Solcery.Models.Shared.Context
 
         public void Set(string key, int value)
         {
-            Debug.Log($"ComponentContextVars Set key->{key} value->{value}");
-            
             if (!_vars.ContainsKey(key))
             {
                 _vars.Add(key, value);
@@ -23,6 +20,11 @@ namespace Solcery.Models.Shared.Context
 
         public bool TryGet(string key, out int value)
         {
+            if (!_vars.ContainsKey(key))
+            {
+                Set(key, 0);
+            }
+            
             return _vars.TryGetValue(key, out value);
         }
         

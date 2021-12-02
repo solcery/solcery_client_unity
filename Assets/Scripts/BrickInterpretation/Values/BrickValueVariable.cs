@@ -24,7 +24,7 @@ namespace Solcery.BrickInterpretation.Values
                 foreach (var entityId in filter)
                 {
                     ref var contextVars = ref world.GetPool<ComponentContextVars>().Get(entityId);
-                    if (contextVars.TryGet(varName, out int value))
+                    if (contextVars.TryGet(varName, out var value))
                     {
                         return value;
                     }

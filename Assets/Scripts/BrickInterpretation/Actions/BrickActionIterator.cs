@@ -28,7 +28,7 @@ namespace Solcery.BrickInterpretation.Actions
                 && serviceBricks.ExecuteValueBrick(valueBrick, world, out var limit))
             {
                 var filterObjects = world.Filter<ComponentContextObject>().End();
-                var filterEntityIds = world.Filter<ComponentEntityId>().End();
+                var filterEntityIds = world.Filter<ComponentEntityId>().Inc<ComponentEntityCardTag>().End();
                 var selectedObjects = new List<int>();
                 var resultObjects = new List<int>();
                 foreach (var uniqObjectEntityId in filterObjects)
