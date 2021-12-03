@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Shared.Commands;
+using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Shared.Triggers.Apply;
 using Solcery.Models.Simulation.Game.State;
@@ -40,6 +41,9 @@ namespace Solcery.Models.Simulation
             
             // Apply triggers
             _systems.Add(SystemsTriggerApply.Create(serviceBricks));
+            
+            // Update static attributes
+            _systems.Add(SystemStaticAttributesUpdate.Create());
             
             // Create game state
             _systems.Add(SystemGameStateCreate.Create(applyGameState));

@@ -88,7 +88,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                     break;
                 }
                 
-                world.GetPool<ComponentTriggerOnClickTag>().Del(triggerEntityId);
+                world.DelEntity(triggerEntityId);
             }
         }
 

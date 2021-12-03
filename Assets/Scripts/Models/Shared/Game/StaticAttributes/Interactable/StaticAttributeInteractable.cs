@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Attributes.Interactable;
-using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Game.StaticAttributes.Interactable
 {
@@ -16,7 +14,7 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Interactable
         
         string IStaticAttribute.Key => "interactable";
 
-        void IStaticAttribute.Apply(EcsWorld world, int entity, JObject attribute)
+        void IStaticAttribute.Apply(EcsWorld world, int entity, int value)
         {
             var pool = world.GetPool<ComponentAttributeInteractable>();
             if (!pool.Has(entity))
@@ -25,7 +23,16 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Interactable
             }
 
             ref var component = ref pool.Get(entity);
-            component.Value = attribute.GetValue<int>("value") == 1;
+            component.Value = value == 1;
+        }
+        
+        void IStaticAttribute.Destroy(EcsWorld world, int entity)
+        {
+            var pool = world.GetPool<ComponentAttributeInteractable>();
+            if (pool.Has(entity))
+            {
+                pool.Del(entity);
+            }
         }
     }
 }

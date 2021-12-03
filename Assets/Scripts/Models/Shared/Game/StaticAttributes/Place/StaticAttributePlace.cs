@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Attributes.Place;
-using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Game.StaticAttributes.Place
 {
@@ -16,7 +14,7 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Place
         
         string IStaticAttribute.Key => "place";
 
-        void IStaticAttribute.Apply(EcsWorld world, int entity, JObject attribute)
+        void IStaticAttribute.Apply(EcsWorld world, int entity, int value)
         {
             var pool = world.GetPool<ComponentAttributePlace>();
             if (!pool.Has(entity))
@@ -25,7 +23,16 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Place
             }
 
             ref var component = ref pool.Get(entity);
-            component.Value = attribute.GetValue<int>("value");
+            component.Value = value;
+        }
+        
+        void IStaticAttribute.Destroy(EcsWorld world, int entity)
+        {
+            var pool = world.GetPool<ComponentAttributePlace>();
+            if (pool.Has(entity))
+            {
+                pool.Del(entity);
+            }
         }
     }
 }

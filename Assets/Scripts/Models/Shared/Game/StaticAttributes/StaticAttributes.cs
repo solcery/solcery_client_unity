@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
-using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Game.StaticAttributes
 {
@@ -37,15 +35,17 @@ namespace Solcery.Models.Shared.Game.StaticAttributes
             _staticAttributes.Clear();
         }
 
-        public void ApplyAndUpdateAttributes(EcsWorld world, int entity, JArray attributes)
+        public void ApplyAndUpdateAttributes(EcsWorld world, int entity, IReadOnlyDictionary<string, int> attributes)
         {
-            foreach (var attributeToken in attributes)
+            foreach (var staticAttribute in _staticAttributes)
             {
-                if (attributeToken is JObject attributeObject
-                    && attributeObject.TryGetValue("key", out string key)
-                    && _staticAttributes.TryGetValue(key, out var staticAttribute))
+                if (attributes.TryGetValue(staticAttribute.Key, out var value))
                 {
-                    staticAttribute.Apply(world, entity, attributeObject);
+                    staticAttribute.Value.Apply(world, entity, value);
+                }
+                else
+                {
+                    staticAttribute.Value.Destroy(world, entity);
                 }
             }
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 
@@ -7,6 +8,6 @@ namespace Solcery.Models.Shared.Game.StaticAttributes
     {
         void RegistrationStaticAttribute(IStaticAttribute staticAttribute);
         void Cleanup();
-        void ApplyAndUpdateAttributes(EcsWorld world, int entity, JArray attributes);
+        void ApplyAndUpdateAttributes(EcsWorld world, int entity, IReadOnlyDictionary<string, int> attributes);
     }
 }

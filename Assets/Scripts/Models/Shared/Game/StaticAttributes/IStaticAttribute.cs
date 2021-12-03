@@ -7,6 +7,7 @@ namespace Solcery.Models.Shared.Game.StaticAttributes
     {
         string Key { get; }
 
-        void Apply(EcsWorld world, int entity, JObject attribute);
+        void Apply(EcsWorld world, int entity, int value);
+        void Destroy(EcsWorld world, int entity);
     }
 }

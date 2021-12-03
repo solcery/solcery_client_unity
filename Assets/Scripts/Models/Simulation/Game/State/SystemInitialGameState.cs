@@ -109,23 +109,7 @@ namespace Solcery.Models.Simulation.Game.State
             world.GetPool<ComponentEntityType>().Add(entityIndex);
             world.GetPool<ComponentEntityAttributes>().Add(entityIndex).Attributes =
                 new Dictionary<string, int>();
-            
-            foreach (var entityTypesId in _filterEntityTypes)
-            {
-                var entityTypesPool = world.GetPool<ComponentEntityTypes>();
-                ref var entityTypes = ref entityTypesPool.Get(entityTypesId);
-                if (entityData.TryGetValue("tplId", out int entityTypeId)
-                    && entityTypes.Types.TryGetValue(entityTypeId, out var entityTypeData)
-                    && entityTypeData.HasKey("picture")
-                    && entityTypeData.HasKey("action")
-                    && entityTypeData.HasKey("name")
-                    && entityTypeData.HasKey("description"))
-                {
-                    world.GetPool<ComponentEntityCardTag>().Add(entityIndex);
-                }
-                break;
-            }
-            
+
             UpdateEntity(world, entityIndex, entityData);
         }
         
@@ -142,7 +126,7 @@ namespace Solcery.Models.Simulation.Game.State
             ref var attributesComponent = ref world.GetPool<ComponentEntityAttributes>().Get(entityIndex);
             var attributeArray = entityData.GetValue<JArray>("attrs");
             UpdateAttributes(attributeArray, attributesComponent.Attributes);
-            _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributeArray);
+            _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributesComponent.Attributes);
         }
         
         private void UpdateInteractable(int typeId, EcsWorld world, int entityIndex)
