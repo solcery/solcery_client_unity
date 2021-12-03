@@ -63,3 +63,5 @@ crashlytics-build.properties
 
 .DS_Store
 CI/WebGl
+Assets/Tests/Logs
+Assets/Tests/Logs.meta

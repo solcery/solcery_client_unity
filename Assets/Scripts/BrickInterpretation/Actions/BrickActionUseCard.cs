@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Entities;
+using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Actions
@@ -32,7 +33,9 @@ namespace Solcery.BrickInterpretation.Actions
                         ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
                         if (types.Types.TryGetValue(type, out var data))
                         {
+                            TestUtils.AddLine(level, $"Start UseCard -> type {type}");
                             serviceBricks.ExecuteActionBrick(data["action"] as JObject, world, level + 1);
+                            TestUtils.AddLine(level, $"Finish UseCard -> type {type}");
                             return;
                         }
                     }

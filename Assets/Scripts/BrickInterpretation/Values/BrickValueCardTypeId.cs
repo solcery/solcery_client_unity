@@ -13,13 +13,9 @@ namespace Solcery.BrickInterpretation.Values
             return new BrickValueCardTypeId(type, subType);
         }
 
-        private BrickValueCardTypeId(int type, int subType) : base(type, subType)
-        {
-        }
+        private BrickValueCardTypeId(int type, int subType) : base(type, subType) { }
 
-        public override void Reset()
-        {
-        }
+        public override void Reset() { }
 
         public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {

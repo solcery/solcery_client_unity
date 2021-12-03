@@ -201,10 +201,13 @@ namespace Solcery.BrickInterpretation
             {
                 foreach (var entityId in filter)
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     completed = ExecuteActionBrick(customBrickToken, world, level);
                     args.Pop();
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     break;
                 }
             }
@@ -225,10 +228,13 @@ namespace Solcery.BrickInterpretation
             {
                 foreach (var entityId in filter)
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     completed = ExecuteValueBrick(customBrickToken, world, level, out result);
                     args.Pop();
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     break;
                 }
             }
@@ -249,10 +255,13 @@ namespace Solcery.BrickInterpretation
             {
                 foreach (var entityId in filter)
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     completed = ExecuteConditionBrick(customBrickToken, world, level, out result);
                     args.Pop();
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     break;
                 }
             }
@@ -271,8 +280,11 @@ namespace Solcery.BrickInterpretation
                     && !IsCustomBrick(typeSubType.Item2)
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     brick = CreateBrick<BrickAction>(typeSubType.Item1, typeSubType.Item2);
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     brick.Run(this, parameters, world, level);
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     completed = true;
                 }
             }
@@ -296,8 +308,11 @@ namespace Solcery.BrickInterpretation
                     && !IsCustomBrick(typeSubType.Item2)
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     brick = CreateBrick<BrickValue>(typeSubType.Item1, typeSubType.Item2);
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     result = brick.Run(this, parameters, world, level);
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     completed = true;
                 }
             }
@@ -321,8 +336,11 @@ namespace Solcery.BrickInterpretation
                     && !IsCustomBrick(typeSubType.Item2)
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
+                    //var cbn = brickObject.GetValue<string>("name");
                     brick = CreateBrick<BrickCondition>(typeSubType.Item1, typeSubType.Item2);
+                    //TestUtils.AddLine(level, $"Start {level}-{cbn}");
                     result = brick.Run(this, parameters, world, level);
+                    //TestUtils.AddLine(level, $"Finish {level}-{cbn}");
                     completed = true;
                 }
             }

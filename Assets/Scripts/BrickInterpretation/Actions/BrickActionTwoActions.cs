@@ -20,15 +20,11 @@ namespace Solcery.BrickInterpretation.Actions
         {
             if (parameters.Count >= 2 
                 && parameters[0].TryParseBrickParameter(out _, out JObject actionBrick1)
-                && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick2))
+                && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick2)
+                && serviceBricks.ExecuteActionBrick(actionBrick1, world, level + 1)
+                && serviceBricks.ExecuteActionBrick(actionBrick2, world, level + 1))
             {
-                var brickExecutionResult = serviceBricks.ExecuteActionBrick(actionBrick1, world, level + 1);
-                brickExecutionResult = brickExecutionResult && serviceBricks.ExecuteActionBrick(actionBrick2, world, level + 1);
-
-                if (brickExecutionResult)
-                {
-                    return;
-                }
+                return;
             }
             
             throw new Exception($"BrickActionTwoActions Run parameters {parameters}!");
