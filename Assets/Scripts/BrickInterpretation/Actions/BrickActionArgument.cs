@@ -17,7 +17,7 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0 
                 && parameters[0].TryParseBrickParameter(out _, out string argName))
@@ -28,9 +28,9 @@ namespace Solcery.BrickInterpretation.Actions
                 {
                     ref var contextArgs = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     var args = contextArgs.Pop();
-                    if (args.TryGetValue(argName, out var brickToken) && brickToken is JObject brickObject)
+                    if (args.TryGetValue(argName, out var brickObject))
                     {
-                        if (serviceBricks.ExecuteActionBrick(brickObject, world))
+                        if (serviceBricks.ExecuteActionBrick(brickObject, world, level + 1))
                         {
                             contextArgs.Push(args);
                             return;

@@ -16,7 +16,7 @@ namespace Solcery.BrickInterpretation.Values
         
         private BrickValueAttribute(int type, int subType) : base(type, subType) { }
 
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0 
                 && parameters[0].TryParseBrickParameter(out _, out string attrName))

@@ -17,12 +17,12 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 3
                 && parameters[0].TryParseBrickParameter(out _, out string counterVarName)
                 && parameters[1].TryParseBrickParameter(out _, out JObject counterBrick)
-                && serviceBricks.ExecuteValueBrick(counterBrick, world, out var counter) 
+                && serviceBricks.ExecuteValueBrick(counterBrick, world, level + 1, out var counter) 
                 && parameters[2].TryParseBrickParameter(out _, out JObject actionBrick))
             {
                 var filter = world.Filter<ComponentContextVars>().End();
@@ -33,7 +33,7 @@ namespace Solcery.BrickInterpretation.Actions
                     for (var i = 0; i < counter; i++)
                     {
                         contextVars.Set(counterVarName, i);
-                        if (!serviceBricks.ExecuteActionBrick(actionBrick, world))
+                        if (!serviceBricks.ExecuteActionBrick(actionBrick, world, level + 1))
                         {
                             failIteration++;
                         }

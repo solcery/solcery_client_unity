@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Entities;
 using Solcery.Utils;
-using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Actions
 {
@@ -19,16 +19,16 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
         
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 3
                 && parameters[0].TryParseBrickParameter(out _, out JObject conditionBrick)
                 && parameters[1].TryParseBrickParameter(out _, out JObject actionBrick)
                 && parameters[2].TryParseBrickParameter(out _, out JObject valueBrick)
-                && serviceBricks.ExecuteValueBrick(valueBrick, world, out var limit))
+                && serviceBricks.ExecuteValueBrick(valueBrick, world, level + 1, out var limit))
             {
                 var filterObjects = world.Filter<ComponentContextObject>().End();
-                var filterEntityIds = world.Filter<ComponentEntityId>().Inc<ComponentEntityCardTag>().End();
+                var filterEntityIds = world.Filter<ComponentEntityId>().End();
                 var selectedObjects = new List<int>();
                 var resultObjects = new List<int>();
                 foreach (var uniqObjectEntityId in filterObjects)
@@ -47,8 +47,8 @@ namespace Solcery.BrickInterpretation.Actions
                     {
                         var entityId = selectedObjects.Pop();
                         contextObject.Push(entityId);
-                        if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var conditionResult) &&
-                            conditionResult)
+                        if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, level + 1, out var conditionResult) 
+                            && conditionResult)
                         {
                             resultObjects.Add(entityId);
                             --limit;
@@ -60,7 +60,7 @@ namespace Solcery.BrickInterpretation.Actions
                     foreach (var entityId in resultObjects)
                     {
                         contextObject.Push(entityId);
-                        serviceBricks.ExecuteActionBrick(actionBrick, world);
+                        serviceBricks.ExecuteActionBrick(actionBrick, world, level + 1);
                         contextObject.TryPop<int>(out _);
                     }
 
@@ -74,8 +74,8 @@ namespace Solcery.BrickInterpretation.Actions
 
                 return;
             }
-
-            Debug.Log("Call BrickActionIterator!");
+            
+            throw new Exception($"BrickActionIterator Run parameters {parameters}!");
         }
     }
 }

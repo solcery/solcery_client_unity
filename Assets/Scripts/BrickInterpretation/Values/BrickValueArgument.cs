@@ -15,7 +15,7 @@ namespace Solcery.BrickInterpretation.Values
         
         private BrickValueArgument(int type, int subType) : base(type, subType) { }
 
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0 
                 && parameters[0].TryParseBrickParameter(out _, out string argName))
@@ -27,7 +27,7 @@ namespace Solcery.BrickInterpretation.Values
                     var args = contextArgs.Pop();
                     if (args.TryGetValue(argName, out var brickObject))
                     {
-                        if (serviceBricks.ExecuteValueBrick(brickObject, world, out var result))
+                        if (serviceBricks.ExecuteValueBrick(brickObject, world, level + 1, out var result))
                         {
                             contextArgs.Push(args);
                             return result;

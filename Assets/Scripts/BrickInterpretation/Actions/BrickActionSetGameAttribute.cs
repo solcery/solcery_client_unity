@@ -1,7 +1,6 @@
 using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Play.Game;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Utils;
 
@@ -18,12 +17,12 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 2
                 && parameters[0].TryParseBrickParameter(out _, out string attrName)
                 && parameters[1].TryParseBrickParameter(out _, out JObject valueBrick)
-                && serviceBricks.ExecuteValueBrick(valueBrick, world, out var value))
+                && serviceBricks.ExecuteValueBrick(valueBrick, world, level + 1, out var value))
             {
                 var filter = world.Filter<ComponentGameAttributes>().End();
                 foreach (var entityId in filter)

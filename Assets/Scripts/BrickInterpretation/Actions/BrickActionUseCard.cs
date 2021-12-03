@@ -17,7 +17,7 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
         
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             var filterObjects = world.Filter<ComponentContextObject>().End();
             var filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
@@ -32,7 +32,7 @@ namespace Solcery.BrickInterpretation.Actions
                         ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
                         if (types.Types.TryGetValue(type, out var data))
                         {
-                            serviceBricks.ExecuteActionBrick(data["action"] as JObject, world);
+                            serviceBricks.ExecuteActionBrick(data["action"] as JObject, world, level + 1);
                             return;
                         }
                     }

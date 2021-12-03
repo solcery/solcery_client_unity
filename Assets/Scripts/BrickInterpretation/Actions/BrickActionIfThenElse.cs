@@ -16,7 +16,7 @@ namespace Solcery.BrickInterpretation.Actions
 
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 3 
                 && parameters[0] is JObject ifObject
@@ -26,9 +26,9 @@ namespace Solcery.BrickInterpretation.Actions
                 && thenObject.TryGetValue("value", out JObject thenBrick)
                 && elseObject.TryGetValue("value", out JObject elseBrick))
             {
-                if (serviceBricks.ExecuteConditionBrick(ifBrick, world, out var result))
+                if (serviceBricks.ExecuteConditionBrick(ifBrick, world, level + 1, out var result))
                 {
-                    serviceBricks.ExecuteActionBrick(result ? thenBrick : elseBrick, world);
+                    serviceBricks.ExecuteActionBrick(result ? thenBrick : elseBrick, world, level + 1);
                     return;
                 }
             }

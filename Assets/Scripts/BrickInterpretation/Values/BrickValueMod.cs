@@ -14,15 +14,21 @@ namespace Solcery.BrickInterpretation.Values
         
         private BrickValueMod(int type, int subType) : base(type, subType) { }
         
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 2 
                 && parameters[0].TryParseBrickParameter(out _, out JObject valueBrick1)
-                && parameters[1].TryParseBrickParameter(out _, out JObject valueBrick2)
-                && serviceBricks.ExecuteValueBrick(valueBrick1, world, out var value1) 
-                && serviceBricks.ExecuteValueBrick(valueBrick2, world, out var value2))
+                && parameters[1].TryParseBrickParameter(out _, out JObject valueBrick2))
             {
-                return value1 % value2;
+                var brickExecutionResult = serviceBricks.ExecuteValueBrick(valueBrick1, world, level + 1, out var value1);
+                var value2 = 0;
+                brickExecutionResult = brickExecutionResult &&
+                                       serviceBricks.ExecuteValueBrick(valueBrick2, world, level + 1, out value2);
+
+                if (brickExecutionResult)
+                {
+                    return value1 % value2;
+                }
             }
 
             throw new ArgumentException($"BrickValueMod Run has exception! Parameters {parameters}");

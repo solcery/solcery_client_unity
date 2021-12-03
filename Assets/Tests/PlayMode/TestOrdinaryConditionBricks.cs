@@ -159,7 +159,7 @@ namespace Solcery.Tests.PlayMode
                     hasAttrs = true;
                 }
                 
-                var er = _serviceBricks.ExecuteConditionBrick(brick, _world, out var ebr);
+                var er = _serviceBricks.ExecuteConditionBrick(brick, _world, 1, out var ebr);
 
                 if (hasArgs)
                 {

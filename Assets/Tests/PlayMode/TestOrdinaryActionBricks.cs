@@ -4,7 +4,6 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
-using Solcery.Models.Play.Game;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
@@ -199,7 +198,7 @@ namespace Solcery.Tests.PlayMode
                     hasAttrs = true;
                 }
                 
-                var er = _serviceBricks.ExecuteActionBrick(brick, _world);
+                var er = _serviceBricks.ExecuteActionBrick(brick, _world, 1);
 
                 if (hasArgs)
                 {

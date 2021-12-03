@@ -21,7 +21,7 @@ namespace Solcery.BrickInterpretation.Values
         {
         }
 
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             var filter = world.Filter<ComponentContextObject>().End();
             foreach (var uniqEntityType in filter)

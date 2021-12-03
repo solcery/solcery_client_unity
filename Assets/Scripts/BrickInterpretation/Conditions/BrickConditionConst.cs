@@ -14,7 +14,7 @@ namespace Solcery.BrickInterpretation.Conditions
 
         private BrickConditionConst(int type, int subType) : base(type, subType) { }
         
-        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0 
                 && parameters[0].TryParseBrickParameter(out _, out bool value))

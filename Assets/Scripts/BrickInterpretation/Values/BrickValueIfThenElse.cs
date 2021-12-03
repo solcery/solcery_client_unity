@@ -14,17 +14,17 @@ namespace Solcery.BrickInterpretation.Values
         
         private BrickValueIfThenElse(int type, int subType) : base(type, subType) { }
         
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 3)
             {
                 if (parameters[0].TryParseBrickParameter(out _, out JObject conditionBrick) 
-                    && serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var result))
+                    && serviceBricks.ExecuteConditionBrick(conditionBrick, world, level + 1, out var result))
                 {
                     if (result)
                     {
                         if (parameters[1].TryParseBrickParameter(out _, out JObject actionBrick) 
-                            && serviceBricks.ExecuteValueBrick(actionBrick, world, out var value))
+                            && serviceBricks.ExecuteValueBrick(actionBrick, world, level + 1, out var value))
                         {
                             return value;
                         }
@@ -32,7 +32,7 @@ namespace Solcery.BrickInterpretation.Values
                     else
                     {
                         if (parameters[2].TryParseBrickParameter(out _, out JObject actionBrick) 
-                            && serviceBricks.ExecuteValueBrick(actionBrick, world, out var value))
+                            && serviceBricks.ExecuteValueBrick(actionBrick, world, level + 1, out var value))
                         {
                             return value;
                         }

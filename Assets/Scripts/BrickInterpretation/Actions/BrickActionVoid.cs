@@ -15,7 +15,7 @@ namespace Solcery.BrickInterpretation.Actions
         
         public override void Reset() { }
 
-        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             Debug.Log("BrickActionVoid Run!");
         }

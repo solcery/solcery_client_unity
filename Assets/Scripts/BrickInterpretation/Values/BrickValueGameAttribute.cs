@@ -18,7 +18,7 @@ namespace Solcery.BrickInterpretation.Values
 
         public override void Reset() { }
 
-        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override int Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count >= 1
                 && parameters[0].TryParseBrickParameter(out _, out string attrName))

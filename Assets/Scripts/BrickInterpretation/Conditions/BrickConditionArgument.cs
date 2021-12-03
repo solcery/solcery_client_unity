@@ -15,7 +15,7 @@ namespace Solcery.BrickInterpretation.Conditions
         
         private BrickConditionArgument(int type, int subType) : base(type, subType) { }
 
-        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0 
                 && parameters[0].TryParseBrickParameter(out _, out string argName))
@@ -27,7 +27,7 @@ namespace Solcery.BrickInterpretation.Conditions
                     var args = contextArgs.Pop();
                     if (args.TryGetValue(argName, out var brickObject))
                     {
-                        if (serviceBricks.ExecuteConditionBrick(brickObject, world, out var result))
+                        if (serviceBricks.ExecuteConditionBrick(brickObject, world, level + 1, out var result))
                         {
                             contextArgs.Push(args);
                             return result;

@@ -14,12 +14,12 @@ namespace Solcery.BrickInterpretation.Conditions
 
         private BrickConditionAnd(int type, int subType) : base(type, subType) { }
         
-        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             foreach (var parameterToken in parameters)
             {
                 if (!parameterToken.TryParseBrickParameter(out _, out JObject conditionBrick) 
-                    || !serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var result))
+                    || !serviceBricks.ExecuteConditionBrick(conditionBrick, world, level + 1, out var result))
                 {
                     throw new Exception($"BrickConditionAnd Run parameters {parameters}");
                 }

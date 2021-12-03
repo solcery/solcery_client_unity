@@ -57,19 +57,19 @@ namespace Solcery.BrickInterpretation
             Cleanup();
         }
         
-        bool IServiceBricks.ExecuteActionBrick(JObject brickObject, EcsWorld world)
+        bool IServiceBricks.ExecuteActionBrick(JObject brickObject, EcsWorld world, int level)
         {
-            return ExecuteActionBrick(brickObject, world);
+            return ExecuteActionBrick(brickObject, world, level);
         }
         
-        bool IServiceBricks.ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result)
+        bool IServiceBricks.ExecuteValueBrick(JObject brickObject, EcsWorld world, int level, out int result)
         {
-            return ExecuteValueBrick(brickObject, world, out result);
+            return ExecuteValueBrick(brickObject, world, level, out result);
         }
         
-        bool IServiceBricks.ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result)
+        bool IServiceBricks.ExecuteConditionBrick(JObject brickObject, EcsWorld world, int level, out bool result)
         {
-            return ExecuteConditionBrick(brickObject, world, out result);
+            return ExecuteConditionBrick(brickObject, world, level, out result);
         }
         
         #endregion
@@ -189,7 +189,7 @@ namespace Solcery.BrickInterpretation
             return arg;
         }
 
-        private bool ExecuteActionCustomBrick(JObject brickObject, EcsWorld world)
+        private bool ExecuteActionCustomBrick(JObject brickObject, EcsWorld world, int level)
         {
             var completed = false;
             var filter = world.Filter<ComponentContextArgs>().End();
@@ -203,7 +203,7 @@ namespace Solcery.BrickInterpretation
                 {
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
-                    completed = ExecuteActionBrick(customBrickToken, world);
+                    completed = ExecuteActionBrick(customBrickToken, world, level);
                     args.Pop();
                     break;
                 }
@@ -212,7 +212,7 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteValueCustomBrick(JObject brickObject, EcsWorld world, out int result)
+        private bool ExecuteValueCustomBrick(JObject brickObject, EcsWorld world, int level, out int result)
         {
             result = 0;
             var completed = false;
@@ -227,7 +227,7 @@ namespace Solcery.BrickInterpretation
                 {
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
-                    completed = ExecuteValueBrick(customBrickToken, world, out result);
+                    completed = ExecuteValueBrick(customBrickToken, world, level, out result);
                     args.Pop();
                     break;
                 }
@@ -236,7 +236,7 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteConditionCustomBrick(JObject brickObject, EcsWorld world, out bool result)
+        private bool ExecuteConditionCustomBrick(JObject brickObject, EcsWorld world, int level, out bool result)
         {
             result = false;
             var completed = false;
@@ -251,7 +251,7 @@ namespace Solcery.BrickInterpretation
                 {
                     ref var args = ref world.GetPool<ComponentContextArgs>().Get(entityId);
                     args.Push(CreateCustomArgs(customParameters));
-                    completed = ExecuteConditionBrick(customBrickToken, world, out result);
+                    completed = ExecuteConditionBrick(customBrickToken, world, level, out result);
                     args.Pop();
                     break;
                 }
@@ -260,7 +260,7 @@ namespace Solcery.BrickInterpretation
             return completed;
         }
 
-        private bool ExecuteActionBrick(JObject brickObject, EcsWorld world)
+        private bool ExecuteActionBrick(JObject brickObject, EcsWorld world, int level)
         {
             var completed = false;
             BrickAction brick = null;
@@ -272,7 +272,7 @@ namespace Solcery.BrickInterpretation
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickAction>(typeSubType.Item1, typeSubType.Item2);
-                    brick.Run(this, parameters, world);
+                    brick.Run(this, parameters, world, level);
                     completed = true;
                 }
             }
@@ -281,10 +281,10 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteActionCustomBrick(brickObject, world);
+            return completed || ExecuteActionCustomBrick(brickObject, world, level);
         }
 
-        private bool ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result)
+        private bool ExecuteValueBrick(JObject brickObject, EcsWorld world, int level, out int result)
         {
             result = 0;
             var completed = false;
@@ -297,7 +297,7 @@ namespace Solcery.BrickInterpretation
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickValue>(typeSubType.Item1, typeSubType.Item2);
-                    result = brick.Run(this, parameters, world);
+                    result = brick.Run(this, parameters, world, level);
                     completed = true;
                 }
             }
@@ -306,10 +306,10 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteValueCustomBrick(brickObject, world, out result);
+            return completed || ExecuteValueCustomBrick(brickObject, world, level, out result);
         }
 
-        private bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result)
+        private bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, int level, out bool result)
         {
             result = false;
             var completed = false;
@@ -322,7 +322,7 @@ namespace Solcery.BrickInterpretation
                     && brickObject.TryGetBrickParameters(out var parameters))
                 {
                     brick = CreateBrick<BrickCondition>(typeSubType.Item1, typeSubType.Item2);
-                    result = brick.Run(this, parameters, world);
+                    result = brick.Run(this, parameters, world, level);
                     completed = true;
                 }
             }
@@ -331,7 +331,7 @@ namespace Solcery.BrickInterpretation
                 FreeBrick(brick);
             }
 
-            return completed || ExecuteConditionCustomBrick(brickObject, world, out result);
+            return completed || ExecuteConditionCustomBrick(brickObject, world, level, out result);
         }
 
         #endregion

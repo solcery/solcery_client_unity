@@ -13,9 +13,9 @@ namespace Solcery.BrickInterpretation
         void RegistrationBrickType(BrickTypes type, BrickConditionTypes subType, Func<int, int, Brick> created, uint capacity = 1);
         void RegistrationBrickType(BrickTypes type, BrickValueTypes subType, Func<int, int, Brick> created, uint capacity = 1);
         void RegistrationCustomBricksData(JArray customBricksJson);
-        bool ExecuteActionBrick(JObject brickObject, EcsWorld world);
-        bool ExecuteValueBrick(JObject brickObject, EcsWorld world, out int result);
-        bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, out bool result);
+        bool ExecuteActionBrick(JObject brickObject, EcsWorld world, int level);
+        bool ExecuteValueBrick(JObject brickObject, EcsWorld world, int level, out int result);
+        bool ExecuteConditionBrick(JObject brickObject, EcsWorld world, int level, out bool result);
         void Destroy();
     }
 }

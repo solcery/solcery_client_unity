@@ -14,11 +14,11 @@ namespace Solcery.BrickInterpretation.Conditions
 
         private BrickConditionNot(int type, int subType) : base(type, subType) { }
         
-        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world)
+        public override bool Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             if (parameters.Count > 0
                 && parameters[0].TryParseBrickParameter(out _, out JObject conditionBrick)
-                && serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var result))
+                && serviceBricks.ExecuteConditionBrick(conditionBrick, world, level + 1, out var result))
             {
                 return !result;
             }
