@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Actions
 {
-    public class BrickActionIterator : BrickAction
+    public sealed class BrickActionIterator : BrickAction
     {
         public static BrickAction Create(int type, int subType)
         {
@@ -43,10 +43,9 @@ namespace Solcery.BrickInterpretation.Actions
                     selectedObjects.Shuffle();
 
                     limit = limit < selectedObjects.Count ? limit : selectedObjects.Count;
-                    var index = 0;
-                    while (limit > 0 && index < selectedObjects.Count)
+                    while (limit > 0 && !selectedObjects.IsEmpty())
                     {
-                        var entityId = selectedObjects[index];
+                        var entityId = selectedObjects.Pop();
                         contextObject.Push(entityId);
                         if (serviceBricks.ExecuteConditionBrick(conditionBrick, world, out var conditionResult) &&
                             conditionResult)
@@ -56,7 +55,6 @@ namespace Solcery.BrickInterpretation.Actions
                         }
 
                         contextObject.TryPop<int>(out _);
-                        ++index;
                     }
 
                     foreach (var entityId in resultObjects)
