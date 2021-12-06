@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Services.LocalSimulation;
+using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Models.Simulation.Game.State
 {
@@ -11,10 +13,101 @@ namespace Solcery.Models.Simulation.Game.State
 
     public sealed class SystemGameStateCreate : ISystemGameStateCreate
     {
+        private sealed class GameStateDiffLog
+        {
+            private bool _isInitFirstGameState;
+            private readonly Dictionary<string, int> _oldGameAttributes;
+            private readonly Dictionary<int, Dictionary<string, int>> _oldEntityAttributes;
+
+            public static GameStateDiffLog Create()
+            {
+                return new GameStateDiffLog();
+            }
+            
+            private GameStateDiffLog()
+            {
+                _oldGameAttributes = new Dictionary<string, int>();
+                _oldEntityAttributes = new Dictionary<int, Dictionary<string, int>>();
+            }
+
+            public void PrintDiff(JObject gameState)
+            {
+                Debug.Log("======[Game state diff]======");
+
+                if (gameState.TryGetValue("attrs", out JArray gameAttrsArray))
+                {
+                    PrintGameAttrsDiff(gameAttrsArray);
+                }
+
+                if (gameState.TryGetValue("objects", out JArray entitiesArray))
+                {
+                    PrintEntitiesAttrDiff(entitiesArray);
+                }
+
+                Debug.Log("============[End]============");
+            }
+
+            private void PrintGameAttrsDiff(JArray gameAttrsArray)
+            {
+                Debug.Log("=========[Game attrs]========");
+                foreach (var attrToken in gameAttrsArray)
+                {
+                    PrintAttrDiff(_oldGameAttributes, attrToken);
+                }
+                Debug.Log("============[End]============");
+            }
+
+            private void PrintEntitiesAttrDiff(JArray entityArray)
+            {
+                Debug.Log("==========[Entities]=========");
+                foreach (var entityAttrToken in entityArray)
+                {
+                    if (entityAttrToken is JObject entityAttrObject 
+                        && entityAttrObject.TryGetValue("id", out int id)
+                        && entityAttrObject.TryGetValue("attrs", out JArray entityAttrsArray))
+                    {
+                        if (!_oldEntityAttributes.ContainsKey(id))
+                        {
+                            _oldEntityAttributes.Add(id, new Dictionary<string, int>());
+                        }
+
+                        foreach (var attrToken in entityAttrsArray)
+                        {
+                            PrintAttrDiff(_oldEntityAttributes[id], attrToken);
+                        }
+                    }
+                }
+                Debug.Log("============[End]============");
+            }
+
+            private void PrintAttrDiff(Dictionary<string, int> attrs, JToken attrToken)
+            {
+                if (attrToken is JObject attrObject 
+                    && attrObject.TryGetValue("key", out string key)
+                    && attrObject.TryGetValue("value", out int value))
+                {
+                    if (!attrs.ContainsKey(key) || _oldGameAttributes[key] != value)
+                    {
+                        if (!attrs.ContainsKey(key))
+                        {
+                            attrs.Add(key, value);
+                        }
+                        else
+                        {
+                            Debug.Log($"Attr {key} {attrs[key]}->{value}");
+                            attrs[key] = value;
+                        }
+                    }
+                }
+            }
+        }
+        
         private IServiceLocalSimulationApplyGameState _applyGameState;
         private EcsFilter _filterGameAttributes;
         private EcsFilter _filterEntities;
-        
+
+        private GameStateDiffLog _diff;
+
         public static ISystemGameStateCreate Create(IServiceLocalSimulationApplyGameState applyGameState)
         {
             return new SystemGameStateCreate(applyGameState);
@@ -27,6 +120,8 @@ namespace Solcery.Models.Simulation.Game.State
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
+            _diff = GameStateDiffLog.Create();
+            
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentEntityTag>().Inc<ComponentEntityId>().Inc<ComponentEntityType>()
@@ -71,6 +166,8 @@ namespace Solcery.Models.Simulation.Game.State
                 });
             }
             gameState.Add("objects", entityArray);
+            
+            _diff.PrintDiff(gameState);
             
             _applyGameState.ApplySimulatedGameState(gameState);
         }
