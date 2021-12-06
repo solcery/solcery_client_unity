@@ -30,11 +30,8 @@ namespace Solcery.Widgets
             AnchorMin = new Vector2(x1.Value<int>() / AnchorDivider, y1.Value<int>() / AnchorDivider);
             AnchorMax = new Vector2(x2.Value<int>() / AnchorDivider, y2.Value<int>() / AnchorDivider);
             ZOrder = zOrder.Value<int>();
-            
-            if (jsonData.TryGetValue("face", out int face))
-            {
-                Face = (CardFaceOption)face;
-            }
+            jsonData.TryGetValue("face", out int face);
+            Face = (CardFaceOption)face;
             return true;
         }
     }
