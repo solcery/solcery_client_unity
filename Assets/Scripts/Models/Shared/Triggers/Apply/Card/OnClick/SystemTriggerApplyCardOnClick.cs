@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
 using UnityEngine;
@@ -41,9 +41,9 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
             _filterContext = world.Filter<ComponentContextObject>().Inc<ComponentContextArgs>()
                 .Inc<ComponentContextVars>().End();
 
-            _filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
+            _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
 
-            _filterEntities = world.Filter<ComponentEntityTag>().Inc<ComponentEntityId>().Inc<ComponentEntityType>()
+            _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
                 .End();
         }
         
@@ -51,9 +51,9 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         {
             var world = systems.GetWorld();
             var triggerTargetEntityIdPool = world.GetPool<ComponentTriggerTargetEntityId>();
-            var entityIdPool = world.GetPool<ComponentEntityId>();
-            var entityTypePool = world.GetPool<ComponentEntityType>();
-            var entityTypesPool = world.GetPool<ComponentEntityTypes>();
+            var entityIdPool = world.GetPool<ComponentObjectId>();
+            var entityTypePool = world.GetPool<ComponentObjectType>();
+            var entityTypesPool = world.GetPool<ComponentObjectTypes>();
 
             foreach (var triggerEntityId in _filterTriggers)
             {

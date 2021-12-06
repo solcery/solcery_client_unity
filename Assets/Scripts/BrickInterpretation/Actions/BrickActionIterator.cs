@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Actions
@@ -28,7 +28,7 @@ namespace Solcery.BrickInterpretation.Actions
                 && serviceBricks.ExecuteValueBrick(valueBrick, world, level + 1, out var limit))
             {
                 var filterObjects = world.Filter<ComponentContextObject>().End();
-                var filterEntityIds = world.Filter<ComponentEntityId>().End();
+                var filterEntityIds = world.Filter<ComponentObjectId>().End();
                 var selectedObjects = new List<int>();
                 var resultObjects = new List<int>();
                 foreach (var uniqObjectEntityId in filterObjects)

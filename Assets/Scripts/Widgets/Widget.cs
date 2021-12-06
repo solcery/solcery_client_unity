@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Places;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
 
@@ -22,15 +22,15 @@ namespace Solcery.Widgets
 
         public void UpdateSubWidgets(EcsWorld world, int[] entityIds)
         {
-            var filter = world.Filter<ComponentEntityTypes>().End();
+            var filter = world.Filter<ComponentObjectTypes>().End();
 
             foreach (var uniqEntityId in filter)
             {
-                ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityId);
+                ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityId);
                 
                 foreach (var entityId in entityIds)
                 {
-                    var typePool = world.GetPool<ComponentEntityType>();
+                    var typePool = world.GetPool<ComponentObjectType>();
                     if (typePool.Has(entityId))
                     {
                         if (types.Types.TryGetValue(typePool.Get(entityId).Type, out var data))

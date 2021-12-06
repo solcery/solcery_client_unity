@@ -5,8 +5,8 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
+using Solcery.Models.Shared.Objects;
 using UnityEngine;
 using Solcery.Utils;
 
@@ -82,7 +82,7 @@ namespace Solcery.Tests.PlayMode
         public void TestOrdinaryActionBricksSetAttributePasses()
         {
             var entityId = _world.NewEntity();
-            ref var attrs = ref _world.GetPool<ComponentEntityAttributes>().Add(entityId);
+            ref var attrs = ref _world.GetPool<ComponentObjectAttributes>().Add(entityId);
             attrs.Attributes.Add("hp", 0);
             TestUtils.PushObject(_world, entityId);
             ExecuteActionBrick("SetAttribute");
@@ -116,13 +116,13 @@ namespace Solcery.Tests.PlayMode
         public void TestOrdinaryActionBricksIteratorPasses()
         {
             var entityId1 = _world.NewEntity();
-            ref var cardId1 = ref _world.GetPool<ComponentEntityId>().Add(entityId1);
+            ref var cardId1 = ref _world.GetPool<ComponentObjectId>().Add(entityId1);
             cardId1.Id = 1;
             var entityId2 = _world.NewEntity();
-            ref var cardId2 = ref _world.GetPool<ComponentEntityId>().Add(entityId2);
+            ref var cardId2 = ref _world.GetPool<ComponentObjectId>().Add(entityId2);
             cardId2.Id = 2;
             var entityId3 = _world.NewEntity();
-            ref var cardId3 = ref _world.GetPool<ComponentEntityId>().Add(entityId3);
+            ref var cardId3 = ref _world.GetPool<ComponentObjectId>().Add(entityId3);
             cardId3.Id = 3;
             TestUtils.PushObject(_world, entityId3);
             ExecuteActionBrick("Iterator");
@@ -176,7 +176,7 @@ namespace Solcery.Tests.PlayMode
                 if (brickObject.TryGetValue("attributes", out JArray attributesArray))
                 {
                     attrsEntityId = _world.NewEntity();
-                    ref var attrs = ref _world.GetPool<ComponentEntityAttributes>().Add(attrsEntityId);
+                    ref var attrs = ref _world.GetPool<ComponentObjectAttributes>().Add(attrsEntityId);
                     foreach (var attributeToken in attributesArray)
                     {
                         if (attributeToken is JObject attributeObject 

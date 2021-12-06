@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
+using Solcery.Models.Shared.Objects;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
 using UnityEngine;
@@ -158,8 +158,8 @@ namespace Solcery.Models.Simulation.Game.State
             
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
-            _filterEntities = world.Filter<ComponentEntityTag>().Inc<ComponentEntityId>().Inc<ComponentEntityType>()
-                .Inc<ComponentEntityAttributes>().End();
+            _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
+                .Inc<ComponentObjectAttributes>().End();
         }
         
         public void Run(EcsSystems systems)
@@ -182,9 +182,9 @@ namespace Solcery.Models.Simulation.Game.State
             
             // Entities
             var entityArray = new JArray();
-            var entityIdPool = world.GetPool<ComponentEntityId>();
-            var entityTypePool = world.GetPool<ComponentEntityType>();
-            var entityAttributesPool = world.GetPool<ComponentEntityAttributes>();
+            var entityIdPool = world.GetPool<ComponentObjectId>();
+            var entityTypePool = world.GetPool<ComponentObjectType>();
+            var entityAttributesPool = world.GetPool<ComponentObjectAttributes>();
             foreach (var entityId in _filterEntities)
             {
                 if (!TryCreateAttributeArray(entityAttributesPool.Get(entityId).Attributes, out var attributesArray))

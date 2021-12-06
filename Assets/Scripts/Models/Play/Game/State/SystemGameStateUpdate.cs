@@ -3,12 +3,12 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Interactable;
-using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Game.StaticAttributes;
 using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
 using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 
 namespace Solcery.Models.Play.Game.State
@@ -38,8 +38,8 @@ namespace Solcery.Models.Play.Game.State
         {
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
-            _filterEntities = world.Filter<ComponentEntityTag>().End();
-            _filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
+            _filterEntities = world.Filter<ComponentObjectTag>().End();
+            _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
             _staticAttributes = StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
@@ -93,7 +93,7 @@ namespace Solcery.Models.Play.Game.State
 
             foreach (var entityIndex in _filterEntities)
             {
-                var entityId = world.GetPool<ComponentEntityId>().Get(entityIndex).Id;
+                var entityId = world.GetPool<ComponentObjectId>().Get(entityIndex).Id;
 
                 if (!entityHashMap.ContainsKey(entityId))
                 {
@@ -142,7 +142,7 @@ namespace Solcery.Models.Play.Game.State
         {
             foreach (var uniqEntityTypes in _filterEntityTypes)
             {
-                ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
+                ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityTypes);
                 if (types.Types.ContainsKey(typeId))
                 {
                     if (!world.GetPool<ComponentAttributeInteractable>().Has(entityIndex))
@@ -156,10 +156,10 @@ namespace Solcery.Models.Play.Game.State
         private void CreateEntity(EcsWorld world, JObject entityData)
         {
             var entityIndex = world.NewEntity();
-            world.GetPool<ComponentEntityTag>().Add(entityIndex);
-            world.GetPool<ComponentEntityId>().Add(entityIndex);
-            world.GetPool<ComponentEntityType>().Add(entityIndex);
-            world.GetPool<ComponentEntityAttributes>().Add(entityIndex).Attributes =
+            world.GetPool<ComponentObjectTag>().Add(entityIndex);
+            world.GetPool<ComponentObjectId>().Add(entityIndex);
+            world.GetPool<ComponentObjectType>().Add(entityIndex);
+            world.GetPool<ComponentObjectAttributes>().Add(entityIndex).Attributes =
                 new Dictionary<string, int>();
 
             UpdateEntity(world, entityIndex, entityData);
@@ -167,15 +167,15 @@ namespace Solcery.Models.Play.Game.State
 
         private void UpdateEntity(EcsWorld world, int entityIndex, JObject entityData)
         {
-            world.GetPool<ComponentEntityId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
+            world.GetPool<ComponentObjectId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
             var typeId = entityData.GetValue<int>("tplId");
-            world.GetPool<ComponentEntityType>().Get(entityIndex).Type = typeId;
+            world.GetPool<ComponentObjectType>().Get(entityIndex).Type = typeId;
 
             // interactable
             UpdateInteractable(typeId, world, entityIndex);
             
             // attributes
-            ref var attributesComponent = ref world.GetPool<ComponentEntityAttributes>().Get(entityIndex);
+            ref var attributesComponent = ref world.GetPool<ComponentObjectAttributes>().Get(entityIndex);
             var attributeArray = entityData.GetValue<JArray>("attrs");
             UpdateAttributes(attributeArray, attributesComponent.Attributes);
             _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributesComponent.Attributes);

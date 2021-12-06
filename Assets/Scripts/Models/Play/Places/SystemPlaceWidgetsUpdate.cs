@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Shared.Attributes.Place;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
 
 namespace Solcery.Models.Play.Places
@@ -27,7 +27,7 @@ namespace Solcery.Models.Play.Places
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
-            _filterEntities = systems.GetWorld().Filter<ComponentEntityTag>().Inc<ComponentAttributePlace>().End();
+            _filterEntities = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentAttributePlace>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
         

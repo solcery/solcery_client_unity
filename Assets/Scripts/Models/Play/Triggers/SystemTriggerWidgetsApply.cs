@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Services.Transport;
 
 namespace Solcery.Models.Play.Triggers
@@ -32,7 +32,7 @@ namespace Solcery.Models.Play.Triggers
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            var entityIdPool = world.GetPool<ComponentEntityId>();
+            var entityIdPool = world.GetPool<ComponentObjectId>();
             foreach (var uniqEntityId in _filterTriggerWidgetCollector)
             {
                 ref var triggerCollector = ref world.GetPool<ComponentTriggerWidgetCollector>().Get(uniqEntityId)
