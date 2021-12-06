@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
@@ -15,7 +16,7 @@ namespace Solcery.Models.Simulation.Game.State
     {
         private sealed class GameStateDiffLog
         {
-            private bool _isInitFirstGameState;
+            private int _updateIteration;
             private readonly Dictionary<string, int> _oldGameAttributes;
             private readonly Dictionary<int, Dictionary<string, int>> _oldEntityAttributes;
 
@@ -26,40 +27,53 @@ namespace Solcery.Models.Simulation.Game.State
             
             private GameStateDiffLog()
             {
+                _updateIteration = 0;
                 _oldGameAttributes = new Dictionary<string, int>();
                 _oldEntityAttributes = new Dictionary<int, Dictionary<string, int>>();
             }
 
             public void PrintDiff(JObject gameState)
             {
-                Debug.Log("======[Game state diff]======");
-
-                if (gameState.TryGetValue("attrs", out JArray gameAttrsArray))
+                ++_updateIteration;
+                var result = new JObject
                 {
-                    PrintGameAttrsDiff(gameAttrsArray);
+                    {"Diff iteration", new JValue(_updateIteration)}
+                };
+                
+                if (gameState.TryGetValue("attrs", out JArray gameAttrsArray) 
+                    && PrintGameAttrsDiff(gameAttrsArray, out var res1))
+                {
+                    result.Add("Game Attributes", res1);
                 }
 
-                if (gameState.TryGetValue("objects", out JArray entitiesArray))
+                if (gameState.TryGetValue("objects", out JArray entitiesArray) 
+                    && PrintEntitiesAttrDiff(entitiesArray, out var res2))
                 {
-                    PrintEntitiesAttrDiff(entitiesArray);
+                    result.Add("Entities", res2);
                 }
-
-                Debug.Log("============[End]============");
+                
+                Debug.Log(result.ToString(Formatting.Indented));
             }
 
-            private void PrintGameAttrsDiff(JArray gameAttrsArray)
+            private bool PrintGameAttrsDiff(JArray gameAttrsArray, out JArray result)
             {
-                Debug.Log("=========[Game attrs]========");
+                result = new JArray();
+                
                 foreach (var attrToken in gameAttrsArray)
                 {
-                    PrintAttrDiff(_oldGameAttributes, attrToken);
+                    if (PrintAttrDiff(_oldGameAttributes, -1, attrToken, out var res))
+                    {
+                        result.Add(new JValue(res));
+                    }
                 }
-                Debug.Log("============[End]============");
+
+                return result.Count > 0;
             }
 
-            private void PrintEntitiesAttrDiff(JArray entityArray)
+            private bool PrintEntitiesAttrDiff(JArray entityArray, out JArray result)
             {
-                Debug.Log("==========[Entities]=========");
+                result = new JArray();
+
                 foreach (var entityAttrToken in entityArray)
                 {
                     if (entityAttrToken is JObject entityAttrObject 
@@ -71,22 +85,38 @@ namespace Solcery.Models.Simulation.Game.State
                             _oldEntityAttributes.Add(id, new Dictionary<string, int>());
                         }
 
+                        
+                        var resArr = new JArray();
+
                         foreach (var attrToken in entityAttrsArray)
                         {
-                            PrintAttrDiff(_oldEntityAttributes[id], attrToken);
+                            if (PrintAttrDiff(_oldEntityAttributes[id], id, attrToken, out var res))
+                            {
+                                resArr.Add(new JValue(res));
+                            }
+                        }
+
+                        if (resArr.Count > 0)
+                        {
+                            var resObj = new JObject {{"Entity Id", new JValue(id)}};
+                            result.Add(resObj);
+                            resObj.Add("Attrs", resArr);
                         }
                     }
                 }
-                Debug.Log("============[End]============");
+
+                return result.Count > 0;
             }
 
-            private void PrintAttrDiff(Dictionary<string, int> attrs, JToken attrToken)
+            private bool PrintAttrDiff(Dictionary<string, int> attrs, int entityId, JToken attrToken, out string result)
             {
+                result = "";
+                
                 if (attrToken is JObject attrObject 
                     && attrObject.TryGetValue("key", out string key)
                     && attrObject.TryGetValue("value", out int value))
                 {
-                    if (!attrs.ContainsKey(key) || _oldGameAttributes[key] != value)
+                    if (!attrs.ContainsKey(key) || attrs[key] != value)
                     {
                         if (!attrs.ContainsKey(key))
                         {
@@ -94,11 +124,14 @@ namespace Solcery.Models.Simulation.Game.State
                         }
                         else
                         {
-                            Debug.Log($"Attr {key} {attrs[key]}->{value}");
+                            result = $"Entity {entityId} attr {key} {attrs[key]}->{value}";
                             attrs[key] = value;
+                            return true;
                         }
                     }
                 }
+                
+                return false;
             }
         }
         
