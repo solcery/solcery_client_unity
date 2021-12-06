@@ -16,6 +16,7 @@ namespace Solcery.Models.Play.Places
         private EcsFilter _filterPlaceWithWidget;
         private EcsFilter _filterEntities;
         private EcsFilter _filterGameStateUpdate;
+        private EcsFilter _filterSubWidgetComponent;
 
         public static ISystemPlaceWidgetsUpdate Create()
         {
@@ -29,6 +30,7 @@ namespace Solcery.Models.Play.Places
             _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
             _filterEntities = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentAttributePlace>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
+            _filterSubWidgetComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().End();
         }
         
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -38,6 +40,15 @@ namespace Solcery.Models.Play.Places
                 return;
             }
 
+            // Чистим старые сабвиджеты
+            var subWidgetsPool = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
+            foreach (var entityId in _filterSubWidgetComponent)
+            {
+                var subWidget = subWidgetsPool.Get(entityId).Widget;
+                subWidget.ClearView();
+                subWidgetsPool.Del(entityId);
+            }
+            
             var entitiesInPlace = new Dictionary<int, List<int>>();
             // Подготовим набор entity в place
             foreach (var entityIndex in _filterEntities)
@@ -59,7 +70,6 @@ namespace Solcery.Models.Play.Places
                     out var entityIds))
                 {
                     var widget = systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget;
-                    widget.ClearSubWidgets(systems.GetWorld(), entityIds.ToArray());
                     widget.UpdateSubWidgets(systems.GetWorld(), entityIds.ToArray());
                 }
             }

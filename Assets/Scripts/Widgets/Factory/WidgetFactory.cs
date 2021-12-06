@@ -28,24 +28,25 @@ namespace Solcery.Widgets.Factory
         bool IWidgetFactory.TryCreateWidget(JObject jsonData, out IWidget widget)
         {
             widget = null;
-            
-            if (!jsonData.TryGetValue("layout", out int layout))
-            {
-                return false;
-            }
-
+            jsonData.TryGetValue("layout", out int layout);
             var widgetType = (WidgetPlaceTypes) layout;
+            
             var placeViewData = new WidgetPlaceViewData();
             if (placeViewData.TryParse(jsonData))
             {
                 switch (widgetType)
                 {
-                    case WidgetPlaceTypes.None:
-                        return false;
+                    case WidgetPlaceTypes.Widget:
+                        widget = new WidgetAreaCoins(_widgetCanvas, _serviceResource, placeViewData);
+                        return true;
                     case WidgetPlaceTypes.Button:
+                        widget = new WidgetAreaButtons(_widgetCanvas, _serviceResource, placeViewData);
+                        return true;
                     case WidgetPlaceTypes.Title:
+                        widget = new WidgetAreaTitles(_widgetCanvas, _serviceResource, placeViewData);
+                        return true;
                     case WidgetPlaceTypes.Picture:
-                        widget = new WidgetArea(_widgetCanvas, _serviceResource, placeViewData);
+                        widget = new WidgetAreaPictures(_widgetCanvas, _serviceResource, placeViewData);
                         return true;
                     case WidgetPlaceTypes.Stacked:
                         widget = new WidgetStack(_widgetCanvas, _serviceResource, placeViewData);

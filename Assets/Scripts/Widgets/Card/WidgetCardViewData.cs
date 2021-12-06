@@ -23,4 +23,5 @@ namespace Solcery.Widgets.Card
             Description = description.Value<string>();
             return true;
         }
-    }}
+    }
+}

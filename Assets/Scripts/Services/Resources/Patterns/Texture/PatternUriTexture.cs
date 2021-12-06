@@ -17,10 +17,7 @@ namespace Solcery.Services.Resources.Patterns.Texture
         bool IPattern.HasPattern(JObject json)
         {
             return json.TryGetValue("picture", out string picture)
-                   && picture != null
-                   && json.HasKey("name")
-                   && json.HasKey("description")
-                   && json.HasKey("action");
+                   && picture != null;
         }
 
         PatternData IPattern.GetPatternData(JObject json)

@@ -1,7 +1,6 @@
 using System;
 using Solcery.Models.Play.Attributes.Highlighted;
 using Solcery.Models.Play.Attributes.Interactable;
-using Solcery.Widgets.Deck;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +29,7 @@ namespace Solcery.Widgets.Card
         public override void Clear()
         {
             Button.onClick.RemoveAllListeners();
+            Destroy(Image.sprite);
         }
 
         public void SetHighlighted(bool value)
@@ -43,8 +43,15 @@ namespace Solcery.Widgets.Card
 
         public override void ApplyPlaceViewData(WidgetPlaceViewData viewData)
         {
-            gameObject.SetActive(viewData.Visible);
-            Back.SetActive(!viewData.Face);
+            switch (viewData.Face)
+            {
+                case CardFaceOption.Up:
+                    Back.SetActive(false);
+                    break;
+                case CardFaceOption.Down:
+                    Back.SetActive(true);
+                    break;
+            }
         }
     }
 }

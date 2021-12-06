@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.Places;
@@ -13,7 +14,7 @@ namespace Solcery.Widgets
         protected readonly IServiceResource ServiceResource;
         
         public abstract WidgetViewBase View { get; }
-
+            
         protected Widget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
             WidgetCanvas = widgetCanvas;
@@ -45,20 +46,6 @@ namespace Solcery.Widgets
                 }
                 
                 break;
-            }
-        }
-        
-        public void ClearSubWidgets(EcsWorld world, int[] entityIds)
-        {
-            var subWidgetPool = world.GetPool<ComponentPlaceSubWidget>();
-            foreach (var entityId in entityIds)
-            {
-                if (subWidgetPool.Has(entityId))
-                {
-                    var subWidget = subWidgetPool.Get(entityId);
-                    subWidget.Widget.ClearView();
-                    subWidgetPool.Del(entityId);
-                }
             }
         }
         

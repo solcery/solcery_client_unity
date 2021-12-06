@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using Solcery.Utils;
 
 namespace Solcery.Widgets
 {
@@ -10,8 +11,7 @@ namespace Solcery.Widgets
         public int ZOrder { get; private set; }
         public Vector2 AnchorMin { get; private set; }
         public Vector2 AnchorMax { get; private set; }
-        public bool Visible { get; private set; }
-        public bool Face { get; private set; }
+        public CardFaceOption Face { get; private set; }
 
         public override bool TryParse(JObject jsonData)
         {
@@ -30,16 +30,8 @@ namespace Solcery.Widgets
             AnchorMin = new Vector2(x1.Value<int>() / AnchorDivider, y1.Value<int>() / AnchorDivider);
             AnchorMax = new Vector2(x2.Value<int>() / AnchorDivider, y2.Value<int>() / AnchorDivider);
             ZOrder = zOrder.Value<int>();
-            
-            if (jsonData.TryGetValue("visible", out var visible))
-            {
-                Visible = visible.Value<bool>();
-            }
-            
-            if (jsonData.TryGetValue("face", out var face))
-            {
-                Face = face.Value<bool>();
-            }
+            jsonData.TryGetValue("face", out int face);
+            Face = (CardFaceOption)face;
             return true;
         }
     }

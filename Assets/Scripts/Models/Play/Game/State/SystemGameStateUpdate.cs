@@ -7,6 +7,7 @@ using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Game.StaticAttributes;
 using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
 using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
+using Solcery.Models.Shared.Game.StaticAttributes.Number;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
@@ -43,6 +44,7 @@ namespace Solcery.Models.Play.Game.State
             _staticAttributes = StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
+            _staticAttributes.RegistrationStaticAttribute(StaticAttributeNumber.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
         }
 
