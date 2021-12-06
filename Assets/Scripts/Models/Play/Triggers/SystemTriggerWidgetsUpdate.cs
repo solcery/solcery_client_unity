@@ -45,10 +45,10 @@ namespace Solcery.Models.Play.Triggers
                 ref var triggerCollector = ref world.GetPool<ComponentTriggerWidgetCollector>().Get(uniqEntityId)
                     .TriggerCollector;
                 triggerCollector.Cleanup();
-                var subWidgetComponents = world.GetPool<ComponentPlaceSubWidget>();
+                var subWidgetsPool = world.GetPool<ComponentPlaceSubWidget>();
                 foreach (var entityId in _filterSubWidgetComponent)
                 {
-                    var subWidget = subWidgetComponents.Get(entityId).Widget;
+                    var subWidget = subWidgetsPool.Get(entityId).Widget;
                     triggerCollector.Register(entityId, subWidget);
                 }
 

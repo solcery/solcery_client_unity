@@ -6,7 +6,6 @@ namespace Solcery.Widgets
     {
         WidgetViewBase View { get; }
         void UpdateSubWidgets(EcsWorld world, int[] entityIds);
-        void ClearSubWidgets(EcsWorld world, int[] entityIds);
         WidgetViewBase CreateView();
         void ClearView();
 

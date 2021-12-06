@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.Attributes.Highlighted;
 using Solcery.Models.Play.Attributes.Interactable;
+using Solcery.Models.Play.Attributes.Numberable;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -40,6 +41,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemPlaceWidgetsUpdate.Create());
             _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
+            _systems.Add(SystemApplyAttributeNumber.Create());
             _systems.Add(SystemTriggerWidgetsUpdate.Create());
             _systems.Add(SystemTriggerWidgetsApply.Create(game.TransportService));
             // TODO сюда добавляем новые системы и тд

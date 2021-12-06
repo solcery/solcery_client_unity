@@ -8,7 +8,6 @@ namespace Solcery.Widgets.Deck
         
         public override void ApplyPlaceViewData(WidgetPlaceViewData viewData)
         {
-            gameObject.SetActive(viewData.Visible);
             RectTransform.anchorMin = viewData.AnchorMin;
             RectTransform.anchorMax = viewData.AnchorMax;
         }
