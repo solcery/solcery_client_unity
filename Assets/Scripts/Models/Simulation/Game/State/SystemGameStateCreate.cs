@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json;
@@ -37,33 +38,33 @@ namespace Solcery.Models.Simulation.Game.State
                 ++_updateIteration;
                 var result = new JObject
                 {
-                    {"Diff iteration", new JValue(_updateIteration)}
+                    {"diff_iteration", new JValue(_updateIteration)}
                 };
                 
                 if (gameState.TryGetValue("attrs", out JArray gameAttrsArray) 
                     && PrintGameAttrsDiff(gameAttrsArray, out var res1))
                 {
-                    result.Add("Game Attributes", res1);
+                    result.Add("attrs", res1);
                 }
 
                 if (gameState.TryGetValue("objects", out JArray entitiesArray) 
                     && PrintEntitiesAttrDiff(entitiesArray, out var res2))
                 {
-                    result.Add("Entities", res2);
+                    result.Add("objects", res2);
                 }
                 
                 Debug.Log(result.ToString(Formatting.Indented));
             }
 
-            private bool PrintGameAttrsDiff(JArray gameAttrsArray, out JArray result)
+            private bool PrintGameAttrsDiff(JArray gameAttrsArray, out JObject result)
             {
-                result = new JArray();
+                result = new JObject();
                 
                 foreach (var attrToken in gameAttrsArray)
                 {
-                    if (PrintAttrDiff(_oldGameAttributes, -1, attrToken, out var res))
+                    if (PrintAttrDiff(_oldGameAttributes, attrToken, out var res))
                     {
-                        result.Add(new JValue(res));
+                        result.Add(res.Item1, new JValue(res.Item2));
                     }
                 }
 
@@ -85,22 +86,22 @@ namespace Solcery.Models.Simulation.Game.State
                             _oldEntityAttributes.Add(id, new Dictionary<string, int>());
                         }
 
-                        
-                        var resArr = new JArray();
+
+                        var resArr = new JObject();
 
                         foreach (var attrToken in entityAttrsArray)
                         {
-                            if (PrintAttrDiff(_oldEntityAttributes[id], id, attrToken, out var res))
+                            if (PrintAttrDiff(_oldEntityAttributes[id], attrToken, out var res))
                             {
-                                resArr.Add(new JValue(res));
+                                resArr.Add(res.Item1, new JValue(res.Item2));
                             }
                         }
 
                         if (resArr.Count > 0)
                         {
-                            var resObj = new JObject {{"Entity Id", new JValue(id)}};
+                            var resObj = new JObject {{"id", new JValue(id)}};
                             result.Add(resObj);
-                            resObj.Add("Attrs", resArr);
+                            resObj.Add("attrs", resArr);
                         }
                     }
                 }
@@ -108,9 +109,9 @@ namespace Solcery.Models.Simulation.Game.State
                 return result.Count > 0;
             }
 
-            private bool PrintAttrDiff(Dictionary<string, int> attrs, int entityId, JToken attrToken, out string result)
+            private bool PrintAttrDiff(IDictionary<string, int> attrs, JToken attrToken, out Tuple<string, string> result)
             {
-                result = "";
+                result = null;
                 
                 if (attrToken is JObject attrObject 
                     && attrObject.TryGetValue("key", out string key)
@@ -124,7 +125,7 @@ namespace Solcery.Models.Simulation.Game.State
                         }
                         else
                         {
-                            result = $"Entity {entityId} attr {key} {attrs[key]}->{value}";
+                            result = new Tuple<string, string>(key, $"{attrs[key]}->{value}");
                             attrs[key] = value;
                             return true;
                         }
