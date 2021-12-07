@@ -14,7 +14,6 @@ namespace Solcery.Widgets.Card
         public TextMeshProUGUI Description;
         public UnityEngine.UI.Button Button;
         public Image Image;
-
         public Action OnClick { get; set; }
 
         public override void Init()
