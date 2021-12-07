@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Initial.Game.Content
@@ -32,8 +32,8 @@ namespace Solcery.Models.Shared.Initial.Game.Content
             var world = systems.GetWorld();
             
             // Только тут мы инитим entity types, так что можно спокойно удалить если что то есть еще
-            var filter = world.Filter<ComponentEntityTypes>().End();
-            var pool = world.GetPool<ComponentEntityTypes>();
+            var filter = world.Filter<ComponentObjectTypes>().End();
+            var pool = world.GetPool<ComponentObjectTypes>();
 
             foreach (var entityId in filter)
             {
@@ -54,7 +54,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                 }
                 
                 var entityIndex = world.NewEntity();
-                world.GetPool<ComponentEntityTypes>().Add(entityIndex).Types = entityTypeMap;
+                world.GetPool<ComponentObjectTypes>().Add(entityIndex).Types = entityTypeMap;
             }
             
             _gameContent = null;

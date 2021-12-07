@@ -5,8 +5,8 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.Attributes;
+using Solcery.Models.Shared.Objects;
 using UnityEngine;
 using Solcery.Utils;
 
@@ -123,7 +123,7 @@ namespace Solcery.Tests.PlayMode
         public void TestOrdinaryValueBricksCardIdPasses()
         {
             var entityId = _world.NewEntity();
-            ref var cardId = ref _world.GetPool<ComponentEntityId>().Add(entityId);
+            ref var cardId = ref _world.GetPool<ComponentObjectId>().Add(entityId);
             cardId.Id = 11;
             TestUtils.PushObject(_world, entityId);
             ExecuteValueBrick("CardId");
@@ -134,7 +134,7 @@ namespace Solcery.Tests.PlayMode
         public void TestOrdinaryValueBricksCardTypeIdPasses()
         {
             var entityId = _world.NewEntity();
-            ref var cardId = ref _world.GetPool<ComponentEntityType>().Add(entityId);
+            ref var cardId = ref _world.GetPool<ComponentObjectType>().Add(entityId);
             cardId.Type = 12;
             TestUtils.PushObject(_world, entityId);
             ExecuteValueBrick("CardTypeId");
@@ -189,7 +189,7 @@ namespace Solcery.Tests.PlayMode
                 if (brickObject.TryGetValue("attributes", out JArray attributesArray))
                 {
                     attrsEntityId = _world.NewEntity();
-                    ref var attrs = ref _world.GetPool<ComponentEntityAttributes>().Add(attrsEntityId);
+                    ref var attrs = ref _world.GetPool<ComponentObjectAttributes>().Add(attrsEntityId);
                     foreach (var attributeToken in attributesArray)
                     {
                         if (attributeToken is JObject attributeObject 

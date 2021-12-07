@@ -1,9 +1,9 @@
 using Leopotam.EcsLite;
-using Solcery.Models.Shared.Entities;
 using Solcery.Models.Shared.Game.StaticAttributes;
 using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
 using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
+using Solcery.Models.Shared.Objects;
 
 namespace Solcery.Models.Shared.Game.Attributes
 {
@@ -23,8 +23,8 @@ namespace Solcery.Models.Shared.Game.Attributes
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filter = systems.GetWorld().Filter<ComponentEntityTag>().Inc<ComponentEntityId>()
-                .Inc<ComponentEntityAttributes>().End();
+            _filter = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentObjectId>()
+                .Inc<ComponentObjectAttributes>().End();
             
             _staticAttributes = StaticAttributes.StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
@@ -37,7 +37,7 @@ namespace Solcery.Models.Shared.Game.Attributes
             var world = systems.GetWorld();
             foreach (var entityId in _filter)
             {
-                ref var entityAttributes = ref world.GetPool<ComponentEntityAttributes>().Get(entityId);
+                ref var entityAttributes = ref world.GetPool<ComponentObjectAttributes>().Get(entityId);
                 _staticAttributes.ApplyAndUpdateAttributes(world, entityId, entityAttributes.Attributes);
             }
         }

@@ -2,7 +2,7 @@ using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 
 namespace Solcery.BrickInterpretation.Actions
@@ -29,7 +29,7 @@ namespace Solcery.BrickInterpretation.Actions
                 foreach (var uniqEntityId in filter)
                 {
                     ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
-                    var attrsPool = world.GetPool<ComponentEntityAttributes>();
+                    var attrsPool = world.GetPool<ComponentObjectAttributes>();
                     if (contextObject.TryPeek(out int entityId))
                     {
                         var attrs = attrsPool.Get(entityId).Attributes;

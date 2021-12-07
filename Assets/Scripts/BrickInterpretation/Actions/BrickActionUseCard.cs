@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Context;
-using Solcery.Models.Shared.Entities;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -21,16 +21,16 @@ namespace Solcery.BrickInterpretation.Actions
         public override void Run(IServiceBricks serviceBricks, JArray parameters, EcsWorld world, int level)
         {
             var filterObjects = world.Filter<ComponentContextObject>().End();
-            var filterEntityTypes = world.Filter<ComponentEntityTypes>().End();
+            var filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
             foreach (var uniqEntityId in filterObjects)
             {
                 ref var contextObject = ref world.GetPool<ComponentContextObject>().Get(uniqEntityId);
                 if (contextObject.TryPeek(out int entityId))
                 {
-                    var type = world.GetPool<ComponentEntityType>().Get(entityId).Type;
+                    var type = world.GetPool<ComponentObjectType>().Get(entityId).Type;
                     foreach (var uniqEntityTypes in filterEntityTypes)
                     {
-                        ref var types = ref world.GetPool<ComponentEntityTypes>().Get(uniqEntityTypes);
+                        ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityTypes);
                         if (types.Types.TryGetValue(type, out var data))
                         {
                             TestUtils.AddLine(level, $"Start UseCard -> type {type}");
