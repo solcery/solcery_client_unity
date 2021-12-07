@@ -18,7 +18,7 @@ namespace Solcery.Widgets_new
         
         protected T Layout;
 
-        protected PlaceWidget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject placeDataObject, string prefabPathKey)
+        protected PlaceWidget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, string prefabPathKey, JObject placeDataObject)
         {
             if (serviceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go) 
                 && Object.Instantiate(go, widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(T), out var component)
