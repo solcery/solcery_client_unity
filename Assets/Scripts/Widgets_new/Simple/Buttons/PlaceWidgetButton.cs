@@ -4,10 +4,10 @@ using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
-using Solcery.Widgets.Canvas;
 using Solcery.Utils;
+using Solcery.Widgets.Canvas;
 
-namespace Solcery.Widgets_new.Simple.Button
+namespace Solcery.Widgets_new.Simple.Buttons
 {
     public sealed class PlaceWidgetButton : PlaceWidget<PlaceWidgetButtonLayout>
     {

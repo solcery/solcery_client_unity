@@ -52,5 +52,20 @@ namespace Solcery.Widgets_new
                 Layout.UpdateVisible(placeDataObject.TryGetValue("visible", out bool visible) && visible);
             }
         }
+
+        protected virtual void CleanupImpl() { }
+
+        public void Cleanup()
+        {
+            CleanupImpl();
+            
+            if (Layout != null && Layout.gameObject != null)
+            {
+                Object.Destroy(Layout.gameObject);
+            }
+
+            Layout = null;
+            Game = null;
+        }
     }
 }

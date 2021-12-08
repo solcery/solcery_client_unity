@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-namespace Solcery.Widgets_new.Simple.Button
+namespace Solcery.Widgets_new.Simple.Buttons
 {
     public sealed class PlaceWidgetButtonLayout : PlaceWidgetSimpleLayout
     {
         [SerializeField]
-        private UnityEngine.UI.Button button;
+        private Button button;
         [SerializeField]
         private TMP_Text buttonText;
 

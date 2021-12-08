@@ -5,7 +5,7 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using Solcery.Widgets.Canvas;
 
-namespace Solcery.Widgets_new.Simple.Title
+namespace Solcery.Widgets_new.Simple.Titles
 {
     public sealed class PlaceWidgetTitle : PlaceWidget<PlaceWidgetTitleLayout>
     {
