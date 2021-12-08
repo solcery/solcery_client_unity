@@ -73,11 +73,9 @@ namespace Solcery.Models.Play.Places
             foreach (var entityId in _filterPlaceWithPlaceWidget)
             {
                 var placeId = poolPlaceId.Get(entityId).Id;
-                if (entitiesInPlace.TryGetValue(placeId, out var entityIds))
-                {
-                    var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
-                    placeWidget.Update(world, entityIds.ToArray());
-                }
+                var entityIds = entitiesInPlace.TryGetValue(placeId, out var eid) ? eid.ToArray() : new int[]{};
+                var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
+                placeWidget.Update(world, entityIds);
             }
             
             

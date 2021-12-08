@@ -42,18 +42,18 @@ namespace Solcery.Widgets.Factory
                     // case WidgetPlaceTypes.Button:
                     //     widget = new WidgetAreaButtons(_widgetCanvas, _serviceResource, placeViewData);
                     //     return true;
-                    case WidgetPlaceTypes.Title:
-                        widget = new WidgetAreaTitles(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
-                    case WidgetPlaceTypes.Picture:
-                        widget = new WidgetAreaPictures(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
-                    case WidgetPlaceTypes.Stacked:
-                        widget = new WidgetStack(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
-                    case WidgetPlaceTypes.LayedOut:
-                        widget = new WidgetDeck(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
+                    // case WidgetPlaceTypes.Title:
+                    //     widget = new WidgetAreaTitles(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
+                    // case WidgetPlaceTypes.Picture:
+                    //     widget = new WidgetAreaPictures(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
+                    // case WidgetPlaceTypes.Stacked:
+                    //     widget = new WidgetStack(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
+                    // case WidgetPlaceTypes.LayedOut:
+                    //     widget = new WidgetDeck(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
                 }
             }
 

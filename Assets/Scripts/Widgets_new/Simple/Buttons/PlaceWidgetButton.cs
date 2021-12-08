@@ -62,9 +62,9 @@ namespace Solcery.Widgets_new.Simple.Buttons
                 }
 
                 if (objectTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var objectTypeDataObject) 
-                    && objectTypeDataObject.TryGetValue("description", out string description))
+                    && objectTypeDataObject.TryGetValue("name", out string name))
                 {
-                    Layout.UpdateButtonText(description);
+                    Layout.UpdateButtonText(name);
                     return;
                 }
                 

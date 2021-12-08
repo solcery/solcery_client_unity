@@ -8,7 +8,7 @@ namespace Solcery.Widgets_new
         None = -1,
         [EnumPlaceWidgetPrefabPath("ui/ui_stack")]
         Stacked = 0,
-        [EnumPlaceWidgetPrefabPath("ui/ui_deck")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_hand")]
         LayedOut = 1,
         [EnumPlaceWidgetPrefabPath("ui/ui_widget")]
         Widget = 2,

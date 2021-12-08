@@ -9,6 +9,8 @@ using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
 using Solcery.Widgets_new;
+using Solcery.Widgets_new.Container.Hands;
+using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.Factories;
 using Solcery.Widgets_new.Simple.Buttons;
 using Solcery.Widgets_new.Simple.Pictures;
@@ -121,12 +123,14 @@ namespace Solcery.Games
         private void RegistrationPlaceWidgetTypes()
         {
             // Simple
-             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Widget, PlaceWidgetWidget.Create);
-             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Button, PlaceWidgetButton.Create);
-            // _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Picture, PlaceWidgetPicture.Create);
-            // _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Title, PlaceWidgetTitle.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Widget, PlaceWidgetWidget.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Button, PlaceWidgetButton.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Picture, PlaceWidgetPicture.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Title, PlaceWidgetTitle.Create);
             
             // Container
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.LayedOut, PlaceWidgetHand.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Stacked, PlaceWidgetStack.Create);
         }
 
         private void RegistrationBrickTypes()

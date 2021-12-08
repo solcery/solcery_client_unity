@@ -29,6 +29,22 @@ MonoBehaviour:
     m_Address: ui/picture
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 224af77f0d7ea41a58e8dde882e4b417
+    m_Address: ui/ui_widget
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eb604258e38324851af2b62792b6a927
+    m_Address: ui/ui_button
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1c5eb07ba73f4fa8baac533d6af57de
+    m_Address: ui/ui_picture
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9977d4c4ccd8d4eda8973a97f7d4c0c0
+    m_Address: ui/ui_title
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f49114169a154bc2bcc588cc3759c96, type: 2}
   m_SchemaSet:

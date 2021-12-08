@@ -26,5 +26,18 @@ namespace Solcery.Widgets_new.Simple.Buttons
         {
             button.onClick.AddListener(onClick);
         }
+        
+        public override void UpdateAlpha(int alpha)
+        {
+            if (canvasGroup == null)
+                return;
+
+            var isAlphaZero = alpha == 0;
+            canvasGroup.interactable = !isAlphaZero;
+            canvasGroup.blocksRaycasts = !isAlphaZero;
+
+            var a = alpha / 100f;
+            canvasGroup.alpha = a;
+        }
     }
 }
