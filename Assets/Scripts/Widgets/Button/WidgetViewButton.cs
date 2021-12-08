@@ -35,6 +35,7 @@ namespace Solcery.Widgets.Button
         {
             RectTransform.anchorMin = viewData.AnchorMin;
             RectTransform.anchorMax = viewData.AnchorMax;
+            SetInteractable(viewData.Interactable);
         }
     }
 }

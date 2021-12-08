@@ -12,6 +12,7 @@ namespace Solcery.Widgets
         public Vector2 AnchorMin { get; private set; }
         public Vector2 AnchorMax { get; private set; }
         public CardFaceOption Face { get; private set; }
+        public bool Interactable { get; set; }
 
         public override bool TryParse(JObject jsonData)
         {
@@ -32,6 +33,10 @@ namespace Solcery.Widgets
             ZOrder = zOrder.Value<int>();
             jsonData.TryGetValue("face", out int face);
             Face = (CardFaceOption)face;
+            if (jsonData.TryGetValue("interactableForActiveLocalPlayer", out bool interactable))
+            {
+                Interactable = interactable;
+            }
             return true;
         }
     }

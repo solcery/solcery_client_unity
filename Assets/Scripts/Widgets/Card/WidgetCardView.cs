@@ -51,6 +51,8 @@ namespace Solcery.Widgets.Card
                     Back.SetActive(true);
                     break;
             }
+
+            SetInteractable(viewData.Interactable);
         }
     }
 }
