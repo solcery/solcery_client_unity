@@ -12,19 +12,20 @@ namespace Solcery.Widgets
     {
         protected readonly IWidgetCanvas WidgetCanvas;
         protected readonly IServiceResource ServiceResource;
-        
+        protected readonly List<Widget> SubWidgets;
         public abstract WidgetViewBase View { get; }
             
         protected Widget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
             WidgetCanvas = widgetCanvas;
             ServiceResource = serviceResource;
+            SubWidgets = new List<Widget>();
         }
 
-        public void UpdateSubWidgets(EcsWorld world, int[] entityIds)
+        public virtual void UpdateSubWidgets(EcsWorld world, int[] entityIds)
         {
+            SubWidgets.Clear();
             var filter = world.Filter<ComponentObjectTypes>().End();
-
             foreach (var uniqEntityId in filter)
             {
                 ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityId);
@@ -40,6 +41,7 @@ namespace Solcery.Widgets
                             if (subWidget != null)
                             {
                                 world.GetPool<ComponentPlaceSubWidget>().Add(entityId).Widget = subWidget;
+                                SubWidgets.Add(subWidget);
                             }
                         }
                     }

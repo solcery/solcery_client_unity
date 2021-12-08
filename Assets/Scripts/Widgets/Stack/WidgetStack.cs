@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
 using Solcery.Widgets.Canvas;
@@ -23,9 +24,19 @@ namespace Solcery.Widgets.Stack
             _creator.Register(new WidgetCreatorCard(widgetCanvas, serviceResource));
             _gameObject = (GameObject) Resources.Load("ui/stack");
         }
-        
+
+        public override void UpdateSubWidgets(EcsWorld world, int[] entityIds)
+        {
+            base.UpdateSubWidgets(world, entityIds);
+            _stackView.Number.gameObject.SetActive(_viewData.Face == CardFaceOption.Down);
+            _stackView.Number.text = entityIds.Length.ToString();
+        }
+
         protected override Widget AddSubWidget(JObject data)
         {
+            if (SubWidgets.Count != 0) 
+                return null;
+            
             var widget = _creator.CreateWidget(data);
             if (widget != null)
             {
@@ -34,10 +45,10 @@ namespace Solcery.Widgets.Stack
                 view.ApplyPlaceViewData(_viewData);
                 return widget;
             }
-            
+
             return null;
         }
-        
+
         public override WidgetViewBase CreateView()
         {
             if (_stackView == null)

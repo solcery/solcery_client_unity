@@ -51,6 +51,7 @@ namespace Solcery.Widgets.Pool
         {
             var clone = Object.Instantiate(_prefab, _parent, false);
             var poolComponent = clone.GetComponent<PoolObject>();
+            poolComponent.Create();
             if (poolComponent != null)
             {
                 return poolComponent;
