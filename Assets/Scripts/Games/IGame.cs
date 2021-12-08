@@ -4,6 +4,7 @@ using Solcery.Models;
 using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
+using Solcery.Widgets_new.Factories;
 using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
@@ -15,6 +16,7 @@ namespace Solcery.Games
         public IServiceResource ServiceResource { get; }
         public IPlayModel PlayModel { get; }
         public IWidgetFactory WidgetFactory { get; }
+        public IPlaceWidgetFactory PlaceWidgetFactory { get; }
         public JObject GameContent { get; }
         public JObject GameStatePopAndClear { get; }
 

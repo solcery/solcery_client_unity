@@ -8,9 +8,14 @@ using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Factories;
+using Solcery.Widgets_new.Simple.Buttons;
+using Solcery.Widgets_new.Simple.Pictures;
+using Solcery.Widgets_new.Simple.Titles;
+using Solcery.Widgets_new.Simple.Widgets;
 using Solcery.Widgets.Canvas;
 using Solcery.Widgets.Factory;
-using UnityEngine;
 
 namespace Solcery.Games
 {
@@ -21,6 +26,7 @@ namespace Solcery.Games
         IServiceResource IGame.ServiceResource => _serviceResource;
         IPlayModel IGame.PlayModel => _playModel;
         IWidgetFactory IGame.WidgetFactory => _widgetFactory;
+        IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
 
         JObject IGame.GameContent => _gameContentJson;
 
@@ -39,6 +45,7 @@ namespace Solcery.Games
         private IServiceResource _serviceResource;
         private IPlayModel _playModel;
         private IWidgetFactory _widgetFactory;
+        private IPlaceWidgetFactory _placeWidgetFactory;
 
         private JObject _gameContentJson;
         private Stack<JObject> _gameStates;
@@ -73,6 +80,8 @@ namespace Solcery.Games
 
             _serviceResource = ServiceResource.Create(this);
             _widgetFactory = WidgetFactory.Create(widgetCanvas, _serviceResource);
+            _placeWidgetFactory = PlaceWidgetFactory.Create(this, widgetCanvas);
+            RegistrationPlaceWidgetTypes();
         }
 
         void IGame.Init()
@@ -107,6 +116,17 @@ namespace Solcery.Games
         private void Init(JObject gameContentJson)
         {
             _playModel.Init(this, gameContentJson);
+        }
+
+        private void RegistrationPlaceWidgetTypes()
+        {
+            // Simple
+             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Widget, PlaceWidgetWidget.Create);
+             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Button, PlaceWidgetButton.Create);
+            // _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Picture, PlaceWidgetPicture.Create);
+            // _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Title, PlaceWidgetTitle.Create);
+            
+            // Container
         }
 
         private void RegistrationBrickTypes()
@@ -178,6 +198,8 @@ namespace Solcery.Games
             // TODO: удаляем последними, так как в разных объектах могут быть ссылки на виджеты и ресурсы
             _widgetFactory.Destroy();
             _widgetFactory = null;
+            _placeWidgetFactory.Destroy();
+            _placeWidgetFactory = null;
             _serviceResource.Destroy();
             _serviceResource = null;
         }

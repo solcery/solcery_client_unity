@@ -19,6 +19,8 @@ namespace Solcery.Widgets_new.Simple.Titles
         
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.UpdateVisible(entityIds.Length > 0);
+            
             if (entityIds.Length <= 0)
             {
                 Layout.UpdateTitle("No cards in this place.");

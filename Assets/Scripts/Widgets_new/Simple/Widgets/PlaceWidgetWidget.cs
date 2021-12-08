@@ -9,16 +9,23 @@ namespace Solcery.Widgets_new.Simple.Widgets
 {
     public sealed class PlaceWidgetWidget : PlaceWidget<PlaceWidgetWidgetLayout>
     {
+        private string _lastPictureName;
+        
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetWidget(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
-        
-        private PlaceWidgetWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
-            : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
+
+        private PlaceWidgetWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+            : base(widgetCanvas, game, prefabPathKey, placeDataObject)
+        {
+            _lastPictureName = "";
+        }
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.UpdateVisible(entityIds.Length > 0);
+            
             if (entityIds.Length <= 0)
             {
                 return;
@@ -38,8 +45,10 @@ namespace Solcery.Widgets_new.Simple.Widgets
 
                 if (objectTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var objectTypeDataObject) 
                     && objectTypeDataObject.TryGetValue("picture", out string picture)
+                    && _lastPictureName != picture
                     && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
                 {
+                    _lastPictureName = picture;
                     Layout.UpdateImage(texture);
                 }
             }

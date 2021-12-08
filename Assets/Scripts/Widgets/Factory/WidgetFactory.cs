@@ -36,12 +36,12 @@ namespace Solcery.Widgets.Factory
             {
                 switch (widgetType)
                 {
-                    case WidgetPlaceTypes.Widget:
-                        widget = new WidgetAreaCoins(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
-                    case WidgetPlaceTypes.Button:
-                        widget = new WidgetAreaButtons(_widgetCanvas, _serviceResource, placeViewData);
-                        return true;
+                    // case WidgetPlaceTypes.Widget:
+                    //     widget = new WidgetAreaCoins(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
+                    // case WidgetPlaceTypes.Button:
+                    //     widget = new WidgetAreaButtons(_widgetCanvas, _serviceResource, placeViewData);
+                    //     return true;
                     case WidgetPlaceTypes.Title:
                         widget = new WidgetAreaTitles(_widgetCanvas, _serviceResource, placeViewData);
                         return true;

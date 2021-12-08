@@ -19,6 +19,8 @@ namespace Solcery.Widgets_new.Simple.Pictures
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.UpdateVisible(entityIds.Length > 0);
+            
             if (entityIds.Length <= 0)
             {
                 return;

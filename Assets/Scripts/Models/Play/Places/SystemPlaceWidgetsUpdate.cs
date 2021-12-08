@@ -14,6 +14,7 @@ namespace Solcery.Models.Play.Places
     public sealed class SystemPlaceWidgetsUpdate : ISystemPlaceWidgetsUpdate
     {
         private EcsFilter _filterPlaceWithWidget;
+        private EcsFilter _filterPlaceWithPlaceWidget;
         private EcsFilter _filterEntities;
         private EcsFilter _filterGameStateUpdate;
         private EcsFilter _filterSubWidgetComponent;
@@ -28,6 +29,8 @@ namespace Solcery.Models.Play.Places
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
+            _filterPlaceWithPlaceWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>()
+                .Inc<ComponentPlaceWidgetNew>().End();
             _filterEntities = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentAttributePlace>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
             _filterSubWidgetComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().End();
@@ -62,6 +65,21 @@ namespace Solcery.Models.Play.Places
                 
                 entitiesInPlace[entityPlaceId].Add(entityIndex);
             }
+
+            var world = systems.GetWorld();
+            var poolPlaceId = world.GetPool<ComponentPlaceId>();
+            var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
+            // TODO: New place widget update
+            foreach (var entityId in _filterPlaceWithPlaceWidget)
+            {
+                var placeId = poolPlaceId.Get(entityId).Id;
+                if (entitiesInPlace.TryGetValue(placeId, out var entityIds))
+                {
+                    var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
+                    placeWidget.Update(world, entityIds.ToArray());
+                }
+            }
+            
             
             // Пробежим по place с widget
             foreach (var placeIndex in _filterPlaceWithWidget)

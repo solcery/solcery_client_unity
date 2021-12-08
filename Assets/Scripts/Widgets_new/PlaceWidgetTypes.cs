@@ -6,17 +6,17 @@ namespace Solcery.Widgets_new
     {
         [EnumPlaceWidgetPrefabPath("")]
         None = -1,
-        [EnumPlaceWidgetPrefabPath("ui/stack")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_stack")]
         Stacked = 0,
-        [EnumPlaceWidgetPrefabPath("ui/deck")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_deck")]
         LayedOut = 1,
-        [EnumPlaceWidgetPrefabPath("ui/widget")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_widget")]
         Widget = 2,
-        [EnumPlaceWidgetPrefabPath("ui/title")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_title")]
         Title = 3,
-        [EnumPlaceWidgetPrefabPath("ui/button")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_button")]
         Button = 4,
-        [EnumPlaceWidgetPrefabPath("ui/picture")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_picture")]
         Picture = 5
     }
 }

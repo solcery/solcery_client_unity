@@ -10,6 +10,7 @@ namespace Solcery.Widgets_new
     public abstract class PlaceWidget
     {
         public abstract void Update(EcsWorld world, int[] entityIds);
+        public abstract void Destroy();
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
@@ -49,15 +50,15 @@ namespace Solcery.Widgets_new
                 var backgroundColor = placeDataObject.TryGetValue("bgColor", out string bgColor) ? bgColor : null;
                 Layout.UpdateBackgroundColor(backgroundColor);
 
-                Layout.UpdateVisible(placeDataObject.TryGetValue("visible", out bool visible) && visible);
+                Layout.UpdateVisible(false);
             }
         }
 
-        protected virtual void CleanupImpl() { }
+        protected virtual void DestroyImpl() { }
 
-        public void Cleanup()
+        public override void Destroy()
         {
-            CleanupImpl();
+            DestroyImpl();
             
             if (Layout != null && Layout.gameObject != null)
             {

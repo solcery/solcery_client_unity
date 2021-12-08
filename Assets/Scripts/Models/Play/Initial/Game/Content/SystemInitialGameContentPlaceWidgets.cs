@@ -51,14 +51,23 @@ namespace Solcery.Models.Play.Initial.Game.Content
                     var filter = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
                     var poolPlaceId = world.GetPool<ComponentPlaceId>();
                     var poolPlaceWidget = world.GetPool<ComponentPlaceWidget>();
+                    var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
 
                     foreach (var entityId in filter)
                     {
-                        if (placeHashMap.TryGetValue(poolPlaceId.Get(entityId).Id, out var placeObject)
-                            && _game.WidgetFactory.TryCreateWidget(placeObject, out var widget))
+                        if (placeHashMap.TryGetValue(poolPlaceId.Get(entityId).Id, out var placeObject))
                         {
-                            widget.CreateView();
-                            poolPlaceWidget.Add(entityId).Widget = widget;
+                            if (_game.WidgetFactory.TryCreateWidget(placeObject, out var widget))
+                            {
+                                widget.CreateView();
+                                poolPlaceWidget.Add(entityId).Widget = widget;
+                            }
+
+                            // TODO: New place widgets
+                            if (_game.PlaceWidgetFactory.TryCreatePlaceWidgetByType(placeObject, out var placeWidget))
+                            {
+                                poolPlaceWidgetNew.Add(entityId).Widget = placeWidget;
+                            }
                         }
                     }
                 }

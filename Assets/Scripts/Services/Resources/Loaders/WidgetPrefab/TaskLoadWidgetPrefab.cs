@@ -31,6 +31,11 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
                 }
             }
             
+            widgetResourcePaths.Add("ui/ui_widget");
+            widgetResourcePaths.Add("ui/ui_title");
+            widgetResourcePaths.Add("ui/ui_button");
+            widgetResourcePaths.Add("ui/ui_picture");
+            
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }
 

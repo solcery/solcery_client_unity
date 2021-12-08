@@ -21,11 +21,11 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.UpdateVisible(entityIds.Length > 0);
             Layout.ClearAllOnClickListener();
             
             if (entityIds.Length <= 0)
             {
-                Layout.UpdateButtonText("No cards in this place.");
                 return;
             }
 
