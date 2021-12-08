@@ -29,7 +29,7 @@ namespace Solcery.Widgets.Card
                 _cardView.Description.text = _viewData.Description;
                 if (ServiceResource.TryGetTextureForKey(_viewData.Picture, out var texture))
                 {
-                    _cardView.Image.sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+                    _cardView.MainImage.sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
                 }
 
                 _cardView.Init();
