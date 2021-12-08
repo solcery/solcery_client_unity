@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Services.Resources;
+using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets.Canvas;
 using UnityEngine;
@@ -17,10 +17,13 @@ namespace Solcery.Widgets_new
         private const float AnchorDivider = 10000.0f;
         
         protected T Layout;
+        protected IGame Game;
 
-        protected PlaceWidget(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, string prefabPathKey, JObject placeDataObject)
+        protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
-            if (serviceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go) 
+            Game = game;
+            
+            if (Game.ServiceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go) 
                 && Object.Instantiate(go, widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(T), out var component)
                 && component is T layout)
             {

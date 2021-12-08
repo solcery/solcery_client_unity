@@ -1,23 +1,77 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Services.Resources;
+using Solcery.Games;
+using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Triggers.EntityTypes;
+using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Widgets.Canvas;
+using Solcery.Utils;
 
 namespace Solcery.Widgets_new.Simple.Button
 {
     public sealed class PlaceWidgetButton : PlaceWidget<PlaceWidgetButtonLayout>
     {
-        public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, string prefabPathKey, JObject placeDataObject)
+        public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
-            return new PlaceWidgetButton(widgetCanvas, serviceResource, prefabPathKey, placeDataObject);
+            return new PlaceWidgetButton(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
         
-        private PlaceWidgetButton(IWidgetCanvas widgetCanvas, IServiceResource serviceResource, string prefabPathKey, JObject placeDataObject) 
-            : base(widgetCanvas, serviceResource, prefabPathKey, placeDataObject) { }
+        private PlaceWidgetButton(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
+            : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.ClearAllOnClickListener();
             
+            if (entityIds.Length <= 0)
+            {
+                Layout.UpdateButtonText("No cards in this place.");
+                return;
+            }
+
+            var entityId = entityIds[0];
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+
+            if (!objectIdPool.Has(entityId))
+            {
+                Layout.UpdateButtonText("No card id.");
+                return;
+            }
+
+            var objectId = objectIdPool.Get(entityId).Id;
+            
+            Layout.AddOnClickListener(() =>
+            {
+                var command = new JObject
+                {
+                    ["object_id"] = new JValue(objectId),
+                    ["trigger_type"] = new JValue(TriggerTypes.OnClick),
+                    ["trigger_target_entity_type"] = new JValue(TriggerTargetEntityTypes.Card)
+                };
+                Game.TransportService.SendCommand(command);
+            });
+            
+            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
+            var objectTypePool = world.GetPool<ComponentObjectType>();
+            foreach (var objectTypesEntityId in objectTypesFilter)
+            {
+                var objectTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
+                if (!objectTypePool.Has(entityId))
+                {
+                    break;
+                }
+
+                if (objectTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var objectTypeDataObject) 
+                    && objectTypeDataObject.TryGetValue("description", out string description))
+                {
+                    Layout.UpdateButtonText(description);
+                    return;
+                }
+                
+                break;
+            }
+            
+            Layout.UpdateButtonText("No card type data.");
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using Solcery.Services.Resources;
+using Solcery.Games;
 using Solcery.Widgets_new.Attributes.Enum;
 using Solcery.Widgets.Canvas;
 
@@ -9,9 +9,9 @@ namespace Solcery.Widgets_new
 {
     public sealed class PlaceWidgetFactory
     {
-        private Dictionary<PlaceWidgetTypes, Func<IWidgetCanvas, IServiceResource, string, JObject, PlaceWidget>> _placeWidgetCreators;
+        private Dictionary<PlaceWidgetTypes, Func<IWidgetCanvas, IGame, string, JObject, PlaceWidget>> _placeWidgetCreators;
 
-        public void RegistrationPlaceWidget(PlaceWidgetTypes placeWidgetType, Func<IWidgetCanvas, IServiceResource,  string, JObject, PlaceWidget> createdFunc)
+        public void RegistrationPlaceWidget(PlaceWidgetTypes placeWidgetType, Func<IWidgetCanvas, IGame,  string, JObject, PlaceWidget> createdFunc)
         {
             if (_placeWidgetCreators.ContainsKey(placeWidgetType))
             {
@@ -21,7 +21,7 @@ namespace Solcery.Widgets_new
             _placeWidgetCreators.Add(placeWidgetType, createdFunc);
         }
 
-        public bool TryCreatePlaceWidgetByType(PlaceWidgetTypes placeWidgetType, IWidgetCanvas widgetCanvas, IServiceResource serviceResource, JObject placeDataObject, out PlaceWidget placeWidget)
+        public bool TryCreatePlaceWidgetByType(PlaceWidgetTypes placeWidgetType, IWidgetCanvas widgetCanvas, IGame game, JObject placeDataObject, out PlaceWidget placeWidget)
         {
             placeWidget = null;
             if (!_placeWidgetCreators.ContainsKey(placeWidgetType))
@@ -29,7 +29,7 @@ namespace Solcery.Widgets_new
                 return false;
             }
 
-            placeWidget = _placeWidgetCreators[placeWidgetType].Invoke(widgetCanvas, serviceResource,
+            placeWidget = _placeWidgetCreators[placeWidgetType].Invoke(widgetCanvas, game,
                 EnumPlaceWidgetPrefabPathAttribute.GetPrefabPath(placeWidgetType), placeDataObject);
             return true;
         } 

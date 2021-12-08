@@ -27,7 +27,7 @@ namespace Solcery.Models.Shared.Commands
         {
             if (_serviceCommands.IsEmpty() 
                 || !_serviceCommands.TryPopCommand(out var command)
-                || !command.TryGetValue("entity_id", out int targetEntityId)
+                || !command.TryGetValue("object_id", out int objectId)
                 || !command.TryGetEnum("trigger_type", out TriggerTypes triggerType)
                 || !command.TryGetEnum("trigger_target_entity_type", out TriggerTargetEntityTypes triggerTargetEntityTypes))
             {
@@ -45,7 +45,7 @@ namespace Solcery.Models.Shared.Commands
             }
             
             world.GetPool<ComponentTriggerTag>().Add(entityId);
-            world.GetPool<ComponentTriggerTargetEntityId>().Add(entityId).TargetEntityId = targetEntityId;
+            world.GetPool<ComponentTriggerTargetObjectId>().Add(entityId).TargetObjectId = objectId;
         }
 
         private bool TryAddTriggerType(int entityId, TriggerTypes triggerType, EcsWorld world)

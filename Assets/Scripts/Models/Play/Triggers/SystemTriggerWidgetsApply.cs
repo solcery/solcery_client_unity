@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Transport;
 
 namespace Solcery.Models.Play.Triggers
@@ -41,9 +42,9 @@ namespace Solcery.Models.Play.Triggers
                 {
                     _transportService.SendCommand(new JObject
                     {
-                        ["entity_id"] = new JValue(entityIdPool.Get(triggerData.EntityId).Id),
+                        ["object_id"] = new JValue(entityIdPool.Get(triggerData.EntityId).Id),
                         ["trigger_type"] = new JValue(triggerData.Type),
-                        ["trigger_target_entity_type"] = new JValue(1)
+                        ["trigger_target_entity_type"] = new JValue(TriggerTargetEntityTypes.Card)
                     });
                 }
             }

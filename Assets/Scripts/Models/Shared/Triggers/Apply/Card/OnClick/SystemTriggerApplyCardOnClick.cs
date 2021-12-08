@@ -34,7 +34,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         {
             var world = systems.GetWorld();
             
-            _filterTriggers = world.Filter<ComponentTriggerTag>().Inc<ComponentTriggerTargetEntityId>()
+            _filterTriggers = world.Filter<ComponentTriggerTag>().Inc<ComponentTriggerTargetObjectId>()
                 .Inc<ComponentTriggerEntityCardTag>()
                 .Inc<ComponentTriggerOnClickTag>().End();
 
@@ -50,14 +50,14 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            var triggerTargetEntityIdPool = world.GetPool<ComponentTriggerTargetEntityId>();
+            var triggerTargetEntityIdPool = world.GetPool<ComponentTriggerTargetObjectId>();
             var entityIdPool = world.GetPool<ComponentObjectId>();
             var entityTypePool = world.GetPool<ComponentObjectType>();
             var entityTypesPool = world.GetPool<ComponentObjectTypes>();
 
             foreach (var triggerEntityId in _filterTriggers)
             {
-                var targetObjectId = triggerTargetEntityIdPool.Get(triggerEntityId).TargetEntityId;
+                var targetObjectId = triggerTargetEntityIdPool.Get(triggerEntityId).TargetObjectId;
 
                 foreach (var entityId in _filterEntities)
                 {
