@@ -14,5 +14,10 @@ namespace Solcery.Widgets_new.Container.Stacks
         {
             text.text = newText;
         }
+
+        public void UpdateTextVisible(bool visible)
+        {
+            text.gameObject.SetActive(visible);
+        }
     }
 }

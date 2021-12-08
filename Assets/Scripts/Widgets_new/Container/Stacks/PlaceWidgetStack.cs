@@ -19,9 +19,17 @@ namespace Solcery.Widgets_new.Container.Stacks
         {
             Layout.UpdateVisible(entityIds.Length > 0);
             
+            var textVisible = CardFace == PlaceWidgetCardFace.Down;
+            Layout.UpdateTextVisible(textVisible);
+            
             if (entityIds.Length <= 0)
             {
                 return;
+            }
+
+            if (textVisible)
+            {
+                Layout.UpdateText(entityIds.Length.ToString());
             }
         }
     }

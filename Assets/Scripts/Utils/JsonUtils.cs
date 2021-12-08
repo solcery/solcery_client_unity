@@ -62,7 +62,9 @@ namespace Solcery.Utils
         
         public static bool TryGetEnum<T>(this JObject data, string key, out T ret) where T : struct
         {
-            if (data == null || !data.TryGetValue(key, StringComparison.Ordinal, out var value))
+            if (data == null 
+                || !data.ContainsKey(key) 
+                || !data.TryGetValue(key, StringComparison.Ordinal, out var value))
             {
                 ret = default;
                 return false;

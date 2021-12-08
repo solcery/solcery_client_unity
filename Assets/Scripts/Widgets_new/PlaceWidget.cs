@@ -19,6 +19,7 @@ namespace Solcery.Widgets_new
         
         protected T Layout;
         protected IGame Game;
+        protected PlaceWidgetCardFace CardFace;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -30,19 +31,21 @@ namespace Solcery.Widgets_new
             {
                 Layout = layout;
 
-                if (placeDataObject.TryGetValue("x1", out int x1) 
-                    && placeDataObject.TryGetValue("x2", out int x2)
-                    && placeDataObject.TryGetValue("y1", out int y1)
-                    && placeDataObject.TryGetValue("y2", out int y2))
-                {
-                    Layout.UpdateAnchor(new Vector2(x1 / AnchorDivider, y1 / AnchorDivider),
-                        new Vector2(x2 / AnchorDivider, y2 / AnchorDivider));
-                }
+                var placeId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
+                Layout.name = $"{placeId}_{Layout.name}";
 
-                if (placeDataObject.TryGetValue("zOrder", out int orderZ))
-                {
-                    Layout.UpdateOrderZ(orderZ);
-                }
+                var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
+                var x2 = placeDataObject.TryGetValue("x2", out int xt2) ? xt2 / AnchorDivider : 0f;
+                var y1 = placeDataObject.TryGetValue("y1", out int yt1) ? yt1 / AnchorDivider : 0f;
+                var y2 = placeDataObject.TryGetValue("y2", out int yt2) ? yt2 / AnchorDivider : 0f;
+                Layout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
+
+                var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
+                Layout.UpdateOrderZ(orderZ);
+
+                CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
+                    ? res
+                    : PlaceWidgetCardFace.Up;
 
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
