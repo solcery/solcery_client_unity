@@ -4,14 +4,18 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets_new.Attributes.Enum;
+using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets_new.Factories
 {
     public sealed class PlaceWidgetFactory : IPlaceWidgetFactory
     {
+        ICardInContainerPool IPlaceWidgetFactory.CardInContainerPool => _cardInContainerPool;
+        
         private IGame _game;
         private IWidgetCanvas _widgetCanvas;
+        private ICardInContainerPool _cardInContainerPool;
         private Dictionary<PlaceWidgetTypes, Func<IWidgetCanvas, IGame, string, JObject, PlaceWidget>> _placeWidgetCreators;
 
         public static IPlaceWidgetFactory Create(IGame game, IWidgetCanvas widgetCanvas)
@@ -23,6 +27,7 @@ namespace Solcery.Widgets_new.Factories
         {
             _game = game;
             _widgetCanvas = widgetCanvas;
+            _cardInContainerPool = CardInContainerPool.Create(widgetCanvas.GetUiCanvas(), game.ServiceResource);
             _placeWidgetCreators = new Dictionary<PlaceWidgetTypes, Func<IWidgetCanvas, IGame, string, JObject, PlaceWidget>>();
         }
 
@@ -56,16 +61,13 @@ namespace Solcery.Widgets_new.Factories
 
         void IPlaceWidgetFactory.Destroy()
         {
-            Cleanup();
+            _cardInContainerPool.Destroy();
+            _placeWidgetCreators.Clear();
 
             _game = null;
             _widgetCanvas = null;
+            _cardInContainerPool = null;
             _placeWidgetCreators = null;
-        }
-
-        private void Cleanup()
-        {
-            _placeWidgetCreators.Clear();
         }
     }
 }

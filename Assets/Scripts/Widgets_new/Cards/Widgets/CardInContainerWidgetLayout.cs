@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Solcery.Widgets_new.Cards
+namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidgetLayout : MonoBehaviour
     {
@@ -18,5 +18,10 @@ namespace Solcery.Widgets_new.Cards
         private Button button;
         [SerializeField]
         private Image image;
+
+        public void Cleanup()
+        {
+            
+        }
     }
 }
