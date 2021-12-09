@@ -1,4 +1,5 @@
 using System.Linq;
+using Solcery.Widgets_new.StaticOrderZ;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +30,15 @@ namespace Solcery.Widgets_new
         public void UpdateOrderZ(int orderZ)
         {
             _orderZ = orderZ;
+
+            var parent = rectTransform.parent;
+            var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
             
-            var placeWidgetLayoutArray = rectTransform.parent.GetComponentsInChildren<PlaceWidgetLayout>()
+            var placeWidgetLayoutArray = parent.GetComponentsInChildren<PlaceWidgetLayout>()
                 .OrderBy(o => o._orderZ).ToList();
             foreach (var placeWidgetLayout in placeWidgetLayoutArray)
             {
-                rectTransform.SetSiblingIndex(placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
+                rectTransform.SetSiblingIndex(staticOrderZLayoutCount + placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
             }
         }
 

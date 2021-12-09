@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502658, g: 0.37139314, b: 0.49600917, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850265, g: 0.3713928, b: 0.49600852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 1140071410}
   - component: {fileID: 1140071412}
   - component: {fileID: 1140071411}
+  - component: {fileID: 1140071413}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -450,6 +451,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140071409}
   m_CullTransparentMesh: 1
+--- !u!114 &1140071413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140071409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b83d849dbe34de998adfeae210cbfe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orderZ: -10
 --- !u!1 &1293047458
 GameObject:
   m_ObjectHideFlags: 0
