@@ -11,7 +11,7 @@ namespace Solcery.Services.Resources.Loaders.Texture
         Texture2D ITextureLoaderUri.Texture => _texture;
 
         private bool _loadedIsSuccess;
-        private string _uri;
+        private readonly string _uri;
         private Texture2D _texture;
         private bool _inProgress;
         private Action<ITextureLoaderUri> _callback;
@@ -52,6 +52,8 @@ namespace Solcery.Services.Resources.Loaders.Texture
                 _loadedIsSuccess = true;
                 _texture = ((DownloadHandlerTexture) _webRequest.downloadHandler).texture;
             }
+            
+            _webRequest.Dispose();
 
             _inProgress = false;
             _callback?.Invoke(this);
