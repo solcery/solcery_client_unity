@@ -70,18 +70,7 @@ namespace Solcery.Widgets_new.Container.Stacks
 
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
-                    cardUpdater.Invoke(entityId, objectTypePool, cardTypes, cardInContainerWidget);
-                    // cardInContainerWidget.UpdateParent(Layout.Content);
-                    // cardInContainerWidget.UpdateCardFace(CardFace);
-                    // cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
-                    //
-                    // if (CardFace != PlaceWidgetCardFace.Down 
-                    //     && objectTypePool.Has(entityId)
-                    //     && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
-                    // {
-                    //     cardInContainerWidget.UpdateFromCardTypeData(cardTypeDataObject);
-                    // }
-                        
+                    cardUpdater.Invoke(entityId, objectTypePool, cardTypes, cardInContainerWidget); 
                     _cards.Add(entityId, cardInContainerWidget);
                 }
             }
@@ -132,7 +121,5 @@ namespace Solcery.Widgets_new.Container.Stacks
                 }
             }
         }
-        
-        
     }
 }

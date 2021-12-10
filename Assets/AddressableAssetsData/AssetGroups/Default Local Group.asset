@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Address: ui/ui_title
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 4b04c4fcdc8cb4da19ddd5fab9dd390d
+  - m_GUID: 0d0716bedbcac48a3be10b53cb1f2c34
     m_Address: ui/ui_hand
     m_ReadOnly: 0
     m_SerializedLabels: []
