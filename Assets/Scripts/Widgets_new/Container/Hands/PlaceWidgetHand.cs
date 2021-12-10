@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
@@ -24,18 +25,18 @@ namespace Solcery.Widgets_new.Container.Hands
 
     public class PlaceWidgetHand<T> : PlaceWidget<T> where T : PlaceWidgetHandLayout
     {
-        private List<ICardInContainerWidget> _cards;
+        private Dictionary<int, ICardInContainerWidget> _cards;
         
         protected PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            _cards = new List<ICardInContainerWidget>();
+            _cards = new Dictionary<int, ICardInContainerWidget>();
         }
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
             Layout.UpdateVisible(entityIds.Length > 0);
-            RemoveCards();
+            RemoveCards(world, entityIds);
             
             if (entityIds.Length <= 0)
             {
@@ -71,10 +72,17 @@ namespace Solcery.Widgets_new.Container.Hands
             
             foreach (var entityId in entityIds)
             {
+                var objectId = objectIdPool.Get(entityId).Id;
+
+                if (_cards.ContainsKey(objectId))
+                {
+                    continue;
+                }
+                
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
                     cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, cardTypes, cardInContainerWidget); 
-                    _cards.Add(cardInContainerWidget);
+                    _cards.Add(objectId, cardInContainerWidget);
                 }
             }
         }
@@ -110,19 +118,27 @@ namespace Solcery.Widgets_new.Container.Hands
         {
             foreach (var cardInContainerWidget in _cards)
             {
-                cardInContainerWidget.Destroy();
+                cardInContainerWidget.Value.Destroy();
             }
             _cards.Clear();
             _cards = null;
         }
 
-        private void RemoveCards()
+        private void RemoveCards(EcsWorld world, int[] entityIds)
         {
-            while (_cards.Count > 0)
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var keys = _cards.Keys.ToList();
+
+            foreach (var entityId in entityIds)
             {
-                var cardInContainerWidget = _cards[0];
-                _cards.Remove(cardInContainerWidget);
-                Game.PlaceWidgetFactory.CardInContainerPool.Push(cardInContainerWidget);
+                var objectId = objectIdPool.Get(entityId).Id;
+                keys.Remove(objectId);
+            }
+
+            foreach (var key in keys)
+            {
+                Game.PlaceWidgetFactory.CardInContainerPool.Push(_cards[key]);
+                _cards.Remove(key);
             }
         }
     }
