@@ -53,7 +53,7 @@ namespace Solcery.Models.Shared.Attributes.Values
 
         void IAttributeValue.Cleanup()
         {
-            _init = true;
+            _init = false;
             _changed = false;
             _current = -1;
             _old = -1;
