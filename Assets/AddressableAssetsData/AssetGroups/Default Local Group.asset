@@ -49,11 +49,11 @@ MonoBehaviour:
     m_Address: ui/ui_hand
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: b7e76019cad054991a4ef1b41ebfb497
+  - m_GUID: 8b2ef1a32238840e4b17ea26d0356ff0
     m_Address: ui/ui_stack
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: cac8ebbad37cd481e8d2799ec62f8ddb
+  - m_GUID: 877a3f48ae38a411c87e12b6979f22dd
     m_Address: ui/ui_card
     m_ReadOnly: 0
     m_SerializedLabels: []

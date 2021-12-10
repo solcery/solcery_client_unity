@@ -1,5 +1,7 @@
 using Newtonsoft.Json.Linq;
-using Solcery.Services.Resources;
+using Solcery.Games;
+using Solcery.Models.Shared.Triggers.EntityTypes;
+using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -7,17 +9,17 @@ namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidget : ICardInContainerWidget
     {
-        private IServiceResource _serviceResource;
+        private IGame _game;
         private CardInContainerWidgetLayout _layout;
 
-        public static ICardInContainerWidget Create(IServiceResource serviceResource, GameObject prefab, Transform poolTransform)
+        public static ICardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
-            return new CardInContainerWidget(serviceResource, prefab, poolTransform);
+            return new CardInContainerWidget(game, prefab, poolTransform);
         }
         
-        private CardInContainerWidget(IServiceResource serviceResource, GameObject prefab, Transform poolTransform)
+        private CardInContainerWidget(IGame game, GameObject prefab, Transform poolTransform)
         {
-            _serviceResource = serviceResource;
+            _game = game;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<CardInContainerWidgetLayout>();
         }
 
@@ -36,7 +38,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateInteractable(interactable);
         }
 
-        void ICardInContainerWidget.UpdateFromCardTypeData(JObject data)
+        void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
         {
             if (data.TryGetValue("name", out string name))
             {
@@ -49,10 +51,21 @@ namespace Solcery.Widgets_new.Cards.Widgets
             }
 
             if (data.TryGetValue("picture", out string picture) 
-                && _serviceResource.TryGetTextureForKey(picture, out var texture))
+                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
             {
                 _layout.UpdateSprite(texture);
             }
+            
+            _layout.AddOnClickListener(() =>
+            {
+                var command = new JObject
+                {
+                    ["object_id"] = new JValue(objectId),
+                    ["trigger_type"] = new JValue(TriggerTypes.OnClick),
+                    ["trigger_target_entity_type"] = new JValue(TriggerTargetEntityTypes.Card)
+                };
+                _game.TransportService.SendCommand(command);
+            });
         }
         
         void ICardInContainerWidget.Cleanup()
@@ -62,10 +75,11 @@ namespace Solcery.Widgets_new.Cards.Widgets
 
         void ICardInContainerWidget.Destroy()
         {
+            _layout.Cleanup();
             Object.Destroy(_layout.gameObject);
             _layout = null;
 
-            _serviceResource = null;
+            _game = null;
         }
     }
 }

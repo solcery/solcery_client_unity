@@ -8,7 +8,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
         void UpdateParent(Transform parent);
         void UpdateCardFace(PlaceWidgetCardFace cardFace);
         void UpdateInteractable(bool interactable);
-        void UpdateFromCardTypeData(JObject data);
+        void UpdateFromCardTypeData(int objectId, JObject data);
         void Cleanup();
         void Destroy();
     }

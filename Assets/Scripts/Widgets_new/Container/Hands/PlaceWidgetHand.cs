@@ -24,18 +24,18 @@ namespace Solcery.Widgets_new.Container.Hands
 
     public class PlaceWidgetHand<T> : PlaceWidget<T> where T : PlaceWidgetHandLayout
     {
-        private Dictionary<int, ICardInContainerWidget> _cards;
+        private List<ICardInContainerWidget> _cards;
         
         protected PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            _cards = new Dictionary<int, ICardInContainerWidget>();
+            _cards = new List<ICardInContainerWidget>();
         }
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
             Layout.UpdateVisible(entityIds.Length > 0);
-            RemoveCards(entityIds);
+            RemoveCards();
             
             if (entityIds.Length <= 0)
             {
@@ -43,8 +43,9 @@ namespace Solcery.Widgets_new.Container.Hands
             }
 
             var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
-            
-            Action<int, EcsPool<ComponentObjectType>, Dictionary<int, JObject>, ICardInContainerWidget> cardUpdater;
+
+            Action<int, EcsPool<ComponentObjectType>, EcsPool<ComponentObjectId>, Dictionary<int, JObject>,
+                ICardInContainerWidget> cardUpdater;
             if (cardFaceVisible)
             {
                 cardUpdater = CardFaceShowUpdater;
@@ -56,6 +57,7 @@ namespace Solcery.Widgets_new.Container.Hands
             
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectTypePool = world.GetPool<ComponentObjectType>();
+            var objectIdPool = world.GetPool<ComponentObjectId>();
             var cardTypes = new Dictionary<int, JObject>();
 
             if (cardFaceVisible)
@@ -69,21 +71,17 @@ namespace Solcery.Widgets_new.Container.Hands
             
             foreach (var entityId in entityIds)
             {
-                if (_cards.ContainsKey(entityId))
-                {
-                    continue;
-                }
-
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
-                    cardUpdater.Invoke(entityId, objectTypePool, cardTypes, cardInContainerWidget); 
-                    _cards.Add(entityId, cardInContainerWidget);
+                    cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, cardTypes, cardInContainerWidget); 
+                    _cards.Add(cardInContainerWidget);
                 }
             }
         }
         
         private void CardFaceHideUpdater(int entityId, 
             EcsPool<ComponentObjectType> objectTypePool, 
+            EcsPool<ComponentObjectId> objectIdPool,
             Dictionary<int, JObject> cardTypes, 
             ICardInContainerWidget cardInContainerWidget)
         {
@@ -94,15 +92,17 @@ namespace Solcery.Widgets_new.Container.Hands
 
         private void CardFaceShowUpdater(int entityId, 
             EcsPool<ComponentObjectType> objectTypePool, 
+            EcsPool<ComponentObjectId> objectIdPool,
             Dictionary<int, JObject> cardTypes,
             ICardInContainerWidget cardInContainerWidget)
         {
-            CardFaceHideUpdater(entityId, objectTypePool, cardTypes, cardInContainerWidget);
+            CardFaceHideUpdater(entityId, objectTypePool, objectIdPool, cardTypes, cardInContainerWidget);
             
             if (objectTypePool.Has(entityId)
-                && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
+                && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject)
+                && objectIdPool.Has(entityId))
             {
-                cardInContainerWidget.UpdateFromCardTypeData(cardTypeDataObject);
+                cardInContainerWidget.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
             }
         }
         
@@ -110,21 +110,19 @@ namespace Solcery.Widgets_new.Container.Hands
         {
             foreach (var cardInContainerWidget in _cards)
             {
-                cardInContainerWidget.Value.Destroy();
+                cardInContainerWidget.Destroy();
             }
             _cards.Clear();
             _cards = null;
         }
 
-        private void RemoveCards(int[] entityIds)
+        private void RemoveCards()
         {
-            foreach (var entityId in entityIds)
+            while (_cards.Count > 0)
             {
-                if (_cards.TryGetValue(entityId, out var cardInContainerWidget))
-                {
-                    _cards.Remove(entityId);
-                    Game.PlaceWidgetFactory.CardInContainerPool.Push(cardInContainerWidget);
-                }
+                var cardInContainerWidget = _cards[0];
+                _cards.Remove(cardInContainerWidget);
+                Game.PlaceWidgetFactory.CardInContainerPool.Push(cardInContainerWidget);
             }
         }
     }

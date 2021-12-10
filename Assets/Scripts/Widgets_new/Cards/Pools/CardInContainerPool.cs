@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Solcery.Services.Resources;
+using Solcery.Games;
 using Solcery.Widgets_new.Cards.Widgets;
 using UnityEngine;
 
@@ -9,14 +9,14 @@ namespace Solcery.Widgets_new.Cards.Pools
     {
         private Transform _poolTransform;
         private Stack<ICardInContainerWidget> _pool;
-        private IServiceResource _serviceResource;
+        private IGame _game;
 
-        public static ICardInContainerPool Create(Transform parent, IServiceResource serviceResource)
+        public static ICardInContainerPool Create(Transform parent, IGame game)
         {
-            return new CardInContainerPool(parent, serviceResource);
+            return new CardInContainerPool(parent, game);
         }
 
-        private CardInContainerPool(Transform parent, IServiceResource serviceResource)
+        private CardInContainerPool(Transform parent, IGame game)
         {
             var go = new GameObject("card_in_container_pool")
             {
@@ -29,7 +29,7 @@ namespace Solcery.Widgets_new.Cards.Pools
             go.SetActive(false);
             _poolTransform = go.GetComponent<Transform>();
 
-            _serviceResource = serviceResource;
+            _game = game;
 
             _pool = new Stack<ICardInContainerWidget>();
         }
@@ -48,7 +48,6 @@ namespace Solcery.Widgets_new.Cards.Pools
         {
             cardInContainerWidget.Cleanup();
             cardInContainerWidget.UpdateParent(_poolTransform);
-            //cardInContainerWidget.UpdatePosition(Vector3.zero);
             _pool.Push(cardInContainerWidget);
         }
 
@@ -63,16 +62,16 @@ namespace Solcery.Widgets_new.Cards.Pools
             Object.Destroy(_poolTransform.gameObject);
             _poolTransform = null;
             
-            _serviceResource = null;
+            _game = null;
         }
 
         private void PrePool()
         {
-            if (_serviceResource.TryGetWidgetPrefabForKey("ui/ui_card", out var prefab))
+            if (_game.ServiceResource.TryGetWidgetPrefabForKey("ui/ui_card", out var prefab))
             {
                 for (var index = 0; index < 10; index++)
                 {
-                    _pool.Push(CardInContainerWidget.Create(_serviceResource, prefab, _poolTransform));
+                    _pool.Push(CardInContainerWidget.Create(_game, prefab, _poolTransform));
                 }
             }
         }

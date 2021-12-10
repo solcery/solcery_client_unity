@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Cards.Widgets
@@ -20,10 +21,34 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Image image;
         
         private Sprite _sprite;
+        private Vector2 _anchorMin;
+        private Vector2 _anchorMax;
+        private Vector2 _pivot;
+        private Vector2 _anchoredPosition;
+        private Vector2 _offsetMax;
+        private Vector2 _offsetMin;
+
+        private void Awake()
+        {
+            _anchoredPosition = rectTransform.anchoredPosition;
+            _anchorMin = rectTransform.anchorMin;
+            _anchorMax = rectTransform.anchorMax;
+            _pivot = rectTransform.pivot;
+            _offsetMin = rectTransform.offsetMin;
+            _offsetMax = rectTransform.offsetMax;
+        }
 
         public void UpdateParent(Transform parent)
         {
             rectTransform.SetParent(parent, false);
+            
+            rectTransform.offsetMax = Vector2.down;
+            rectTransform.anchoredPosition = _anchoredPosition;
+            rectTransform.pivot = _pivot;
+            rectTransform.anchorMin = _anchorMin;
+            rectTransform.anchorMax = _anchorMax;
+            rectTransform.offsetMin = _offsetMin;
+            rectTransform.offsetMax = _offsetMax;
         }
 
         public void UpdateCardFace(PlaceWidgetCardFace cardFace)
@@ -34,6 +59,12 @@ namespace Solcery.Widgets_new.Cards.Widgets
         public void UpdateInteractable(bool interactable)
         {
             button.interactable = interactable;
+        }
+
+        public void AddOnClickListener(UnityAction onClick)
+        {
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(onClick);
         }
 
         public void UpdateName(string newName)
@@ -57,7 +88,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
         
         public void Cleanup()
         {
-            
+            button.onClick.RemoveAllListeners();
         }
         
         private void OnDestroy()

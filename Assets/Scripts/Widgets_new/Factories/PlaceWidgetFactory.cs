@@ -27,7 +27,7 @@ namespace Solcery.Widgets_new.Factories
         {
             _game = game;
             _widgetCanvas = widgetCanvas;
-            _cardInContainerPool = CardInContainerPool.Create(widgetCanvas.GetUiCanvas(), game.ServiceResource);
+            _cardInContainerPool = CardInContainerPool.Create(widgetCanvas.GetUiCanvas(), game);
             _placeWidgetCreators = new Dictionary<PlaceWidgetTypes, Func<IWidgetCanvas, IGame, string, JObject, PlaceWidget>>();
         }
 

@@ -24,6 +24,7 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
         public void AddOnClickListener(UnityAction onClick)
         {
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(onClick);
         }
         
