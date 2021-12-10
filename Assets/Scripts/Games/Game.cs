@@ -80,7 +80,7 @@ namespace Solcery.Games
 #if UNITY_EDITOR
             _transportService = EditorTransportService.Create(this, _serviceBricks);
 #else
-            _transportService = WebGlTransportService.Create(this);
+            _transportService = WebGlTransportService.Create();
 #endif
 
             _serviceResource = ServiceResource.Create(this);

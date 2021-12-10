@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Address: ui/ui_stack
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 877a3f48ae38a411c87e12b6979f22dd
+  - m_GUID: ce160d0e5eac845a2b0a38043390dc3a
     m_Address: ui/ui_card
     m_ReadOnly: 0
     m_SerializedLabels: []
