@@ -57,7 +57,13 @@ namespace Solcery.Widgets_new.Simple.Widgets
             if (objectAttributesPool.Has(entityId)
                 && objectAttributesPool.Get(entityId).Attributes.TryGetValue("number", out var number))
             {
+
                 Layout.UpdateText(number.Current.ToString());
+                var diff =  number.Current - number.Old;
+                if (number.Changed)
+                {
+                    Layout.ShowDiff(diff);
+                }
             }
         }
     }
