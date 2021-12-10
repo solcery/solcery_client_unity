@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Objects;
 using Solcery.Services.LocalSimulation;
@@ -211,7 +212,7 @@ namespace Solcery.Models.Simulation.Game.State
             _applyGameState = null;
         }
 
-        private bool TryCreateAttributeArray(Dictionary<string, int> attributesHashMap, out JArray attributeArray)
+        private bool TryCreateAttributeArray(Dictionary<string, IAttributeValue> attributesHashMap, out JArray attributeArray)
         {
             if (attributesHashMap == null || attributesHashMap.Count <= 0)
             {
@@ -225,7 +226,7 @@ namespace Solcery.Models.Simulation.Game.State
                 attributeArray.Add(new JObject
                 {
                     ["key"] = new JValue(attribute.Key),
-                    ["value"] = new JValue(attribute.Value)
+                    ["value"] = new JValue(attribute.Value.Current)
                 });
             }
             

@@ -57,7 +57,7 @@ namespace Solcery.Widgets_new.Simple.Widgets
             if (objectAttributesPool.Has(entityId)
                 && objectAttributesPool.Get(entityId).Attributes.TryGetValue("number", out var number))
             {
-                Layout.UpdateText(number.ToString());
+                Layout.UpdateText(number.Current.ToString());
             }
         }
     }

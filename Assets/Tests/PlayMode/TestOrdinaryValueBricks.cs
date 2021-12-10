@@ -4,6 +4,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Objects;
@@ -113,7 +114,7 @@ namespace Solcery.Tests.PlayMode
         {
             var entityId = _world.NewEntity();
             ref var attrs = ref _world.GetPool<ComponentGameAttributes>().Add(entityId);
-            attrs.Attributes.Add("finished", 1);
+            attrs.Attributes.Add("finished", AttributeValue.Create(1));
             TestUtils.PushObject(_world, entityId);
             ExecuteValueBrick("GameAttribute");
             TestUtils.TryPopObject<object>(_world, out _);
@@ -195,7 +196,7 @@ namespace Solcery.Tests.PlayMode
                         if (attributeToken is JObject attributeObject 
                             && attributeObject.TryParseBrickParameter(out var key, out int value))
                         {
-                            attrs.Attributes.Add(key, value);
+                            attrs.Attributes.Add(key, AttributeValue.Create(value));
                         }
                     }
                     

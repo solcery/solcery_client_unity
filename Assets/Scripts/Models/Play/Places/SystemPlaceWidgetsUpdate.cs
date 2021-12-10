@@ -64,12 +64,12 @@ namespace Solcery.Models.Play.Places
             {
                 var entityPlaceId = systems.GetWorld().GetPool<ComponentAttributePlace>().Get(entityIndex).Value;
 
-                if (!entitiesInPlace.ContainsKey(entityPlaceId))
+                if (!entitiesInPlace.ContainsKey(entityPlaceId.Current))
                 {
-                    entitiesInPlace.Add(entityPlaceId, new List<int>());
+                    entitiesInPlace.Add(entityPlaceId.Current, new List<int>());
                 }
                 
-                entitiesInPlace[entityPlaceId].Add(entityIndex);
+                entitiesInPlace[entityPlaceId.Current].Add(entityIndex);
             }
 
             var world = systems.GetWorld();

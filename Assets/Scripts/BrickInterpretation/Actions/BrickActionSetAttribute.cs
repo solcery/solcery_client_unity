@@ -35,7 +35,7 @@ namespace Solcery.BrickInterpretation.Actions
                         var attrs = attrsPool.Get(entityId).Attributes;
                         if (attrs.ContainsKey(attrName))
                         {
-                            attrs[attrName] = value;
+                            attrs[attrName].UpdateValue(value);
                             return;
                         }
                     }
