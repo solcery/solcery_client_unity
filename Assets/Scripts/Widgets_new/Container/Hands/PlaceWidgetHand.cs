@@ -9,16 +9,24 @@ using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets_new.Container.Hands
 {
-    public sealed class PlaceWidgetHand : PlaceWidget<PlaceWidgetHandLayout>
+    public sealed class PlaceWidgetHand : PlaceWidgetHand<PlaceWidgetHandLayout>
     {
-        private Dictionary<int, ICardInContainerWidget> _cards;
-        
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetHand(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
+        
+        private PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
+            : base(widgetCanvas, game, prefabPathKey, placeDataObject)
+        {
+        }
+    }
 
-        private PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+    public class PlaceWidgetHand<T> : PlaceWidget<T> where T : PlaceWidgetHandLayout
+    {
+        private Dictionary<int, ICardInContainerWidget> _cards;
+        
+        protected PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
             _cards = new Dictionary<int, ICardInContainerWidget>();
