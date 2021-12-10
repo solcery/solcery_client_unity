@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Solcery.Games;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
+using Solcery.Widgets_new;
 
 namespace Solcery.Models.Play.Places
 {
@@ -13,18 +15,22 @@ namespace Solcery.Models.Play.Places
 
     public sealed class SystemPlaceWidgetsUpdate : ISystemPlaceWidgetsUpdate
     {
+        private IGame _game;
         private EcsFilter _filterPlaceWithWidget;
         private EcsFilter _filterPlaceWithPlaceWidget;
         private EcsFilter _filterEntities;
         private EcsFilter _filterGameStateUpdate;
         private EcsFilter _filterSubWidgetComponent;
 
-        public static ISystemPlaceWidgetsUpdate Create()
+        public static ISystemPlaceWidgetsUpdate Create(IGame game)
         {
-            return new SystemPlaceWidgetsUpdate();
+            return new SystemPlaceWidgetsUpdate(game);
         }
-        
-        private SystemPlaceWidgetsUpdate() { }
+
+        private SystemPlaceWidgetsUpdate(IGame game)
+        {
+            _game = game;
+        }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
@@ -89,6 +95,8 @@ namespace Solcery.Models.Play.Places
                     widget.UpdateSubWidgets(systems.GetWorld(), entityIds.ToArray());
                 }
             }
+            
+            PlaceWidget.RefreshPlaceWidgetOrderZ(_game.WidgetCanvas.GetUiCanvas());
             
             entitiesInPlace.Clear();
         }

@@ -19,6 +19,16 @@ namespace Solcery.Widgets_new.Cards.Widgets
         [SerializeField]
         private Image image;
 
+        public void UpdateParent(Transform parent)
+        {
+            rectTransform.SetParent(parent, false);
+        }
+
+        public void UpdatePosition(Vector3 position)
+        {
+            rectTransform.position = position;
+        }
+        
         public void Cleanup()
         {
             

@@ -7,6 +7,8 @@ namespace Solcery.Widgets_new
 {
     public class PlaceWidgetLayout : MonoBehaviour
     {
+        public int OrderZ => _orderZ;
+        
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
@@ -31,15 +33,28 @@ namespace Solcery.Widgets_new
         {
             _orderZ = orderZ;
 
-            var parent = rectTransform.parent;
-            var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
-            
-            var placeWidgetLayoutArray = parent.GetComponentsInChildren<PlaceWidgetLayout>()
-                .OrderBy(o => o._orderZ).ToList();
-            foreach (var placeWidgetLayout in placeWidgetLayoutArray)
-            {
-                rectTransform.SetSiblingIndex(staticOrderZLayoutCount + placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
-            }
+            // var parent = rectTransform.parent;
+            // var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
+            //
+            // var placeWidgetLayoutArray = parent.GetComponentsInChildren<PlaceWidgetLayout>().ToList();
+            //
+            // if (!placeWidgetLayoutArray.Contains(this))
+            // {
+            //     placeWidgetLayoutArray.Add(this);
+            // }
+            //
+            // placeWidgetLayoutArray = placeWidgetLayoutArray.OrderBy(o=>o._orderZ).ToList();
+            //
+            // foreach (var placeWidgetLayout in placeWidgetLayoutArray)
+            // {
+            //     placeWidgetLayout.rectTransform.SetSiblingIndex(staticOrderZLayoutCount +
+            //                                                     placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
+            // }
+        }
+
+        public void UpdateSiblingIndex(int siblingIndex)
+        {
+            rectTransform.SetSiblingIndex(siblingIndex);
         }
 
         public void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)

@@ -47,6 +47,8 @@ namespace Solcery.Widgets_new.Cards.Pools
         void ICardInContainerPool.Push(ICardInContainerWidget cardInContainerWidget)
         {
             cardInContainerWidget.Cleanup();
+            cardInContainerWidget.UpdateParent(_poolTransform);
+            //cardInContainerWidget.UpdatePosition(Vector3.zero);
             _pool.Push(cardInContainerWidget);
         }
 

@@ -10,6 +10,8 @@ namespace Solcery.Widgets_new.Container.Stacks
         [SerializeField]
         private TMP_Text text;
 
+        public RectTransform Content => content;
+        
         public void UpdateText(string newText)
         {
             text.text = newText;

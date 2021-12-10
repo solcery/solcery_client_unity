@@ -15,6 +15,16 @@ namespace Solcery.Widgets_new.Cards.Widgets
         {
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<CardInContainerWidgetLayout>();
         }
+
+        void ICardInContainerWidget.UpdateParent(Transform parent)
+        {
+            _layout.UpdateParent(parent);
+        }
+
+        void ICardInContainerWidget.UpdatePosition(Vector3 position)
+        {
+            _layout.UpdatePosition(position);
+        }
         
         void ICardInContainerWidget.Cleanup()
         {
