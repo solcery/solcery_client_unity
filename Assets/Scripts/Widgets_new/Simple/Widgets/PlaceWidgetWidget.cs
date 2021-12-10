@@ -10,6 +10,7 @@ namespace Solcery.Widgets_new.Simple.Widgets
     public sealed class PlaceWidgetWidget : PlaceWidget<PlaceWidgetWidgetLayout>
     {
         private string _lastPictureName;
+        private int? _lastNumber;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -20,6 +21,7 @@ namespace Solcery.Widgets_new.Simple.Widgets
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
             _lastPictureName = "";
+            _lastNumber = null;
         }
 
         public override void Update(EcsWorld world, int[] entityIds)
@@ -57,7 +59,13 @@ namespace Solcery.Widgets_new.Simple.Widgets
             if (objectAttributesPool.Has(entityId)
                 && objectAttributesPool.Get(entityId).Attributes.TryGetValue("number", out var number))
             {
+                var diff =  number - _lastNumber?? 0;
                 Layout.UpdateText(number.ToString());
+                if (diff != 0)
+                {
+                    Layout.ShowDiff(diff);
+                }
+                _lastNumber = number;
             }
         }
     }
