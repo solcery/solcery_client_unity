@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,15 +13,25 @@ namespace Solcery.Widgets_new.Simple.Pictures
 
         public void UpdatePicture(Texture2D texture)
         {
+            DestroySprite();
+            
+            _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f), 100.0f);
+            picture.sprite = _sprite;
+        }
+
+        private void OnDestroy()
+        {
+            DestroySprite();
+        }
+
+        private void DestroySprite()
+        {
             if (_sprite != null)
             {
                 Destroy(_sprite);
                 _sprite = null;
             }
-            
-            _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
-                new Vector2(0.5f, 0.5f), 100.0f);
-            picture.sprite = _sprite;
         }
     }
 }

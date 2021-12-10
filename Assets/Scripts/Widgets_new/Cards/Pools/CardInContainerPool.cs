@@ -72,7 +72,7 @@ namespace Solcery.Widgets_new.Cards.Pools
             {
                 for (var index = 0; index < 10; index++)
                 {
-                    _pool.Push(CardInContainerWidget.Create(prefab, _poolTransform));
+                    _pool.Push(CardInContainerWidget.Create(_serviceResource, prefab, _poolTransform));
                 }
             }
         }

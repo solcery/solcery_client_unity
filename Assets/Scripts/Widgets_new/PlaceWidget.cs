@@ -36,6 +36,7 @@ namespace Solcery.Widgets_new
         protected T Layout;
         protected IGame Game;
         protected PlaceWidgetCardFace CardFace;
+        protected bool InteractableForActiveLocalPlayer;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -63,6 +64,9 @@ namespace Solcery.Widgets_new
                 CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
                     ? res
                     : PlaceWidgetCardFace.Up;
+
+                InteractableForActiveLocalPlayer =
+                    placeDataObject.TryGetValue("interactableForActiveLocalPlayer", out bool ifalp) && ifalp;
 
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);

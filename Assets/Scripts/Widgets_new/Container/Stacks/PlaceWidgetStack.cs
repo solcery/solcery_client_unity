@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets.Canvas;
-using UnityEngine;
 
 namespace Solcery.Widgets_new.Container.Stacks
 {
@@ -28,33 +29,85 @@ namespace Solcery.Widgets_new.Container.Stacks
             Layout.UpdateVisible(entityIds.Length > 0);
 
             RemoveCards(entityIds);
-            
-            var textVisible = CardFace == PlaceWidgetCardFace.Down;
-            Layout.UpdateTextVisible(textVisible);
+
+            Action<int, EcsPool<ComponentObjectType>, Dictionary<int, JObject>, ICardInContainerWidget> cardUpdater;
+            var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
+            Layout.UpdateTextVisible(!cardFaceVisible);
+            if (cardFaceVisible)
+            {
+                cardUpdater = CardFaceShowUpdater;
+            }
+            else
+            {
+                cardUpdater = CardFaceHideUpdater;
+                Layout.UpdateText(entityIds.Length.ToString());
+            }
             
             if (entityIds.Length <= 0)
             {
                 return;
             }
 
-            if (textVisible)
-            {
-                Layout.UpdateText(entityIds.Length.ToString());
-            }
+            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
+            var objectTypePool = world.GetPool<ComponentObjectType>();
+            var cardTypes = new Dictionary<int, JObject>();
 
+            if (cardFaceVisible)
+            {
+                foreach (var objectTypesEntityId in objectTypesFilter)
+                {
+                    cardTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
+                    break;
+                }
+            }
+            
             foreach (var entityId in entityIds)
             {
                 if (_cards.ContainsKey(entityId))
                 {
                     continue;
                 }
-                
+
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
-                    cardInContainerWidget.UpdateParent(Layout.Content);
-                    //cardInContainerWidget.UpdatePosition(Vector3.zero);
+                    cardUpdater.Invoke(entityId, objectTypePool, cardTypes, cardInContainerWidget);
+                    // cardInContainerWidget.UpdateParent(Layout.Content);
+                    // cardInContainerWidget.UpdateCardFace(CardFace);
+                    // cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
+                    //
+                    // if (CardFace != PlaceWidgetCardFace.Down 
+                    //     && objectTypePool.Has(entityId)
+                    //     && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
+                    // {
+                    //     cardInContainerWidget.UpdateFromCardTypeData(cardTypeDataObject);
+                    // }
+                        
                     _cards.Add(entityId, cardInContainerWidget);
                 }
+            }
+        }
+
+        private void CardFaceHideUpdater(int entityId, 
+            EcsPool<ComponentObjectType> objectTypePool, 
+            Dictionary<int, JObject> cardTypes, 
+            ICardInContainerWidget cardInContainerWidget)
+        {
+            cardInContainerWidget.UpdateParent(Layout.Content);
+            cardInContainerWidget.UpdateCardFace(CardFace);
+            cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
+        }
+
+        private void CardFaceShowUpdater(int entityId, 
+            EcsPool<ComponentObjectType> objectTypePool, 
+            Dictionary<int, JObject> cardTypes,
+            ICardInContainerWidget cardInContainerWidget)
+        {
+            CardFaceHideUpdater(entityId, objectTypePool, cardTypes, cardInContainerWidget);
+            
+            if (objectTypePool.Has(entityId)
+                && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
+            {
+                cardInContainerWidget.UpdateFromCardTypeData(cardTypeDataObject);
             }
         }
 
@@ -79,5 +132,7 @@ namespace Solcery.Widgets_new.Container.Stacks
                 }
             }
         }
+        
+        
     }
 }
