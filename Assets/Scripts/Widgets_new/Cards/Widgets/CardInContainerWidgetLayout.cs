@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +20,8 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Button button;
         [SerializeField]
         private Image image;
+        [SerializeField]
+        private Animator animator;
         
         private Sprite _sprite;
         private Vector2 _anchorMin;
@@ -36,14 +39,14 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
+            animator.SetTrigger("Idle");
         }
 
         public void UpdateParent(Transform parent)
         {
             rectTransform.SetParent(parent, false);
-            
-            rectTransform.offsetMax = Vector2.down;
             rectTransform.anchoredPosition = _anchoredPosition;
+            rectTransform.offsetMax = Vector2.down;
             rectTransform.pivot = _pivot;
             rectTransform.anchorMin = _anchorMin;
             rectTransform.anchorMax = _anchorMax;
@@ -51,9 +54,33 @@ namespace Solcery.Widgets_new.Cards.Widgets
             rectTransform.offsetMax = _offsetMax;
         }
 
-        public void UpdateCardFace(PlaceWidgetCardFace cardFace)
+        public void Move(Vector2 oldPosition)
         {
-            back.SetActive(cardFace == PlaceWidgetCardFace.Down);
+            var newPosition = rectTransform.position;
+            rectTransform.position = oldPosition;
+            DOTween.Sequence()
+                .Append(transform.DOMove(newPosition, 1f))
+                .Play();
+        }
+
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            if (withAnimation)
+            {
+                if (cardFace == PlaceWidgetCardFace.Down)
+                {
+                    animator.SetTrigger("TurnFaceDown");
+                }
+
+                if (cardFace == PlaceWidgetCardFace.Up)
+                {
+                    animator.SetTrigger("TurnFaceUp");
+                }
+            }
+            else
+            {
+                back.SetActive(cardFace == PlaceWidgetCardFace.Down);
+            }
         }
 
         public void UpdateInteractable(bool interactable)

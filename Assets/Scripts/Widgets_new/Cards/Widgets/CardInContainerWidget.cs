@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Triggers.EntityTypes;
@@ -28,9 +29,14 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateParent(parent);
         }
 
-        void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace)
+        void ICardInContainerWidget.Move(Vector2 oldPosition)
         {
-            _layout.UpdateCardFace(cardFace);
+            _layout.Move(oldPosition);
+        }
+        
+        void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            _layout.UpdateCardFace(cardFace, withAnimation);
         }
 
         void ICardInContainerWidget.UpdateInteractable(bool interactable)

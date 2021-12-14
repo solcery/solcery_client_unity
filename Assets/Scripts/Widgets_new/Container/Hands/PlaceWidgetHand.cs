@@ -4,7 +4,9 @@ using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Places;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets.Canvas;
 
@@ -45,7 +47,13 @@ namespace Solcery.Widgets_new.Container.Hands
 
             var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
 
-            Action<int, EcsPool<ComponentObjectType>, EcsPool<ComponentObjectId>, Dictionary<int, JObject>,
+            Action<int, 
+                EcsPool<ComponentObjectType>, 
+                EcsPool<ComponentObjectId>, 
+                EcsPool<ComponentObjectAttributes>, 
+                EcsPool<ComponentPlaceId>, 
+                EcsPool<ComponentPlaceWidgetNew>, 
+                Dictionary<int, JObject>,
                 ICardInContainerWidget> cardUpdater;
             if (cardFaceVisible)
             {
@@ -59,6 +67,9 @@ namespace Solcery.Widgets_new.Container.Hands
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var objectIdPool = world.GetPool<ComponentObjectId>();
+            var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
+            var poolPlaceId = world.GetPool<ComponentPlaceId>();
+            var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
             var cardTypes = new Dictionary<int, JObject>();
 
             if (cardFaceVisible)
@@ -81,30 +92,76 @@ namespace Solcery.Widgets_new.Container.Hands
                 
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
-                    cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, cardTypes, cardInContainerWidget); 
+                    cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget); 
                     _cards.Add(objectId, cardInContainerWidget);
                 }
             }
         }
-        
+
+        private PlaceWidget GetPlaceWidget(
+            int placeId, 
+            EcsPool<ComponentPlaceId> poolPlaceId,
+            EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew)
+        {
+            PlaceWidget oldWidget = null; 
+            var widgetFilter = poolPlaceId.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().Inc<ComponentPlaceWidgetNew>().End();
+            foreach (var entityId in widgetFilter)
+            {
+                if (poolPlaceId.Get(entityId).Id == placeId)
+                {
+                    oldWidget = poolPlaceWidgetNew.Get(entityId).Widget;
+                }
+            }
+
+            return oldWidget;
+        }
+
         private void CardFaceHideUpdater(int entityId, 
             EcsPool<ComponentObjectType> objectTypePool, 
             EcsPool<ComponentObjectId> objectIdPool,
+            EcsPool<ComponentObjectAttributes> objectAttributesPool,
+            EcsPool<ComponentPlaceId> poolPlaceId,
+            EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew,
             Dictionary<int, JObject> cardTypes, 
             ICardInContainerWidget cardInContainerWidget)
         {
+            PlaceWidget oldWidget = null;
+            if (objectAttributesPool.Has(entityId)
+                && objectAttributesPool.Get(entityId).Attributes.TryGetValue("place", out var place))
+            {
+                if (place.Changed)
+                {
+                    oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
+                }
+            }
+            
             cardInContainerWidget.UpdateParent(Layout.Content);
-            cardInContainerWidget.UpdateCardFace(CardFace);
+
+            if (oldWidget != null)
+            {
+                cardInContainerWidget.Move(oldWidget.GetPosition());
+                cardInContainerWidget.UpdateCardFace(CardFace, oldWidget.GetPlaceWidgetCardFace() != CardFace);
+            }
+            else
+            {
+                cardInContainerWidget.UpdateParent(Layout.Content);
+                cardInContainerWidget.UpdateCardFace(CardFace, false);
+            }
+
             cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
+            
         }
 
         private void CardFaceShowUpdater(int entityId, 
             EcsPool<ComponentObjectType> objectTypePool, 
             EcsPool<ComponentObjectId> objectIdPool,
+            EcsPool<ComponentObjectAttributes> objectAttributesPool,
+            EcsPool<ComponentPlaceId> poolPlaceId,
+            EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew,
             Dictionary<int, JObject> cardTypes,
             ICardInContainerWidget cardInContainerWidget)
         {
-            CardFaceHideUpdater(entityId, objectTypePool, objectIdPool, cardTypes, cardInContainerWidget);
+            CardFaceHideUpdater(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget);
             
             if (objectTypePool.Has(entityId)
                 && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject)
