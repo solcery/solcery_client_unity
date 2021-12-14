@@ -39,7 +39,7 @@ namespace Solcery.Models.Play.Attributes.Numberable
                 var view = subWidgetComponents.Get(entity).Widget.View;
                 if (view is INumberable value)
                 {
-                    value.SetNumber(attributeComponents.Get(entity).Value);
+                    value.SetNumber(attributeComponents.Get(entity).Value.Current);
                 }
             }
         }

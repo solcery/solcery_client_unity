@@ -1,10 +1,12 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
+using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation
 {
@@ -49,6 +51,7 @@ namespace Solcery.Services.LocalSimulation
 
         void IServiceLocalSimulation.PushCommand(JObject command)
         {
+            Debug.Log(command.ToString(Formatting.Indented));
             _serviceCommands.PushCommand(command);
         }
 

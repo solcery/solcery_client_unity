@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Attributes.Interactable;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Game.StaticAttributes;
 using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
@@ -50,7 +51,6 @@ namespace Solcery.Models.Simulation.Game.State
             var entityIndex = world.NewEntity();
             ref var gameAttributesComponent =
                 ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
-            gameAttributesComponent.Attributes = new Dictionary<string, int>(gameAttributeArray?.Count ?? 0);
             UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
             
             // Update game entity
@@ -76,7 +76,7 @@ namespace Solcery.Models.Simulation.Game.State
             _filterEntityTypes = null;
         }
         
-        private void UpdateAttributes(JArray gameAttributeArray, Dictionary<string, int> attributesHashMap)
+        private void UpdateAttributes(JArray gameAttributeArray, Dictionary<string, IAttributeValue> attributesHashMap)
         {
             if (gameAttributeArray == null)
             {
@@ -92,11 +92,11 @@ namespace Solcery.Models.Simulation.Game.State
                     var value = gameAttributeObject.GetValue<int>("value");
                     if (!attributesHashMap.ContainsKey(key))
                     {
-                        attributesHashMap.Add(key, value);
+                        attributesHashMap.Add(key, AttributeValue.Create(value));
                         continue;
                     }
 
-                    attributesHashMap[key] = value;
+                    attributesHashMap[key].UpdateValue(value);
                 }
             }
         }
@@ -107,8 +107,7 @@ namespace Solcery.Models.Simulation.Game.State
             world.GetPool<ComponentObjectTag>().Add(entityIndex);
             world.GetPool<ComponentObjectId>().Add(entityIndex);
             world.GetPool<ComponentObjectType>().Add(entityIndex);
-            world.GetPool<ComponentObjectAttributes>().Add(entityIndex).Attributes =
-                new Dictionary<string, int>();
+            world.GetPool<ComponentObjectAttributes>().Add(entityIndex);
 
             UpdateEntity(world, entityIndex, entityData);
         }
@@ -136,7 +135,7 @@ namespace Solcery.Models.Simulation.Game.State
                 ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityTypes);
                 if (types.Types.ContainsKey(typeId))
                 {
-                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Value = true;
+                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Update(1);
                 }
             }
         }

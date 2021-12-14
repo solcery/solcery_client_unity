@@ -1,12 +1,11 @@
+using Solcery.Widgets_new.Container.Hands;
 using TMPro;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Container.Stacks
 {
-    public sealed class PlaceWidgetStackLayout : PlaceWidgetLayout
+    public sealed class PlaceWidgetStackLayout : PlaceWidgetHandLayout
     {
-        [SerializeField]
-        private RectTransform content;
         [SerializeField]
         private TMP_Text text;
 

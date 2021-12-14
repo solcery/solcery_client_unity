@@ -1,14 +1,16 @@
 using System;
+using Solcery.Models.Play.Attributes.Highlighted;
 using Solcery.Models.Play.Attributes.Interactable;
-using Solcery.Widgets.Deck;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets.Button
 {
-    public class WidgetViewButton : WidgetViewBase, IInteractable
+    public class WidgetViewButton : WidgetViewBase, IInteractable, IHighlighted
     {
         public UnityEngine.UI.Button Button;
         public TextMeshProUGUI Text;
+        public Image HighlightImage;
         
         public Action OnClick { get; set; }
         
@@ -24,6 +26,7 @@ namespace Solcery.Widgets.Button
         public override void Clear()
         {
             Button.onClick.RemoveAllListeners();
+            HighlightImage.gameObject.SetActive(false);
         }
         
         public void SetInteractable(bool value)
@@ -31,10 +34,16 @@ namespace Solcery.Widgets.Button
             Button.interactable = value;
         }
 
+        public void SetHighlighted(bool value)
+        {
+            HighlightImage.gameObject.SetActive(value);
+        }
+        
         public override void ApplyPlaceViewData(WidgetPlaceViewData viewData)
         {
             RectTransform.anchorMin = viewData.AnchorMin;
             RectTransform.anchorMax = viewData.AnchorMax;
+            SetInteractable(viewData.Interactable);
         }
     }
 }

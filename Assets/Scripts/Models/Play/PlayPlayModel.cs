@@ -38,7 +38,7 @@ namespace Solcery.Models.Play
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             
-            _systems.Add(SystemPlaceWidgetsUpdate.Create());
+            _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
             _systems.Add(SystemApplyAttributeInteractable.Create());
             _systems.Add(SystemApplyAttributeHighlighted.Create());
             _systems.Add(SystemApplyAttributeNumber.Create());

@@ -23,7 +23,7 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Place
             }
 
             ref var component = ref pool.Get(entity);
-            component.Value = value;
+            component.Value.UpdateValue(value);
         }
         
         void IStaticAttribute.Destroy(EcsWorld world, int entity)

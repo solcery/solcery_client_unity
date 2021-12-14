@@ -13,7 +13,8 @@ namespace Solcery.Widgets.Card
         public TextMeshProUGUI Name;
         public TextMeshProUGUI Description;
         public UnityEngine.UI.Button Button;
-        public Image Image;
+        public Image MainImage;
+        public Image HighlightImage;
         public Action OnClick { get; set; }
 
         public override void Init()
@@ -28,11 +29,13 @@ namespace Solcery.Widgets.Card
         public override void Clear()
         {
             Button.onClick.RemoveAllListeners();
-            Destroy(Image.sprite);
+            Destroy(MainImage.sprite);
+            HighlightImage.gameObject.SetActive(false);
         }
 
         public void SetHighlighted(bool value)
         {
+            HighlightImage.gameObject.SetActive(value);
         }
 
         public void SetInteractable(bool value)
@@ -51,6 +54,8 @@ namespace Solcery.Widgets.Card
                     Back.SetActive(true);
                     break;
             }
+
+            SetInteractable(viewData.Interactable);
         }
     }
 }

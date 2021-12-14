@@ -1,7 +1,9 @@
+using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
+using Solcery.Widgets_new.StaticOrderZ;
 using Solcery.Widgets.Canvas;
 using UnityEngine;
 
@@ -9,6 +11,20 @@ namespace Solcery.Widgets_new
 {
     public abstract class PlaceWidget
     {
+        public static void RefreshPlaceWidgetOrderZ(Transform widgetParentTransform)
+        {
+            var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
+
+            var placeWidgetLayoutArray = widgetParentTransform.GetComponentsInChildren<PlaceWidgetLayout>().ToList();
+            placeWidgetLayoutArray = placeWidgetLayoutArray.OrderBy(o=>o.OrderZ).ToList();
+
+            foreach (var placeWidgetLayout in placeWidgetLayoutArray)
+            {
+                placeWidgetLayout.UpdateSiblingIndex(staticOrderZLayoutCount +
+                                                     placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
+            }
+        }
+        
         public abstract void Update(EcsWorld world, int[] entityIds);
         public abstract void Destroy();
     }
@@ -20,6 +36,7 @@ namespace Solcery.Widgets_new
         protected T Layout;
         protected IGame Game;
         protected PlaceWidgetCardFace CardFace;
+        protected bool InteractableForActiveLocalPlayer;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -32,7 +49,6 @@ namespace Solcery.Widgets_new
                 Layout = layout;
 
                 var placeId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
-                Layout.name = $"{placeId}_{Layout.name}";
 
                 var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
                 var x2 = placeDataObject.TryGetValue("x2", out int xt2) ? xt2 / AnchorDivider : 0f;
@@ -42,10 +58,15 @@ namespace Solcery.Widgets_new
 
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
+                
+                Layout.name = $"{placeId}_{orderZ}_{Layout.name}";
 
                 CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
                     ? res
                     : PlaceWidgetCardFace.Up;
+
+                InteractableForActiveLocalPlayer =
+                    placeDataObject.TryGetValue("interactableForActiveLocalPlayer", out bool ifalp) && ifalp;
 
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);

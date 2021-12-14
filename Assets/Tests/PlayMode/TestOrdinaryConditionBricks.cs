@@ -4,6 +4,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using UnityEngine;
@@ -143,7 +144,7 @@ namespace Solcery.Tests.PlayMode
                         if (attributeToken is JObject attributeObject 
                             && attributeObject.TryParseBrickParameter(out var key, out int value))
                         {
-                            attrs.Attributes.Add(key, value);
+                            attrs.Attributes.Add(key, AttributeValue.Create(value));
                         }
                     }
                     

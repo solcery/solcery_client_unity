@@ -27,6 +27,7 @@ namespace Solcery.Games
         IServiceBricks IGame.ServiceBricks => _serviceBricks;
         IServiceResource IGame.ServiceResource => _serviceResource;
         IPlayModel IGame.PlayModel => _playModel;
+        IWidgetCanvas IGame.WidgetCanvas => _widgetCanvas;
         IWidgetFactory IGame.WidgetFactory => _widgetFactory;
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
 
@@ -46,6 +47,7 @@ namespace Solcery.Games
         private IServiceBricks _serviceBricks;
         private IServiceResource _serviceResource;
         private IPlayModel _playModel;
+        private IWidgetCanvas _widgetCanvas;
         private IWidgetFactory _widgetFactory;
         private IPlaceWidgetFactory _placeWidgetFactory;
 
@@ -59,6 +61,7 @@ namespace Solcery.Games
 
         private Game(IWidgetCanvas widgetCanvas)
         {
+            _widgetCanvas = widgetCanvas;
             _gameStates = new Stack<JObject>();
             CreateModel();
             CreateServices(widgetCanvas);
@@ -77,7 +80,7 @@ namespace Solcery.Games
 #if UNITY_EDITOR
             _transportService = EditorTransportService.Create(this, _serviceBricks);
 #else
-            _transportService = WebGlTransportService.Create(this);
+            _transportService = WebGlTransportService.Create();
 #endif
 
             _serviceResource = ServiceResource.Create(this);
@@ -206,6 +209,8 @@ namespace Solcery.Games
             _placeWidgetFactory = null;
             _serviceResource.Destroy();
             _serviceResource = null;
+
+            _widgetCanvas = null;
         }
     }
 }

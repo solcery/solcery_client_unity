@@ -31,7 +31,7 @@ namespace Solcery.BrickInterpretation.Actions
                     var attrs = gameAttributesComponent.Attributes;
                     if (attrs.ContainsKey(attrName))
                     {
-                        attrs[attrName] = value;
+                        attrs[attrName].UpdateValue(value);
                         return;
                     }
                     

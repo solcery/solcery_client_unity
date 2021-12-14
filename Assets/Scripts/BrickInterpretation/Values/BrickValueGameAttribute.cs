@@ -1,7 +1,6 @@
 using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Play.Game;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Utils;
 
@@ -30,7 +29,7 @@ namespace Solcery.BrickInterpretation.Values
                     var attrs = gameAttributesComponent.Attributes;
                     if (attrs.ContainsKey(attrName))
                     {
-                        return attrs[attrName];
+                        return attrs[attrName].Current;
                     }
                     
                     break;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Solcery.Models.Shared.Attributes.Values;
 
 namespace Solcery.Models.Shared.Game.StaticAttributes
 {
@@ -35,13 +36,13 @@ namespace Solcery.Models.Shared.Game.StaticAttributes
             _staticAttributes.Clear();
         }
 
-        public void ApplyAndUpdateAttributes(EcsWorld world, int entity, IReadOnlyDictionary<string, int> attributes)
+        public void ApplyAndUpdateAttributes(EcsWorld world, int entity, IReadOnlyDictionary<string, IAttributeValue> attributes)
         {
             foreach (var staticAttribute in _staticAttributes)
             {
                 if (attributes.TryGetValue(staticAttribute.Key, out var value))
                 {
-                    staticAttribute.Value.Apply(world, entity, value);
+                    staticAttribute.Value.Apply(world, entity, value.Current);
                 }
                 else
                 {

@@ -45,6 +45,18 @@ MonoBehaviour:
     m_Address: ui/ui_title
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 0d0716bedbcac48a3be10b53cb1f2c34
+    m_Address: ui/ui_hand
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b2ef1a32238840e4b17ea26d0356ff0
+    m_Address: ui/ui_stack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ce160d0e5eac845a2b0a38043390dc3a
+    m_Address: ui/ui_card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f49114169a154bc2bcc588cc3759c96, type: 2}
   m_SchemaSet:
