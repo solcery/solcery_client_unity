@@ -39,7 +39,6 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
-            animator.SetTrigger("Idle");
         }
 
         public void UpdateParent(Transform parent)
@@ -67,6 +66,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
         {
             if (withAnimation)
             {
+                animator.enabled = true;
                 if (cardFace == PlaceWidgetCardFace.Down)
                 {
                     animator.SetTrigger("TurnFaceDown");
@@ -79,6 +79,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             }
             else
             {
+                animator.enabled = false;
                 back.SetActive(cardFace == PlaceWidgetCardFace.Down);
             }
         }
