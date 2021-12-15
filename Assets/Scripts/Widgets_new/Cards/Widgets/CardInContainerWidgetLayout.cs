@@ -1,4 +1,7 @@
+using System;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +11,8 @@ namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidgetLayout : MonoBehaviour
     {
+        public Vector3 WorldPosition => rectTransform.position;
+        
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
@@ -30,6 +35,10 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
+        private TweenerCore<Vector3, Vector3, VectorOptions> _moveTween;
+        
+        private static readonly int TurnFaceDown = Animator.StringToHash("TurnFaceDown");
+        private static readonly int TurnFaceUp = Animator.StringToHash("TurnFaceUp");
 
         private void Awake()
         {
@@ -53,13 +62,22 @@ namespace Solcery.Widgets_new.Cards.Widgets
             rectTransform.offsetMax = _offsetMax;
         }
 
-        public void Move(Vector2 oldPosition)
+        public void UpdateSiblingIndex(int siblingIndex)
         {
-            var newPosition = rectTransform.position;
-            rectTransform.position = oldPosition;
-            DOTween.Sequence()
-                .Append(transform.DOMove(newPosition, 1f))
-                .Play();
+            rectTransform.SetSiblingIndex(siblingIndex);
+        }
+
+        public void Move(Vector3 from, Vector3 to, Action onMoveComplete)
+        {
+            rectTransform.position = from;
+
+            KillMoveTween();
+            
+            _moveTween = rectTransform.DOMove(to, 1f).OnComplete(() =>
+            {
+                onMoveComplete.Invoke();
+                _moveTween = null;
+            }).Play();
         }
 
         public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
@@ -69,12 +87,12 @@ namespace Solcery.Widgets_new.Cards.Widgets
                 animator.enabled = true;
                 if (cardFace == PlaceWidgetCardFace.Down)
                 {
-                    animator.SetTrigger("TurnFaceDown");
+                    animator.SetTrigger(TurnFaceDown);
                 }
 
                 if (cardFace == PlaceWidgetCardFace.Up)
                 {
-                    animator.SetTrigger("TurnFaceUp");
+                    animator.SetTrigger(TurnFaceUp);
                 }
             }
             else
@@ -116,11 +134,22 @@ namespace Solcery.Widgets_new.Cards.Widgets
         
         public void Cleanup()
         {
+            KillMoveTween();
             button.onClick.RemoveAllListeners();
+        }
+
+        private void KillMoveTween()
+        {
+            if (_moveTween != null)
+            {
+                _moveTween.Kill();
+                _moveTween = null;
+            }
         }
         
         private void OnDestroy()
         {
+            KillMoveTween();
             DestroySprite();
         }
 

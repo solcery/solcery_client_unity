@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -5,8 +6,12 @@ namespace Solcery.Widgets_new.Cards.Widgets
 {
     public interface ICardInContainerWidget
     {
+        Vector3 WorldPosition { get; }
+        int CardIndex { get; set; }
+
         void UpdateParent(Transform parent);
-        void Move(Vector2 oldPosition);
+        void UpdateSiblingIndex(int siblingIndex);
+        void Move(Vector3 from, Vector3 to, Action<ICardInContainerWidget> onMoveComplete);
         void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation);
         void UpdateInteractable(bool interactable);
         void UpdateFromCardTypeData(int objectId, JObject data);

@@ -6,7 +6,10 @@ namespace Solcery.Widgets_new.Container.Hands
     {
         [SerializeField]
         private RectTransform content;
-        
+        [SerializeField]
+        private RectTransform fakeContent;
+
         public RectTransform Content => content;
+        public RectTransform Transform => fakeContent;
     }
 }

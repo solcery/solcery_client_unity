@@ -38,6 +38,7 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
             widgetResourcePaths.Add("ui/ui_hand");
             widgetResourcePaths.Add("ui/ui_stack");
             widgetResourcePaths.Add("ui/ui_card");
+            widgetResourcePaths.Add("ui/ui_fake_card");
             
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }

@@ -1,17 +1,27 @@
-using DG.Tweening;
+using System;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidget : ICardInContainerWidget
     {
+        Vector3 ICardInContainerWidget.WorldPosition => _layout.WorldPosition;
+        
+        int ICardInContainerWidget.CardIndex
+        {
+            get => _cardIndex;
+            set => _cardIndex = value;
+        }
+
         private IGame _game;
         private CardInContainerWidgetLayout _layout;
+        private int _cardIndex;
 
         public static ICardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -29,9 +39,14 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateParent(parent);
         }
 
-        void ICardInContainerWidget.Move(Vector2 oldPosition)
+        void ICardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
         {
-            _layout.Move(oldPosition);
+            _layout.UpdateSiblingIndex(siblingIndex);
+        }
+
+        void ICardInContainerWidget.Move(Vector3 from, Vector3 to, Action<ICardInContainerWidget> onMoveComplete)
+        {
+            _layout.Move(from, to, () => onMoveComplete.Invoke(this));
         }
         
         void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
@@ -76,16 +91,23 @@ namespace Solcery.Widgets_new.Cards.Widgets
         
         void ICardInContainerWidget.Cleanup()
         {
+            Cleanup();
             _layout.Cleanup();
         }
 
         void ICardInContainerWidget.Destroy()
         {
+            Cleanup();
             _layout.Cleanup();
             Object.Destroy(_layout.gameObject);
             _layout = null;
 
             _game = null;
+        }
+
+        private void Cleanup()
+        {
+            _cardIndex = -1;
         }
     }
 }
