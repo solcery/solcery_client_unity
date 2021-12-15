@@ -356,7 +356,7 @@ namespace Solcery.Widgets_new.Container.Hands
                 return cardInContainerWidget.WorldPosition;
             }
             
-            return Vector3.zero;
+            return Layout.Content.position;
         }
     }
 }
