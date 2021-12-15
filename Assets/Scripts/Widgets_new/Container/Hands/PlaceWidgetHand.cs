@@ -137,7 +137,7 @@ namespace Solcery.Widgets_new.Container.Hands
             
             cardInContainerWidget.UpdateParent(Layout.Content);
 
-            if (oldWidget != null)
+            if (oldWidget != null && InteractableForActiveLocalPlayer)
             {
                 cardInContainerWidget.Move(oldWidget.GetPosition());
                 cardInContainerWidget.UpdateCardFace(CardFace, oldWidget.GetPlaceWidgetCardFace() != CardFace);
