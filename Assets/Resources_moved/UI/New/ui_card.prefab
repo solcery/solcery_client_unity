@@ -145,7 +145,6 @@ GameObject:
   m_Component:
   - component: {fileID: 348070657124763931}
   - component: {fileID: 348070657124763928}
-  - component: {fileID: 5176026971089487703}
   - component: {fileID: 8004619478931230465}
   - component: {fileID: 109011675341129145}
   m_Layer: 5
@@ -192,26 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 2
   m_AspectRatio: 0.71875
---- !u!95 &5176026971089487703
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348070657124763930}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 217f0bd1d7fa2a147a815ef5bc5030c8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8004619478931230465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,11 +205,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 348070657124763931}
   back: {fileID: 2746402451999064462}
+  front: {fileID: 6080424054038107882}
   cardName: {fileID: 642263690928292624}
   description: {fileID: 7899081689914481010}
   button: {fileID: 2992525226601870308}
   image: {fileID: 2307604813889946526}
-  animator: {fileID: 5176026971089487703}
 --- !u!222 &109011675341129145
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -548,7 +527,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
