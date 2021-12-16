@@ -28,6 +28,8 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Button button;
         [SerializeField]
         private Image image;
+        [SerializeField]
+        private Image highlightedImage;
         
         private Sprite _sprite;
         private Vector2 _anchorMin;
@@ -117,6 +119,11 @@ namespace Solcery.Widgets_new.Cards.Widgets
             button.interactable = interactable;
         }
 
+        public void UpdateHighlighted(bool highlighted)
+        {
+            highlightedImage.enabled = highlighted;
+        }
+
         public void AddOnClickListener(UnityAction onClick)
         {
             button.onClick.RemoveAllListeners();
@@ -147,6 +154,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _sequence?.Kill();
             KillMoveTween();
             button.onClick.RemoveAllListeners();
+            highlightedImage.enabled = false;
         }
 
         private void KillMoveTween()

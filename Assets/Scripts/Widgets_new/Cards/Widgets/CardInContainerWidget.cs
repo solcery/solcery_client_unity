@@ -59,6 +59,11 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateInteractable(interactable);
         }
 
+        void ICardInContainerWidget.UpdateHighlighted(bool highlighted)
+        {
+            _layout.UpdateHighlighted(highlighted);
+        }
+
         void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
         {
             if (data.TryGetValue("name", out string name))

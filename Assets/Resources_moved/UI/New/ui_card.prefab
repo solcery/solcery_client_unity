@@ -210,6 +210,7 @@ MonoBehaviour:
   description: {fileID: 7899081689914481010}
   button: {fileID: 2992525226601870308}
   image: {fileID: 2307604813889946526}
+  highlightedImage: {fileID: 6350384346996390725}
 --- !u!222 &109011675341129145
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -569,7 +570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2650579684141105140
 RectTransform:
   m_ObjectHideFlags: 0
