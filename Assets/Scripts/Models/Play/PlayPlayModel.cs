@@ -1,9 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Play.Attributes.Highlighted;
-using Solcery.Models.Play.Attributes.Interactable;
-using Solcery.Models.Play.Attributes.Numberable;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -37,12 +34,9 @@ namespace Solcery.Models.Play
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             
-            _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
-            _systems.Add(SystemApplyAttributeInteractable.Create());
-            _systems.Add(SystemApplyAttributeHighlighted.Create());
-            _systems.Add(SystemApplyAttributeNumber.Create());
             // TODO сюда добавляем новые системы и тд
-            
+            _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
+
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif

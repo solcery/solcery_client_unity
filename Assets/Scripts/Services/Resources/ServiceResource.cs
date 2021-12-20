@@ -7,9 +7,6 @@ using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
 using Solcery.Services.Resources.Patterns;
 using Solcery.Services.Resources.Patterns.Texture;
-using Solcery.Services.Resources.Patterns.Widgets.Button;
-using Solcery.Services.Resources.Patterns.Widgets.Picture;
-using Solcery.Services.Resources.Patterns.Widgets.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -38,9 +35,6 @@ namespace Solcery.Services.Resources
         {
             var patternsProcessor = PatternsProcessor.Create();
             patternsProcessor.PatternRegistration(PatternUriTexture.Create());
-            patternsProcessor.PatternRegistration(PatternButton.Create());
-            patternsProcessor.PatternRegistration(PatternText.Create());
-            patternsProcessor.PatternRegistration(PatternPicture.Create());
             patternsProcessor.ProcessGameContent(gameContentJson);
 
             _task = MultiLoadTask.Create();
