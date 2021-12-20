@@ -16,11 +16,9 @@ namespace Solcery.Models.Play.Places
     public sealed class SystemPlaceWidgetsUpdate : ISystemPlaceWidgetsUpdate
     {
         private IGame _game;
-        private EcsFilter _filterPlaceWithWidget;
         private EcsFilter _filterPlaceWithPlaceWidget;
         private EcsFilter _filterEntities;
         private EcsFilter _filterGameStateUpdate;
-        private EcsFilter _filterSubWidgetComponent;
 
         public static ISystemPlaceWidgetsUpdate Create(IGame game)
         {
@@ -34,12 +32,10 @@ namespace Solcery.Models.Play.Places
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filterPlaceWithWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceWidget>().End();
             _filterPlaceWithPlaceWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>()
                 .Inc<ComponentPlaceWidgetNew>().End();
             _filterEntities = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentAttributePlace>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
-            _filterSubWidgetComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().End();
         }
         
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -49,15 +45,6 @@ namespace Solcery.Models.Play.Places
                 return;
             }
 
-            // Чистим старые сабвиджеты
-            var subWidgetsPool = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
-            foreach (var entityId in _filterSubWidgetComponent)
-            {
-                var subWidget = subWidgetsPool.Get(entityId).Widget;
-                subWidget.ClearView();
-                subWidgetsPool.Del(entityId);
-            }
-            
             var entitiesInPlace = new Dictionary<int, List<int>>();
             // Подготовим набор entity в place
             foreach (var entityIndex in _filterEntities)
@@ -82,18 +69,6 @@ namespace Solcery.Models.Play.Places
                 var entityIds = entitiesInPlace.TryGetValue(placeId, out var eid) ? eid.ToArray() : new int[]{};
                 var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
                 placeWidget.Update(world, entityIds);
-            }
-            
-            
-            // Пробежим по place с widget
-            foreach (var placeIndex in _filterPlaceWithWidget)
-            {
-                if (entitiesInPlace.TryGetValue(systems.GetWorld().GetPool<ComponentPlaceId>().Get(placeIndex).Id,
-                    out var entityIds))
-                {
-                    var widget = systems.GetWorld().GetPool<ComponentPlaceWidget>().Get(placeIndex).Widget;
-                    widget.UpdateSubWidgets(systems.GetWorld(), entityIds.ToArray());
-                }
             }
             
             PlaceWidget.RefreshPlaceWidgetOrderZ(_game.WidgetCanvas.GetUiCanvas());

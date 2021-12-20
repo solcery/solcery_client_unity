@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Game.State;
-using Solcery.Models.Play.Places;
-using Solcery.Models.Shared.Attributes.Highlighted;
 
 namespace Solcery.Models.Play.Attributes.Highlighted
 {
@@ -21,7 +19,6 @@ namespace Solcery.Models.Play.Attributes.Highlighted
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filterSubViewComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().Inc<ComponentAttributeHighlighted>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
 
@@ -32,16 +29,16 @@ namespace Solcery.Models.Play.Attributes.Highlighted
                 return;
             }
             
-            var subWidgetComponents = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
-            var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeHighlighted>();
-            foreach (var entity in _filterSubViewComponent)
-            {
-                var view = subWidgetComponents.Get(entity).Widget.View;
-                if (view is IHighlighted value)
-                {
-                    value.SetHighlighted(attributeComponents.Get(entity).Value);
-                }
-            }
+            // var subWidgetComponents = systems.GetWorld().GetPool<ComponentPlaceSubWidget>();
+            // var attributeComponents = systems.GetWorld().GetPool<ComponentAttributeHighlighted>();
+            // foreach (var entity in _filterSubViewComponent)
+            // {
+            //     var view = subWidgetComponents.Get(entity).Widget.View;
+            //     if (view is IHighlighted value)
+            //     {
+            //         value.SetHighlighted(attributeComponents.Get(entity).Value);
+            //     }
+            // }
         }
     }
 }

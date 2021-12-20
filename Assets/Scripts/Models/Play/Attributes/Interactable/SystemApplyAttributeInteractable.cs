@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Game.State;
-using Solcery.Models.Play.Places;
-using Solcery.Models.Shared.Attributes.Interactable;
 
 namespace Solcery.Models.Play.Attributes.Interactable
 {
@@ -25,7 +23,6 @@ namespace Solcery.Models.Play.Attributes.Interactable
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            _filterSubWidgetComponent = systems.GetWorld().Filter<ComponentPlaceSubWidget>().Inc<ComponentAttributeInteractable>().End();
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
 
@@ -36,17 +33,17 @@ namespace Solcery.Models.Play.Attributes.Interactable
                 return;
             }
 
-            var world = systems.GetWorld();
-            var subWidgetComponents = world.GetPool<ComponentPlaceSubWidget>();
-            var attributeComponents = world.GetPool<ComponentAttributeInteractable>();
-            foreach (var entityId in _filterSubWidgetComponent)
-            {
-                var view = subWidgetComponents.Get(entityId).Widget.View;
-                if (view is IInteractable value)
-                {
-                    value.SetInteractable(attributeComponents.Get(entityId).Value);
-                }
-            }
+            // var world = systems.GetWorld();
+            // var subWidgetComponents = world.GetPool<ComponentPlaceSubWidget>();
+            // var attributeComponents = world.GetPool<ComponentAttributeInteractable>();
+            // foreach (var entityId in _filterSubWidgetComponent)
+            // {
+            //     var view = subWidgetComponents.Get(entityId).Widget.View;
+            //     if (view is IInteractable value)
+            //     {
+            //         value.SetInteractable(attributeComponents.Get(entityId).Value);
+            //     }
+            // }
         }
     }
 }
