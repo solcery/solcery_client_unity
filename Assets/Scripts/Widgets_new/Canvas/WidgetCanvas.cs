@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Solcery.Widgets.Canvas
+namespace Solcery.Widgets_new.Canvas
 {
     public sealed class WidgetCanvas : IWidgetCanvas
     {

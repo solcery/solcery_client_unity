@@ -1,8 +1,8 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Container.Hands;
-using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets_new.Container.Stacks
 {

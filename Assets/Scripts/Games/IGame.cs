@@ -3,8 +3,8 @@ using Solcery.BrickInterpretation;
 using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Factories;
-using Solcery.Widgets.Canvas;
 
 namespace Solcery.Games
 {

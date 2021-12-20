@@ -9,6 +9,7 @@ using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
 using Solcery.Widgets_new;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.Factories;
@@ -16,7 +17,6 @@ using Solcery.Widgets_new.Simple.Buttons;
 using Solcery.Widgets_new.Simple.Pictures;
 using Solcery.Widgets_new.Simple.Titles;
 using Solcery.Widgets_new.Simple.Widgets;
-using Solcery.Widgets.Canvas;
 
 namespace Solcery.Games
 {

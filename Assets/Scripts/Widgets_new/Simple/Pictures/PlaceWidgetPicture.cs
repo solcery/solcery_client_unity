@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
-using Solcery.Widgets.Canvas;
+using Solcery.Widgets_new.Canvas;
 
 namespace Solcery.Widgets_new.Simple.Pictures
 {

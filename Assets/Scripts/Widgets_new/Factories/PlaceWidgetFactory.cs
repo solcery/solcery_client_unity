@@ -4,8 +4,8 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets_new.Attributes.Enum;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Pools;
-using Solcery.Widgets.Canvas;
 
 namespace Solcery.Widgets_new.Factories
 {
