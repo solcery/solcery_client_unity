@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
     public sealed class CardInContainerWidgetLayout : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Vector3 WorldPosition => rectTransform.position;
+        public float Width => rectTransform.rect.width;
         
         [SerializeField]
         private RectTransform rectTransform;

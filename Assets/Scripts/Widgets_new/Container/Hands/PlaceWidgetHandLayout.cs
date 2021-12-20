@@ -8,12 +8,9 @@ namespace Solcery.Widgets_new.Container.Hands
         [SerializeField]
         private RectTransform content;
         [SerializeField]
-        private RectTransform fakeContent;
-        [SerializeField]
-        private List<GameObject> fakeCardList;
+        private float spacing;
 
         public RectTransform Content => content;
-        public RectTransform Transform => fakeContent;
-        public IReadOnlyList<GameObject> FakeCardList => fakeCardList;
+        public float Spacing => spacing;
     }
 }

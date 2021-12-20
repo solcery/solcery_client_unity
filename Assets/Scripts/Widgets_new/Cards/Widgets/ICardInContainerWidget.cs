@@ -7,7 +7,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
     public interface ICardInContainerWidget
     {
         Vector3 WorldPosition { get; }
-        int CardIndex { get; set; }
+        float Width { get; }
 
         void UpdateParent(Transform parent);
         void UpdateSiblingIndex(int siblingIndex);

@@ -16,39 +16,6 @@ namespace Solcery.Widgets_new.Container.Hands
 {
     public sealed class PlaceWidgetHand : PlaceWidgetHand<PlaceWidgetHandLayout>
     {
-        private class FakeCardWrapper
-        {
-            public bool Available => _available;
-            public Vector3 WorldPosition => _fakeCard.transform.position;
-            
-            private bool _available;
-            private GameObject _fakeCard;
-
-            public static FakeCardWrapper Create(GameObject fakeCard)
-            {
-                return new FakeCardWrapper(fakeCard);
-            }
-
-            private FakeCardWrapper(GameObject fakeCard)
-            {
-                _available = true;
-                _fakeCard = fakeCard;
-            }
-
-            public void UpdateAvailable(bool available)
-            {
-                _available = available;
-            }
-
-            public void UpdateActive(bool active)
-            {
-                _fakeCard.SetActive(active);
-            }
-        }
-        
-        private List<FakeCardWrapper> _fakeCards;
-        private bool _firstUpdate;
-
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetHand(widgetCanvas, game, prefabPathKey, placeDataObject);
@@ -57,81 +24,14 @@ namespace Solcery.Widgets_new.Container.Hands
         private PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            PreloadFakeCards();
-            _firstUpdate = true;
         }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        protected override Vector3 WorldPositionForCardIndex(float cardWidth, int cardIndex)
         {
-            Layout.UpdateFirstUpdate(_firstUpdate, true);
-            _firstUpdate = false;
-            base.Update(world, entityIds);
-        }
-
-        private void PreloadFakeCards()
-        {
-            _fakeCards = new List<FakeCardWrapper>(Layout.FakeCardList.Count);
-            foreach (var gameObject in Layout.FakeCardList)
-            {
-                _fakeCards.Add(FakeCardWrapper.Create(gameObject));
-            }
-        }
-
-        public override void Destroy()
-        {
-            while (_fakeCards.Count > 0)
-            {
-                _fakeCards.RemoveAt(0);
-            }
-            
-            base.Destroy();
-        }
-
-        protected override int PopFreeCardIndex()
-        {
-            foreach (var fakeCard in _fakeCards)
-            {
-                if (fakeCard.Available)
-                {
-                    fakeCard.UpdateAvailable(false);
-                    return _fakeCards.IndexOf(fakeCard);
-                }
-            }
-
-            return -1;
-        }
-
-        protected override Vector3 WorldPositionForCardIndex(int cardIndex)
-        {
-            if (cardIndex >= 0 && cardIndex < _fakeCards.Count)
-            {
-                Debug.Log($"WorldPositionForCardIndex {cardIndex} position {_fakeCards[cardIndex].WorldPosition}");
-                return _fakeCards[cardIndex].WorldPosition;
-            }
-            
-            return Layout.Transform.position;
-        }
-
-        protected override void UpdateAvailableFakeCardForCardIndex(int cardIndex, bool available)
-        {
-            if (cardIndex >= 0 && cardIndex < _fakeCards.Count)
-            {
-                _fakeCards[cardIndex].UpdateAvailable(available);
-            }
-        }
-
-        protected override void UpdateActiveFakeCardForCardIndex(int cardIndex, bool active)
-        {
-            if (cardIndex >= 0 && cardIndex < _fakeCards.Count)
-            {
-                _fakeCards[cardIndex].UpdateActive(active);
-            }
-        }
-
-        protected override void OnRemoveCard(ICardInContainerWidget cardInContainerWidget)
-        {
-            UpdateAvailableFakeCardForCardIndex(cardInContainerWidget.CardIndex, true);
-            UpdateActiveFakeCardForCardIndex(cardInContainerWidget.CardIndex, true);
+            var position = Layout.Content.position;
+            position.x = position.x - Layout.Content.rect.width / 2 + cardWidth / 2;
+            position.x += (cardWidth + Layout.Spacing) * cardIndex;
+            return position;
         }
     }
 
@@ -195,7 +95,7 @@ namespace Solcery.Widgets_new.Container.Hands
                     break;
                 }
             }
-            
+
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
@@ -207,7 +107,7 @@ namespace Solcery.Widgets_new.Container.Hands
                 
                 if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
                 {
-                    cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget); 
+                    cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget);
                     _cards.Add(objectId, cardInContainerWidget);
                 }
             }
@@ -241,7 +141,7 @@ namespace Solcery.Widgets_new.Container.Hands
             ICardInContainerWidget cardInContainerWidget)
         {
             PlaceWidget oldWidget = null;
-            bool highlighted = false;
+            var highlighted = false;
             
             if (objectAttributesPool.Has(entityId))
             {
@@ -258,9 +158,9 @@ namespace Solcery.Widgets_new.Container.Hands
                 }
             }
 
+            cardInContainerWidget.UpdateParent(Layout.Content);
             if (oldWidget is PlaceWidgetHand or PlaceWidgetStack)
             {
-                cardInContainerWidget.UpdateParent(Layout.Transform);
                 var from = oldWidget.GetPosition();
 
                 if (objectIdPool.Has(entityId) 
@@ -269,15 +169,12 @@ namespace Solcery.Widgets_new.Container.Hands
                     from = placeWidgetCardPositionForObjectId.WorldPositionForObjectId(objectIdPool.Get(entityId).Id);
                 }
 
-                var freeCardIndex = PopFreeCardIndex();
-                var to = WorldPositionForCardIndex(freeCardIndex);
+                var index = _cards.Count;
+                var to = WorldPositionForCardIndex(cardInContainerWidget.Width, index);
 
-                cardInContainerWidget.CardIndex = freeCardIndex;
                 cardInContainerWidget.Move(from, to, widget =>
                 {
-                    UpdateActiveFakeCardForCardIndex(widget.CardIndex, false);
-                    widget.UpdateParent(Layout.Content);
-                    widget.UpdateSiblingIndex(widget.CardIndex);
+                    widget.UpdateSiblingIndex(index);
                     widget.UpdateHighlighted(highlighted);
                 });
                 
@@ -285,7 +182,6 @@ namespace Solcery.Widgets_new.Container.Hands
             }
             else
             {
-                cardInContainerWidget.UpdateParent(Layout.Content);
                 cardInContainerWidget.UpdateCardFace(CardFace, false);
             }
 
@@ -334,27 +230,15 @@ namespace Solcery.Widgets_new.Container.Hands
 
             foreach (var key in keys)
             {
-                OnRemoveCard(_cards[key]);
                 Game.PlaceWidgetFactory.CardInContainerPool.Push(_cards[key]);
                 _cards.Remove(key);
             }
         }
-
-        protected virtual int PopFreeCardIndex()
-        {
-            return -1;
-        }
-
-        protected virtual Vector3 WorldPositionForCardIndex(int cardIndex)
+        
+        protected virtual Vector3 WorldPositionForCardIndex(float cardWidth, int cardIndex)
         {
             return Layout.Content.position;
         }
-        
-        protected virtual void UpdateAvailableFakeCardForCardIndex(int cardIndex, bool available) { }
-
-        protected virtual void UpdateActiveFakeCardForCardIndex(int cardIndex, bool active) { }
-        
-        protected virtual void OnRemoveCard(ICardInContainerWidget cardInContainerWidget) { }
         
         Vector3 IPlaceWidgetCardPositionForObjectId.WorldPositionForObjectId(int objectId)
         {

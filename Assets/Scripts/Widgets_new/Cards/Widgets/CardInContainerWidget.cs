@@ -12,16 +12,10 @@ namespace Solcery.Widgets_new.Cards.Widgets
     public sealed class CardInContainerWidget : ICardInContainerWidget
     {
         Vector3 ICardInContainerWidget.WorldPosition => _layout.WorldPosition;
+        public float Width => _layout.Width;
         
-        int ICardInContainerWidget.CardIndex
-        {
-            get => _cardIndex;
-            set => _cardIndex = value;
-        }
-
         private IGame _game;
         private CardInContainerWidgetLayout _layout;
-        private int _cardIndex;
 
         public static ICardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -112,7 +106,6 @@ namespace Solcery.Widgets_new.Cards.Widgets
 
         private void Cleanup()
         {
-            _cardIndex = -1;
         }
     }
 }
