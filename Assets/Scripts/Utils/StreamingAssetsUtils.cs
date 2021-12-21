@@ -1,8 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEngine.Networking;
+#endif
 
 namespace Solcery.Utils
 {
