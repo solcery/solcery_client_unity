@@ -9,6 +9,7 @@ using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
 using Solcery.Widgets_new;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.Factories;
@@ -16,8 +17,6 @@ using Solcery.Widgets_new.Simple.Buttons;
 using Solcery.Widgets_new.Simple.Pictures;
 using Solcery.Widgets_new.Simple.Titles;
 using Solcery.Widgets_new.Simple.Widgets;
-using Solcery.Widgets.Canvas;
-using Solcery.Widgets.Factory;
 
 namespace Solcery.Games
 {
@@ -28,7 +27,6 @@ namespace Solcery.Games
         IServiceResource IGame.ServiceResource => _serviceResource;
         IPlayModel IGame.PlayModel => _playModel;
         IWidgetCanvas IGame.WidgetCanvas => _widgetCanvas;
-        IWidgetFactory IGame.WidgetFactory => _widgetFactory;
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
 
         JObject IGame.GameContent => _gameContentJson;
@@ -48,7 +46,6 @@ namespace Solcery.Games
         private IServiceResource _serviceResource;
         private IPlayModel _playModel;
         private IWidgetCanvas _widgetCanvas;
-        private IWidgetFactory _widgetFactory;
         private IPlaceWidgetFactory _placeWidgetFactory;
 
         private JObject _gameContentJson;
@@ -77,14 +74,13 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
-#if UNITY_EDITOR
+#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
             _transportService = EditorTransportService.Create(this, _serviceBricks);
 #else
             _transportService = WebGlTransportService.Create();
 #endif
 
             _serviceResource = ServiceResource.Create(this);
-            _widgetFactory = WidgetFactory.Create(widgetCanvas, _serviceResource);
             _placeWidgetFactory = PlaceWidgetFactory.Create(this, widgetCanvas);
             RegistrationPlaceWidgetTypes();
         }
@@ -182,7 +178,6 @@ namespace Solcery.Games
         {
             _playModel.Destroy();
             _transportService.Cleanup();
-            _widgetFactory.Cleanup();
             _serviceResource.Cleanup();
         }
 
@@ -203,8 +198,6 @@ namespace Solcery.Games
             _transportService = null;
 
             // TODO: удаляем последними, так как в разных объектах могут быть ссылки на виджеты и ресурсы
-            _widgetFactory.Destroy();
-            _widgetFactory = null;
             _placeWidgetFactory.Destroy();
             _placeWidgetFactory = null;
             _serviceResource.Destroy();

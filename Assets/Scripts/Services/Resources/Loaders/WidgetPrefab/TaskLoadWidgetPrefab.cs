@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Solcery.Services.Resources.Patterns;
-using Solcery.Services.Resources.Patterns.Widgets;
 using UnityEngine;
 
 namespace Solcery.Services.Resources.Loaders.WidgetPrefab
@@ -17,28 +16,17 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         public static ILoadTask Create(List<PatternData> patternDataList, Action<Dictionary<string, GameObject>> callback)
         {
-            var widgetResourcePaths = new List<string>(patternDataList.Count);
-            foreach (var patternRawData in patternDataList)
+            var widgetResourcePaths = new List<string>
             {
-                if (patternRawData is PatternWidgetData patternData)
-                {
-                    if (widgetResourcePaths.Contains(patternData.WidgetResourcePath))
-                    {
-                        continue;
-                    }
-                    
-                    widgetResourcePaths.Add(patternData.WidgetResourcePath);
-                }
-            }
-            
-            widgetResourcePaths.Add("ui/ui_widget");
-            widgetResourcePaths.Add("ui/ui_title");
-            widgetResourcePaths.Add("ui/ui_button");
-            widgetResourcePaths.Add("ui/ui_picture");
-            widgetResourcePaths.Add("ui/ui_hand");
-            widgetResourcePaths.Add("ui/ui_stack");
-            widgetResourcePaths.Add("ui/ui_card");
-            
+                "ui/ui_widget",
+                "ui/ui_title",
+                "ui/ui_button",
+                "ui/ui_picture",
+                "ui/ui_hand",
+                "ui/ui_stack",
+                "ui/ui_card"
+            };
+
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }
 

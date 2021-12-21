@@ -7,9 +7,9 @@ using Solcery.Games;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Container.Stacks;
-using Solcery.Widgets.Canvas;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Container.Hands

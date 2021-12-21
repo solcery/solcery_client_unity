@@ -1,5 +1,5 @@
 using Solcery.Games;
-using Solcery.Widgets.Canvas;
+using Solcery.Widgets_new.Canvas;
 using UnityEngine;
 
 namespace Solcery

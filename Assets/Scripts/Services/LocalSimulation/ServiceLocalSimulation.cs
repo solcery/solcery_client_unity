@@ -1,13 +1,11 @@
-#if UNITY_EDITOR
+#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
-using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation
@@ -59,7 +57,6 @@ namespace Solcery.Services.LocalSimulation
 
         void IServiceLocalSimulationApplyGameState.ApplySimulatedGameState(JObject gameState)
         {
-            //gameState.SaveForFile(Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/gs.json"));
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 

@@ -3,8 +3,8 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.StaticOrderZ;
-using Solcery.Widgets.Canvas;
 using UnityEngine;
 
 namespace Solcery.Widgets_new
