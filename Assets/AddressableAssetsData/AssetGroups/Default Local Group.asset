@@ -17,18 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3828cc652ae2442108ee048291445fca
   m_SerializeEntries:
-  - m_GUID: c9dbc26ac674e4c06b782ba5b2c73aa5
-    m_Address: ui/button
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 3fce2df46cda94ab2b985a704bcbbb63
-    m_Address: ui/text
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 3600e9100db564ecbb5e8a5da5f89e0a
-    m_Address: ui/picture
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 224af77f0d7ea41a58e8dde882e4b417
     m_Address: ui/ui_widget
     m_ReadOnly: 0

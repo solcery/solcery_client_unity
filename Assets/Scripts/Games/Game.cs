@@ -74,7 +74,7 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
-#if UNITY_EDITOR
+#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
             _transportService = EditorTransportService.Create(this, _serviceBricks);
 #else
             _transportService = WebGlTransportService.Create();
