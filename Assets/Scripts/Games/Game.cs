@@ -5,6 +5,7 @@ using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models.Play;
+using Solcery.React;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Utils;
@@ -74,10 +75,10 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
-#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
+#if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, _serviceBricks);
-#else
-            _transportService = WebGlTransportService.Create();
+#elif UNITY_WEBGL
+            _transportService = WebGlTransportService.Create(this);
 #endif
 
             _serviceResource = ServiceResource.Create(this);
@@ -87,7 +88,13 @@ namespace Solcery.Games
 
         void IGame.Init()
         {
+            ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
             _transportService.CallUnityLoaded();
+        }
+
+        private void OnOpenGameOverPopup(string obj)
+        {
+            ReactToUnity.Instance.OpenGameOverPopup(obj);
         }
 
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
@@ -176,6 +183,7 @@ namespace Solcery.Games
 
         private void Cleanup()
         {
+            ReactToUnity.RemoveCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
             _playModel.Destroy();
             _transportService.Cleanup();
             _serviceResource.Cleanup();
@@ -189,6 +197,8 @@ namespace Solcery.Games
 
         void IGame.Destroy()
         {
+            Cleanup();
+            
             _playModel.Destroy();
             _playModel = null;
             
