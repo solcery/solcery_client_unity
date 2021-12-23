@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Solcery.Editor.CI.WebGl.Configuration;
 using UnityEditor;
 
 namespace Solcery.Editor.CI.Utils
@@ -59,13 +59,13 @@ namespace Solcery.Editor.CI.Utils
             return scenes;
         }
 
-        internal static void AddDefineSymbols(IEnumerable<string> addSymbols, IEnumerable<string> removeSymbols)
+        internal static void AddDefineSymbols(BuildConfiguration configuration)
         {
             var definesString =
                 PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
             var allDefines = definesString.Split(';').ToList();
-            allDefines = allDefines.Except(removeSymbols).ToList();
-            allDefines.AddRange(addSymbols.Except(allDefines));
+            allDefines = allDefines.Except(configuration.RemoveDefineSymbols).ToList();
+            allDefines.AddRange(configuration.AddDefineSymbols.Except(allDefines));
             PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup,
                 string.Join(";", allDefines.ToArray()));
         }
