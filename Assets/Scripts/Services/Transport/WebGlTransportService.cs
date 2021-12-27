@@ -28,12 +28,14 @@ namespace Solcery.Services.Transport
 
         private void OnGameStateUpdate(string obj)
         {
-            _gameTransportCallbacks?.OnReceivingGameContent(JObject.Parse(obj));
+            //UnityEngine.Debug.Log($"OnGameStateUpdate {obj}");
+            _gameTransportCallbacks?.OnReceivingGameState(JObject.Parse(obj));
         }
 
         private void OnGameContentUpdate(string obj)
         {
-            _gameTransportCallbacks?.OnReceivingGameState(JObject.Parse(obj));
+            //UnityEngine.Debug.Log($"OnGameContentUpdate {obj}");
+            _gameTransportCallbacks?.OnReceivingGameContent(JObject.Parse(obj));
         }
 
         void ITransportService.SendCommand(JObject command)
