@@ -17,12 +17,12 @@ namespace Solcery.Services.Transport
         private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks)
         {
             _gameTransportCallbacks = gameTransportCallbacks;
+            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
+            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
         
         void ITransportService.CallUnityLoaded()
         {
-            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
-            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
             UnityToReact.Instance.CallOnUnityLoaded();
         }
 
@@ -59,7 +59,7 @@ namespace Solcery.Services.Transport
         
         void ITransportService.Cleanup()
         {
-            Cleanup();
+            //Cleanup();
         }
         
         void ITransportService.Destroy()

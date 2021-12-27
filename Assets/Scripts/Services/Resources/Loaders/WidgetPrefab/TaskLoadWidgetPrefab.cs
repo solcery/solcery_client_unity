@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Solcery.Services.Resources.Patterns;
 using UnityEngine;
 
 namespace Solcery.Services.Resources.Loaders.WidgetPrefab
@@ -14,7 +13,7 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         private int _completedLoaderCount;
         private Dictionary<string, GameObject> _widgetPrefabs;
 
-        public static ILoadTask Create(List<PatternData> patternDataList, Action<Dictionary<string, GameObject>> callback)
+        public static ILoadTask Create(Action<Dictionary<string, GameObject>> callback)
         {
             var widgetResourcePaths = new List<string>
             {
@@ -45,28 +44,39 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         void ILoadTask.Run()
         {
-            _completedLoaderCount = 0;
-            foreach (var prefabLoader in _prefabLoaders)
+            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run()");
+            _completedLoaderCount = _prefabLoaders.Count;
+
+            while (_prefabLoaders.Count > 0)
             {
+                var prefabLoader = _prefabLoaders[0];
+                _prefabLoaders.RemoveAt(0);
                 prefabLoader.Load(OnPrefabLoaded);
             }
+            
+            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run() Finish");
         }
 
         private void OnPrefabLoaded(IPrefabLoader obj)
         {
-            ++_completedLoaderCount;
+            Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded");
+            --_completedLoaderCount;
             
             _widgetPrefabs.Add(obj.Name, obj.Prefab);
 
-            if (_prefabLoaders.Count <= _completedLoaderCount)
+            Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded check completed");
+            if (_completedLoaderCount <= 0)
             {
                 _callback?.Invoke(_widgetPrefabs);
                 Completed?.Invoke(true, this);
+                Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded completed");
             }
         }
 
         void ILoadTask.Destroy()
         {
+            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Destroy()");
+            
             _callback = null;
             
             _widgetPrefabs?.Clear();
