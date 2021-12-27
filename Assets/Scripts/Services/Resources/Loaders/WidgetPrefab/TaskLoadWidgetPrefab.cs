@@ -44,7 +44,7 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         void ILoadTask.Run()
         {
-            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run()");
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run()");
             _completedLoaderCount = _prefabLoaders.Count;
 
             while (_prefabLoaders.Count > 0)
@@ -54,28 +54,28 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
                 prefabLoader.Load(OnPrefabLoaded);
             }
             
-            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run() Finish");
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run() Finish");
         }
 
         private void OnPrefabLoaded(IPrefabLoader obj)
         {
-            Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded");
+            //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded");
             --_completedLoaderCount;
             
             _widgetPrefabs.Add(obj.Name, obj.Prefab);
 
-            Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded check completed");
+            //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded check completed");
             if (_completedLoaderCount <= 0)
             {
                 _callback?.Invoke(_widgetPrefabs);
                 Completed?.Invoke(true, this);
-                Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded completed");
+                //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded completed");
             }
         }
 
         void ILoadTask.Destroy()
         {
-            Debug.Log("TaskLoadWidgetPrefab ILoadTask.Destroy()");
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Destroy()");
             
             _callback = null;
             

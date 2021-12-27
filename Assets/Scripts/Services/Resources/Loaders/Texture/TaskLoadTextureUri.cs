@@ -49,7 +49,7 @@ namespace Solcery.Services.Resources.Loaders.Texture
 
         void ILoadTask.Run()
         {
-            Debug.Log("TaskLoadTextureUri ILoadTask.Run()");
+            //Debug.Log("TaskLoadTextureUri ILoadTask.Run()");
             _completedLoaderCount = _textureLoaderUriList.Count;
 
             while (_textureLoaderUriList.Count > 0)
@@ -59,12 +59,12 @@ namespace Solcery.Services.Resources.Loaders.Texture
                 imageLoaderUri.Load(OnImageLoad);
             }
             
-            Debug.Log("TaskLoadTextureUri ILoadTask.Run() finish");
+            //Debug.Log("TaskLoadTextureUri ILoadTask.Run() finish");
         }
 
         private void OnImageLoad(ITextureLoaderUri imageLoaderUri)
         {
-            Debug.Log("TaskLoadTextureUri OnPrefabLoaded");
+            //Debug.Log("TaskLoadTextureUri OnPrefabLoaded");
             --_completedLoaderCount;
             if (imageLoaderUri.LoadedIsSuccess)
             {
@@ -74,19 +74,19 @@ namespace Solcery.Services.Resources.Loaders.Texture
             imageLoaderUri.Destroy();
             
 
-            Debug.Log("TaskLoadTextureUri OnPrefabLoaded check completed");
+            //Debug.Log("TaskLoadTextureUri OnPrefabLoaded check completed");
             if (_completedLoaderCount <= 0)
             {
                 _callback?.Invoke(_textures);
                 Completed?.Invoke(true, this);
                 
-                Debug.Log("TaskLoadTextureUri OnPrefabLoaded completed");
+                //Debug.Log("TaskLoadTextureUri OnPrefabLoaded completed");
             }
         }
 
         void ILoadTask.Destroy()
         {
-            Debug.Log("TaskLoadTextureUri ILoadTask.Destroy()");
+            //Debug.Log("TaskLoadTextureUri ILoadTask.Destroy()");
             
             _callback = null;
 
