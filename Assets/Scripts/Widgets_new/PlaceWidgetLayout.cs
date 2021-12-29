@@ -7,6 +7,7 @@ namespace Solcery.Widgets_new
     {
         public int OrderZ => _orderZ;
         
+        public RectTransform Root => rectTransform;
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]

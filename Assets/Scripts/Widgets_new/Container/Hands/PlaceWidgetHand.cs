@@ -16,6 +16,8 @@ namespace Solcery.Widgets_new.Container.Hands
 {
     public sealed class PlaceWidgetHand : PlaceWidgetHand<PlaceWidgetHandLayout>
     {
+        private int _capacity = 3;
+        
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetHand(widgetCanvas, game, prefabPathKey, placeDataObject);
@@ -24,14 +26,15 @@ namespace Solcery.Widgets_new.Container.Hands
         private PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
+            _capacity = 3;
         }
 
-        protected override Vector3 WorldPositionForCardIndex(float cardWidth, int cardIndex)
+        protected override Vector3 WorldLocalPositionForCardIndex(int cardIndex)
         {
-            var position = Layout.Content.position;
-            position.x = position.x - Layout.Content.rect.width / 2 + cardWidth / 2;
-            position.x += (cardWidth + Layout.Spacing) * cardIndex;
-            return position;
+            var width = Layout.Content.rect.width;
+            var partWidth = width / _capacity;
+            var partX = partWidth / 2 + cardIndex * partWidth - width / 2;
+            return new Vector3(partX, 0f, 0f);     
         }
     }
 
@@ -161,18 +164,18 @@ namespace Solcery.Widgets_new.Container.Hands
             cardInContainerWidget.UpdateParent(Layout.Content);
             if (oldWidget is PlaceWidgetHand or PlaceWidgetStack)
             {
-                var from = oldWidget.GetPosition();
+                var fromWorld = oldWidget.GetPosition();
 
                 if (objectIdPool.Has(entityId) 
                     && oldWidget is IPlaceWidgetCardPositionForObjectId placeWidgetCardPositionForObjectId)
                 {
-                    from = placeWidgetCardPositionForObjectId.WorldPositionForObjectId(objectIdPool.Get(entityId).Id);
+                    fromWorld = placeWidgetCardPositionForObjectId.WorldPositionForObjectId(objectIdPool.Get(entityId).Id);
                 }
-
+                
                 var index = _cards.Count;
-                var to = WorldPositionForCardIndex(cardInContainerWidget.Width, index);
+                var toLocal = WorldLocalPositionForCardIndex(index);
 
-                cardInContainerWidget.Move(from, to, widget =>
+               cardInContainerWidget.MoveLocal(fromWorld, toLocal, widget =>
                 {
                     widget.UpdateSiblingIndex(index);
                     widget.UpdateHighlighted(highlighted);
@@ -235,9 +238,9 @@ namespace Solcery.Widgets_new.Container.Hands
             }
         }
         
-        protected virtual Vector3 WorldPositionForCardIndex(float cardWidth, int cardIndex)
+        protected virtual Vector3 WorldLocalPositionForCardIndex( int cardIndex)
         {
-            return Layout.Content.position;
+            return Vector3.zero;
         }
         
         Vector3 IPlaceWidgetCardPositionForObjectId.WorldPositionForObjectId(int objectId)

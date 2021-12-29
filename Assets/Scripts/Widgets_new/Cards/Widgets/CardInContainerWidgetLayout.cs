@@ -12,8 +12,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidgetLayout : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Vector3 WorldPosition => rectTransform.position;
-        public float Width => rectTransform.rect.width;
+        public RectTransform RectTransform => rectTransform;
         
         [SerializeField]
         private RectTransform rectTransform;
@@ -71,13 +70,13 @@ namespace Solcery.Widgets_new.Cards.Widgets
             rectTransform.SetSiblingIndex(siblingIndex);
         }
 
-        public void Move(Vector3 from, Vector3 to, Action onMoveComplete)
+        public void MoveLocal(Vector3 fromWorld, Vector3 toLocal, Action onMoveComplete)
         {
-            rectTransform.position = from;
+            rectTransform.position = fromWorld;
 
             KillMoveTween();
             
-            _moveTween = rectTransform.DOMove(to, 1f).OnComplete(() =>
+            _moveTween = rectTransform.DOLocalMove(toLocal, 1f).OnComplete(() =>
             {
                 onMoveComplete.Invoke();
                 _moveTween = null;

@@ -11,8 +11,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidget : ICardInContainerWidget
     {
-        Vector3 ICardInContainerWidget.WorldPosition => _layout.WorldPosition;
-        public float Width => _layout.Width;
+        Vector3 ICardInContainerWidget.WorldPosition => _layout.RectTransform.position;
         
         private IGame _game;
         private CardInContainerWidgetLayout _layout;
@@ -38,9 +37,9 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateSiblingIndex(siblingIndex);
         }
 
-        void ICardInContainerWidget.Move(Vector3 from, Vector3 to, Action<ICardInContainerWidget> onMoveComplete)
+        void ICardInContainerWidget.MoveLocal(Vector3 fromWorld, Vector3 toLocal, Action<ICardInContainerWidget> onMoveComplete)
         {
-            _layout.Move(from, to, () => onMoveComplete.Invoke(this));
+            _layout.MoveLocal(fromWorld, toLocal, () => onMoveComplete.Invoke(this));
         }
         
         void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)

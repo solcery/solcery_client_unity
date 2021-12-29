@@ -7,11 +7,9 @@ namespace Solcery.Widgets_new.Cards.Widgets
     public interface ICardInContainerWidget
     {
         Vector3 WorldPosition { get; }
-        float Width { get; }
-
         void UpdateParent(Transform parent);
         void UpdateSiblingIndex(int siblingIndex);
-        void Move(Vector3 from, Vector3 to, Action<ICardInContainerWidget> onMoveComplete);
+        void MoveLocal(Vector3 fromWorld, Vector3 toLocal, Action<ICardInContainerWidget> onMoveComplete);
         void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation);
         void UpdateInteractable(bool interactable);
         void UpdateHighlighted(bool highlighted);
