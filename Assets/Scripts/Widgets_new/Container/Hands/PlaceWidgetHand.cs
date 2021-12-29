@@ -16,8 +16,6 @@ namespace Solcery.Widgets_new.Container.Hands
 {
     public sealed class PlaceWidgetHand : PlaceWidgetHand<PlaceWidgetHandLayout>
     {
-        private int _capacity = 3;
-        
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetHand(widgetCanvas, game, prefabPathKey, placeDataObject);
@@ -26,13 +24,12 @@ namespace Solcery.Widgets_new.Container.Hands
         private PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            _capacity = 3;
         }
 
         protected override Vector3 WorldLocalPositionForCardIndex(int cardIndex)
         {
             var width = Layout.Content.rect.width;
-            var partWidth = width / _capacity;
+            var partWidth = width / CardsCount;
             var partX = partWidth / 2 + cardIndex * partWidth - width / 2;
             return new Vector3(partX, 0f, 0f);     
         }
@@ -46,6 +43,7 @@ namespace Solcery.Widgets_new.Container.Hands
     public class PlaceWidgetHand<T> : PlaceWidget<T>, IPlaceWidgetCardPositionForObjectId where T : PlaceWidgetHandLayout
     {
         private Dictionary<int, ICardInContainerWidget> _cards;
+        protected int CardsCount;
         
         protected PlaceWidgetHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
@@ -57,12 +55,12 @@ namespace Solcery.Widgets_new.Container.Hands
         {
             Layout.UpdateVisible(entityIds.Length > 0);
             RemoveCards(world, entityIds);
-            
             if (entityIds.Length <= 0)
             {
                 return;
             }
 
+            CardsCount = entityIds.Length;
             var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
 
             Action<int, 
@@ -185,9 +183,9 @@ namespace Solcery.Widgets_new.Container.Hands
             else
             {
                 cardInContainerWidget.SetLocalPosition(localPosition);
-                cardInContainerWidget.UpdateCardFace(CardFace, false);
                 cardInContainerWidget.UpdateSiblingIndex(cardIndex);
                 cardInContainerWidget.UpdateHighlighted(highlighted);
+                cardInContainerWidget.UpdateCardFace(CardFace, false);
             }
 
             cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
@@ -244,7 +242,7 @@ namespace Solcery.Widgets_new.Container.Hands
         {
             return Vector3.zero;
         }
-        
+
         Vector3 IPlaceWidgetCardPositionForObjectId.WorldPositionForObjectId(int objectId)
         {
             if (_cards.TryGetValue(objectId, out var cardInContainerWidget))
