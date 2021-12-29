@@ -9,47 +9,12 @@ namespace Solcery.Ui
 
         [SerializeField]
         private TMP_Text label;
-
-        private bool _showing = false;
-        private float _labelTimer;
-        private int _labelIndex;
-        private string[] _labelTextList;
+        [SerializeField]
+        private Canvas canvas;
 
         private void Awake()
         {
             _instance = this;
-
-            _showing = true;
-            _labelIndex = 0;
-            _labelTimer = 1f;
-            _labelTextList = new []
-            {
-                "Loading",
-                "Loading.",
-                "Loading..",
-                "Loading..."
-            };
-
-            label.text = _labelTextList[_labelIndex];
-        }
-
-        private void Update()
-        {
-            if (!_showing)
-            {
-                return;
-            }
-
-            _labelTimer -= Time.deltaTime;
-            if (!(_labelTimer <= 0f))
-            {
-                return;
-            }
-            
-            ++_labelIndex;
-            _labelIndex = _labelIndex < _labelTextList.Length ? _labelIndex : 0;
-            label.text = _labelTextList[_labelIndex];
-            _labelTimer = 1f;
         }
 
         private void OnDestroy()
@@ -73,14 +38,24 @@ namespace Solcery.Ui
             }
         }
 
+        public static void SetTitle(string text)
+        {
+            _instance.SetTitleImpl(text);
+        }
+
         private void ShowImpl()
         {
-            gameObject.SetActive(true);
+            canvas.enabled = true;
         }
 
         private void HideImpl()
         {
-            gameObject.SetActive(false);
+            canvas.enabled = false;
+        }
+
+        private void SetTitleImpl(string text)
+        {
+            label.text = text;
         }
     }
 }

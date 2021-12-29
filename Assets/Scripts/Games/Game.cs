@@ -5,9 +5,12 @@ using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models.Play;
+#if !UNITY_EDITOR && UNITY_WEBGL
 using Solcery.React;
+#endif
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
+using Solcery.Ui;
 using Solcery.Utils;
 using Solcery.Widgets_new;
 using Solcery.Widgets_new.Canvas;
@@ -88,14 +91,19 @@ namespace Solcery.Games
 
         void IGame.Init()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
             ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
+#endif
+            LoaderScreen.SetTitle("Load configuration.");
             _transportService.CallUnityLoaded();
         }
 
+#if !UNITY_EDITOR && UNITY_WEBGL
         private void OnOpenGameOverPopup(string obj)
         {
             ReactToUnity.Instance.OpenGameOverPopup(obj);
         }
+#endif
 
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
@@ -108,6 +116,7 @@ namespace Solcery.Games
                 _serviceBricks.RegistrationCustomBricksData(customBricksArray);
             }
             
+            LoaderScreen.SetTitle("Load resources.");
             _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
         }
         
@@ -124,6 +133,7 @@ namespace Solcery.Games
         private void Init(JObject gameContentJson)
         {
             _playModel.Init(this, gameContentJson);
+            LoaderScreen.Hide();
         }
 
         private void RegistrationPlaceWidgetTypes()
@@ -183,7 +193,9 @@ namespace Solcery.Games
 
         private void Cleanup()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
+#endif
             _playModel.Destroy();
             _transportService.Cleanup();
             _serviceResource.Cleanup();
