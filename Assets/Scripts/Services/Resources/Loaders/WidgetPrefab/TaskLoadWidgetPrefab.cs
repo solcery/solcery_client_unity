@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Attributes.Enum;
 using UnityEngine;
 
 namespace Solcery.Services.Resources.Loaders.WidgetPrefab
@@ -15,16 +17,18 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         public static ILoadTask Create(Action<Dictionary<string, GameObject>> callback)
         {
-            var widgetResourcePaths = new List<string>
+            var widgetResourcePaths = new List<string>();
+            
+            var names = Enum.GetNames(typeof(PlaceWidgetTypes));
+            foreach (var name in names)
             {
-                "ui/ui_widget",
-                "ui/ui_title",
-                "ui/ui_button",
-                "ui/ui_picture",
-                "ui/ui_hand",
-                "ui/ui_stack",
-                "ui/ui_card"
-            };
+                if (Enum.TryParse(name, out PlaceWidgetTypes value) 
+                    && EnumPlaceWidgetPrefabPathAttribute.TryGetPrefabPath(value, out var prefabPath)
+                    && !string.IsNullOrEmpty(prefabPath))
+                {
+                    widgetResourcePaths.Add(prefabPath);
+                }
+            }
 
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }

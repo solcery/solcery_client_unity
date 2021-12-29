@@ -5,7 +5,9 @@ namespace Solcery.Widgets_new
     public enum PlaceWidgetTypes
     {
         [EnumPlaceWidgetPrefabPath("")]
-        None = -1,
+        None = -10,
+        [EnumPlaceWidgetPrefabPath("ui/ui_card")]
+        Card = -1,
         [EnumPlaceWidgetPrefabPath("ui/ui_stack")]
         Stacked = 0,
         [EnumPlaceWidgetPrefabPath("ui/ui_hand")]
