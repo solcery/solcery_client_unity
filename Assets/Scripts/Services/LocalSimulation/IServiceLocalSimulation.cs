@@ -1,4 +1,4 @@
-#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
+#if UNITY_EDITOR || LOCAL_SIMULATION
 using System;
 using Newtonsoft.Json.Linq;
 

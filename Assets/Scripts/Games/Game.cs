@@ -5,8 +5,12 @@ using Solcery.BrickInterpretation.Actions;
 using Solcery.BrickInterpretation.Conditions;
 using Solcery.BrickInterpretation.Values;
 using Solcery.Models.Play;
+#if !UNITY_EDITOR && UNITY_WEBGL
+using Solcery.React;
+#endif
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
+using Solcery.Ui;
 using Solcery.Utils;
 using Solcery.Widgets_new;
 using Solcery.Widgets_new.Canvas;
@@ -74,10 +78,10 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
-#if UNITY_EDITOR || (DEBUG && UNITY_WEBGL)
+#if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, _serviceBricks);
-#else
-            _transportService = WebGlTransportService.Create();
+#elif UNITY_WEBGL
+            _transportService = WebGlTransportService.Create(this);
 #endif
 
             _serviceResource = ServiceResource.Create(this);
@@ -87,8 +91,19 @@ namespace Solcery.Games
 
         void IGame.Init()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
+#endif
+            LoaderScreen.SetTitle("Load configuration.");
             _transportService.CallUnityLoaded();
         }
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+        private void OnOpenGameOverPopup(string obj)
+        {
+            ReactToUnity.Instance.OpenGameOverPopup(obj);
+        }
+#endif
 
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
@@ -101,6 +116,7 @@ namespace Solcery.Games
                 _serviceBricks.RegistrationCustomBricksData(customBricksArray);
             }
             
+            LoaderScreen.SetTitle("Load resources.");
             _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
         }
         
@@ -117,6 +133,7 @@ namespace Solcery.Games
         private void Init(JObject gameContentJson)
         {
             _playModel.Init(this, gameContentJson);
+            LoaderScreen.Hide();
         }
 
         private void RegistrationPlaceWidgetTypes()
@@ -176,6 +193,9 @@ namespace Solcery.Games
 
         private void Cleanup()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
+            ReactToUnity.RemoveCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
+#endif
             _playModel.Destroy();
             _transportService.Cleanup();
             _serviceResource.Cleanup();
@@ -189,6 +209,8 @@ namespace Solcery.Games
 
         void IGame.Destroy()
         {
+            Cleanup();
+            
             _playModel.Destroy();
             _playModel = null;
             

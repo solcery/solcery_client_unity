@@ -1,3 +1,4 @@
+#if UNITY_EDITOR || LOCAL_SIMULATION
 using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
@@ -234,3 +235,4 @@ namespace Solcery.Models.Simulation.Game.State
         }
     }
 }
+#endif
