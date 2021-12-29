@@ -32,6 +32,11 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateParent(parent);
         }
 
+        public void SetLocalPosition(Vector3 localPosition)
+        {
+            _layout.RectTransform.localPosition = localPosition;
+        }
+
         void ICardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
         {
             _layout.UpdateSiblingIndex(siblingIndex);

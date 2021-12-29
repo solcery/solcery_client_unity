@@ -162,6 +162,8 @@ namespace Solcery.Widgets_new.Container.Hands
             }
 
             cardInContainerWidget.UpdateParent(Layout.Content);
+            var cardIndex = _cards.Count;
+            var localPosition = WorldLocalPositionForCardIndex(cardIndex);
             if (oldWidget is PlaceWidgetHand or PlaceWidgetStack)
             {
                 var fromWorld = oldWidget.GetPosition();
@@ -171,13 +173,10 @@ namespace Solcery.Widgets_new.Container.Hands
                 {
                     fromWorld = placeWidgetCardPositionForObjectId.WorldPositionForObjectId(objectIdPool.Get(entityId).Id);
                 }
-                
-                var index = _cards.Count;
-                var toLocal = WorldLocalPositionForCardIndex(index);
 
-               cardInContainerWidget.MoveLocal(fromWorld, toLocal, widget =>
+                cardInContainerWidget.MoveLocal(fromWorld, localPosition, widget =>
                 {
-                    widget.UpdateSiblingIndex(index);
+                    widget.UpdateSiblingIndex(cardIndex);
                     widget.UpdateHighlighted(highlighted);
                 });
                 
@@ -185,7 +184,10 @@ namespace Solcery.Widgets_new.Container.Hands
             }
             else
             {
+                cardInContainerWidget.SetLocalPosition(localPosition);
                 cardInContainerWidget.UpdateCardFace(CardFace, false);
+                cardInContainerWidget.UpdateSiblingIndex(cardIndex);
+                cardInContainerWidget.UpdateHighlighted(highlighted);
             }
 
             cardInContainerWidget.UpdateInteractable(InteractableForActiveLocalPlayer);
