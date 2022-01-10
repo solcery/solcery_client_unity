@@ -1,14 +1,18 @@
+using System;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Solcery.Widgets_new.Cards.Widgets
 {
     public sealed class CardInContainerWidget : ICardInContainerWidget
     {
+        Vector3 ICardInContainerWidget.WorldPosition => _layout.RectTransform.position;
+        
         private IGame _game;
         private CardInContainerWidgetLayout _layout;
 
@@ -28,14 +32,34 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateParent(parent);
         }
 
-        void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace)
+        public void SetLocalPosition(Vector3 localPosition)
         {
-            _layout.UpdateCardFace(cardFace);
+            _layout.RectTransform.localPosition = localPosition;
+        }
+
+        void ICardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
+        {
+            _layout.UpdateSiblingIndex(siblingIndex);
+        }
+
+        void ICardInContainerWidget.MoveLocal(Vector3 fromWorld, Vector3 toLocal, Action<ICardInContainerWidget> onMoveComplete)
+        {
+            _layout.MoveLocal(fromWorld, toLocal, () => onMoveComplete.Invoke(this));
+        }
+        
+        void ICardInContainerWidget.UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            _layout.UpdateCardFace(cardFace, withAnimation);
         }
 
         void ICardInContainerWidget.UpdateInteractable(bool interactable)
         {
             _layout.UpdateInteractable(interactable);
+        }
+
+        void ICardInContainerWidget.UpdateHighlighted(bool highlighted)
+        {
+            _layout.UpdateHighlighted(highlighted);
         }
 
         void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
@@ -70,16 +94,22 @@ namespace Solcery.Widgets_new.Cards.Widgets
         
         void ICardInContainerWidget.Cleanup()
         {
+            Cleanup();
             _layout.Cleanup();
         }
 
         void ICardInContainerWidget.Destroy()
         {
+            Cleanup();
             _layout.Cleanup();
             Object.Destroy(_layout.gameObject);
             _layout = null;
 
             _game = null;
+        }
+
+        private void Cleanup()
+        {
         }
     }
 }

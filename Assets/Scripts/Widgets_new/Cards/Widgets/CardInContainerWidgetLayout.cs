@@ -1,16 +1,25 @@
+using System;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Cards.Widgets
 {
-    public sealed class CardInContainerWidgetLayout : MonoBehaviour
+    public sealed class CardInContainerWidgetLayout : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public RectTransform RectTransform => rectTransform;
+        
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
         private GameObject back;
+        [SerializeField]
+        private GameObject front;
         [SerializeField]
         private TMP_Text cardName;
         [SerializeField]
@@ -19,6 +28,8 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Button button;
         [SerializeField]
         private Image image;
+        [SerializeField]
+        private Image highlightedImage;
         
         private Sprite _sprite;
         private Vector2 _anchorMin;
@@ -27,6 +38,8 @@ namespace Solcery.Widgets_new.Cards.Widgets
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
+        private TweenerCore<Vector3, Vector3, VectorOptions> _moveTween;
+        private Sequence _sequence;
 
         private void Awake()
         {
@@ -41,24 +54,74 @@ namespace Solcery.Widgets_new.Cards.Widgets
         public void UpdateParent(Transform parent)
         {
             rectTransform.SetParent(parent, false);
-            
-            rectTransform.offsetMax = Vector2.down;
             rectTransform.anchoredPosition = _anchoredPosition;
+            rectTransform.offsetMax = Vector2.down;
             rectTransform.pivot = _pivot;
             rectTransform.anchorMin = _anchorMin;
             rectTransform.anchorMax = _anchorMax;
             rectTransform.offsetMin = _offsetMin;
             rectTransform.offsetMax = _offsetMax;
+            rectTransform.localScale = Vector3.one;
+            rectTransform.rotation = Quaternion.identity;
         }
 
-        public void UpdateCardFace(PlaceWidgetCardFace cardFace)
+        public void UpdateSiblingIndex(int siblingIndex)
         {
-            back.SetActive(cardFace == PlaceWidgetCardFace.Down);
+            rectTransform.SetSiblingIndex(siblingIndex);
+        }
+
+        public void MoveLocal(Vector3 fromWorld, Vector3 toLocal, Action onMoveComplete)
+        {
+            rectTransform.position = fromWorld;
+
+            KillMoveTween();
+            
+            _moveTween = rectTransform.DOLocalMove(toLocal, 1f).OnComplete(() =>
+            {
+                onMoveComplete.Invoke();
+                _moveTween = null;
+            }).Play();
+        }
+        
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            if (withAnimation)
+            {
+                PlayCardTurn(cardFace);
+            }
+            else
+            {
+                UpdateView(cardFace);
+            }
+        }
+
+        private void PlayCardTurn(PlaceWidgetCardFace cardFace)
+        {
+            _sequence?.Complete();
+            _sequence = DOTween.Sequence()
+                .Append(transform.DORotate(new Vector3(0, 90, 0), 0.3f))
+                .AppendCallback(() =>
+                {
+                    UpdateView(cardFace);
+                })
+                .Append(transform.DORotate(new Vector3(0, 0, 0), 0.3f))
+                .Play();
+        }
+        
+        private void UpdateView(PlaceWidgetCardFace cardFace)
+        {
+            front.gameObject.SetActive(cardFace != PlaceWidgetCardFace.Down);
+            back.gameObject.SetActive(cardFace == PlaceWidgetCardFace.Down);
         }
 
         public void UpdateInteractable(bool interactable)
         {
             button.interactable = interactable;
+        }
+
+        public void UpdateHighlighted(bool highlighted)
+        {
+            highlightedImage.enabled = highlighted;
         }
 
         public void AddOnClickListener(UnityAction onClick)
@@ -88,11 +151,24 @@ namespace Solcery.Widgets_new.Cards.Widgets
         
         public void Cleanup()
         {
+            _sequence?.Kill();
+            KillMoveTween();
             button.onClick.RemoveAllListeners();
+            highlightedImage.enabled = false;
+        }
+
+        private void KillMoveTween()
+        {
+            if (_moveTween != null)
+            {
+                _moveTween.Kill();
+                _moveTween = null;
+            }
         }
         
         private void OnDestroy()
         {
+            KillMoveTween();
             DestroySprite();
         }
 
@@ -103,6 +179,30 @@ namespace Solcery.Widgets_new.Cards.Widgets
                 Destroy(_sprite);
                 _sprite = null;
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (button.interactable)
+            {
+                PlayCardScale(new Vector3(1.1f, 1.1f, 0));
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (button.interactable)
+            {
+                PlayCardScale(new Vector3(1f, 1f, 0));
+            }
+        }
+
+        private void PlayCardScale(Vector3 scale)
+        {
+            _sequence?.Complete();
+            _sequence = DOTween.Sequence()
+                .Append(transform.DOScale(scale, 0.3f))
+                .Play();
         }
     }
 }

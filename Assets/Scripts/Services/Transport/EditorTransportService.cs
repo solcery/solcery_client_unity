@@ -1,10 +1,9 @@
-#if UNITY_EDITOR
-using System.IO;
+#if UNITY_EDITOR || LOCAL_SIMULATION
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
-using UnityEngine;
+using Solcery.Utils;
 
 namespace Solcery.Services.Transport
 {
@@ -26,14 +25,25 @@ namespace Solcery.Services.Transport
         
         void ITransportService.CallUnityLoaded()
         {
-            var pathToGameContent = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_content.json");
-            var gameContent = JObject.Parse(File.ReadAllText(pathToGameContent));
-            _gameTransportCallbacks.OnReceivingGameContent(gameContent);
-            
-            var pathToGameState = Path.GetFullPath($"{Application.dataPath}/LocalSimulationData/game_state.json");
-            var gameState = JObject.Parse(File.ReadAllText(pathToGameState));
+            StreamingAssetsUtils.LoadText("LocalSimulationData/game_content.json", OnGameContentLoaded);
+        }
+
+        private JObject _gameContent;
+
+        private void OnGameContentLoaded(string obj)
+        {
+            _gameContent = JObject.Parse(obj);
+            _gameTransportCallbacks.OnReceivingGameContent(_gameContent);
+
+            StreamingAssetsUtils.LoadText("LocalSimulationData/game_state.json", OnGameStateLoaded);
+        }
+
+        private void OnGameStateLoaded(string obj)
+        {
+            var gameState = JObject.Parse(obj);
             _localSimulation.EventOnUpdateGameState += OnUpdateGameState;
-            _localSimulation.Init(gameContent, gameState);
+            _localSimulation.Init(_gameContent, gameState);
+            _gameContent = null;
         }
 
         private void OnUpdateGameState(JObject gameStateJson)

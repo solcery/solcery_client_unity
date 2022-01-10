@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Solcery.Services.Resources.Patterns;
-using Solcery.Services.Resources.Patterns.Widgets;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Attributes.Enum;
 using UnityEngine;
 
 namespace Solcery.Services.Resources.Loaders.WidgetPrefab
@@ -15,30 +15,21 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         private int _completedLoaderCount;
         private Dictionary<string, GameObject> _widgetPrefabs;
 
-        public static ILoadTask Create(List<PatternData> patternDataList, Action<Dictionary<string, GameObject>> callback)
+        public static ILoadTask Create(Action<Dictionary<string, GameObject>> callback)
         {
-            var widgetResourcePaths = new List<string>(patternDataList.Count);
-            foreach (var patternRawData in patternDataList)
+            var widgetResourcePaths = new List<string>();
+            
+            var names = Enum.GetNames(typeof(PlaceWidgetTypes));
+            foreach (var name in names)
             {
-                if (patternRawData is PatternWidgetData patternData)
+                if (Enum.TryParse(name, out PlaceWidgetTypes value) 
+                    && EnumPlaceWidgetPrefabPathAttribute.TryGetPrefabPath(value, out var prefabPath)
+                    && !string.IsNullOrEmpty(prefabPath))
                 {
-                    if (widgetResourcePaths.Contains(patternData.WidgetResourcePath))
-                    {
-                        continue;
-                    }
-                    
-                    widgetResourcePaths.Add(patternData.WidgetResourcePath);
+                    widgetResourcePaths.Add(prefabPath);
                 }
             }
-            
-            widgetResourcePaths.Add("ui/ui_widget");
-            widgetResourcePaths.Add("ui/ui_title");
-            widgetResourcePaths.Add("ui/ui_button");
-            widgetResourcePaths.Add("ui/ui_picture");
-            widgetResourcePaths.Add("ui/ui_hand");
-            widgetResourcePaths.Add("ui/ui_stack");
-            widgetResourcePaths.Add("ui/ui_card");
-            
+
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }
 
@@ -57,28 +48,39 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         void ILoadTask.Run()
         {
-            _completedLoaderCount = 0;
-            foreach (var prefabLoader in _prefabLoaders)
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run()");
+            _completedLoaderCount = _prefabLoaders.Count;
+
+            while (_prefabLoaders.Count > 0)
             {
+                var prefabLoader = _prefabLoaders[0];
+                _prefabLoaders.RemoveAt(0);
                 prefabLoader.Load(OnPrefabLoaded);
             }
+            
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Run() Finish");
         }
 
         private void OnPrefabLoaded(IPrefabLoader obj)
         {
-            ++_completedLoaderCount;
+            //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded");
+            --_completedLoaderCount;
             
             _widgetPrefabs.Add(obj.Name, obj.Prefab);
 
-            if (_prefabLoaders.Count <= _completedLoaderCount)
+            //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded check completed");
+            if (_completedLoaderCount <= 0)
             {
                 _callback?.Invoke(_widgetPrefabs);
                 Completed?.Invoke(true, this);
+                //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded completed");
             }
         }
 
         void ILoadTask.Destroy()
         {
+            //Debug.Log("TaskLoadWidgetPrefab ILoadTask.Destroy()");
+            
             _callback = null;
             
             _widgetPrefabs?.Clear();

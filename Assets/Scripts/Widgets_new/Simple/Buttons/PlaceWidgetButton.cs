@@ -5,7 +5,7 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
-using Solcery.Widgets.Canvas;
+using Solcery.Widgets_new.Canvas;
 
 namespace Solcery.Widgets_new.Simple.Buttons
 {

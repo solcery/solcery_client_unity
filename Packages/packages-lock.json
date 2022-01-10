@@ -12,14 +12,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "bc2e10a9edb66bbc20a1d516c932a7a313c18254"
+      "hash": "c297b6110bd953eb80b48395e5e4452c759db749"
     },
     "com.leopotam.ecslite.di": {
       "version": "https://github.com/Leopotam/ecslite-di.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "b097742f3ee53697e8f991efb88aa3035172ceba"
+      "hash": "c0bcb6fa6c6baad5700b64ae4d59bc24181df5f8"
     },
     "com.leopotam.ecslite.extendedfilters": {
       "version": "https://github.com/Leopotam/ecslite-extendedfilters.git",
@@ -33,7 +33,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "127ee50c5c8339c9a5b531354711e7bcf9214d7d"
+      "hash": "6f914d9a723a99338af11b03961694adc4674311"
     },
     "com.leopotam.ecslite.unity.ugui": {
       "version": "https://github.com/Leopotam/ecslite-unity-ugui.git",
@@ -47,7 +47,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f8fb1468e91dd89681ade447b5d8fbec283e8865"
+      "hash": "93d8dcde21f441afe7226eea6635a798aa32aff9"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -56,11 +56,11 @@
       "dependencies": {}
     },
     "com.unity.addressables": {
-      "version": "1.19.11",
+      "version": "1.19.15",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.scriptablebuildpipeline": "1.19.3",
+        "com.unity.scriptablebuildpipeline": "1.19.5",
         "com.unity.modules.assetbundle": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0",
@@ -123,7 +123,7 @@
       }
     },
     "com.unity.scriptablebuildpipeline": {
-      "version": "1.19.3",
+      "version": "1.19.5",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -166,7 +166,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.6.2",
+      "version": "1.6.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {

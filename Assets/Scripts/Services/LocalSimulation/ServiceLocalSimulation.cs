@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+#if UNITY_EDITOR || LOCAL_SIMULATION
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;

@@ -7,9 +7,6 @@ using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
 using Solcery.Services.Resources.Patterns;
 using Solcery.Services.Resources.Patterns.Texture;
-using Solcery.Services.Resources.Patterns.Widgets.Button;
-using Solcery.Services.Resources.Patterns.Widgets.Picture;
-using Solcery.Services.Resources.Patterns.Widgets.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -36,11 +33,9 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(JObject gameContentJson)
         {
+            //Debug.Log("PreloadResourcesFromGameContent start");
             var patternsProcessor = PatternsProcessor.Create();
             patternsProcessor.PatternRegistration(PatternUriTexture.Create());
-            patternsProcessor.PatternRegistration(PatternButton.Create());
-            patternsProcessor.PatternRegistration(PatternText.Create());
-            patternsProcessor.PatternRegistration(PatternPicture.Create());
             patternsProcessor.ProcessGameContent(gameContentJson);
 
             _task = MultiLoadTask.Create();
@@ -51,27 +46,9 @@ namespace Solcery.Services.Resources
                 _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
             }
 
-            {
-                var widgetList = new List<PatternData>();
+            _task.AddTask(TaskLoadWidgetPrefab.Create(OnWidgetPrefabLoaded));
 
-                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetButton, out var buttonWidgetList))
-                {
-                    widgetList.AddRange(buttonWidgetList);
-                }
-
-                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetText, out var textWidgetList))
-                {
-                    widgetList.AddRange(textWidgetList);
-                }
-
-                if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.WidgetPicture, out var pictureWidgetList))
-                {
-                    widgetList.AddRange(pictureWidgetList);
-                }
-                
-                _task.AddTask(TaskLoadWidgetPrefab.Create(widgetList, OnWidgetPrefabLoaded));
-            }
-
+            //Debug.Log("PreloadResourcesFromGameContent _task.Run()");
             _task.Run();
         }
 

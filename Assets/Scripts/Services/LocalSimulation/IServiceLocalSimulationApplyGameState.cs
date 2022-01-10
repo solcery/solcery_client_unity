@@ -1,3 +1,4 @@
+#if UNITY_EDITOR || LOCAL_SIMULATION
 using Newtonsoft.Json.Linq;
 
 namespace Solcery.Services.LocalSimulation
@@ -7,3 +8,4 @@ namespace Solcery.Services.LocalSimulation
         void ApplySimulatedGameState(JObject gameState);
     }
 }
+#endif

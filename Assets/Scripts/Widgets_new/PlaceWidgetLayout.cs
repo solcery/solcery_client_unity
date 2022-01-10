@@ -1,5 +1,3 @@
-using System.Linq;
-using Solcery.Widgets_new.StaticOrderZ;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +7,7 @@ namespace Solcery.Widgets_new
     {
         public int OrderZ => _orderZ;
         
+        public RectTransform Root => rectTransform;
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
@@ -19,37 +18,38 @@ namespace Solcery.Widgets_new
         private int _orderZ;
         private GameObject _gameObject;
 
+        private bool _firstUpdate;
+        private int _firstUpdateIteration;
+        private bool _firstUpdateVisible;
+        private bool _visible;
+
         private void Awake()
         {
             _gameObject = gameObject;
         }
 
+        public void UpdateFirstUpdate(bool firstUpdate, bool visible)
+        {
+            _firstUpdate = firstUpdate;
+            _firstUpdateVisible = visible;
+        }
+
         public void UpdateVisible(bool enable)
         {
+            if (_firstUpdate)
+            {
+                _firstUpdateIteration = 0;
+                _visible = enable;
+                _gameObject.SetActive(_firstUpdateVisible);
+                return;
+            }
+
             _gameObject.SetActive(enable);
         }
         
         public void UpdateOrderZ(int orderZ)
         {
             _orderZ = orderZ;
-
-            // var parent = rectTransform.parent;
-            // var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
-            //
-            // var placeWidgetLayoutArray = parent.GetComponentsInChildren<PlaceWidgetLayout>().ToList();
-            //
-            // if (!placeWidgetLayoutArray.Contains(this))
-            // {
-            //     placeWidgetLayoutArray.Add(this);
-            // }
-            //
-            // placeWidgetLayoutArray = placeWidgetLayoutArray.OrderBy(o=>o._orderZ).ToList();
-            //
-            // foreach (var placeWidgetLayout in placeWidgetLayoutArray)
-            // {
-            //     placeWidgetLayout.rectTransform.SetSiblingIndex(staticOrderZLayoutCount +
-            //                                                     placeWidgetLayoutArray.IndexOf(placeWidgetLayout));
-            // }
         }
 
         public void UpdateSiblingIndex(int siblingIndex)
@@ -83,6 +83,20 @@ namespace Solcery.Widgets_new
             if (background != null)
             {
                 background.gameObject.SetActive(false);
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (_firstUpdateIteration > 2)
+            {
+                _firstUpdateIteration = -1;
+                _gameObject.SetActive(_visible);
+            }
+
+            if (_firstUpdateIteration > 0)
+            {
+                _firstUpdateIteration++;
             }
         }
     }

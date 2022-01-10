@@ -1,3 +1,4 @@
+#if UNITY_EDITOR ||  LOCAL_SIMULATION
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
@@ -70,3 +71,4 @@ namespace Solcery.Models.Simulation
         }
     }
 }
+#endif

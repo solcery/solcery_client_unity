@@ -1,27 +1,26 @@
 using Solcery.Editor.CI.Utils;
+using Solcery.Editor.CI.WebGl.Configuration.Dev;
+using Solcery.Editor.CI.WebGl.Configuration.Prod;
 using UnityEditor;
 
 namespace Solcery.Editor.CI.WebGl
 {
     public static class BuildWebGl
     {
-        private static readonly string [] DevelopWebGlAddSymbols = 
-        {
-            "DEV"
-        };
-        private static readonly string [] ReleaseWebGlAddSymbols = { };
-        
-        private static readonly string [] DevelopWebGlRemoveSymbols = { };
-        private static readonly string [] ReleaseWebGlRemoveSymbols =
-        {
-            "DEV"
-        };
-        
-        
         [MenuItem("Build/WebGl/Develop")]
         public static void BuildDevelop()
         {
-            BuildUtils.AddDefineSymbols(DevelopWebGlAddSymbols, DevelopWebGlRemoveSymbols);
+            BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+                BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
+                false, BuildOptions.Development);
+            DocketUtils.DockerImageUp();
+        }
+        
+        [MenuItem("Build/WebGl/Develop with local simulation")]
+        public static void BuildDevelopWithLocalSimulation()
+        {
+            BuildUtils.AddDefineSymbols(BuildConfigurationDev.CreateWithLocalSimulation());
             Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
@@ -31,7 +30,7 @@ namespace Solcery.Editor.CI.WebGl
         [MenuItem("Build/WebGl/Release")]
         public static void BuildRelease()
         {
-            BuildUtils.AddDefineSymbols(ReleaseWebGlAddSymbols, ReleaseWebGlRemoveSymbols);
+            BuildUtils.AddDefineSymbols(BuildConfigurationProd.Create());
             Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathReleaseWebGl),
                 BuildSettings.ReleaseWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Brotli, false,
                 BuildOptions.None);
@@ -62,11 +61,11 @@ namespace Solcery.Editor.CI.WebGl
 
             if (isDevelopBuild)
             {
-                BuildUtils.AddDefineSymbols(DevelopWebGlAddSymbols, DevelopWebGlRemoveSymbols);
+                BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
             }
             else
             {
-                BuildUtils.AddDefineSymbols(ReleaseWebGlAddSymbols, ReleaseWebGlRemoveSymbols);
+                BuildUtils.AddDefineSymbols(BuildConfigurationProd.Create());
             }
 
             BuildUtils.TryGetArgOrDefault(BuildArgs.EmscriptenArgs, out var emscriptenArgs,

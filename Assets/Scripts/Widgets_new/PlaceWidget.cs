@@ -3,8 +3,8 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
+using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.StaticOrderZ;
-using Solcery.Widgets.Canvas;
 using UnityEngine;
 
 namespace Solcery.Widgets_new
@@ -27,6 +27,8 @@ namespace Solcery.Widgets_new
         
         public abstract void Update(EcsWorld world, int[] entityIds);
         public abstract void Destroy();
+        public abstract Vector2 GetPosition();
+        public abstract PlaceWidgetCardFace GetPlaceWidgetCardFace();
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
@@ -91,6 +93,16 @@ namespace Solcery.Widgets_new
 
             Layout = null;
             Game = null;
+        }
+
+        public override Vector2 GetPosition()
+        {
+            return Layout.transform.position;
+        }
+        
+        public override PlaceWidgetCardFace GetPlaceWidgetCardFace()
+        {
+            return CardFace;
         }
     }
 }

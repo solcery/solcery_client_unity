@@ -1,43 +1,72 @@
-using System;
 using Newtonsoft.Json.Linq;
-using Solcery.Services.Commands;
+using Solcery.Games;
+using Solcery.React;
+using Solcery.Utils;
 
 namespace Solcery.Services.Transport
 {
     public sealed class WebGlTransportService : ITransportService
     {
-        public static ITransportService Create()
+        private IGameTransportCallbacks _gameTransportCallbacks;
+        
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks)
         {
-            return new WebGlTransportService();
+            return new WebGlTransportService(gameTransportCallbacks);
         }
 
-        private WebGlTransportService()
+        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks)
         {
+            _gameTransportCallbacks = gameTransportCallbacks;
+            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
+            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
         
         void ITransportService.CallUnityLoaded()
         {
-            throw new NotImplementedException();
+            UnityToReact.Instance.CallOnUnityLoaded();
+        }
+
+        private void OnGameStateUpdate(string obj)
+        {
+            //UnityEngine.Debug.Log($"OnGameStateUpdate {obj}");
+            _gameTransportCallbacks?.OnReceivingGameState(JObject.Parse(obj));
+        }
+
+        private void OnGameContentUpdate(string obj)
+        {
+            //UnityEngine.Debug.Log($"OnGameContentUpdate {obj}");
+            _gameTransportCallbacks?.OnReceivingGameContent(JObject.Parse(obj));
         }
 
         void ITransportService.SendCommand(JObject command)
         {
-            throw new NotImplementedException();
+            if (command.TryGetValue("object_id", out int objId))
+            {
+                UnityToReact.Instance.CallCastCard(objId);
+            }
         }
 
         void ITransportService.Update(float dt)
         {
             
         }
+
+        private void Cleanup()
+        {
+            ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
+            ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
+        }
         
         void ITransportService.Cleanup()
         {
-            throw new NotImplementedException();
+            //Cleanup();
         }
         
         void ITransportService.Destroy()
         {
-            throw new NotImplementedException();
+            Cleanup();
+
+            _gameTransportCallbacks = null;
         }
     }
 }
