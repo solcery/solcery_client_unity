@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
+using Solcery.BrickInterpretation.Runtime;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
 using UnityEngine;

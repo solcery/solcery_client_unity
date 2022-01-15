@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "GameAssembly",
-        "Leopotam.EcsLite"
+        "Leopotam.EcsLite",
+        "BrickInterpretation"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

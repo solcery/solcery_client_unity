@@ -2,6 +2,8 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 using Solcery.BrickInterpretation;
+using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games.Contexts;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
@@ -82,7 +84,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                     }
 
                     InitContext(entityId, world);
-                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteActionBrick(brick, world, 1)}");
+                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteActionBrick(brick, CurrentContext.Create(world), 1)}");
                     DestroyContext(world);
                     
                     break;

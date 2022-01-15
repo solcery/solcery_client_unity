@@ -2,6 +2,7 @@ using System.IO;
 using Leopotam.EcsLite;
 using NUnit.Framework;
 using Solcery.BrickInterpretation;
+using Solcery.BrickInterpretation.Runtime;
 using UnityEngine;
 
 namespace Solcery.Tests.PlayMode
@@ -36,7 +37,7 @@ namespace Solcery.Tests.PlayMode
         {
             var brickJson = TestUtils.LoadTestBrick(Path.GetFullPath($"{Application.dataPath}/Tests/Bricks/custom_brick.json"));
             Assert.True(brickJson != null);
-            Assert.True(_serviceBricks.ExecuteValueBrick(brickJson, _world, 1, out var result));
+            Assert.True(_serviceBricks.ExecuteValueBrick(brickJson, Contexts.TestContext.Create(_world), 1, out var result));
             Assert.True(result == 20);
         }
     }
