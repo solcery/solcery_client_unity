@@ -2,7 +2,6 @@ using System;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts;
 using Solcery.BrickInterpretation.Runtime.Utils;
-using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Runtime.Actions
 {
@@ -23,7 +22,7 @@ namespace Solcery.BrickInterpretation.Runtime.Actions
                 && parameters[0] is JObject logObject
                 && logObject.TryGetValue("value", out string log))
             {
-                Debug.Log(log);
+                context.Log.Print(log);
                 return;
             }
             

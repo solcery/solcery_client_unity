@@ -3,6 +3,7 @@ using Solcery.BrickInterpretation.Runtime.Contexts;
 using Solcery.BrickInterpretation.Runtime.Contexts.Args;
 using Solcery.BrickInterpretation.Runtime.Contexts.Attrs;
 using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
+using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
 
 namespace Solcery.Tests.PlayMode.Contexts
@@ -15,6 +16,7 @@ namespace Solcery.Tests.PlayMode.Contexts
         public IContextGameArgs GameArgs { get; }
         public IContextGameVars GameVars { get; }
         public IContextGameObjects GameObjects { get; }
+        public ILog Log { get; }
 
         public static IContext Create(EcsWorld world)
         {
@@ -29,6 +31,7 @@ namespace Solcery.Tests.PlayMode.Contexts
             GameArgs = TestContextGameArgs.Create(world);
             GameVars = TestContextGameVars.Create(world);
             GameObjects = TestContextGameObjects.Create(world);
+            Log = TestLog.Create();
         }
     }
 }

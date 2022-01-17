@@ -2,7 +2,6 @@ using System;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts;
 using Solcery.BrickInterpretation.Runtime.Utils;
-using Random = UnityEngine.Random;
 
 namespace Solcery.BrickInterpretation.Runtime.Values
 {
@@ -23,7 +22,8 @@ namespace Solcery.BrickInterpretation.Runtime.Values
                 && serviceBricks.ExecuteValueBrick(brickFrom, context, level + 1, out var from)
                 && serviceBricks.ExecuteValueBrick(brickTo, context, level + 1, out var to))
             {
-                return Random.Range(from, to);
+                var rnd = new Random();
+                return rnd.Next(from, to);
             }
             
             throw new ArgumentException($"BrickValueRandom Run has exception! Parameters {parameters}");

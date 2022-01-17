@@ -1,6 +1,5 @@
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts;
-using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Runtime.Actions
 {
@@ -24,7 +23,7 @@ namespace Solcery.BrickInterpretation.Runtime.Actions
                 return;
             }
 
-            Debug.Log("Call BrickActionUseCard!");
+            context.Log.Print("Call BrickActionUseCard!");
         }
     }
 }

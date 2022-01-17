@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Solcery.BrickInterpretation.Runtime.Utils
 {
@@ -7,10 +7,11 @@ namespace Solcery.BrickInterpretation.Runtime.Utils
     {
         public static void Shuffle<T>(this IList<T> list)
         {
+            var rnd = new Random();
             var count = list.Count;
             for (var i = 0; i < count; i++) 
             {
-                var randomIndex = Random.Range(i, count);
+                var randomIndex = rnd.Next(i, count);
                 (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
             }        
         }

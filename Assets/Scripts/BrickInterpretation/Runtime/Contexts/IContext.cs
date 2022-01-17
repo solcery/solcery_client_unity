@@ -1,6 +1,7 @@
 using Solcery.BrickInterpretation.Runtime.Contexts.Args;
 using Solcery.BrickInterpretation.Runtime.Contexts.Attrs;
 using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
+using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
 
 namespace Solcery.BrickInterpretation.Runtime.Contexts
@@ -13,5 +14,6 @@ namespace Solcery.BrickInterpretation.Runtime.Contexts
         IContextGameArgs GameArgs { get; }
         IContextGameVars GameVars { get; }
         IContextGameObjects GameObjects { get; }
+        ILog Log { get; }
     }
 }
