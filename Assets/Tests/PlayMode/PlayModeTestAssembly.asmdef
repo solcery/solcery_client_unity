@@ -2,11 +2,11 @@
     "name": "PlayModeTestAssembly",
     "rootNamespace": "Solcery",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "GameAssembly",
-        "Leopotam.EcsLite",
-        "BrickInterpretation"
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:b5eb5f89672c9409a85f6b022af813e8",
+        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+        "GUID:70d41f725746a446da7f0d7894a5746d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
