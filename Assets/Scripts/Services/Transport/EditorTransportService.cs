@@ -1,6 +1,7 @@
 #if UNITY_EDITOR || LOCAL_SIMULATION
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
+using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
