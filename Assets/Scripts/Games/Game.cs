@@ -17,6 +17,7 @@ using Solcery.Widgets_new;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
+using Solcery.Widgets_new.EclipseTokensStockpile;
 using Solcery.Widgets_new.Factories;
 using Solcery.Widgets_new.Simple.Buttons;
 using Solcery.Widgets_new.Simple.Pictures;
@@ -148,6 +149,9 @@ namespace Solcery.Games
             // Container
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.LayedOut, PlaceWidgetHand.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Stacked, PlaceWidgetStack.Create);
+            
+            // Eclipse
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.TokensStockpile, PlaceWidgetEclipseTokens.Create);
         }
 
         private void RegistrationBrickTypes()
