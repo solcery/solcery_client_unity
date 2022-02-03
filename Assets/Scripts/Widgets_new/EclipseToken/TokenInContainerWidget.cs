@@ -8,6 +8,11 @@ namespace Solcery.Widgets_new.EclipseToken
         private IGame _game;
         private TokenInContainerWidgetLayout _layout;
         
+        public static ITokenInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
+        {
+            return new TokenInContainerWidget(game, prefab, poolTransform);
+        }
+        
         private TokenInContainerWidget(IGame game, GameObject prefab, Transform poolTransform)
         {
             _game = game;

@@ -6,5 +6,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
     {
         [SerializeField]
         private RectTransform content;
+        
+        public RectTransform Content => content;
     }
 }

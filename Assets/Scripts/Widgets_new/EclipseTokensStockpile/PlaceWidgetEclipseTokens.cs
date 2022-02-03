@@ -4,13 +4,13 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Canvas;
-using Solcery.Widgets_new.EclipseToken;
+using Solcery.Widgets_new.Cards.Widgets;
 
 namespace Solcery.Widgets_new.EclipseTokensStockpile
 {
     public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>
     {
-        private Dictionary<int, ITokenInContainerWidget> _tokens;
+        private Dictionary<int, ICardInContainerWidget> _tokens;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -19,7 +19,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
         
         private PlaceWidgetEclipseTokens(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            _tokens = new Dictionary<int, ITokenInContainerWidget>();
+            _tokens = new Dictionary<int, ICardInContainerWidget>();
             Layout.UpdateVisible(true);
         }
 
@@ -33,6 +33,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
             
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectIdPool = world.GetPool<ComponentObjectId>();
+            var objectTypePool = world.GetPool<ComponentObjectType>();
             var cardTypes = new Dictionary<int, JObject>();
 
             foreach (var objectTypesEntityId in objectTypesFilter)
@@ -44,6 +45,27 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
+
+                if (objectTypePool.Has(entityId))
+                {
+                    var typeId = objectTypePool.Get(entityId).Type;
+                    if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+                    {
+                        if (!_tokens.TryGetValue(typeId, out var tokenLayout))
+                        {
+                            if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out tokenLayout))
+                            {
+                                tokenLayout.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
+                                tokenLayout.UpdateParent(Layout.Content);
+                                _tokens.Add(typeId, tokenLayout);
+                            }
+                        }
+                        else
+                        {
+                            // increase counter
+                        }
+                    }
+                }
             }
         }
         
