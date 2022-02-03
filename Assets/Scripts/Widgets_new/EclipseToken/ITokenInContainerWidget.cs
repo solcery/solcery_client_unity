@@ -6,6 +6,7 @@ namespace Solcery.Widgets_new.EclipseToken
     public interface ITokenInContainerWidget
     {
         void IncreaseCounter();
+        void ClearCounter();
         void UpdateParent(Transform parent);
         void UpdateFromCardTypeData(int objectId, JObject data);
         void Cleanup();

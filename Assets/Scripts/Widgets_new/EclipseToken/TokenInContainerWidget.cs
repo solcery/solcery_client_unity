@@ -19,13 +19,18 @@ namespace Solcery.Widgets_new.EclipseToken
         private TokenInContainerWidget(IGame game, GameObject prefab, Transform poolTransform)
         {
             _game = game;
-            _counter = 1;
+            _counter = 0;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<TokenInContainerWidgetLayout>();
         }
         
         public void IncreaseCounter()
         {
             _layout.UpdateCount(++_counter);
+        }
+
+        public void ClearCounter()
+        {
+            _counter = 0;
         }
 
         void ITokenInContainerWidget.UpdateParent(Transform parent)

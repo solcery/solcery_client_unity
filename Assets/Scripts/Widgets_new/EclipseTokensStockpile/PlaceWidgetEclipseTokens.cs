@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
@@ -46,9 +47,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
 
             foreach (var entityId in entityIds)
             {
-                var objectId = objectIdPool.Get(entityId).Id;
-
-                if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId)))
+                if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId))
                 {
                     var typeId = objectTypePool.Get(entityId).Type;
                     if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
@@ -62,10 +61,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
                                 _tokens.Add(typeId, tokenLayout);
                             }
                         }
-                        else
-                        {
-                            // increase counter
-                        }
+                        // ++counter in tokenLayout
                     }
                 }
             }
@@ -73,6 +69,25 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
         
         private void RemoveTokens(EcsWorld world, int[] entityIds)
         {
+            var objectTypePool = world.GetPool<ComponentObjectType>();
+            var keys = _tokens.Keys.ToList();
+
+            foreach (var entityId in entityIds)
+            {
+                var typeId = objectTypePool.Get(entityId).Type;
+                keys.Remove(typeId);
+            }
+
+            foreach (var key in keys)
+            {
+                Game.PlaceWidgetFactory.CardInContainerPool.Push(_tokens[key]);
+                _tokens.Remove(key);
+            }
+
+            foreach (var token in _tokens)
+            {
+                // counter = 0
+            }
         }
         
         protected override void DestroyImpl()
