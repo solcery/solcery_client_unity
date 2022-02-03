@@ -37,14 +37,14 @@ namespace Solcery.Widgets_new
         
         protected T Layout;
         protected IGame Game;
-        protected PlaceWidgetCardFace CardFace;
-        protected bool InteractableForActiveLocalPlayer;
+        protected readonly PlaceWidgetCardFace CardFace;
+        protected readonly bool InteractableForActiveLocalPlayer;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             Game = game;
-            
-            if (Game.ServiceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go) 
+
+            if (Game.ServiceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go)
                 && Object.Instantiate(go, widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(T), out var component)
                 && component is T layout)
             {
@@ -60,7 +60,7 @@ namespace Solcery.Widgets_new
 
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
-                
+
                 Layout.name = $"{placeId}_{orderZ}_{Layout.name}";
 
                 CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
@@ -75,6 +75,10 @@ namespace Solcery.Widgets_new
 
                 var backgroundColor = placeDataObject.TryGetValue("bgColor", out string bgColor) ? bgColor : null;
                 Layout.UpdateBackgroundColor(backgroundColor);
+
+                Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
+                Layout.UpdateOutOfBorder(
+                    placeDataObject.TryGetValue("frame_width", out bool withBorders) && withBorders);
 
                 Layout.UpdateVisible(false);
             }
