@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Widgets;
 
@@ -34,6 +35,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
+            var eclipseTokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
             var cardTypes = new Dictionary<int, JObject>();
 
             foreach (var objectTypesEntityId in objectTypesFilter)
@@ -46,7 +48,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
             {
                 var objectId = objectIdPool.Get(entityId).Id;
 
-                if (objectTypePool.Has(entityId))
+                if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId)))
                 {
                     var typeId = objectTypePool.Get(entityId).Type;
                     if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))

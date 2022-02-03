@@ -1,4 +1,6 @@
+using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.EclipseToken
@@ -7,6 +9,7 @@ namespace Solcery.Widgets_new.EclipseToken
     {
         private IGame _game;
         private TokenInContainerWidgetLayout _layout;
+        private int _counter;
         
         public static ITokenInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -16,9 +19,29 @@ namespace Solcery.Widgets_new.EclipseToken
         private TokenInContainerWidget(IGame game, GameObject prefab, Transform poolTransform)
         {
             _game = game;
+            _counter = 1;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<TokenInContainerWidgetLayout>();
         }
         
+        public void IncreaseCounter()
+        {
+            _layout.UpdateCount(++_counter);
+        }
+
+        void ITokenInContainerWidget.UpdateParent(Transform parent)
+        {
+            _layout.UpdateParent(parent);
+        }
+
+        public void UpdateFromCardTypeData(int objectId, JObject data)
+        {
+            if (data.TryGetValue("picture", out string picture) 
+                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            {
+                _layout.UpdateSprite(texture);
+            }
+        }
+
         void ITokenInContainerWidget.Cleanup()
         {
             Cleanup();
