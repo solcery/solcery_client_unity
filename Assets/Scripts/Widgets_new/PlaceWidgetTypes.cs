@@ -23,6 +23,6 @@ namespace Solcery.Widgets_new
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
         Eclipse = 6,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_tokens_stockpile")]
-        TokensStockpile = 6
+        TokensStockpile = 7
     }
 }
