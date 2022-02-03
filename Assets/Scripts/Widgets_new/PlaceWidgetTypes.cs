@@ -19,6 +19,8 @@ namespace Solcery.Widgets_new
         [EnumPlaceWidgetPrefabPath("ui/ui_button")]
         Button = 4,
         [EnumPlaceWidgetPrefabPath("ui/ui_picture")]
-        Picture = 5
+        Picture = 5,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        Eclipse = 6
     }
 }
