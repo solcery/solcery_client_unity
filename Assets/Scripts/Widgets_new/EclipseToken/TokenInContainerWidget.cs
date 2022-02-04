@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
+using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.EclipseToken
@@ -33,7 +34,7 @@ namespace Solcery.Widgets_new.EclipseToken
             _counter = 0;
         }
 
-        void ITokenInContainerWidget.UpdateParent(Transform parent)
+        void IPoolingWidget.UpdateParent(Transform parent)
         {
             _layout.UpdateParent(parent);
         }
@@ -47,13 +48,13 @@ namespace Solcery.Widgets_new.EclipseToken
             }
         }
 
-        void ITokenInContainerWidget.Cleanup()
+        void IPoolingWidget.Cleanup()
         {
             Cleanup();
             _layout.Cleanup();
         }
 
-        void ITokenInContainerWidget.Destroy()
+        void IPoolingWidget.Destroy()
         {
             Cleanup();
             _layout.Cleanup();

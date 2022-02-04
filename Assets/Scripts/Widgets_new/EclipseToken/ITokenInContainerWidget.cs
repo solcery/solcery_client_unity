@@ -1,15 +1,12 @@
 using Newtonsoft.Json.Linq;
-using UnityEngine;
+using Solcery.Widgets_new.Cards.Pools;
 
 namespace Solcery.Widgets_new.EclipseToken
 {
-    public interface ITokenInContainerWidget
+    public interface ITokenInContainerWidget : IPoolingWidget
     {
         void IncreaseCounter();
         void ClearCounter();
-        void UpdateParent(Transform parent);
         void UpdateFromCardTypeData(int objectId, JObject data);
-        void Cleanup();
-        void Destroy();
     }
 }

@@ -6,13 +6,13 @@ using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
-using Solcery.Widgets_new.Cards.Widgets;
+using Solcery.Widgets_new.EclipseToken;
 
 namespace Solcery.Widgets_new.EclipseTokensStockpile
 {
     public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>
     {
-        private Dictionary<int, ICardInContainerWidget> _tokens;
+        private Dictionary<int, ITokenInContainerWidget> _tokens;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -21,7 +21,7 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
         
         private PlaceWidgetEclipseTokens(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
-            _tokens = new Dictionary<int, ICardInContainerWidget>();
+            _tokens = new Dictionary<int, ITokenInContainerWidget>();
             Layout.UpdateVisible(true);
         }
 
@@ -54,14 +54,14 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
                     {
                         if (!_tokens.TryGetValue(typeId, out var tokenLayout))
                         {
-                            if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out tokenLayout))
+                            if (Game.TokenInContainerWidgetPool.TryPop(out tokenLayout))
                             {
                                 tokenLayout.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
                                 tokenLayout.UpdateParent(Layout.Content);
                                 _tokens.Add(typeId, tokenLayout);
                             }
                         }
-                        // ++counter in tokenLayout
+                        tokenLayout.IncreaseCounter();
                     }
                 }
             }
@@ -80,13 +80,13 @@ namespace Solcery.Widgets_new.EclipseTokensStockpile
 
             foreach (var key in keys)
             {
-                Game.PlaceWidgetFactory.CardInContainerPool.Push(_tokens[key]);
+                Game.TokenInContainerWidgetPool.Push(_tokens[key]);
                 _tokens.Remove(key);
             }
 
             foreach (var token in _tokens)
             {
-                // counter = 0
+                token.Value.ClearCounter();
             }
         }
         
