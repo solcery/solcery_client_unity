@@ -160,7 +160,7 @@ namespace Solcery.Games
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Stacked, PlaceWidgetStack.Create);
             
             // Eclipse
-            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.TokensStockpile, PlaceWidgetEclipseTokens.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokensStockpile, PlaceWidgetEclipseTokens.Create);
         }
 
         private void RegistrationBrickTypes()
