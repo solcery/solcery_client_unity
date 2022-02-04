@@ -106,7 +106,7 @@ namespace Solcery.Widgets_new.Container.Hands
                     continue;
                 }
                 
-                if (Game.PlaceWidgetFactory.CardInContainerPool.TryPop(out var cardInContainerWidget))
+                if (Game.CardInContainerWidgetPool.TryPop(out var cardInContainerWidget))
                 {
                     cardUpdater.Invoke(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget);
                     _cards.Add(objectId, cardInContainerWidget);
@@ -233,7 +233,7 @@ namespace Solcery.Widgets_new.Container.Hands
 
             foreach (var key in keys)
             {
-                Game.PlaceWidgetFactory.CardInContainerPool.Push(_cards[key]);
+                Game.CardInContainerWidgetPool.Push(_cards[key]);
                 _cards.Remove(key);
             }
         }
