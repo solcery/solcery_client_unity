@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
@@ -15,6 +14,8 @@ using Solcery.Ui;
 using Solcery.Utils;
 using Solcery.Widgets_new;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Cards.Pools;
+using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.EclipseTokensStockpile;
@@ -34,7 +35,7 @@ namespace Solcery.Games
         IPlayModel IGame.PlayModel => _playModel;
         IWidgetCanvas IGame.WidgetCanvas => _widgetCanvas;
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
-
+        IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
 
         JObject IGame.GameStatePopAndClear
@@ -53,7 +54,7 @@ namespace Solcery.Games
         private IPlayModel _playModel;
         private IWidgetCanvas _widgetCanvas;
         private IPlaceWidgetFactory _placeWidgetFactory;
-
+        private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
         private JObject _gameContentJson;
         private Stack<JObject> _gameStates;
 
@@ -89,6 +90,9 @@ namespace Solcery.Games
             _serviceResource = ServiceResource.Create(this);
             _placeWidgetFactory = PlaceWidgetFactory.Create(this, widgetCanvas);
             RegistrationPlaceWidgetTypes();
+
+            _cardInContainerWidgetPool = WidgetPool<ICardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_card", CardInContainerWidget.Create);
         }
 
         void IGame.Init()
@@ -227,6 +231,8 @@ namespace Solcery.Games
             // TODO: удаляем последними, так как в разных объектах могут быть ссылки на виджеты и ресурсы
             _placeWidgetFactory.Destroy();
             _placeWidgetFactory = null;
+            _cardInContainerWidgetPool.Destroy();
+            _cardInContainerWidgetPool = null;
             _serviceResource.Destroy();
             _serviceResource = null;
 

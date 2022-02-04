@@ -4,6 +4,7 @@ using Solcery.Games;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
+using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -27,7 +28,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<CardInContainerWidgetLayout>();
         }
 
-        void ICardInContainerWidget.UpdateParent(Transform parent)
+        void IPoolingWidget.UpdateParent(Transform parent)
         {
             _layout.UpdateParent(parent);
         }
@@ -92,13 +93,13 @@ namespace Solcery.Widgets_new.Cards.Widgets
             });
         }
         
-        void ICardInContainerWidget.Cleanup()
+        void IPoolingWidget.Cleanup()
         {
             Cleanup();
             _layout.Cleanup();
         }
 
-        void ICardInContainerWidget.Destroy()
+        void IPoolingWidget.Destroy()
         {
             Cleanup();
             _layout.Cleanup();
