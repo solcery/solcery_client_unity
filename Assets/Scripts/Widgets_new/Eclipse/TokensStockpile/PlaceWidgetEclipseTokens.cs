@@ -6,9 +6,9 @@ using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
-using Solcery.Widgets_new.EclipseToken;
+using Solcery.Widgets_new.Eclipse.Tokens;
 
-namespace Solcery.Widgets_new.EclipseTokensStockpile
+namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 {
     public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>
     {

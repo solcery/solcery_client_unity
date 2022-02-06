@@ -4,7 +4,7 @@ using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 
-namespace Solcery.Widgets_new.EclipseToken
+namespace Solcery.Widgets_new.Eclipse.Tokens
 {
     public class TokenInContainerWidget : ITokenInContainerWidget
     {

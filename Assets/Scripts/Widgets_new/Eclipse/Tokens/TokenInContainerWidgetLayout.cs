@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Solcery.Widgets_new.EclipseToken
+namespace Solcery.Widgets_new.Eclipse.Tokens
 {
     public class TokenInContainerWidgetLayout : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Solcery.Widgets_new.EclipseTokensStockpile
+namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 {
     public class PlaceWidgetEclipseTokensLayout : PlaceWidgetLayout
     {

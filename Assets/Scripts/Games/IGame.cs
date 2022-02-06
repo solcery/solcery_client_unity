@@ -7,7 +7,7 @@ using Solcery.Services.Transport;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Cards.Widgets;
-using Solcery.Widgets_new.EclipseToken;
+using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Factories;
 
 namespace Solcery.Games
