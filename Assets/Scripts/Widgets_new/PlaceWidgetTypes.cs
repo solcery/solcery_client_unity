@@ -6,6 +6,8 @@ namespace Solcery.Widgets_new
     {
         [EnumPlaceWidgetPrefabPath("")]
         None = -10,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card")]
+        EclipseCard = -3,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_token")]
         EclipseToken = -2,
         [EnumPlaceWidgetPrefabPath("ui/ui_card")]
@@ -23,7 +25,7 @@ namespace Solcery.Widgets_new
         [EnumPlaceWidgetPrefabPath("ui/ui_picture")]
         Picture = 5,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
-        Eclipse = 6,
+        EclipseLayedOut = 6,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_tokens_stockpile")]
         EclipseTokensStockpile = 7
     }

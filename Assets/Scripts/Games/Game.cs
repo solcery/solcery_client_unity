@@ -18,6 +18,8 @@ using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
+using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.CardsContainer;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Eclipse.TokensStockpile;
 using Solcery.Widgets_new.Factories;
@@ -38,6 +40,7 @@ namespace Solcery.Games
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
         IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
+        IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
 
         JObject IGame.GameStatePopAndClear
@@ -58,6 +61,7 @@ namespace Solcery.Games
         private IPlaceWidgetFactory _placeWidgetFactory;
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
+        private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private JObject _gameContentJson;
         private Stack<JObject> _gameStates;
 
@@ -98,6 +102,8 @@ namespace Solcery.Games
                 "ui/ui_card", CardInContainerWidget.Create);
             _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_token", TokenInContainerWidget.Create);
+            _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
         }
 
         void IGame.Init()
@@ -160,6 +166,7 @@ namespace Solcery.Games
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Stacked, PlaceWidgetStack.Create);
             
             // Eclipse
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseLayedOut, PlaceWidgetEclipse.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokensStockpile, PlaceWidgetEclipseTokens.Create);
         }
 
@@ -240,6 +247,8 @@ namespace Solcery.Games
             _cardInContainerWidgetPool = null;
             _tokenInContainerWidgetPool.Destroy();
             _tokenInContainerWidgetPool = null;
+            _eclipseCardInContainerWidgetPool.Destroy();
+            _eclipseCardInContainerWidgetPool = null;
             _serviceResource.Destroy();
             _serviceResource = null;
 
