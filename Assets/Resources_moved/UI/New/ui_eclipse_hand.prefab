@@ -285,7 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5873957177027007702}
   - component: {fileID: 5873957177027007701}
-  - component: {fileID: 6713594031737138298}
+  - component: {fileID: 822085504586025476}
   - component: {fileID: 264010417701515722}
   m_Layer: 5
   m_Name: ui_eclipse_hand
@@ -324,7 +324,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5873957177027007697}
   m_CullTransparentMesh: 1
---- !u!114 &6713594031737138298
+--- !u!114 &822085504586025476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,6 +339,8 @@ MonoBehaviour:
   rectTransform: {fileID: 5873957177027007702}
   background: {fileID: 1604439240257909497}
   canvasGroup: {fileID: 264010417701515722}
+  caption: {fileID: 0}
+  borders: {fileID: 0}
   scroll: {fileID: 6803960377442209090}
 --- !u!225 &264010417701515722
 CanvasGroup:

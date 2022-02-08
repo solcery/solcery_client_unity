@@ -1,4 +1,4 @@
 namespace Solcery.Models.Shared.Objects.Eclipse
 {
-    public struct ComponentEclipseEventTag { }
+    public struct ComponentEclipseCardEventTag { }
 }

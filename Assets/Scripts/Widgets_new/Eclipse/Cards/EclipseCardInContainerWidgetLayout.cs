@@ -1,4 +1,9 @@
+using Solcery.Widgets_new.Eclipse.Cards.Timers;
+using Solcery.Widgets_new.Eclipse.Cards.Tokens;
+using Solcery.Widgets_new.Eclipse.Cards.Traits;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
@@ -8,6 +13,18 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         [SerializeField]
         private RectTransform rectTransform;
+        [SerializeField]
+        private EclipseCardTimerLayout timerLayout;
+        [SerializeField]
+        private EclipseCardTraitsLayout traitsLayout;
+        [SerializeField]
+        private EclipseCardTokensLayout tokensLayout;
+        [SerializeField]
+        private Image iconImage;
+        [SerializeField]
+        private TMP_Text nameText;
+        [SerializeField]
+        private TMP_Text descriptionText;
         
         private Vector2 _anchorMin;
         private Vector2 _anchorMax;

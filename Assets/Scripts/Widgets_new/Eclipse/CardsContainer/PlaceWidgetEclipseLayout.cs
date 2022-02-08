@@ -7,5 +7,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     {
         [SerializeField]
         private ScrollRect scroll;
+
+        public void AddCard()
+        {
+        }
     }
 }

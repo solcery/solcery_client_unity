@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
+using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
@@ -25,6 +26,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            if (entityIds.Length <= 0)
+            {
+                return;
+            }
+
+            Debug.Log("PlaceWidgetEclipse");
+            
             
         }
     }

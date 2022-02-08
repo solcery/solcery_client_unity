@@ -8,6 +8,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
     {
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
+        private EclipseCardInContainerWidgetTypes _eclipseCardType;
 
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -18,6 +19,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _game = game;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
+        }
+
+        void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
+        {
+            _eclipseCardType = eclipseCardType;
         }
 
         void IPoolingWidget.UpdateParent(Transform parent)
