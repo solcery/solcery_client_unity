@@ -11,6 +11,25 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>
     {
         private Dictionary<int, IEclipseCardInContainerWidget> _cards;
+        
+        // TODO: Remove this
+        private bool _isHand;
+
+        public static PlaceWidget CreateHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+        {
+            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject, true);
+        }
+        
+        public static PlaceWidget CreateSingle(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+        {
+            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject, false);
+        }
+        
+        private PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject, bool isHand)
+            : this(widgetCanvas, game, prefabPathKey, placeDataObject)
+        {
+            _isHand = isHand;
+        }
 
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -33,11 +52,22 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             Debug.Log("PlaceWidgetEclipse");
 
-            for (var i = 0; i < entityIds.Length; i++)
+            if (_isHand)
+            {
+                for (var i = 0; i < entityIds.Length; i++)
+                {
+                    if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
+                    {
+                        eclipseCard.Layout.UpdateName($"hand_{i}");
+                        Layout.AddCard(eclipseCard);
+                    }
+                }
+            }
+            else
             {
                 if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
                 {
-                    eclipseCard.Layout.UpdateName($"{i}");
+                    eclipseCard.Layout.UpdateName("single");
                     Layout.AddCard(eclipseCard);
                 }
             }

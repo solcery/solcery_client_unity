@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
             eclipseCardInContainerWidget.UpdateParent(scroll.content);
             eclipseCardInContainerWidget.UpdateSiblingIndex(0);
+            scroll.horizontal = scroll.content.childCount > 1;
         }
     }
 }

@@ -65,8 +65,11 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         {
             //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded");
             --_completedLoaderCount;
-            
-            _widgetPrefabs.Add(obj.Name, obj.Prefab);
+
+            if (!_widgetPrefabs.ContainsKey(obj.Name))
+            {
+                _widgetPrefabs.Add(obj.Name, obj.Prefab);
+            }
 
             //Debug.Log("TaskLoadWidgetPrefab OnPrefabLoaded check completed");
             if (_completedLoaderCount <= 0)
