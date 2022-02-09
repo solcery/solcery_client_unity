@@ -6,6 +6,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 {
     public sealed class EclipseCardInContainerWidget : IEclipseCardInContainerWidget
     {
+        EclipseCardInContainerWidgetLayout IEclipseCardInContainerWidget.Layout => _layout;
+        
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
         private EclipseCardInContainerWidgetTypes _eclipseCardType;
@@ -29,6 +31,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void IPoolingWidget.UpdateParent(Transform parent)
         {
             _layout.UpdateParent(parent);
+        }
+
+        void IEclipseCardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
+        {
+            _layout.UpdateSiblingIndex(siblingIndex);
         }
 
         void IPoolingWidget.Cleanup()

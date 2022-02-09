@@ -32,8 +32,15 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
 
             Debug.Log("PlaceWidgetEclipse");
-            
-            
+
+            for (var i = 0; i < entityIds.Length; i++)
+            {
+                if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
+                {
+                    eclipseCard.Layout.UpdateName($"{i}");
+                    Layout.AddCard(eclipseCard);
+                }
+            }
         }
     }
 }

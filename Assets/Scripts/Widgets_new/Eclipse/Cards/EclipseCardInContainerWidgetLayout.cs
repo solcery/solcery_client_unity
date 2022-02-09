@@ -65,5 +65,10 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void Cleanup()
         {
         }
+
+        public void UpdateName(string newName)
+        {
+            nameText.text = newName;
+        }
     }
 }

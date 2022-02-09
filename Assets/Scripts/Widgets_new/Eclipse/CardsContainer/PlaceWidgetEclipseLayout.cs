@@ -1,3 +1,4 @@
+using Solcery.Widgets_new.Eclipse.Cards;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         [SerializeField]
         private ScrollRect scroll;
 
-        public void AddCard()
+        public void AddCard(IEclipseCardInContainerWidget eclipseCardInContainerWidget)
         {
+            eclipseCardInContainerWidget.UpdateParent(scroll.content);
+            eclipseCardInContainerWidget.UpdateSiblingIndex(0);
         }
     }
 }
