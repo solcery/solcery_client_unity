@@ -6,16 +6,18 @@ namespace Solcery.Widgets_new.Canvas
     {
         private Transform _worldCanvas;
         private RectTransform _uiCanvas;
+        private RectTransform _dragDropCanvas;
         
-        public static IWidgetCanvas Create(Transform worldCanvas, RectTransform uiCanvas)
+        public static IWidgetCanvas Create(Transform worldCanvas, RectTransform uiCanvas, RectTransform dragDropCanvas)
         {
-            return new WidgetCanvas(worldCanvas, uiCanvas);
+            return new WidgetCanvas(worldCanvas, uiCanvas, dragDropCanvas);
         }
         
-        private WidgetCanvas(Transform worldCanvas, RectTransform uiCanvas)
+        private WidgetCanvas(Transform worldCanvas, RectTransform uiCanvas, RectTransform dragDropCanvas)
         {
             _worldCanvas = worldCanvas;
             _uiCanvas = uiCanvas;
+            _dragDropCanvas = dragDropCanvas;
         }
         
         Transform IWidgetCanvas.GetWorldCanvas()
@@ -26,6 +28,11 @@ namespace Solcery.Widgets_new.Canvas
         RectTransform IWidgetCanvas.GetUiCanvas()
         {
             return _uiCanvas;
+        }
+
+        RectTransform IWidgetCanvas.GetDragDropCanvas()
+        {
+            return _dragDropCanvas;
         }
         
         void IWidgetCanvas.Destroy()

@@ -6,6 +6,7 @@ namespace Solcery.Widgets_new.Canvas
     {
         Transform GetWorldCanvas();
         RectTransform GetUiCanvas();
+        RectTransform GetDragDropCanvas();
         void Destroy();
     }
 }

@@ -10,6 +10,8 @@ namespace Solcery
         private Transform gameCanvas;
         [SerializeField]
         private RectTransform uiCanvas;
+        [SerializeField]
+        private RectTransform dragDropCanvas;
         
         private IGame _game;
 
@@ -27,7 +29,7 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas));
+            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas));
             _game.Init();
         }
 

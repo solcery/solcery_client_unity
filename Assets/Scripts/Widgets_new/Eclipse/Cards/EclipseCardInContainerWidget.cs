@@ -1,6 +1,8 @@
+using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
+using Solcery.Utils;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
@@ -21,6 +23,26 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _game = game;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
+            _layout.SetDragDropTransform(game.WidgetCanvas.GetDragDropCanvas());
+        }
+
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
+        {
+            if (data.TryGetValue("name", out string name))
+            {
+                _layout.UpdateName(name);
+            }
+            
+            if (data.TryGetValue("description", out string description))
+            {
+                _layout.UpdateDescription(description);
+            }
+
+            if (data.TryGetValue("picture", out string picture) 
+                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            {
+                _layout.UpdateSprite(texture);
+            }
         }
 
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)

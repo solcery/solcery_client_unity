@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
 using UnityEngine;
@@ -52,24 +54,58 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             Debug.Log("PlaceWidgetEclipse");
 
-            if (_isHand)
+            RemoveCards(world, entityIds);
+            
+            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var objectTypePool = world.GetPool<ComponentObjectType>();
+            var cardTypes = new Dictionary<int, JObject>();
+            
+            foreach (var objectTypesEntityId in objectTypesFilter)
             {
-                for (var i = 0; i < entityIds.Length; i++)
-                {
-                    if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
-                    {
-                        eclipseCard.Layout.UpdateName($"hand_{i}");
-                        Layout.AddCard(eclipseCard);
-                    }
-                }
+                cardTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
+                break;
             }
-            else
+
+            foreach (var entityId in entityIds)
             {
+                var objectId = objectIdPool.Get(entityId).Id;
+
+                if (_cards.ContainsKey(objectId))
+                {
+                    continue;
+                }
+                
                 if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
                 {
-                    eclipseCard.Layout.UpdateName("single");
+                    if (objectTypePool.Has(entityId)
+                        && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject)
+                        && objectIdPool.Has(entityId))
+                    {
+                        eclipseCard.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
+                    }
+                    
                     Layout.AddCard(eclipseCard);
+                    _cards.Add(objectId, eclipseCard);
                 }
+            }
+        }
+        
+        private void RemoveCards(EcsWorld world, int[] entityIds)
+        {
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var keys = _cards.Keys.ToList();
+
+            foreach (var entityId in entityIds)
+            {
+                var objectId = objectIdPool.Get(entityId).Id;
+                keys.Remove(objectId);
+            }
+
+            foreach (var key in keys)
+            {
+                Game.EclipseCardInContainerWidgetPool.Push(_cards[key]);
+                _cards.Remove(key);
             }
         }
     }
