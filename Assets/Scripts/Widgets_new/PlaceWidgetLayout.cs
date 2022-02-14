@@ -72,9 +72,14 @@ namespace Solcery.Widgets_new
 
         public void UpdateCaption(string text)
         {
-            if (!string.IsNullOrEmpty(text) && caption != null)
+            if (caption != null)
             {
-                caption.text = text;
+                var active = !string.IsNullOrEmpty(text);
+                caption.gameObject.SetActive(active);
+                if (active)
+                {
+                    caption.text = text;
+                }
             }
         }
     }
