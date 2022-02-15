@@ -37,6 +37,7 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemInitialGameContentPlaces.Create(gameContent));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(gameContent));
             _systems.Add(SystemGameStateInitial.Create(initialGameState));
+            _systems.Add(SystemInitialGameContentTooltips.Create(initialGameState));
 
             // Process commands
             _systems.Add(SystemProcessCommands.Create(serviceCommands));
