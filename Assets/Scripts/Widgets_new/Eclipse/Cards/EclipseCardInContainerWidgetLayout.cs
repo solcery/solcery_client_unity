@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Solcery.Services.Events;
+using Solcery.Ui;
+using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.Cards.Traits;
@@ -8,9 +13,11 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
-    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler, IPointerMoveHandler
+    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
         public RectTransform RectTransform => rectTransform;
+        [HideInInspector]
+        public int EntityId;
         
         [SerializeField]
         private RectTransform rectTransform;
@@ -26,7 +33,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private TMP_Text nameText;
         [SerializeField]
         private TMP_Text descriptionText;
-        
+        [SerializeField]
+        private List<Graphic> raycastObjects;
+
         private Sprite _sprite;
         private Vector2 _anchorMin;
         private Vector2 _anchorMax;
@@ -36,7 +45,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMin;
         
         private Transform _dragDropTransform;
-        
+        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
+
         private void Awake()
         {
             _anchoredPosition = rectTransform.anchoredPosition;
@@ -117,53 +127,41 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             timerLayout.UpdateTimer(isShow, timer);
         }
         
-        private enum DragDropStates
+        public void RaycastOn()
         {
-            Free,
-            Drag
+            foreach (var targetSetting in _raycastTargetSettings)
+            {
+                targetSetting.Key.raycastTarget = targetSetting.Value;
+            }
         }
 
-        private DragDropStates _dropState = DragDropStates.Free;
-        private int _siblingIndex;
-        private Transform _parent;
+        public void RaycastOff()
+        {
+            _raycastTargetSettings.Clear();
+            foreach (var raycastObject in raycastObjects)
+            {
+                _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
+                raycastObject.raycastTarget = false;
+            }
+        }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (_dropState == DragDropStates.Free)
-            {
-                _dropState = DragDropStates.Drag;
-                _parent = transform.parent;
-                _siblingIndex = transform.GetSiblingIndex();
-                UpdateParent(_dragDropTransform, true);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
 
-                if (RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform) _dragDropTransform,
-                        eventData.position,
-                        Camera.current, out var pos))
-                {
-                    rectTransform.localPosition = pos;
-                }
-            }
-            else
+            var ed = new JObject
             {
-                _dropState = DragDropStates.Free;
-                UpdateParent(_parent);
-                UpdateSiblingIndex(_siblingIndex);
-            }
-        }
-
-        void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
-        {
-            if (_dropState != DragDropStates.Drag)
-            {
-                return;
-            }
+                {"entity_id", new JValue(EntityId)},
+                {"world_position", position.ToJObject()}
+            };
             
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform) _dragDropTransform,
-                    eventData.position,
-                    Camera.current, out var pos))
-            {
-                rectTransform.localPosition = pos;
-            }
+            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDragEvent, ed);
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Solcery.Games
         
         private void CreateModel()
         {
-            _playModel = PlayPlayModel.Create();
+            _playModel = PlayModel.Create();
         }
         
         private void CreateServices(IWidgetCanvas widgetCanvas)

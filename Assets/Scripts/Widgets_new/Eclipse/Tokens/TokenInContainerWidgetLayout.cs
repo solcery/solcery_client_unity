@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,15 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         private Image image;
         [SerializeField]
         private TextMeshProUGUI count;
+        [SerializeField]
+        private List<Graphic> raycastObjects;
         
         private Sprite _sprite;
+        
+        [HideInInspector]
+        public int EntityId;
+        
+        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
         
         public RectTransform RectTransform => rectTransform;
 
@@ -34,6 +42,24 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         public void UpdateParent(Transform parent)
         {
             rectTransform.SetParent(parent, false);
+        }
+        
+        public void RaycastOn()
+        {
+            foreach (var targetSetting in _raycastTargetSettings)
+            {
+                targetSetting.Key.raycastTarget = targetSetting.Value;
+            }
+        }
+
+        public void RaycastOff()
+        {
+            _raycastTargetSettings.Clear();
+            foreach (var raycastObject in raycastObjects)
+            {
+                _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
+                raycastObject.raycastTarget = false;
+            }
         }
 
         public void Cleanup()

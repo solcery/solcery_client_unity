@@ -1,6 +1,9 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.DragDrop;
+using Solcery.Models.Play.DragDrop.OnDrag;
+using Solcery.Models.Play.DragDrop.Types;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -8,7 +11,7 @@ using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
 {
-    public sealed class PlayPlayModel : IPlayModel
+    public sealed class PlayModel : IPlayModel
     {
         public EcsWorld World { get; private set; }
         
@@ -16,10 +19,10 @@ namespace Solcery.Models.Play
 
         public static IPlayModel Create()
         {
-            return new PlayPlayModel();
+            return new PlayModel();
         }
 
-        private PlayPlayModel() { }
+        private PlayModel() { }
         
         void IPlayModel.Init(IGame game, JObject gameContentJson)
         {
@@ -31,12 +34,16 @@ namespace Solcery.Models.Play
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
+            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
             
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             // TODO сюда добавляем новые системы и тд
             _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
+            
+            // TODO drag drop
+            _systems.Add(SystemOnDrag.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
