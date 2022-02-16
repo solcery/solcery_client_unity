@@ -3,6 +3,7 @@ using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
@@ -47,12 +48,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
-            if (entityIds.Length <= 0)
+            if (entityIds.Length <= 0 || !_isHand)
             {
+                Layout.UpdateOutOfBorder(true);
                 return;
             }
 
             Debug.Log("PlaceWidgetEclipse");
+            Layout.UpdateOutOfBorder(false);
 
             RemoveCards(world, entityIds);
             
@@ -84,6 +87,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     {
                         eclipseCard.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
                     }
+
+                    var eid = world.NewEntity();
+                    world.GetPool<ComponentDragDropTag>().Add(eid);
+                    world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+                    eclipseCard.UpdateAttachEntityId(eid);
                     
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
@@ -104,6 +112,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             foreach (var key in keys)
             {
+                var eid = _cards[key].AttachEntityId;
+                if (eid >= 0)
+                {
+                    world.DelEntity(eid);
+                }
+                
+                _cards[key].UpdateAttachEntityId();
                 Game.EclipseCardInContainerWidgetPool.Push(_cards[key]);
                 _cards.Remove(key);
             }

@@ -2,6 +2,8 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
+using Solcery.Widgets_new.Eclipse.DragDropSupport;
+using Solcery.Widgets_new.Eclipse.EcsSupport;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.Tokens
@@ -11,7 +13,8 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         private IGame _game;
         private TokenInContainerWidgetLayout _layout;
         private int _counter;
-        
+        private int _attachEntityId;
+
         public static ITokenInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
             return new TokenInContainerWidget(game, prefab, poolTransform);
@@ -66,6 +69,50 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         private void Cleanup()
         {
-        }    
+        }
+
+        #region Drag drop support
+        
+        private RectTransform _dragDropCacheParent;
+        
+        void IDraggableWidget.OnDrag(RectTransform parent, Vector3 position)
+        {
+            _dragDropCacheParent = (RectTransform)_layout.RectTransform.parent;
+            
+            _layout.RaycastOff();
+            _layout.UpdateParent(parent);
+            _layout.RectTransform.position = position;
+        }
+
+        void IDraggableWidget.OnMove(Vector3 position)
+        {
+            _layout.RectTransform.position = position;
+        }
+
+        void IDraggableWidget.OnDrop(Vector3 position, IApplyDropWidget target)
+        {
+            _layout.RaycastOn();
+            
+            if (target == null)
+            {
+                _layout.UpdateParent(_dragDropCacheParent);
+                return;
+            }
+            
+            target.OnDropWidget(this, position);
+        }
+        
+        #endregion
+
+        #region Ecs support
+        
+        int IEntityId.AttachEntityId => _layout.EntityId;
+
+        void IEntityId.UpdateAttachEntityId(int entityId)
+        {
+            _layout.EntityId = entityId;
+        }
+        
+        #endregion
     }
 }

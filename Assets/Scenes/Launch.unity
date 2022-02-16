@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 77059427}
   - component: {fileID: 77059429}
   - component: {fileID: 77059428}
+  - component: {fileID: 77059430}
   m_Layer: 5
   m_Name: DragDropCanvas
   m_TagString: Untagged
@@ -320,6 +321,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!114 &77059430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77059426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e444b51ff79249c6823d8cf7855333ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 77059427}
 --- !u!1 &153840757
 GameObject:
   m_ObjectHideFlags: 0

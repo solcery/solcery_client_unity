@@ -77,8 +77,7 @@ namespace Solcery.Widgets_new
                 Layout.UpdateBackgroundColor(backgroundColor);
 
                 Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
-                Layout.UpdateOutOfBorder(
-                    placeDataObject.TryGetValue("frame_width", out bool withBorders) && withBorders);
+                Layout.UpdateOutOfBorder(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
 
                 Layout.UpdateVisible(false);
             }

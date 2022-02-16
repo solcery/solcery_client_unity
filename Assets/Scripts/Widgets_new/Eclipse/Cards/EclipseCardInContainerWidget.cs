@@ -3,6 +3,8 @@ using Solcery.Games;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.DragDropSupport;
+using Solcery.Widgets_new.Eclipse.EcsSupport;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
@@ -79,5 +81,52 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private void Cleanup()
         {
         }
+
+        #region Drag drop support
+
+        private RectTransform _dragDropCacheParent;
+        private int _dragDropCacheSiblingIndex;
+
+        void IDraggableWidget.OnDrag(RectTransform parent, Vector3 position)
+        {
+            _dragDropCacheParent = (RectTransform)_layout.RectTransform.parent;
+            _dragDropCacheSiblingIndex = _layout.RectTransform.GetSiblingIndex();
+            
+            _layout.RaycastOff();
+            _layout.UpdateParent(parent, true);
+            _layout.RectTransform.position = position;
+        }
+
+        void IDraggableWidget.OnMove(Vector3 position)
+        {
+            _layout.RectTransform.position = position;
+        }
+
+        void IDraggableWidget.OnDrop(Vector3 position, IApplyDropWidget target)
+        {
+            _layout.RaycastOn();
+            
+            if (target == null)
+            {
+                _layout.UpdateParent(_dragDropCacheParent);
+                _layout.UpdateSiblingIndex(_dragDropCacheSiblingIndex);
+                return;
+            }
+            
+            target.OnDropWidget(this, position);
+        }
+
+        #endregion
+
+        #region Ecs support
+
+        int IEntityId.AttachEntityId => _layout.EntityId;
+
+        void IEntityId.UpdateAttachEntityId(int entityId)
+        {
+            _layout.EntityId = entityId;
+        }
+
+        #endregion
     }
 }
