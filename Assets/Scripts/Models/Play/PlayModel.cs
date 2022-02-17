@@ -7,6 +7,7 @@ using Solcery.Models.Play.DragDrop.Types;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
@@ -44,6 +45,9 @@ namespace Solcery.Models.Play
             
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create());
+            
+            // TODO tooltip
+            _systems.Add(SystemOnTooltipShow.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

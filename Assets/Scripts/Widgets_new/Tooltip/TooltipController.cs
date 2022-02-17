@@ -33,6 +33,7 @@ namespace Solcery.Widgets_new.Tooltip
                 Initialize();
             }
             _tooltipLayout.gameObject.SetActive(true);
+            _tooltipLayout.Text.text = text;
             _tooltipLayout.transform.position = GetPosition(targetPosition);
         }
 
