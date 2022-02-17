@@ -44,7 +44,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         public void UpdateFromCardTypeData(int objectId, JObject data)
         {
-            if (data.TryGetValue("picture", out string picture) 
+            if (data.TryGetValue("picture", out string picture)
                 && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
             {
                 _layout.UpdateSprite(texture);

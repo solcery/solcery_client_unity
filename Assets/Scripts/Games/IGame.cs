@@ -10,6 +10,7 @@ using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Factories;
+using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Games
 {
@@ -26,6 +27,7 @@ namespace Solcery.Games
         public IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
         public JObject GameContent { get; }
         public JObject GameStatePopAndClear { get; }
+        public TooltipController TooltipController { get; }
 
         public void Init();
         public void Update(float dt);
