@@ -50,6 +50,10 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                         world.GetPool<ComponentPlaceTag>().Add(entityIndex);
                         world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
                             placeObject.GetValue<int>("placeId");
+                        if (placeObject.TryGetValue("drag_n_drop", out int dragDropId))
+                        {
+                            world.GetPool<ComponentPlaceDragDropId>().Add(entityIndex).DragDropId = dragDropId;
+                        }
                     }
                 }
             }

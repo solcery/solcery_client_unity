@@ -39,6 +39,7 @@ namespace Solcery.Widgets_new
         protected IGame Game;
         protected readonly PlaceWidgetCardFace CardFace;
         protected readonly bool InteractableForActiveLocalPlayer;
+        protected readonly int PlaceId;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -50,7 +51,7 @@ namespace Solcery.Widgets_new
             {
                 Layout = layout;
 
-                var placeId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
+                PlaceId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
 
                 var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
                 var x2 = placeDataObject.TryGetValue("x2", out int xt2) ? xt2 / AnchorDivider : 0f;
@@ -61,7 +62,7 @@ namespace Solcery.Widgets_new
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
 
-                Layout.name = $"{placeId}_{orderZ}_{Layout.name}";
+                Layout.name = $"{PlaceId}_{orderZ}_{Layout.name}";
 
                 CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
                     ? res

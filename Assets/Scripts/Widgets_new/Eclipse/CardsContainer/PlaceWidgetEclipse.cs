@@ -48,7 +48,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
-            if (entityIds.Length <= 0 || !_isHand)
+            if (entityIds.Length <= 0/* || !_isHand*/)
             {
                 Layout.UpdateOutOfBorder(true);
                 return;
@@ -91,6 +91,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     var eid = world.NewEntity();
                     world.GetPool<ComponentDragDropTag>().Add(eid);
                     world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+                    world.GetPool<ComponentDragDropSourcePlaceId>().Add(eid).SourcePlaceId = PlaceId;
                     eclipseCard.UpdateAttachEntityId(eid);
                     
                     Layout.AddCard(eclipseCard);

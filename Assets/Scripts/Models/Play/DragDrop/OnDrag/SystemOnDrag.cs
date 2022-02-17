@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Play.Places;
-using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Places;
 using Solcery.Services.Events;
 using Solcery.Ui;
@@ -46,13 +44,15 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
             }
 
             var world = systems.GetWorld();
-            var placeAttributePool = world.GetPool<ComponentAttributePlace>();
-            var widgetPool = world.GetPool<ComponentPlaceWidgetNew>();
+            var dragDropTagPool = world.GetPool<ComponentDragDropTag>();
+            var dragDropSourcePlaceIdPool = world.GetPool<ComponentDragDropSourcePlaceId>();
 
             if (_uiEventData.TryGetValue("entity_id", out int entityId) 
-                && placeAttributePool.Has(entityId))
+                && dragDropTagPool.Has(entityId)
+                && dragDropSourcePlaceIdPool.Has(entityId))
             {
-                var placeId = placeAttributePool.Get(entityId).Value.Current;
+                var sourcePlaceId = dragDropSourcePlaceIdPool.Get(entityId).SourcePlaceId;
+                
             }
             
             _uiEventData = null;
