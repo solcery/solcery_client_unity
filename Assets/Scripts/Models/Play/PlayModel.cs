@@ -47,7 +47,9 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnDrag.Create());
             
             // TODO tooltip
+            _systems.Add(SystemOnTooltipHide.Create());
             _systems.Add(SystemOnTooltipShow.Create());
+            _systems.Add(SystemTooltipUpdate.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

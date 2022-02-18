@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Solcery.Models.Play.Tooltip
 {
+    // вешать компонент с тултипом
+    // колмпонент делея с системой SystemUpdateTooltip
+    // сама вьюха решает когда отображать а кога скрывать
     public interface ISystemOnTooltipShow : IEventListener, IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem
     {
     }
@@ -59,6 +62,8 @@ namespace Solcery.Models.Play.Tooltip
                 var text = tooltipDataObject.GetValue<string>("text");
                 GameApplication.Game().TooltipController.Show(text, position);
             }
+            
+            _uiEventData = null;
         }
         
         void IEventListener.OnEvent(string eventKey, object eventData)
