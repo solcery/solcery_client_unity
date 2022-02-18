@@ -3,6 +3,7 @@ using Solcery.Services.Events;
 using Solcery.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Solcery.Ui.DragDrop
 {
@@ -10,6 +11,10 @@ namespace Solcery.Ui.DragDrop
     {
         [SerializeField]
         private RectTransform rectTransform;
+        [SerializeField]
+        private Image image;
+
+        public RectTransform GetRectTransform => rectTransform;
         
         private enum DragDropStates
         {
@@ -24,6 +29,7 @@ namespace Solcery.Ui.DragDrop
         {
             _currentDragDropState = DragDropStates.Drag;
             _currentDraggableEntityId = draggableEntityId;
+            image.enabled = true;
         }
         
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -44,6 +50,9 @@ namespace Solcery.Ui.DragDrop
             };
 
             ServiceEvents.Current.BroadcastEvent(UiEvents.UiDropEvent, ed);
+
+            _currentDragDropState = DragDropStates.Free;
+            image.enabled = false;
         }
 
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)

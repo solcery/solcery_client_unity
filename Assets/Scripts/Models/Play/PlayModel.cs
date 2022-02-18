@@ -42,7 +42,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
             
             // TODO drag drop
-            _systems.Add(SystemOnDrag.Create());
+            _systems.Add(SystemOnDrag.Create(game));
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

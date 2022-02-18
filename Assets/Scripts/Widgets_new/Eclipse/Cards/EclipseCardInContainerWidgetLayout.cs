@@ -44,7 +44,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
         
-        private Transform _dragDropTransform;
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
 
         private void Awake()
@@ -55,11 +54,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
-        }
-
-        public void SetDragDropTransform(Transform dragDropTransform)
-        {
-            _dragDropTransform = dragDropTransform;
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)

@@ -25,7 +25,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _game = game;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
-            _layout.SetDragDropTransform(game.WidgetCanvas.GetDragDropCanvas());
         }
 
         void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)

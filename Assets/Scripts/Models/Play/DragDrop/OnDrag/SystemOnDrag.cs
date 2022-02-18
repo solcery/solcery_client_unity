@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Places;
@@ -16,16 +17,20 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
 
     public sealed class SystemOnDrag : ISystemOnDrag
     {
+        private IGame _game;
         private JObject _uiEventData;
         private EcsFilter _placesFilter;
         private EcsFilter _dragDropParameterFilter;
         
-        public static ISystemOnDrag Create()
+        public static ISystemOnDrag Create(IGame game)
         {
-            return new SystemOnDrag();
+            return new SystemOnDrag(game);
         }
-        
-        private SystemOnDrag() { }
+
+        private SystemOnDrag(IGame game)
+        {
+            _game = game;
+        }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
@@ -93,7 +98,10 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                         {
                             break;
                         }
-                        
+
+                        world.GetPool<ComponentDragDropView>().Get(entityId).View
+                            .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform, _uiEventData.GetVector3("world_position"));
+                        _game.WidgetCanvas.GetDragDropCanvas().UpdateOnDrag(entityId);
                         Debug.Log("On drag!");
                         
                         break;
