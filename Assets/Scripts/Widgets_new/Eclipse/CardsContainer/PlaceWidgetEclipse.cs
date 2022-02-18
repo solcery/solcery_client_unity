@@ -79,6 +79,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     world.GetPool<ComponentDragDropTag>().Add(eid);
                     world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
                     world.GetPool<ComponentDragDropSourcePlaceId>().Add(eid).SourcePlaceId = PlaceId;
+                    world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType = 
+                        world.GetPool<ComponentEclipseCardType>().Has(entityId) 
+                            ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
+                            : EclipseCardTypes.None;
                     eclipseCard.UpdateAttachEntityId(eid);
                     
                     Layout.AddCard(eclipseCard);

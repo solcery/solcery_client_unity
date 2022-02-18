@@ -157,6 +157,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
             var ed = new JObject
             {
+                {"event", new JValue(UiEvents.UiDragEvent)},
                 {"entity_id", new JValue(EntityId)},
                 {"world_position", position.ToJObject()}
             };

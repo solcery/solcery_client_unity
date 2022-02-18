@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Play.DragDrop.OnDrag;
-using Solcery.Models.Play.DragDrop.Types;
+using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;

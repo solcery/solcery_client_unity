@@ -18,12 +18,12 @@ namespace Solcery.Ui.DragDrop
         }
 
         private DragDropStates _currentDragDropState = DragDropStates.Free;
-        private int _currentDraggableObjectId;
+        private int _currentDraggableEntityId;
 
-        public void UpdateOnDrag(int draggableObjectId)
+        public void UpdateOnDrag(int draggableEntityId)
         {
             _currentDragDropState = DragDropStates.Drag;
-            _currentDraggableObjectId = draggableObjectId;
+            _currentDraggableEntityId = draggableEntityId;
         }
         
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -38,7 +38,8 @@ namespace Solcery.Ui.DragDrop
 
             var ed = new JObject
             {
-                {"entity_id", new JValue(_currentDraggableObjectId)},
+                {"event", new JValue(UiEvents.UiDropEvent)},
+                {"entity_id", new JValue(_currentDraggableEntityId)},
                 {"world_position", position.ToJObject()}
             };
 
@@ -57,7 +58,8 @@ namespace Solcery.Ui.DragDrop
 
             var ed = new JObject
             {
-                {"entity_id", new JValue(_currentDraggableObjectId)},
+                {"event", new JValue(UiEvents.UiDragMoveEvent)},
+                {"entity_id", new JValue(_currentDraggableEntityId)},
                 {"world_position", position.ToJObject()}
             };
             

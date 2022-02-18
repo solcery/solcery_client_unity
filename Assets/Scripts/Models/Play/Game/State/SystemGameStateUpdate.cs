@@ -171,6 +171,7 @@ namespace Solcery.Models.Play.Game.State
         private void RemoveAllEclipseCardComponents(EcsWorld world, int entityIndex)
         {
             var tagPool = world.GetPool<ComponentEclipseCardTag>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
             var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
             var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
@@ -179,6 +180,11 @@ namespace Solcery.Models.Play.Game.State
             if (tagPool.Has(entityIndex))
             {
                 tagPool.Del(entityIndex);
+            }
+            
+            if (eclipseCartTypePool.Has(entityIndex))
+            {
+                eclipseCartTypePool.Del(entityIndex);
             }
             
             if (eventTagPool.Has(entityIndex))
@@ -207,11 +213,12 @@ namespace Solcery.Models.Play.Game.State
             RemoveAllEclipseCardComponents(world, entityIndex);
             
             var tagPool = world.GetPool<ComponentEclipseCardTag>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
             var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
             var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
             var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
-            
+
             var typeId = entityData.GetValue<int>("tplId");
             foreach (var filterEntityTypeId in _filterEntityTypes)
             {
@@ -221,6 +228,7 @@ namespace Solcery.Models.Play.Game.State
                     if (entityTypeData.TryGetEnum("type", out EclipseCardTypes eclipseCardType))
                     {
                         tagPool.Add(entityIndex);
+                        eclipseCartTypePool.Add(entityIndex).CardType = eclipseCardType;
                 
                         switch (eclipseCardType)
                         {
