@@ -8,6 +8,7 @@ namespace Solcery.Widgets_new.Tooltip
     {
         private const string PrefabPathKey = "ui/ui_tooltip";
         private TooltipLayout _tooltipLayout;
+        private float? _delay;
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly IServiceResource _serviceResource;
         
@@ -20,29 +21,42 @@ namespace Solcery.Widgets_new.Tooltip
         {
             _widgetCanvas = widgetCanvas;
             _serviceResource = serviceResource;
+            _delay = null;
         }
 
         public void Update(float dt)
         {
+            if (_delay != null && _delay.Value >= 0)
+            {
+                _delay -= dt;
+                if (_delay <= 0)
+                {
+                    _delay = null;
+                    SetTooltipActive(true);
+                }
+            }
         }
         
-        public void Show(string text, Vector2 targetPosition)
+        public void Show(string text, Vector2 targetPosition, float delay = 0)
         {
             if (_tooltipLayout == null)
             {
                 Initialize();
             }
-            _tooltipLayout.gameObject.SetActive(true);
+            
             _tooltipLayout.Text.text = text;
             _tooltipLayout.transform.position = GetPosition(targetPosition);
+            if (delay >= 0)
+            {
+                Hide();
+                _delay = delay;
+            }
         }
 
         public void Hide()
         {
-            if (_tooltipLayout != null)
-            {
-                _tooltipLayout.gameObject.SetActive(false);
-            }
+            _delay = null;
+            SetTooltipActive(false);
         }
 
         private void Initialize()
@@ -82,6 +96,14 @@ namespace Solcery.Widgets_new.Tooltip
             newY = Mathf.Clamp(newY, bottomLimit, topLimit);
 
             return new Vector2(newX, newY);
+        }
+
+        private void SetTooltipActive(bool value)
+        {
+            if (_tooltipLayout != null && _tooltipLayout.gameObject.activeSelf != value)
+            {
+                _tooltipLayout.gameObject.SetActive(value);
+            }
         }
     }
 }

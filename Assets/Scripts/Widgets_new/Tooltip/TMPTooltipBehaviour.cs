@@ -12,7 +12,7 @@ namespace Solcery.Widgets_new.Tooltip
     public class TMPTooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler
     {
         private TextMeshProUGUI _text;
-        private int _linkIndex = -1;
+        private string _tooltipId;
         
         public void Awake()
         {
@@ -24,8 +24,7 @@ namespace Solcery.Widgets_new.Tooltip
             var linkIndex = TMP_TextUtilities.FindIntersectingLink(_text, eventData.position, null);;
             if (linkIndex != -1)
             {
-                _linkIndex = linkIndex;
-                ShowTooltip(_text.textInfo.linkInfo[_linkIndex].GetLinkID(), eventData.position);
+                ShowTooltip(_text.textInfo.linkInfo[linkIndex].GetLinkID(), eventData.position);
             }
             else
             {
@@ -35,7 +34,7 @@ namespace Solcery.Widgets_new.Tooltip
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (_linkIndex != -1)
+            if (_tooltipId != null)
             {
                 HideTooltip();
             }
@@ -43,19 +42,27 @@ namespace Solcery.Widgets_new.Tooltip
 
         private void ShowTooltip(string tooltipId, Vector2 position)
         {
-            var ed = new JObject
+            _tooltipId = tooltipId;
+            var eventData = new JObject
             {
                 {"tooltip_id", new JValue(tooltipId)},
                 {"world_position", position.ToJObject()}
             };
             
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiTooltipShowEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(UiEvents.UiTooltipShowEvent, eventData);
         }
 
         private void HideTooltip()
         {
-            _linkIndex = -1;
-            GameApplication.Game().TooltipController.Hide();
+            if (_tooltipId == null)
+                return;
+
+            var eventData = new JObject
+            {
+                {"tooltip_id", new JValue(_tooltipId)},
+            };
+            ServiceEvents.Current.BroadcastEvent(UiEvents.UiTooltipHideEvent, eventData);
+            _tooltipId = null;
         }
     }
 }

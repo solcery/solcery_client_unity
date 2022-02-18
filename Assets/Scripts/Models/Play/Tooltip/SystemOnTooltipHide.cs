@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
 using Solcery.Ui;
+using Solcery.Utils;
 
 namespace Solcery.Models.Play.Tooltip
 {
@@ -37,7 +38,11 @@ namespace Solcery.Models.Play.Tooltip
                 return;
             }
             
-            GameApplication.Game().TooltipController.Hide();
+            if (_uiEventData.TryGetValue("tooltip_id", out int tooltipId))
+            {
+                HideCurrentTooltip();
+            }
+            
             _uiEventData = null;
         }
 
@@ -47,6 +52,11 @@ namespace Solcery.Models.Play.Tooltip
             {
                 _uiEventData = ed;
             }
+        }
+
+        private void HideCurrentTooltip()
+        {
+            GameApplication.Game().TooltipController.Hide();
         }
     }
 }
