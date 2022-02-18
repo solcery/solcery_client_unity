@@ -47,7 +47,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                 {
                     if (tooltipToken is JObject tooltipObject)
                     {
-                        entityTypeMap.Add(tooltipObject.GetValue<int>("tooltip_id"), tooltipObject);
+                        entityTypeMap.Add(tooltipObject.GetValue<int>("id"), tooltipObject);
                     }
                 }
                 var entityIndex = world.NewEntity();
