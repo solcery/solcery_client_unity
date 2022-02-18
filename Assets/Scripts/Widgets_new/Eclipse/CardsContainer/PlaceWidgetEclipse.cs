@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
 using UnityEngine;
@@ -14,25 +15,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>
     {
         private Dictionary<int, IEclipseCardInContainerWidget> _cards;
-        
-        // TODO: Remove this
-        private bool _isHand;
-
-        public static PlaceWidget CreateHand(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
-        {
-            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject, true);
-        }
-        
-        public static PlaceWidget CreateSingle(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
-        {
-            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject, false);
-        }
-        
-        private PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject, bool isHand)
-            : this(widgetCanvas, game, prefabPathKey, placeDataObject)
-        {
-            _isHand = isHand;
-        }
 
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -48,7 +30,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
-            if (entityIds.Length <= 0/* || !_isHand*/)
+            if (entityIds.Length <= 0)
             {
                 Layout.UpdateOutOfBorder(true);
                 return;
@@ -75,6 +57,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 var objectId = objectIdPool.Get(entityId).Id;
 
                 if (_cards.ContainsKey(objectId))
+                {
+                    continue;
+                }
+
+                if (world.GetPool<ComponentEclipseTokenTag>().Has(entityId))
                 {
                     continue;
                 }

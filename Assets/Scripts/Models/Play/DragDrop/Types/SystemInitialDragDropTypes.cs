@@ -57,7 +57,7 @@ namespace Solcery.Models.Play.DragDrop.Types
                         requiredEclipseCardTypePool.Add(entity).RequiredEclipseCardType =
                             dndObject.TryGetEnum("required_card_type", out EclipseCardTypes ect) 
                                 ? ect 
-                                : EclipseCardTypes.Any;
+                                : EclipseCardTypes.None;
                     }
                 }
             }
