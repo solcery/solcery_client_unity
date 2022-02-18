@@ -5,6 +5,7 @@ using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.StaticOrderZ;
+using Solcery.Widgets_new.Tooltip;
 using UnityEngine;
 
 namespace Solcery.Widgets_new
@@ -78,6 +79,12 @@ namespace Solcery.Widgets_new
 
                 Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
                 Layout.UpdateOutOfBorder(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
+
+                if (placeDataObject.TryGetValue("tooltip_id", out string tooltipId))
+                {
+                    var tooltipBehavior = Layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
+                    tooltipBehavior.SetTooltipId(tooltipId);
+                }
 
                 Layout.UpdateVisible(false);
             }
