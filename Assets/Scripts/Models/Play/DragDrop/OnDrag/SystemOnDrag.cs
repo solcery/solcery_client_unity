@@ -11,9 +11,7 @@ using UnityEngine;
 
 namespace Solcery.Models.Play.DragDrop.OnDrag
 {
-    public interface ISystemOnDrag : IEventListener, IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem
-    {
-    }
+    public interface ISystemOnDrag : IEventListener, IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem { }
 
     public sealed class SystemOnDrag : ISystemOnDrag
     {

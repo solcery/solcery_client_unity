@@ -1,8 +1,9 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Play.DragDrop.OnDrag;
+using Solcery.Models.Play.DragDrop.OnDragMove;
+using Solcery.Models.Play.DragDrop.OnDrop;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
@@ -43,6 +44,8 @@ namespace Solcery.Models.Play
             
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));
+            _systems.Add(SystemOnDragMove.Create());
+            _systems.Add(SystemOnDrop.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
