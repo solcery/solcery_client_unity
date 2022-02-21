@@ -3,7 +3,6 @@ using Solcery.Games;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Services.Events;
-using Solcery.Ui;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 
 namespace Solcery.Models.Play.DragDrop.OnDrag
@@ -27,12 +26,12 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            ServiceEvents.Current.AddListener(UiEvents.UiDragEvent, this);
+            ServiceEvents.Current.AddListener(OnDragEventData.OnDragEventName, this);
         }
         
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            ServiceEvents.Current.RemoveListener(UiEvents.UiDragEvent, this);
+            ServiceEvents.Current.RemoveListener(OnDragEventData.OnDragEventName, this);
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -73,7 +72,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
 
         void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventData.EventName == UiEvents.UiDragEvent)
+            if (eventData.EventName == OnDragEventData.OnDragEventName)
             {
                 _uiEventData = eventData;
             }
