@@ -1,3 +1,4 @@
+using Solcery.Ui.DragDrop;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Canvas
@@ -6,7 +7,7 @@ namespace Solcery.Widgets_new.Canvas
     {
         Transform GetWorldCanvas();
         RectTransform GetUiCanvas();
-        RectTransform GetDragDropCanvas();
+        RootDragDropLayout GetDragDropCanvas();
         void Destroy();
     }
 }

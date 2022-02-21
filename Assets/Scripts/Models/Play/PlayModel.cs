@@ -1,9 +1,10 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Play.DragDrop.OnDrag;
-using Solcery.Models.Play.DragDrop.Types;
+using Solcery.Models.Play.DragDrop.OnDragMove;
+using Solcery.Models.Play.DragDrop.OnDrop;
+using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -31,12 +32,12 @@ namespace Solcery.Models.Play
             _systems = new EcsSystems(World);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
+            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
-            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
-            
+
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             
@@ -44,7 +45,9 @@ namespace Solcery.Models.Play
             _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
             
             // TODO drag drop
-            _systems.Add(SystemOnDrag.Create());
+            _systems.Add(SystemOnDrag.Create(game));
+            _systems.Add(SystemOnDragMove.Create());
+            _systems.Add(SystemOnDrop.Create());
             
             // TODO tooltip
             _systems.Add(SystemOnTooltipHide.Create());

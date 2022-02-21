@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Ui;
-using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.Cards.Traits;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,7 +42,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
         
-        private Transform _dragDropTransform;
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
 
         private void Awake()
@@ -55,11 +52,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
-        }
-
-        public void SetDragDropTransform(Transform dragDropTransform)
-        {
-            _dragDropTransform = dragDropTransform;
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -154,14 +146,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-
-            var ed = new JObject
-            {
-                {"entity_id", new JValue(EntityId)},
-                {"world_position", position.ToJObject()}
-            };
             
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDragEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
         }
     }
 }

@@ -11,6 +11,7 @@ using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Number;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Utils;
 
 namespace Solcery.Models.Play.Game.State
@@ -167,8 +168,96 @@ namespace Solcery.Models.Play.Game.State
             UpdateEntity(world, entityIndex, entityData);
         }
 
+        private void RemoveAllEclipseCardComponents(EcsWorld world, int entityIndex)
+        {
+            var tagPool = world.GetPool<ComponentEclipseCardTag>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
+            var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
+            var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
+            var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
+            var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
+
+            if (tagPool.Has(entityIndex))
+            {
+                tagPool.Del(entityIndex);
+            }
+            
+            if (eclipseCartTypePool.Has(entityIndex))
+            {
+                eclipseCartTypePool.Del(entityIndex);
+            }
+            
+            if (eventTagPool.Has(entityIndex))
+            {
+                eventTagPool.Del(entityIndex);
+            }
+            
+            if (creatureTagPool.Has(entityIndex))
+            {
+                creatureTagPool.Del(entityIndex);
+            }
+            
+            if (buildingTagPool.Has(entityIndex))
+            {
+                buildingTagPool.Del(entityIndex);
+            }
+            
+            if (tokenTagPool.Has(entityIndex))
+            {
+                tokenTagPool.Del(entityIndex);
+            }
+        }
+
+        private void UpdateEclipseCardComponents(EcsWorld world, int entityIndex, JObject entityData)
+        {
+            RemoveAllEclipseCardComponents(world, entityIndex);
+            
+            var tagPool = world.GetPool<ComponentEclipseCardTag>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
+            var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
+            var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
+            var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
+            var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
+
+            var typeId = entityData.GetValue<int>("tplId");
+            foreach (var filterEntityTypeId in _filterEntityTypes)
+            {
+                ref var entityTypesComponent = ref world.GetPool<ComponentObjectTypes>().Get(filterEntityTypeId);
+                if (entityTypesComponent.Types.TryGetValue(typeId, out var entityTypeData))
+                {
+                    if (entityTypeData.TryGetEnum("type", out EclipseCardTypes eclipseCardType))
+                    {
+                        tagPool.Add(entityIndex);
+                        eclipseCartTypePool.Add(entityIndex).CardType = eclipseCardType;
+                
+                        switch (eclipseCardType)
+                        {
+                            case EclipseCardTypes.Event:
+                                eventTagPool.Add(entityIndex);
+                                break;
+                    
+                            case EclipseCardTypes.Creature:
+                                creatureTagPool.Add(entityIndex);
+                                break;
+                    
+                            case EclipseCardTypes.Building:
+                                buildingTagPool.Add(entityIndex);
+                                break;
+                    
+                            case EclipseCardTypes.Token:
+                                tokenTagPool.Add(entityIndex);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
         private void UpdateEntity(EcsWorld world, int entityIndex, JObject entityData)
         {
+            // Eclipse card support
+            UpdateEclipseCardComponents(world, entityIndex, entityData);
+            
             world.GetPool<ComponentObjectId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
             var typeId = entityData.GetValue<int>("tplId");
             world.GetPool<ComponentObjectType>().Get(entityIndex).Type = typeId;

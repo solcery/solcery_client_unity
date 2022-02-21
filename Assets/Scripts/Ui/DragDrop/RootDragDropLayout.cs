@@ -1,8 +1,8 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Solcery.Ui.DragDrop
 {
@@ -10,6 +10,10 @@ namespace Solcery.Ui.DragDrop
     {
         [SerializeField]
         private RectTransform rectTransform;
+        [SerializeField]
+        private Image image;
+
+        public RectTransform GetRectTransform => rectTransform;
         
         private enum DragDropStates
         {
@@ -18,12 +22,13 @@ namespace Solcery.Ui.DragDrop
         }
 
         private DragDropStates _currentDragDropState = DragDropStates.Free;
-        private int _currentDraggableObjectId;
+        private int _currentDraggableEntityId;
 
-        public void UpdateOnDrag(int draggableObjectId)
+        public void UpdateOnDrag(int draggableEntityId)
         {
             _currentDragDropState = DragDropStates.Drag;
-            _currentDraggableObjectId = draggableObjectId;
+            _currentDraggableEntityId = draggableEntityId;
+            image.enabled = true;
         }
         
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -33,16 +38,18 @@ namespace Solcery.Ui.DragDrop
                 return;
             }
 
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.current,
-                out var position);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
 
-            var ed = new JObject
-            {
-                {"entity_id", new JValue(_currentDraggableObjectId)},
-                {"world_position", position.ToJObject()}
-            };
+            ServiceEvents.Current.BroadcastEvent(OnDropEventData.Create(_currentDraggableEntityId, position, eventData));
 
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDropEvent, ed);
+            _currentDragDropState = DragDropStates.Free;
+            image.enabled = false;
         }
 
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
@@ -52,16 +59,15 @@ namespace Solcery.Ui.DragDrop
                 return;
             }
             
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.current,
-                out var position);
-
-            var ed = new JObject
-            {
-                {"entity_id", new JValue(_currentDraggableObjectId)},
-                {"world_position", position.ToJObject()}
-            };
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
             
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDragMoveEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(OnDragMoveEventData.Create(_currentDraggableEntityId, position, eventData));
         }
     }
 }

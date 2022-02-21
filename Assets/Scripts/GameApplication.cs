@@ -1,4 +1,5 @@
 using Solcery.Games;
+using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Solcery
         [SerializeField]
         private RectTransform uiCanvas;
         [SerializeField]
-        private RectTransform dragDropCanvas;
+        private RootDragDropLayout dragDropCanvas;
         
         private IGame _game;
 

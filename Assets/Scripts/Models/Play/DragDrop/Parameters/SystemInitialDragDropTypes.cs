@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Utils;
 
-namespace Solcery.Models.Play.DragDrop.Types
+namespace Solcery.Models.Play.DragDrop.Parameters
 {
     public interface ISystemInitialDragDropTypes : IEcsInitSystem
     {
@@ -26,11 +26,11 @@ namespace Solcery.Models.Play.DragDrop.Types
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            var tagPool = world.GetPool<ComponentDragDropTag>();
-            var idPool = world.GetPool<ComponentDragDropId>();
-            var destinationsPool = world.GetPool<ComponentDragDropDestinations>();
-            var destinationConditionPool = world.GetPool<ComponentDragDropDestinationCondition>();
-            var requiredEclipseCardTypePool = world.GetPool<ComponentDragDropRequiredEclipseCardType>();
+            var tagPool = world.GetPool<Parameters.ComponentDragDropParametersTag>();
+            var idPool = world.GetPool<ComponentDragDropParametersId>();
+            var destinationsPool = world.GetPool<ComponentDragDropParametersDestinations>();
+            var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
+            var requiredEclipseCardTypePool = world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>();
             
             if (_gameContent.TryGetValue("drag_n_drops", out JObject dndBaseObject)
                 && dndBaseObject.TryGetValue("objects", out JArray dndArray))
@@ -49,15 +49,15 @@ namespace Solcery.Models.Play.DragDrop.Types
                             componentDestinations.PlaceIds.Add(destinationIdToken.Value<int>());
                         }
 
-                        destinationConditionPool.Add(entity).DestinationConditionType =
-                            dndObject.TryGetEnum("destination_condition", out DragDropDestinationConditionTypes dct)
+                        destinationConditionPool.Add(entity).ParametersDestinationConditionType =
+                            dndObject.TryGetEnum("destination_condition", out DragDropParametersDestinationConditionTypes dct)
                                 ? dct
-                                : DragDropDestinationConditionTypes.None;
+                                : DragDropParametersDestinationConditionTypes.None;
 
                         requiredEclipseCardTypePool.Add(entity).RequiredEclipseCardType =
                             dndObject.TryGetEnum("required_card_type", out EclipseCardTypes ect) 
                                 ? ect 
-                                : EclipseCardTypes.Any;
+                                : EclipseCardTypes.None;
                     }
                 }
             }

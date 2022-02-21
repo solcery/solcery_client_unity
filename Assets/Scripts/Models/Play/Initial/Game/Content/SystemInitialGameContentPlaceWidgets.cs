@@ -60,6 +60,8 @@ namespace Solcery.Models.Play.Initial.Game.Content
                             if (_game.PlaceWidgetFactory.TryCreatePlaceWidgetByType(placeObject, out var placeWidget))
                             {
                                 poolPlaceWidgetNew.Add(entityId).Widget = placeWidget;
+                                placeWidget.UpdatePlaceId(poolPlaceId.Get(entityId).Id);
+                                placeWidget.UpdateLinkedEntityId(entityId);
                             }
                         }
                     }

@@ -38,13 +38,13 @@ namespace Solcery.Services.Events
             return this;
         }
 
-        void IServiceEvents.BroadcastEvent(string eventKey, object eventData)
+        void IServiceEvents.BroadcastEvent(EventData eventData)
         {
-            if (_eventListeners.TryGetValue(eventKey, out var eventListeners))
+            if (_eventListeners.TryGetValue(eventData.EventName, out var eventListeners))
             {
                 foreach (var eventListener in eventListeners)
                 {
-                    eventListener.OnEvent(eventKey, eventData);
+                    eventListener.OnEvent(eventData);
                 }
             }
         }

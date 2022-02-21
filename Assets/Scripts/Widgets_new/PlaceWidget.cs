@@ -12,6 +12,7 @@ namespace Solcery.Widgets_new
 {
     public abstract class PlaceWidget
     {
+
         public static void RefreshPlaceWidgetOrderZ(Transform widgetParentTransform)
         {
             var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
@@ -30,6 +31,9 @@ namespace Solcery.Widgets_new
         public abstract void Destroy();
         public abstract Vector2 GetPosition();
         public abstract PlaceWidgetCardFace GetPlaceWidgetCardFace();
+        public abstract int GetDragDropId();
+        public abstract void UpdatePlaceId(int placeId);
+        public abstract void UpdateLinkedEntityId(int linkedEntityId);
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
@@ -40,6 +44,8 @@ namespace Solcery.Widgets_new
         protected IGame Game;
         protected readonly PlaceWidgetCardFace CardFace;
         protected readonly bool InteractableForActiveLocalPlayer;
+        protected readonly int PlaceId;
+        protected readonly int DragDropId;
 
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -51,7 +57,8 @@ namespace Solcery.Widgets_new
             {
                 Layout = layout;
 
-                var placeId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
+                PlaceId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
+                DragDropId = placeDataObject.TryGetValue("drag_n_drop", out int dnd) ? dnd : -1;
 
                 var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
                 var x2 = placeDataObject.TryGetValue("x2", out int xt2) ? xt2 / AnchorDivider : 0f;
@@ -62,7 +69,7 @@ namespace Solcery.Widgets_new
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
 
-                Layout.name = $"{placeId}_{orderZ}_{Layout.name}";
+                Layout.name = $"{PlaceId}_{orderZ}_{Layout.name}";
 
                 CardFace = placeDataObject.TryGetEnum("face", out PlaceWidgetCardFace res)
                     ? res
@@ -113,6 +120,21 @@ namespace Solcery.Widgets_new
         public override PlaceWidgetCardFace GetPlaceWidgetCardFace()
         {
             return CardFace;
+        }
+
+        public override int GetDragDropId()
+        {
+            return DragDropId;
+        }
+
+        public override void UpdatePlaceId(int placeId)
+        {
+            Layout.UpdatePlaceId(placeId);
+        }
+
+        public override void UpdateLinkedEntityId(int linkedEntityId)
+        {
+            Layout.UpdateLinkedEntityId(linkedEntityId);
         }
     }
 }
