@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
 using Solcery.Ui;
 using Solcery.Utils;
+using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Models.Play.Tooltip
 {
@@ -12,7 +13,7 @@ namespace Solcery.Models.Play.Tooltip
     
     public class SystemOnTooltipHide : ISystemOnTooltipHide
     {
-        private JObject _uiEventData;
+        private EventData _uiEventData;
         
         public static ISystemOnTooltipHide Create()
         {
@@ -23,12 +24,12 @@ namespace Solcery.Models.Play.Tooltip
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            ServiceEvents.Current.AddListener(UiEvents.UiTooltipHideEvent, this);
+            ServiceEvents.Current.AddListener(OnTooltipHideEventData.OnTooltipEventName, this);
         }
         
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            ServiceEvents.Current.RemoveListener(UiEvents.UiTooltipHideEvent, this);
+            ServiceEvents.Current.RemoveListener(OnTooltipHideEventData.OnTooltipEventName, this);
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -38,7 +39,7 @@ namespace Solcery.Models.Play.Tooltip
                 return;
             }
             
-            if (_uiEventData.TryGetValue("tooltip_id", out int tooltipId))
+            if (_uiEventData is OnTooltipHideEventData)
             {
                 HideCurrentTooltip();
             }
@@ -46,11 +47,11 @@ namespace Solcery.Models.Play.Tooltip
             _uiEventData = null;
         }
 
-        void IEventListener.OnEvent(string eventKey, object eventData)
+        void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventKey == UiEvents.UiTooltipHideEvent && eventData is JObject ed)
+            if (eventData.EventName == OnTooltipHideEventData.OnTooltipEventName)
             {
-                _uiEventData = ed;
+                _uiEventData = eventData;
             }
         }
 

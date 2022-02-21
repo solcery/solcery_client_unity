@@ -6,7 +6,5 @@ namespace Solcery.Ui
         public const string UiDragEvent = "UI_DRAG_EVENT";
         public const string UiDragMoveEvent = "UI_DRAG_MOVE_EVENT";
         public const string UiDropEvent = "UI_DROP_EVENT";
-        public const string UiTooltipShowEvent = "UI_TOOLTIP_SHOW_EVENT";
-        public const string UiTooltipHideEvent = "UI_TOOLTIP_HIDE_EVENT";
     }
 }

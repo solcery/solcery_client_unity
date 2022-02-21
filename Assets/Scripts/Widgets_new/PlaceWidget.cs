@@ -87,7 +87,7 @@ namespace Solcery.Widgets_new
                 Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
                 Layout.UpdateOutOfBorder(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
 
-                if (placeDataObject.TryGetValue("tooltip_id", out string tooltipId))
+                if (placeDataObject.TryGetValue("tooltip_id", out int tooltipId))
                 {
                     var tooltipBehavior = Layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
                     tooltipBehavior.SetTooltipId(tooltipId);

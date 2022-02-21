@@ -51,7 +51,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
                 _layout.UpdateSprite(texture);
             }
             
-            if (data.TryGetValue("tooltip_id", out string tooltipId))
+            if (data.TryGetValue("tooltip_id", out int tooltipId))
             {
                 InitTooltip(tooltipId);
             }
@@ -82,7 +82,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         private TooltipBehaviour _tooltipBehaviour;
         
-        private void InitTooltip(string tooltipId)
+        private void InitTooltip(int tooltipId)
         {
             if (_tooltipBehaviour == null)
             {

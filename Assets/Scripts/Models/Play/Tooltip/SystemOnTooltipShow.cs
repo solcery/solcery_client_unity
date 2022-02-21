@@ -3,9 +3,8 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Tooltips;
 using Solcery.Services.Events;
-using Solcery.Ui;
 using Solcery.Utils;
-using UnityEngine;
+using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Models.Play.Tooltip
 {
@@ -15,7 +14,7 @@ namespace Solcery.Models.Play.Tooltip
     
     public class SystemOnTooltipShow : ISystemOnTooltipShow
     {
-        private JObject _uiEventData;
+        private EventData _uiEventData;
         private EcsFilter _tooltipsFilter;
         
         public static ISystemOnTooltipShow Create()
@@ -27,14 +26,14 @@ namespace Solcery.Models.Play.Tooltip
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            ServiceEvents.Current.AddListener(UiEvents.UiTooltipShowEvent, this);
+            ServiceEvents.Current.AddListener(OnTooltipShowEventData.OnTooltipShowEventName, this);
             var world = systems.GetWorld();
             _tooltipsFilter = world.Filter<ComponentTooltips>().End();;
         }
         
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            ServiceEvents.Current.RemoveListener(UiEvents.UiTooltipShowEvent, this);
+            ServiceEvents.Current.RemoveListener(OnTooltipShowEventData.OnTooltipShowEventName, this);
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -52,23 +51,23 @@ namespace Solcery.Models.Play.Tooltip
                 break;
             }
             
-            if (_uiEventData.TryGetValue("tooltip_id", out int tooltipId) 
-                && _uiEventData.TryGetVector("world_position", out Vector2 position)
-                && tooltips.TryGetValue(tooltipId, out var tooltipDataObject))
+            
+            if (_uiEventData is OnTooltipShowEventData onTooltipShowEventData
+                && tooltips.TryGetValue(onTooltipShowEventData.TooltipId, out var tooltipDataObject))
             {
                 var text = tooltipDataObject.GetValue<string>("text");
                 var delay = tooltipDataObject.GetValue<float>("delay");
-                GameApplication.Game().TooltipController.Show(text, position, delay);
+                GameApplication.Game().TooltipController.Show(text, onTooltipShowEventData.WorldPosition, delay);
             }
             
             _uiEventData = null;
         }
         
-        void IEventListener.OnEvent(string eventKey, object eventData)
+        void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventKey == UiEvents.UiTooltipShowEvent && eventData is JObject ed)
+            if (eventData.EventName == OnTooltipShowEventData.OnTooltipShowEventName)
             {
-                _uiEventData = ed;
+                _uiEventData = eventData;
             }
         }
     }

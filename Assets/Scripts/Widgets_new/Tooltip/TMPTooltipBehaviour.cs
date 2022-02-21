@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,7 +20,8 @@ namespace Solcery.Widgets_new.Tooltip
             var linkIndex = TMP_TextUtilities.FindIntersectingLink(_text, eventData.position, null);;
             if (linkIndex != -1)
             {
-                SetTooltipId(_text.textInfo.linkInfo[linkIndex].GetLinkID());
+                var linkId = _text.textInfo.linkInfo[linkIndex].GetLinkID();
+                SetTooltipId(int.Parse(linkId));
                 ShowTooltip(eventData.position);
             }
             else

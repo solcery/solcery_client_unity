@@ -1,7 +1,4 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Ui;
-using Solcery.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +6,7 @@ namespace Solcery.Widgets_new.Tooltip
 {
     public abstract class TooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler
     {
-        protected string TooltipId;
+        protected int? TooltipId;
         
         public abstract void OnPointerMove(PointerEventData eventData);
         
@@ -21,7 +18,7 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void SetTooltipId(string tooltipId)
+        public void SetTooltipId(int tooltipId)
         {
             TooltipId = tooltipId;
         }
@@ -30,13 +27,7 @@ namespace Solcery.Widgets_new.Tooltip
         {
             if (TooltipId != null)
             {
-                var eventData = new JObject
-                {
-                    {"tooltip_id", new JValue(TooltipId)},
-                    {"world_position", position.ToJObject()}
-                };
-
-                ServiceEvents.Current.BroadcastEvent(UiEvents.UiTooltipShowEvent, eventData);
+                ServiceEvents.Current.BroadcastEvent(OnTooltipShowEventData.Create(TooltipId.Value, position));
             }
             else
             {
@@ -49,11 +40,7 @@ namespace Solcery.Widgets_new.Tooltip
             if (TooltipId == null)
                 return;
 
-            var eventData = new JObject
-            {
-                {"tooltip_id", new JValue(TooltipId)},
-            };
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiTooltipHideEvent, eventData);
+            ServiceEvents.Current.BroadcastEvent(OnTooltipHideEventData.Create(TooltipId.Value));
         }        
     }
 }
