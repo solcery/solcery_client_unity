@@ -4,7 +4,7 @@ namespace Solcery.Services.Events
     {
         IServiceEvents AddListener(string eventKey, IEventListener eventListener);
         IServiceEvents RemoveListener(string eventKey, IEventListener eventListener);
-        void BroadcastEvent(string eventKey, object eventData);
+        void BroadcastEvent(EventData eventData);
         void Cleanup();
     }
 }

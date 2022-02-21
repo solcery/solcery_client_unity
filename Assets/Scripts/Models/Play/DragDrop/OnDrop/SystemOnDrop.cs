@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
+using Solcery.Models.Play.DragDrop.Parameters;
+using Solcery.Models.Play.Places;
 using Solcery.Services.Events;
-using Solcery.Utils;
 using Solcery.Ui;
-using UnityEngine;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Eclipse.DragDropSupport;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
+using UnityEngine.EventSystems;
 
 namespace Solcery.Models.Play.DragDrop.OnDrop
 {
@@ -11,7 +15,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
     public sealed class SystemOnDrop : ISystemOnDrop
     {
-        private JObject _uiEventData;
+        private EventData _uiEventData;
         
         public static ISystemOnDrop Create()
         {
@@ -20,11 +24,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
         private SystemOnDrop() { }
         
-        void IEventListener.OnEvent(string eventKey, object eventData)
+        void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventKey == UiEvents.UiDropEvent && eventData is JObject ed)
+            if (eventData.EventName == UiEvents.UiDropEvent)
             {
-                _uiEventData = ed;
+                _uiEventData = eventData;
             }
         }
 
@@ -42,12 +46,23 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             
             var world = systems.GetWorld();
             var viewPool = world.GetPool<ComponentDragDropView>();
-            
-            if (_uiEventData.TryGetValue("entity_id", out int entityId) 
-                && viewPool.Has(entityId)
-                && _uiEventData.TryGetVector("world_position", out Vector3 position))
+            var sourcePlaceEntityIdPool = world.GetPool<ComponentDragDropSourcePlaceEntityId>();
+
+            if (_uiEventData is OnDropEventData onDropEventData 
+                && viewPool.Has(onDropEventData.DragEntityId))
             {
-                viewPool.Get(entityId).View.OnDrop(position);
+                var raycastResult = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(onDropEventData.PointerEventData, raycastResult);
+                IApplyDropWidget targetDropWidget = null;
+
+                if (raycastResult.Count > 0 
+                    && TryGetRaycastLayout(raycastResult[0], out var layout)
+                    && CheckPlaceDestinations(world, 
+                        sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId, 
+                        layout.PlaceId)
+                    && TryGetTargetDropWidget(world, layout.LinkedEntityId, out targetDropWidget)) { }
+
+                viewPool.Get(onDropEventData.DragEntityId).View.OnDrop(onDropEventData.WorldPosition, targetDropWidget);
             }
             
             _uiEventData = null;
@@ -56,6 +71,41 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
             ServiceEvents.Current.RemoveListener(UiEvents.UiDropEvent, this);
+        }
+
+        private bool TryGetRaycastLayout(RaycastResult raycastResult, out PlaceWidgetLayout placeWidgetLayout)
+        {
+            placeWidgetLayout = null;
+            
+            if (raycastResult.gameObject == null)
+            {
+                return false;
+            }
+
+            placeWidgetLayout = raycastResult.gameObject.GetComponentInParent<PlaceWidgetLayout>();
+            return placeWidgetLayout != null;
+        }
+
+        private bool CheckPlaceDestinations(EcsWorld world, int sourcePlaceEntityId, int targetPlaceId)
+        {
+            var dragDropParameterEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId).DragDropEntityId;
+            var dragDropParameterDestinationPool = world.GetPool<ComponentDragDropParametersDestinations>();
+            return dragDropParameterDestinationPool.Has(dragDropParameterEntityId) && dragDropParameterDestinationPool
+                .Get(dragDropParameterEntityId).PlaceIds.Contains(targetPlaceId);
+        }
+
+        private bool TryGetTargetDropWidget(EcsWorld world, int targetPlaceEntityId, out IApplyDropWidget targetDropWidget)
+        {
+            targetDropWidget = null;
+            
+            var placeWidgetPool = world.GetPool<ComponentPlaceWidgetNew>();
+            if (placeWidgetPool.Has(targetPlaceEntityId) 
+                && placeWidgetPool.Get(targetPlaceEntityId).Widget is IApplyDropWidget adw)
+            {
+                targetDropWidget = adw;
+            }
+
+            return targetDropWidget != null;
         }
     }
 }

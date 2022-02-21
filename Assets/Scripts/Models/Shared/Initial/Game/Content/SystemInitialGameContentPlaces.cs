@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Places;
 using Solcery.Utils;
@@ -33,6 +34,11 @@ namespace Solcery.Models.Shared.Initial.Game.Content
             
             // Только тут мы инитим place, так что можно спокойно удалить если что то есть еще
             var filter = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
+            var dragDropFilter = world
+                .Filter<ComponentDragDropParametersTag>()
+                .Inc<ComponentDragDropParametersId>()
+                .End();
+            var dragDropIdPool = world.GetPool<ComponentDragDropParametersId>();
 
             foreach (var entityId in filter)
             {
@@ -52,7 +58,18 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                             placeObject.GetValue<int>("placeId");
                         if (placeObject.TryGetValue("drag_n_drop", out int dragDropId))
                         {
-                            world.GetPool<ComponentPlaceDragDropId>().Add(entityIndex).DragDropId = dragDropId;
+                            foreach (var dragDropEntityId in dragDropFilter)
+                            {
+                                if (dragDropIdPool.Get(dragDropEntityId).Id != dragDropId)
+                                {
+                                    continue;
+                                }
+
+                                world.GetPool<ComponentPlaceDragDropEntityId>().Add(entityIndex).DragDropEntityId =
+                                    dragDropEntityId;
+                                break;
+                            }
+                            
                         }
                     }
                 }

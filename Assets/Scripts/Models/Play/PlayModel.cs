@@ -31,11 +31,11 @@ namespace Solcery.Models.Play
             _systems = new EcsSystems(World);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
+            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
-            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
-            
+
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             

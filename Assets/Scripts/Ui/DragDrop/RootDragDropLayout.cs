@@ -1,6 +1,5 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -39,17 +38,15 @@ namespace Solcery.Ui.DragDrop
                 return;
             }
 
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.current,
-                out var position);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
 
-            var ed = new JObject
-            {
-                {"event", new JValue(UiEvents.UiDropEvent)},
-                {"entity_id", new JValue(_currentDraggableEntityId)},
-                {"world_position", position.ToJObject()}
-            };
-
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDropEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(OnDropEventData.Create(_currentDraggableEntityId, position, eventData));
 
             _currentDragDropState = DragDropStates.Free;
             image.enabled = false;
@@ -62,17 +59,15 @@ namespace Solcery.Ui.DragDrop
                 return;
             }
             
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.current,
-                out var position);
-
-            var ed = new JObject
-            {
-                {"event", new JValue(UiEvents.UiDragMoveEvent)},
-                {"entity_id", new JValue(_currentDraggableEntityId)},
-                {"world_position", position.ToJObject()}
-            };
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
             
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDragMoveEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(OnDragMoveEventData.Create(_currentDraggableEntityId, position, eventData));
         }
     }
 }

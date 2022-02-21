@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Ui;
-using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.Cards.Traits;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -148,15 +146,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-
-            var ed = new JObject
-            {
-                {"event", new JValue(UiEvents.UiDragEvent)},
-                {"entity_id", new JValue(EntityId)},
-                {"world_position", position.ToJObject()}
-            };
             
-            ServiceEvents.Current.BroadcastEvent(UiEvents.UiDragEvent, ed);
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
         }
     }
 }

@@ -8,11 +8,12 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>
+    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>, IApplyDropWidget
     {
         private Dictionary<int, IEclipseCardInContainerWidget> _cards;
 
@@ -78,7 +79,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     var eid = world.NewEntity();
                     world.GetPool<ComponentDragDropTag>().Add(eid);
                     world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
-                    world.GetPool<ComponentDragDropSourcePlaceId>().Add(eid).SourcePlaceId = PlaceId;
+                    world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId = Layout.LinkedEntityId;
                     world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType = 
                         world.GetPool<ComponentEclipseCardType>().Has(entityId) 
                             ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
@@ -115,5 +116,20 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 _cards.Remove(key);
             }
         }
+        
+        #region IApplyDropWidget
+
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        {
+            if (dropWidget is IEclipseCardInContainerWidget ew)
+            {
+                Layout.AddCard(ew);
+                _cards.Add(-100, ew);
+            }
+            
+            Debug.Log("OnDropWidget");
+        }
+
+        #endregion
     }
 }

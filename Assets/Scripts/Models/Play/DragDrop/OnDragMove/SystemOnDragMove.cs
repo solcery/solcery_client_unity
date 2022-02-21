@@ -1,9 +1,7 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
 using Solcery.Ui;
-using Solcery.Utils;
-using UnityEngine;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 
 namespace Solcery.Models.Play.DragDrop.OnDragMove
 {
@@ -11,7 +9,7 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
 
     public sealed class SystemOnDragMove : ISystemOnDragMove
     {
-        private JObject _uiEventData;
+        private EventData _uiEventData;
         
         public static ISystemOnDragMove Create()
         {
@@ -20,11 +18,11 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
 
         private SystemOnDragMove() { }
         
-        void IEventListener.OnEvent(string eventKey, object eventData)
+        void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventKey == UiEvents.UiDragMoveEvent && eventData is JObject ed)
+            if (eventData.EventName == UiEvents.UiDragMoveEvent)
             {
-                _uiEventData = ed;
+                _uiEventData = eventData;
             }
         }
 
@@ -43,11 +41,10 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
             var world = systems.GetWorld();
             var viewPool = world.GetPool<ComponentDragDropView>();
             
-            if (_uiEventData.TryGetValue("entity_id", out int entityId) 
-                && viewPool.Has(entityId)
-                && _uiEventData.TryGetVector("world_position", out Vector3 position))
+            if (_uiEventData is OnDragMoveEventData onDragMoveEventData
+                && viewPool.Has(onDragMoveEventData.DragEntityId))
             {
-                viewPool.Get(entityId).View.OnMove(position);
+                viewPool.Get(onDragMoveEventData.DragEntityId).View.OnMove(onDragMoveEventData.WorldPosition);
             }
             
             _uiEventData = null;
