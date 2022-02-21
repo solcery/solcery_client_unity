@@ -33,6 +33,14 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
         {
             ServiceEvents.Current.RemoveListener(OnDragEventData.OnDragEventName, this);
         }
+        
+        void IEventListener.OnEvent(EventData eventData)
+        {
+            if (eventData.EventName == OnDragEventData.OnDragEventName)
+            {
+                _uiEventData = eventData;
+            }
+        }
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
@@ -68,14 +76,6 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
             }
             
             _uiEventData = null;
-        }
-
-        void IEventListener.OnEvent(EventData eventData)
-        {
-            if (eventData.EventName == OnDragEventData.OnDragEventName)
-            {
-                _uiEventData = eventData;
-            }
         }
     }
 }

@@ -16,6 +16,16 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
         }
 
         private SystemOnDragMove() { }
+
+        void IEcsInitSystem.Init(EcsSystems systems)
+        {
+            ServiceEvents.Current.AddListener(OnDragMoveEventData.OnDragMoveEventName, this);
+        }
+        
+        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        {
+            ServiceEvents.Current.RemoveListener(OnDragMoveEventData.OnDragMoveEventName, this);
+        }
         
         void IEventListener.OnEvent(EventData eventData)
         {
@@ -23,11 +33,6 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
             {
                 _uiEventData = eventData;
             }
-        }
-
-        void IEcsInitSystem.Init(EcsSystems systems)
-        {
-            ServiceEvents.Current.AddListener(OnDragMoveEventData.OnDragMoveEventName, this);
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -47,11 +52,6 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
             }
             
             _uiEventData = null;
-        }
-
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
-        {
-            ServiceEvents.Current.RemoveListener(OnDragMoveEventData.OnDragMoveEventName, this);
         }
     }
 }

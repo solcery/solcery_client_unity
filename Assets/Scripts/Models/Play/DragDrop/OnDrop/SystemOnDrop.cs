@@ -22,18 +22,23 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
         }
 
         private SystemOnDrop() { }
-        
-        void IEventListener.OnEvent(EventData eventData)
-        {
-            if (eventData.EventName == OnDragMoveEventData.OnDragMoveEventName)
-            {
-                _uiEventData = eventData;
-            }
-        }
 
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            ServiceEvents.Current.AddListener(OnDragMoveEventData.OnDragMoveEventName, this);
+            ServiceEvents.Current.AddListener(OnDropEventData.OnDropEventName, this);
+        }
+        
+        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        {
+            ServiceEvents.Current.RemoveListener(OnDropEventData.OnDropEventName, this);
+        }
+        
+        void IEventListener.OnEvent(EventData eventData)
+        {
+            if (eventData.EventName == OnDropEventData.OnDropEventName)
+            {
+                _uiEventData = eventData;
+            }
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -65,11 +70,6 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             }
             
             _uiEventData = null;
-        }
-
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
-        {
-            ServiceEvents.Current.RemoveListener(OnDragMoveEventData.OnDragMoveEventName, this);
         }
 
         private bool TryGetRaycastLayout(RaycastResult raycastResult, out PlaceWidgetLayout placeWidgetLayout)
