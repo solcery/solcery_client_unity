@@ -1,8 +1,5 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Services.Events;
-using Solcery.Ui;
-using Solcery.Utils;
 using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Models.Play.Tooltip
