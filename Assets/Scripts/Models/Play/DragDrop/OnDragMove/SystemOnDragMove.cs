@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using Solcery.Services.Events;
-using Solcery.Ui;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 
 namespace Solcery.Models.Play.DragDrop.OnDragMove
@@ -20,7 +19,7 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
         
         void IEventListener.OnEvent(EventData eventData)
         {
-            if (eventData.EventName == UiEvents.UiDragMoveEvent)
+            if (eventData.EventName == OnDragMoveEventData.OnDragMoveEventName)
             {
                 _uiEventData = eventData;
             }
@@ -28,7 +27,7 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
 
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            ServiceEvents.Current.AddListener(UiEvents.UiDragMoveEvent, this);
+            ServiceEvents.Current.AddListener(OnDragMoveEventData.OnDragMoveEventName, this);
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
@@ -52,7 +51,7 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
 
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            ServiceEvents.Current.RemoveListener(UiEvents.UiDragMoveEvent, this);
+            ServiceEvents.Current.RemoveListener(OnDragMoveEventData.OnDragMoveEventName, this);
         }
     }
 }
