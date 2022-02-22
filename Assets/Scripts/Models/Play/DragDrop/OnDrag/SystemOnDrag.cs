@@ -53,6 +53,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
             var dragDropTagPool = world.GetPool<ComponentDragDropTag>();
             var dragDropSourcePlaceEntityIdPool = world.GetPool<ComponentDragDropSourcePlaceEntityId>();
             var dragDropEclipseCarTypePool = world.GetPool<ComponentDragDropEclipseCardType>();
+            var placeDragDropEntityIdPool = world.GetPool<ComponentPlaceDragDropEntityId>();
 
             if (_uiEventData is OnDragEventData onDragEventData
                 && dragDropTagPool.Has(onDragEventData.DragEntityId)
@@ -62,16 +63,20 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                 var placeEntityId = dragDropSourcePlaceEntityIdPool.Get(onDragEventData.DragEntityId).SourcePlaceEntityId;
                 var eclipseCardType = dragDropEclipseCarTypePool.Get(onDragEventData.DragEntityId).CardType;
 
-                var dragDropParameterEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(placeEntityId).DragDropEntityId;
-                var requiredEclipseCardType =
-                    world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>()
-                        .Get(dragDropParameterEntityId).RequiredEclipseCardType;
-
-                if (requiredEclipseCardType == eclipseCardType)
+                if (placeDragDropEntityIdPool.Has(placeEntityId))
                 {
-                    world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
-                        .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform, onDragEventData.WorldPosition);
-                    _game.WidgetCanvas.GetDragDropCanvas().UpdateOnDrag(onDragEventData.DragEntityId);
+                    var dragDropParameterEntityId = placeDragDropEntityIdPool.Get(placeEntityId).DragDropEntityId;
+                    var requiredEclipseCardType =
+                        world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>()
+                            .Get(dragDropParameterEntityId).RequiredEclipseCardType;
+
+                    if (requiredEclipseCardType == eclipseCardType)
+                    {
+                        world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
+                            .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform,
+                                onDragEventData.WorldPosition);
+                        _game.WidgetCanvas.GetDragDropCanvas().UpdateOnDrag(onDragEventData.DragEntityId);
+                    }
                 }
             }
             

@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -106,6 +107,23 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         #region Drag drop support
         
         private RectTransform _dragDropCacheParent;
+        
+        int IDraggableWidget.ObjectId
+        {
+            get
+            {
+                if (_game != null)
+                {
+                    var pool = _game.PlayModel.World.GetPool<ComponentObjectId>();
+                    if (pool.Has(_layout.EntityId))
+                    {
+                        return pool.Get(_layout.EntityId).Id;
+                    }
+                }
+
+                return -1;
+            }
+        }
         
         void IDraggableWidget.OnDrag(RectTransform parent, Vector3 position)
         {

@@ -57,14 +57,24 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             {
                 var raycastResult = new List<RaycastResult>();
                 EventSystem.current.RaycastAll(onDropEventData.PointerEventData, raycastResult);
+                var sourcePlaceEntityId = sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId;
+                PlaceWidgetLayout targetLayout = null;
                 IApplyDropWidget targetDropWidget = null;
 
-                if (raycastResult.Count > 0 
-                    && TryGetRaycastLayout(raycastResult[0], out var layout)
+                if (raycastResult.Count > 0)
+                {
+                    TryGetRaycastLayout(raycastResult[0], out targetLayout);
+                }
+
+                if (targetLayout != null
+                    && targetLayout.LinkedEntityId != sourcePlaceEntityId
                     && CheckPlaceDestinations(world, 
                         sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId, 
-                        layout.PlaceId)
-                    && TryGetTargetDropWidget(world, layout.LinkedEntityId, out targetDropWidget)) { }
+                        targetLayout.PlaceId)
+                    && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
+                {
+                    
+                }
 
                 viewPool.Get(onDropEventData.DragEntityId).View.OnDrop(onDropEventData.WorldPosition, targetDropWidget);
             }
