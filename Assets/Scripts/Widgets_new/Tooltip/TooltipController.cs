@@ -6,6 +6,7 @@ namespace Solcery.Widgets_new.Tooltip
 {
     public class TooltipController
     {
+        private const float BorderOffset = 50f;
         private const string PrefabPathKey = "ui/ui_tooltip";
         private TooltipLayout _tooltipLayout;
         private float? _delay;
@@ -79,10 +80,10 @@ namespace Solcery.Widgets_new.Tooltip
             var sizeDelta = _tooltipLayout.RectTransform.sizeDelta;
             var halfTooltipWidth = sizeDelta.x * 0.5f;
             var halfTooltipHeight = sizeDelta.y * 0.5f;
-            var leftLimit = Screen.safeArea.x + halfTooltipWidth;
-            var rightLimit = Screen.safeArea.width - halfTooltipWidth;
-            var topLimit = Screen.safeArea.height - halfTooltipHeight;
-            var bottomLimit = Screen.safeArea.y + halfTooltipHeight;
+            var leftLimit = Screen.safeArea.x + halfTooltipWidth + BorderOffset;
+            var rightLimit = Screen.safeArea.width - halfTooltipWidth - BorderOffset;
+            var topLimit = Screen.safeArea.height - halfTooltipHeight - BorderOffset ;
+            var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
 
             var newX = targetPosition.x;
             var newY = targetPosition.y + halfTooltipHeight;
