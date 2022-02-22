@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -85,6 +86,23 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         private RectTransform _dragDropCacheParent;
         private int _dragDropCacheSiblingIndex;
+
+        int IDraggableWidget.ObjectId
+        {
+            get
+            {
+                if (_game != null)
+                {
+                    var pool = _game.PlayModel.World.GetPool<ComponentObjectId>();
+                    if (pool.Has(_layout.EntityId))
+                    {
+                        return pool.Get(_layout.EntityId).Id;
+                    }
+                }
+
+                return -1;
+            }
+        }
 
         void IDraggableWidget.OnDrag(RectTransform parent, Vector3 position)
         {
