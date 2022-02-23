@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Commands.Datas.OnClick;
+using Solcery.Models.Shared.Commands.Datas.OnDrop;
 
 namespace Solcery.Models.Shared.Commands.Datas
 {
@@ -13,6 +14,9 @@ namespace Solcery.Models.Shared.Commands.Datas
             {
                 case CommandTypes.OnClick:
                     return CommandOnClickData.CreateFromJson(obj);
+                
+                case CommandTypes.OnDrop:
+                    return CommandOnDropData.CreateFromJson(obj);
             }
 
             return null;

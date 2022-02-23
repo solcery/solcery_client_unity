@@ -29,7 +29,7 @@ namespace Solcery.Models.Shared.Commands
             }
 
             var world = systems.GetWorld();
-            CommandDataFactory.CreateFromJson(command).ApplyCommandToWorld(world);
+            CommandDataFactory.CreateFromJson(command)?.ApplyCommandToWorld(world);
         }
     }
 }

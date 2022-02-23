@@ -52,6 +52,15 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                 .End();
         }
         
+        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        {
+            _serviceBricks = null;
+            _filterTriggers = null;
+            _filterContext = null;
+            _filterEntityTypes = null;
+            _filterEntities = null;
+        }
+        
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
@@ -95,12 +104,6 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                 
                 world.DelEntity(triggerEntityId);
             }
-        }
-
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
-        {
-            _serviceBricks = null;
-            _filterTriggers = null;
         }
 
         private void InitContext(int targetEntityId, EcsWorld world)
