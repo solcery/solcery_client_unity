@@ -1,13 +1,12 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
-using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contexts;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
-using Solcery.Models.Shared.Triggers.Types;
+using Solcery.Models.Shared.Triggers.Types.OnClick;
 using UnityEngine;
 
 namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
@@ -36,12 +35,16 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         {
             var world = systems.GetWorld();
             
-            _filterTriggers = world.Filter<ComponentTriggerTag>().Inc<ComponentTriggerTargetObjectId>()
+            _filterTriggers = world.Filter<ComponentTriggerTag>()
+                .Inc<ComponentTriggerTargetObjectId>()
                 .Inc<ComponentTriggerEntityCardTag>()
-                .Inc<ComponentTriggerOnClickTag>().End();
+                .Inc<ComponentTriggerOnClickTag>()
+                .End();
 
-            _filterContext = world.Filter<ComponentContextObject>().Inc<ComponentContextArgs>()
-                .Inc<ComponentContextVars>().End();
+            _filterContext = world.Filter<ComponentContextObject>()
+                .Inc<ComponentContextArgs>()
+                .Inc<ComponentContextVars>()
+                .End();
 
             _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
 
