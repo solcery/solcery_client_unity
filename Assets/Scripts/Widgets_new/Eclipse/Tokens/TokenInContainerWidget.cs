@@ -5,6 +5,7 @@ using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.EcsSupport;
+using Solcery.Widgets_new.Tooltip;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.Tokens
@@ -45,10 +46,15 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         public void UpdateFromCardTypeData(int objectId, JObject data)
         {
-            if (data.TryGetValue("picture", out string picture) 
+            if (data.TryGetValue("picture", out string picture)
                 && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
             {
                 _layout.UpdateSprite(texture);
+            }
+            
+            if (data.TryGetValue("tooltip_id", out int tooltipId))
+            {
+                InitTooltip(tooltipId);
             }
         }
 
@@ -70,8 +76,34 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         private void Cleanup()
         {
+            CleanupTooltip();
         }
 
+        #region tooltip support
+
+        private TooltipBehaviour _tooltipBehaviour;
+        
+        private void InitTooltip(int tooltipId)
+        {
+            if (_tooltipBehaviour == null)
+            {
+                _tooltipBehaviour = _layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
+            }
+            _tooltipBehaviour.SetTooltipId(tooltipId);
+        }
+
+        private void CleanupTooltip()
+        {
+            if (_tooltipBehaviour != null)
+            {
+                Object.Destroy(_tooltipBehaviour);
+            }
+
+            _tooltipBehaviour = null;
+        }
+
+        #endregion
+        
         #region Drag drop support
         
         private RectTransform _dragDropCacheParent;

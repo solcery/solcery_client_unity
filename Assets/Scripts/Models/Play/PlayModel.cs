@@ -8,6 +8,7 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
 
 namespace Solcery.Models.Play
@@ -35,6 +36,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
+            _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
 
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
@@ -46,6 +48,11 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnDrag.Create(game));
             _systems.Add(SystemOnDragMove.Create());
             _systems.Add(SystemOnDrop.Create(game));
+            
+            // TODO tooltip
+            _systems.Add(SystemOnTooltipHide.Create());
+            _systems.Add(SystemOnTooltipShow.Create());
+            _systems.Add(SystemTooltipUpdate.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

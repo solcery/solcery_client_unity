@@ -27,6 +27,7 @@ using Solcery.Widgets_new.Simple.Buttons;
 using Solcery.Widgets_new.Simple.Pictures;
 using Solcery.Widgets_new.Simple.Titles;
 using Solcery.Widgets_new.Simple.Widgets;
+using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Games
 {
@@ -42,7 +43,8 @@ namespace Solcery.Games
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
-
+        TooltipController IGame.TooltipController => _tooltipController;
+        
         JObject IGame.GameStatePopAndClear
         {
             get
@@ -63,7 +65,8 @@ namespace Solcery.Games
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private JObject _gameContentJson;
-        private Stack<JObject> _gameStates;
+        private readonly Stack<JObject> _gameStates;
+        private readonly TooltipController _tooltipController;
 
         public static IGame Create(IWidgetCanvas widgetCanvas)
         {
@@ -76,6 +79,7 @@ namespace Solcery.Games
             _gameStates = new Stack<JObject>();
             CreateModel();
             CreateServices(widgetCanvas);
+            _tooltipController = TooltipController.Create(widgetCanvas, _serviceResource);
         }
         
         private void CreateModel()
@@ -224,6 +228,7 @@ namespace Solcery.Games
 
         void IGame.Update(float dt)
         {
+            _tooltipController.Update(dt);
             _transportService.Update(dt);
             _playModel.Update(dt);
         }

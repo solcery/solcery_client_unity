@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 6310325599295573515}
   - component: {fileID: 8396789948335541374}
   - component: {fileID: 969044784748993515}
+  - component: {fileID: 4172218104656840989}
   m_Layer: 5
   m_Name: caption
   m_TagString: Untagged
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -302,7 +303,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 0
+  m_isRichText: 1
   m_parseCtrlCharacters: 0
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -320,6 +321,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4172218104656840989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514772482969510548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1890aec8c83db481fb6ad2b662830847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3576077537617137974
 GameObject:
   m_ObjectHideFlags: 0
