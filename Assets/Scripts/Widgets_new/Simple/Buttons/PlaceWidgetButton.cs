@@ -1,9 +1,9 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
-using Solcery.Models.Shared.Triggers.Types;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 
@@ -42,13 +42,8 @@ namespace Solcery.Widgets_new.Simple.Buttons
             
             Layout.AddOnClickListener(() =>
             {
-                var command = new JObject
-                {
-                    ["object_id"] = new JValue(objectId),
-                    ["trigger_type"] = new JValue(TriggerTypes.OnClick),
-                    ["trigger_target_entity_type"] = new JValue(TriggerTargetEntityTypes.Card)
-                };
-                Game.TransportService.SendCommand(command);
+                var command = CommandOnClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
+                Game.TransportService.SendCommand(command.ToJson());
             });
             
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();

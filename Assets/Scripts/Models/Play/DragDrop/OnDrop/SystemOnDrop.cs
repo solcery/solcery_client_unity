@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using Solcery.Games;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Shared.Commands.Datas.OnDrop;
+using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Widgets_new;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -14,14 +17,18 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
     public sealed class SystemOnDrop : ISystemOnDrop
     {
+        private IGame _game;
         private EventData _uiEventData;
         
-        public static ISystemOnDrop Create()
+        public static ISystemOnDrop Create(IGame game)
         {
-            return new SystemOnDrop();
+            return new SystemOnDrop(game);
         }
 
-        private SystemOnDrop() { }
+        private SystemOnDrop(IGame game)
+        {
+            _game = game;
+        }
 
         void IEcsInitSystem.Init(EcsSystems systems)
         {
@@ -73,7 +80,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
                         targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
-                    
+                    var objectId = world.GetPool<ComponentDragDropObjectId>().Get(onDropEventData.DragEntityId).ObjectId;
+                    var command =
+                        CommandOnDropData.CreateFromParameters(objectId, targetLayout.PlaceId,
+                            TriggerTargetEntityTypes.Card);
+                    _game.TransportService.SendCommand(command.ToJson());
                 }
 
                 viewPool.Get(onDropEventData.DragEntityId).View.OnDrop(onDropEventData.WorldPosition, targetDropWidget);

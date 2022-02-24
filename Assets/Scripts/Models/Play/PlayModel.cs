@@ -47,7 +47,7 @@ namespace Solcery.Models.Play
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));
             _systems.Add(SystemOnDragMove.Create());
-            _systems.Add(SystemOnDrop.Create());
+            _systems.Add(SystemOnDrop.Create(game));
             
             // TODO tooltip
             _systems.Add(SystemOnTooltipHide.Create());
