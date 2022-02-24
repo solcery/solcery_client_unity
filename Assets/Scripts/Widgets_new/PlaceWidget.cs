@@ -94,6 +94,7 @@ namespace Solcery.Widgets_new
                 }
 
                 Layout.UpdateVisible(false);
+                Layout.UpdatePlaceWidget(this);
             }
         }
 

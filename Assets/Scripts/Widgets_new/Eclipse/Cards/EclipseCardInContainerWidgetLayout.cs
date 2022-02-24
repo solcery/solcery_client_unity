@@ -16,6 +16,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public RectTransform RectTransform => rectTransform;
         [HideInInspector]
         public int EntityId;
+        public PlaceWidget ParentPlaceWidget;
         
         [SerializeField]
         private RectTransform rectTransform;
@@ -139,6 +140,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
+            ParentPlaceWidget = transform.parent.GetComponentInParent<PlaceWidgetLayout>().PlaceWidget;
+            
             RectTransformUtility.ScreenPointToWorldPointInRectangle
             (
                 rectTransform, 

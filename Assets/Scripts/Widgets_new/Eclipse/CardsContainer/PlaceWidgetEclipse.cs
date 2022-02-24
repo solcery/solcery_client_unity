@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>, IApplyDropWidget
+    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>, IApplyDragWidget, IApplyDropWidget
     {
         private Dictionary<int, IEclipseCardInContainerWidget> _cards;
 
@@ -122,6 +122,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
+            Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
+            
             if (dropWidget is not IEclipseCardInContainerWidget ew)
             {
                 return;
@@ -129,6 +131,16 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             
             Layout.AddCard(ew);
             _cards.Add(dropWidget.ObjectId, ew);
+        }
+
+        #endregion
+
+        #region IApplyDragWidget
+
+        void IApplyDragWidget.OnDragWidget(IDraggableWidget dragWidget)
+        {
+            Debug.Log($"OnDrag Widget {dragWidget.ObjectId}");
+            _cards.Remove(dragWidget.ObjectId);
         }
 
         #endregion

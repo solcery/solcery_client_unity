@@ -9,6 +9,7 @@ namespace Solcery.Widgets_new
         public int PlaceId => _placeId;
         public int OrderZ => _orderZ;
         public int LinkedEntityId => _linkedEntityId;
+        public PlaceWidget PlaceWidget => _placeWidget;
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
@@ -19,6 +20,12 @@ namespace Solcery.Widgets_new
         private int _placeId;
         private int _orderZ;
         private int _linkedEntityId;
+        private PlaceWidget _placeWidget;
+
+        public void UpdatePlaceWidget(PlaceWidget placeWidget)
+        {
+            _placeWidget = placeWidget;
+        }
 
         public void UpdateVisible(bool enable)
         {

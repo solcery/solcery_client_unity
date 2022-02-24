@@ -1,6 +1,5 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Shared.Objects;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -16,6 +15,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
         private EclipseCardInContainerWidgetTypes _eclipseCardType;
+        private int _objectId;
 
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -30,6 +30,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
         {
+            _objectId = objectId;
+            
             if (data.TryGetValue("name", out string name))
             {
                 _layout.UpdateName(name);
@@ -87,25 +89,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private RectTransform _dragDropCacheParent;
         private int _dragDropCacheSiblingIndex;
 
-        int IDraggableWidget.ObjectId
-        {
-            get
-            {
-                if (_game != null)
-                {
-                    var pool = _game.PlayModel.World.GetPool<ComponentObjectId>();
-                    if (pool.Has(_layout.EntityId))
-                    {
-                        return pool.Get(_layout.EntityId).Id;
-                    }
-                }
-
-                return -1;
-            }
-        }
+        int IDraggableWidget.ObjectId => _objectId;
 
         void IDraggableWidget.OnDrag(RectTransform parent, Vector3 position)
         {
+            if (_layout.ParentPlaceWidget is IApplyDragWidget dragWidget)
+            {
+                dragWidget.OnDragWidget(this);
+            }
+            
             _dragDropCacheParent = (RectTransform)_layout.RectTransform.parent;
             _dragDropCacheSiblingIndex = _layout.RectTransform.GetSiblingIndex();
             
@@ -125,6 +117,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             
             if (target == null)
             {
+                if (_layout.ParentPlaceWidget is IApplyDropWidget dropWidget)
+                {
+                    dropWidget.OnDropWidget(this, position);
+                }
+                
                 _layout.UpdateParent(_dragDropCacheParent);
                 _layout.UpdateSiblingIndex(_dragDropCacheSiblingIndex);
                 return;
