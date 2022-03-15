@@ -1,7 +1,6 @@
 #if UNITY_EDITOR ||  LOCAL_SIMULATION
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Models.Shared.Commands;
 using Solcery.Models.Shared.Game.Attributes;
@@ -43,7 +42,8 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemProcessCommands.Create(serviceCommands));
             
             // Apply triggers
-            _systems.Add(SystemsTriggerApply.Create(serviceBricks));
+            // TODO: fix it!!!
+            _systems.Add(SystemsTriggerApply.Create(serviceBricks, applyGameState as IServiceLocalSimulationApplyGameStateNew));
             
             // Update static attributes
             _systems.Add(SystemStaticAttributesUpdate.Create());

@@ -96,7 +96,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                     }
 
                     InitContext(entityId, world);
-                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteActionBrick(brick, CurrentContext.Create(world), 1)}");
+                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, CurrentContext.Create(world), 1)}");
                     DestroyContext(world);
                     
                     break;

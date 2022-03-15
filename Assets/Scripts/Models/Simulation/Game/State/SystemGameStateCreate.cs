@@ -205,7 +205,8 @@ namespace Solcery.Models.Simulation.Game.State
             
             _diff.PrintDiff(gameState);
             
-            _applyGameState.ApplySimulatedGameState(gameState);
+            // TODO: Fix it!!!
+            //_applyGameState.ApplySimulatedGameState(gameState);
         }
 
         void IEcsDestroySystem.Destroy(EcsSystems systems)

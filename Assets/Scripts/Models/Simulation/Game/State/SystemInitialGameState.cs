@@ -20,6 +20,7 @@ namespace Solcery.Models.Simulation.Game.State
     {
         private JObject _initialGameState;
         private EcsFilter _filterEntityTypes;
+        private EcsFilter _filterObjectIdHash;
         private IStaticAttributes _staticAttributes;
         
         public static ISystemGameStateInitial Create(JObject initialGameState)
@@ -46,6 +47,16 @@ namespace Solcery.Models.Simulation.Game.State
             
             var world = systems.GetWorld();
             _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
+            _filterObjectIdHash = world.Filter<ComponentObjectIdHash>().End();
+            var objectIdHashPool = world.GetPool<ComponentObjectIdHash>();
+
+            foreach (var oih in _filterObjectIdHash)
+            {
+                world.DelEntity(oih);
+            }
+
+            var objectIdHashPoolEntityId = world.NewEntity();
+            var objectIdHash = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHash;
             
             // Update game attributes
             var gameAttributeArray = _initialGameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
@@ -67,6 +78,7 @@ namespace Solcery.Models.Simulation.Game.State
             
             foreach (var entityObject in entityHashMap)
             {
+                objectIdHash.Add(entityObject.Key);
                 CreateEntity(world, entityObject.Value);
             }
                 
