@@ -31,7 +31,7 @@ namespace Solcery.Services.LocalSimulation
         private IServiceCommands _serviceCommands;
         private IServiceBricks _serviceBricks;
 
-        private IContextGameStates _gameStates;
+        private Queue<IContextGameStates> _gameStates;
 
         public static IServiceLocalSimulation Create(IServiceBricks serviceBricks)
         {
@@ -44,6 +44,7 @@ namespace Solcery.Services.LocalSimulation
             _serviceCommands = ServiceCommands.Create();
             _serviceBricks = serviceBricks;
             _simulationModel = SimulationModel.Create();
+            _gameStates = new Queue<IContextGameStates>();
         }
 
         void IServiceLocalSimulation.Init(JObject gameContent, JObject gameState)
@@ -55,7 +56,7 @@ namespace Solcery.Services.LocalSimulation
         void IServiceLocalSimulation.PushCommand(JObject command)
         {
             // TODO: fix it hack!!!
-            if (_gameStates is {IsEmpty: false})
+            if (_gameStates.Count > 0)
             {
                 return;
             }
@@ -71,30 +72,31 @@ namespace Solcery.Services.LocalSimulation
         
         void IServiceLocalSimulationApplyGameStateNew.ApplySimulatedGameStates(IContextGameStates gameStates)
         {
-            _gameStates = gameStates;
+            _gameStates.Enqueue(gameStates);
         }
 
         void IServiceLocalSimulation.Update(float dt)
         {
-            if (_serviceCommands.IsEmpty())
+            if (!_serviceCommands.IsEmpty())
             {
-                return;
-            }
-            
-            dt /= _serviceCommands.CountCommand();
-            while (!_serviceCommands.IsEmpty())
-            {
-                _simulationModel?.Update(dt);
-
-                if (_gameStates != null)
+                dt /= _serviceCommands.CountCommand();
+                while (!_serviceCommands.IsEmpty())
                 {
-                    while (!_gameStates.IsEmpty)
-                    {
-                        if (_gameStates.TryGetGameState((int)(Time.deltaTime * 1000), out var gsd))
-                        {
-                            CallAllActionWithParams(_listOnUpdateGameState, gsd);
-                        }
-                    }
+                    _simulationModel?.Update(dt);
+                }
+            }
+
+            if (_gameStates.Count > 0)
+            {
+                var gss = _gameStates.Peek();
+                if (gss.TryGetGameState((int) (Time.deltaTime * 1000), out var gsd))
+                {
+                    CallAllActionWithParams(_listOnUpdateGameState, gsd);
+                }
+
+                if (gss.IsEmpty)
+                {
+                    _gameStates.Dequeue();
                 }
             }
         }
