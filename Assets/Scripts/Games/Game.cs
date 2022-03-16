@@ -191,6 +191,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.GameAttribute, BrickValueGameAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.CardId, BrickValueCardId.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.CardTypeId, BrickValueCardTypeId.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorSum, BrickValueIteratorSum.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.SetVariable, BrickValueSetVariable.Create);
 
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
@@ -204,6 +206,10 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetAttribute, BrickActionSetAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetGameAttribute, BrickActionSetGameAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Iterator, BrickActionIterator.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Event, BrickActionEvent.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Pause, BrickActionPause.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.CreateObject, BrickActionCreateObject.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.DeleteObject, BrickActionDeleteObject.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
@@ -214,6 +220,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.GreaterThan, BrickConditionGreaterThan.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.LesserThan, BrickConditionLesserThan.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Argument, BrickConditionArgument.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorOr, BrickConditionIteratorOr.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorAnd, BrickConditionIteratorAnd.Create);
         }
 
         private void Cleanup()

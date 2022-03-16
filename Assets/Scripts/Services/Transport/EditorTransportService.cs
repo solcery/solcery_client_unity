@@ -5,6 +5,7 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Services.Transport
 {
@@ -49,6 +50,7 @@ namespace Solcery.Services.Transport
 
         private void OnUpdateGameState(JObject gameStateJson)
         {
+            Debug.Log("OnUpdateGameState");
             _gameTransportCallbacks.OnReceivingGameState(gameStateJson);
         }
 

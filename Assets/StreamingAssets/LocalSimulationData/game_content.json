@@ -593,24 +593,62 @@
         "name": "OnDrag",
         "enabled": true,
         "brick": {
-          "name": "Action.Set attribute",
+          "name": "Action.Two attribute",
           "type": 0,
-          "subtype": 7,
-          "params": [
+          "subtype": 1,
+          "params":
+          [
             {
-              "name": "attr_name",
-              "value": "place"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Variable",
-                "type": 2,
-                "subtype": 1,
+              "name": "One",
+              "value":
+              {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
                 "params": [
                   {
-                    "name": "var_name",
-                    "value": "target_place"
+                    "name": "attr_name",
+                    "value": "place"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Variable",
+                      "type": 2,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "target_place"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Two",
+              "value": {
+                "name": "Action.Pause attribute",
+                "type": 0,
+                "subtype": 10,
+                "params":
+                [
+                  {
+                    "name": "Delay param",
+                    "value":
+                    {
+                      "name": "Value.Const attribute",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "delay",
+                          "value": 5000
+                        }
+                      ]
+                    }
                   }
                 ]
               }
