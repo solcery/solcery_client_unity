@@ -6,4 +6,4 @@ WORKDIR solcery_cms
 RUN git fetch
 RUN git checkout main
 RUN yarn install
-RUN yarn start
+RUN yarn build
