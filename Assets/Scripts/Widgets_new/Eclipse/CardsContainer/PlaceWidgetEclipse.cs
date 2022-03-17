@@ -37,7 +37,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 return;
             }
 
-            Debug.Log("PlaceWidgetEclipse");
             Layout.UpdateOutOfBorder(false);
 
             RemoveCards(world, entityIds);
