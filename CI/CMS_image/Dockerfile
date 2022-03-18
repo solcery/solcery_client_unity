@@ -5,5 +5,7 @@ RUN git clone https://github.com/solcery/solcery_cms.git
 WORKDIR solcery_cms
 RUN git fetch
 RUN git checkout main
+COPY ./WebGl/StreamingAssets public/new_game/StreamingAssets
+COPY ./WebGl/Build public/new_game
 RUN yarn install
 RUN yarn build
