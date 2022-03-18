@@ -11,20 +11,30 @@ namespace Solcery.Editor.CI.WebGl
         public static void BuildDevelop()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
+        }
+        
+        [MenuItem("Build/WebGl/Develop with cms")]
+        public static void BuildDevelopWithCms()
+        {
+            BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGlWithCms),
+                BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
+                false, BuildOptions.Development);
+            DocketUtils.DockerImageWebGlWithCmsUp();
         }
         
         [MenuItem("Build/WebGl/Develop with local simulation")]
         public static void BuildDevelopWithLocalSimulation()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.CreateWithLocalSimulation());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
         }
 
         [MenuItem("Build/WebGl/Release")]
@@ -48,7 +58,7 @@ namespace Solcery.Editor.CI.WebGl
             }
 
             var outputPath = BuildUtils.GetOutputPath(isDevelopBuild
-                ? BuildSettings.DefaultOutputPathDevelopWebGl
+                ? BuildSettings.DefaultOutputPathWebGl
                 : BuildSettings.DefaultOutputPathReleaseWebGl);
 
             var linkerTarget = WebGLLinkerTarget.Wasm;

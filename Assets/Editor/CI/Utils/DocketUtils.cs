@@ -5,14 +5,14 @@ namespace Solcery.Editor.CI.Utils
 {
     public static class DocketUtils
     {
-        public static void DockerImageUp()
+        public static void DockerImageWebGlUp()
         {
-            RunExecutable("docker_compose_build_and_up");
+            RunExecutable(BuildSettings.DefaultPathDevelopWebGl + "docker_compose_build_and_up");
         }
 
-        public static void DocketImageDown()
+        public static void DockerImageWebGlWithCmsUp()
         {
-            RunExecutable("docker_compose_build_down");
+            RunExecutable(BuildSettings.DefaultPathDevelopWebGlWithCms + "docker_compose_build_and_up");
         }
 
         private static void RunExecutable(string name)

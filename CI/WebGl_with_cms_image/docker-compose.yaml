@@ -2,8 +2,8 @@ version: '3.0'
 
 services:
   solcery_cms_dev:
-    container_name: solcery_unity_client
-    image: solcery_unity_client
+    container_name: solcery_cms
+    image: solcery_cms
     build: 
       context: .
     ports:
