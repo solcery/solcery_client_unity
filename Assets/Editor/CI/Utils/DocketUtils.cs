@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
@@ -12,12 +13,22 @@ namespace Solcery.Editor.CI.Utils
 
         public static void DockerImageWebGlWithCmsUp()
         {
-            RunExecutable(BuildSettings.DefaultPathDevelopWebGlWithCms + "docker_compose_build_and_up");
+            var args = new[] {"main"};
+            RunExecutable(BuildSettings.DefaultPathDevelopWebGlWithCms + "docker_compose_build_and_up", args);
         }
 
-        private static void RunExecutable(string name)
+        private static void RunExecutable(string name, IEnumerable<string> args = null)
         {
             Debug.Log($"Execute \"{name}\"");
+            var argsStr = BuildUtils.GetOutputPath(BuildSettings.DefaultPathDevelopCI) + name;
+            if (args != null)
+            {
+                foreach (var arg in args)
+                {
+                    argsStr += $" {arg}";
+                }
+            }
+
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -26,7 +37,7 @@ namespace Solcery.Editor.CI.Utils
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    Arguments = BuildUtils.GetOutputPath(BuildSettings.DefaultPathDevelopCI) + name
+                    Arguments = argsStr
                 }
             };
             
