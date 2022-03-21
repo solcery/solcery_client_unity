@@ -6,6 +6,8 @@ services:
     image: solcery_cms
     build: 
       context: .
+      args:
+        BRANCH: .
     ports:
       - "3000:3000"
     command: yarn start
