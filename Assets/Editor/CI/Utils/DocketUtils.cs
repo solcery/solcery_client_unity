@@ -11,9 +11,9 @@ namespace Solcery.Editor.CI.Utils
             RunExecutable(BuildSettings.DefaultPathDevelopWebGl + "docker_compose_build_and_up");
         }
 
-        public static void DockerImageWebGlWithCmsUp()
+        public static void DockerImageWebGlWithCmsUp(string branch)
         {
-            var args = new[] {"main"};
+            var args = new[] {branch};
             RunExecutable(BuildSettings.DefaultPathDevelopWebGlWithCms + "docker_compose_build_and_up", args);
         }
 
