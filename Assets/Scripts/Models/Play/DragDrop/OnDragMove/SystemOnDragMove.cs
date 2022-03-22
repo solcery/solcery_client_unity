@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
+using UnityEngine;
 
 namespace Solcery.Models.Play.DragDrop.OnDragMove
 {
@@ -48,6 +49,7 @@ namespace Solcery.Models.Play.DragDrop.OnDragMove
             if (_uiEventData is OnDragMoveEventData onDragMoveEventData
                 && viewPool.Has(onDragMoveEventData.DragEntityId))
             {
+                Debug.Log($"SystemOnDragMove world position {onDragMoveEventData.WorldPosition}");
                 viewPool.Get(onDragMoveEventData.DragEntityId).View.OnMove(onDragMoveEventData.WorldPosition);
             }
             

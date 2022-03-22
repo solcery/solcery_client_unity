@@ -13,10 +13,13 @@ namespace Solcery
         private RectTransform uiCanvas;
         [SerializeField]
         private RootDragDropLayout dragDropCanvas;
+        [SerializeField]
+        private Camera rootCamera;
         
         private IGame _game;
 
         private static GameApplication _instance;
+        public static GameApplication Instance => _instance;
         
         public static IGame Game()
         {
@@ -43,6 +46,14 @@ namespace Solcery
         {
             _game?.Destroy();
             _game = null;
+        }
+
+        public Vector3 WorldToCanvas(Vector3 worldPosition)
+        {
+            var dX = worldPosition.x / Screen.width;
+            var dY = worldPosition.y / Screen.height;
+            var rect = uiCanvas.rect;
+            return new Vector3(rect.width * dX, rect.height * dY);
         }
     }
 }

@@ -8,7 +8,7 @@
   "objects": [
     {
       "id": 1,
-      "tplId": 117,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
@@ -25,12 +25,36 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 2,
-      "tplId": 117,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
@@ -47,12 +71,36 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 3,
-      "tplId": 117,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
@@ -69,12 +117,36 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 4,
-      "tplId": 117,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
@@ -91,12 +163,36 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 5,
-      "tplId": 117,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
@@ -113,16 +209,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 6,
-      "tplId": 115,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 21
+          "value": 2
         },
         {
           "key": "number",
@@ -135,16 +255,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 7,
-      "tplId": 115,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 21
+          "value": 2
         },
         {
           "key": "number",
@@ -157,16 +301,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 8,
-      "tplId": 115,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 21
+          "value": 2
         },
         {
           "key": "number",
@@ -179,16 +347,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 9,
-      "tplId": 115,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 21
+          "value": 2
         },
         {
           "key": "number",
@@ -201,16 +393,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 10,
-      "tplId": 115,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 21
+          "value": 2
         },
         {
           "key": "number",
@@ -223,16 +439,40 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 11,
-      "tplId": 116,
+      "tplId": 295,
       "attrs": [
         {
           "key": "place",
-          "value": 20
+          "value": 2
         },
         {
           "key": "number",
@@ -245,11 +485,449 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
         }
       ]
     },
     {
       "id": 12,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "tplId": 295,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": 21,
       "tplId": 119,
       "attrs": [
         {
@@ -267,210 +945,82 @@
         {
           "key": "token_slots",
           "value": 0
-        }
-      ]
-    },
-    {
-      "id": 13,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 31
         },
         {
-          "key": "number",
+          "key": "type",
           "value": 0
         },
         {
-          "key": "show_duration",
+          "key": "creature_number",
           "value": 0
         },
         {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 14,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 31
-        },
-        {
-          "key": "number",
+          "key": "token_count",
           "value": 0
         },
         {
-          "key": "show_duration",
+          "key": "token_type",
           "value": 0
         },
         {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 15,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 31
-        },
-        {
-          "key": "number",
+          "key": "token_origin",
           "value": 0
         },
         {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 16,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 31
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 17,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 31
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 18,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 41
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 19,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 41
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 20,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 41
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 21,
-      "tplId": 115,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 41
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
+          "key": "duration",
           "value": 0
         }
       ]
     },
     {
       "id": 22,
-      "tplId": 115,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 31
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "tplId": 287,
       "attrs": [
         {
           "key": "place",
@@ -487,143 +1037,35 @@
         {
           "key": "token_slots",
           "value": 0
-        }
-      ]
-    },
-    {
-      "id": 23,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
         },
         {
-          "key": "number",
+          "key": "type",
           "value": 0
         },
         {
-          "key": "show_duration",
+          "key": "creature_number",
           "value": 0
         },
         {
-          "key": "token_slots",
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
           "value": 0
         }
       ]
     },
     {
       "id": 24,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 25,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 26,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 27,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 28,
-      "tplId": 117,
-      "attrs": [
-        {
-          "key": "place",
-          "value": 5
-        },
-        {
-          "key": "number",
-          "value": 0
-        },
-        {
-          "key": "show_duration",
-          "value": 0
-        },
-        {
-          "key": "token_slots",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "id": 29,
       "tplId": 116,
       "attrs": [
         {
@@ -641,11 +1083,35 @@
         {
           "key": "token_slots",
           "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
         }
       ]
     },
     {
-      "id": 30,
+      "id": 25,
       "tplId": 116,
       "attrs": [
         {
@@ -662,6 +1128,996 @@
         },
         {
           "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "tplId": 286,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "tplId": 287,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 2
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "tplId": 303,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 7
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
           "value": 0
         }
       ]

@@ -67,6 +67,8 @@ namespace Solcery.Ui.DragDrop
                 out var position
             );
             
+            Debug.Log($"Event pos {eventData.position} world pos {position}");
+            
             ServiceEvents.Current.BroadcastEvent(OnDragMoveEventData.Create(_currentDraggableEntityId, position, eventData));
         }
     }

@@ -21,7 +21,8 @@ namespace Solcery.Services.Resources.Loaders.Texture
             var imageUriList = new List<string>(patternDataList.Count);
             foreach (var patternRawData in patternDataList)
             {
-                if (patternRawData is PatternUriTextureData patternData)
+                if (patternRawData is PatternUriTextureData patternData 
+                    && !imageUriList.Contains(patternData.Uri))
                 {
                     imageUriList.Add(patternData.Uri);
                 }
@@ -39,9 +40,14 @@ namespace Solcery.Services.Resources.Loaders.Texture
         {
             _callback = callback;
             _textureLoaderUriList = new List<ITextureLoaderUri>(imageUriList.Count);
+            var hashAddUri = new HashSet<string>();
             foreach (var imageUri in imageUriList)
             {
-                _textureLoaderUriList.Add(TextureLoaderUri.Create(imageUri));
+                if (!hashAddUri.Contains(imageUri))
+                {
+                    hashAddUri.Add(imageUri);
+                    _textureLoaderUriList.Add(TextureLoaderUri.Create(imageUri));
+                }
             }
 
             _textures = new Dictionary<string, Texture2D>(_textureLoaderUriList.Count);
