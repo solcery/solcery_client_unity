@@ -88,6 +88,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         private RectTransform _dragDropCacheParent;
         private int _dragDropCacheSiblingIndex;
+        private Vector2 _dragAnchorMin;
+        private Vector2 _dragAnchorMax;
 
         int IDraggableWidget.ObjectId => _objectId;
 
@@ -103,9 +105,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             
             _layout.RaycastOff();
             _layout.UpdateParent(parent, true);
+            _dragAnchorMin = _layout.RectTransform.anchorMin;
+            _dragAnchorMax = _layout.RectTransform.anchorMax;
             _layout.RectTransform.anchorMin = Vector2.zero;
             _layout.RectTransform.anchorMax = Vector2.zero;
-            _layout.RectTransform.anchoredPosition = position;
+            _layout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(position);
         }
 
         void IDraggableWidget.OnMove(Vector3 position)
@@ -115,6 +119,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IDraggableWidget.OnDrop(Vector3 position, IApplyDropWidget target)
         {
+            _layout.RectTransform.anchorMin = _dragAnchorMin;
+            _layout.RectTransform.anchorMax = _dragAnchorMax;
             _layout.RaycastOn();
             
             if (target == null)
