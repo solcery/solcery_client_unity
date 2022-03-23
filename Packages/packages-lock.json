@@ -7,48 +7,6 @@
       "dependencies": {},
       "hash": "69be818a46ca876afc5cb370a0ceb00324b4437d"
     },
-    "com.leopotam.ecslite": {
-      "version": "https://github.com/Leopotam/ecslite.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "c297b6110bd953eb80b48395e5e4452c759db749"
-    },
-    "com.leopotam.ecslite.di": {
-      "version": "https://github.com/Leopotam/ecslite-di.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "c0bcb6fa6c6baad5700b64ae4d59bc24181df5f8"
-    },
-    "com.leopotam.ecslite.extendedfilters": {
-      "version": "https://github.com/Leopotam/ecslite-extendedfilters.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "39571d34dac63c49b76ce3dda4d0a3fb3b9cb958"
-    },
-    "com.leopotam.ecslite.extendedsystems": {
-      "version": "https://github.com/Leopotam/ecslite-extendedsystems.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "6f914d9a723a99338af11b03961694adc4674311"
-    },
-    "com.leopotam.ecslite.unity.ugui": {
-      "version": "https://github.com/Leopotam/ecslite-unity-ugui.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "072d4c699c7a6aa9aaa5cf92ef6a847fd33a926a"
-    },
-    "com.leopotam.ecslite.unityeditor": {
-      "version": "https://github.com/Leopotam/ecslite-unityeditor.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "93d8dcde21f441afe7226eea6635a798aa32aff9"
-    },
     "com.solcery.bricksinterpretationsystem": {
       "version": "git@github.com:solcery/solcery_client_bricks_interpretation_system.git",
       "depth": 0,
@@ -56,7 +14,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "5dc937d9a09e6bc631fec38e5b8c39a46e49ad2b"
+      "hash": "a62c47a52c52d2136ec0b9eaf467b9172a955f94"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
