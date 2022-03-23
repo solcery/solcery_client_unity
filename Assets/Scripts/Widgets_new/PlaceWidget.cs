@@ -65,6 +65,10 @@ namespace Solcery.Widgets_new
                 var y1 = placeDataObject.TryGetValue("y1", out int yt1) ? yt1 / AnchorDivider : 0f;
                 var y2 = placeDataObject.TryGetValue("y2", out int yt2) ? yt2 / AnchorDivider : 0f;
                 Layout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
+                if (x1 >= x2 || y1 >= y2)
+                {
+                    Debug.LogWarning($"Wrong anchors on place with id \"{PlaceId}\"");
+                }
 
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
