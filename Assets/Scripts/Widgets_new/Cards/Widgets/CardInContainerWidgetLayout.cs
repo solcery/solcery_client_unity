@@ -62,7 +62,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             rectTransform.offsetMin = _offsetMin;
             rectTransform.offsetMax = _offsetMax;
             rectTransform.localScale = Vector3.one;
-            rectTransform.rotation = Quaternion.identity;
+            //rectTransform.rotation = Quaternion.identity;
         }
 
         public void UpdateSiblingIndex(int siblingIndex)

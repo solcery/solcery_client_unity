@@ -70,7 +70,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
 
             rectTransform.localScale = Vector3.one;
-            rectTransform.rotation = Quaternion.identity;
+            //rectTransform.rotation = Quaternion.identity;
         }
         
         public void UpdateSiblingIndex(int siblingIndex)
