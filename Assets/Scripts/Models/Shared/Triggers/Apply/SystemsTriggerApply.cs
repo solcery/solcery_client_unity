@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
-using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Models.Shared.Triggers.Apply.Card.OnClick;
 using Solcery.Models.Shared.Triggers.Apply.Card.OnDrop;
@@ -23,7 +22,7 @@ namespace Solcery.Models.Shared.Triggers.Apply
         {
             _systems = new List<IEcsSystem>
             {
-                SystemTriggerApplyCardOnClick.Create(serviceBricks),
+                SystemTriggerApplyCardOnClick.Create(serviceBricks, applyGameState),
                 SystemTriggerApplyCardOnDrop.Create(serviceBricks, applyGameState)
             };
         }

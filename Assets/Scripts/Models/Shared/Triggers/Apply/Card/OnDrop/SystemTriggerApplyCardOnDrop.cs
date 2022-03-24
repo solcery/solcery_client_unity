@@ -102,6 +102,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
                             
                         // TODO: fix it!!!
                         var context = CurrentContext.Create(world);
+                        
                         var brick = dragDropActionPool.Get(dragDropParameterEntityId).Action;
                             
                         Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
