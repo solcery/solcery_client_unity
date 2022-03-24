@@ -51,7 +51,7 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
         {
             var entityId = world.NewEntity();
             
-            if (TryAddTriggerEntityType(entityId, _triggerTargetEntityTypes, world))
+            if (!TryAddTriggerEntityType(entityId, _triggerTargetEntityTypes, world))
             {
                 world.DelEntity(entityId);
                 return;

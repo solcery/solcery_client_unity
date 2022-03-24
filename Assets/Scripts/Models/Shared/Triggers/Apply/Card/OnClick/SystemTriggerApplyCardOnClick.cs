@@ -7,6 +7,7 @@ using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types.OnClick;
+using Solcery.Services.LocalSimulation;
 using UnityEngine;
 
 namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
@@ -16,19 +17,21 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
     public sealed class SystemTriggerApplyCardOnClick : ISystemTriggerApplyCardOnClick
     {
         private IServiceBricks _serviceBricks;
+        private IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
         private EcsFilter _filterContext;
         private EcsFilter _filterEntityTypes;
         private EcsFilter _filterEntities;
 
-        public static ISystemTriggerApplyCardOnClick Create(IServiceBricks serviceBricks)
+        public static ISystemTriggerApplyCardOnClick Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            return new SystemTriggerApplyCardOnClick(serviceBricks);
+            return new SystemTriggerApplyCardOnClick(serviceBricks, applyGameState);
         }
         
-        private SystemTriggerApplyCardOnClick(IServiceBricks serviceBricks)
+        private SystemTriggerApplyCardOnClick(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
             _serviceBricks = serviceBricks;
+            _applyGameState = applyGameState;
         }
         
         void IEcsInitSystem.Init(EcsSystems systems)
@@ -96,7 +99,15 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                     }
 
                     InitContext(entityId, world);
-                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, CurrentContext.Create(world), 1)}");
+                    
+                    // TODO: fix it!!!
+                    var context = CurrentContext.Create(world);
+                    
+                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
+                    
+                    // TODO: fix it!!!
+                    _applyGameState.ApplySimulatedGameStates(context.GameStates);
+                    
                     DestroyContext(world);
                     
                     break;
