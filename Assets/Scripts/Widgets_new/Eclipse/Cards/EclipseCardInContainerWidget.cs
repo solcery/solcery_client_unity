@@ -49,6 +49,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
+        void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
+        {
+            if (data.TryGetValue("picture", out string picture) 
+                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            {
+                _layout.AttachToken(index, texture);
+            }
+        }
+
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;

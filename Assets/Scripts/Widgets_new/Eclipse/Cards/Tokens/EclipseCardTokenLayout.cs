@@ -7,5 +7,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
     {
         [SerializeField]
         private Image icon;
+
+        public Image Icon => icon;
     }
 }

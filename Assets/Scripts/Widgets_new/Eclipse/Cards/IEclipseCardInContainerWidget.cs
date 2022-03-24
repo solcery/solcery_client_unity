@@ -12,5 +12,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void UpdateFromCardTypeData(int objectId, JObject data);
         void SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType);
         void UpdateSiblingIndex(int siblingIndex);
+        void AttachToken(int index, JObject data);
     }
 }
