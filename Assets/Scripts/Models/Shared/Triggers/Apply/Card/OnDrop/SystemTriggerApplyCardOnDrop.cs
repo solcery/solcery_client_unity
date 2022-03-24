@@ -1,13 +1,12 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contexts;
 using Solcery.Models.Shared.Context;
+using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types.OnDrop;
 using Solcery.Services.LocalSimulation;
-using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
@@ -20,8 +19,8 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
         private IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
         private EcsFilter _filterObjects;
-        private EcsFilter _filterObjectTypes;
         private EcsFilter _filterContext;
+        private EcsFilter _filterDragDropParameters;
 
         public static ISystemTriggerApplyCardOnDrop Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
@@ -50,12 +49,14 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
                 .Inc<ComponentObjectType>()
                 .End();
             
-            _filterObjectTypes = world.Filter<ComponentObjectTypes>()
-                .End();
-            
             _filterContext = world.Filter<ComponentContextObject>()
                 .Inc<ComponentContextArgs>()
                 .Inc<ComponentContextVars>()
+                .End();
+            
+            _filterDragDropParameters = world.Filter<ComponentDragDropParametersTag>()
+                .Inc<ComponentDragDropParametersId>()
+                .Inc<ComponentDragDropParametersAction>()
                 .End();
         }
         
@@ -64,22 +65,24 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
             _serviceBricks = null;
             _filterTriggers = null;
             _filterObjects = null;
-            _filterObjectTypes = null;
+            _filterDragDropParameters = null;
         }
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
             var targetObjectIdPool = world.GetPool<ComponentTriggerTargetObjectId>();
+            var targetDragDropIdPool = world.GetPool<ComponentTriggerTargetDragDropId>();
             var targetPlaceIdPool = world.GetPool<ComponentTriggerTargetPlaceId>();
             var objectIdPool = world.GetPool<ComponentObjectId>();
-            var objectTypePool = world.GetPool<ComponentObjectType>();
-            var objectTypesPool = world.GetPool<ComponentObjectTypes>();
+            var dragDropIdPool = world.GetPool<ComponentDragDropParametersId>();
+            var dragDropActionPool = world.GetPool<ComponentDragDropParametersAction>();
             
             foreach (var triggerEntityId in _filterTriggers)
             {
                 var targetObjectId = targetObjectIdPool.Get(triggerEntityId).TargetObjectId;
                 var targetPlaceId = targetPlaceIdPool.Get(triggerEntityId).TargetPlaceId;
+                var targetDragDropId = targetDragDropIdPool.Get(triggerEntityId).DragDropId;
 
                 foreach (var objectEntityId in _filterObjects)
                 {
@@ -88,30 +91,30 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
                         continue;
                     }
 
-                    var objectTypeId = objectTypePool.Get(objectEntityId).Type;
-
-                    foreach (var objectTypeEntityId in _filterObjectTypes)
+                    foreach (var dragDropParameterEntityId in _filterDragDropParameters)
                     {
-                        if (objectTypesPool.Get(objectTypeEntityId).Types.TryGetValue(objectTypeId, out var objectTypeData) 
-                            && objectTypeData.TryGetValue("action", out JObject brick))
+                        if (dragDropIdPool.Get(dragDropParameterEntityId).Id != targetDragDropId)
                         {
-                            InitContext(objectEntityId, world, targetPlaceId);
-                            
-                            // TODO: fix it!!!
-                            var context = CurrentContext.Create(world);
-                            
-                            Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
-                            
-                            // TODO: fix it!!!
-                            _applyGameState.ApplySimulatedGameStates(context.GameStates);
-                            
-                            
-                            DestroyContext(world);
+                            continue;
                         }
+                        
+                        InitContext(objectEntityId, world, targetPlaceId);
+                            
+                        // TODO: fix it!!!
+                        var context = CurrentContext.Create(world);
+                        var brick = dragDropActionPool.Get(dragDropParameterEntityId).Action;
+                            
+                        Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
+                            
+                        // TODO: fix it!!!
+                        _applyGameState.ApplySimulatedGameStates(context.GameStates);
+                            
+                            
+                        DestroyContext(world);
                         
                         break;
                     }
-                    
+
                     break;
                 }
                 

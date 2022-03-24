@@ -1,4 +1,4 @@
-namespace Solcery.Models.Play.DragDrop.Parameters
+namespace Solcery.Models.Shared.DragDrop.Parameters
 {
     public struct ComponentDragDropParametersId
     {

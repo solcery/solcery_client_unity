@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Utils;
 
@@ -26,12 +27,12 @@ namespace Solcery.Models.Play.DragDrop.Parameters
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            var tagPool = world.GetPool<Parameters.ComponentDragDropParametersTag>();
+            var tagPool = world.GetPool<ComponentDragDropParametersTag>();
             var idPool = world.GetPool<ComponentDragDropParametersId>();
             var destinationsPool = world.GetPool<ComponentDragDropParametersDestinations>();
             var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
             var requiredEclipseCardTypePool = world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>();
-            
+
             if (_gameContent.TryGetValue("drag_n_drops", out JObject dndBaseObject)
                 && dndBaseObject.TryGetValue("objects", out JArray dndArray))
             {
@@ -56,7 +57,7 @@ namespace Solcery.Models.Play.DragDrop.Parameters
 
                         requiredEclipseCardTypePool.Add(entity).RequiredEclipseCardType =
                             dndObject.TryGetEnum("required_card_type", out EclipseCardTypes ect) 
-                                ? ect 
+                                ? ect
                                 : EclipseCardTypes.None;
                     }
                 }

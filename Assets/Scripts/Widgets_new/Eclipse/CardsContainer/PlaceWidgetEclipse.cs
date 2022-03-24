@@ -121,7 +121,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
-            Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
+            //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
             
             if (dropWidget is not IEclipseCardInContainerWidget ew)
             {
@@ -138,7 +138,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         void IApplyDragWidget.OnDragWidget(IDraggableWidget dragWidget)
         {
-            Debug.Log($"OnDrag Widget {dragWidget.ObjectId}");
+            //Debug.Log($"OnDrag Widget {dragWidget.ObjectId}");
             _cards.Remove(dragWidget.ObjectId);
         }
 

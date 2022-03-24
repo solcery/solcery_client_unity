@@ -6,6 +6,7 @@ using Solcery.Models.Shared.Commands;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Shared.Triggers.Apply;
+using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
 using Solcery.Services.Commands;
 using Solcery.Services.LocalSimulation;
@@ -33,6 +34,7 @@ namespace Solcery.Models.Simulation
             _systems = new EcsSystems(_world);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
+            _systems.Add(SystemInitialDragDropTypes.Create(gameContent));
             _systems.Add(SystemInitialGameContentPlaces.Create(gameContent));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(gameContent));
             _systems.Add(SystemGameStateInitial.Create(initialGameState));

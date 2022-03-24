@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Places;
 using Solcery.Utils;
 

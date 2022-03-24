@@ -4,6 +4,7 @@ using Solcery.Games;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Commands.Datas.OnDrop;
+using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Widgets_new;
@@ -75,14 +76,14 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
                 if (targetLayout != null
                     && targetLayout.LinkedEntityId != sourcePlaceEntityId
-                    && CheckPlaceDestinations(world, 
-                        sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId, 
-                        targetLayout.PlaceId)
+                    && CheckPlaceDestinations(world, sourcePlaceEntityId, targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
                     var objectId = world.GetPool<ComponentDragDropObjectId>().Get(onDropEventData.DragEntityId).ObjectId;
-                    var command =
-                        CommandOnDropData.CreateFromParameters(objectId, targetLayout.PlaceId,
+                    var dragDropEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId)
+                        .DragDropEntityId;
+                    var dragDropId = world.GetPool<ComponentDragDropParametersId>().Get(dragDropEntityId).Id;
+                    var command = CommandOnDropData.CreateFromParameters(objectId, dragDropId, targetLayout.PlaceId,
                             TriggerTargetEntityTypes.Card);
                     _game.TransportService.SendCommand(command.ToJson());
                 }
