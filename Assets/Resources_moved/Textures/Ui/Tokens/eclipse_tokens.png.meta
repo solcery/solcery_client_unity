@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cbb804ffef577460590bdc6d4e694786
+guid: 9e9df9b66dcbb4e2cba76d42dc38ec21
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -157,8 +157,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 842a8763c096a4523899a07675d7dd8b
-      internalID: -247220932
+      spriteID: 288fe0f1f4098403db2f2d7f232f11d8
+      internalID: 1287957710
       vertices: []
       indices: 
       edges: []
@@ -176,10 +176,10 @@ TextureImporter:
       name: eclipse_tokens_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c00978178407744a2b037a7439faa0e9
-      internalID: -693469331
+      spriteID: e65cfa8e87b9f4d2e9ed7f141df2caa3
+      internalID: 869018169
       vertices: []
       indices: 
       edges: []
@@ -197,10 +197,10 @@ TextureImporter:
       name: eclipse_tokens_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 512
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b23a49f8f894c42049bb3c55228d5789
-      internalID: 780749446
+      spriteID: 5056f4dfe896a479d8d05954a0b80623
+      internalID: -932258628
       vertices: []
       indices: 
       edges: []
@@ -218,10 +218,10 @@ TextureImporter:
       name: eclipse_tokens_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 840c9ad71d8f4468695cda9959c954ae
-      internalID: 1858456194
+      spriteID: ebd121f35a6d44f488da9b3e5c4094f6
+      internalID: -386381786
       vertices: []
       indices: 
       edges: []
@@ -239,10 +239,10 @@ TextureImporter:
       name: eclipse_tokens_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fabc1b1959985483da24266dd58906f5
-      internalID: -1509297814
+      spriteID: f4694f1d6d09847c0ab6cb4b3d62a987
+      internalID: -1718449682
       vertices: []
       indices: 
       edges: []
@@ -260,10 +260,10 @@ TextureImporter:
       name: eclipse_tokens_5
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4992860bb24c489495436ecb8d74c44
-      internalID: 1535262139
+      spriteID: 70cab76b558064c5183aa6a25b58cb6b
+      internalID: -1527292546
       vertices: []
       indices: 
       edges: []
@@ -281,10 +281,10 @@ TextureImporter:
       name: eclipse_tokens_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 256
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b65c4e8715af4420e9b8ab6c0957a9ad
-      internalID: -1836536248
+      spriteID: af36b649b832940a4815644b2d880495
+      internalID: 1237606463
       vertices: []
       indices: 
       edges: []
@@ -302,10 +302,10 @@ TextureImporter:
       name: eclipse_tokens_7
       rect:
         serializedVersion: 2
-        x: 128
+        x: 512
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c017e8ca80f64d9390991a373a03f83
-      internalID: -762005232
+      spriteID: 184f0824d86c04b12b45b02b47224834
+      internalID: -781173762
       vertices: []
       indices: 
       edges: []
@@ -323,10 +323,10 @@ TextureImporter:
       name: eclipse_tokens_8
       rect:
         serializedVersion: 2
-        x: 256
+        x: 768
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,8 +334,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3a0c59406ac94c5f9759c385d095b6e
-      internalID: 1726698276
+      spriteID: d356b88f6b9fe44a8a2c68ef859d9c7d
+      internalID: -1653120745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eclipse_tokens_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986138784c4964e88ac2dda77d347a19
+      internalID: 318539142
       vertices: []
       indices: 
       edges: []
@@ -343,7 +364,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: f168085b11dab406fa6dcbdad0d0c48a
     internalID: 0
     vertices: []
     indices: 
@@ -351,15 +372,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      eclipse_tokens_1: -693469331
-      eclipse_tokens_5: 1535262139
-      eclipse_tokens_8: 1726698276
-      eclipse_tokens_7: -762005232
-      eclipse_tokens_3: 1858456194
-      eclipse_tokens_2: 780749446
-      eclipse_tokens_6: -1836536248
-      eclipse_tokens_4: -1509297814
-      eclipse_tokens_0: -247220932
+      eclipse_tokens_1: 869018169
+      eclipse_tokens_9: 318539142
+      eclipse_tokens_5: -1527292546
+      eclipse_tokens_8: -1653120745
+      eclipse_tokens_7: -781173762
+      eclipse_tokens_3: -386381786
+      eclipse_tokens_2: -932258628
+      eclipse_tokens_6: 1237606463
+      eclipse_tokens_4: -1718449682
+      eclipse_tokens_0: 1287957710
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
