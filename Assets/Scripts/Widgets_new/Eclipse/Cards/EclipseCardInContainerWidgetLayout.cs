@@ -42,7 +42,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
-        private List<Sprite> _tokensSprite = new List<Sprite>();
         
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
 
@@ -81,12 +80,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         public void Cleanup()
         {
-            foreach (var sprite in _tokensSprite)
-            {
-                Destroy(sprite);
-            }
+            tokensLayout.Cleanup();
             timerLayout.UpdateTimer(false, 0);
-            _tokensSprite.Clear();
         }
         
         private void OnDestroy()
@@ -94,20 +89,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             DestroySprite();
         }
 
-        public void AttachToken(int index, Texture2D texture)
+        public EclipseCardTokenLayout GetTokenLayout(int index)
         {
-            var token = tokensLayout.GetTokenByIndex(index);
-            if (token != null)
-            {
-                var sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
-                    new Vector2(0.5f, 0.5f), 100.0f);
-                token.Icon.sprite = sprite;
-                _tokensSprite.Add(sprite);
-            }
-            else
-            {
-                Debug.LogWarning("Can't set token for slot on the eclipse card!");
-            }
+            return tokensLayout.GetTokenByIndex(index);
         }
 
         public void UpdateName(string newName)

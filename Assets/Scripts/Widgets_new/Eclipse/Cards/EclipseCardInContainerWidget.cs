@@ -56,10 +56,23 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
         {
-            if (data.TryGetValue("picture", out string picture) 
-                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            var tokenLayout = _layout.GetTokenLayout(index);
+            if (tokenLayout != null)
             {
-                _layout.AttachToken(index, texture);
+                if (data.TryGetValue("picture", out string picture)
+                    && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+                {
+                    tokenLayout.UpdateSprite(texture);
+                }
+
+                if (data.TryGetValue("tooltip_id", out int tooltipId))
+                {
+                    tokenLayout.UpdateTooltip(tooltipId);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Can't set token for slot on the eclipse card!");
             }
         }
 
