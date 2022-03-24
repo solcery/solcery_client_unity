@@ -85,6 +85,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             {
                 Destroy(sprite);
             }
+            timerLayout.UpdateTimer(false, 0);
             _tokensSprite.Clear();
         }
         

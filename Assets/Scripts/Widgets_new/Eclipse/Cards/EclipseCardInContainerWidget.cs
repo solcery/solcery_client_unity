@@ -49,6 +49,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
+        void IEclipseCardInContainerWidget.UpdateTimer(bool show, int duration)
+        {
+            _layout.UpdateTimer(show, duration);
+        }
+
         void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
         {
             if (data.TryGetValue("picture", out string picture) 
