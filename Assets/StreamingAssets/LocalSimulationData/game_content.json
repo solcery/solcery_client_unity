@@ -4836,10 +4836,15 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.Void",
+                "name": "Action.Event",
                 "type": 0,
-                "subtype": 0,
-                "params": []
+                "subtype": 11,
+                "params": [
+                  {
+                    "name": "event_name",
+                    "value": "create"
+                  }
+                ]
               }
             }
           ]
@@ -5924,15 +5929,10 @@
                               {
                                 "name": "value",
                                 "value": {
-                                  "name": "Value.Variable",
+                                  "name": "Value.Custom.10335 [[object Object]]",
                                   "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "current_place"
-                                    }
-                                  ]
+                                  "subtype": 10335,
+                                  "params": []
                                 }
                               }
                             ]
@@ -5953,19 +5953,19 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.Iterator",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 5,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "condition",
+                          "name": "action1",
                           "value": {
-                            "name": "Condition.And",
-                            "type": 1,
-                            "subtype": 7,
+                            "name": "Action.Iterator",
+                            "type": 0,
+                            "subtype": 5,
                             "params": [
                               {
-                                "name": "cond1",
+                                "name": "condition",
                                 "value": {
                                   "name": "Condition.Equal",
                                   "type": 1,
@@ -5998,71 +5998,118 @@
                                 }
                               },
                               {
-                                "name": "cond2",
+                                "name": "action",
                                 "value": {
-                                  "name": "Condition.Or",
-                                  "type": 1,
-                                  "subtype": 6,
+                                  "name": "Action.Set attribute",
+                                  "type": 0,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "cond1",
+                                      "name": "attr_name",
+                                      "value": "place"
+                                    },
+                                    {
+                                      "name": "value",
                                       "value": {
-                                        "name": "Condition.Custom.10187 [[object Object]]",
-                                        "type": 1,
-                                        "subtype": 10187,
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "target_place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "limit",
+                                "value": {
+                                  "name": "Value.Custom.10147 [[object Object]]",
+                                  "type": 2,
+                                  "subtype": 10147,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Iterator",
+                            "type": 0,
+                            "subtype": 5,
+                            "params": [
+                              {
+                                "name": "condition",
+                                "value": {
+                                  "name": "Condition.Equal",
+                                  "type": 1,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Custom.10146 [[object Object]]",
+                                        "type": 2,
+                                        "subtype": 10146,
                                         "params": []
                                       }
                                     },
                                     {
-                                      "name": "cond2",
+                                      "name": "value2",
                                       "value": {
-                                        "name": "Condition.Custom.10190 [[object Object]]",
-                                        "type": 1,
-                                        "subtype": 10190,
+                                        "name": "Value.Custom.10335 [[object Object]]",
+                                        "type": 2,
+                                        "subtype": 10335,
                                         "params": []
                                       }
                                     }
                                   ]
                                 }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action",
-                          "value": {
-                            "name": "Action.Set attribute",
-                            "type": 0,
-                            "subtype": 7,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "place"
                               },
                               {
-                                "name": "value",
+                                "name": "action",
                                 "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
+                                  "name": "Action.Set attribute",
+                                  "type": 0,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "var_name",
-                                      "value": "target_place"
+                                      "name": "attr_name",
+                                      "value": "place"
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "current_place"
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
+                              },
+                              {
+                                "name": "limit",
+                                "value": {
+                                  "name": "Value.Custom.10147 [[object Object]]",
+                                  "type": 2,
+                                  "subtype": 10147,
+                                  "params": []
+                                }
                               }
                             ]
-                          }
-                        },
-                        {
-                          "name": "limit",
-                          "value": {
-                            "name": "Value.Custom.10147 [[object Object]]",
-                            "type": 2,
-                            "subtype": 10147,
-                            "params": []
                           }
                         }
                       ]
@@ -6288,7 +6335,7 @@
         "id": 162
       },
       {
-        "name": "~003: Create a Token in Place [X] with Origin [Y]",
+        "name": "~003: Create a Token [TplId] in Place [X]",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -6387,10 +6434,15 @@
                         {
                           "name": "action",
                           "value": {
-                            "name": "Action.Void",
+                            "name": "Action.Event",
                             "type": 0,
-                            "subtype": 0,
-                            "params": []
+                            "subtype": 11,
+                            "params": [
+                              {
+                                "name": "event_name",
+                                "value": "create"
+                              }
+                            ]
                           }
                         }
                       ]
@@ -7862,10 +7914,15 @@
                               {
                                 "name": "action",
                                 "value": {
-                                  "name": "Action.Void",
+                                  "name": "Action.Event",
                                   "type": 0,
-                                  "subtype": 0,
-                                  "params": []
+                                  "subtype": 11,
+                                  "params": [
+                                    {
+                                      "name": "event_name",
+                                      "value": "create"
+                                    }
+                                  ]
                                 }
                               }
                             ]
@@ -12009,6 +12066,22 @@
           ]
         },
         "id": 332
+      },
+      {
+        "name": "Drag&Drop Transitory Place",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 10
+            }
+          ]
+        },
+        "id": 335
       }
     ]
   }
