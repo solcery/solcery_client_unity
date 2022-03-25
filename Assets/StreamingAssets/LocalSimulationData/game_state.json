@@ -20,7 +20,7 @@
         },
         {
           "key": "show_duration",
-          "value": 0
+          "value": 1
         },
         {
           "key": "token_slots",
@@ -28,7 +28,7 @@
         },
         {
           "key": "type",
-          "value": 0
+          "value": 3
         },
         {
           "key": "creature_number",
@@ -48,7 +48,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -66,7 +66,7 @@
         },
         {
           "key": "show_duration",
-          "value": 0
+          "value": 1
         },
         {
           "key": "token_slots",
@@ -74,7 +74,7 @@
         },
         {
           "key": "type",
-          "value": 0
+          "value": 3
         },
         {
           "key": "creature_number",
@@ -94,7 +94,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -112,7 +112,7 @@
         },
         {
           "key": "show_duration",
-          "value": 0
+          "value": 1
         },
         {
           "key": "token_slots",
@@ -120,7 +120,7 @@
         },
         {
           "key": "type",
-          "value": 0
+          "value": 5
         },
         {
           "key": "creature_number",
@@ -140,7 +140,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 15
         }
       ]
     },
@@ -186,7 +186,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -232,7 +232,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -278,7 +278,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 2
         }
       ]
     },
@@ -324,7 +324,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 2
         }
       ]
     },
@@ -392,11 +392,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -416,7 +416,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -438,11 +438,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -462,7 +462,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -484,11 +484,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -508,7 +508,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -530,11 +530,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -554,7 +554,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -576,11 +576,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -600,7 +600,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -622,11 +622,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -646,7 +646,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -668,11 +668,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -692,7 +692,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -714,11 +714,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -738,7 +738,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -760,11 +760,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -784,7 +784,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
@@ -806,11 +806,11 @@
         },
         {
           "key": "token_slots",
-          "value": 0
+          "value": 3
         },
         {
           "key": "type",
-          "value": 0
+          "value": 1
         },
         {
           "key": "creature_number",
@@ -830,7 +830,7 @@
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 3
         }
       ]
     },
