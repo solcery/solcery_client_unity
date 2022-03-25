@@ -4523,7 +4523,7 @@
         "id": 295
       },
       {
-        "name": "End Turn TEST",
+        "name": "Test Activation event",
         "enabled": true,
         "action": {
           "name": "Action.Iterator",
@@ -4834,7 +4834,7 @@
         "id": 316
       },
       {
-        "name": "Test DO STUFF",
+        "name": "Test CreateEntity",
         "enabled": true,
         "description": "Does AMAZING THINGS",
         "action": {
@@ -5387,7 +5387,7 @@
         "name": "Test tokens",
         "enabled": true,
         "cardType": 199,
-        "place": 31,
+        "place": 43,
         "amount": 1,
         "id": 302
       },
