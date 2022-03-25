@@ -50,7 +50,7 @@ namespace Solcery.Services.Transport
 
         private void OnUpdateGameState(JObject gameStateJson)
         {
-            Debug.Log("OnUpdateGameState");
+            Debug.Log($"OnUpdateGameState {gameStateJson}");
             _gameTransportCallbacks.OnReceivingGameState(gameStateJson);
         }
 
