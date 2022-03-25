@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Solcery.Games;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
 using UnityEngine;
@@ -29,27 +29,25 @@ namespace Solcery.Services.LocalSimulation
         private readonly List<Action<JObject>> _listOnUpdateGameState;
         private ISimulationModel _simulationModel;
         private IServiceCommands _serviceCommands;
-        private IServiceBricks _serviceBricks;
 
         private Queue<IContextGameStates> _gameStates;
 
-        public static IServiceLocalSimulation Create(IServiceBricks serviceBricks)
+        public static IServiceLocalSimulation Create()
         {
-            return new ServiceLocalSimulation(serviceBricks);
+            return new ServiceLocalSimulation();
         }
         
-        private ServiceLocalSimulation(IServiceBricks serviceBricks)
+        private ServiceLocalSimulation()
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
             _serviceCommands = ServiceCommands.Create();
-            _serviceBricks = serviceBricks;
             _simulationModel = SimulationModel.Create();
             _gameStates = new Queue<IContextGameStates>();
         }
 
-        void IServiceLocalSimulation.Init(JObject gameContent, JObject gameState)
+        void IServiceLocalSimulation.Init(IGame game, JObject gameState)
         {
-            _simulationModel.Init(this, _serviceCommands, _serviceBricks, gameContent, gameState);
+            _simulationModel.Init(this, game, _serviceCommands, gameState);
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 
@@ -118,7 +116,6 @@ namespace Solcery.Services.LocalSimulation
             _simulationModel = null;
             _serviceCommands.Destroy();
             _serviceCommands = null;
-            _serviceBricks = null;
         }
 
         private void CallAllActionWithParams(List<Action<JObject>> listActions, JObject @params)

@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games;
 using Solcery.Services.Commands;
 using Solcery.Services.LocalSimulation;
 
@@ -12,8 +13,7 @@ namespace Solcery.Models.Simulation
     {
         EcsWorld World { get; }
 
-        void Init(IServiceLocalSimulationApplyGameState applyGameState, IServiceCommands serviceCommands,
-            IServiceBricks serviceBricks, JObject gameContentJson, JObject initialGameState);
+        void Init(IServiceLocalSimulationApplyGameState applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState);
         void Update(float dt);
         void Destroy();
     }

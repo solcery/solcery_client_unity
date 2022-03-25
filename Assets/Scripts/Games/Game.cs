@@ -4,6 +4,7 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
+using Solcery.Games.Contents;
 using Solcery.Models.Play;
 #if !UNITY_EDITOR && UNITY_WEBGL
 using Solcery.React;
@@ -44,6 +45,7 @@ namespace Solcery.Games
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
         TooltipController IGame.TooltipController => _tooltipController;
+        IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         
         JObject IGame.GameStatePopAndClear
         {
@@ -67,6 +69,7 @@ namespace Solcery.Games
         private JObject _gameContentJson;
         private readonly Stack<JObject> _gameStates;
         private readonly TooltipController _tooltipController;
+        private readonly IGameContentAttributes _contentAttributes;
 
         public static IGame Create(IWidgetCanvas widgetCanvas)
         {
@@ -80,6 +83,7 @@ namespace Solcery.Games
             CreateModel();
             CreateServices(widgetCanvas);
             _tooltipController = TooltipController.Create(widgetCanvas, _serviceResource);
+            _contentAttributes = GameContentAttributes.Create();
         }
         
         private void CreateModel()
@@ -93,7 +97,7 @@ namespace Solcery.Games
             RegistrationBrickTypes();
             
 #if UNITY_EDITOR || LOCAL_SIMULATION
-            _transportService = EditorTransportService.Create(this, _serviceBricks);
+            _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
             _transportService = WebGlTransportService.Create(this);
 #endif
@@ -130,6 +134,7 @@ namespace Solcery.Games
         {
             Cleanup();
             _gameContentJson = gameContentJson;
+            _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
 
             if (gameContentJson.TryGetValue("customBricks", out JObject customBricks) &&
                 customBricks.TryGetValue("objects", out JArray customBricksArray))

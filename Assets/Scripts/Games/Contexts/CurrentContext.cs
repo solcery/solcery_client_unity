@@ -9,9 +9,11 @@ using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
 using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
 using Solcery.Games.Contexts.GameStates;
+using Solcery.Models.Play.Initial.Game;
 using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Simulation.Game;
 using Solcery.Utils;
 using Random = UnityEngine.Random;
 
@@ -30,6 +32,7 @@ namespace Solcery.Games.Contexts
 
         private readonly EcsWorld _world;
         private readonly EcsFilter _filterComponentObjectIdHash;
+        private readonly EcsFilter _filterComponentGame;
 
         public static IContext Create(EcsWorld world)
         {
@@ -49,6 +52,7 @@ namespace Solcery.Games.Contexts
 
             _world = world;
             _filterComponentObjectIdHash = _world.Filter<ComponentObjectIdHash>().End();
+            _filterComponentGame = _world.Filter<ComponentGame>().End();
         }
         
         bool IContext.DeleteObject(object @object)
@@ -72,6 +76,8 @@ namespace Solcery.Games.Contexts
 
         bool IContext.TryCreateObject(JObject parameters, out object @object)
         {
+            
+            
             var entityId = _world.NewEntity();
             var cardTypeId = parameters.GetValue<int>("card_type");
             var place = parameters.GetValue<int>("place");
@@ -98,10 +104,35 @@ namespace Solcery.Games.Contexts
                 _world.GetPool<ComponentObjectTag>().Add(entityId);
                 _world.GetPool<ComponentObjectId>().Add(entityId).Id = objectId;
                 _world.GetPool<ComponentObjectType>().Add(entityId).Type = cardTypeId;
-                _world.GetPool<ComponentObjectAttributes>().Add(entityId).Attributes.Add("place", AttributeValue.Create(place));
+
+                ref var componentAttributes = ref _world.GetPool<ComponentObjectAttributes>().Add(entityId);
+                foreach (var gameEntityId in _filterComponentGame)
+                {
+                    var attributeList = _world.GetPool<ComponentGame>().Get(gameEntityId).Game.GameContentAttributes;
+                    foreach (var attribute in attributeList.AttributeNameList)
+                    {
+                        if (!componentAttributes.Attributes.ContainsKey(attribute))
+                        {
+                            if (attribute == "place")
+                            {
+                                componentAttributes.Attributes.Add(attribute, AttributeValue.Create(place));
+                            }
+                            else
+                            {
+                                componentAttributes.Attributes.Add(attribute, AttributeValue.Create(0));
+                            }
+                        }
+                    }
+                    break;
+                }
+                
+                //_world.GetPool<ComponentObjectAttributes>().Add(entityId).Attributes.Add("place", AttributeValue.Create(place));
                 _world.GetPool<ComponentAttributePlace>().Add(entityId).Value = AttributeValue.Create(place);
 
                 @object = entityId;
+                
+                Log.Print($"Create new object with entity id {entityId}");
+                
                 return true;
             }
 

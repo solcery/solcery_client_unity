@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games.Contents;
 using Solcery.Models.Play;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
@@ -28,6 +29,7 @@ namespace Solcery.Games
         public JObject GameContent { get; }
         public JObject GameStatePopAndClear { get; }
         public TooltipController TooltipController { get; }
+        public IGameContentAttributes GameContentAttributes { get; }
 
         public void Init();
         public void Update(float dt);
