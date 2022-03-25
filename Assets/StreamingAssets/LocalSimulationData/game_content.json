@@ -682,6 +682,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/cgcVfnY/token-hot.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 199
       },
       {
@@ -689,6 +709,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/c80hK25/token-cold.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 217
       },
       {
@@ -696,6 +736,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/86qF1R0/token-order.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 218
       },
       {
@@ -703,6 +763,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/RpF3g7n/token-chaos.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 219
       },
       {
@@ -710,6 +790,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/TbtFmfv/token-joy.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 220
       },
       {
@@ -717,6 +817,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/3fwJpW1/token-stress.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 221
       },
       {
@@ -725,6 +845,26 @@
         "description": "Clears the Oldest Token on the Creature",
         "picture": "https://i.ibb.co/LZBqDx3/token-food.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 222
       },
       {
@@ -733,6 +873,26 @@
         "description": "Protects the Creature from gaining the next Token once",
         "picture": "https://i.ibb.co/0CsDqzK/token-shield.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 223
       },
       {
@@ -920,24 +1080,57 @@
         },
         "type": 1,
         "action_on_init": {
-          "name": "Action.Set attribute",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 7,
+          "subtype": 1,
           "params": [
             {
-              "name": "attr_name",
-              "value": "creature"
-            },
-            {
-              "name": "value",
+              "name": "action1",
               "value": {
-                "name": "Value.Constant",
-                "type": 2,
-                "subtype": 0,
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
                 "params": [
                   {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
                     "name": "value",
-                    "value": 1
+                    "value": {
+                      "name": "Value.Custom.10297 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10297,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 3
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -1204,6 +1397,64 @@
           ]
         },
         "type": 1,
+        "action_on_init": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10297 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10297,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 3
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 244
       },
       {
@@ -4571,6 +4822,26 @@
         "enabled": true,
         "picture": "https://i.ibb.co/bNLqtZ1/token-work.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 309
       },
       {
@@ -4579,6 +4850,26 @@
         "description": "Makes a Creature immediately use its Ability",
         "picture": "https://i.ibb.co/ZBNCnQq/token-gold.png",
         "type": 2,
+        "action_on_init": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 312
       },
       {
@@ -5341,6 +5632,64 @@
         "cardType": 286,
         "place": 31,
         "amount": 1,
+        "initializer": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10297 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10297,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 3
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 125
       },
       {
@@ -5349,6 +5698,64 @@
         "cardType": 287,
         "place": 43,
         "amount": 1,
+        "initializer": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10297 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10297,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 3
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 126
       },
       {
@@ -5357,6 +5764,64 @@
         "cardType": 116,
         "place": 20,
         "amount": 1,
+        "initializer": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10298 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10298,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 5
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 131
       },
       {
@@ -5365,6 +5830,64 @@
         "cardType": 116,
         "place": 40,
         "amount": 1,
+        "initializer": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10298 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10298,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 5
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 132
       },
       {
@@ -5389,6 +5912,26 @@
         "cardType": 199,
         "place": 43,
         "amount": 1,
+        "initializer": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
         "id": 302
       },
       {
@@ -5718,26 +6261,116 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.Set attribute",
+                      "name": "Action.Iterator",
                       "type": 0,
-                      "subtype": 7,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "attr_name",
-                          "value": "place"
-                        },
-                        {
-                          "name": "value",
+                          "name": "condition",
                           "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
                             "params": [
                               {
-                                "name": "var_name",
-                                "value": "target_place"
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.Equal",
+                                  "type": 1,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Custom.10146 [[object Object]]",
+                                        "type": 2,
+                                        "subtype": 10146,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "current_place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.Or",
+                                  "type": 1,
+                                  "subtype": 6,
+                                  "params": [
+                                    {
+                                      "name": "cond1",
+                                      "value": {
+                                        "name": "Condition.Custom.10187 [[object Object]]",
+                                        "type": 1,
+                                        "subtype": 10187,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "cond2",
+                                      "value": {
+                                        "name": "Condition.Custom.10190 [[object Object]]",
+                                        "type": 1,
+                                        "subtype": 10190,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
                               }
                             ]
+                          }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "place"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "target_place"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Custom.10147 [[object Object]]",
+                            "type": 2,
+                            "subtype": 10147,
+                            "params": []
                           }
                         }
                       ]
@@ -9406,6 +10039,212 @@
           ]
         },
         "id": 306
+      },
+      {
+        "name": "Is a Leftmost Creature",
+        "enabled": true,
+        "brick": {
+          "name": "Condition.Or",
+          "type": 1,
+          "subtype": 6,
+          "params": [
+            {
+              "name": "cond1",
+              "value": {
+                "name": "Condition.Equal",
+                "type": 1,
+                "subtype": 2,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Value.Subtraction",
+                      "type": 2,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Value.Custom.10146 [[object Object]]",
+                            "type": 2,
+                            "subtype": 10146,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Value.Custom.10181 [[object Object]]",
+                            "type": 2,
+                            "subtype": 10181,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Value.Custom.10174 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10174,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "Condition.Custom.10151 [[object Object]]",
+                "type": 1,
+                "subtype": 10151,
+                "params": [
+                  {
+                    "name": "Value 1",
+                    "value": {
+                      "name": "Value.Sum Iterator",
+                      "type": 2,
+                      "subtype": 14,
+                      "params": [
+                        {
+                          "name": "iter_condition",
+                          "value": {
+                            "name": "Condition.Custom.10152 [[object Object]]",
+                            "type": 1,
+                            "subtype": 10152,
+                            "params": [
+                              {
+                                "name": "Value",
+                                "value": {
+                                  "name": "Value.Custom.10146 [[object Object]]",
+                                  "type": 2,
+                                  "subtype": 10146,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "From",
+                                "value": {
+                                  "name": "Value.Addition",
+                                  "type": 2,
+                                  "subtype": 5,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Argument",
+                                        "type": 2,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "name",
+                                            "value": "Current row"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Value.Custom.10174 [[object Object]]",
+                                        "type": 2,
+                                        "subtype": 10174,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "To",
+                                "value": {
+                                  "name": "Value.Subtraction",
+                                  "type": 2,
+                                  "subtype": 6,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Argument",
+                                        "type": 2,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "name",
+                                            "value": "Current place"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 1
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Custom.10147 [[object Object]]",
+                            "type": 2,
+                            "subtype": 10147,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Value 2",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 325
       },
       {
         "name": "#Current place",
