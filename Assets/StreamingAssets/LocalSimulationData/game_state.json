@@ -20,7 +20,7 @@
         },
         {
           "key": "show_duration",
-          "value": 1
+          "value": 0
         },
         {
           "key": "token_slots",
@@ -28,7 +28,7 @@
         },
         {
           "key": "type",
-          "value": 3
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -48,7 +48,7 @@
         },
         {
           "key": "duration",
-          "value": 3
+          "value": 0
         }
       ]
     },
@@ -66,7 +66,7 @@
         },
         {
           "key": "show_duration",
-          "value": 1
+          "value": 0
         },
         {
           "key": "token_slots",
@@ -74,7 +74,7 @@
         },
         {
           "key": "type",
-          "value": 3
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -94,7 +94,7 @@
         },
         {
           "key": "duration",
-          "value": 3
+          "value": 0
         }
       ]
     },
@@ -392,11 +392,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -438,11 +438,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -484,11 +484,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -530,11 +530,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -576,11 +576,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -622,11 +622,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -668,11 +668,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -714,11 +714,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -760,11 +760,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",
@@ -806,11 +806,11 @@
         },
         {
           "key": "token_slots",
-          "value": 3
+          "value": 0
         },
         {
           "key": "type",
-          "value": 1
+          "value": 0
         },
         {
           "key": "creature_number",

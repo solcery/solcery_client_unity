@@ -8,58 +8,35 @@
         "description": "Gives 1 Cold to Right Neighbour",
         "picture": "https://i.ibb.co/G7LR8y2/2-44.jpg",
         "type": 1,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10337 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10337,
           "params": [
             {
-              "name": "action1",
+              "name": "Slots",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10297 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10297,
-                      "params": []
-                    }
+                    "value": 3
                   }
                 ]
               }
             },
             {
-              "name": "action2",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "token_slots"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 3
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -99,58 +76,35 @@
         "description": "Produces Food. Gains Work from slots 1&5",
         "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
         "type": 4,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10340 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10340,
           "params": [
             {
-              "name": "action1",
+              "name": "Slots",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10298 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10298,
-                      "params": []
-                    }
+                    "value": 5
                   }
                 ]
               }
             },
             {
-              "name": "action2",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "token_slots"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 5
-                        }
-                      ]
-                    }
+                    "value": 2
                   }
                 ]
               }
@@ -529,58 +483,21 @@
         "description": "Places 1 Hot on every Creature",
         "picture": "https://i.ibb.co/cJX7cBs/1-25-Fireball.jpg",
         "type": 3,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10339 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10339,
           "params": [
             {
-              "name": "action1",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10300 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10300,
-                      "params": []
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
-                "params": [
-                  {
-                    "name": "attr_name",
-                    "value": "show_duration"
-                  },
-                  {
-                    "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 3
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -667,6 +584,27 @@
         "description": "Init: attr Eclipse =1;",
         "picture": "https://i.ibb.co/27Dh20Y/1-81-Star-fire.jpg",
         "type": 3,
+        "action_on_create": {
+          "name": "Action.Custom.10341 [[object Object]]",
+          "type": 0,
+          "subtype": 10341,
+          "params": [
+            {
+              "name": "Timer",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 15
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "id": 119
       },
       {
@@ -682,25 +620,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/cgcVfnY/token-hot.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 199
       },
@@ -709,25 +633,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/c80hK25/token-cold.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 217
       },
@@ -736,25 +646,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/86qF1R0/token-order.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 218
       },
@@ -763,25 +659,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/RpF3g7n/token-chaos.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 219
       },
@@ -790,25 +672,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/TbtFmfv/token-joy.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 220
       },
@@ -817,25 +685,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/3fwJpW1/token-stress.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 221
       },
@@ -845,25 +699,11 @@
         "description": "Clears the Oldest Token on the Creature",
         "picture": "https://i.ibb.co/LZBqDx3/token-food.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 222
       },
@@ -873,25 +713,11 @@
         "description": "Protects the Creature from gaining the next Token once",
         "picture": "https://i.ibb.co/0CsDqzK/token-shield.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 223
       },
@@ -1079,7 +905,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Two actions",
           "type": 0,
           "subtype": 1,
@@ -1397,7 +1223,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Two actions",
           "type": 0,
           "subtype": 1,
@@ -1908,7 +1734,7 @@
             }
           ]
         },
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Void",
           "type": 0,
           "subtype": 0,
@@ -2352,7 +2178,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -2585,7 +2411,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -2718,7 +2544,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -2898,7 +2724,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -2984,7 +2810,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Void",
           "type": 0,
           "subtype": 0,
@@ -3341,7 +3167,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -3580,7 +3406,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -3791,7 +3617,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -4078,7 +3904,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -4207,7 +4033,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -4355,7 +4181,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -4444,58 +4270,35 @@
         "description": "Gives 1 Hot to right neighbor",
         "picture": "https://i.ibb.co/PcNSyQ4/2-7.jpg",
         "type": 1,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10337 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10337,
           "params": [
             {
-              "name": "action1",
+              "name": "Slots",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10297 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10297,
-                      "params": []
-                    }
+                    "value": 3
                   }
                 ]
               }
             },
             {
-              "name": "action2",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "token_slots"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 3
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -4535,58 +4338,35 @@
         "description": "Gives 1 Cold to right neighbor",
         "picture": "https://i.ibb.co/zhh5DWZ/1-41-Ice-fish.jpg",
         "type": 1,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10337 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10337,
           "params": [
             {
-              "name": "action1",
+              "name": "Slots",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10297 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10297,
-                      "params": []
-                    }
+                    "value": 3
                   }
                 ]
               }
             },
             {
-              "name": "action2",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "token_slots"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 3
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -4626,96 +4406,21 @@
         "description": "Adds 1 Hot to all creatures in top row",
         "picture": "https://i.ibb.co/RbYSd5m/1-44-Infernal-nest.jpg",
         "type": 3,
-        "action_on_init": {
-          "name": "Action.Two actions",
+        "action_on_create": {
+          "name": "Action.Custom.10339 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10339,
           "params": [
             {
-              "name": "action1",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
-                  {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
                   {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10300 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10300,
-                      "params": []
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Two actions",
-                "type": 0,
-                "subtype": 1,
-                "params": [
-                  {
-                    "name": "action1",
-                    "value": {
-                      "name": "Action.Set attribute",
-                      "type": 0,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "show_duration"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "Action.Set attribute",
-                      "type": 0,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "duration"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -4822,25 +4527,11 @@
         "enabled": true,
         "picture": "https://i.ibb.co/bNLqtZ1/token-work.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 309
       },
@@ -4850,25 +4541,11 @@
         "description": "Makes a Creature immediately use its Ability",
         "picture": "https://i.ibb.co/ZBNCnQq/token-gold.png",
         "type": 2,
-        "action_on_init": {
-          "name": "Action.Set attribute",
+        "action_on_create": {
+          "name": "Action.Custom.10338 [[object Object]]",
           "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "type"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Custom.10299 [[object Object]]",
-                "type": 2,
-                "subtype": 10299,
-                "params": []
-              }
-            }
-          ]
+          "subtype": 10338,
+          "params": []
         },
         "id": 312
       },
@@ -5097,7 +4774,7 @@
           ]
         },
         "type": 1,
-        "action_on_init": {
+        "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
           "subtype": 7,
@@ -5604,6 +5281,21 @@
         "layout": 4,
         "zOrder": 9,
         "id": 333
+      },
+      {
+        "name": "Tech - Drag&Drop Transitory Place",
+        "enabled": true,
+        "placeId": 10,
+        "interactableForActiveLocalPlayer": true,
+        "visible": true,
+        "x1": 100,
+        "x2": 1100,
+        "y1": 5100,
+        "y2": 7500,
+        "layout": 6,
+        "caption": "Transit place",
+        "frame": true,
+        "id": 336
       }
     ]
   },
@@ -9108,6 +8800,511 @@
           ]
         },
         "id": 334
+      },
+      {
+        "name": "Default OnCreate - Creature",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10297 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10297,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "token_slots"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Slots"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_duration"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "duration"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Argument",
+                                  "type": 2,
+                                  "subtype": 3,
+                                  "params": [
+                                    {
+                                      "name": "name",
+                                      "value": "Timer"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 337
+      },
+      {
+        "name": "Default OnCreate - Token",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "type"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Custom.10299 [[object Object]]",
+                "type": 2,
+                "subtype": 10299,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 338
+      },
+      {
+        "name": "Default OnCreate - Event",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10300 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10300,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "show_duration"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "duration"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Timer"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 339
+      },
+      {
+        "name": "Default OnCreate - Building",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10298 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10298,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "token_slots"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Slots"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_duration"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "duration"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Argument",
+                                  "type": 2,
+                                  "subtype": 3,
+                                  "params": [
+                                    {
+                                      "name": "name",
+                                      "value": "Timer"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 340
+      },
+      {
+        "name": "Default OnCreate - Eclipse",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10321 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10321,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "show_duration"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "duration"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Timer"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 341
       },
       {
         "name": "#001:True",
