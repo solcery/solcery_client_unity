@@ -79,6 +79,8 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
                     && CheckPlaceDestinations(world, sourcePlaceEntityId, targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
+                    sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId =
+                        targetLayout.LinkedEntityId;
                     var objectId = world.GetPool<ComponentDragDropObjectId>().Get(onDropEventData.DragEntityId).ObjectId;
                     var dragDropEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId)
                         .DragDropEntityId;
