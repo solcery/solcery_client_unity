@@ -53,7 +53,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 break;
             }
 
-            IEclipseCardInContainerWidget firstEclipseCard = null;
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
@@ -96,13 +95,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
                     eclipseCard.UpdateAttachEntityId(eid);
 
-                    firstEclipseCard ??= eclipseCard;
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
                 }
             }
 
-            ApplyTokensForCard(world, cardTypes, firstEclipseCard);
+            ApplyTokensForCard(world, cardTypes);
         }
 
         private void RemoveCards(EcsWorld world, int[] entityIds)
@@ -130,12 +128,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private void ApplyTokensForCard(EcsWorld world, Dictionary<int, JObject> cardTypes, IEclipseCardInContainerWidget card)
+        private void ApplyTokensForCard(EcsWorld world, Dictionary<int, JObject> cardTypes)
         {
+            var card = _cards.Values.FirstOrDefault();
             if (card != null)
             {
                 var objectTypePool = world.GetPool<ComponentObjectType>();
                 var counter = 0;
+                card.ClearTokens();
                 foreach (var entityId in _tokensCache)
                 {
                     if (objectTypePool.Has(entityId)

@@ -76,6 +76,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
+        void IEclipseCardInContainerWidget.ClearTokens()
+        {
+            _layout.ClearTokensLayouts();
+        }
+
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;

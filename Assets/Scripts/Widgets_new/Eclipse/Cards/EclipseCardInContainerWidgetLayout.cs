@@ -94,6 +94,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             return tokensLayout.GetTokenByIndex(index);
         }
 
+        public void ClearTokensLayouts()
+        {
+            tokensLayout.Cleanup();
+        }
+
         public void UpdateName(string newName)
         {
             nameText.text = newName;
