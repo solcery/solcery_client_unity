@@ -925,6 +925,52 @@
           "value": 0
         }
       ]
+    },
+    {
+      "id": 21,
+      "tplId": 115,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 25
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 3
+        },
+        {
+          "key": "type",
+          "value": 1
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        }
+      ]
     }
   ]
 }

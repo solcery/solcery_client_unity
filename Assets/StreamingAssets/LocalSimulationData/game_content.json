@@ -4211,48 +4211,48 @@
       {
         "name": "Building Watchtower",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Shields.  +1 work for every Creature in Innermost slots (2,3,4)",
+        "picture": "https://i.ibb.co/qshRSW9/1-89-Tower.png",
         "type": 4,
         "id": 271
       },
       {
         "name": "Building Barracks",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Shields.  +1 work for every Creature in Innermost slots (2,3,4)",
+        "picture": "https://i.ibb.co/n7dp6NB/1-6-Barracks.png",
         "type": 4,
         "id": 272
       },
       {
         "name": "Building Gold mine",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Gold.  +1 work for every Creature in Outermost slots (1,5)",
+        "picture": "https://i.ibb.co/jkXFgnc/1-35-Gold-mine.png",
         "type": 4,
         "id": 273
       },
       {
         "name": "Building Kobold tunnel",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Gold. +1 work for every Creature w/o neighbours",
+        "picture": "https://i.ibb.co/Nry8Pcm/1-20-Den.png",
         "type": 4,
         "id": 274
       },
       {
         "name": "Building Decrepit Mill",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Food. +1 work for every Creature in Outermost slots (1,5)",
+        "picture": "https://i.ibb.co/BTvw2dZ/1-57-Mill.png",
         "type": 4,
         "id": 275
       },
       {
         "name": "Building Baker’s House",
         "enabled": true,
-        "description": "Init: attr Building =1;",
-        "picture": "https://i.ibb.co/ZB4PTBD/1-34-Goblin-s-dwelling.jpg",
+        "description": "Produces Food.  +1 work for every Creature with 2 neighbours",
+        "picture": "https://i.ibb.co/kxKdJhG/1-71-Shack-1.png",
         "type": 4,
         "id": 276
       },
@@ -4306,26 +4306,170 @@
           ]
         },
         "action_on_activation": {
-          "name": "Action.Custom.10184 [[object Object]]",
+          "name": "Action.Custom.10344 [[object Object]]",
           "type": 0,
-          "subtype": 10184,
+          "subtype": 10344,
           "params": [
             {
-              "name": "Place",
+              "name": "Action",
               "value": {
-                "name": "Value.Custom.10180 [[object Object]]",
-                "type": 2,
-                "subtype": 10180,
-                "params": []
-              }
-            },
-            {
-              "name": "Token type",
-              "value": {
-                "name": "Value.Custom.10226 [[object Object]]",
-                "type": 2,
-                "subtype": 10226,
-                "params": []
+                "name": "Action.Custom.10184 [[object Object]]",
+                "type": 0,
+                "subtype": 10184,
+                "params": [
+                  {
+                    "name": "Place",
+                    "value": {
+                      "name": "Value.If-Then-Else",
+                      "type": 2,
+                      "subtype": 4,
+                      "params": [
+                        {
+                          "name": "if",
+                          "value": {
+                            "name": "Condition.Custom.10151 [[object Object]]",
+                            "type": 1,
+                            "subtype": 10151,
+                            "params": [
+                              {
+                                "name": "Value 1",
+                                "value": {
+                                  "name": "Value.Modulo",
+                                  "type": 2,
+                                  "subtype": 9,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Addition",
+                                        "type": 2,
+                                        "subtype": 5,
+                                        "params": [
+                                          {
+                                            "name": "value1",
+                                            "value": {
+                                              "name": "Value.Attribute",
+                                              "type": 2,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "place"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "value2",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 1
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 10
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "Value 2",
+                                "value": {
+                                  "name": "Value.Custom.10175 [[object Object]]",
+                                  "type": 2,
+                                  "subtype": 10175,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "then",
+                          "value": {
+                            "name": "Value.Addition",
+                            "type": 2,
+                            "subtype": 5,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Value.Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "place"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "else",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 25
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Token type",
+                    "value": {
+                      "name": "Value.Custom.10226 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10226,
+                      "params": []
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -4489,10 +4633,44 @@
             {
               "name": "condition",
               "value": {
-                "name": "Condition.Custom.10280 [[object Object]]",
+                "name": "Condition.And",
                 "type": 1,
-                "subtype": 10280,
-                "params": []
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Condition.Custom.10155 [[object Object]]",
+                      "type": 1,
+                      "subtype": 10155,
+                      "params": [
+                        {
+                          "name": "Place Id",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 32
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Condition.Custom.10187 [[object Object]]",
+                      "type": 1,
+                      "subtype": 10187,
+                      "params": []
+                    }
+                  }
+                ]
               }
             },
             {
@@ -4806,21 +4984,12 @@
         "enabled": true,
         "description": "Does AMAZING THINGS",
         "action": {
-          "name": "Action.CreateEntity",
+          "name": "Action.Custom.10184 [[object Object]]",
           "type": 0,
-          "subtype": 12,
+          "subtype": 10184,
           "params": [
             {
-              "name": "card_type",
-              "value": {
-                "name": "Value.Custom.10227 [[object Object]]",
-                "type": 2,
-                "subtype": 10227,
-                "params": []
-              }
-            },
-            {
-              "name": "place",
+              "name": "Place",
               "value": {
                 "name": "Value.Constant",
                 "type": 2,
@@ -4834,17 +5003,12 @@
               }
             },
             {
-              "name": "action",
+              "name": "Token type",
               "value": {
-                "name": "Action.Event",
-                "type": 0,
-                "subtype": 11,
-                "params": [
-                  {
-                    "name": "event_name",
-                    "value": "create"
-                  }
-                ]
+                "name": "Value.Custom.10230 [[object Object]]",
+                "type": 2,
+                "subtype": 10230,
+                "params": []
               }
             }
           ]
@@ -5330,57 +5494,34 @@
         "place": 31,
         "amount": 1,
         "initializer": {
-          "name": "Action.Two actions",
+          "name": "Action.Custom.10337 [[object Object]]",
           "type": 0,
-          "subtype": 1,
+          "subtype": 10337,
           "params": [
             {
-              "name": "action1",
+              "name": "Slots",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "type"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10297 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10297,
-                      "params": []
-                    }
+                    "value": 3
                   }
                 ]
               }
             },
             {
-              "name": "action2",
+              "name": "Timer",
               "value": {
-                "name": "Action.Set attribute",
-                "type": 0,
-                "subtype": 7,
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "token_slots"
-                  },
-                  {
                     "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 3
-                        }
-                      ]
-                    }
+                    "value": 3
                   }
                 ]
               }
@@ -5638,6 +5779,49 @@
         "place": 9,
         "amount": 1,
         "id": 307
+      },
+      {
+        "name": "Creature - Top Row",
+        "enabled": true,
+        "cardType": 115,
+        "place": 25,
+        "amount": 1,
+        "initializer": {
+          "name": "Action.Custom.10337 [[object Object]]",
+          "type": 0,
+          "subtype": 10337,
+          "params": [
+            {
+              "name": "Slots",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 3
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Timer",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 3
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 322
       }
     ]
   },
@@ -6335,45 +6519,22 @@
         "id": 162
       },
       {
-        "name": "~003: Create a Token [TplId] in Place [X]",
+        "name": "~003: Create a Token [TplId] on a Creature in Place [X]",
         "enabled": true,
         "brick": {
-          "name": "Action.Two actions",
+          "name": "Action.Iterator",
           "type": 0,
-          "subtype": 1,
+          "subtype": 5,
           "params": [
             {
-              "name": "action1",
+              "name": "condition",
               "value": {
-                "name": "Action.Set variable",
-                "type": 0,
-                "subtype": 6,
+                "name": "Condition.And",
+                "type": 1,
+                "subtype": 7,
                 "params": [
                   {
-                    "name": "var_name",
-                    "value": "origin"
-                  },
-                  {
-                    "name": "value",
-                    "value": {
-                      "name": "Value.Custom.10146 [[object Object]]",
-                      "type": 2,
-                      "subtype": 10146,
-                      "params": []
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Iterator",
-                "type": 0,
-                "subtype": 5,
-                "params": [
-                  {
-                    "name": "condition",
+                    "name": "cond1",
                     "value": {
                       "name": "Condition.Custom.10155 [[object Object]]",
                       "type": 1,
@@ -6397,70 +6558,79 @@
                     }
                   },
                   {
-                    "name": "action",
+                    "name": "cond2",
                     "value": {
-                      "name": "Action.CreateEntity",
-                      "type": 0,
-                      "subtype": 12,
+                      "name": "Condition.Custom.10343 [[object Object]]",
+                      "type": 1,
+                      "subtype": 10343,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.CreateEntity",
+                "type": 0,
+                "subtype": 12,
+                "params": [
+                  {
+                    "name": "card_type",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
                       "params": [
                         {
-                          "name": "card_type",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Token type"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "place",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Place"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action",
-                          "value": {
-                            "name": "Action.Event",
-                            "type": 0,
-                            "subtype": 11,
-                            "params": [
-                              {
-                                "name": "event_name",
-                                "value": "create"
-                              }
-                            ]
-                          }
+                          "name": "name",
+                          "value": "Token type"
                         }
                       ]
                     }
                   },
                   {
-                    "name": "limit",
+                    "name": "place",
                     "value": {
-                      "name": "Value.Constant",
+                      "name": "Value.Argument",
                       "type": 2,
-                      "subtype": 0,
+                      "subtype": 3,
                       "params": [
                         {
-                          "name": "value",
-                          "value": 1
+                          "name": "name",
+                          "value": "Place"
                         }
                       ]
                     }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Event",
+                      "type": 0,
+                      "subtype": 11,
+                      "params": [
+                        {
+                          "name": "event_name",
+                          "value": "create"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "limit",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 1
                   }
                 ]
               }
@@ -9364,6 +9534,55 @@
         "id": 341
       },
       {
+        "name": "Default onActivation - Creature",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set variable",
+                "type": 0,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "var_name",
+                    "value": "current_place"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Custom.10146 [[object Object]]",
+                      "type": 2,
+                      "subtype": 10146,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Argument",
+                "type": 0,
+                "subtype": 4,
+                "params": [
+                  {
+                    "name": "name",
+                    "value": "Action"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 344
+      },
+      {
         "name": "#001:True",
         "enabled": true,
         "brick": {
@@ -10501,6 +10720,46 @@
         "id": 325
       },
       {
+        "name": "Can Receive Tokens",
+        "enabled": true,
+        "brick": {
+          "name": "Condition.Greater than",
+          "type": 1,
+          "subtype": 3,
+          "params": [
+            {
+              "name": "value1",
+              "value": {
+                "name": "Value.Attribute",
+                "type": 2,
+                "subtype": 2,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "token_slots"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "value2",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 343
+      },
+      {
         "name": "#Current place",
         "enabled": true,
         "brick": {
@@ -10791,7 +11050,7 @@
         "id": 173
       },
       {
-        "name": "~006: Leftmost Creature Number",
+        "name": "~006: № of First Creature in Row",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -10807,7 +11066,7 @@
         "id": 174
       },
       {
-        "name": "~007: Rightmost Creature Number",
+        "name": "~007: № of Last Creature in Row",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -10823,7 +11082,7 @@
         "id": 175
       },
       {
-        "name": "~008: Creature Slot Number",
+        "name": "~008: № of Card's Slot in Row",
         "enabled": true,
         "brick": {
           "name": "Value.Modulo",
@@ -11193,15 +11452,10 @@
             {
               "name": "value2",
               "value": {
-                "name": "Value.Attribute",
+                "name": "Value.Custom.10176 [[object Object]]",
                 "type": 2,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "attr_name",
-                    "value": "creature_number"
-                  }
-                ]
+                "subtype": 10176,
+                "params": []
               }
             }
           ]
@@ -12082,6 +12336,70 @@
           ]
         },
         "id": 335
+      },
+      {
+        "name": "Get Card's Row by Current Place",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Subtraction",
+          "type": 2,
+          "subtype": 6,
+          "params": [
+            {
+              "name": "value1",
+              "value": {
+                "name": "Value.Argument",
+                "type": 2,
+                "subtype": 3,
+                "params": [
+                  {
+                    "name": "name",
+                    "value": "Current Place"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "value2",
+              "value": {
+                "name": "Value.Modulo",
+                "type": 2,
+                "subtype": 9,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Current Place"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 10
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 342
       }
     ]
   }
