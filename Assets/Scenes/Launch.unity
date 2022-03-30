@@ -858,7 +858,6 @@ GameObject:
   m_Component:
   - component: {fileID: 947319657}
   - component: {fileID: 947319660}
-  - component: {fileID: 947319659}
   - component: {fileID: 947319658}
   m_Layer: 0
   m_Name: Camera
@@ -915,14 +914,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &947319659
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947319656}
-  m_Enabled: 1
 --- !u!20 &947319660
 Camera:
   m_ObjectHideFlags: 0
