@@ -6,6 +6,7 @@ using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
 using Solcery.Games.Contents;
 using Solcery.Models.Play;
+using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
 using Solcery.React;
 #endif
@@ -46,6 +47,7 @@ namespace Solcery.Games
         JObject IGame.GameContent => _gameContentJson;
         TooltipController IGame.TooltipController => _tooltipController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
+        IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
         
         JObject IGame.GameStatePopAndClear
         {
@@ -66,22 +68,23 @@ namespace Solcery.Games
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
+        private IServiceRenderWidget _serviceRenderWidget;
         private JObject _gameContentJson;
         private readonly Stack<JObject> _gameStates;
         private readonly TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
 
-        public static IGame Create(IWidgetCanvas widgetCanvas)
+        public static IGame Create(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
         {
-            return new Game(widgetCanvas);
+            return new Game(widgetCanvas, rendererLayout);
         }
 
-        private Game(IWidgetCanvas widgetCanvas)
+        private Game(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
         {
             _widgetCanvas = widgetCanvas;
             _gameStates = new Stack<JObject>();
             CreateModel();
-            CreateServices(widgetCanvas);
+            CreateServices(widgetCanvas, rendererLayout);
             _tooltipController = TooltipController.Create(widgetCanvas, _serviceResource);
             _contentAttributes = GameContentAttributes.Create();
         }
@@ -91,8 +94,10 @@ namespace Solcery.Games
             _playModel = PlayModel.Create();
         }
         
-        private void CreateServices(IWidgetCanvas widgetCanvas)
+        private void CreateServices(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
         {
+            _serviceRenderWidget = ServiceRenderWidget.Create(rendererLayout);
+            
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             

@@ -3,6 +3,7 @@ using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contents;
 using Solcery.Models.Play;
+using Solcery.Services.Renderer;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
 using Solcery.Widgets_new.Canvas;
@@ -30,6 +31,7 @@ namespace Solcery.Games
         public JObject GameStatePopAndClear { get; }
         public TooltipController TooltipController { get; }
         public IGameContentAttributes GameContentAttributes { get; }
+        public IServiceRenderWidget ServiceRenderWidget { get; }
 
         public void Init();
         public void Update(float dt);

@@ -15,6 +15,8 @@ namespace Solcery
         private RootDragDropLayout dragDropCanvas;
         [SerializeField]
         private Camera rootCamera;
+        [SerializeField]
+        private RendererLayout rendererLayout;
         
         private IGame _game;
 
@@ -33,7 +35,7 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas));
+            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas), rendererLayout);
             _game.Init();
         }
 

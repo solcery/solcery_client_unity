@@ -908,7 +908,7 @@ MonoBehaviour:
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
-  m_StopNaN: 0
+  m_StopNaN: 1
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
@@ -932,8 +932,8 @@ Camera:
   m_GameObject: {fileID: 947319656}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -954,7 +954,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e3c39988bebdb48e29246f4ea37bc08c, type: 2}
   m_TargetDisplay: 0
@@ -1526,7 +1526,7 @@ GameObject:
   - component: {fileID: 1254207102}
   - component: {fileID: 1254207104}
   - component: {fileID: 1254207103}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 2
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2318,13 +2318,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022818157}
+  - component: {fileID: 2022818158}
   m_Layer: 0
   m_Name: Widget Renderer To Texture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2022818157
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,6 +2343,20 @@ Transform:
   m_Father: {fileID: 2071866657}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022818158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022818156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445f4171cfa4419087cc3c3a7012307f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderCamera: {fileID: 947319660}
+  renderRectTransform: {fileID: 1254207102}
 --- !u!1 &2071866656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,6 +2412,7 @@ MonoBehaviour:
   uiCanvas: {fileID: 1944453779}
   dragDropCanvas: {fileID: 75409948}
   rootCamera: {fileID: 1687258584}
+  rendererLayout: {fileID: 2022818158}
 --- !u!1 &2115487933
 GameObject:
   m_ObjectHideFlags: 0
