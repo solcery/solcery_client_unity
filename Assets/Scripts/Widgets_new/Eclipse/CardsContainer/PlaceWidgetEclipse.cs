@@ -76,31 +76,27 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     {
                         eclipseCard.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
                     }
-
+                    
                     var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                    var showTimer = attributes.TryGetValue("show_duration", out var showDuration) &&
-                                    showDuration.Current > 0;
-                    var timerDuration = attributes.TryGetValue("duration", out var duration) ? duration.Current : 0;
+                    
+                    // drug and drop
+                    AttachDrugAndDrop(world, entityId, objectId, eclipseCard);
+                    
+                    // timer
+                    var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
+                    var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
                     eclipseCard.UpdateTimer(showTimer, timerDuration);
 
-                    var eid = world.NewEntity();
-                    world.GetPool<ComponentDragDropTag>().Add(eid);
-                    world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
-                    world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId =
-                        Layout.LinkedEntityId;
-                    world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType =
-                        world.GetPool<ComponentEclipseCardType>().Has(entityId)
-                            ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
-                            : EclipseCardTypes.None;
-                    world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
-                    eclipseCard.UpdateAttachEntityId(eid);
-
+                    // tokens
+                    var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
+                    eclipseCard.UpdateTokenSlots(tokenSlots);
+                    
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
                 }
             }
 
-            ApplyTokensForCard(world, cardTypes);
+            AttachTokensForCard(world, cardTypes);
         }
 
         private void RemoveCards(EcsWorld world, int[] entityIds)
@@ -128,19 +124,19 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private void ApplyTokensForCard(EcsWorld world, Dictionary<int, JObject> cardTypes)
+        private void AttachTokensForCard(EcsWorld world, Dictionary<int, JObject> cardTypes)
         {
             var card = _cards.Values.FirstOrDefault();
             if (card != null)
             {
                 var objectTypePool = world.GetPool<ComponentObjectType>();
                 var counter = 0;
-                card.ClearTokens();
                 foreach (var entityId in _tokensCache)
                 {
                     if (objectTypePool.Has(entityId)
                         && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                     {
+                        var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
                         card.AttachToken(counter, cardTypeDataObject);
                         counter++;
                     }
@@ -154,8 +150,23 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _tokensCache.Clear();
         }
 
+        void AttachDrugAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardInContainerWidget eclipseCard)
+        {
+            var eid = world.NewEntity();
+            world.GetPool<ComponentDragDropTag>().Add(eid);
+            world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+            world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId =
+                Layout.LinkedEntityId;
+            world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType =
+                world.GetPool<ComponentEclipseCardType>().Has(entityId)
+                    ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
+                    : EclipseCardTypes.None;
+            world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
+            eclipseCard.UpdateAttachEntityId(eid);        
+        }
+        
         #region IApplyDropWidget
-
+        
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
             //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");

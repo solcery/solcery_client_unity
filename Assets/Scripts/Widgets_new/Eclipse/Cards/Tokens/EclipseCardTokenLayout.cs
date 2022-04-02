@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         
         public void UpdateSprite(Texture2D texture)
         {
+            icon.gameObject.SetActive(true);
             icon.sprite =  Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100.0f);
         }
@@ -25,7 +26,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
             }
             _tooltipBehaviour.SetTooltipId(tooltipId);
         }
-
+        
         public void Cleanup()
         {
             if (icon.sprite != null)
@@ -33,6 +34,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
                 Destroy(icon.sprite);
             }
             icon.sprite = null;
+            icon.gameObject.SetActive(false);
             
             if (_tooltipBehaviour != null)
             {
