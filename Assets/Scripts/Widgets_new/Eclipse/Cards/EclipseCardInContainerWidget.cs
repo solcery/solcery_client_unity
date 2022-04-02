@@ -51,7 +51,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IEclipseCardInContainerWidget.UpdateTimer(bool show, int duration)
         {
-            _layout.UpdateTimer(show, duration);
+            _layout.TimerLayout.gameObject.SetActive(show);
+            _layout.TimerLayout.UpdateTimer(duration);
         }
 
         public void UpdateTokenSlots(int count)

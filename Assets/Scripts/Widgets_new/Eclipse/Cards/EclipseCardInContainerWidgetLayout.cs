@@ -43,6 +43,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
+        public EclipseCardTimerLayout TimerLayout => timerLayout;
         
         private void Awake()
         {
@@ -80,7 +81,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void Cleanup()
         {
             tokensLayout.Cleanup();
-            timerLayout.UpdateTimer(false, 0);
+            timerLayout.Cleanup();
         }
         
         private void OnDestroy()
@@ -114,11 +115,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Destroy(_sprite);
                 _sprite = null;
             }
-        }
-        
-        public void UpdateTimer(bool isShow, int timer)
-        {
-            timerLayout.UpdateTimer(isShow, timer);
         }
         
         public void RaycastOn()
