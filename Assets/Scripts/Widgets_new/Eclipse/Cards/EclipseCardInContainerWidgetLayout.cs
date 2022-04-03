@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
-using Solcery.Widgets_new.Eclipse.Cards.Traits;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using TMPro;
 using UnityEngine;
@@ -22,8 +21,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private RectTransform rectTransform;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
-        [SerializeField]
-        private EclipseCardTraitsLayout traitsLayout;
         [SerializeField]
         private EclipseCardTokensLayout tokensLayout;
         [SerializeField]
@@ -45,6 +42,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
 
+        public EclipseCardTokensLayout TokensLayout => tokensLayout;
+        public EclipseCardTimerLayout TimerLayout => timerLayout;
+        
         private void Awake()
         {
             _anchoredPosition = rectTransform.anchoredPosition;
@@ -81,22 +81,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void Cleanup()
         {
             tokensLayout.Cleanup();
-            timerLayout.UpdateTimer(false, 0);
+            timerLayout.Cleanup();
         }
         
         private void OnDestroy()
         {
             DestroySprite();
-        }
-
-        public EclipseCardTokenLayout GetTokenLayout(int index)
-        {
-            return tokensLayout.GetTokenByIndex(index);
-        }
-
-        public void ClearTokensLayouts()
-        {
-            tokensLayout.Cleanup();
         }
 
         public void UpdateName(string newName)
@@ -125,11 +115,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Destroy(_sprite);
                 _sprite = null;
             }
-        }
-
-        public void UpdateTimer(bool isShow, int timer)
-        {
-            timerLayout.UpdateTimer(isShow, timer);
         }
         
         public void RaycastOn()

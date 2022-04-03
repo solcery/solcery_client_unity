@@ -11,11 +11,13 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Timers
         [SerializeField]
         private TMP_Text timerText;
 
-        public void UpdateTimer(bool isShow, int timer)
+        public void UpdateTimer(int timer)
         {
-            timerIcon.enabled = isShow;
-            timerText.enabled = isShow;
             timerText.text = timer.ToString();
+        }
+
+        public void Cleanup()
+        {
         }
     }
 }

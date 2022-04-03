@@ -51,12 +51,18 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IEclipseCardInContainerWidget.UpdateTimer(bool show, int duration)
         {
-            _layout.UpdateTimer(show, duration);
+            _layout.TimerLayout.gameObject.SetActive(show);
+            _layout.TimerLayout.UpdateTimer(duration);
+        }
+
+        public void UpdateTokenSlots(int count)
+        {
+            _layout.TokensLayout.UpdateTokenSlots(count);
         }
 
         void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
         {
-            var tokenLayout = _layout.GetTokenLayout(index);
+            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(index);
             if (tokenLayout != null)
             {
                 if (data.TryGetValue("picture", out string picture)
@@ -75,12 +81,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Debug.LogWarning("Can't set token for slot on the eclipse card!");
             }
         }
-
-        void IEclipseCardInContainerWidget.ClearTokens()
-        {
-            _layout.ClearTokensLayouts();
-        }
-
+        
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;
