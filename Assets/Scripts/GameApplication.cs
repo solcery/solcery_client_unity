@@ -1,4 +1,6 @@
 using Solcery.Games;
+using Solcery.Games.DTO;
+using Solcery.Services.Renderer.DTO;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
@@ -16,7 +18,9 @@ namespace Solcery
         [SerializeField]
         private Camera rootCamera;
         [SerializeField]
-        private RendererLayout rendererLayout;
+        private Transform renderFrame;
+        [SerializeField]
+        private GameObject renderPrefab;
         
         private IGame _game;
 
@@ -35,7 +39,9 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas), rendererLayout);
+            _game = Games.Game.Create(GameInitDto.Create(rootCamera,
+                WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas),
+                ServiceRenderDto.Create(renderFrame, renderPrefab)));
             _game.Init();
         }
 

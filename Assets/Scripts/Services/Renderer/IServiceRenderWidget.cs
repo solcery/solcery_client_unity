@@ -1,10 +1,11 @@
-using Solcery.Services.Renderer.Widget;
+using Solcery.Services.Renderer.Widgets;
 using UnityEngine;
 
 namespace Solcery.Services.Renderer
 {
     public interface IServiceRenderWidget
     {
-        IWidgetRenderData AddWidget(RectTransform widget);
+        IWidgetRenderData CreateWidgetRender(RectTransform widget);
+        void ReleaseWidgetRender(RectTransform widget);
     }
 }

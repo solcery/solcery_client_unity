@@ -5,6 +5,7 @@ using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
 using Solcery.Games.Contents;
+using Solcery.Games.DTO;
 using Solcery.Models.Play;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -30,11 +31,13 @@ using Solcery.Widgets_new.Simple.Pictures;
 using Solcery.Widgets_new.Simple.Titles;
 using Solcery.Widgets_new.Simple.Widgets;
 using Solcery.Widgets_new.Tooltip;
+using UnityEngine;
 
 namespace Solcery.Games
 {
     public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
+        Camera IGame.MainCamera => _mainCamera;
         ITransportService IGame.TransportService => _transportService;
         IServiceBricks IGame.ServiceBricks => _serviceBricks;
         IServiceResource IGame.ServiceResource => _serviceResource;
@@ -59,6 +62,7 @@ namespace Solcery.Games
             }
         }
 
+        private Camera _mainCamera;
         private ITransportService _transportService;
         private IServiceBricks _serviceBricks;
         private IServiceResource _serviceResource;
@@ -74,18 +78,19 @@ namespace Solcery.Games
         private readonly TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
 
-        public static IGame Create(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
+        public static IGame Create(IGameInitDto dto)
         {
-            return new Game(widgetCanvas, rendererLayout);
+            return new Game(dto);
         }
 
-        private Game(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
+        private Game(IGameInitDto dto)
         {
-            _widgetCanvas = widgetCanvas;
+            _mainCamera = dto.MainCamera;
+            _widgetCanvas = dto.WidgetCanvas;
             _gameStates = new Stack<JObject>();
             CreateModel();
-            CreateServices(widgetCanvas, rendererLayout);
-            _tooltipController = TooltipController.Create(widgetCanvas, _serviceResource);
+            CreateServices(dto);
+            _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
             _contentAttributes = GameContentAttributes.Create();
         }
         
@@ -94,9 +99,9 @@ namespace Solcery.Games
             _playModel = PlayModel.Create();
         }
         
-        private void CreateServices(IWidgetCanvas widgetCanvas, RendererLayout rendererLayout)
+        private void CreateServices(IGameInitDto dto)
         {
-            _serviceRenderWidget = ServiceRenderWidget.Create(rendererLayout);
+            _serviceRenderWidget = ServiceRenderWidget.Create(dto.ServiceRenderDto);
             
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
@@ -108,14 +113,14 @@ namespace Solcery.Games
 #endif
 
             _serviceResource = ServiceResource.Create(this);
-            _placeWidgetFactory = PlaceWidgetFactory.Create(this, widgetCanvas);
+            _placeWidgetFactory = PlaceWidgetFactory.Create(this, _widgetCanvas);
             RegistrationPlaceWidgetTypes();
 
-            _cardInContainerWidgetPool = WidgetPool<ICardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _cardInContainerWidgetPool = WidgetPool<ICardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_card", CardInContainerWidget.Create);
-            _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_token", TokenInContainerWidget.Create);
-            _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
         }
 

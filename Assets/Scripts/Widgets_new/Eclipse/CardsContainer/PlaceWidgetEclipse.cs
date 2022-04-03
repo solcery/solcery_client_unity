@@ -98,7 +98,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
 
-                    Game.ServiceRenderWidget.AddWidget(eclipseCard.Layout.RectTransform);
+                    Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
                 }
             }
 

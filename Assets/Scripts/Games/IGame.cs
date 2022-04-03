@@ -1,5 +1,4 @@
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contents;
 using Solcery.Models.Play;
@@ -13,11 +12,13 @@ using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Factories;
 using Solcery.Widgets_new.Tooltip;
+using UnityEngine;
 
 namespace Solcery.Games
 {
     public interface IGame
     {
+        public Camera MainCamera { get; }
         public ITransportService TransportService { get; }
         public IServiceBricks ServiceBricks { get; }
         public IServiceResource ServiceResource { get; }

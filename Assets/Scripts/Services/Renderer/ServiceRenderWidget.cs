@@ -1,72 +1,56 @@
-using Solcery.Services.Renderer.Widget;
+using System.Collections.Generic;
+using Solcery.Services.Renderer.DTO;
+using Solcery.Services.Renderer.Widgets;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 
 namespace Solcery.Services.Renderer
 {
     public sealed class ServiceRenderWidget : IServiceRenderWidget
     {
-        private readonly Camera _renderCamera;
-        private readonly RectTransform _canvasRectTransform;
+        private readonly IServiceRenderDto _dto;
+        private readonly Dictionary<RectTransform, IWidgetRenderData> _widgetRenderList;
 
-        public static IServiceRenderWidget Create(RendererLayout rendererLayout)
+        public static IServiceRenderWidget Create(IServiceRenderDto dto)
         {
-            return new ServiceRenderWidget(rendererLayout);
+            return new ServiceRenderWidget(dto);
         }
 
-        private ServiceRenderWidget(RendererLayout rendererLayout)
+        private ServiceRenderWidget(IServiceRenderDto dto)
         {
-            _renderCamera = rendererLayout.RenderCamera;
-            _canvasRectTransform = rendererLayout.RenderRectTransform;
+            _dto = dto;
+            _widgetRenderList = new Dictionary<RectTransform, IWidgetRenderData>();
         }
 
-        private GameObject _widget;
+        private int count = 0;
 
-        public IWidgetRenderData AddWidget(RectTransform widget)
+        IWidgetRenderData IServiceRenderWidget.CreateWidgetRender(RectTransform widget)
         {
-            if (_widget != null)
+            if (count > 0)
             {
                 return null;
             }
 
-            var rect = widget.rect;
-            var width = rect.width;
-            var height = rect.height;
-            var powerOf2 = NearestPowerOf2_4(Mathf.CeilToInt(Mathf.Max(width, height)));
-
-            var rtt = new RenderTexture(powerOf2, powerOf2, 16, GraphicsFormat.R8G8B8A8_UNorm);
-
-            var crtt = _renderCamera.targetTexture;
-            if (crtt != null)
-            {
-                crtt.Release();
-            }
-
-            _renderCamera.targetTexture = rtt;
-            _canvasRectTransform.ForceUpdateRectTransforms();
+            count++;
             
-            _widget = Object.Instantiate(widget.gameObject);
-            var widgetRectTransformRect = _widget.GetComponent<RectTransform>();
-            widgetRectTransformRect.SetParent(_canvasRectTransform);
-            widgetRectTransformRect.pivot = Vector2.up;
-            widgetRectTransformRect.localScale = Vector3.one;
-            widgetRectTransformRect.position = Vector3.zero;
-            widgetRectTransformRect.ForceUpdateRectTransforms();
-
-            return WidgetRenderData.Create(new Vector2(width / powerOf2, height / powerOf2), rtt);
-        }
-        
-        private int NearestPowerOf2_4(int n)
-        {
-            unsafe
+            if (_widgetRenderList.ContainsKey(widget))
             {
-                const int mantissaMask = (1<<23) - 1;  
-                (*(float*)&n) = n;  
-                n = n + mantissaMask & ~mantissaMask;  
-                n = (int) *(float*)&n; 
+                return _widgetRenderList[widget];
             }
-             
-            return n;
+            
+            var renderObject = WidgetRenderData.Create(widget, _dto.WidgetRenderPrefab, _dto.Frame);
+            _widgetRenderList.Add(widget, renderObject);
+            return renderObject;
+        }
+
+        void IServiceRenderWidget.ReleaseWidgetRender(RectTransform widget)
+        {
+            if (!_widgetRenderList.TryGetValue(widget, out var widgetRender))
+            {
+                return;
+            }
+            
+            widgetRender.Release();
+            _widgetRenderList.Remove(widget);
         }
     }
 }

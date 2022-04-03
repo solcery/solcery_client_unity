@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Solcery
+namespace Solcery.Services.Renderer.Layouts
 {
-    public sealed class RendererLayout : MonoBehaviour
+    public sealed class WidgetRendererLayout : MonoBehaviour
     {
         [SerializeField]
         private Camera renderCamera;
