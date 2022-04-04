@@ -101,7 +101,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         eclipseCard.UpdateFromCardTypeData(objectId, cardTypeDataObject);
                     }
                     
-                    // drug and drop
+                    // drag and drop
                     AttachDragAndDrop(world, entityId, objectId, eclipseCard);
 
                     // timer
