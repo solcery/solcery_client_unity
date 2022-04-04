@@ -13,7 +13,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType);
         void UpdateSiblingIndex(int siblingIndex);
         void UpdateTokenSlots(int count);
-        void AttachToken(int index, JObject data);
+        void AttachToken(int slot, JObject data);
         void UpdateTimer(bool show, int duration);
     }
 }

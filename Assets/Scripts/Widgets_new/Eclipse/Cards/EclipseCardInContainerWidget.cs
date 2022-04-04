@@ -60,9 +60,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout.TokensLayout.UpdateTokenSlots(count);
         }
 
-        void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
+        void IEclipseCardInContainerWidget.AttachToken(int slot, JObject data)
         {
-            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(index);
+            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(slot - 1);
             if (tokenLayout != null)
             {
                 if (data.TryGetValue("picture", out string picture)

@@ -18,7 +18,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         
         public EclipseCardTokenLayout GetTokenByIndex(int index)
         {
-            return index < tokens.Count ? tokens[index] : null;
+            return index >= 0 && index < tokens.Count ? tokens[index] : null;
         }
 
         public void Cleanup()
