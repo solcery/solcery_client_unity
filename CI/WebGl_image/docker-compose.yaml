@@ -1,9 +1,0 @@
-version: '3.0'
-
-services:
-  webgl:
-    container_name: solcery_unity_client
-    image: solcery_unity_client
-    build: .
-    ports:
-      - "8080:80"
