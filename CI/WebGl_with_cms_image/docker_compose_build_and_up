@@ -1,0 +1,10 @@
+#!/bin/bash
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+PROJECT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo "Try build image!"
+docker-compose -f "$PROJECT"/docker-compose.yaml build --build-arg BRANCH=$1 --no-cache
+echo "Build done!"
+echo "Try up image!"
+docker-compose -f "$PROJECT"/docker-compose.yaml up
+echo "Up done!"
+exit 0

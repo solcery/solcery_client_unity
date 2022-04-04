@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+  solcery_cms_dev:
+    container_name: solcery_cms
+    image: solcery_cms
+    build: 
+      context: .
+      args:
+        BRANCH: .
+    ports:
+      - "3000:3000"
+    command: yarn start
