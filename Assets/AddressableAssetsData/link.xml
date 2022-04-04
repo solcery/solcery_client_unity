@@ -3,6 +3,10 @@
     <type fullname="Solcery.Widgets_new.Cards.Widgets.CardInContainerWidgetLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Container.Hands.PlaceWidgetHandLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Container.Stacks.PlaceWidgetStackLayout" preserve="all" />
+    <type fullname="Solcery.Widgets_new.Eclipse.Cards.EclipseCardInContainerWidgetLayout" preserve="all" />
+    <type fullname="Solcery.Widgets_new.Eclipse.Cards.Timers.EclipseCardTimerLayout" preserve="all" />
+    <type fullname="Solcery.Widgets_new.Eclipse.Cards.Tokens.EclipseCardTokenLayout" preserve="all" />
+    <type fullname="Solcery.Widgets_new.Eclipse.Cards.Tokens.EclipseCardTokensLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Eclipse.CardsContainer.PlaceWidgetEclipseLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Eclipse.Tokens.TokenInContainerWidgetLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Eclipse.TokensStockpile.PlaceWidgetEclipseTokensLayout" preserve="all" />
@@ -10,6 +14,7 @@
     <type fullname="Solcery.Widgets_new.Simple.Pictures.PlaceWidgetPictureLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Simple.Titles.PlaceWidgetTitleLayout" preserve="all" />
     <type fullname="Solcery.Widgets_new.Simple.Widgets.PlaceWidgetWidgetLayout" preserve="all" />
+    <type fullname="Solcery.Widgets_new.Tooltip.TooltipLayout" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -58,6 +63,7 @@
     <type fullname="UnityEngine.UI.AspectRatioFitter" preserve="all" />
     <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
+    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.Mask" preserve="all" />
     <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
