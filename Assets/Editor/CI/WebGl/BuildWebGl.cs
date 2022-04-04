@@ -7,27 +7,33 @@ namespace Solcery.Editor.CI.WebGl
 {
     public static class BuildWebGl
     {
-        [MenuItem("Build/WebGl/Develop")]
         public static void BuildDevelop()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
         }
-        
-        [MenuItem("Build/WebGl/Develop with local simulation")]
+
+        public static void BuildDevelopWithCms(string branch)
+        {
+            BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGlWithCms),
+                BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
+                false, BuildOptions.Development);
+            DocketUtils.DockerImageWebGlWithCmsUp(branch);
+        }
+
         public static void BuildDevelopWithLocalSimulation()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.CreateWithLocalSimulation());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
         }
 
-        [MenuItem("Build/WebGl/Release")]
         public static void BuildRelease()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationProd.Create());
@@ -48,7 +54,7 @@ namespace Solcery.Editor.CI.WebGl
             }
 
             var outputPath = BuildUtils.GetOutputPath(isDevelopBuild
-                ? BuildSettings.DefaultOutputPathDevelopWebGl
+                ? BuildSettings.DefaultOutputPathWebGl
                 : BuildSettings.DefaultOutputPathReleaseWebGl);
 
             var linkerTarget = WebGLLinkerTarget.Wasm;
