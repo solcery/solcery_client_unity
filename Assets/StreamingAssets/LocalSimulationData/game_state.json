@@ -3,6 +3,10 @@
     {
       "key": "finished",
       "value": 0
+    },
+    {
+      "key": "input_lock",
+      "value": 0
     }
   ],
   "objects": [
@@ -49,6 +53,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -95,6 +107,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -141,6 +161,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -187,6 +215,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -233,6 +269,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -279,6 +323,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -325,6 +377,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -371,6 +431,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -417,6 +485,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -463,6 +539,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -509,6 +593,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -555,6 +647,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -601,6 +701,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -647,6 +755,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -693,6 +809,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -739,6 +863,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -785,6 +917,14 @@
         {
           "key": "duration",
           "value": 15
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -831,12 +971,20 @@
         {
           "key": "duration",
           "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
     {
       "id": 19,
-      "tplId": 63,
+      "tplId": 303,
       "attrs": [
         {
           "key": "place",
@@ -876,6 +1024,14 @@
         },
         {
           "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
           "value": 0
         }
       ]
@@ -923,6 +1079,14 @@
         {
           "key": "duration",
           "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -969,6 +1133,14 @@
         {
           "key": "duration",
           "value": 2
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1015,6 +1187,14 @@
         {
           "key": "duration",
           "value": 2
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1061,6 +1241,14 @@
         {
           "key": "duration",
           "value": 2
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1107,6 +1295,14 @@
         {
           "key": "duration",
           "value": 2
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1153,6 +1349,14 @@
         {
           "key": "duration",
           "value": 2
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1199,6 +1403,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1245,6 +1457,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1291,6 +1511,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1337,6 +1565,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1383,6 +1619,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1429,6 +1673,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1475,6 +1727,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1521,6 +1781,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1567,6 +1835,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1613,6 +1889,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1659,6 +1943,14 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
@@ -1705,12 +1997,20 @@
         {
           "key": "duration",
           "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
     {
       "id": 38,
-      "tplId": 303,
+      "tplId": 462,
       "attrs": [
         {
           "key": "place",
@@ -1751,12 +2051,236 @@
         {
           "key": "duration",
           "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
         }
       ]
     },
     {
       "id": 39,
-      "tplId": 436,
+      "tplId": 477,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 14
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "tplId": 443,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "tplId": 444,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "tplId": 263,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 22
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 3
+        },
+        {
+          "key": "type",
+          "value": 1
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "tplId": 478,
       "attrs": [
         {
           "key": "place",
@@ -1796,6 +2320,338 @@
         },
         {
           "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "tplId": 266,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 21
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 3
+        },
+        {
+          "key": "type",
+          "value": 1
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 3
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "tplId": 481,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "tplId": 482,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "tplId": 241,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "tplId": 243,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "tplId": 243,
+      "attrs": [
+        {
+          "key": "place",
+          "value": 1
+        },
+        {
+          "key": "number",
+          "value": 0
+        },
+        {
+          "key": "show_duration",
+          "value": 0
+        },
+        {
+          "key": "token_slots",
+          "value": 0
+        },
+        {
+          "key": "type",
+          "value": 0
+        },
+        {
+          "key": "creature_number",
+          "value": 0
+        },
+        {
+          "key": "token_count",
+          "value": 0
+        },
+        {
+          "key": "token_type",
+          "value": 0
+        },
+        {
+          "key": "token_origin",
+          "value": 0
+        },
+        {
+          "key": "duration",
+          "value": 0
+        },
+        {
+          "key": "creature",
+          "value": 0
+        },
+        {
+          "key": "highlighted",
           "value": 0
         }
       ]
