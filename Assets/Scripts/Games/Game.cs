@@ -53,7 +53,15 @@ namespace Solcery.Games
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
 
-        JObject IGame.GameStatePopAndClear => _gameState;
+        JObject IGame.GameStatePopAndClear
+        {
+            get
+            {
+                var newGs = _gameState;
+                _gameState = null;
+                return newGs;
+            }
+        }
 
         private Camera _mainCamera;
         private ITransportService _transportService;
