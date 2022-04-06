@@ -4,6 +4,7 @@ using Solcery.Services.Renderer.DTO;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery
 {
@@ -21,6 +22,8 @@ namespace Solcery
         private Transform renderFrame;
         [SerializeField]
         private GameObject renderPrefab;
+        [SerializeField]
+        private Graphic raycastBlockTouches;
         
         private IGame _game;
 
@@ -62,6 +65,11 @@ namespace Solcery
             var dY = worldPosition.y / Screen.height;
             var rect = uiCanvas.rect;
             return new Vector3(rect.width * dX, rect.height * dY);
+        }
+
+        public void EnableBlockTouches(bool enable)
+        {
+            raycastBlockTouches.raycastTarget = enable;
         }
     }
 }

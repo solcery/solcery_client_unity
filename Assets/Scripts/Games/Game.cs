@@ -6,6 +6,7 @@ using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
 using Solcery.Games.Contents;
 using Solcery.Games.DTO;
+using Solcery.Games.States;
 using Solcery.Models.Play;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -51,16 +52,8 @@ namespace Solcery.Games
         TooltipController IGame.TooltipController => _tooltipController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
-        
-        JObject IGame.GameStatePopAndClear
-        {
-            get
-            {
-                var lastGameContent = _gameStates.Count > 0 ? _gameStates.Pop() : null;
-                _gameStates.Clear();
-                return lastGameContent;
-            }
-        }
+
+        JObject IGame.GameStatePopAndClear => _gameState;
 
         private Camera _mainCamera;
         private ITransportService _transportService;
@@ -74,7 +67,8 @@ namespace Solcery.Games
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private IServiceRenderWidget _serviceRenderWidget;
         private JObject _gameContentJson;
-        private readonly Stack<JObject> _gameStates;
+        private readonly Queue<GameStatePackage> _gameStatePackages;
+        private JObject _gameState;
         private readonly TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
 
@@ -87,7 +81,7 @@ namespace Solcery.Games
         {
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
-            _gameStates = new Stack<JObject>();
+            _gameStatePackages = new Queue<GameStatePackage>();
             CreateModel();
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
@@ -163,13 +157,15 @@ namespace Solcery.Games
 
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
-            _gameStates.Push(gameStateJson);
+            GameApplication.Instance.EnableBlockTouches(true);
+            _gameStatePackages.Enqueue(GameStatePackage.Create(gameStateJson));
         }
 
         private void Init(JObject gameContentJson)
         {
             _playModel.Init(this, gameContentJson);
             LoaderScreen.Hide();
+            GameApplication.Instance.EnableBlockTouches(false);
         }
 
         private void RegistrationPlaceWidgetTypes()
@@ -253,6 +249,31 @@ namespace Solcery.Games
         {
             _tooltipController.Update(dt);
             _transportService.Update(dt);
+
+            if (_gameStatePackages.Count > 0)
+            {
+                var state = _gameStatePackages.Peek();
+
+                if (!state.IsCompleted)
+                {
+                    var msec = (int)(dt * 1000f);
+                    if (state.TryGetGameState(msec, out var gameState))
+                    {
+                        _gameState = gameState;
+                    }
+                }
+
+                if (state.IsCompleted)
+                {
+                    _gameStatePackages.Dequeue();
+                }
+
+                if (_gameStatePackages.Count <= 0)
+                {
+                    GameApplication.Instance.EnableBlockTouches(false);
+                }
+            }
+            
             _playModel.Update(dt);
         }
 
