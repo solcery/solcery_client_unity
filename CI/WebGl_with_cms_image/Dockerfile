@@ -6,7 +6,7 @@ WORKDIR solcery_cms
 RUN git fetch
 ARG BRANCH
 RUN git checkout $BRANCH
-COPY ./WebGl/StreamingAssets public/new_game/StreamingAssets
+COPY ./WebGl/StreamingAssets public/StreamingAssets
 COPY ./WebGl/Build public/new_game
 RUN yarn install
 RUN yarn build
