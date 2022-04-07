@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
 using Solcery.Games;
+using Solcery.Games.Contexts.GameStates;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
 using UnityEngine;
@@ -48,17 +49,23 @@ namespace Solcery.Services.LocalSimulation
         void IServiceLocalSimulation.Init(IGame game, JObject gameState)
         {
             _simulationModel.Init(this, game, _serviceCommands, gameState);
-            CallAllActionWithParams(_listOnUpdateGameState, gameState);
+            
+            // TODO: fix it
+            var gs = new JObject();
+            var stateArray = new JArray();
+            gs.Add("states", stateArray);
+            stateArray.Add(new JObject
+            {
+                {"id", new JValue(0)},
+                {"state_type", new JValue((int)ContextGameStateTypes.GameState)},
+                {"value", gameState}
+            });
+
+            CallAllActionWithParams(_listOnUpdateGameState, gs);
         }
 
         void IServiceLocalSimulation.PushCommand(JObject command)
         {
-            // TODO: fix it hack!!!
-            if (_gameStates.Count > 0)
-            {
-                return;
-            }
-            
             Debug.Log(command.ToString(Formatting.Indented));
             _serviceCommands.PushCommand(command);
         }
@@ -82,19 +89,14 @@ namespace Solcery.Services.LocalSimulation
                 {
                     _simulationModel?.Update(dt);
                 }
-            }
 
-            if (_gameStates.Count > 0)
-            {
-                var gss = _gameStates.Peek();
-                if (gss.TryGetGameState((int) (Time.deltaTime * 1000), out var gsd))
+                while (_gameStates.Count > 0)
                 {
-                    CallAllActionWithParams(_listOnUpdateGameState, gsd);
-                }
-
-                if (gss.IsEmpty)
-                {
-                    _gameStates.Dequeue();
+                    var gss = _gameStates.Dequeue();
+                    if (gss.TryGetGameState((int) (Time.deltaTime * 1000), out var gsd))
+                    {
+                        CallAllActionWithParams(_listOnUpdateGameState, gsd);
+                    }
                 }
             }
         }

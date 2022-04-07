@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
@@ -10,12 +11,14 @@ namespace Solcery.Games.Contexts.GameStates
 {
     public sealed class ContextGameStates : IContextGameStates
     {
-        public bool IsEmpty => _gameStates.Count <= 0;
+        public bool IsEmpty => _states.Count <= 0;
 
         private readonly EcsWorld _world;
         private readonly EcsFilter _filterGameAttributes;
         private readonly EcsFilter _filterEntities;
-        private readonly Queue<ContextGameState> _gameStates;
+
+        private int _gameStateInPackage;
+        private readonly List<JObject> _states;
 
         public static IContextGameStates Create(EcsWorld world)
         {
@@ -28,7 +31,8 @@ namespace Solcery.Games.Contexts.GameStates
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
                 .Inc<ComponentObjectAttributes>().End();
-            _gameStates = new Queue<ContextGameState>(10);
+            _gameStateInPackage = 0;
+            _states = new List<JObject>();
         }
         
         public void PushGameState()
@@ -38,7 +42,7 @@ namespace Solcery.Games.Contexts.GameStates
             // Game attributes
             foreach (var gameAttributesEntityId in _filterGameAttributes)
             {
-                if (!TryCreateAttributeArray(_world.GetPool<ComponentGameAttributes>().Get(gameAttributesEntityId).Attributes, out var gameAttributesArray))
+                if (!TryCreateAttributeArray(_gameStateInPackage == 0, _world.GetPool<ComponentGameAttributes>().Get(gameAttributesEntityId).Attributes, out var gameAttributesArray))
                 {
                     gameAttributesArray = new JArray();
                 }
@@ -56,7 +60,7 @@ namespace Solcery.Games.Contexts.GameStates
             var entityDeletedPool = _world.GetPool<ComponentObjectDeletedTag>();
             foreach (var entityId in _filterEntities)
             {
-                if (!TryCreateAttributeArray(entityAttributesPool.Get(entityId).Attributes, out var attributesArray) 
+                if (!TryCreateAttributeArray(_gameStateInPackage == 0, entityAttributesPool.Get(entityId).Attributes, out var attributesArray) 
                     || entityDeletedPool.Has(entityId))
                 {
                     continue;
@@ -70,55 +74,67 @@ namespace Solcery.Games.Contexts.GameStates
                 });
             }
             gameState.Add("objects", entityArray);
-            _gameStates.Enqueue(ContextGameStateData.Create(gameState));
+            _states.Add(CreateState(_states.Count, ContextGameStateTypes.GameState, gameState));
+            ++_gameStateInPackage;
         }
 
         public void PushDelay(int msec)
         {
-            _gameStates.Enqueue(ContextGameStateDelay.Create(msec));
+            var delayState = new JObject {{"delay", new JValue(msec)}};
+            _states.Add(CreateState(_states.Count, ContextGameStateTypes.Delay, delayState));
         }
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
-            if (_gameStates.TryPeek(out var gs))
-            {
-                if (gs is ContextGameStateDelay gsd 
-                    && gsd.CanDestroy(deltaTimeMsec))
-                {
-                    _gameStates.Dequeue();
-                }
+            _gameStateInPackage = 0;
 
-                if (gs is ContextGameStateData gsdt)
-                {
-                    _gameStates.Dequeue();
-                    gameState = gsdt.GameStateData;
-                    return true;
-                }
+            gameState = new JObject();
+            var stateArray = new JArray();
+            gameState.Add("states", stateArray);
+            
+            foreach (var state in _states)
+            {
+                stateArray.Add(state);
             }
 
-            gameState = null;
-            return false;
+            return true;
         }
         
-        private bool TryCreateAttributeArray(Dictionary<string, IAttributeValue> attributesHashMap, out JArray attributeArray)
+        private static bool TryCreateAttributeArray(bool firstGameState, Dictionary<string, IAttributeValue> attributesHashMap, out JArray attributeArray)
         {
-            if (attributesHashMap == null || attributesHashMap.Count <= 0)
+            if (attributesHashMap is not {Count: > 0} 
+                || !firstGameState && attributesHashMap.Count(o=>o.Value.Changed) <= 0)
             {
                 attributeArray = null;
                 return false;
             }
 
             attributeArray = new JArray();
-            foreach (var attribute in attributesHashMap)
+            foreach (var (key, value) in attributesHashMap)
             {
+                if (!firstGameState && !value.Changed)
+                {
+                    continue;
+                }
+                
                 attributeArray.Add(new JObject
                 {
-                    ["key"] = new JValue(attribute.Key),
-                    ["value"] = new JValue(attribute.Value.Current)
+                    ["key"] = new JValue(key),
+                    ["value"] = new JValue(value.Current)
                 });
             }
             
             return true;
+        }
+
+        private static JObject CreateState(int id, ContextGameStateTypes type, JToken value)
+        {
+            return new JObject
+            {
+                {"id", new JValue(id)},
+                {"state_type", new JValue((int) type)},
+                {"value", value}
+            };
         }
     }
 }
