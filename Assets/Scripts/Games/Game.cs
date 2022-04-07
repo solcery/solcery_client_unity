@@ -208,6 +208,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.CardTypeId, BrickValueCardTypeId.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorSum, BrickValueIteratorSum.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.SetVariable, BrickValueSetVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMax, BrickValueIteratorMax.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMin, BrickValueIteratorMin.Create);
 
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
