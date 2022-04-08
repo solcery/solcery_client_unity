@@ -57,8 +57,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 var objectId = objectIdPool.Get(entityId).Id;
 
-                if (_cards.ContainsKey(objectId))
+                if (_cards.ContainsKey(objectId) && _cards.TryGetValue(objectId, out var eclipseCard))
                 {
+                    // update attributes
+                    eclipseCard.UpdateFromAttributes(world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes);
                     continue;
                 }
 
@@ -68,7 +70,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     continue;
                 }
 
-                if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
+                if (Game.EclipseCardInContainerWidgetPool.TryPop(out eclipseCard))
                 {
                     if (objectTypePool.Has(entityId)
                         && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject)
@@ -77,19 +79,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         eclipseCard.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
                     }
                     
-                    var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+                    // update attributes
+                    eclipseCard.UpdateFromAttributes(world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes);
                     
                     // drug and drop
                     AttachDrugAndDrop(world, entityId, objectId, eclipseCard);
-                    
-                    // timer
-                    var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
-                    var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
-                    eclipseCard.UpdateTimer(showTimer, timerDuration);
-
-                    // tokens
-                    var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
-                    eclipseCard.UpdateTokenSlots(tokenSlots);
                     
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
