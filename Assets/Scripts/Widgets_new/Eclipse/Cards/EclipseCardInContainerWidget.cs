@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -49,15 +51,27 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
-        void IEclipseCardInContainerWidget.UpdateTimer(bool show, int duration)
+        private void UpdateTimer(bool show, int duration)
         {
             _layout.TimerLayout.gameObject.SetActive(show);
             _layout.TimerLayout.UpdateTimer(duration);
         }
 
-        public void UpdateTokenSlots(int count)
+        private void UpdateTokenSlots(int count)
         {
             _layout.TokensLayout.UpdateTokenSlots(count);
+        }
+
+        void IEclipseCardInContainerWidget.UpdateFromAttributes(Dictionary<string, IAttributeValue> attributes)
+        {
+            // timer
+            var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
+            var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
+            UpdateTimer(showTimer, timerDuration);
+            
+            // tokens
+            var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
+            UpdateTokenSlots(tokenSlots);
         }
 
         void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
