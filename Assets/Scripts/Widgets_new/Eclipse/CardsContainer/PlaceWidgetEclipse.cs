@@ -164,7 +164,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                             && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                         {
                             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                            if (attributes.TryGetValue("slot", out var tokenSlotAttribute));
+                            if (attributes.TryGetValue("slot", out var tokenSlotAttribute))
                             {
                                 cardWidget.AttachToken(tokenSlotAttribute.Current, cardTypeDataObject);
                             }

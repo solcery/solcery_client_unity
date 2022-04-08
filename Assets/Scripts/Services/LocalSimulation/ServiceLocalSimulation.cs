@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
 using Solcery.Games;
-using Solcery.Games.Contexts.GameStates;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
+using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation
@@ -48,20 +48,21 @@ namespace Solcery.Services.LocalSimulation
 
         void IServiceLocalSimulation.Init(IGame game, JObject gameState)
         {
-            _simulationModel.Init(this, game, _serviceCommands, gameState);
-            
-            // TODO: fix it
-            var gs = new JObject();
-            var stateArray = new JArray();
-            gs.Add("states", stateArray);
-            stateArray.Add(new JObject
+            if (!gameState.TryGetValue("states", out JArray states) 
+                || states.Count <= 0
+                || states[0] is not JObject stateObject
+                || !stateObject.TryGetValue("value", out JObject gs))
             {
-                {"id", new JValue(0)},
-                {"state_type", new JValue((int)ContextGameStateTypes.GameState)},
-                {"value", gameState}
-            });
-
-            CallAllActionWithParams(_listOnUpdateGameState, gs);
+                gs = new JObject
+                {
+                    {"attrs", new JArray()},
+                    {"objects", new JArray()}
+                };
+                Debug.LogError("Invalid initial game state!");
+            }
+            
+            _simulationModel.Init(this, game, _serviceCommands, gs);
+            CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 
         void IServiceLocalSimulation.PushCommand(JObject command)
