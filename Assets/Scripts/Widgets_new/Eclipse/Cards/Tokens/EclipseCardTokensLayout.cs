@@ -12,6 +12,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         {
             for (var i = 0; i < tokens.Count; i++)
             {
+                tokens[i].Cleanup();
                 tokens[i].gameObject.SetActive(i < count);
             }
         }

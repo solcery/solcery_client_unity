@@ -55,13 +55,17 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
-                if (_cards.ContainsKey(objectId))
+                
+                if (_cards.ContainsKey(objectId) && _cards.TryGetValue(objectId, out var eclipseCard))
                 {
-                    continue;
+                    UpdateCard(world, entityId, eclipseCard);
                 }
-
+                else
+                {
+                    AttachCard(world, entityId, objectId, cardTypes);
+                }
+                
                 PrepareToken(world, entityId);
-                AttachCard(world, entityId, objectId, cardTypes);
             }
 
             AttachTokensForCard(world, cardTypes);
@@ -87,6 +91,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
+        private void UpdateCard(EcsWorld world, int entityId, IEclipseCardInContainerWidget eclipseCard)
+        {
+            var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+            eclipseCard.UpdateFromAttributes(attributes);
+        }
+
         private void AttachCard(EcsWorld world, int entityId, int objectId, Dictionary<int, JObject> cardTypes)
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
@@ -101,23 +111,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         eclipseCard.UpdateFromCardTypeData(objectId, cardTypeDataObject);
                     }
                     
-                    // drag and drop
+                    // update attributes
+                    eclipseCard.UpdateFromAttributes(attributes);
+                    
+                    // drug and drop
                     AttachDragAndDrop(world, entityId, objectId, eclipseCard);
-
-                    // timer
-                    var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) &&
-                                    showDurationAttribute.Current > 0;
-                    var timerDuration = attributes.TryGetValue("duration", out var durationAttribute)
-                        ? durationAttribute.Current
-                        : 0;
-                    eclipseCard.UpdateTimer(showTimer, timerDuration);
-
-                    // token slots
-                    var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute)
-                        ? tokenSlotsAttribute.Current
-                        : 0;
-                    eclipseCard.UpdateTokenSlots(tokenSlots);
-
+                    
                     Layout.AddCard(eclipseCard);
                     _cards.Add(objectId, eclipseCard);
 
