@@ -42,8 +42,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 return;
             }
 
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectIdPool = world.GetPool<ComponentObjectId>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
+            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var cardTypes = new Dictionary<int, JObject>();
 
             foreach (var objectTypesEntityId in objectTypesFilter)
@@ -55,17 +56,26 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
+                var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 
-                if (_cards.ContainsKey(objectId) && _cards.TryGetValue(objectId, out var eclipseCard))
+                switch (eclipseCardType)
                 {
-                    UpdateCard(world, entityId, eclipseCard);
+                    case EclipseCardTypes.Token:
+                        PrepareToken(world, entityId);
+                        break;
+                    default:
+                    {
+                        if (_cards.TryGetValue(objectId, out var eclipseCard))
+                        {
+                            UpdateCard(world, entityId, eclipseCard);
+                        }
+                        else
+                        {
+                            AttachCard(world, entityId, objectId, cardTypes);
+                        }
+                        break;
+                    }
                 }
-                else
-                {
-                    AttachCard(world, entityId, objectId, cardTypes);
-                }
-                
-                PrepareToken(world, entityId);
             }
 
             AttachTokensForCard(world, cardTypes);
