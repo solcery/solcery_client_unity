@@ -1,14 +1,14 @@
 mergeInto(LibraryManager.library, {
     OnUnityLoaded: function (message) {
-      ReactUnityWebGL.OnUnityLoaded();
+        ReactUnityWebGL.OnUnityLoaded();
     },
     OnGameOverPopupButtonClicked: function () {
-      ReactUnityWebGL.OnGameOverPopupButtonClicked();
+        ReactUnityWebGL.OnGameOverPopupButtonClicked();
     },
     OpenLinkInNewTab: function (link) {
         ReactUnityWebGL.OpenLinkInNewTab(Pointer_stringify(link));
     },
-    CastCard: function (cardId) {
-      ReactUnityWebGL.CastCard(cardId);
-  },
+    SendCommand: function (command) {
+        ReactUnityWebGL.SendCommand(Pointer_stringify(command));
+    }
 });

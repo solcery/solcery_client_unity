@@ -1,7 +1,7 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.React;
-using Solcery.Utils;
 
 namespace Solcery.Services.Transport
 {
@@ -28,22 +28,17 @@ namespace Solcery.Services.Transport
 
         private void OnGameStateUpdate(string obj)
         {
-            //UnityEngine.Debug.Log($"OnGameStateUpdate {obj}");
             _gameTransportCallbacks?.OnReceivingGameState(JObject.Parse(obj));
         }
 
         private void OnGameContentUpdate(string obj)
         {
-            //UnityEngine.Debug.Log($"OnGameContentUpdate {obj}");
             _gameTransportCallbacks?.OnReceivingGameContent(JObject.Parse(obj));
         }
 
         void ITransportService.SendCommand(JObject command)
         {
-            if (command.TryGetValue("object_id", out int objId))
-            {
-                UnityToReact.Instance.CallCastCard(objId);
-            }
+            UnityToReact.Instance.CallSendCommand(command.ToString(Formatting.None));
         }
 
         void ITransportService.Update(float dt)
