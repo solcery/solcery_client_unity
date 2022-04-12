@@ -12,13 +12,14 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         {
             for (var i = 0; i < tokens.Count; i++)
             {
+                tokens[i].Cleanup();
                 tokens[i].gameObject.SetActive(i < count);
             }
         }
         
         public EclipseCardTokenLayout GetTokenByIndex(int index)
         {
-            return index < tokens.Count ? tokens[index] : null;
+            return index >= 0 && index < tokens.Count ? tokens[index] : null;
         }
 
         public void Cleanup()

@@ -50,33 +50,23 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _layout.UpdateSprite(texture);
             }
         }
-
-        private void UpdateTimer(bool show, int duration)
-        {
-            _layout.TimerLayout.gameObject.SetActive(show);
-            _layout.TimerLayout.UpdateTimer(duration);
-        }
-
-        private void UpdateTokenSlots(int count)
-        {
-            _layout.TokensLayout.UpdateTokenSlots(count);
-        }
-
+        
         void IEclipseCardInContainerWidget.UpdateFromAttributes(Dictionary<string, IAttributeValue> attributes)
         {
             // timer
             var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
             var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
-            UpdateTimer(showTimer, timerDuration);
+            _layout.TimerLayout.gameObject.SetActive(showTimer);
+            _layout.TimerLayout.UpdateTimer(timerDuration);
             
             // tokens
             var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
-            UpdateTokenSlots(tokenSlots);
+            _layout.TokensLayout.UpdateTokenSlots(tokenSlots);
         }
 
-        void IEclipseCardInContainerWidget.AttachToken(int index, JObject data)
+        void IEclipseCardInContainerWidget.AttachToken(int slot, JObject data)
         {
-            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(index);
+            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(slot - 1);
             if (tokenLayout != null)
             {
                 if (data.TryGetValue("picture", out string picture)
