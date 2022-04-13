@@ -1,3 +1,7 @@
+using System;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Solcery.Widgets_new.Tooltip;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +12,19 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
     {
         [SerializeField]
         private Image icon;
-        
+
+        private TweenerCore<Vector3, Vector3, VectorOptions> _moveTween;
         private TooltipBehaviour _tooltipBehaviour;
+        private RectTransform _rectTransform;
         
+        public Image Icon => icon;
+        public RectTransform RectTransform => _rectTransform;
+        
+        public void Awake()
+        {
+            _rectTransform = icon.GetComponent<RectTransform>();
+        }
+
         public void UpdateSprite(Texture2D texture)
         {
             icon.gameObject.SetActive(true);
@@ -26,7 +40,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
             }
             _tooltipBehaviour.SetTooltipId(tooltipId);
         }
-        
+
         public void Cleanup()
         {
             if (icon.sprite != null)

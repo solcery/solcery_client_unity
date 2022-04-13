@@ -4,10 +4,12 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.DragDrop;
+using Solcery.Models.Play.Eclipse;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using UnityEngine;
 
@@ -128,6 +130,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     AttachDragAndDrop(world, entityId, objectId, eclipseCard);
                     
                     Layout.AddCard(eclipseCard);
+                    world.GetPool<ComponentEclipseCarsView>().Add(entityId).View = eclipseCard;
                     _cards.Add(objectId, eclipseCard);
 
                     Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
@@ -154,6 +157,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     world.DelEntity(eid);
                 }
 
+                world.GetPool<ComponentEclipseCarsView>().Del(eid);
                 _cards[key].UpdateAttachEntityId();
                 Game.EclipseCardInContainerWidgetPool.Push(_cards[key]);
                 _cards.Remove(key);
@@ -175,7 +179,16 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
                             if (attributes.TryGetValue("slot", out var tokenSlotAttribute))
                             {
-                                cardWidget.AttachToken(tokenSlotAttribute.Current, cardTypeDataObject);
+                                var tokenLayout = cardWidget.AttachToken(tokenSlotAttribute.Current, cardTypeDataObject);
+                                if (tokenLayout != null)
+                                {
+                                    if (attributes.TryGetValue("anim_token_fly", out var animTokenFlyAttribute) && animTokenFlyAttribute.Current > 0)
+                                    {
+                                        var formCardId = attributes.TryGetValue("anim_token_fly_from_card_id", out var fromCardAttribute) ? fromCardAttribute.Current : 0;
+                                        var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
+                                        AnimTokenFly(tokenLayout, GetPositionForTokenSlot(world, formCardId, fromSlotId));
+                                    }
+                                }
                             }
                         }
                     }
@@ -187,6 +200,34 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
 
             _tokensPerCardCache.Clear();
+        }
+
+        private void AnimTokenFly(EclipseCardTokenLayout tokenLayout, Vector3 from)
+        {
+            var to = tokenLayout.transform.position;
+            tokenLayout.Icon.gameObject.SetActive(false);
+            WidgetCanvas.GetEffects().MoveToken(tokenLayout.Icon.sprite,
+                tokenLayout.RectTransform.rect.size,
+                from,
+                to,
+                0.5f,
+                () => {  tokenLayout.Icon.gameObject.SetActive(true); });
+        }
+
+        private Vector3 GetPositionForTokenSlot(EcsWorld world, int cardId, int slotId)
+        {
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var poolEclipseCardsView = world.GetPool<ComponentEclipseCarsView>();
+            var widgetFilter = objectIdPool.GetWorld().Filter<ComponentEclipseCardTag>().End();
+            foreach (var entityId in widgetFilter)
+            {
+                if (objectIdPool.Get(entityId).Id == cardId)
+                {
+                    return poolEclipseCardsView.Get(entityId).View.GetTokenPosition(slotId);
+                }
+            }
+            
+            return Vector3.zero;
         }
 
         void AttachDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardInContainerWidget eclipseCard)

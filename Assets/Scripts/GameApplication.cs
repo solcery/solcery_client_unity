@@ -1,9 +1,11 @@
 using Solcery.Games;
 using Solcery.Games.DTO;
 using Solcery.Services.Renderer.DTO;
+using Solcery.Ui;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Solcery
@@ -11,9 +13,9 @@ namespace Solcery
     public class GameApplication : MonoBehaviour
     {
         [SerializeField]
-        private Transform gameCanvas;
+        private Transform worldGame;
         [SerializeField]
-        private RectTransform uiCanvas;
+        private RootUiGame uiGame;
         [SerializeField]
         private RootDragDropLayout dragDropCanvas;
         [SerializeField]
@@ -43,7 +45,7 @@ namespace Solcery
         private void Start()
         {
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
-                WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas),
+                WidgetCanvas.Create(worldGame, uiGame, dragDropCanvas),
                 ServiceRenderDto.Create(renderFrame, renderPrefab)));
             _game.Init();
         }
@@ -63,7 +65,7 @@ namespace Solcery
         {
             var dX = worldPosition.x / Screen.width;
             var dY = worldPosition.y / Screen.height;
-            var rect = uiCanvas.rect;
+            var rect = uiGame.Game.rect;
             return new Vector3(rect.width * dX, rect.height * dY);
         }
 

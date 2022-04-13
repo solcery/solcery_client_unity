@@ -42,6 +42,7 @@ namespace Solcery.Widgets_new
         
         protected T Layout;
         protected IGame Game;
+        protected IWidgetCanvas WidgetCanvas;
         protected readonly PlaceWidgetCardFace CardFace;
         protected readonly bool InteractableForActiveLocalPlayer;
         protected readonly int PlaceId;
@@ -50,7 +51,8 @@ namespace Solcery.Widgets_new
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             Game = game;
-
+            WidgetCanvas = widgetCanvas;
+            
             if (Game.ServiceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go)
                 && Object.Instantiate(go, widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(T), out var component)
                 && component is T layout)

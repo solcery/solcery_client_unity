@@ -5,6 +5,7 @@ using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.EcsSupport;
 
@@ -64,9 +65,14 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout.TokensLayout.UpdateTokenSlots(tokenSlots);
         }
 
-        void IEclipseCardInContainerWidget.AttachToken(int slot, JObject data)
+        EclipseCardTokenLayout GetToken(int slot)
         {
-            var tokenLayout = _layout.TokensLayout.GetTokenByIndex(slot - 1);
+            return _layout.TokensLayout.GetTokenByIndex(slot - 1);
+        }
+        
+        EclipseCardTokenLayout IEclipseCardInContainerWidget.AttachToken(int slot, JObject data)
+        {
+            var tokenLayout = GetToken(slot);
             if (tokenLayout != null)
             {
                 if (data.TryGetValue("picture", out string picture)
@@ -84,8 +90,21 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             {
                 Debug.LogWarning("Can't set token for slot on the eclipse card!");
             }
+
+            return tokenLayout;
         }
-        
+
+        Vector3 IEclipseCardInContainerWidget.GetTokenPosition(int slot)
+        {
+            var tokenLayout = GetToken(slot);
+            if (tokenLayout != null)
+            {
+                return tokenLayout.transform.position;
+            }
+
+            return _layout.TokensLayout.GetTokenByIndex(0).transform.position;
+        }
+
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;
