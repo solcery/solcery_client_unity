@@ -29,7 +29,6 @@ namespace Solcery.Widgets_new.Effects
             float time,
             Action onMoveComplete)
         {
-            Debug.Log(to);
             var effect = Object.Instantiate(_effectRoot.TokenEffect, _effectRoot.transform, false).GetComponent<TokenEffectLayout>();
             effect.Image.sprite = sprite;
             effect.transform.position = from;

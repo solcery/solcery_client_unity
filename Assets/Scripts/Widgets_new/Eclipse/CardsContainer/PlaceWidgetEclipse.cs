@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Leopotam.EcsLite;
@@ -211,7 +212,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 from,
                 to,
                 0.5f,
-                () => {  tokenLayout.Icon.gameObject.SetActive(true); });
+                () => { tokenLayout.Icon.gameObject.SetActive(true); });
         }
 
         private Vector3 GetPositionForTokenSlot(EcsWorld world, int cardId, int slotId)
