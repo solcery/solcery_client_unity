@@ -66,11 +66,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                 if (placeDragDropEntityIdPool.Has(placeEntityId))
                 {
                     var dragDropParameterEntityId = placeDragDropEntityIdPool.Get(placeEntityId).DragDropEntityId;
-                    var requiredEclipseCardType =
-                        world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>()
-                            .Get(dragDropParameterEntityId).RequiredEclipseCardType;
+                    var requiredEclipseCardTypes =
+                        world.GetPool<ComponentDragDropParametersRequiredEclipseCardTypes>()
+                            .Get(dragDropParameterEntityId).RequiredEclipseCardTypes;
 
-                    if (requiredEclipseCardType == eclipseCardType)
+                    if (requiredEclipseCardTypes.Contains(eclipseCardType))
                     {
                         world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
                             .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform,

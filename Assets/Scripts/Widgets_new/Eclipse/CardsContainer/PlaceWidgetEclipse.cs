@@ -88,7 +88,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (world.GetPool<ComponentEclipseTokenTag>().Has(entityId))
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                if (attributes.TryGetValue("card_id", out var tokenCardIdAttribute))
+                if (attributes.TryGetValue("linked_card_id", out var tokenCardIdAttribute))
                 {
                     var cardId = tokenCardIdAttribute.Current;
                     if (_tokensPerCardCache.TryGetValue(cardId, out var tokensEntities))
