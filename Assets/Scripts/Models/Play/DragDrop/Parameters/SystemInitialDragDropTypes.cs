@@ -58,7 +58,8 @@ namespace Solcery.Models.Play.DragDrop.Parameters
                         ref var componentCardTypes = ref requiredEclipseCardTypesPool.Add(entity);
                         foreach (var cardTypeToken in dndObject.GetValue<JArray>("required_card_types"))
                         {
-                            componentCardTypes.RequiredEclipseCardTypes.Add(cardTypeToken.Value<EclipseCardTypes>());
+                            var cardType = cardTypeToken.Value<int>();
+                            componentCardTypes.RequiredEclipseCardTypes.Add((EclipseCardTypes)cardType);
                         }
                     }
                 }
