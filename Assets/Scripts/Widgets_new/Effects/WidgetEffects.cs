@@ -4,6 +4,7 @@ using Solcery.Ui;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Solcery.Widgets_new.Effects
 {
@@ -34,11 +35,11 @@ namespace Solcery.Widgets_new.Effects
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = sizeDelta;
 
-            effect.RectTransform.DOMove(to, time).OnComplete(() =>
+            effect.RectTransform.DOJump(to, Random.Range(0.5f, 1.5f),0, time).OnComplete(() =>
             {
                 Object.Destroy(effect.gameObject);
                 onMoveComplete?.Invoke();
-            }).SetEase(Ease.InOutFlash).Play();
+            }).SetEase(Ease.Linear).Play();
         }
 
         public void Destroy()
