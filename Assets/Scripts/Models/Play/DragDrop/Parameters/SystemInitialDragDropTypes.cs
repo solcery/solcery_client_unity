@@ -31,7 +31,7 @@ namespace Solcery.Models.Play.DragDrop.Parameters
             var idPool = world.GetPool<ComponentDragDropParametersId>();
             var destinationsPool = world.GetPool<ComponentDragDropParametersDestinations>();
             var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
-            var requiredEclipseCardTypePool = world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>();
+            var requiredEclipseCardTypesPool = world.GetPool<ComponentDragDropParametersRequiredEclipseCardTypes>();
 
             if (_gameContent.TryGetValue("drag_n_drops", out JObject dndBaseObject)
                 && dndBaseObject.TryGetValue("objects", out JArray dndArray))
@@ -55,10 +55,11 @@ namespace Solcery.Models.Play.DragDrop.Parameters
                                 ? dct
                                 : DragDropParametersDestinationConditionTypes.None;
 
-                        requiredEclipseCardTypePool.Add(entity).RequiredEclipseCardType =
-                            dndObject.TryGetEnum("required_card_type", out EclipseCardTypes ect) 
-                                ? ect
-                                : EclipseCardTypes.None;
+                        ref var componentCardTypes = ref requiredEclipseCardTypesPool.Add(entity);
+                        foreach (var cardTypeToken in dndObject.GetValue<JArray>("required_card_types"))
+                        {
+                            componentCardTypes.RequiredEclipseCardTypes.Add(cardTypeToken.Value<EclipseCardTypes>());
+                        }
                     }
                 }
             }
