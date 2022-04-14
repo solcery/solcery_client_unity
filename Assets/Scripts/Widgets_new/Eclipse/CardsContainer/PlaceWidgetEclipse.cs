@@ -155,10 +155,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 var eid = _cards[key].AttachEntityId;
                 if (eid >= 0)
                 {
+                    world.GetPool<ComponentEclipseCarsView>().Del(eid);
                     world.DelEntity(eid);
                 }
 
-                world.GetPool<ComponentEclipseCarsView>().Del(eid);
                 _cards[key].UpdateAttachEntityId();
                 Game.EclipseCardInContainerWidgetPool.Push(_cards[key]);
                 _cards.Remove(key);
