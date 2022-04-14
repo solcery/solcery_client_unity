@@ -67,9 +67,8 @@ namespace Solcery.Editor.GameStateDebug
             else
             {
                 DrawGameState(gameState);
+                EditorUtility.SetDirty(target);
             }
-            
-            EditorUtility.SetDirty(target);
         }
 
         private void DrawGameStateIsNull()
