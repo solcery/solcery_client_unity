@@ -265,7 +265,7 @@
           "params": []
         },
         "action_on_death": {
-          "name": "Action.[525] Default onDeath - Creature/Building",
+          "name": "Action.[525] Default onDeath - General",
           "type": 0,
           "subtype": 10525,
           "params": []
@@ -536,7 +536,7 @@
           ]
         },
         "action_on_death": {
-          "name": "Action.[525] Default onDeath - Creature/Building",
+          "name": "Action.[525] Default onDeath - General",
           "type": 0,
           "subtype": 10525,
           "params": []
@@ -4871,7 +4871,7 @@
           "params": []
         },
         "action_on_death": {
-          "name": "Action.[525] Default onDeath - Creature/Building",
+          "name": "Action.[525] Default onDeath - General",
           "type": 0,
           "subtype": 10525,
           "params": []
@@ -5017,122 +5017,99 @@
           ]
         },
         "action_on_activation": {
-          "name": "Action.Iterator",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 5,
+          "subtype": 1,
           "params": [
             {
-              "name": "condition",
+              "name": "action1",
               "value": {
-                "name": "Condition.And",
-                "type": 1,
-                "subtype": 7,
+                "name": "Action.Iterator",
+                "type": 0,
+                "subtype": 5,
                 "params": [
                   {
-                    "name": "cond1",
+                    "name": "condition",
                     "value": {
-                      "name": "Condition.[187] ~001:Is a Creature",
+                      "name": "Condition.And",
                       "type": 1,
-                      "subtype": 10187,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Condition.[194] ~:Is in Row [#]",
-                      "type": 1,
-                      "subtype": 10194,
+                      "subtype": 7,
                       "params": [
                         {
-                          "name": "Target Row #",
+                          "name": "cond1",
                           "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
+                            "name": "Condition.[187] ~001:Is a Creature",
+                            "type": 1,
+                            "subtype": 10187,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[194] ~:Is in Row [#]",
+                            "type": 1,
+                            "subtype": 10194,
                             "params": [
                               {
-                                "name": "value",
-                                "value": 1
+                                "name": "Target Row #",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
                               }
                             ]
                           }
                         }
                       ]
                     }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action",
-              "value": {
-                "name": "Action.Two actions",
-                "type": 0,
-                "subtype": 1,
-                "params": [
-                  {
-                    "name": "action1",
-                    "value": {
-                      "name": "Action.Set variable",
-                      "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "target_place"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.[146] #Current place",
-                            "type": 2,
-                            "subtype": 10146,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
                   },
                   {
-                    "name": "action2",
+                    "name": "action",
                     "value": {
-                      "name": "Action.[495] ~Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 10495,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "place",
+                          "name": "action1",
                           "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
                             "params": [
                               {
                                 "name": "var_name",
-                                "value": "current_place"
+                                "value": "target_place"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.[146] #Current place",
+                                  "type": 2,
+                                  "subtype": 10146,
+                                  "params": []
+                                }
                               }
                             ]
                           }
                         },
                         {
-                          "name": "tpl",
+                          "name": "action2",
                           "value": {
-                            "name": "Value.[226] Token TplId - Hot",
-                            "type": 2,
-                            "subtype": 10226,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "action",
-                          "value": {
-                            "name": "Action.[502] ~Move Token to [PlaceId]",
+                            "name": "Action.[495] ~Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
                             "type": 0,
-                            "subtype": 10502,
+                            "subtype": 10495,
                             "params": [
                               {
-                                "name": "Target Place",
+                                "name": "place",
                                 "value": {
                                   "name": "Value.Variable",
                                   "type": 2,
@@ -5140,44 +5117,92 @@
                                   "params": [
                                     {
                                       "name": "var_name",
-                                      "value": "target_place"
+                                      "value": "current_place"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "tpl",
+                                "value": {
+                                  "name": "Value.[226] Token TplId - Hot",
+                                  "type": 2,
+                                  "subtype": 10226,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "action",
+                                "value": {
+                                  "name": "Action.[502] ~Move Token to [PlaceId]",
+                                  "type": 0,
+                                  "subtype": 10502,
+                                  "params": [
+                                    {
+                                      "name": "Target Place",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "target_place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cnt",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
                                     }
                                   ]
                                 }
                               }
                             ]
                           }
-                        },
-                        {
-                          "name": "cnt",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
-                              }
-                            ]
-                          }
                         }
                       ]
+                    }
+                  },
+                  {
+                    "name": "limit",
+                    "value": {
+                      "name": "Value.[147] #Cards total",
+                      "type": 2,
+                      "subtype": 10147,
+                      "params": []
                     }
                   }
                 ]
               }
             },
             {
-              "name": "limit",
+              "name": "action2",
               "value": {
-                "name": "Value.[147] #Cards total",
-                "type": 2,
-                "subtype": 10147,
+                "name": "Action.[499] Trigger event 'Death' + build context",
+                "type": 0,
+                "subtype": 10499,
                 "params": []
               }
             }
           ]
+        },
+        "action_on_death": {
+          "name": "Action.[525] Default onDeath - General",
+          "type": 0,
+          "subtype": 10525,
+          "params": []
         },
         "id": 295
       },
@@ -6419,7 +6444,7 @@
         "id": 477
       },
       {
-        "name": "Test TokenCreation",
+        "name": "Test Token Create",
         "enabled": true,
         "action": {
           "name": "Action.[495] ~Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
@@ -6573,6 +6598,99 @@
           "params": []
         },
         "id": 517
+      },
+      {
+        "name": "Test Token Move",
+        "enabled": true,
+        "action": {
+          "name": "Action.Iterator",
+          "type": 0,
+          "subtype": 5,
+          "params": [
+            {
+              "name": "condition",
+              "value": {
+                "name": "Condition.And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Condition.[155] #008:Is in place [X]",
+                      "type": 1,
+                      "subtype": 10155,
+                      "params": [
+                        {
+                          "name": "Place Id",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 32
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Condition.[190] ~002:Is a Token",
+                      "type": 1,
+                      "subtype": 10190,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[502] ~Move Token to [PlaceId]",
+                "type": 0,
+                "subtype": 10502,
+                "params": [
+                  {
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 33
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "limit",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 534
       }
     ]
   },
@@ -6950,7 +7068,7 @@
         "zOrder": 10,
         "caption": "Top Row Building",
         "frame": true,
-        "drag_n_drop": 524,
+        "drag_n_drop": 240,
         "id": 128
       },
       {
@@ -6967,7 +7085,7 @@
         "zOrder": 10,
         "caption": "Botton Row Building",
         "frame": true,
-        "drag_n_drop": 524,
+        "drag_n_drop": 240,
         "id": 129
       },
       {
@@ -6984,7 +7102,7 @@
         "zOrder": 10,
         "caption": "Central Row Building",
         "frame": true,
-        "drag_n_drop": 524,
+        "drag_n_drop": 240,
         "id": 130
       },
       {
@@ -7141,6 +7259,20 @@
         "caption": "Token Reserve",
         "frame": true,
         "id": 520
+      },
+      {
+        "name": "Test Button 6",
+        "enabled": true,
+        "placeId": 16,
+        "interactableForActiveLocalPlayer": true,
+        "visible": true,
+        "x1": 8900,
+        "x2": 9900,
+        "y1": 3700,
+        "y2": 4000,
+        "layout": 4,
+        "zOrder": 9,
+        "id": 532
       }
     ]
   },
@@ -7190,7 +7322,7 @@
       {
         "name": "Test button 1",
         "enabled": true,
-        "cardType": 462,
+        "cardType": 303,
         "place": 11,
         "amount": 1,
         "id": 307
@@ -7246,7 +7378,7 @@
       {
         "name": "Test button 3",
         "enabled": true,
-        "cardType": 477,
+        "cardType": 517,
         "place": 13,
         "amount": 1,
         "id": 437
@@ -7318,10 +7450,18 @@
       {
         "name": "Test button 5",
         "enabled": true,
-        "cardType": 517,
+        "cardType": 534,
         "place": 15,
         "amount": 1,
         "id": 518
+      },
+      {
+        "name": "Test button 6",
+        "enabled": true,
+        "cardType": 477,
+        "place": 16,
+        "amount": 1,
+        "id": 533
       }
     ]
   },
@@ -7485,7 +7625,7 @@
     "name": "drag_n_drops",
     "objects": [
       {
-        "name": "Event Deck - Creatures & Buildings",
+        "name": "Event Tracker - Creatures & Buildings",
         "enabled": true,
         "destinations": [
           41,
@@ -7510,12 +7650,32 @@
           4
         ],
         "action_on_drop": {
-          "name": "Action.[531] Drag & Drop - Creatures/Buildings",
+          "name": "Action.[529] ~Drag & Drop v2",
           "type": 0,
-          "subtype": 10531,
+          "subtype": 10529,
           "params": []
         },
         "id": 136
+      },
+      {
+        "name": "Realm Board - Buildings",
+        "enabled": true,
+        "destinations": [
+          40,
+          30,
+          20
+        ],
+        "destination_condition": 1,
+        "required_card_types": [
+          4
+        ],
+        "action_on_drop": {
+          "name": "Action.[529] ~Drag & Drop v2",
+          "type": 0,
+          "subtype": 10529,
+          "params": []
+        },
+        "id": 240
       },
       {
         "name": "Realm Board - Creatures",
@@ -7541,31 +7701,12 @@
           1
         ],
         "action_on_drop": {
-          "name": "Action.[529] Drag & Drop - Creatures",
+          "name": "Action.[529] ~Drag & Drop v2",
           "type": 0,
           "subtype": 10529,
           "params": []
         },
         "id": 285
-      },
-      {
-        "name": "Realm Board - Buildings",
-        "enabled": true,
-        "destinations": [
-          40,
-          30,
-          20
-        ],
-        "required_card_types": [
-          4
-        ],
-        "action_on_drop": {
-          "name": "Action.[530] Drag & Drop - Buildings",
-          "type": 0,
-          "subtype": 10530,
-          "params": []
-        },
-        "id": 524
       }
     ]
   },
@@ -7941,24 +8082,138 @@
         "name": "#001:Move to Place [Id]",
         "enabled": true,
         "brick": {
-          "name": "Action.Set attribute",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 7,
+          "subtype": 1,
           "params": [
             {
-              "name": "attr_name",
-              "value": "place"
-            },
-            {
-              "name": "value",
+              "name": "action1",
               "value": {
-                "name": "Value.Argument",
-                "type": 2,
-                "subtype": 3,
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "name",
-                    "value": "Dest Place"
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "anim_token_fly"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "anim_token_fly_from_card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "anim_token_fly_from_slot"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "place"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Dest Place"
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -14548,21 +14803,54 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.Set variable",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 6,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "var_name",
-                          "value": "current_row"
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Card Id",
+                                  "type": 2,
+                                  "subtype": 11,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
                         },
                         {
-                          "name": "value",
+                          "name": "action2",
                           "value": {
-                            "name": "Value.[181] ~Current Row",
-                            "type": 2,
-                            "subtype": 10181,
-                            "params": []
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "current_row"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.[181] ~Current Row",
+                                  "type": 2,
+                                  "subtype": 10181,
+                                  "params": []
+                                }
+                              }
+                            ]
                           }
                         }
                       ]
@@ -15970,7 +16258,7 @@
         "id": 523
       },
       {
-        "name": "Default onDeath - Creature/Building",
+        "name": "Default onDeath - General",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -16043,7 +16331,7 @@
         "id": 525
       },
       {
-        "name": "Drag & Drop Aux - Move ALL Cards from targetPlace to transitoryPlace",
+        "name": "Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -16086,16 +16374,138 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.Set attribute",
+                "name": "Action.[144] #001:Move to Place [Id]",
                 "type": 0,
-                "subtype": 7,
+                "subtype": 10144,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "place"
+                    "name": "Dest Place",
+                    "value": {
+                      "name": "Value.Variable",
+                      "type": 2,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "current_place"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "limit",
+              "value": {
+                "name": "Value.[147] #Cards total",
+                "type": 2,
+                "subtype": 10147,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 526
+      },
+      {
+        "name": "Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Iterator",
+          "type": 0,
+          "subtype": 5,
+          "params": [
+            {
+              "name": "condition",
+              "value": {
+                "name": "Condition.Or",
+                "type": 1,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Condition.Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Value.Card Id",
+                            "type": 2,
+                            "subtype": 11,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Card Id"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
                   },
                   {
-                    "name": "value",
+                    "name": "cond2",
+                    "value": {
+                      "name": "Condition.Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Value.Attribute",
+                            "type": 2,
+                            "subtype": 2,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "linked_card_id"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Card Id"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[144] #001:Move to Place [Id]",
+                "type": 0,
+                "subtype": 10144,
+                "params": [
+                  {
+                    "name": "Dest Place",
                     "value": {
                       "name": "Value.[335] Drag&Drop Transitory Place",
                       "type": 2,
@@ -16117,250 +16527,10 @@
             }
           ]
         },
-        "id": 526
-      },
-      {
-        "name": "Drag & Drop Aux - Move 1 Card with [Cond] and its Tokens from currentPlace to targetPlace",
-        "enabled": true,
-        "brick": {
-          "name": "Action.Two actions",
-          "type": 0,
-          "subtype": 1,
-          "params": [
-            {
-              "name": "action1",
-              "value": {
-                "name": "Action.Iterator",
-                "type": 0,
-                "subtype": 5,
-                "params": [
-                  {
-                    "name": "condition",
-                    "value": {
-                      "name": "Condition.And",
-                      "type": 1,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Condition.Equal",
-                            "type": 1,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "value1",
-                                "value": {
-                                  "name": "Value.[146] #Current place",
-                                  "type": 2,
-                                  "subtype": 10146,
-                                  "params": []
-                                }
-                              },
-                              {
-                                "name": "value2",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "current_place"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Condition.Argument",
-                            "type": 1,
-                            "subtype": 5,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Cond"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action",
-                    "value": {
-                      "name": "Action.Set variable",
-                      "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "card_id"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Card Id",
-                            "type": 2,
-                            "subtype": 11,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "limit",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 1
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Iterator",
-                "type": 0,
-                "subtype": 5,
-                "params": [
-                  {
-                    "name": "condition",
-                    "value": {
-                      "name": "Condition.Or",
-                      "type": 1,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Condition.Equal",
-                            "type": 1,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "value1",
-                                "value": {
-                                  "name": "Value.Card Id",
-                                  "type": 2,
-                                  "subtype": 11,
-                                  "params": []
-                                }
-                              },
-                              {
-                                "name": "value2",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "card_id"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Condition.Equal",
-                            "type": 1,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "value1",
-                                "value": {
-                                  "name": "Value.Attribute",
-                                  "type": 2,
-                                  "subtype": 2,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "linked_card_id"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "value2",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "card_id"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action",
-                    "value": {
-                      "name": "Action.[144] #001:Move to Place [Id]",
-                      "type": 0,
-                      "subtype": 10144,
-                      "params": [
-                        {
-                          "name": "Dest Place",
-                          "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "target_place"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "limit",
-                    "value": {
-                      "name": "Value.[147] #Cards total",
-                      "type": 2,
-                      "subtype": 10147,
-                      "params": []
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
         "id": 527
       },
       {
-        "name": "Drag & Drop Aux - Move ALL Cards from transitoryPlace to currentPlace",
+        "name": "Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -16398,16 +16568,12 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.Set attribute",
+                "name": "Action.[144] #001:Move to Place [Id]",
                 "type": 0,
-                "subtype": 7,
+                "subtype": 10144,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "place"
-                  },
-                  {
-                    "name": "value",
+                    "name": "Dest Place",
                     "value": {
                       "name": "Value.Variable",
                       "type": 2,
@@ -16415,7 +16581,7 @@
                       "params": [
                         {
                           "name": "var_name",
-                          "value": "current_place"
+                          "value": "target_place"
                         }
                       ]
                     }
@@ -16437,7 +16603,7 @@
         "id": 528
       },
       {
-        "name": "Drag & Drop - Creatures",
+        "name": "~Drag & Drop v2",
         "enabled": true,
         "brick": {
           "name": "Action.[145] #002:If-then",
@@ -16492,21 +16658,54 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.Set variable",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 6,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "var_name",
-                          "value": "current_place"
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "current_place"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.[146] #Current place",
+                                  "type": 2,
+                                  "subtype": 10146,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
                         },
                         {
-                          "name": "value",
+                          "name": "action2",
                           "value": {
-                            "name": "Value.[146] #Current place",
-                            "type": 2,
-                            "subtype": 10146,
-                            "params": []
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Card Id",
+                                  "type": 2,
+                                  "subtype": 11,
+                                  "params": []
+                                }
+                              }
+                            ]
                           }
                         }
                       ]
@@ -16522,10 +16721,25 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to transitoryPlace",
+                            "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
                             "type": 0,
-                            "subtype": 10526,
-                            "params": []
+                            "subtype": 10527,
+                            "params": [
+                              {
+                                "name": "Card Id",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "card_id"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
                           }
                         },
                         {
@@ -16538,26 +16752,16 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card with [Cond] and its Tokens from currentPlace to targetPlace",
+                                  "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
                                   "type": 0,
-                                  "subtype": 10527,
-                                  "params": [
-                                    {
-                                      "name": "Cond",
-                                      "value": {
-                                        "name": "Condition.[187] ~001:Is a Creature",
-                                        "type": 1,
-                                        "subtype": 10187,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
+                                  "subtype": 10526,
+                                  "params": []
                                 }
                               },
                               {
                                 "name": "action2",
                                 "value": {
-                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to currentPlace",
+                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
                                   "type": 0,
                                   "subtype": 10528,
                                   "params": []
@@ -16662,7 +16866,7 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to transitoryPlace",
+                            "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
                             "type": 0,
                             "subtype": 10526,
                             "params": []
@@ -16678,12 +16882,12 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card with [Cond] and its Tokens from currentPlace to targetPlace",
+                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
                                   "type": 0,
                                   "subtype": 10527,
                                   "params": [
                                     {
-                                      "name": "Cond",
+                                      "name": "Card Id",
                                       "value": {
                                         "name": "Condition.[189] ~004:Is a Building",
                                         "type": 1,
@@ -16697,7 +16901,7 @@
                               {
                                 "name": "action2",
                                 "value": {
-                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to currentPlace",
+                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
                                   "type": 0,
                                   "subtype": 10528,
                                   "params": []
@@ -16802,7 +17006,7 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to transitoryPlace",
+                            "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
                             "type": 0,
                             "subtype": 10526,
                             "params": []
@@ -16818,12 +17022,12 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card with [Cond] and its Tokens from currentPlace to targetPlace",
+                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
                                   "type": 0,
                                   "subtype": 10527,
                                   "params": [
                                     {
-                                      "name": "Cond",
+                                      "name": "Card Id",
                                       "value": {
                                         "name": "Condition.Or",
                                         "type": 1,
@@ -16856,7 +17060,7 @@
                               {
                                 "name": "action2",
                                 "value": {
-                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to currentPlace",
+                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
                                   "type": 0,
                                   "subtype": 10528,
                                   "params": []
