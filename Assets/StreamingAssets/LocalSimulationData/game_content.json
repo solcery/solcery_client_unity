@@ -258,8 +258,8 @@
             }
           ]
         },
-        "action_on_token_gain": {
-          "name": "Action.[519] Default onTokenGain - Creature",
+        "action_on_token_added": {
+          "name": "Action.[519] Default onTokenAdded - Creature",
           "type": 0,
           "subtype": 10519,
           "params": []
@@ -519,8 +519,8 @@
             }
           ]
         },
-        "action_on_token_gain": {
-          "name": "Action.[522] Default onTokenGain - Building",
+        "action_on_token_added": {
+          "name": "Action.[522] Default onTokenAdded - Building",
           "type": 0,
           "subtype": 10522,
           "params": [
@@ -791,7 +791,7 @@
         "name": "Start Game",
         "enabled": true,
         "action": {
-          "name": "Action.[314] Phase - Init",
+          "name": "Action.[314] Phase 0 - Init",
           "type": 0,
           "subtype": 10314,
           "params": []
@@ -3440,7 +3440,7 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                                  "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                                   "type": 0,
                                   "subtype": 10161,
                                   "params": [
@@ -4864,8 +4864,8 @@
             }
           ]
         },
-        "action_on_token_gain": {
-          "name": "Action.[519] Default onTokenGain - Creature",
+        "action_on_token_added": {
+          "name": "Action.[519] Default onTokenAdded - Creature",
           "type": 0,
           "subtype": 10519,
           "params": []
@@ -4990,9 +4990,9 @@
         "id": 287
       },
       {
-        "name": "Test Hot Event",
+        "name": "Test Order Event",
         "enabled": true,
-        "description": "Adds 1 Hot to all creatures in top row",
+        "description": "Adds 1 Order to all creatures in top row",
         "picture": "https://i.ibb.co/RbYSd5m/1-44-Infernal-nest.jpg",
         "type": 3,
         "action_on_create": {
@@ -5031,10 +5031,44 @@
                   {
                     "name": "condition",
                     "value": {
-                      "name": "Condition.[187] ~001:Is a Creature",
+                      "name": "Condition.And",
                       "type": 1,
-                      "subtype": 10187,
-                      "params": []
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Condition.[187] ~001:Is a Creature",
+                            "type": 1,
+                            "subtype": 10187,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[194] ~:Is in Row [#]",
+                            "type": 1,
+                            "subtype": 10194,
+                            "params": [
+                              {
+                                "name": "Target Row #",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   },
                   {
@@ -5091,9 +5125,9 @@
                               {
                                 "name": "tpl",
                                 "value": {
-                                  "name": "Value.[226] Token TplId - Hot",
+                                  "name": "Value.[231] Token TplId- Order",
                                   "type": 2,
-                                  "subtype": 10226,
+                                  "subtype": 10231,
                                   "params": []
                                 }
                               },
@@ -5709,9 +5743,9 @@
         "enabled": true,
         "description": "Starts main turn sequence",
         "action": {
-          "name": "Action.[334] Phase - End Player Turn",
+          "name": "Action.[538] {v2} End Player Turn",
           "type": 0,
-          "subtype": 10334,
+          "subtype": 10538,
           "params": []
         },
         "id": 347
@@ -5811,7 +5845,7 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[291] Phase - Buildings",
+                      "name": "Action.[291] {v1} Phase 1.1 - Buildings",
                       "type": 0,
                       "subtype": 10291,
                       "params": []
@@ -5827,7 +5861,7 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[441] Phase - Creatures",
+                            "name": "Action.[441] {v1} Phase 1.2 - Creatures",
                             "type": 0,
                             "subtype": 10441,
                             "params": []
@@ -6547,7 +6581,7 @@
         "name": "Test Event Phase",
         "enabled": true,
         "action": {
-          "name": "Action.[514] Test Event Phase",
+          "name": "Action.[514] {v2} Phase 2.1 - Events",
           "type": 0,
           "subtype": 10514,
           "params": []
@@ -6558,7 +6592,7 @@
         "name": "Test Draw Phase",
         "enabled": true,
         "action": {
-          "name": "Action.[506] Test Draw Phase",
+          "name": "Action.[506] {v2} Phase 2.2 - Draw",
           "type": 0,
           "subtype": 10506,
           "params": []
@@ -6711,12 +6745,13 @@
         "enabled": true,
         "placeId": 4,
         "visible": true,
-        "x1": 8450,
-        "x2": 9950,
-        "y1": 6950,
-        "y2": 9950,
+        "x1": 8400,
+        "x2": 9900,
+        "y1": 7000,
+        "y2": 10000,
         "layout": 6,
         "zOrder": 4,
+        "frame": true,
         "id": 96
       },
       {
@@ -6737,9 +6772,9 @@
         "id": 97
       },
       {
-        "name": "Token Storage",
+        "name": "Token Reserve",
         "enabled": true,
-        "placeId": 6,
+        "placeId": 50,
         "interactableForActiveLocalPlayer": true,
         "x1": 8900,
         "x2": 9900,
@@ -6747,7 +6782,7 @@
         "y2": 5000,
         "layout": 7,
         "zOrder": 6,
-        "caption": "Token Storage",
+        "caption": "Token Reserve",
         "frame": true,
         "id": 98
       },
@@ -6757,10 +6792,10 @@
         "placeId": 7,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 6100,
-        "y2": 6400,
+        "x1": 100,
+        "x2": 1300,
+        "y1": 5000,
+        "y2": 5400,
         "layout": 4,
         "zOrder": 7,
         "id": 99
@@ -7190,8 +7225,8 @@
         "visible": true,
         "x1": 1200,
         "x2": 2200,
-        "y1": 7550,
-        "y2": 9950,
+        "y1": 8150,
+        "y2": 9350,
         "face": 1,
         "layout": 3,
         "zOrder": 99,
@@ -7212,9 +7247,9 @@
         "id": 480
       },
       {
-        "name": "Token Reserve",
+        "name": "Token Storage",
         "enabled": true,
-        "placeId": 50,
+        "placeId": 6,
         "visible": true,
         "x1": 100,
         "x2": 1100,
@@ -7222,7 +7257,7 @@
         "y2": 5000,
         "layout": 7,
         "zOrder": 6,
-        "caption": "Token Reserve",
+        "caption": "Token Storage",
         "frame": true,
         "id": 520
       },
@@ -7250,7 +7285,7 @@
         "enabled": true,
         "cardType": 295,
         "place": 1,
-        "amount": 1,
+        "amount": 5,
         "id": 121
       },
       {
@@ -7260,22 +7295,6 @@
         "place": 1,
         "amount": 1,
         "id": 124
-      },
-      {
-        "name": "TestCreature 1 - Kangaroo",
-        "enabled": true,
-        "cardType": 286,
-        "place": 5,
-        "amount": 1,
-        "id": 125
-      },
-      {
-        "name": "TestBuilding 1 - House",
-        "enabled": true,
-        "cardType": 116,
-        "place": 5,
-        "amount": 1,
-        "id": 131
       },
       {
         "name": "MD - End Turn button",
@@ -7314,7 +7333,7 @@
         "enabled": true,
         "cardType": 115,
         "place": 1,
-        "amount": 1,
+        "amount": 2,
         "id": 350
       },
       {
@@ -7322,7 +7341,7 @@
         "enabled": true,
         "cardType": 286,
         "place": 1,
-        "amount": 1,
+        "amount": 2,
         "id": 351
       },
       {
@@ -7330,7 +7349,7 @@
         "enabled": true,
         "cardType": 287,
         "place": 1,
-        "amount": 1,
+        "amount": 2,
         "id": 352
       },
       {
@@ -8238,7 +8257,7 @@
         "id": 145
       },
       {
-        "name": "~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+        "name": "~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -8364,7 +8383,7 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -8858,7 +8877,7 @@
         "id": 184
       },
       {
-        "name": "~Move [N] Cards by [Tpl Id] from MD to [Place Id]",
+        "name": "~Move [N] Cards by [Tpl Id] from MD to Place [Id]",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -9412,7 +9431,7 @@
         "id": 290
       },
       {
-        "name": "Phase - Buildings",
+        "name": "{v1} Phase 1.1 - Buildings",
         "enabled": true,
         "brick": {
           "name": "Action.[290] Apply to Buildings",
@@ -9462,100 +9481,7 @@
         "id": 291
       },
       {
-        "name": "Phase - Death",
-        "enabled": true,
-        "brick": {
-          "name": "Action.[289] Apply to Creatures",
-          "type": 0,
-          "subtype": 10289,
-          "params": [
-            {
-              "name": "Action",
-              "value": {
-                "name": "Action.If-Then-Else",
-                "type": 0,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "if",
-                    "value": {
-                      "name": "Condition.Lesser than",
-                      "type": 1,
-                      "subtype": 4,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Value.[233] Number of Tokens in Place X",
-                            "type": 2,
-                            "subtype": 10233,
-                            "params": [
-                              {
-                                "name": "Target Place",
-                                "value": {
-                                  "name": "Value.[146] #Current place",
-                                  "type": 2,
-                                  "subtype": 10146,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Value.Attribute",
-                            "type": 2,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "token_count"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "then",
-                    "value": {
-                      "name": "Action.Void",
-                      "type": 0,
-                      "subtype": 0,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "else",
-                    "value": {
-                      "name": "Action.[162] ~002: Clear Place [Id]",
-                      "type": 0,
-                      "subtype": 10162,
-                      "params": [
-                        {
-                          "name": "Target Place",
-                          "value": {
-                            "name": "Value.[146] #Current place",
-                            "type": 2,
-                            "subtype": 10146,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "id": 292
-      },
-      {
-        "name": "Phase - Event",
+        "name": "{v1} Phase 2.1 - Event",
         "enabled": true,
         "brick": {
           "name": "Action.[294] Apply to Events",
@@ -9956,7 +9882,7 @@
         "id": 296
       },
       {
-        "name": "Phase - Draw ",
+        "name": "{v1} Phase 2.2 - Draw ",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -9966,7 +9892,7 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[239] ~Move [N] Cards by [Tpl Id] from MD to [Place Id]",
+                "name": "Action.[239] ~Move [N] Cards by [Tpl Id] from MD to Place [Id]",
                 "type": 0,
                 "subtype": 10239,
                 "params": [
@@ -10061,7 +9987,7 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[239] ~Move [N] Cards by [Tpl Id] from MD to [Place Id]",
+                "name": "Action.[239] ~Move [N] Cards by [Tpl Id] from MD to Place [Id]",
                 "type": 0,
                 "subtype": 10239,
                 "params": [
@@ -10273,7 +10199,7 @@
         "id": 311
       },
       {
-        "name": "Phase - Init",
+        "name": "Phase 0 - Init",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -10309,7 +10235,7 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                      "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                       "type": 0,
                       "subtype": 10161,
                       "params": [
@@ -10396,29 +10322,10 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[145] #002:If-then",
+                            "name": "Action.[356] Init - Form Event Deck",
                             "type": 0,
-                            "subtype": 10145,
-                            "params": [
-                              {
-                                "name": "Condition",
-                                "value": {
-                                  "name": "Condition.[149] #002:False",
-                                  "type": 1,
-                                  "subtype": 10149,
-                                  "params": []
-                                }
-                              },
-                              {
-                                "name": "Action",
-                                "value": {
-                                  "name": "Action.[356] Init - Form Event Deck",
-                                  "type": 0,
-                                  "subtype": 10356,
-                                  "params": []
-                                }
-                              }
-                            ]
+                            "subtype": 10356,
+                            "params": []
                           }
                         },
                         {
@@ -10482,91 +10389,10 @@
                                           {
                                             "name": "action1",
                                             "value": {
-                                              "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                                              "name": "Action.[539] Show/Hide End Turn Button",
                                               "type": 0,
-                                              "subtype": 10161,
-                                              "params": [
-                                                {
-                                                  "name": "cond",
-                                                  "value": {
-                                                    "name": "Condition.And",
-                                                    "type": 1,
-                                                    "subtype": 7,
-                                                    "params": [
-                                                      {
-                                                        "name": "cond1",
-                                                        "value": {
-                                                          "name": "Condition.[155] #008:Is in place [X]",
-                                                          "type": 1,
-                                                          "subtype": 10155,
-                                                          "params": [
-                                                            {
-                                                              "name": "Place Id",
-                                                              "value": {
-                                                                "name": "Value.[163] Place 01. Main Deck/MD",
-                                                                "type": 2,
-                                                                "subtype": 10163,
-                                                                "params": []
-                                                              }
-                                                            }
-                                                          ]
-                                                        }
-                                                      },
-                                                      {
-                                                        "name": "cond2",
-                                                        "value": {
-                                                          "name": "Condition.[154] #007:Is card type",
-                                                          "type": 1,
-                                                          "subtype": 10154,
-                                                          "params": [
-                                                            {
-                                                              "name": "Card Type Id",
-                                                              "value": {
-                                                                "name": "Value.[365] End Turn Button Id",
-                                                                "type": 2,
-                                                                "subtype": 10365,
-                                                                "params": []
-                                                              }
-                                                            }
-                                                          ]
-                                                        }
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                {
-                                                  "name": "destPlace",
-                                                  "value": {
-                                                    "name": "Value.[169] Place 07. End Turn Button",
-                                                    "type": 2,
-                                                    "subtype": 10169,
-                                                    "params": []
-                                                  }
-                                                },
-                                                {
-                                                  "name": "action",
-                                                  "value": {
-                                                    "name": "Action.Void",
-                                                    "type": 0,
-                                                    "subtype": 0,
-                                                    "params": []
-                                                  }
-                                                },
-                                                {
-                                                  "name": "cnt",
-                                                  "value": {
-                                                    "name": "Value.Constant",
-                                                    "type": 2,
-                                                    "subtype": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "value",
-                                                        "value": 1
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
+                                              "subtype": 10539,
+                                              "params": []
                                             }
                                           },
                                           {
@@ -10579,7 +10405,7 @@
                                                 {
                                                   "name": "action1",
                                                   "value": {
-                                                    "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                                                    "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                                                     "type": 0,
                                                     "subtype": 10161,
                                                     "params": [
@@ -10676,7 +10502,7 @@
                                                       {
                                                         "name": "action1",
                                                         "value": {
-                                                          "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                                                          "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                                                           "type": 0,
                                                           "subtype": 10161,
                                                           "params": [
@@ -11394,7 +11220,7 @@
         "id": 329
       },
       {
-        "name": "Phase - End Player Turn",
+        "name": "{v1} End Player Turn",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -11411,7 +11237,7 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[291] Phase - Buildings",
+                      "name": "Action.[291] {v1} Phase 1.1 - Buildings",
                       "type": 0,
                       "subtype": 10291,
                       "params": []
@@ -11461,7 +11287,7 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[293] Phase - Event",
+                            "name": "Action.[293] {v1} Phase 2.1 - Event",
                             "type": 0,
                             "subtype": 10293,
                             "params": []
@@ -11504,7 +11330,7 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[304] Phase - Draw ",
+                            "name": "Action.[304] {v1} Phase 2.2 - Draw ",
                             "type": 0,
                             "subtype": 10304,
                             "params": []
@@ -12328,7 +12154,7 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -12391,15 +12217,10 @@
                   {
                     "name": "cnt",
                     "value": {
-                      "name": "Value.Constant",
+                      "name": "Value.[147] #Cards total",
                       "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 15
-                        }
-                      ]
+                      "subtype": 10147,
+                      "params": []
                     }
                   }
                 ]
@@ -12415,7 +12236,7 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                      "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                       "type": 0,
                       "subtype": 10161,
                       "params": [
@@ -12484,7 +12305,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 9
+                                "value": 3
                               }
                             ]
                           }
@@ -12495,7 +12316,7 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                      "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                       "type": 0,
                       "subtype": 10161,
                       "params": [
@@ -12564,7 +12385,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 3
+                                "value": 0
                               }
                             ]
                           }
@@ -12623,7 +12444,7 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -12910,7 +12731,7 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                      "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                       "type": 0,
                       "subtype": 10161,
                       "params": [
@@ -12990,7 +12811,7 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                      "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                       "type": 0,
                       "subtype": 10161,
                       "params": [
@@ -13030,7 +12851,7 @@
                                     {
                                       "name": "Card Type Id",
                                       "value": {
-                                        "name": "Value.[365] End Turn Button Id",
+                                        "name": "Value.[365] End Turn Button Tpl Id",
                                         "type": 2,
                                         "subtype": 10365,
                                         "params": []
@@ -13045,7 +12866,7 @@
                         {
                           "name": "destPlace",
                           "value": {
-                            "name": "Value.[169] Place 07. End Turn Button",
+                            "name": "Value.[169] Place - End Turn Button",
                             "type": 2,
                             "subtype": 10169,
                             "params": []
@@ -13085,7 +12906,7 @@
         "id": 359
       },
       {
-        "name": "Move N cards to place X from place Y by Cond",
+        "name": "{OLD} Move N cards to place X from place Y by Cond",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -13305,7 +13126,7 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -13385,7 +13206,7 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -13470,7 +13291,7 @@
         "name": "Init - Place Starting Events",
         "enabled": true,
         "brick": {
-          "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+          "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
           "type": 0,
           "subtype": 10161,
           "params": [
@@ -13549,7 +13370,7 @@
         "id": 439
       },
       {
-        "name": "Phase - Creatures",
+        "name": "{v1} Phase 1.2 - Creatures",
         "enabled": true,
         "brick": {
           "name": "Action.[289] Apply to Creatures",
@@ -13602,86 +13423,115 @@
         "name": "Show Msg - Player Turn",
         "enabled": true,
         "brick": {
-          "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 10161,
+          "subtype": 1,
           "params": [
             {
-              "name": "cond",
+              "name": "action1",
               "value": {
-                "name": "Condition.And",
-                "type": 1,
-                "subtype": 7,
+                "name": "Action.[162] ~002: Clear Place [Id]",
+                "type": 0,
+                "subtype": 10162,
                 "params": [
                   {
-                    "name": "cond1",
+                    "name": "Target Place",
                     "value": {
-                      "name": "Condition.[155] #008:Is in place [X]",
-                      "type": 1,
-                      "subtype": 10155,
-                      "params": [
-                        {
-                          "name": "Place Id",
-                          "value": {
-                            "name": "Value.[163] Place 01. Main Deck/MD",
-                            "type": 2,
-                            "subtype": 10163,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Condition.[154] #007:Is card type",
-                      "type": 1,
-                      "subtype": 10154,
-                      "params": [
-                        {
-                          "name": "Card Type Id",
-                          "value": {
-                            "name": "Value.[448] TplId - Msg - Player Turn",
-                            "type": 2,
-                            "subtype": 10448,
-                            "params": []
-                          }
-                        }
-                      ]
+                      "name": "Value.[447] Place - Msg Area",
+                      "type": 2,
+                      "subtype": 10447,
+                      "params": []
                     }
                   }
                 ]
               }
             },
             {
-              "name": "destPlace",
+              "name": "action2",
               "value": {
-                "name": "Value.[447] Place - Msg Area",
-                "type": 2,
-                "subtype": 10447,
-                "params": []
-              }
-            },
-            {
-              "name": "action",
-              "value": {
-                "name": "Action.Void",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
-                "subtype": 0,
-                "params": []
-              }
-            },
-            {
-              "name": "cnt",
-              "value": {
-                "name": "Value.Constant",
-                "type": 2,
-                "subtype": 0,
+                "subtype": 10161,
                 "params": [
                   {
-                    "name": "value",
-                    "value": 1
+                    "name": "cond",
+                    "value": {
+                      "name": "Condition.And",
+                      "type": 1,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Condition.[155] #008:Is in place [X]",
+                            "type": 1,
+                            "subtype": 10155,
+                            "params": [
+                              {
+                                "name": "Place Id",
+                                "value": {
+                                  "name": "Value.[163] Place 01. Main Deck/MD",
+                                  "type": 2,
+                                  "subtype": 10163,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[154] #007:Is card type",
+                            "type": 1,
+                            "subtype": 10154,
+                            "params": [
+                              {
+                                "name": "Card Type Id",
+                                "value": {
+                                  "name": "Value.[448] TplId - Msg - Player Turn",
+                                  "type": 2,
+                                  "subtype": 10448,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "destPlace",
+                    "value": {
+                      "name": "Value.[447] Place - Msg Area",
+                      "type": 2,
+                      "subtype": 10447,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Void",
+                      "type": 0,
+                      "subtype": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cnt",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -13694,86 +13544,115 @@
         "name": "Show Msg - Realm Turn",
         "enabled": true,
         "brick": {
-          "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 10161,
+          "subtype": 1,
           "params": [
             {
-              "name": "cond",
+              "name": "action1",
               "value": {
-                "name": "Condition.And",
-                "type": 1,
-                "subtype": 7,
+                "name": "Action.[162] ~002: Clear Place [Id]",
+                "type": 0,
+                "subtype": 10162,
                 "params": [
                   {
-                    "name": "cond1",
+                    "name": "Target Place",
                     "value": {
-                      "name": "Condition.[155] #008:Is in place [X]",
-                      "type": 1,
-                      "subtype": 10155,
-                      "params": [
-                        {
-                          "name": "Place Id",
-                          "value": {
-                            "name": "Value.[163] Place 01. Main Deck/MD",
-                            "type": 2,
-                            "subtype": 10163,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Condition.[154] #007:Is card type",
-                      "type": 1,
-                      "subtype": 10154,
-                      "params": [
-                        {
-                          "name": "Card Type Id",
-                          "value": {
-                            "name": "Value.[449] TplId - Msg - Realm Turn",
-                            "type": 2,
-                            "subtype": 10449,
-                            "params": []
-                          }
-                        }
-                      ]
+                      "name": "Value.[447] Place - Msg Area",
+                      "type": 2,
+                      "subtype": 10447,
+                      "params": []
                     }
                   }
                 ]
               }
             },
             {
-              "name": "destPlace",
+              "name": "action2",
               "value": {
-                "name": "Value.[447] Place - Msg Area",
-                "type": 2,
-                "subtype": 10447,
-                "params": []
-              }
-            },
-            {
-              "name": "action",
-              "value": {
-                "name": "Action.Void",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
-                "subtype": 0,
-                "params": []
-              }
-            },
-            {
-              "name": "cnt",
-              "value": {
-                "name": "Value.Constant",
-                "type": 2,
-                "subtype": 0,
+                "subtype": 10161,
                 "params": [
                   {
-                    "name": "value",
-                    "value": 1
+                    "name": "cond",
+                    "value": {
+                      "name": "Condition.And",
+                      "type": 1,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Condition.[155] #008:Is in place [X]",
+                            "type": 1,
+                            "subtype": 10155,
+                            "params": [
+                              {
+                                "name": "Place Id",
+                                "value": {
+                                  "name": "Value.[163] Place 01. Main Deck/MD",
+                                  "type": 2,
+                                  "subtype": 10163,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[154] #007:Is card type",
+                            "type": 1,
+                            "subtype": 10154,
+                            "params": [
+                              {
+                                "name": "Card Type Id",
+                                "value": {
+                                  "name": "Value.[449] TplId - Msg - Realm Turn",
+                                  "type": 2,
+                                  "subtype": 10449,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "destPlace",
+                    "value": {
+                      "name": "Value.[447] Place - Msg Area",
+                      "type": 2,
+                      "subtype": 10447,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Void",
+                      "type": 0,
+                      "subtype": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cnt",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -14393,9 +14272,9 @@
                   {
                     "name": "cond2",
                     "value": {
-                      "name": "Condition.[343] Can Receive Tokens",
+                      "name": "Condition.[362] Is a Card (not a Token)",
                       "type": 1,
-                      "subtype": 10343,
+                      "subtype": 10362,
                       "params": []
                     }
                   }
@@ -14405,12 +14284,12 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.CreateEntity",
+                "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
                 "type": 0,
-                "subtype": 12,
+                "subtype": 10535,
                 "params": [
                   {
-                    "name": "card_type",
+                    "name": "tpl",
                     "value": {
                       "name": "Value.Argument",
                       "type": 2,
@@ -14424,48 +14303,15 @@
                     }
                   },
                   {
-                    "name": "place",
+                    "name": "action",
                     "value": {
-                      "name": "Value.Argument",
-                      "type": 2,
-                      "subtype": 3,
+                      "name": "Action.Argument",
+                      "type": 0,
+                      "subtype": 4,
                       "params": [
                         {
                           "name": "name",
-                          "value": "place"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action",
-                    "value": {
-                      "name": "Action.Two actions",
-                      "type": 0,
-                      "subtype": 1,
-                      "params": [
-                        {
-                          "name": "action1",
-                          "value": {
-                            "name": "Action.[503] Trigger event 'Create' + build context",
-                            "type": 0,
-                            "subtype": 10503,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "action2",
-                          "value": {
-                            "name": "Action.Argument",
-                            "type": 0,
-                            "subtype": 4,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "action"
-                              }
-                            ]
-                          }
+                          "value": "action"
                         }
                       ]
                     }
@@ -14506,34 +14352,20 @@
             {
               "name": "value",
               "value": {
-                "name": "Value.Set variable",
+                "name": "Value.[501] Next free Slot in [Card Id]",
                 "type": 2,
-                "subtype": 15,
+                "subtype": 10501,
                 "params": [
                   {
-                    "name": "var_name",
-                    "value": "new_slot"
-                  },
-                  {
-                    "name": "value",
+                    "name": "Card Id",
                     "value": {
-                      "name": "Value.[501] Next free Slot in Card [TplId]",
+                      "name": "Value.Argument",
                       "type": 2,
-                      "subtype": 10501,
+                      "subtype": 3,
                       "params": [
                         {
-                          "name": "Card Id",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Card Id"
-                              }
-                            ]
-                          }
+                          "name": "name",
+                          "value": "Card Id"
                         }
                       ]
                     }
@@ -14546,7 +14378,7 @@
         "id": 496
       },
       {
-        "name": "Trigger Token Gain Event on [Card Id]",
+        "name": "Trigger 'Token Added' Event on [Card Id]",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -14589,7 +14421,7 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.[498] Trigger event 'Token Gain' + build context",
+                "name": "Action.[498] Trigger event 'Token Added' + build context",
                 "type": 0,
                 "subtype": 10498,
                 "params": []
@@ -14614,7 +14446,7 @@
         "id": 497
       },
       {
-        "name": "Trigger event 'Token Gain' + build context",
+        "name": "Trigger event 'Token Added' + build context",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -14958,58 +14790,20 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.Two actions",
+                "name": "Action.[504] ~Link Token to [Card Id]",
                 "type": 0,
-                "subtype": 1,
+                "subtype": 10504,
                 "params": [
                   {
-                    "name": "action1",
+                    "name": "Card Id",
                     "value": {
-                      "name": "Action.Set attribute",
-                      "type": 0,
-                      "subtype": 7,
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
                       "params": [
                         {
-                          "name": "attr_name",
-                          "value": "linked_card_id"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Card Id"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "Action.[504] ~Link Token to [Card Id]",
-                      "type": 0,
-                      "subtype": 10504,
-                      "params": [
-                        {
-                          "name": "Card Id",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Card Id"
-                              }
-                            ]
-                          }
+                          "name": "name",
+                          "value": "Card Id"
                         }
                       ]
                     }
@@ -15182,149 +14976,16 @@
         "id": 502
       },
       {
-        "name": "Trigger event 'Create' + build context",
+        "name": "Trigger event 'Create' for Tokens + build context",
         "enabled": true,
         "brick": {
-          "name": "Action.Two actions",
+          "name": "Action.Event",
           "type": 0,
-          "subtype": 1,
+          "subtype": 11,
           "params": [
             {
-              "name": "action1",
-              "value": {
-                "name": "Action.Two actions",
-                "type": 0,
-                "subtype": 1,
-                "params": [
-                  {
-                    "name": "action1",
-                    "value": {
-                      "name": "Action.Set variable",
-                      "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "current_place"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.[146] #Current place",
-                            "type": 2,
-                            "subtype": 10146,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "Action.Iterator",
-                      "type": 0,
-                      "subtype": 5,
-                      "params": [
-                        {
-                          "name": "condition",
-                          "value": {
-                            "name": "Condition.And",
-                            "type": 1,
-                            "subtype": 7,
-                            "params": [
-                              {
-                                "name": "cond1",
-                                "value": {
-                                  "name": "Condition.[155] #008:Is in place [X]",
-                                  "type": 1,
-                                  "subtype": 10155,
-                                  "params": [
-                                    {
-                                      "name": "Place Id",
-                                      "value": {
-                                        "name": "Value.Variable",
-                                        "type": 2,
-                                        "subtype": 1,
-                                        "params": [
-                                          {
-                                            "name": "var_name",
-                                            "value": "current_place"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "cond2",
-                                "value": {
-                                  "name": "Condition.[343] Can Receive Tokens",
-                                  "type": 1,
-                                  "subtype": 10343,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action",
-                          "value": {
-                            "name": "Action.Set variable",
-                            "type": 0,
-                            "subtype": 6,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "origin_card_id"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Value.Card Id",
-                                  "type": 2,
-                                  "subtype": 11,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "limit",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Event",
-                "type": 0,
-                "subtype": 11,
-                "params": [
-                  {
-                    "name": "event_name",
-                    "value": "create"
-                  }
-                ]
-              }
+              "name": "event_name",
+              "value": "create"
             }
           ]
         },
@@ -15341,20 +15002,34 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[496] Place a Token into a free Slot in [Card Id]",
+                "name": "Action.Set attribute",
                 "type": 0,
-                "subtype": 10496,
+                "subtype": 7,
                 "params": [
                   {
-                    "name": "Card Id",
+                    "name": "attr_name",
+                    "value": "slot"
+                  },
+                  {
+                    "name": "value",
                     "value": {
-                      "name": "Value.Argument",
+                      "name": "Value.[501] Next free Slot in [Card Id]",
                       "type": 2,
-                      "subtype": 3,
+                      "subtype": 10501,
                       "params": [
                         {
-                          "name": "name",
-                          "value": "Card Id"
+                          "name": "Card Id",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Card Id"
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -15365,20 +15040,58 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[497] Trigger Token Gain Event on [Card Id]",
+                "name": "Action.Two actions",
                 "type": 0,
-                "subtype": 10497,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "Card Id",
+                    "name": "action1",
                     "value": {
-                      "name": "Value.Argument",
-                      "type": 2,
-                      "subtype": 3,
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
                       "params": [
                         {
-                          "name": "name",
-                          "value": "Card Id"
+                          "name": "attr_name",
+                          "value": "linked_card_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Card Id"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[497] Trigger 'Token Added' Event on [Card Id]",
+                      "type": 0,
+                      "subtype": 10497,
+                      "params": [
+                        {
+                          "name": "Card Id",
+                          "value": {
+                            "name": "Value.Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Card Id"
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -15391,7 +15104,7 @@
         "id": 504
       },
       {
-        "name": "Test Draw Phase",
+        "name": "{v2} Phase 2.2 - Draw",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -15401,7 +15114,7 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[161] ~001: Move [N] Cards by Cond [X] to [Place Id] & [DO] ",
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
                 "type": 0,
                 "subtype": 10161,
                 "params": [
@@ -15488,10 +15201,53 @@
                   {
                     "name": "action",
                     "value": {
-                      "name": "Action.[346] Trigger event 'Activation' + build context",
+                      "name": "Action.Set attribute",
                       "type": 0,
-                      "subtype": 10346,
-                      "params": []
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "number"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Addition",
+                            "type": 2,
+                            "subtype": 5,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Value.Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "number"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   },
                   {
@@ -15516,7 +15272,7 @@
         "id": 506
       },
       {
-        "name": "Test Event Phase",
+        "name": "{v2} Phase 2.1 - Events",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -15540,17 +15296,46 @@
                         {
                           "name": "cond1",
                           "value": {
-                            "name": "Condition.[155] #008:Is in place [X]",
+                            "name": "Condition.Or",
                             "type": 1,
-                            "subtype": 10155,
+                            "subtype": 6,
                             "params": [
                               {
-                                "name": "Place Id",
+                                "name": "cond1",
                                 "value": {
-                                  "name": "Value.[167] Place 05. Event Tracker",
-                                  "type": 2,
-                                  "subtype": 10167,
-                                  "params": []
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.[167] Place 05. Event Tracker",
+                                        "type": 2,
+                                        "subtype": 10167,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.[166] Place 04. Eclipse ",
+                                        "type": 2,
+                                        "subtype": 10166,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
                                 }
                               }
                             ]
@@ -15742,9 +15527,9 @@
                               {
                                 "name": "cond2",
                                 "value": {
-                                  "name": "Condition.[343] Can Receive Tokens",
+                                  "name": "Condition.[362] Is a Card (not a Token)",
                                   "type": 1,
-                                  "subtype": 10343,
+                                  "subtype": 10362,
                                   "params": []
                                 }
                               }
@@ -15808,7 +15593,7 @@
         "id": 514
       },
       {
-        "name": "Default onTokenGain - Creature",
+        "name": "Default onTokenAdded - Creature",
         "enabled": true,
         "brick": {
           "name": "Action.[145] #002:If-then",
@@ -15832,10 +15617,15 @@
                         {
                           "name": "Card Id",
                           "value": {
-                            "name": "Value.Card Id",
+                            "name": "Value.Variable",
                             "type": 2,
-                            "subtype": 11,
-                            "params": []
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              }
+                            ]
                           }
                         },
                         {
@@ -15881,7 +15671,7 @@
         "id": 519
       },
       {
-        "name": "Default onTokenGain - Building",
+        "name": "Default onTokenAdded - Building",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -16249,7 +16039,7 @@
                 "params": [
                   {
                     "name": "attr_name",
-                    "value": "destroyed"
+                    "value": "anim_destroy"
                   },
                   {
                     "name": "value",
@@ -17091,6 +16881,895 @@
           ]
         },
         "id": 531
+      },
+      {
+        "name": "~Create a Token [Tpl Id] on this Card & [DO]",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "current_place"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.[146] #Current place",
+                            "type": 2,
+                            "subtype": 10146,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "origin_card_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Card Id",
+                            "type": 2,
+                            "subtype": 11,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.CreateEntity",
+                "type": 0,
+                "subtype": 12,
+                "params": [
+                  {
+                    "name": "card_type",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "tpl"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "place",
+                    "value": {
+                      "name": "Value.Variable",
+                      "type": 2,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "current_place"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.[503] Trigger event 'Create' for Tokens + build context",
+                            "type": 0,
+                            "subtype": 10503,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Argument",
+                            "type": 0,
+                            "subtype": 4,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "action"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 535
+      },
+      {
+        "name": "{v2} Phase 1.1 - Buildings",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Iterator",
+          "type": 0,
+          "subtype": 5,
+          "params": [
+            {
+              "name": "condition",
+              "value": {
+                "name": "Condition.And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Condition.[280] ~006:Is in Realm Board",
+                      "type": 1,
+                      "subtype": 10280,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Condition.[189] ~004:Is a Building",
+                      "type": 1,
+                      "subtype": 10189,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[346] Trigger event 'Activation' + build context",
+                "type": 0,
+                "subtype": 10346,
+                "params": []
+              }
+            },
+            {
+              "name": "limit",
+              "value": {
+                "name": "Value.[147] #Cards total",
+                "type": 2,
+                "subtype": 10147,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 536
+      },
+      {
+        "name": "{v2} Phase 1.2 - Creatures",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Iterator",
+          "type": 0,
+          "subtype": 5,
+          "params": [
+            {
+              "name": "condition",
+              "value": {
+                "name": "Condition.And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Condition.[280] ~006:Is in Realm Board",
+                      "type": 1,
+                      "subtype": 10280,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Condition.[187] ~001:Is a Creature",
+                      "type": 1,
+                      "subtype": 10187,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[346] Trigger event 'Activation' + build context",
+                "type": 0,
+                "subtype": 10346,
+                "params": []
+              }
+            },
+            {
+              "name": "limit",
+              "value": {
+                "name": "Value.[147] #Cards total",
+                "type": 2,
+                "subtype": 10147,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 537
+      },
+      {
+        "name": "{v2} End Player Turn",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[539] Show/Hide End Turn Button",
+                "type": 0,
+                "subtype": 10539,
+                "params": []
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set game attribute",
+                      "type": 0,
+                      "subtype": 9,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "input_lock"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.[451] Show Msg - Realm Turn",
+                            "type": 0,
+                            "subtype": 10451,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Action.[536] {v2} Phase 1.1 - Buildings",
+                                        "type": 0,
+                                        "subtype": 10536,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.Pause",
+                                        "type": 0,
+                                        "subtype": 10,
+                                        "params": [
+                                          {
+                                            "name": "duration",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 500
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Action.Two actions",
+                                        "type": 0,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "Action.[537] {v2} Phase 1.2 - Creatures",
+                                              "type": 0,
+                                              "subtype": 10537,
+                                              "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Action.Pause",
+                                              "type": 0,
+                                              "subtype": 10,
+                                              "params": [
+                                                {
+                                                  "name": "duration",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 1000
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.Two actions",
+                                        "type": 0,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "Action.Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Action.[514] {v2} Phase 2.1 - Events",
+                                                    "type": 0,
+                                                    "subtype": 10514,
+                                                    "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Action.Pause",
+                                                    "type": 0,
+                                                    "subtype": 10,
+                                                    "params": [
+                                                      {
+                                                        "name": "duration",
+                                                        "value": {
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 500
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Action.Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Action.Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "Action.[506] {v2} Phase 2.2 - Draw",
+                                                          "type": 0,
+                                                          "subtype": 10506,
+                                                          "params": []
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "action2",
+                                                        "value": {
+                                                          "name": "Action.Pause",
+                                                          "type": 0,
+                                                          "subtype": 10,
+                                                          "params": [
+                                                            {
+                                                              "name": "duration",
+                                                              "value": {
+                                                                "name": "Value.Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": 500
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Action.Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "Action.[450] Show Msg - Player Turn",
+                                                          "type": 0,
+                                                          "subtype": 10450,
+                                                          "params": []
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "action2",
+                                                        "value": {
+                                                          "name": "Action.Two actions",
+                                                          "type": 0,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "action1",
+                                                              "value": {
+                                                                "name": "Action.Set game attribute",
+                                                                "type": 0,
+                                                                "subtype": 9,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "attr_name",
+                                                                    "value": "input_lock"
+                                                                  },
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": {
+                                                                      "name": "Value.Constant",
+                                                                      "type": 2,
+                                                                      "subtype": 0,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "value": 0
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "action2",
+                                                              "value": {
+                                                                "name": "Action.[539] Show/Hide End Turn Button",
+                                                                "type": 0,
+                                                                "subtype": 10539,
+                                                                "params": []
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 538
+      },
+      {
+        "name": "Show/Hide End Turn Button",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Iterator",
+                "type": 0,
+                "subtype": 5,
+                "params": [
+                  {
+                    "name": "condition",
+                    "value": {
+                      "name": "Condition.And",
+                      "type": 1,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Condition.[155] #008:Is in place [X]",
+                            "type": 1,
+                            "subtype": 10155,
+                            "params": [
+                              {
+                                "name": "Place Id",
+                                "value": {
+                                  "name": "Value.[169] Place - End Turn Button",
+                                  "type": 2,
+                                  "subtype": 10169,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[154] #007:Is card type",
+                            "type": 1,
+                            "subtype": 10154,
+                            "params": [
+                              {
+                                "name": "Card Type Id",
+                                "value": {
+                                  "name": "Value.[365] End Turn Button Tpl Id",
+                                  "type": 2,
+                                  "subtype": 10365,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "end_turn_visible"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "limit",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.If-Then-Else",
+                      "type": 0,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "if",
+                          "value": {
+                            "name": "Condition.Greater than",
+                            "type": 1,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "end_turn_visible"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "then",
+                          "value": {
+                            "name": "Action.[162] ~002: Clear Place [Id]",
+                            "type": 0,
+                            "subtype": 10162,
+                            "params": [
+                              {
+                                "name": "Target Place",
+                                "value": {
+                                  "name": "Value.[169] Place - End Turn Button",
+                                  "type": 2,
+                                  "subtype": 10169,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "else",
+                          "value": {
+                            "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                            "type": 0,
+                            "subtype": 10161,
+                            "params": [
+                              {
+                                "name": "cond",
+                                "value": {
+                                  "name": "Condition.[154] #007:Is card type",
+                                  "type": 1,
+                                  "subtype": 10154,
+                                  "params": [
+                                    {
+                                      "name": "Card Type Id",
+                                      "value": {
+                                        "name": "Value.[365] End Turn Button Tpl Id",
+                                        "type": 2,
+                                        "subtype": 10365,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "destPlace",
+                                "value": {
+                                  "name": "Value.[169] Place - End Turn Button",
+                                  "type": 2,
+                                  "subtype": 10169,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "action",
+                                "value": {
+                                  "name": "Action.Void",
+                                  "type": 0,
+                                  "subtype": 0,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "cnt",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "end_turn_visible"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 539
       },
       {
         "name": "#001:True",
@@ -18737,7 +19416,7 @@
         "id": 168
       },
       {
-        "name": "Place 07. End Turn Button",
+        "name": "Place - End Turn Button",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -20771,7 +21450,7 @@
         "id": 364
       },
       {
-        "name": "End Turn Button Id",
+        "name": "End Turn Button Tpl Id",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -20963,7 +21642,7 @@
         "id": 488
       },
       {
-        "name": "Next free Slot in Card [TplId]",
+        "name": "Next free Slot in [Card Id]",
         "enabled": true,
         "brick": {
           "name": "Value.Addition",
@@ -21082,12 +21761,26 @@
                   {
                     "name": "cond1",
                     "value": {
-                      "name": "Condition.[516] #008:Is [Card Id]",
+                      "name": "Condition.Equal",
                       "type": 1,
-                      "subtype": 10516,
+                      "subtype": 2,
                       "params": [
                         {
-                          "name": "Card Id",
+                          "name": "value1",
+                          "value": {
+                            "name": "Value.Attribute",
+                            "type": 2,
+                            "subtype": 2,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "linked_card_id"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
                           "value": {
                             "name": "Value.Argument",
                             "type": 2,
@@ -21106,32 +21799,13 @@
                   {
                     "name": "cond2",
                     "value": {
-                      "name": "Condition.And",
+                      "name": "Condition.Argument",
                       "type": 1,
-                      "subtype": 7,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Condition.[190] ~002:Is a Token",
-                            "type": 1,
-                            "subtype": 10190,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Condition.Argument",
-                            "type": 1,
-                            "subtype": 5,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Cond"
-                              }
-                            ]
-                          }
+                          "name": "name",
+                          "value": "Cond"
                         }
                       ]
                     }
