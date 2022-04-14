@@ -1,5 +1,6 @@
 using Solcery.Games;
 using Solcery.Games.DTO;
+using Solcery.GameStateDebug;
 using Solcery.Services.Renderer.DTO;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
@@ -24,6 +25,8 @@ namespace Solcery
         private GameObject renderPrefab;
         [SerializeField]
         private Graphic raycastBlockTouches;
+        [SerializeField]
+        private GameStateDebugView gameStateDebugView;
         
         private IGame _game;
 
@@ -42,9 +45,14 @@ namespace Solcery
 
         private void Start()
         {
+        #if UNITY_EDITOR
+            gameStateDebugView.gameObject.SetActive(true);
+        #endif
+            
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
                 WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas),
-                ServiceRenderDto.Create(renderFrame, renderPrefab)));
+                ServiceRenderDto.Create(renderFrame, renderPrefab),
+                gameStateDebugView));
             _game.Init();
         }
 

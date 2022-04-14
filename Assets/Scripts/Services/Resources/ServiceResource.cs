@@ -33,7 +33,6 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(JObject gameContentJson)
         {
-            //Debug.Log("PreloadResourcesFromGameContent start");
             var patternsProcessor = PatternsProcessor.Create();
             patternsProcessor.PatternRegistration(PatternUriTexture.Create());
             patternsProcessor.ProcessGameContent(gameContentJson);
@@ -47,8 +46,6 @@ namespace Solcery.Services.Resources
             }
 
             _task.AddTask(TaskLoadWidgetPrefab.Create(OnWidgetPrefabLoaded));
-
-            //Debug.Log("PreloadResourcesFromGameContent _task.Run()");
             _task.Run();
         }
 

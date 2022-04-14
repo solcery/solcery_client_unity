@@ -7,6 +7,7 @@ using Solcery.BrickInterpretation.Runtime.Values;
 using Solcery.Games.Contents;
 using Solcery.Games.DTO;
 using Solcery.Games.States;
+using Solcery.GameStateDebug;
 using Solcery.Models.Play;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -79,6 +80,10 @@ namespace Solcery.Games
         private JObject _gameState;
         private readonly TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
+        
+        #if UNITY_EDITOR
+        private readonly GameStateDebugView _gameStateDebugView;
+        #endif
 
         public static IGame Create(IGameInitDto dto)
         {
@@ -87,6 +92,10 @@ namespace Solcery.Games
 
         private Game(IGameInitDto dto)
         {
+            #if UNITY_EDITOR
+            _gameStateDebugView = dto.GameStateDebugView;
+            #endif
+            
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
             _gameStatePackages = new Queue<GameStatePackage>();
@@ -269,6 +278,10 @@ namespace Solcery.Games
                     var msec = (int)(dt * 1000f);
                     if (state.TryGetGameState(msec, out var gameState))
                     {
+                        #if UNITY_EDITOR
+                        _gameStateDebugView.GameState = gameState;
+                        #endif
+                        
                         _gameState = gameState;
                     }
                 }

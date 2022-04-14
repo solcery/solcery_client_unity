@@ -47,8 +47,6 @@ namespace Solcery.Services.Resources.Loaders.Texture
                 return;
             }
             
-            Debug.Log($"Resource {_uri} loaded state {_webRequest.result} and error {_webRequest.error}");
-
             if (_webRequest.result == UnityWebRequest.Result.Success)
             {
                 _loadedIsSuccess = true;

@@ -39,7 +39,6 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         private void OnCompleted(AsyncOperationHandle<GameObject> obj)
         {
             obj.Completed -= OnCompleted;
-            Debug.Log($"Prefab {_widgetPrefabPath} loaded status {obj.Status}");
             _widgetPrefab = obj.Result;
             _callback?.Invoke(this);
         }
