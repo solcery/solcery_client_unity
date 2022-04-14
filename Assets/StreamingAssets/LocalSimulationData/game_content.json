@@ -5031,44 +5031,10 @@
                   {
                     "name": "condition",
                     "value": {
-                      "name": "Condition.And",
+                      "name": "Condition.[187] ~001:Is a Creature",
                       "type": 1,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Condition.[187] ~001:Is a Creature",
-                            "type": 1,
-                            "subtype": 10187,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Condition.[194] ~:Is in Row [#]",
-                            "type": 1,
-                            "subtype": 10194,
-                            "params": [
-                              {
-                                "name": "Target Row #",
-                                "value": {
-                                  "name": "Value.Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 1
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
+                      "subtype": 10187,
+                      "params": []
                     }
                   },
                   {
@@ -13928,7 +13894,7 @@
                                   "params": [
                                     {
                                       "name": "attr_name",
-                                      "value": "card_id"
+                                      "value": "linked_card_id"
                                     }
                                   ]
                                 }
@@ -15776,29 +15742,10 @@
                               {
                                 "name": "cond2",
                                 "value": {
-                                  "name": "Condition.Or",
+                                  "name": "Condition.[343] Can Receive Tokens",
                                   "type": 1,
-                                  "subtype": 6,
-                                  "params": [
-                                    {
-                                      "name": "cond1",
-                                      "value": {
-                                        "name": "Condition.[343] Can Receive Tokens",
-                                        "type": 1,
-                                        "subtype": 10343,
-                                        "params": []
-                                      }
-                                    },
-                                    {
-                                      "name": "cond2",
-                                      "value": {
-                                        "name": "Condition.[188] ~003:Is an Event",
-                                        "type": 1,
-                                        "subtype": 10188,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
+                                  "subtype": 10343,
+                                  "params": []
                                 }
                               }
                             ]
@@ -15810,10 +15757,38 @@
                   {
                     "name": "action",
                     "value": {
-                      "name": "Action.[346] Trigger event 'Activation' + build context",
+                      "name": "Action.If-Then-Else",
                       "type": 0,
-                      "subtype": 10346,
-                      "params": []
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "if",
+                          "value": {
+                            "name": "Condition.[188] ~003:Is an Event",
+                            "type": 1,
+                            "subtype": 10188,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "then",
+                          "value": {
+                            "name": "Action.[346] Trigger event 'Activation' + build context",
+                            "type": 0,
+                            "subtype": 10346,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "else",
+                          "value": {
+                            "name": "Action.[499] Trigger event 'Death' + build context",
+                            "type": 0,
+                            "subtype": 10499,
+                            "params": []
+                          }
+                        }
+                      ]
                     }
                   },
                   {
@@ -16191,7 +16166,7 @@
                             "params": [
                               {
                                 "name": "attr_name",
-                                "value": "card_id"
+                                "value": "linked_card_id"
                               }
                             ]
                           }
@@ -16268,40 +16243,26 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[523] Delete [N] Tokens with [Cond] on Card [Id]",
+                "name": "Action.Set attribute",
                 "type": 0,
-                "subtype": 10523,
+                "subtype": 7,
                 "params": [
                   {
-                    "name": "Card Id",
+                    "name": "attr_name",
+                    "value": "destroyed"
+                  },
+                  {
+                    "name": "value",
                     "value": {
-                      "name": "Value.Variable",
+                      "name": "Value.Constant",
                       "type": 2,
-                      "subtype": 1,
+                      "subtype": 0,
                       "params": [
                         {
-                          "name": "var_name",
-                          "value": "card_id"
+                          "name": "value",
+                          "value": 1
                         }
                       ]
-                    }
-                  },
-                  {
-                    "name": "Cond",
-                    "value": {
-                      "name": "Condition.[148] #001:True",
-                      "type": 1,
-                      "subtype": 10148,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "Cnt",
-                    "value": {
-                      "name": "Value.[147] #Cards total",
-                      "type": 2,
-                      "subtype": 10147,
-                      "params": []
                     }
                   }
                 ]
@@ -16310,17 +16271,69 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[144] #001:Move to Place [Id]",
+                "name": "Action.Two actions",
                 "type": 0,
-                "subtype": 10144,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "Dest Place",
+                    "name": "action1",
                     "value": {
-                      "name": "Value.[165] Place 03. Event Deck Discard",
-                      "type": 2,
-                      "subtype": 10165,
-                      "params": []
+                      "name": "Action.[523] Delete [N] Tokens with [Cond] on Card [Id]",
+                      "type": 0,
+                      "subtype": 10523,
+                      "params": [
+                        {
+                          "name": "Card Id",
+                          "value": {
+                            "name": "Value.Variable",
+                            "type": 2,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Cond",
+                          "value": {
+                            "name": "Condition.[148] #001:True",
+                            "type": 1,
+                            "subtype": 10148,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "Cnt",
+                          "value": {
+                            "name": "Value.[147] #Cards total",
+                            "type": 2,
+                            "subtype": 10147,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[144] #001:Move to Place [Id]",
+                      "type": 0,
+                      "subtype": 10144,
+                      "params": [
+                        {
+                          "name": "Dest Place",
+                          "value": {
+                            "name": "Value.[165] Place 03. Event Deck Discard",
+                            "type": 2,
+                            "subtype": 10165,
+                            "params": []
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
