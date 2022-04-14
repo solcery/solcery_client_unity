@@ -1,11 +1,9 @@
 {
-  "states": 
-  [
+  "states": [
     {
       "id": 0,
       "state_type": 0,
-      "value":
-      {
+      "value": {
         "attrs": [
           {
             "key": "finished",
@@ -78,11 +76,23 @@
                 "value": 0
               },
               {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
                 "key": "anim_token_fly_from_card_id",
                 "value": 0
               },
               {
                 "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
                 "value": 0
               }
             ]
@@ -148,1351 +158,29 @@
                 "value": 0
               },
               {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
                 "key": "anim_token_fly_from_card_id",
                 "value": 0
               },
               {
                 "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
                 "value": 0
               }
             ]
           },
           {
             "id": 3,
-            "tplId": 347,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 4,
-            "tplId": 303,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 11
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 5,
-            "tplId": 236,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 8
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 6,
-            "tplId": 116,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 5
-              },
-              {
-                "key": "type",
-                "value": 4
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 2
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 7,
-            "tplId": 116,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 5
-              },
-              {
-                "key": "type",
-                "value": 4
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 2
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 8,
-            "tplId": 115,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 3
-              },
-              {
-                "key": "type",
-                "value": 1
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 3
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 9,
-            "tplId": 286,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 3
-              },
-              {
-                "key": "type",
-                "value": 1
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 3
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 10,
-            "tplId": 287,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 3
-              },
-              {
-                "key": "type",
-                "value": 1
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 3
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 11,
-            "tplId": 505,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 12
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 12,
-            "tplId": 477,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 14
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 13,
-            "tplId": 443,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 14,
-            "tplId": 444,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 15,
-            "tplId": 478,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 13
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 16,
-            "tplId": 481,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 17,
-            "tplId": 482,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 18,
-            "tplId": 241,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 19,
-            "tplId": 243,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 20,
-            "tplId": 243,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-               {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 21,
-            "tplId": 517,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 15
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 22,
             "tplId": 286,
             "attrs": [
               {
@@ -1574,7 +262,7 @@
             ]
           },
           {
-            "id": 23,
+            "id": 4,
             "tplId": 116,
             "attrs": [
               {
@@ -1616,6 +304,1646 @@
               {
                 "key": "duration",
                 "value": 2
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "tplId": 347,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "tplId": 303,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 11
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "tplId": 236,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 8
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "tplId": 116,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 5
+              },
+              {
+                "key": "type",
+                "value": 4
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 2
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "tplId": 116,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 5
+              },
+              {
+                "key": "type",
+                "value": 4
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 2
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "tplId": 115,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 3
+              },
+              {
+                "key": "type",
+                "value": 1
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 3
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "tplId": 286,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 3
+              },
+              {
+                "key": "type",
+                "value": 1
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 3
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "tplId": 287,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 3
+              },
+              {
+                "key": "type",
+                "value": 1
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 3
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "tplId": 505,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 12
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "tplId": 517,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 13
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 15,
+            "tplId": 443,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 16,
+            "tplId": 444,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 17,
+            "tplId": 478,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 14
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 18,
+            "tplId": 481,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 19,
+            "tplId": 482,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 20,
+            "tplId": 241,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 21,
+            "tplId": 243,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "tplId": 243,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 23,
+            "tplId": 534,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 24,
+            "tplId": 477,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 16
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
               },
               {
                 "key": "creature",
