@@ -129,13 +129,26 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     
                     // drug and drop
                     AttachDragAndDrop(world, entityId, objectId, eclipseCard);
-                    
-                    Layout.AddCard(eclipseCard);
-                    world.GetPool<ComponentEclipseCarsView>().Add(entityId).View = eclipseCard;
-                    _cards.Add(objectId, eclipseCard);
 
+                    PutCardToInPlace(world, entityId, objectId, eclipseCard);
                     Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
                 }
+            }
+        }
+
+        private void PutCardToInPlace(EcsWorld world, int entityId, int objectId, IEclipseCardInContainerWidget eclipseCard)
+        {
+            Layout.AddCard(eclipseCard);
+            _cards.Add(objectId, eclipseCard);
+            var eclipseCardViewPool = world.GetPool<ComponentEclipseCardView>();
+            if (eclipseCardViewPool.Has(entityId))
+            {
+                ref var eclipseCardViewComponent = ref eclipseCardViewPool.Get(entityId);
+                eclipseCardViewComponent.View = eclipseCard;
+            }
+            else
+            {
+                eclipseCardViewPool.Add(entityId).View = eclipseCard;
             }
         }
 
@@ -155,7 +168,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 var eid = _cards[key].AttachEntityId;
                 if (eid >= 0)
                 {
-                    world.GetPool<ComponentEclipseCarsView>().Del(eid);
+                    world.GetPool<ComponentEclipseCardView>().Del(eid);
                     world.DelEntity(eid);
                 }
 
@@ -218,7 +231,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         private Vector3 GetPositionForTokenSlot(EcsWorld world, int cardId, int slotId)
         {
             var objectIdPool = world.GetPool<ComponentObjectId>();
-            var poolEclipseCardsView = world.GetPool<ComponentEclipseCarsView>();
+            var poolEclipseCardsView = world.GetPool<ComponentEclipseCardView>();
             var widgetFilter = objectIdPool.GetWorld().Filter<ComponentEclipseCardTag>().End();
             foreach (var entityId in widgetFilter)
             {
