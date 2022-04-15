@@ -50,6 +50,7 @@ namespace Solcery.Games.States
                 {
                     if (fsObjectToken is JObject fsObject 
                         && fsObject.TryGetValue("id", out int id)
+                        && ds.HasObjectForId(id)
                         && fsObject.TryGetValue("tplId", out int tplId)
                         && fsObject.TryGetValue("attrs", out JArray fsObjectAttrsArray))
                     {
@@ -131,6 +132,11 @@ namespace Solcery.Games.States
                     }
                 }
             }
+        }
+
+        private bool HasObjectForId(int objId)
+        {
+            return _stateObjects.ContainsKey(objId);
         }
 
         private bool TryGetStateAttribute(string name, out int value)
