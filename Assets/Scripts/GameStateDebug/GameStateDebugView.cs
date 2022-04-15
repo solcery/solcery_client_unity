@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -10,4 +9,3 @@ namespace Solcery.GameStateDebug
         public JObject GameState;
     }
 }
-#endif
