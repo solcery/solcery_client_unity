@@ -11,6 +11,12 @@ namespace Solcery.Widgets_new.Effects
             Vector3 to,
             float time,
             Action onMoveComplete);
+
+        public void DestroyToken(Sprite sprite,
+            Vector2 sizeDelta,
+            Vector3 position,
+            float time,
+            Action onMoveComplete);
         void Destroy();
     }
 }

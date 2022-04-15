@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Leopotam.EcsLite;
@@ -202,6 +201,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                                         var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
                                         AnimTokenFly(tokenLayout, GetPositionForTokenSlot(world, formCardId, fromSlotId));
                                     }
+
+                                    if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
+                                        animDestroyAttribute.Current > 0)
+                                    {
+                                        AnimTokenDestroy(tokenLayout);
+                                    }
                                 }
                             }
                         }
@@ -226,6 +231,17 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 to,
                 0.5f,
                 () => { tokenLayout.Icon.gameObject.SetActive(true); });
+        }
+
+        private void AnimTokenDestroy(EclipseCardTokenLayout tokenLayout)
+        {
+            var position = tokenLayout.transform.position;
+            tokenLayout.Icon.gameObject.SetActive(false);
+            WidgetCanvas.GetEffects().DestroyToken(tokenLayout.Icon.sprite,
+                tokenLayout.RectTransform.rect.size,
+                position,
+                0.5f,
+                () => {});
         }
 
         private Vector3 GetPositionForTokenSlot(EcsWorld world, int cardId, int slotId)
