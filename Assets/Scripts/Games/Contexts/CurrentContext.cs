@@ -9,7 +9,6 @@ using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
 using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
 using Solcery.Games.Contexts.GameStates;
-using Solcery.Models.Play.Initial.Game;
 using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
@@ -65,6 +64,7 @@ namespace Solcery.Games.Contexts
             {
                 if (!objectsDeletedPool.Has(entityId))
                 {
+                    Log.Print($"Mark destroyed object with entity id {entityId}");
                     objectsDeletedPool.Add(entityId);
                 }
 
@@ -76,8 +76,6 @@ namespace Solcery.Games.Contexts
 
         bool IContext.TryCreateObject(JObject parameters, out object @object)
         {
-            
-            
             var entityId = _world.NewEntity();
             var cardTypeId = parameters.GetValue<int>("card_type");
             var place = parameters.GetValue<int>("place");
