@@ -7,6 +7,7 @@ using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Shared.Triggers.Apply;
 using Solcery.Models.Simulation.Game;
+using Solcery.Models.Simulation.Game.Destroy;
 using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
 using Solcery.Services.Commands;
@@ -53,6 +54,9 @@ namespace Solcery.Models.Simulation
             
             // Create game state
             _systems.Add(SystemGameStateCreate.Create(applyGameState));
+            
+            // Destroy objects
+            _systems.Add(SystemDestroyObjects.Create());
             
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

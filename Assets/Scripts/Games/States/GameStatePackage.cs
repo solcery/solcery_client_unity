@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Solcery.Games.Contexts.GameStates;
 using Solcery.Utils;
-using UnityEngine;
 
 namespace Solcery.Games.States
 {
@@ -19,78 +17,99 @@ namespace Solcery.Games.States
             var ds = new DeltaState(deltaState);
             var result = new JObject();
 
-            var stateAttrs = new JArray();
-            if (fullState.TryGetValue("attrs", out JArray fsAttrsArray))
+            // Attrs
             {
-                foreach (var fsAttrToken in fsAttrsArray)
+                var array = new JArray();
+                if (fullState.TryGetValue("attrs", out JArray attrsArray))
                 {
-                    if (fsAttrToken is JObject fsAttrObject
-                        && fsAttrObject.TryGetValue("key", out string name)
-                        && fsAttrObject.TryGetValue("value", out int value))
+                    foreach (var attrToken in attrsArray)
                     {
-                        if (ds.TryGetStateAttribute(name, out var newValue))
+                        if (attrToken is JObject attrObject
+                            && attrObject.TryGetValue("key", out string key)
+                            && attrObject.TryGetValue("value", out int value))
                         {
-                            value = newValue;
-                        }
-                        
-                        stateAttrs.Add(new JObject
-                        {
-                            {"key", new JValue(name)},
-                            {"value", new JValue(value)},
-                        });
-                    }
-                }
-            }
-            result.Add("attrs", stateAttrs);
-
-            var objectsArray = new JArray();
-            if (fullState.TryGetValue("objects", out JArray fsObjectsArray))
-            {
-                foreach (var fsObjectToken in fsObjectsArray)
-                {
-                    if (fsObjectToken is JObject fsObject 
-                        && fsObject.TryGetValue("id", out int id)
-                        && ds.HasObjectForId(id)
-                        && fsObject.TryGetValue("tplId", out int tplId)
-                        && fsObject.TryGetValue("attrs", out JArray fsObjectAttrsArray))
-                    {
-                        var objectAttrs = new JArray();
-
-                        foreach (var fsObjectAttrToken in fsObjectAttrsArray)
-                        {
-                            if (fsObjectAttrToken is JObject fsObjectAttrObject
-                                && fsObjectAttrObject.TryGetValue("key", out string name)
-                                && fsObjectAttrObject.TryGetValue("value", out int value))
+                            if (ds.TryGetStateAttribute(key, out var newValue))
                             {
-                                if (ds.TryGetObjectAttribute(id, name, out var newValue))
-                                {
-                                    value = newValue;
-                                }
-                                
-                                objectAttrs.Add(new JObject
-                                {
-                                    {"key", new JValue(name)},
-                                    {"value", new JValue(value)},
-                                });
+                                value = newValue;
                             }
+                            
+                            array.Add(new JObject
+                            {
+                                ["key"] = new JValue(key),
+                                ["value"] = new JValue(value)
+                            });
                         }
-                        
-                        objectsArray.Add(new JObject
-                        {
-                            {"id", new JValue(id)},
-                            {"tplId", new JValue(tplId)},
-                            {"attrs", objectAttrs}
-                        });
+                    }
+                }
+                
+                result.Add("attrs", array);
+            }
+
+            // Deleted objects
+            var deletedObject = new HashSet<int>();
+            {
+                if (deltaState.TryGetValue("deleted_objects", out JArray array))
+                {
+                    foreach (var objectIdToken in array)
+                    {
+                        deletedObject.Add(objectIdToken.Value<int>());
                     }
                 }
             }
-            result.Add("objects", objectsArray);
+
+            // Objects
+            {
+                var array = new JArray();
+                if (fullState.TryGetValue("objects", out JArray objectsArray))
+                {
+                    foreach (var objectToken in objectsArray)
+                    {
+                        if (objectToken is JObject objectObject
+                            && objectObject.TryGetValue("id", out int id)
+                            && objectObject.TryGetValue("tplId", out int tplId)
+                            && objectObject.TryGetValue("attrs", out JArray attrsArray)
+                            && !deletedObject.Contains(id))
+                        {
+                            var obj = new JObject
+                            {
+                                {"id", new JValue(id)},
+                                {"tplId", new JValue(tplId)}
+                            };
+
+                            var attrsArr = new JArray();
+                            foreach (var attrToken in attrsArray)
+                            {
+                                if (attrToken is JObject attrObject
+                                    && attrObject.TryGetValue("key", out string key)
+                                    && attrObject.TryGetValue("value", out int value))
+                                {
+                                    if (ds.TryGetObjectAttribute(id, key, out var newValue))
+                                    {
+                                        value = newValue;
+                                    }
+                                    
+                                    attrsArr.Add(new JObject
+                                    {
+                                        ["key"] = new JValue(key),
+                                        ["value"] = new JValue(value)
+                                    });
+                                }
+                            }
+                            obj.Add("attrs", attrsArr);
+                            
+                            array.Add(obj);
+                        }
+                    }
+                }
+
+                result.Add("objects", array);
+            }
             
             return result;
         }
 
-        private Dictionary<string, int> _stateAttrs;
-        private Dictionary<int, Dictionary<string, int>> _stateObjects;
+        private readonly Dictionary<string, int> _stateAttrs;
+        private readonly Dictionary<int, Dictionary<string, int>> _stateObjects;
 
         private DeltaState(JObject deltaState)
         {
@@ -115,8 +134,7 @@ namespace Solcery.Games.States
                 {
                     if (objectToken is JObject @object
                         && @object.TryGetValue("id", out int id)
-                        && @object.TryGetValue("attrs", out JArray objectAttrsArray)
-                        && objectAttrsArray.Count > 0)
+                        && @object.TryGetValue("attrs", out JArray objectAttrsArray))
                     {
                         var attrs = new Dictionary<string, int>(objectAttrsArray.Count);
                         foreach (var objectAttrToken in objectAttrsArray)
@@ -132,11 +150,6 @@ namespace Solcery.Games.States
                     }
                 }
             }
-        }
-
-        private bool HasObjectForId(int objId)
-        {
-            return _stateObjects.ContainsKey(objId);
         }
 
         private bool TryGetStateAttribute(string name, out int value)
@@ -181,13 +194,10 @@ namespace Solcery.Games.States
                         {
                             case ContextGameStateTypes.GameState:
                                 fullState = DeltaState.CreateFullState(fullState, value);
-                                Debug.Log($"Add full state {fullState.ToString(Formatting.None)}");
-                                Debug.Log($"Delta state {value.ToString(Formatting.None)}");
                                 _states.Enqueue(GameState.Create(fullState));
                                 break;
                             
                             case ContextGameStateTypes.Delay:
-                                Debug.Log($"Add pause state {value}");
                                 _states.Enqueue(PauseState.Create(GetDelay(value)));
                                 break;
                         }
