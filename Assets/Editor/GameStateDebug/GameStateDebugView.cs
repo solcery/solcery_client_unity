@@ -50,12 +50,42 @@ namespace Solcery.Editor.GameStateDebug
                 Attrs.Add(AttrDiff.Create(name, value));
             }
         }
+        
+        public sealed class GameStateDiff
+        {
+            public IReadOnlyList<AttrDiff> AttrDiffs => _attrDiffs;
+            public IReadOnlyList<ObjectDiff> ObjectDiffs => _objectDiffs;
 
+            private readonly List<AttrDiff> _attrDiffs;
+            private readonly List<ObjectDiff> _objectDiffs;
+
+            public static GameStateDiff Create()
+            {
+                return new GameStateDiff();
+            }
+
+            private GameStateDiff()
+            {
+                _attrDiffs = new List<AttrDiff>();
+                _objectDiffs = new List<ObjectDiff>();
+            }
+
+            public void AddAttrDiff(AttrDiff attrDiff)
+            {
+                _attrDiffs.Add(attrDiff);
+            }
+
+            public void AddObjectDiff(ObjectDiff objectDiff)
+            {
+                _objectDiffs.Add(objectDiff);
+            }
+        }
+
+        private int _showIndex = -1;
         private int _hashCode = -1;
         private Dictionary<string, int> _attrs;
         private Dictionary<int, Dictionary<string, int>> _objects;
-        private List<AttrDiff> _attrDiffs;
-        private List<ObjectDiff> _objectDiffs;
+        private List<GameStateDiff> _gameStateDiffs;
 
         public override void OnInspectorGUI()
         {
@@ -66,7 +96,34 @@ namespace Solcery.Editor.GameStateDebug
             }
             else
             {
-                DrawGameState(gameState);
+                GetDiff(gameState);
+            }
+
+            EditorGUILayout.BeginHorizontal();
+            if (EditorGUILayout.LinkButton("<=")
+                && _gameStateDiffs is {Count: > 0} 
+                && _showIndex > 0)
+            {
+                _showIndex--;
+            }
+
+            if (EditorGUILayout.LinkButton("=>")
+                && _gameStateDiffs is {Count: > 0}
+                && _showIndex < _gameStateDiffs.Count - 1)
+            {
+                _showIndex++;
+            }
+
+            if (EditorGUILayout.LinkButton("last")
+                && _gameStateDiffs is {Count: > 0})
+            {
+                _showIndex = _gameStateDiffs.Count - 1;
+            }
+            EditorGUILayout.EndHorizontal();
+
+            if (_gameStateDiffs is {Count: > 0})
+            {
+                DrawGameState(_gameStateDiffs[_showIndex]);
                 EditorUtility.SetDirty(target);
             }
         }
@@ -76,17 +133,16 @@ namespace Solcery.Editor.GameStateDebug
             EditorGUILayout.LabelField("Game state is null!", EditorStyles.boldLabel);
         }
 
-        private void DrawGameState(JObject gameState)
+        private void DrawGameState(GameStateDiff gameStateDiff)
         {
-            GetDiff(gameState);
             EditorGUILayout.LabelField("Game state attrs diff", EditorStyles.boldLabel);
-            foreach (var attrDiff in _attrDiffs)
+            foreach (var attrDiff in gameStateDiff.AttrDiffs)
             {
                 DrawAttr(attrDiff);
             }
             
             EditorGUILayout.LabelField("Game state objects diff", EditorStyles.boldLabel);
-            foreach (var objectDiff in _objectDiffs)
+            foreach (var objectDiff in gameStateDiff.ObjectDiffs)
             {
                 DrawObject(objectDiff);
             }
@@ -113,8 +169,7 @@ namespace Solcery.Editor.GameStateDebug
 
         private void GetDiff(JObject gameState)
         {
-            _attrDiffs ??= new List<AttrDiff>();
-            _objectDiffs ??= new List<ObjectDiff>();
+            _gameStateDiffs ??= new List<GameStateDiff>();
             
             var hashCode = gameState.ToString(Formatting.None).GetHashCode();
             if (_hashCode == -1)
@@ -129,8 +184,8 @@ namespace Solcery.Editor.GameStateDebug
                 return;
             }
 
+            var gameStateDiff = GameStateDiff.Create();
             _hashCode = hashCode;
-            _attrDiffs.Clear();
             var attrs = gameState.GetValue<JArray>("attrs");
             foreach (var attrToken in attrs)
             {
@@ -142,17 +197,16 @@ namespace Solcery.Editor.GameStateDebug
                     {
                         if (oldAttrValue != attrValue)
                         {
-                            _attrDiffs.Add(AttrDiff.Create(attrName, attrValue));
+                            gameStateDiff.AddAttrDiff(AttrDiff.Create(attrName, attrValue));
                         }
                     }
                     else
                     {
-                        _attrDiffs.Add(AttrDiff.Create(attrName, attrValue));
+                        gameStateDiff.AddAttrDiff(AttrDiff.Create(attrName, attrValue));
                     }
                 }
             }
             
-            _objectDiffs.Clear();
             var objects = gameState.GetValue<JArray>("objects");
             foreach (var objectToken in objects)
             {
@@ -199,11 +253,13 @@ namespace Solcery.Editor.GameStateDebug
 
                     if (objectDiff.HasDiff)
                     {
-                        _objectDiffs.Add(objectDiff);
+                        gameStateDiff.AddObjectDiff(objectDiff);
                     }
                 }
             }
             
+            _gameStateDiffs.Add(gameStateDiff);
+            _showIndex = _gameStateDiffs.Count - 1;
             PrepareHashes(gameState);
         }
 
