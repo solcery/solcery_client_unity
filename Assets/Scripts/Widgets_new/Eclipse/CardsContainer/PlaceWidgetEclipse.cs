@@ -88,7 +88,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (world.GetPool<ComponentEclipseTokenTag>().Has(entityId))
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                if (attributes.TryGetValue("linked_card_id", out var tokenCardIdAttribute))
+                if (attributes.TryGetValue("linked_card_id", out var tokenCardIdAttribute) && tokenCardIdAttribute.Current > 0)
                 {
                     var cardId = tokenCardIdAttribute.Current;
                     if (_tokensPerCardCache.TryGetValue(cardId, out var tokensEntities))
@@ -199,6 +199,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                                     {
                                         var formCardId = attributes.TryGetValue("anim_token_fly_from_card_id", out var fromCardAttribute) ? fromCardAttribute.Current : 0;
                                         var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
+                                        if (formCardId == 0 || fromSlotId == 0)
+                                        {
+                                            Debug.LogWarning($"Token fly problem card_id = {tokensPerCard.Key}, place = {PlaceId}: anim_token_fly_from_card_id = {formCardId} and anim_token_fly_from_slot = {fromSlotId}");
+                                        }
+                                        
                                         AnimTokenFly(tokenLayout, GetPositionForTokenSlot(world, formCardId, fromSlotId));
                                     }
 
@@ -214,7 +219,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 }
                 else
                 {
-                    Debug.LogWarning("Can't attach tokens for eclipse card!");
+                    Debug.LogWarning($"Can't attach tokens card_id = {tokensPerCard.Key}, place = {PlaceId}!");
                 }
             }
 
@@ -244,14 +249,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 () => {});
         }
 
-        private Vector3 GetPositionForTokenSlot(EcsWorld world, int cardId, int slotId)
+        private Vector3 GetPositionForTokenSlot(EcsWorld world, int fromCardId, int slotId)
         {
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var poolEclipseCardsView = world.GetPool<ComponentEclipseCardView>();
             var widgetFilter = objectIdPool.GetWorld().Filter<ComponentEclipseCardTag>().End();
             foreach (var entityId in widgetFilter)
             {
-                if (objectIdPool.Get(entityId).Id == cardId)
+                if (objectIdPool.Get(entityId).Id == fromCardId)
                 {
                     return poolEclipseCardsView.Get(entityId).View.GetTokenPosition(slotId);
                 }

@@ -102,7 +102,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 return tokenLayout.transform.position;
             }
 
-            Debug.LogWarning($"Can't find position for slot with id={slot}");
             return _layout.transform.position;
         }
 
