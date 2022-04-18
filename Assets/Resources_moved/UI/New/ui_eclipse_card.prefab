@@ -217,6 +217,7 @@ MonoBehaviour:
   iconImage: {fileID: 2307604813889946526}
   nameText: {fileID: 642263690928292624}
   descriptionText: {fileID: 7899081689914481010}
+  highlight: {fileID: 5692342214946274832}
   raycastObjects:
   - {fileID: 2307604813889946526}
   - {fileID: 862396947281623709}

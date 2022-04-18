@@ -30,6 +30,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private TMP_Text descriptionText;
         [SerializeField]
+        private GameObject highlight;
+        [SerializeField]
         private List<Graphic> raycastObjects;
 
         private Sprite _sprite;
@@ -44,7 +46,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
-        
+        public GameObject Highlight => highlight;
+
         private void Awake()
         {
             _anchoredPosition = rectTransform.anchoredPosition;

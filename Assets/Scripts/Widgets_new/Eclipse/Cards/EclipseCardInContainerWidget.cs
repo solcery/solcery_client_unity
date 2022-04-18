@@ -63,6 +63,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             // tokens
             var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
             _layout.TokensLayout.UpdateTokenSlots(tokenSlots);
+            
+            var animHighlight = attributes.TryGetValue("anim_highlight", out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
+            _layout.Highlight.SetActive(animHighlight);
         }
 
         EclipseCardTokenLayout GetToken(int slot)
