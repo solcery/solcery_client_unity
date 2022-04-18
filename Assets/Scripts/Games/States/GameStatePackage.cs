@@ -60,6 +60,8 @@ namespace Solcery.Games.States
             // Objects
             {
                 var array = new JArray();
+                
+                // Check full state objects
                 if (fullState.TryGetValue("objects", out JArray objectsArray))
                 {
                     foreach (var objectToken in objectsArray)
@@ -96,9 +98,36 @@ namespace Solcery.Games.States
                                 }
                             }
                             obj.Add("attrs", attrsArr);
+                            ds.RemoveObjectForId(id);
                             
                             array.Add(obj);
                         }
+                    }
+                }
+                
+                // Add new objects
+                foreach (var (id, attrs) in ds._stateObjects)
+                {
+                    if (ds._tplIdForId.TryGetValue(id, out var tplId))
+                    {
+                        var obj = new JObject
+                        {
+                            {"id", new JValue(id)},
+                            {"tplId", new JValue(tplId)}
+                        };
+
+                        var attrsArr = new JArray();
+                        foreach (var (key, value) in attrs)
+                        {
+                            attrsArr.Add(new JObject
+                            {
+                                ["key"] = new JValue(key),
+                                ["value"] = new JValue(value)
+                            });
+                        }
+                        obj.Add("attrs", attrsArr);
+                        
+                        array.Add(obj);
                     }
                 }
 
@@ -110,6 +139,7 @@ namespace Solcery.Games.States
 
         private readonly Dictionary<string, int> _stateAttrs;
         private readonly Dictionary<int, Dictionary<string, int>> _stateObjects;
+        private readonly Dictionary<int, int> _tplIdForId;
 
         private DeltaState(JObject deltaState)
         {
@@ -128,12 +158,14 @@ namespace Solcery.Games.States
             }
 
             _stateObjects = new Dictionary<int, Dictionary<string, int>>();
+            _tplIdForId = new Dictionary<int, int>();
             if (deltaState.TryGetValue("objects", out JArray objectsArray))
             {
                 foreach (var objectToken in objectsArray)
                 {
                     if (objectToken is JObject @object
                         && @object.TryGetValue("id", out int id)
+                        && @object.TryGetValue("tplId", out int tplId)
                         && @object.TryGetValue("attrs", out JArray objectAttrsArray))
                     {
                         var attrs = new Dictionary<string, int>(objectAttrsArray.Count);
@@ -147,6 +179,7 @@ namespace Solcery.Games.States
                             }
                         }
                         _stateObjects.Add(id, attrs);
+                        _tplIdForId.Add(id, tplId);
                     }
                 }
             }
@@ -162,6 +195,11 @@ namespace Solcery.Games.States
             value = 0;
             return _stateObjects.TryGetValue(objId, out var attrs) 
                    && attrs.TryGetValue(name, out value);
+        }
+
+        private void RemoveObjectForId(int objId)
+        {
+            _stateObjects.Remove(objId);
         }
     }
     
