@@ -15,6 +15,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             eclipseCardInContainerWidget.UpdateSiblingIndex(0);
             scroll.horizontal = scroll.content.childCount > 1;
             LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
+            UnityEngine.Canvas.ForceUpdateCanvases();
         }
     }
 }
