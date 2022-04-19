@@ -52,22 +52,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
         
-        void IEclipseCardInContainerWidget.UpdateFromAttributes(Dictionary<string, IAttributeValue> attributes)
-        {
-            // timer
-            var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
-            var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
-            _layout.TimerLayout.gameObject.SetActive(showTimer);
-            _layout.TimerLayout.UpdateTimer(timerDuration);
-            
-            // tokens
-            var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
-            _layout.TokensLayout.UpdateTokenSlots(tokenSlots);
-            
-            var animHighlight = attributes.TryGetValue("anim_highlight", out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
-            _layout.Highlight.SetActive(animHighlight);
-        }
-
         EclipseCardTokenLayout GetToken(int slot)
         {
             return _layout.TokensLayout.GetTokenByIndex(slot - 1);
@@ -106,6 +90,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
 
             return _layout.transform.position;
+        }
+
+        public void SetActive(bool active)
+        {
+            _layout.gameObject.SetActive(active);
         }
 
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
