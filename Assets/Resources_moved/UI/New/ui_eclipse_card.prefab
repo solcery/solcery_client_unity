@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityId: 0
   rectTransform: {fileID: 348070657124763931}
+  frontTransform: {fileID: 2599180590035948034}
   timerLayout: {fileID: 1629200007459241172}
   tokensLayout: {fileID: 1994152796848667027}
   iconImage: {fileID: 2307604813889946526}

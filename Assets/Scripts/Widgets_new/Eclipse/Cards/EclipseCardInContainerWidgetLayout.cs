@@ -12,13 +12,17 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 {
     public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
-        public RectTransform RectTransform => rectTransform;
         [HideInInspector]
         public int EntityId;
         public PlaceWidget ParentPlaceWidget;
         
+        public RectTransform RectTransform => rectTransform;
+        public RectTransform FrontTransform => rectTransform;
+        
         [SerializeField]
         private RectTransform rectTransform;
+        [SerializeField]
+        private RectTransform frontTransform;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
         [SerializeField]

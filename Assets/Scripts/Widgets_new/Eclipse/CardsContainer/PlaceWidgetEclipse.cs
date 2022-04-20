@@ -127,12 +127,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard)
         {
-            var rtt = Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform).RenderTexture;
-            if (rtt != null)
+            var rttData = Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
+            if (rttData != null)
             {
                 eclipseCard.SetActive(false);
                 WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard.Layout.RectTransform,
-                    rtt,
+                    rttData.RenderTexture,
                     0.5f,
                     () => { Game.ServiceRenderWidget.ReleaseWidgetRender(eclipseCard.Layout.RectTransform); });
             }

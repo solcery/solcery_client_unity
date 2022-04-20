@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -94,7 +92,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public void SetActive(bool active)
         {
-            _layout.gameObject.SetActive(active);
+            _layout.FrontTransform.gameObject.SetActive(active);
+            _layout.Highlight.SetActive(false);
         }
 
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)

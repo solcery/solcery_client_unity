@@ -21,17 +21,8 @@ namespace Solcery.Services.Renderer
             _widgetRenderList = new Dictionary<RectTransform, IWidgetRenderData>();
         }
 
-        private int count = 0;
-
         IWidgetRenderData IServiceRenderWidget.CreateWidgetRender(RectTransform widget)
         {
-            if (count > 0)
-            {
-                return null;
-            }
-
-            count++;
-            
             if (_widgetRenderList.ContainsKey(widget))
             {
                 return _widgetRenderList[widget];
