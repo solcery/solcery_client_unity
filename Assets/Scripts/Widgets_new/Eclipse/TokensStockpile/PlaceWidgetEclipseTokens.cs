@@ -83,6 +83,12 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     Debug.LogWarning($"Can't run token animation: anim_token_fly_from_place = {fromPlaceId}: anim_token_fly_from_card_id = {formCardId} and anim_token_fly_from_slot = {fromSlotId}");
                 }
             }
+            
+            if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
+                animDestroyAttribute.Current > 0)
+            {
+                AnimTokenDestroy(tokenLayout);
+            }
         }
 
         public bool TryGetTokenPosition(EcsWorld world, int cardId, int slotId, out Vector3 position)
@@ -102,12 +108,16 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
         
         private void AnimTokenFly(ITokenInContainerWidget tokenLayout, Vector3 from)
         {
-            tokenLayout.Layout.Icon.gameObject.SetActive(false);
             WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.RectTransform, 
                 tokenLayout.Layout.Icon.sprite,
                 from,
                 0.5f,
                 () => { tokenLayout.Layout.Icon.gameObject.SetActive(true); });
+        }
+        
+        private void AnimTokenDestroy(ITokenInContainerWidget tokenLayout)
+        {
+            // todo
         }
         
         private void RemoveTokens(EcsWorld world, int[] entityIds)
