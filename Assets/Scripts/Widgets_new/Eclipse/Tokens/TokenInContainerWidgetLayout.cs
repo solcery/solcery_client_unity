@@ -24,6 +24,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
         
         public RectTransform RectTransform => rectTransform;
+        public Image Icon => image;
 
         public void UpdateCount(int value)
         {

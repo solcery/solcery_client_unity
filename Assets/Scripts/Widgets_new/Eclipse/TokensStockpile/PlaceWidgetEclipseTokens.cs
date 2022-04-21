@@ -3,14 +3,17 @@ using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Tokens;
+using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 {
-    public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>
+    public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>, IPlaceWidgetTokenCollection
     {
         private Dictionary<int, ITokenInContainerWidget> _tokens;
         
@@ -33,17 +36,10 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 return;
             }
             
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var eclipseTokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
-            var cardTypes = new Dictionary<int, JObject>();
-
-            foreach (var objectTypesEntityId in objectTypesFilter)
-            {
-                cardTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
-                break;
-            }
+            var cardTypes = world.GetCardTypes();
 
             foreach (var entityId in entityIds)
             {
@@ -52,6 +48,8 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     var typeId = objectTypePool.Get(entityId).Type;
                     if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
                     {
+                        var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+                        
                         if (!_tokens.TryGetValue(typeId, out var tokenLayout))
                         {
                             if (Game.TokenInContainerWidgetPool.TryPop(out tokenLayout))
@@ -61,10 +59,55 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                                 _tokens.Add(typeId, tokenLayout);
                             }
                         }
+                        
                         tokenLayout.IncreaseCounter();
+                        ProcessTokenAttributes(world, tokenLayout, attributes);
                     }
                 }
             }
+        }
+
+        private void ProcessTokenAttributes(EcsWorld world, ITokenInContainerWidget tokenLayout, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes.TryGetValue("anim_token_fly", out var animTokenFlyAttribute) && animTokenFlyAttribute.Current > 0)
+            {
+                var fromPlaceId = attributes.TryGetValue("anim_token_fly_from_place", out var fromPlaceAttribute) ? fromPlaceAttribute.Current : 0;
+                var formCardId = attributes.TryGetValue("anim_token_fly_from_card_id", out var fromCardAttribute) ? fromCardAttribute.Current : 0;
+                var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
+                if (WidgetExtensions.TryGetTokenFromPosition(world, fromPlaceId, formCardId, fromSlotId, out var from))
+                {
+                    AnimTokenFly(tokenLayout, from);
+                }
+                else
+                {
+                    Debug.LogWarning($"Can't run token animation: anim_token_fly_from_place = {fromPlaceId}: anim_token_fly_from_card_id = {formCardId} and anim_token_fly_from_slot = {fromSlotId}");
+                }
+            }
+        }
+
+        public bool TryGetTokenPosition(EcsWorld world, int cardId, int slotId, out Vector3 position)
+        {
+            if (world.TryGetCardTypeByCardId(cardId, out var type))
+            {
+                if (_tokens.TryGetValue(type, out var widget))
+                {
+                    position = widget.Layout.RectTransform.position;
+                    return true;
+                }
+            }
+
+            position = Vector3.zero;
+            return false;
+        }
+        
+        private void AnimTokenFly(ITokenInContainerWidget tokenLayout, Vector3 from)
+        {
+            tokenLayout.Layout.Icon.gameObject.SetActive(false);
+            WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.RectTransform, 
+                tokenLayout.Layout.Icon.sprite,
+                from,
+                0.5f,
+                () => { tokenLayout.Layout.Icon.gameObject.SetActive(true); });
         }
         
         private void RemoveTokens(EcsWorld world, int[] entityIds)

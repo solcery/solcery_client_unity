@@ -17,6 +17,8 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         private int _counter;
         private int _attachEntityId;
 
+        public TokenInContainerWidgetLayout Layout => _layout;
+        
         public static ITokenInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
             return new TokenInContainerWidget(game, prefab, poolTransform);
