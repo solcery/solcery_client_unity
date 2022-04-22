@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace Solcery.DebugViewers.States
 
         public abstract void Draw(RectTransform content, JObject parameters);
         public abstract void Cleanup();
+        public abstract IReadOnlyList<string> AllMoveToKeys();
+        public abstract Vector2 GetPositionToKeys(string key);
     }
 
     public abstract class DebugState<T> : DebugState  where T : MonoBehaviour

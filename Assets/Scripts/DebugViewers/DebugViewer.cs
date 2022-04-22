@@ -36,6 +36,8 @@ namespace Solcery.DebugViewers
         [SerializeField]
         private Button fullButton;
         [SerializeField]
+        private TMP_Dropdown moveToObject;
+        [SerializeField]
         private TMP_Text states;
         [SerializeField]
         private RectTransform pool;
@@ -81,7 +83,8 @@ namespace Solcery.DebugViewers
             nextButton.onClick.AddListener(Next);
             deltaButton.onClick.AddListener(Delta);
             fullButton.onClick.AddListener(Full);
-            
+            moveToObject.onValueChanged.AddListener(OnValueChange);
+
             _states = new List<DebugStateInfo>();
             _delayStates = new List<DebugDelayState>();
             _gameStates = new List<DebugGameState>();
@@ -116,6 +119,7 @@ namespace Solcery.DebugViewers
             nextButton.onClick.RemoveAllListeners();
             deltaButton.onClick.RemoveAllListeners();
             fullButton.onClick.RemoveAllListeners();
+            moveToObject.onValueChanged.RemoveAllListeners();
 
             _deltaParameters = null;
             _fullParameters = null;
@@ -139,6 +143,7 @@ namespace Solcery.DebugViewers
         {
             _currentState?.Cleanup();
             _currentState = null;
+            moveToObject.options = new List<TMP_Dropdown.OptionData>();
             root.SetActive(false);
         }
 
@@ -183,6 +188,15 @@ namespace Solcery.DebugViewers
         {
             ApplyState(_currentState, _fullParameters);
         }
+        
+        // Тут место для перехода к конкретному объекту
+        private void OnValueChange(int arg0)
+        {
+            if (_currentState != null)
+            {
+                diffScrollView.content.localPosition = _currentState.GetPositionToKeys(moveToObject.options[arg0].text);
+            }
+        }
 
         private void ApplyState(DebugState newState, JObject parameters)
         {
@@ -194,6 +208,15 @@ namespace Solcery.DebugViewers
             _currentState?.Cleanup();
             _currentState = newState;
             _currentState.Draw(diffScrollView.content, parameters);
+            diffScrollView.normalizedPosition = new Vector2(0, 1);
+
+            var options = new List<TMP_Dropdown.OptionData>();
+            foreach (var moveToKey in _currentState.AllMoveToKeys())
+            {
+                options.Add(new TMP_Dropdown.OptionData(moveToKey));
+            }
+
+            moveToObject.options = options;
 
             states.text = $"STATE {_currentState.StateIndex + 1}";
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Solcery.DebugViewers.States.Games.Attrs;
@@ -23,6 +24,7 @@ namespace Solcery.DebugViewers.States.Games
 
         private readonly IAttrsValue _attrsValue;
         private readonly IObjectsValue _objectsValue;
+        private readonly Dictionary<string, Vector2> _keyToPosition;
 
         public static DebugGameState Create(
             int stateIndex, 
@@ -53,6 +55,7 @@ namespace Solcery.DebugViewers.States.Games
             _attrDebugViewPool = attrDebugViewPool;
             _objectDebugViewPool = objectDebugViewPool;
             _objectAttrDebugViewPool = objectAttrDebugViewPool;
+            _keyToPosition = new Dictionary<string, Vector2>();
 
             _attrsValue = AttrsValue.Create(currentFullState?.GetValue<JArray>("attrs"),
                 previousFullState?.GetValue<JArray>("attrs"));
@@ -108,7 +111,7 @@ namespace Solcery.DebugViewers.States.Games
                     objectDebugView.PushAttr(objectAttrDebugView);
                 }
                 
-                Layout.PushObject(objectDebugView);
+                _keyToPosition.Add(objectValue.Id.ToString(), Layout.PushObject(objectDebugView));
             }
         }
 
@@ -155,12 +158,13 @@ namespace Solcery.DebugViewers.States.Games
                     objectDebugView.PushAttr(objectAttrDebugView);
                 }
                 
-                Layout.PushObject(objectDebugView);
+                _keyToPosition.Add(objectValue.Id.ToString(), Layout.PushObject(objectDebugView));
             }
         }
 
         public override void Cleanup()
         {
+            _keyToPosition.Clear();
 
             while (Layout.TryPopAttr(out var attr))
             {
@@ -182,6 +186,21 @@ namespace Solcery.DebugViewers.States.Games
             
             Layout.Cleanup();
             _viewPool.Push(Layout);
+        }
+
+        public override IReadOnlyList<string> AllMoveToKeys()
+        {
+            return _keyToPosition.Keys.ToList();
+        }
+
+        public override Vector2 GetPositionToKeys(string key)
+        {
+            if (_keyToPosition.TryGetValue(key, out var position))
+            {
+                return new Vector2(0f, Mathf.Abs(position.y));
+            }
+
+            return new Vector2(0f, 0f);
         }
     }
 }

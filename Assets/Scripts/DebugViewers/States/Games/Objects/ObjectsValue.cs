@@ -7,8 +7,10 @@ namespace Solcery.DebugViewers.States.Games.Objects
 {
     public sealed class ObjectsValue : IObjectsValue
     {
-        public IReadOnlyList<IObjectValue> Objects => _objects;
+        IReadOnlyList<string> IObjectsValue.ObjectKeys => _objectKeys;
+        IReadOnlyList<IObjectValue> IObjectsValue.Objects => _objects;
 
+        private readonly List<string> _objectKeys;
         private readonly List<IObjectValue> _objects;
 
         public static IObjectsValue Create(JArray currentObjectsArray, JArray oldObjectsArray)
@@ -19,6 +21,7 @@ namespace Solcery.DebugViewers.States.Games.Objects
         private ObjectsValue(JArray currentObjectsArray, JArray oldObjectsArray)
         {
             _objects = new List<IObjectValue>();
+            _objectKeys = new List<string>();
             
             var objectsCount = Mathf.Max(currentObjectsArray?.Count ?? 0, oldObjectsArray?.Count ?? 0);
             var currentObjects = new Dictionary<int, JObject>();
@@ -58,6 +61,7 @@ namespace Solcery.DebugViewers.States.Games.Objects
             {
                 var currentObject = currentObjects.TryGetValue(id, out var co) ? co : null;
                 var oldObject = oldObjects.TryGetValue(id, out var oo) ? oo : null;
+                _objectKeys.Add(id.ToString());
                 _objects.Add(ObjectValue.Create(currentObject, oldObject));
             }
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ namespace Solcery.DebugViewers.States.Delays
         private DebugStateViewPool<DebugDelayStateLayout> _viewPool;
         private RectTransform _content;
         private readonly int _delayMSec;
-        
+        private readonly List<string> _fakeMoveToKeys;
+
         public static DebugDelayState Create(int stateIndex, int delayMSec, RectTransform content, DebugStateViewPool<DebugDelayStateLayout> viewPool)
         {
             return new DebugDelayState(stateIndex, delayMSec, content, viewPool);
@@ -19,6 +21,7 @@ namespace Solcery.DebugViewers.States.Delays
             _delayMSec = delayMSec;
             _content = content;
             _viewPool = viewPool;
+            _fakeMoveToKeys = new List<string>();
         }
         
         public override void Draw(RectTransform content, JObject parameters)
@@ -33,6 +36,16 @@ namespace Solcery.DebugViewers.States.Delays
         {
             _viewPool.Push(Layout);
             Layout = null;
+        }
+
+        public override IReadOnlyList<string> AllMoveToKeys()
+        {
+            return _fakeMoveToKeys;
+        }
+
+        public override Vector2 GetPositionToKeys(string key)
+        {
+            return new Vector2(0, 1);
         }
     }
 }

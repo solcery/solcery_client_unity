@@ -71,7 +71,7 @@ namespace Solcery.DebugViewers.States.Games
             return result;
         }
         
-        public void PushObject(DebugViewObjectLayout viewObjectLayout)
+        public Vector2 PushObject(DebugViewObjectLayout viewObjectLayout)
         {
             _objects ??= new Stack<DebugViewObjectLayout>();
             _objects.Push(viewObjectLayout);
@@ -84,6 +84,9 @@ namespace Solcery.DebugViewers.States.Games
             objects.sizeDelta = newSize;
             
             UpdateContentSize();
+
+            return new Vector2(0f,
+                Mathf.Abs(objects.transform.localPosition.y) + Mathf.Abs(viewObjectLayout.transform.localPosition.y));
         }
         
         public bool TryPopObject(out DebugViewObjectLayout viewObjectLayout)
