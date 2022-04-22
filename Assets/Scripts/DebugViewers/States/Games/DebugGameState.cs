@@ -1,3 +1,4 @@
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Solcery.DebugViewers.States.Games.Attrs;
 using Solcery.DebugViewers.States.Games.Objects;
@@ -129,6 +130,11 @@ namespace Solcery.DebugViewers.States.Games
 
             foreach (var objectValue in _objectsValue.Objects)
             {
+                if (objectValue.Attrs.Attrs.Count(o => o.IsChange) <= 0)
+                {
+                    continue;
+                }
+                
                 var objectDebugView = _objectDebugViewPool.Pop();
                 objectDebugView.Apply(objectValue.IsCreated, 
                     objectValue.IsDestroyed, 

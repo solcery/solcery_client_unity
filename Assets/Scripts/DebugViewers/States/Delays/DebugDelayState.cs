@@ -25,6 +25,7 @@ namespace Solcery.DebugViewers.States.Delays
         {
             Layout = _viewPool.Pop();
             Layout.transform.SetParent(_content);
+            Layout.UpdatePosition(Vector3.zero);
             Layout.Delay.text = $"{_delayMSec}ms";
         }
 
