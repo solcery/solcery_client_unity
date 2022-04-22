@@ -2,11 +2,25 @@ using Solcery.Editor.CI.Utils;
 using Solcery.Editor.CI.WebGl.Configuration.Dev;
 using Solcery.Editor.CI.WebGl.Configuration.Prod;
 using UnityEditor;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+using UnityEditor.Build.Pipeline.Utilities;
 
 namespace Solcery.Editor.CI.WebGl
 {
     public static class BuildWebGl
     {
+        private static void BuildAddressableAsset(string profileId)
+        {
+            var addressableAssetSettings = AddressableAssetSettingsDefaultObject.Settings;            
+            var id = addressableAssetSettings.profileSettings.GetProfileId(profileId);
+            addressableAssetSettings.activeProfileId = id;
+            EditorUtility.SetDirty(AddressableAssetSettingsDefaultObject.Settings);
+            AddressableAssetSettings.CleanPlayerContent();
+            BuildCache.PurgeCache(false);
+            AddressableAssetSettings.BuildPlayerContent();
+        }
+
         public static void BuildDevelop()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
@@ -82,6 +96,7 @@ namespace Solcery.Editor.CI.WebGl
 
         private static string Build(string outputPath, string emscriptenArgs, WebGLLinkerTarget linkerTarget, WebGLCompressionFormat compressionFormat, bool dataCaching, BuildOptions buildOptions)
         {
+            BuildAddressableAsset("Default");
             BuildUtils.PrepareOutputDirectory(outputPath);
             PlayerSettings.WebGL.linkerTarget = linkerTarget;
             PlayerSettings.WebGL.compressionFormat = compressionFormat;
