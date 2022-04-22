@@ -206,8 +206,9 @@ namespace Solcery.Games.States
     public sealed class GameStatePackage
     {
         public bool IsCompleted => _states.Count <= 0;
-        
-        private readonly Queue<State> _states;
+        public IReadOnlyList<State> States => _states;
+
+        private readonly List<State> _states;
 
         public static GameStatePackage Create(JObject gameStatePackage)
         {
@@ -218,7 +219,7 @@ namespace Solcery.Games.States
         {
             if (gameStatePackage.TryGetValue("states", out JArray stateArray))
             {
-                _states = new Queue<State>(stateArray.Count);
+                _states = new List<State>(stateArray.Count);
                 JObject fullState = null;
 
                 foreach (var stateToken in stateArray)
@@ -232,11 +233,11 @@ namespace Solcery.Games.States
                         {
                             case ContextGameStateTypes.GameState:
                                 fullState = DeltaState.CreateFullState(fullState, value);
-                                _states.Enqueue(GameState.Create(fullState));
+                                _states.Add(GameState.Create(fullState));
                                 break;
                             
                             case ContextGameStateTypes.Delay:
-                                _states.Enqueue(PauseState.Create(GetDelay(value)));
+                                _states.Add(PauseState.Create(GetDelay(value)));
                                 break;
                         }
                     }
@@ -251,17 +252,17 @@ namespace Solcery.Games.States
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
-            var state = _states.Peek();
+            var state = _states[0];
 
             switch (state)
             {
                 case GameState gs:
-                    _states.Dequeue();
+                    _states.Remove(state);
                     gameState = gs.GameStateObject;
                     return true;
                 
                 case PauseState ps when ps.IsCompleted(deltaTimeMsec):
-                    _states.Dequeue();
+                    _states.Remove(state);
                     break;
             }
 

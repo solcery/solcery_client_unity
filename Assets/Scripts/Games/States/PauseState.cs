@@ -2,6 +2,8 @@ namespace Solcery.Games.States
 {
     public sealed class PauseState : State
     {
+        public int Delay => _delay;
+        
         private int _delay;
 
         public static PauseState Create(int delay)

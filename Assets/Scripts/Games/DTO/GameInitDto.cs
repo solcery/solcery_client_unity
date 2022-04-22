@@ -1,4 +1,3 @@
-using Solcery.GameStateDebug;
 using Solcery.Services.Renderer.DTO;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
@@ -10,24 +9,21 @@ namespace Solcery.Games.DTO
         public Camera MainCamera => _mainCamera;
         public IWidgetCanvas WidgetCanvas => _widgetCanvas;
         public IServiceRenderDto ServiceRenderDto => _serviceRenderDto;
-        public GameStateDebugView GameStateDebugView => _gameStateDebugView;
         
         private readonly Camera _mainCamera;
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly IServiceRenderDto _serviceRenderDto;
-        private readonly GameStateDebugView _gameStateDebugView;
 
-        public static IGameInitDto Create(Camera mainCamera, IWidgetCanvas widgetCanvas, IServiceRenderDto serviceRenderDto, GameStateDebugView gameStateDebugView)
+        public static IGameInitDto Create(Camera mainCamera, IWidgetCanvas widgetCanvas, IServiceRenderDto serviceRenderDto)
         {
-            return new GameInitDto(mainCamera, widgetCanvas, serviceRenderDto, gameStateDebugView);
+            return new GameInitDto(mainCamera, widgetCanvas, serviceRenderDto);
         }
 
-        private GameInitDto(Camera mainCamera, IWidgetCanvas widgetCanvas, IServiceRenderDto serviceRenderDto, GameStateDebugView gameStateDebugView)
+        private GameInitDto(Camera mainCamera, IWidgetCanvas widgetCanvas, IServiceRenderDto serviceRenderDto)
         {
             _mainCamera = mainCamera;
             _widgetCanvas = widgetCanvas;
             _serviceRenderDto = serviceRenderDto;
-            _gameStateDebugView = gameStateDebugView;
         }
     }
 }
