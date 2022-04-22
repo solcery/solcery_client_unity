@@ -7,6 +7,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 {
     public interface ITokenInContainerWidget : IPoolingWidget, IDraggableWidget, IEntityId
     {
+        TokenInContainerWidgetLayout Layout { get; }
         void IncreaseCounter();
         void ClearCounter();
         void UpdateFromCardTypeData(int objectId, JObject data);

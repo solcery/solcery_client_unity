@@ -12,13 +12,17 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 {
     public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
-        public RectTransform RectTransform => rectTransform;
         [HideInInspector]
         public int EntityId;
         public PlaceWidget ParentPlaceWidget;
         
+        public RectTransform RectTransform => rectTransform;
+        public RectTransform FrontTransform => rectTransform;
+        
         [SerializeField]
         private RectTransform rectTransform;
+        [SerializeField]
+        private RectTransform frontTransform;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
         [SerializeField]
@@ -29,6 +33,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private TMP_Text nameText;
         [SerializeField]
         private TMP_Text descriptionText;
+        [SerializeField]
+        private GameObject highlight;
         [SerializeField]
         private List<Graphic> raycastObjects;
 
@@ -44,7 +50,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
-        
+        public GameObject Highlight => highlight;
+
         private void Awake()
         {
             _anchoredPosition = rectTransform.anchoredPosition;

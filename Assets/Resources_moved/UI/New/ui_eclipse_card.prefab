@@ -212,11 +212,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityId: 0
   rectTransform: {fileID: 348070657124763931}
+  frontTransform: {fileID: 2599180590035948034}
   timerLayout: {fileID: 1629200007459241172}
   tokensLayout: {fileID: 1994152796848667027}
   iconImage: {fileID: 2307604813889946526}
   nameText: {fileID: 642263690928292624}
   descriptionText: {fileID: 7899081689914481010}
+  highlight: {fileID: 5692342214946274832}
   raycastObjects:
   - {fileID: 2307604813889946526}
   - {fileID: 862396947281623709}

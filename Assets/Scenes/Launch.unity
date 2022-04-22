@@ -2457,6 +2457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TokenEffect: {fileID: 5204042782543770256, guid: 352f8e2c381c0488fb6394d469f6bda9, type: 3}
+  EclipseCardEffect: {fileID: 7057140277570761592, guid: 83052c3dcbeed49b99123ffcf5385cf9, type: 3}
 --- !u!1 &2115487933
 GameObject:
   m_ObjectHideFlags: 0

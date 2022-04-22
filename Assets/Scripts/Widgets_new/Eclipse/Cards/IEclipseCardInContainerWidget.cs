@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
@@ -17,6 +18,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);
         Vector3 GetTokenPosition(int slot);
-        void UpdateFromAttributes(Dictionary<string, IAttributeValue> attributes);
+        void SetActive(bool active);
     }
 }
