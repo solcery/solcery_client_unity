@@ -43,7 +43,7 @@ namespace Solcery
 
         private void Start()
         {
-            #if UNITY_WEBGL
+            #if !UNITY_EDITOR && UNITY_WEBGL
             WebGLInput.captureAllKeyboardInput = false;
             #endif
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
