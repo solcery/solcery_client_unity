@@ -64,9 +64,9 @@ namespace Solcery.Widgets_new.Effects
                 .Play();
         }
 
-        public void DestroyEclipseCard(RectTransform rectTransform, 
+        public void DestroyEclipseCard(RectTransform rectTransform,
             RenderTexture rtt,
-            float time, 
+            float time,
             Action onMoveComplete)
         {
             var effect = Object.Instantiate(_effectRoot.EclipseCardEffect, _effectRoot.transform, false)
@@ -75,11 +75,11 @@ namespace Solcery.Widgets_new.Effects
             var maxSize = Mathf.Max(rect.size.x, rect.size.y);
             effect.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
             effect.RectTransform.position = rectTransform.position;
-            effect.RectTransform.anchoredPosition += new Vector2( rect.width / 2f, 0f);
+            effect.RectTransform.anchoredPosition += new Vector2((maxSize - rect.size.x) / 2f, 0f);
             effect.Image.texture = rtt;
             var alpha = effect.CanvasGroup.alpha;
             DOTween.Sequence()
-                .Append(DOTween.To(() => alpha, x => alpha = x, 0f, time).OnUpdate (() =>
+                .Append(DOTween.To(() => alpha, x => alpha = x, 0f, time).OnUpdate(() =>
                 {
                     effect.CanvasGroup.alpha = alpha;
                 }))
