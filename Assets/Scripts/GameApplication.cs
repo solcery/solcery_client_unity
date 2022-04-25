@@ -43,6 +43,9 @@ namespace Solcery
 
         private void Start()
         {
+            #if UNITY_WEBGL
+            WebGLInput.captureAllKeyboardInput = false;
+            #endif
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
                 WidgetCanvas.Create(worldGame, uiGame, dragDropCanvas),
                 ServiceRenderDto.Create(renderFrame, renderPrefab)));
