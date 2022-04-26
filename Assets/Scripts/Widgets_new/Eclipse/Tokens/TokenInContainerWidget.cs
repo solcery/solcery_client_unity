@@ -27,8 +27,8 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         private TokenInContainerWidget(IGame game, GameObject prefab, Transform poolTransform)
         {
             _game = game;
-            _counter = 0;
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<TokenInContainerWidgetLayout>();
+            ClearCounter();
         }
         
         public void IncreaseCounter()
@@ -39,6 +39,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         public void ClearCounter()
         {
             _counter = 0;
+            _layout.UpdateCount(_counter);
         }
 
         void IPoolingWidget.UpdateParent(Transform parent)

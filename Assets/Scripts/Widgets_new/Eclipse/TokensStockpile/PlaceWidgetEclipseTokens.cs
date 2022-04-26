@@ -60,7 +60,6 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                             }
                         }
                         
-                        tokenLayout.IncreaseCounter();
                         ProcessTokenAttributes(world, tokenLayout, attributes);
                     }
                 }
@@ -76,18 +75,22 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
                 if (WidgetExtensions.TryGetTokenFromPosition(world, fromPlaceId, formCardId, fromSlotId, out var from))
                 {
-                    AnimTokenFly(tokenLayout, from);
+                    TokenAnimFly(tokenLayout, from);
                 }
                 else
                 {
                     Debug.LogWarning($"Can't run token animation: anim_token_fly_from_place = {fromPlaceId}: anim_token_fly_from_card_id = {formCardId} and anim_token_fly_from_slot = {fromSlotId}");
                 }
             }
+            else
+            {
+                TokenAnimFlyCompleted(tokenLayout);
+            }
             
             if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
                 animDestroyAttribute.Current > 0)
             {
-                AnimTokenDestroy(tokenLayout);
+                TokenAnimDestroy(tokenLayout);
             }
         }
 
@@ -106,16 +109,20 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             return false;
         }
         
-        private void AnimTokenFly(ITokenInContainerWidget tokenLayout, Vector3 from)
+        private void TokenAnimFly(ITokenInContainerWidget tokenLayout, Vector3 from)
         {
             WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.RectTransform, 
                 tokenLayout.Layout.Icon.sprite,
                 from,
-                0.5f,
-                () => { tokenLayout.Layout.Icon.gameObject.SetActive(true); });
+                0.5f, () => { TokenAnimFlyCompleted(tokenLayout); });
         }
-        
-        private void AnimTokenDestroy(ITokenInContainerWidget tokenLayout)
+
+        private void TokenAnimFlyCompleted(ITokenInContainerWidget tokenLayout)
+        {
+            tokenLayout.IncreaseCounter();
+        }
+
+        private void TokenAnimDestroy(ITokenInContainerWidget tokenLayout)
         {
             // todo
         }
