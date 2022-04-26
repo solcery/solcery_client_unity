@@ -57,7 +57,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                         world.GetPool<ComponentPlaceTag>().Add(entityIndex);
                         world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
                             placeObject.GetValue<int>("placeId");
-                        if (placeObject.TryGetValue("drag_n_drop", out JArray dragDropIdArray))
+                        if (placeObject.TryGetValue("drag_n_drops", out JArray dragDropIdArray))
                         {
                             var idHash = new HashSet<int>();
                             foreach (var dragDropIdToken in dragDropIdArray)
