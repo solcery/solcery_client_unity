@@ -29,13 +29,13 @@ namespace Solcery.Utils
         public static bool TryGetCardTypeByCardId(this EcsWorld world, int cardId, out int type)
         {
             var objectIdPool = world.GetPool<ComponentObjectId>();
-            var objectTypePool = world.GetPool<ComponentObjectId>();
+            var objectTypePool = world.GetPool<ComponentObjectType>();
             var objectIdFilter = world.Filter<ComponentObjectId>().Inc<ComponentObjectType>().End();
             foreach (var entityId in objectIdFilter)
             {
                 if (objectIdPool.Get(entityId).Id == cardId)
                 {
-                    type = objectIdPool.Get(entityId).Id;
+                    type = objectTypePool.Get(entityId).Type;
                     return true;
                 }
             }

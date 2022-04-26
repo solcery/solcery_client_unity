@@ -34,6 +34,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _cards = new Dictionary<int, IEclipseCardInContainerWidget>();
             _tokensPerCardCache = new Dictionary<int, List<int>>();
             Layout.UpdateVisible(true);
+            Layout.SetAnchor(TextAnchor.MiddleLeft);
         }
 
         public override void Update(EcsWorld world, int[] entityIds)
