@@ -122,6 +122,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
         
         private void RemoveTokens(EcsWorld world, int[] entityIds)
         {
+            foreach (var token in _tokens)
+            {
+                token.Value.ClearCounter();
+            }
+            
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var keys = _tokens.Keys.ToList();
 
@@ -130,16 +135,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 var typeId = objectTypePool.Get(entityId).Type;
                 keys.Remove(typeId);
             }
-
+            
             foreach (var key in keys)
             {
                 Game.TokenInContainerWidgetPool.Push(_tokens[key]);
                 _tokens.Remove(key);
-            }
-
-            foreach (var token in _tokens)
-            {
-                token.Value.ClearCounter();
             }
         }
         
