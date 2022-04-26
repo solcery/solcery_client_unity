@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "com.solcery.bricksinterpretationsystem": {
-      "version": "git@github.com:solcery/solcery_client_bricks_interpretation_system.git",
+      "version": "https://github.com/solcery/solcery_client_bricks_interpretation_system.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "8637f2924f2c27e0f6ebe713ba0f2da9afa91d69"
+      "hash": "437cd0c6083b7a8a8384a1e7eac8bbd4e4913867"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -46,7 +46,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.13",
+      "version": "3.0.14",
       "depth": 0,
       "source": "registry",
       "dependencies": {

@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Places;
@@ -57,18 +57,25 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                         world.GetPool<ComponentPlaceTag>().Add(entityIndex);
                         world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
                             placeObject.GetValue<int>("placeId");
-                        if (placeObject.TryGetValue("drag_n_drop", out int dragDropId))
+                        if (placeObject.TryGetValue("drag_n_drop", out JArray dragDropIdArray))
                         {
+                            var idHash = new HashSet<int>();
+                            foreach (var dragDropIdToken in dragDropIdArray)
+                            {
+                                idHash.Add(dragDropIdToken.Value<int>());
+                            }
+
+                            ref var entityIdsComponent =
+                                ref world.GetPool<ComponentPlaceDragDropEntityId>().Add(entityIndex);
+                            
                             foreach (var dragDropEntityId in dragDropFilter)
                             {
-                                if (dragDropIdPool.Get(dragDropEntityId).Id != dragDropId)
+                                
+                                if (idHash.Contains(dragDropIdPool.Get(dragDropEntityId).Id))
                                 {
-                                    continue;
+                                    entityIdsComponent.DragDropEntityIds.Add(dragDropEntityId);
+                                    idHash.Remove(dragDropIdPool.Get(dragDropEntityId).Id);
                                 }
-
-                                world.GetPool<ComponentPlaceDragDropEntityId>().Add(entityIndex).DragDropEntityId =
-                                    dragDropEntityId;
-                                break;
                             }
                             
                         }

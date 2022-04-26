@@ -76,15 +76,13 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
                 if (targetLayout != null
                     && targetLayout.LinkedEntityId != sourcePlaceEntityId
-                    && CheckPlaceDestinations(world, sourcePlaceEntityId, targetLayout.PlaceId)
+                    && CheckPlaceDestinations(world, onDropEventData.DragDropEntityId, targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
                     sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId =
                         targetLayout.LinkedEntityId;
                     var objectId = world.GetPool<ComponentDragDropObjectId>().Get(onDropEventData.DragEntityId).ObjectId;
-                    var dragDropEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId)
-                        .DragDropEntityId;
-                    var dragDropId = world.GetPool<ComponentDragDropParametersId>().Get(dragDropEntityId).Id;
+                    var dragDropId = world.GetPool<ComponentDragDropParametersId>().Get(onDropEventData.DragDropEntityId).Id;
                     var command = CommandOnDropData.CreateFromParameters(objectId, dragDropId, targetLayout.PlaceId,
                             TriggerTargetEntityTypes.Card);
                     _game.TransportService.SendCommand(command.ToJson());
@@ -109,12 +107,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             return placeWidgetLayout != null;
         }
 
-        private bool CheckPlaceDestinations(EcsWorld world, int sourcePlaceEntityId, int targetPlaceId)
+        private bool CheckPlaceDestinations(EcsWorld world, int dragDropEntityId, int targetPlaceId)
         {
-            var dragDropParameterEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId).DragDropEntityId;
             var dragDropParameterDestinationPool = world.GetPool<ComponentDragDropParametersDestinations>();
-            return dragDropParameterDestinationPool.Has(dragDropParameterEntityId) && dragDropParameterDestinationPool
-                .Get(dragDropParameterEntityId).PlaceIds.Contains(targetPlaceId);
+            return dragDropParameterDestinationPool.Has(dragDropEntityId) && dragDropParameterDestinationPool
+                .Get(dragDropEntityId).PlaceIds.Contains(targetPlaceId);
         }
 
         private bool TryGetTargetDropWidget(EcsWorld world, int targetPlaceEntityId, out IApplyDropWidget targetDropWidget)
