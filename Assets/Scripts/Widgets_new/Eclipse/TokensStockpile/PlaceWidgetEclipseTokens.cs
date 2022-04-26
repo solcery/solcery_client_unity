@@ -111,7 +111,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
         
         private void TokenAnimFly(ITokenInContainerWidget tokenLayout, Vector3 from)
         {
-            WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.RectTransform, 
+            WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.Icon.rectTransform, 
                 tokenLayout.Layout.Icon.sprite,
                 from,
                 0.5f, () => { TokenAnimFlyCompleted(tokenLayout); });
