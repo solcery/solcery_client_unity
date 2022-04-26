@@ -1775,7 +1775,7 @@
         "id": 243
       },
       {
-        "name": "Creature Dragonling^",
+        "name": "Creature Dragonling *",
         "enabled": true,
         "description": "Gives 1 Hot to Left Neighbor then gives 1 Hot to Right Neighbor",
         "picture": "https://i.ibb.co/wp2w87t/2-17.jpg",
@@ -3714,23 +3714,13 @@
                         {
                           "name": "Target Place",
                           "value": {
-                            "name": "Value.[172] Row X Building",
+                            "name": "Value.Constant",
                             "type": 2,
-                            "subtype": 10172,
+                            "subtype": 0,
                             "params": [
                               {
-                                "name": "Row Id",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "activation_row"
-                                    }
-                                  ]
-                                }
+                                "name": "value",
+                                "value": 40
                               }
                             ]
                           }
@@ -5000,88 +4990,74 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.Set variable",
+                "name": "Action.[145] #002:If-then",
                 "type": 0,
-                "subtype": 6,
+                "subtype": 10145,
                 "params": [
                   {
-                    "name": "var_name",
-                    "value": "original_place"
-                  },
-                  {
-                    "name": "value",
+                    "name": "Condition",
                     "value": {
-                      "name": "Value.[146] #Current place",
-                      "type": 2,
-                      "subtype": 10146,
+                      "name": "Condition.[191] Has left neightbour",
+                      "type": 1,
+                      "subtype": 10191,
                       "params": []
                     }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.Two actions",
-                "type": 0,
-                "subtype": 1,
-                "params": [
+                  },
                   {
-                    "name": "action1",
+                    "name": "Action",
                     "value": {
-                      "name": "Action.[145] #002:If-then",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 10145,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "Condition",
+                          "name": "action1",
                           "value": {
-                            "name": "Condition.[191] Has left neightbour",
-                            "type": 1,
-                            "subtype": 10191,
-                            "params": []
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "neighbor_left"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.[178] ~009: Creature's Left Neighbour Place Id",
+                                  "type": 2,
+                                  "subtype": 10178,
+                                  "params": []
+                                }
+                              }
+                            ]
                           }
                         },
                         {
-                          "name": "Action",
+                          "name": "action2",
                           "value": {
-                            "name": "Action.Two actions",
+                            "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
                             "type": 0,
-                            "subtype": 1,
+                            "subtype": 10535,
                             "params": [
                               {
-                                "name": "action1",
+                                "name": "tpl",
                                 "value": {
-                                  "name": "Action.Set variable",
-                                  "type": 0,
-                                  "subtype": 6,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "neighbor_left"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.[178] ~009: Creature's Left Neighbour Place Id",
-                                        "type": 2,
-                                        "subtype": 10178,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
+                                  "name": "Value.[228] Token TplId - Joy",
+                                  "type": 2,
+                                  "subtype": 10228,
+                                  "params": []
                                 }
                               },
                               {
-                                "name": "action2",
+                                "name": "action",
                                 "value": {
-                                  "name": "Action.[495] {DEPRECATED} Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
+                                  "name": "Action.[502] ~Move Token to [PlaceId]",
                                   "type": 0,
-                                  "subtype": 10495,
+                                  "subtype": 10502,
                                   "params": [
                                     {
-                                      "name": "place",
+                                      "name": "Target Place",
                                       "value": {
                                         "name": "Value.Variable",
                                         "type": 2,
@@ -5089,54 +5065,7 @@
                                         "params": [
                                           {
                                             "name": "var_name",
-                                            "value": "original_place"
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "tpl",
-                                      "value": {
-                                        "name": "Value.[228] Token TplId - Joy",
-                                        "type": 2,
-                                        "subtype": 10228,
-                                        "params": []
-                                      }
-                                    },
-                                    {
-                                      "name": "action",
-                                      "value": {
-                                        "name": "Action.[502] ~Move Token to [PlaceId]",
-                                        "type": 0,
-                                        "subtype": 10502,
-                                        "params": [
-                                          {
-                                            "name": "Target Place",
-                                            "value": {
-                                              "name": "Value.Variable",
-                                              "type": 2,
-                                              "subtype": 1,
-                                              "params": [
-                                                {
-                                                  "name": "var_name",
-                                                  "value": "neighbor_left"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "cnt",
-                                      "value": {
-                                        "name": "Value.Constant",
-                                        "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 1
+                                            "value": "neighbor_left"
                                           }
                                         ]
                                       }
@@ -5149,62 +5078,81 @@
                         }
                       ]
                     }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.[145] #002:If-then",
+                "type": 0,
+                "subtype": 10145,
+                "params": [
+                  {
+                    "name": "Condition",
+                    "value": {
+                      "name": "Condition.[192] Has right neighbour",
+                      "type": 1,
+                      "subtype": 10192,
+                      "params": []
+                    }
                   },
                   {
-                    "name": "action2",
+                    "name": "Action",
                     "value": {
-                      "name": "Action.[145] #002:If-then",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 10145,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "Condition",
+                          "name": "action1",
                           "value": {
-                            "name": "Condition.[192] Has right neighbour",
-                            "type": 1,
-                            "subtype": 10192,
-                            "params": []
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "neighbor_right"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.[180] ~010: Creature's Right Neighbour Place Id",
+                                  "type": 2,
+                                  "subtype": 10180,
+                                  "params": []
+                                }
+                              }
+                            ]
                           }
                         },
                         {
-                          "name": "Action",
+                          "name": "action2",
                           "value": {
-                            "name": "Action.Two actions",
+                            "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
                             "type": 0,
-                            "subtype": 1,
+                            "subtype": 10535,
                             "params": [
                               {
-                                "name": "action1",
+                                "name": "tpl",
                                 "value": {
-                                  "name": "Action.Set variable",
-                                  "type": 0,
-                                  "subtype": 6,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "neighbor_right"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.[180] ~010: Creature's Right Neighbour Place Id",
-                                        "type": 2,
-                                        "subtype": 10180,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
+                                  "name": "Value.[229] Token TplId - Stress",
+                                  "type": 2,
+                                  "subtype": 10229,
+                                  "params": []
                                 }
                               },
                               {
-                                "name": "action2",
+                                "name": "action",
                                 "value": {
-                                  "name": "Action.[495] {DEPRECATED} Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
+                                  "name": "Action.[502] ~Move Token to [PlaceId]",
                                   "type": 0,
-                                  "subtype": 10495,
+                                  "subtype": 10502,
                                   "params": [
                                     {
-                                      "name": "place",
+                                      "name": "Target Place",
                                       "value": {
                                         "name": "Value.Variable",
                                         "type": 2,
@@ -5212,54 +5160,7 @@
                                         "params": [
                                           {
                                             "name": "var_name",
-                                            "value": "original_place"
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "tpl",
-                                      "value": {
-                                        "name": "Value.[229] Token TplId - Stress",
-                                        "type": 2,
-                                        "subtype": 10229,
-                                        "params": []
-                                      }
-                                    },
-                                    {
-                                      "name": "action",
-                                      "value": {
-                                        "name": "Action.[502] ~Move Token to [PlaceId]",
-                                        "type": 0,
-                                        "subtype": 10502,
-                                        "params": [
-                                          {
-                                            "name": "Target Place",
-                                            "value": {
-                                              "name": "Value.Variable",
-                                              "type": 2,
-                                              "subtype": 1,
-                                              "params": [
-                                                {
-                                                  "name": "var_name",
-                                                  "value": "neighbor_right"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "cnt",
-                                      "value": {
-                                        "name": "Value.Constant",
-                                        "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 1
+                                            "value": "neighbor_right"
                                           }
                                         ]
                                       }
@@ -5334,58 +5235,58 @@
           ]
         },
         "action_on_activation": {
-          "name": "Action.[145] #002:If-then",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 10145,
+          "subtype": 1,
           "params": [
             {
-              "name": "Condition",
+              "name": "action1",
               "value": {
-                "name": "Condition.[192] Has right neighbour",
-                "type": 1,
-                "subtype": 10192,
-                "params": []
+                "name": "Action.Set variable",
+                "type": 0,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "var_name",
+                    "value": "neighbor_right"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.[180] ~010: Creature's Right Neighbour Place Id",
+                      "type": 2,
+                      "subtype": 10180,
+                      "params": []
+                    }
+                  }
+                ]
               }
             },
             {
-              "name": "Action",
+              "name": "action2",
               "value": {
-                "name": "Action.Two actions",
+                "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
                 "type": 0,
-                "subtype": 1,
+                "subtype": 10535,
                 "params": [
                   {
-                    "name": "action1",
+                    "name": "tpl",
                     "value": {
-                      "name": "Action.Set variable",
-                      "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "neighbor_right"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.[180] ~010: Creature's Right Neighbour Place Id",
-                            "type": 2,
-                            "subtype": 10180,
-                            "params": []
-                          }
-                        }
-                      ]
+                      "name": "Value.[228] Token TplId - Joy",
+                      "type": 2,
+                      "subtype": 10228,
+                      "params": []
                     }
                   },
                   {
-                    "name": "action2",
+                    "name": "action",
                     "value": {
-                      "name": "Action.[495] {DEPRECATED} Create [N] Tokens [Tpl Id] on Card in [Place Id] & [DO]",
+                      "name": "Action.[502] ~Move Token to [PlaceId]",
                       "type": 0,
-                      "subtype": 10495,
+                      "subtype": 10502,
                       "params": [
                         {
-                          "name": "place",
+                          "name": "Target Place",
                           "value": {
                             "name": "Value.Variable",
                             "type": 2,
@@ -5393,54 +5294,7 @@
                             "params": [
                               {
                                 "name": "var_name",
-                                "value": "current_place"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "tpl",
-                          "value": {
-                            "name": "Value.[228] Token TplId - Joy",
-                            "type": 2,
-                            "subtype": 10228,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "action",
-                          "value": {
-                            "name": "Action.[502] ~Move Token to [PlaceId]",
-                            "type": 0,
-                            "subtype": 10502,
-                            "params": [
-                              {
-                                "name": "Target Place",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "neighbor_right"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cnt",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
+                                "value": "neighbor_right"
                               }
                             ]
                           }
@@ -6060,7 +5914,7 @@
                                                             {
                                                               "name": "action",
                                                               "value": {
-                                                                "name": "Action.[500] ~Move Token to [Card Id]",
+                                                                "name": "Action.[500] ~Link Token to [Card Id] & consequences",
                                                                 "type": 0,
                                                                 "subtype": 10500,
                                                                 "params": [
@@ -6465,7 +6319,7 @@
                         {
                           "name": "action",
                           "value": {
-                            "name": "Action.[523] Delete [N] Tokens with [Cond] on Card [Id]",
+                            "name": "Action.[523] ~Delete [N] Tokens with [Cond] on Card [Id]",
                             "type": 0,
                             "subtype": 10523,
                             "params": [
@@ -12137,16 +11991,12 @@
             {
               "name": "Action",
               "value": {
-                "name": "Action.Set attribute",
+                "name": "Action.[502] ~Move Token to [PlaceId]",
                 "type": 0,
-                "subtype": 7,
+                "subtype": 10502,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "place"
-                  },
-                  {
-                    "name": "value",
+                    "name": "Target Place",
                     "value": {
                       "name": "Value.[168] Place 06. Token Storage",
                       "type": 2,
@@ -12941,14 +12791,6 @@
         "place": 1,
         "amount": 1,
         "id": 446
-      },
-      {
-        "name": "TestCreature Sand Lizard",
-        "enabled": true,
-        "cardType": 258,
-        "place": 22,
-        "amount": 1,
-        "id": 454
       },
       {
         "name": "Test button 4",
@@ -18724,7 +18566,7 @@
         "id": 499
       },
       {
-        "name": "~Move Token to [Card Id]",
+        "name": "~Link Token to [Card Id] & consequences",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -18734,134 +18576,20 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.Two actions",
+                "name": "Action.[504] ~Link Token to [Card Id]",
                 "type": 0,
-                "subtype": 1,
+                "subtype": 10504,
                 "params": [
                   {
-                    "name": "action1",
+                    "name": "Card Id",
                     "value": {
-                      "name": "Action.Two actions",
-                      "type": 0,
-                      "subtype": 1,
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
                       "params": [
                         {
-                          "name": "action1",
-                          "value": {
-                            "name": "Action.Set attribute",
-                            "type": 0,
-                            "subtype": 7,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "anim_token_fly"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Value.Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 1
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action2",
-                          "value": {
-                            "name": "Action.Two actions",
-                            "type": 0,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "action1",
-                                "value": {
-                                  "name": "Action.Set attribute",
-                                  "type": 0,
-                                  "subtype": 7,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "anim_token_fly_from_card_id"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.Attribute",
-                                        "type": 2,
-                                        "subtype": 2,
-                                        "params": [
-                                          {
-                                            "name": "attr_name",
-                                            "value": "linked_card_id"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "action2",
-                                "value": {
-                                  "name": "Action.Set attribute",
-                                  "type": 0,
-                                  "subtype": 7,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "anim_token_fly_from_slot"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.Attribute",
-                                        "type": 2,
-                                        "subtype": 2,
-                                        "params": [
-                                          {
-                                            "name": "attr_name",
-                                            "value": "slot"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "Action.[504] ~Link Token to [Card Id]",
-                      "type": 0,
-                      "subtype": 10504,
-                      "params": [
-                        {
-                          "name": "Card Id",
-                          "value": {
-                            "name": "Value.Argument",
-                            "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Card Id"
-                              }
-                            ]
-                          }
+                          "name": "name",
+                          "value": "Card Id"
                         }
                       ]
                     }
@@ -19013,78 +18741,16 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.Iterator",
+                "name": "Action.Set variable",
                 "type": 0,
-                "subtype": 5,
+                "subtype": 6,
                 "params": [
                   {
-                    "name": "condition",
-                    "value": {
-                      "name": "Condition.And",
-                      "type": 1,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Condition.[155] #008:Is in place [X]",
-                            "type": 1,
-                            "subtype": 10155,
-                            "params": [
-                              {
-                                "name": "Place Id",
-                                "value": {
-                                  "name": "Value.Argument",
-                                  "type": 2,
-                                  "subtype": 3,
-                                  "params": [
-                                    {
-                                      "name": "name",
-                                      "value": "Target Place"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Condition.[343] Can Receive Tokens",
-                            "type": 1,
-                            "subtype": 10343,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
+                    "name": "var_name",
+                    "value": "target_card_id"
                   },
                   {
-                    "name": "action",
-                    "value": {
-                      "name": "Action.Set variable",
-                      "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "target_card_id"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Card Id",
-                            "type": 2,
-                            "subtype": 11,
-                            "params": []
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "limit",
+                    "name": "value",
                     "value": {
                       "name": "Value.Constant",
                       "type": 2,
@@ -19092,7 +18758,7 @@
                       "params": [
                         {
                           "name": "value",
-                          "value": 1
+                          "value": 0
                         }
                       ]
                     }
@@ -19110,21 +18776,88 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.Set attribute",
+                      "name": "Action.Iterator",
                       "type": 0,
-                      "subtype": 7,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "attr_name",
-                          "value": "anim_token_fly_from_place"
+                          "name": "condition",
+                          "value": {
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.Argument",
+                                        "type": 2,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "name",
+                                            "value": "Target Place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[343] Can Receive Tokens",
+                                  "type": 1,
+                                  "subtype": 10343,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
                         },
                         {
-                          "name": "value",
+                          "name": "action",
                           "value": {
-                            "name": "Value.[146] #Current place",
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "target_card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Card Id",
+                                  "type": 2,
+                                  "subtype": 11,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Constant",
                             "type": 2,
-                            "subtype": 10146,
-                            "params": []
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
                           }
                         }
                       ]
@@ -19140,48 +18873,115 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.Set attribute",
+                            "name": "Action.[568] ~Show Token Fly Animation",
                             "type": 0,
-                            "subtype": 7,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "place"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Value.Argument",
-                                  "type": 2,
-                                  "subtype": 3,
-                                  "params": [
-                                    {
-                                      "name": "name",
-                                      "value": "Target Place"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
+                            "subtype": 10568,
+                            "params": []
                           }
                         },
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Action.[500] ~Move Token to [Card Id]",
+                            "name": "Action.Two actions",
                             "type": 0,
-                            "subtype": 10500,
+                            "subtype": 1,
                             "params": [
                               {
-                                "name": "Card Id",
+                                "name": "action1",
                                 "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
+                                  "name": "Action.Set attribute",
+                                  "type": 0,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "var_name",
-                                      "value": "target_card_id"
+                                      "name": "attr_name",
+                                      "value": "place"
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Value.Argument",
+                                        "type": 2,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "name",
+                                            "value": "Target Place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.[145] #002:If-then",
+                                  "type": 0,
+                                  "subtype": 10145,
+                                  "params": [
+                                    {
+                                      "name": "Condition",
+                                      "value": {
+                                        "name": "Condition.Greater than",
+                                        "type": 1,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "value1",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "target_card_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "value2",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 0
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Action",
+                                      "value": {
+                                        "name": "Action.[500] ~Link Token to [Card Id] & consequences",
+                                        "type": 0,
+                                        "subtype": 10500,
+                                        "params": [
+                                          {
+                                            "name": "Card Id",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "target_card_id"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
@@ -19226,6 +19026,34 @@
             {
               "name": "action1",
               "value": {
+                "name": "Action.Set variable",
+                "type": 0,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "var_name",
+                    "value": "link_to_card_id"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Card Id"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
                 "name": "Action.Two actions",
                 "type": 0,
                 "subtype": 1,
@@ -19239,20 +19067,15 @@
                       "params": [
                         {
                           "name": "var_name",
-                          "value": "link_to_card_id"
+                          "value": "anti_token_tpl"
                         },
                         {
                           "name": "value",
                           "value": {
-                            "name": "Value.Argument",
+                            "name": "Value.[554] Anti-Token for Token",
                             "type": 2,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "name",
-                                "value": "Card Id"
-                              }
-                            ]
+                            "subtype": 10554,
+                            "params": []
                           }
                         }
                       ]
@@ -19268,159 +19091,126 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.Two actions",
+                            "name": "Action.Set variable",
                             "type": 0,
-                            "subtype": 1,
+                            "subtype": 6,
                             "params": [
                               {
-                                "name": "action1",
-                                "value": {
-                                  "name": "Action.Set variable",
-                                  "type": 0,
-                                  "subtype": 6,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "anti_token_tpl"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.[554] Anti-Token for Token",
-                                        "type": 2,
-                                        "subtype": 10554,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
-                                }
+                                "name": "var_name",
+                                "value": "anti_token_slot"
                               },
                               {
-                                "name": "action2",
+                                "name": "value",
                                 "value": {
-                                  "name": "Action.Set variable",
-                                  "type": 0,
-                                  "subtype": 6,
+                                  "name": "Value.Min Iterator",
+                                  "type": 2,
+                                  "subtype": 17,
                                   "params": [
                                     {
-                                      "name": "var_name",
-                                      "value": "anti_token_slot"
-                                    },
-                                    {
-                                      "name": "value",
+                                      "name": "iter_condition",
                                       "value": {
-                                        "name": "Value.Min Iterator",
-                                        "type": 2,
-                                        "subtype": 17,
+                                        "name": "Condition.And",
+                                        "type": 1,
+                                        "subtype": 7,
                                         "params": [
                                           {
-                                            "name": "iter_condition",
+                                            "name": "cond1",
                                             "value": {
-                                              "name": "Condition.And",
+                                              "name": "Condition.Equal",
                                               "type": 1,
-                                              "subtype": 7,
+                                              "subtype": 2,
                                               "params": [
                                                 {
-                                                  "name": "cond1",
+                                                  "name": "value1",
                                                   "value": {
-                                                    "name": "Condition.Equal",
-                                                    "type": 1,
+                                                    "name": "Value.Card type Id",
+                                                    "type": 2,
+                                                    "subtype": 12,
+                                                    "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "value2",
+                                                  "value": {
+                                                    "name": "Value.Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "anti_token_tpl"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "cond2",
+                                            "value": {
+                                              "name": "Condition.Equal",
+                                              "type": 1,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "value1",
+                                                  "value": {
+                                                    "name": "Value.Attribute",
+                                                    "type": 2,
                                                     "subtype": 2,
                                                     "params": [
                                                       {
-                                                        "name": "value1",
-                                                        "value": {
-                                                          "name": "Value.Card type Id",
-                                                          "type": 2,
-                                                          "subtype": 12,
-                                                          "params": []
-                                                        }
-                                                      },
-                                                      {
-                                                        "name": "value2",
-                                                        "value": {
-                                                          "name": "Value.Variable",
-                                                          "type": 2,
-                                                          "subtype": 1,
-                                                          "params": [
-                                                            {
-                                                              "name": "var_name",
-                                                              "value": "anti_token_tpl"
-                                                            }
-                                                          ]
-                                                        }
+                                                        "name": "attr_name",
+                                                        "value": "linked_card_id"
                                                       }
                                                     ]
                                                   }
                                                 },
                                                 {
-                                                  "name": "cond2",
+                                                  "name": "value2",
                                                   "value": {
-                                                    "name": "Condition.Equal",
-                                                    "type": 1,
-                                                    "subtype": 2,
+                                                    "name": "Value.Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
                                                     "params": [
                                                       {
-                                                        "name": "value1",
-                                                        "value": {
-                                                          "name": "Value.Attribute",
-                                                          "type": 2,
-                                                          "subtype": 2,
-                                                          "params": [
-                                                            {
-                                                              "name": "attr_name",
-                                                              "value": "linked_card_id"
-                                                            }
-                                                          ]
-                                                        }
-                                                      },
-                                                      {
-                                                        "name": "value2",
-                                                        "value": {
-                                                          "name": "Value.Variable",
-                                                          "type": 2,
-                                                          "subtype": 1,
-                                                          "params": [
-                                                            {
-                                                              "name": "var_name",
-                                                              "value": "link_to_card_id"
-                                                            }
-                                                          ]
-                                                        }
+                                                        "name": "var_name",
+                                                        "value": "link_to_card_id"
                                                       }
                                                     ]
                                                   }
                                                 }
                                               ]
                                             }
-                                          },
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Value.Attribute",
+                                        "type": 2,
+                                        "subtype": 2,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "slot"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "fallback",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
                                           {
                                             "name": "value",
-                                            "value": {
-                                              "name": "Value.Attribute",
-                                              "type": 2,
-                                              "subtype": 2,
-                                              "params": [
-                                                {
-                                                  "name": "attr_name",
-                                                  "value": "slot"
-                                                }
-                                              ]
-                                            }
-                                          },
-                                          {
-                                            "name": "fallback",
-                                            "value": {
-                                              "name": "Value.Constant",
-                                              "type": 2,
-                                              "subtype": 0,
-                                              "params": [
-                                                {
-                                                  "name": "value",
-                                                  "value": 0
-                                                }
-                                              ]
-                                            }
+                                            "value": 0
                                           }
                                         ]
                                       }
@@ -19541,130 +19331,140 @@
                               {
                                 "name": "action2",
                                 "value": {
-                                  "name": "Action.Set attribute",
+                                  "name": "Action.Two actions",
                                   "type": 0,
-                                  "subtype": 7,
+                                  "subtype": 1,
                                   "params": [
                                     {
-                                      "name": "attr_name",
-                                      "value": "linked_card_id"
-                                    },
-                                    {
-                                      "name": "value",
+                                      "name": "action1",
                                       "value": {
-                                        "name": "Value.Variable",
-                                        "type": 2,
-                                        "subtype": 1,
+                                        "name": "Action.Set attribute",
+                                        "type": 0,
+                                        "subtype": 7,
                                         "params": [
                                           {
-                                            "name": "var_name",
-                                            "value": "link_to_card_id"
+                                            "name": "attr_name",
+                                            "value": "linked_card_id"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "link_to_card_id"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.If-Then-Else",
+                                        "type": 0,
+                                        "subtype": 2,
+                                        "params": [
+                                          {
+                                            "name": "if",
+                                            "value": {
+                                              "name": "Condition.Greater than",
+                                              "type": 1,
+                                              "subtype": 3,
+                                              "params": [
+                                                {
+                                                  "name": "value1",
+                                                  "value": {
+                                                    "name": "Value.Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "anti_token_slot"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "value2",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 0
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "then",
+                                            "value": {
+                                              "name": "Action.Set attribute",
+                                              "type": 0,
+                                              "subtype": 7,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "to_destroy"
+                                                },
+                                                {
+                                                  "name": "value",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 1
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "else",
+                                            "value": {
+                                              "name": "Action.[497] Trigger 'Token Added' Event on [Card Id]",
+                                              "type": 0,
+                                              "subtype": 10497,
+                                              "params": [
+                                                {
+                                                  "name": "Card Id",
+                                                  "value": {
+                                                    "name": "Value.Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "link_to_card_id"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
                                           }
                                         ]
                                       }
                                     }
                                   ]
                                 }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "action2",
-              "value": {
-                "name": "Action.If-Then-Else",
-                "type": 0,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "if",
-                    "value": {
-                      "name": "Condition.Greater than",
-                      "type": 1,
-                      "subtype": 3,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "anti_token_slot"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 0
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "then",
-                    "value": {
-                      "name": "Action.Set attribute",
-                      "type": 0,
-                      "subtype": 7,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "to_destroy"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "else",
-                    "value": {
-                      "name": "Action.[497] Trigger 'Token Added' Event on [Card Id]",
-                      "type": 0,
-                      "subtype": 10497,
-                      "params": [
-                        {
-                          "name": "Card Id",
-                          "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "link_to_card_id"
                               }
                             ]
                           }
@@ -20429,7 +20229,7 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[523] Delete [N] Tokens with [Cond] on Card [Id]",
+                                  "name": "Action.[523] ~Delete [N] Tokens with [Cond] on Card [Id]",
                                   "type": 0,
                                   "subtype": 10523,
                                   "params": [
@@ -20540,7 +20340,7 @@
         "id": 522
       },
       {
-        "name": "Delete [N] Tokens with [Cond] on Card [Id]",
+        "name": "~Delete [N] Tokens with [Cond] on Card [Id]",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -20612,10 +20412,44 @@
             {
               "name": "action",
               "value": {
-                "name": "Action.DeleteEntity",
+                "name": "Action.Two actions",
                 "type": 0,
-                "subtype": 13,
-                "params": []
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.[144] #001:Move to Place [Id]",
+                      "type": 0,
+                      "subtype": 10144,
+                      "params": [
+                        {
+                          "name": "Dest Place",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.DeleteEntity",
+                      "type": 0,
+                      "subtype": 13,
+                      "params": []
+                    }
+                  }
+                ]
               }
             },
             {
@@ -20812,7 +20646,7 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Action.[523] Delete [N] Tokens with [Cond] on Card [Id]",
+                                        "name": "Action.[523] ~Delete [N] Tokens with [Cond] on Card [Id]",
                                         "type": 0,
                                         "subtype": 10523,
                                         "params": [
@@ -23908,6 +23742,145 @@
           ]
         },
         "id": 565
+      },
+      {
+        "name": "~Show Token Fly Animation",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "anim_token_fly"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "anim_token_fly_from_place"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.[146] #Current place",
+                            "type": 2,
+                            "subtype": 10146,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "anim_token_fly_from_card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "linked_card_id"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "anim_token_fly_from_slot"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "slot"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 568
       },
       {
         "name": "#001:True",
