@@ -11535,7 +11535,8 @@
         "frame": true,
         "drag_n_drop": 136,
         "drag_n_drops": [
-          136
+          569,
+          570
         ],
         "id": 97
       },
@@ -12554,7 +12555,7 @@
         "id": 569
       },
       {
-        "name": "Event Tracker - Creatures & Buildings",
+        "name": "Event Tracker - Buildings v2",
         "enabled": true,
         "destinations": [
           40,
@@ -12563,7 +12564,6 @@
         ],
         "destination_condition": 1,
         "required_card_types": [
-          0,
           4
         ],
         "action_on_drop": {
@@ -15016,95 +15016,114 @@
                               {
                                 "name": "cond1",
                                 "value": {
-                                  "name": "Condition.Equal",
+                                  "name": "Condition.And",
                                   "type": 1,
-                                  "subtype": 2,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "value1",
+                                      "name": "cond1",
                                       "value": {
-                                        "name": "Value.[146] #Current place",
-                                        "type": 2,
-                                        "subtype": 10146,
+                                        "name": "Condition.[187] ~001:Is a Creature",
+                                        "type": 1,
+                                        "subtype": 10187,
                                         "params": []
                                       }
                                     },
                                     {
-                                      "name": "value2",
+                                      "name": "cond2",
                                       "value": {
-                                        "name": "Value.[173] Row X Creature (1-5)",
-                                        "type": 2,
-                                        "subtype": 10173,
+                                        "name": "Condition.Equal",
+                                        "type": 1,
+                                        "subtype": 2,
                                         "params": [
                                           {
-                                            "name": "Row Number",
+                                            "name": "value1",
                                             "value": {
-                                              "name": "Value.Addition",
+                                              "name": "Value.[146] #Current place",
                                               "type": 2,
-                                              "subtype": 5,
-                                              "params": [
-                                                {
-                                                  "name": "value1",
-                                                  "value": {
-                                                    "name": "Value.Variable",
-                                                    "type": 2,
-                                                    "subtype": 1,
-                                                    "params": [
-                                                      {
-                                                        "name": "var_name",
-                                                        "value": "row_id"
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                {
-                                                  "name": "value2",
-                                                  "value": {
-                                                    "name": "Value.Constant",
-                                                    "type": 2,
-                                                    "subtype": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "value",
-                                                        "value": 1
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
+                                              "subtype": 10146,
+                                              "params": []
                                             }
                                           },
                                           {
-                                            "name": "Creature Number",
+                                            "name": "value2",
                                             "value": {
-                                              "name": "Value.Addition",
+                                              "name": "Value.[173] Row X Creature (1-5)",
                                               "type": 2,
-                                              "subtype": 5,
+                                              "subtype": 10173,
                                               "params": [
                                                 {
-                                                  "name": "value1",
+                                                  "name": "Row Number",
                                                   "value": {
-                                                    "name": "Value.Variable",
+                                                    "name": "Value.Addition",
                                                     "type": 2,
-                                                    "subtype": 1,
+                                                    "subtype": 5,
                                                     "params": [
                                                       {
-                                                        "name": "var_name",
-                                                        "value": "creature_number"
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Value.Variable",
+                                                          "type": 2,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "var_name",
+                                                              "value": "row_id"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 1
+                                                            }
+                                                          ]
+                                                        }
                                                       }
                                                     ]
                                                   }
                                                 },
                                                 {
-                                                  "name": "value2",
+                                                  "name": "Creature Number",
                                                   "value": {
-                                                    "name": "Value.Constant",
+                                                    "name": "Value.Addition",
                                                     "type": 2,
-                                                    "subtype": 0,
+                                                    "subtype": 5,
                                                     "params": [
                                                       {
-                                                        "name": "value",
-                                                        "value": 1
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Value.Variable",
+                                                          "type": 2,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "var_name",
+                                                              "value": "creature_number"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 1
+                                                            }
+                                                          ]
+                                                        }
                                                       }
                                                     ]
                                                   }
