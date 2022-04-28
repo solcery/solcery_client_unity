@@ -94,7 +94,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void SetActive(bool active)
         {
             _layout.FrontTransform.gameObject.SetActive(active);
-            _layout.Highlight.SetActive(false);
         }
 
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardTypes eclipseCardType)

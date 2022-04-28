@@ -126,13 +126,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (rttData != null)
             {
                 eclipseCard.SetActive(false);
-                WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard.Layout.RectTransform,
-                    rttData.RenderTexture,
+                WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard,
+                    rttData,
                     0.5f,
                     () => { Game.ServiceRenderWidget.ReleaseWidgetRender(eclipseCard.Layout.RectTransform); });
             }
         }
-        
+
         private IEclipseCardInContainerWidget AttachCard(EcsWorld world, int entityId, int objectId, Dictionary<int, JObject> cardTypes)
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))

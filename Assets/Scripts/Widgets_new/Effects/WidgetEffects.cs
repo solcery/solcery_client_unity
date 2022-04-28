@@ -1,6 +1,8 @@
 using System;
 using DG.Tweening;
+using Solcery.Services.Renderer.Widgets;
 using Solcery.Ui;
+using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -64,30 +66,26 @@ namespace Solcery.Widgets_new.Effects
                 .Play();
         }
 
-        public void DestroyEclipseCard(RectTransform rectTransform,
-            RenderTexture rtt,
+        public void DestroyEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            IWidgetRenderData renderData,
             float time,
             Action onMoveComplete)
         {
-            var effect = Object.Instantiate(_effectRoot.EclipseCardEffect, _effectRoot.transform, false)
-                .GetComponent<EclipseCardEffectLayout>();
-            var rect = rectTransform.rect;
+            var rect = eclipseCard.Layout.RectTransform.rect;
             var maxSize = Mathf.Max(rect.size.x, rect.size.y);
-            effect.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
-            effect.RectTransform.position = rectTransform.position;
-            effect.RectTransform.anchoredPosition += new Vector2((maxSize - rect.size.x) / 2f, 0f);
-            effect.Image.texture = rtt;
-            var alpha = effect.CanvasGroup.alpha;
+            var effectLayout = eclipseCard.Layout.EffectLayout;
+            effectLayout.Image.texture = renderData.RenderTexture;
+            effectLayout.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
+            effectLayout.RectTransform.localPosition = new Vector2((maxSize - rect.size.x) / 2f, 0f);
+
+            effectLayout.CanvasGroup.alpha = 1f;
+            var alpha = effectLayout.CanvasGroup.alpha;
             DOTween.Sequence()
                 .Append(DOTween.To(() => alpha, x => alpha = x, 0f, time).OnUpdate(() =>
                 {
-                    effect.CanvasGroup.alpha = alpha;
+                    effectLayout.CanvasGroup.alpha = alpha;
                 }))
-                .AppendCallback(() =>
-                {
-                    Object.Destroy(effect.gameObject);
-                    onMoveComplete?.Invoke();
-                })
+                .AppendCallback(() => { onMoveComplete?.Invoke(); })
                 .Play();
         }
 

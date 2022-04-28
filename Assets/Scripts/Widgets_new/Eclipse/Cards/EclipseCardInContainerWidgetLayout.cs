@@ -3,6 +3,7 @@ using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
+using Solcery.Widgets_new.Eclipse.Effects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,13 +17,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public int EntityId;
         public PlaceWidget ParentPlaceWidget;
         
-        public RectTransform RectTransform => rectTransform;
-        public RectTransform FrontTransform => rectTransform;
-        
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
         private RectTransform frontTransform;
+        [SerializeField]
+        private EclipseCardEffectLayout effectLayout;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
         [SerializeField]
@@ -47,8 +47,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
-        
-        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
+        public RectTransform RectTransform => rectTransform;
+        public RectTransform FrontTransform => frontTransform;
+        public EclipseCardEffectLayout EffectLayout => effectLayout;
+
+        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;

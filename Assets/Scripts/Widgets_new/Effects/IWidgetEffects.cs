@@ -1,5 +1,6 @@
 using System;
 using Solcery.Games;
+using Solcery.Services.Renderer.Widgets;
 using Solcery.Widgets_new.Eclipse.Cards;
 using UnityEngine;
 
@@ -7,8 +8,8 @@ namespace Solcery.Widgets_new.Effects
 {
     public interface IWidgetEffects
     {
-        public void DestroyEclipseCard(RectTransform rectTransform,
-            RenderTexture rtt,
+        public void DestroyEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            IWidgetRenderData renderData,
             float time,
             Action onMoveComplete);
         
