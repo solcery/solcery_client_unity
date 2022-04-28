@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -15,7 +16,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
-        private EclipseCardInContainerWidgetTypes _eclipseCardType;
+        private EclipseCardTypes _eclipseCardType;
         private int _objectId;
 
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
@@ -96,9 +97,10 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout.Highlight.SetActive(false);
         }
 
-        void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType)
+        void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;
+            _layout.UpdateType(eclipseCardType.ToString());
         }
 
         void IPoolingWidget.UpdateParent(Transform parent)

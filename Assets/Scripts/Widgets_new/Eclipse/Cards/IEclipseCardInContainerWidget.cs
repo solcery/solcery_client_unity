@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Values;
+using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -14,7 +15,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
     {
         EclipseCardInContainerWidgetLayout Layout { get; }
         void UpdateFromCardTypeData(int objectId, JObject data);
-        void SetEclipseCardType(EclipseCardInContainerWidgetTypes eclipseCardType);
+        void SetEclipseCardType(EclipseCardTypes eclipseCardType);
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);
         Vector3 GetTokenPosition(int slot);

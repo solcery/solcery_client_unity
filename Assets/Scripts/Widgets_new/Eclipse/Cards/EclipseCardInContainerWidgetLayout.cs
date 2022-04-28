@@ -30,6 +30,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private Image iconImage;
         [SerializeField]
+        private TMP_Text typeText;
+        [SerializeField]
         private TMP_Text nameText;
         [SerializeField]
         private TMP_Text descriptionText;
@@ -106,6 +108,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             descriptionText.text = newDescription;
         }
 
+        public void UpdateType(string newType)
+        {
+            typeText.text = newType;
+        }
+        
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();

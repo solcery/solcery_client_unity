@@ -138,12 +138,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
             {
                 var objectTypePool = world.GetPool<ComponentObjectType>();
+                var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
                 if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
                 {
                     if (objectTypePool.Has(entityId)
                         && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                     {
                         eclipseCard.UpdateFromCardTypeData(objectId, cardTypeDataObject);
+                        eclipseCard.SetEclipseCardType(eclipseCartTypePool.Get(entityId).CardType);
                     }
                     
                     // drug and drop
