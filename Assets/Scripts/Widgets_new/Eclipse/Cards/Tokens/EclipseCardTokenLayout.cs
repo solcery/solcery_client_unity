@@ -12,21 +12,25 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
     {
         [SerializeField]
         private Image icon;
-
+        
         private TweenerCore<Vector3, Vector3, VectorOptions> _moveTween;
         private TooltipBehaviour _tooltipBehaviour;
         private RectTransform _rectTransform;
         
         public Image Icon => icon;
         public RectTransform RectTransform => _rectTransform;
+
+        private bool _active;        
         
         public void Awake()
         {
             _rectTransform = icon.GetComponent<RectTransform>();
+            _active = false;
         }
 
         public void UpdateSprite(Texture2D texture)
         {
+            _active = true;
             icon.gameObject.SetActive(true);
             icon.sprite =  Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100.0f);
@@ -43,7 +47,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
 
         public void Cleanup()
         {
-            if (icon.sprite != null)
+            if (icon.sprite != null && _active)
             {
                 Destroy(icon.sprite);
             }
@@ -55,6 +59,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
                 Destroy(_tooltipBehaviour);
             }
             _tooltipBehaviour = null;
+            _active = false;
         }
     }
 }
