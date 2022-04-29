@@ -14708,6 +14708,89 @@
         "enabled": true,
         "description": "Eclipse Phase",
         "id": 618
+      },
+      {
+        "name": "Test Fill Token Storage",
+        "enabled": true,
+        "description": "Does AMAZING THINGS",
+        "action": {
+          "name": "Action.Loop",
+          "type": 0,
+          "subtype": 3,
+          "params": [
+            {
+              "name": "counter_var",
+              "value": "apple_counter"
+            },
+            {
+              "name": "iterations",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 5
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[563] ~Create a Token [Tpl Id] on Card in [Place Id] & [DO]",
+                "type": 0,
+                "subtype": 10563,
+                "params": [
+                  {
+                    "name": "Target place",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 31
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Token Tpl",
+                    "value": {
+                      "name": "Value.[224] Token TplId - Food",
+                      "type": 2,
+                      "subtype": 10224,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "Action",
+                    "value": {
+                      "name": "Action.[502] ~Move & Link Token to [PlaceId]",
+                      "type": 0,
+                      "subtype": 10502,
+                      "params": [
+                        {
+                          "name": "Target Place",
+                          "value": {
+                            "name": "Value.[168] Place 06. Token Storage",
+                            "type": 2,
+                            "subtype": 10168,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 628
       }
     ]
   },
@@ -14732,10 +14815,10 @@
         "enabled": true,
         "placeId": 2,
         "visible": true,
-        "x1": 100,
-        "x2": 1100,
-        "y1": 7550,
-        "y2": 9950,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 7592,
+        "y2": 9815,
         "face": 1,
         "zOrder": 2,
         "caption": "Event Deck",
@@ -14747,10 +14830,10 @@
         "enabled": true,
         "placeId": 3,
         "visible": true,
-        "x1": 1200,
-        "x2": 2200,
-        "y1": 7550,
-        "y2": 9950,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 4999,
+        "y2": 7221,
         "face": 1,
         "zOrder": 3,
         "caption": "Event Discard",
@@ -14762,10 +14845,10 @@
         "enabled": true,
         "placeId": 4,
         "visible": true,
-        "x1": 8400,
-        "x2": 9900,
-        "y1": 7000,
-        "y2": 10000,
+        "x1": 7976,
+        "x2": 9164,
+        "y1": 7592,
+        "y2": 9815,
         "layout": 6,
         "zOrder": 4,
         "frame": true,
@@ -14777,10 +14860,10 @@
         "placeId": 5,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 2800,
-        "x2": 8200,
-        "y1": 7550,
-        "y2": 9950,
+        "x1": 1968,
+        "x2": 7664,
+        "y1": 7592,
+        "y2": 9815,
         "layout": 6,
         "zOrder": 5,
         "caption": "Event Tracker",
@@ -14797,10 +14880,10 @@
         "enabled": true,
         "placeId": 50,
         "interactableForActiveLocalPlayer": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 100,
-        "y2": 5000,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 183,
+        "y2": 1294,
         "layout": 7,
         "zOrder": 6,
         "caption": "Token Reserve",
@@ -14813,10 +14896,10 @@
         "placeId": 7,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 100,
-        "x2": 1300,
-        "y1": 5000,
-        "y2": 5400,
+        "x1": 7976,
+        "x2": 9164,
+        "y1": 5056,
+        "y2": 5741,
         "layout": 4,
         "zOrder": 7,
         "id": 99
@@ -14827,10 +14910,10 @@
         "placeId": 41,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 2800,
-        "x2": 3800,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 2952,
+        "x2": 3832,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 1",
@@ -14847,10 +14930,10 @@
         "placeId": 42,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 3850,
-        "x2": 4850,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 3910,
+        "x2": 4790,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 2",
@@ -14867,10 +14950,10 @@
         "placeId": 43,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 4900,
-        "x2": 5900,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 4868,
+        "x2": 5748,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 3",
@@ -14887,10 +14970,10 @@
         "placeId": 44,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 5950,
-        "x2": 6950,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 5826,
+        "x2": 6706,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 4",
@@ -14907,10 +14990,10 @@
         "placeId": 45,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 7000,
-        "x2": 8000,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 6784,
+        "x2": 7664,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 5",
@@ -14927,10 +15010,10 @@
         "placeId": 31,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 2800,
-        "x2": 3800,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 2952,
+        "x2": 3832,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 1",
@@ -14947,10 +15030,10 @@
         "placeId": 32,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 3850,
-        "x2": 4850,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 3910,
+        "x2": 4790,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 2",
@@ -14967,10 +15050,10 @@
         "placeId": 33,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 4900,
-        "x2": 5900,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 4868,
+        "x2": 5748,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 3",
@@ -14987,10 +15070,10 @@
         "placeId": 34,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 5950,
-        "x2": 6950,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 5826,
+        "x2": 6706,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 4",
@@ -15007,10 +15090,10 @@
         "placeId": 35,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 7000,
-        "x2": 8000,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 6784,
+        "x2": 7664,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 5",
@@ -15027,10 +15110,10 @@
         "placeId": 21,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 2800,
-        "x2": 3800,
-        "y1": 4950,
-        "y2": 7350,
+        "x1": 2952,
+        "x2": 3832,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 1",
@@ -15047,10 +15130,10 @@
         "placeId": 22,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 3850,
-        "x2": 4850,
-        "y1": 4950,
-        "y2": 7350,
+        "x1": 3910,
+        "x2": 4790,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 2",
@@ -15067,10 +15150,10 @@
         "placeId": 23,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 4900,
-        "x2": 5900,
-        "y1": 4950,
-        "y2": 7359,
+        "x1": 4868,
+        "x2": 5748,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 3",
@@ -15087,10 +15170,10 @@
         "placeId": 24,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 5950,
-        "x2": 6950,
-        "y1": 4950,
-        "y2": 7350,
+        "x1": 5826,
+        "x2": 6706,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 4",
@@ -15107,10 +15190,10 @@
         "placeId": 25,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 7000,
-        "x2": 8000,
-        "y1": 4950,
-        "y2": 7350,
+        "x1": 6784,
+        "x2": 7664,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 5",
@@ -15127,10 +15210,10 @@
         "placeId": 20,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 1600,
-        "x2": 2480,
-        "y1": 5128,
-        "y2": 7350,
+        "x1": 1968,
+        "x2": 2848,
+        "y1": 4999,
+        "y2": 7221,
         "layout": 6,
         "zOrder": 10,
         "caption": "Top Row Building",
@@ -15147,10 +15230,10 @@
         "placeId": 40,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 1600,
-        "x2": 2600,
-        "y1": 50,
-        "y2": 2450,
+        "x1": 1968,
+        "x2": 2848,
+        "y1": 183,
+        "y2": 2405,
         "layout": 6,
         "zOrder": 10,
         "caption": "Botton Row Building",
@@ -15167,10 +15250,10 @@
         "placeId": 30,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 1600,
-        "x2": 2600,
-        "y1": 2500,
-        "y2": 4900,
+        "x1": 1968,
+        "x2": 2848,
+        "y1": 2591,
+        "y2": 4813,
         "layout": 6,
         "zOrder": 10,
         "caption": "Central Row Building",
@@ -15201,10 +15284,10 @@
         "placeId": 11,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 5700,
-        "y2": 6000,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 4500,
+        "y2": 4800,
         "layout": 4,
         "zOrder": 9,
         "id": 333
@@ -15228,10 +15311,10 @@
         "placeId": 12,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 5300,
-        "y2": 5600,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 4100,
+        "y2": 4400,
         "layout": 4,
         "zOrder": 9,
         "id": 433
@@ -15242,10 +15325,10 @@
         "placeId": 13,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 4900,
-        "y2": 5200,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 3700,
+        "y2": 4000,
         "layout": 4,
         "zOrder": 9,
         "id": 434
@@ -15255,10 +15338,10 @@
         "enabled": true,
         "placeId": 10,
         "visible": true,
-        "x1": 100,
-        "x2": 1500,
-        "y1": 7000,
-        "y2": 7500,
+        "x1": 7976,
+        "x2": 9164,
+        "y1": 5741,
+        "y2": 6426,
         "layout": 3,
         "zOrder": 1,
         "caption": "MSG AREA",
@@ -15271,10 +15354,10 @@
         "placeId": 14,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 4500,
-        "y2": 4800,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 3300,
+        "y2": 3600,
         "layout": 4,
         "zOrder": 9,
         "id": 466
@@ -15285,10 +15368,10 @@
         "placeId": 15,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 4100,
-        "y2": 4400,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 2900,
+        "y2": 3200,
         "layout": 4,
         "zOrder": 9,
         "id": 476
@@ -15298,10 +15381,10 @@
         "enabled": true,
         "placeId": 18,
         "visible": true,
-        "x1": 1200,
-        "x2": 2200,
-        "y1": 8150,
-        "y2": 9350,
+        "x1": 7976,
+        "x2": 8768,
+        "y1": 6426,
+        "y2": 7111,
         "face": 1,
         "layout": 3,
         "zOrder": 99,
@@ -15312,10 +15395,10 @@
         "enabled": true,
         "placeId": 19,
         "visible": true,
-        "x1": 2300,
-        "x2": 2700,
-        "y1": 7550,
-        "y2": 9950,
+        "x1": 8768,
+        "x2": 9164,
+        "y1": 6426,
+        "y2": 7111,
         "face": 1,
         "layout": 2,
         "zOrder": 99,
@@ -15326,10 +15409,10 @@
         "enabled": true,
         "placeId": 6,
         "visible": true,
-        "x1": 100,
-        "x2": 1100,
-        "y1": 100,
-        "y2": 5000,
+        "x1": 7976,
+        "x2": 9164,
+        "y1": 183,
+        "y2": 4813,
         "layout": 7,
         "zOrder": 6,
         "caption": "Token Storage",
@@ -15342,10 +15425,10 @@
         "placeId": 16,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
-        "x1": 8900,
-        "x2": 9900,
-        "y1": 3700,
-        "y2": 4000,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 2500,
+        "y2": 2800,
         "layout": 4,
         "zOrder": 9,
         "id": 532
@@ -15385,7 +15468,7 @@
       {
         "name": "Test button 1",
         "enabled": true,
-        "cardType": 599,
+        "cardType": 628,
         "place": 11,
         "amount": 1,
         "preset": "test buttons",
@@ -15750,7 +15833,7 @@
     "name": "drag_n_drops",
     "objects": [
       {
-        "name": "Event Tracker - Creatures & Buildings",
+        "name": "Token Storage - Tokens",
         "enabled": true,
         "destinations": [
           41,
@@ -15771,13 +15854,12 @@
         ],
         "destination_condition": 1,
         "required_card_types": [
-          1,
-          4
+          2
         ],
         "action_on_drop": {
-          "name": "Action.[544] ~Drag & Drop v2 (Event Tracker)",
+          "name": "Action.[529] {v2} Drag & Drop",
           "type": 0,
-          "subtype": 10544,
+          "subtype": 10529,
           "params": []
         },
         "id": 136
@@ -15796,7 +15878,7 @@
           4
         ],
         "action_on_drop": {
-          "name": "Action.[529] ~Drag & Drop v2",
+          "name": "Action.[529] {v2} Drag & Drop",
           "type": 0,
           "subtype": 10529,
           "params": []
@@ -15828,7 +15910,7 @@
           1
         ],
         "action_on_drop": {
-          "name": "Action.[529] ~Drag & Drop v2",
+          "name": "Action.[529] {v2} Drag & Drop",
           "type": 0,
           "subtype": 10529,
           "params": []
@@ -15860,7 +15942,7 @@
           1
         ],
         "action_on_drop": {
-          "name": "Action.[544] ~Drag & Drop v2 (Event Tracker)",
+          "name": "Action.[544] {v2} Drag & Drop (Event Tracker)",
           "type": 0,
           "subtype": 10544,
           "params": []
@@ -15880,7 +15962,7 @@
           4
         ],
         "action_on_drop": {
-          "name": "Action.[544] ~Drag & Drop v2 (Event Tracker)",
+          "name": "Action.[544] {v2} Drag & Drop (Event Tracker)",
           "type": 0,
           "subtype": 10544,
           "params": []
@@ -24323,231 +24405,15 @@
         "id": 528
       },
       {
-        "name": "~Drag & Drop v2",
+        "name": "{v2} Drag & Drop",
         "enabled": true,
         "brick": {
-          "name": "Action.[145] #002:If-then",
+          "name": "Action.Two actions",
           "type": 0,
-          "subtype": 10145,
+          "subtype": 1,
           "params": [
             {
-              "name": "Condition",
-              "value": {
-                "name": "Condition.[151] #004:Lesser or equal",
-                "type": 1,
-                "subtype": 10151,
-                "params": [
-                  {
-                    "name": "Value 1",
-                    "value": {
-                      "name": "Value.Game Attribute",
-                      "type": 2,
-                      "subtype": 13,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "input_lock"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "Value 2",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Action",
-              "value": {
-                "name": "Action.Two actions",
-                "type": 0,
-                "subtype": 1,
-                "params": [
-                  {
-                    "name": "action1",
-                    "value": {
-                      "name": "Action.Two actions",
-                      "type": 0,
-                      "subtype": 1,
-                      "params": [
-                        {
-                          "name": "action1",
-                          "value": {
-                            "name": "Action.Set variable",
-                            "type": 0,
-                            "subtype": 6,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "current_place"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Value.[146] #Current place",
-                                  "type": 2,
-                                  "subtype": 10146,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action2",
-                          "value": {
-                            "name": "Action.Set variable",
-                            "type": 0,
-                            "subtype": 6,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "card_id"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Value.Card Id",
-                                  "type": 2,
-                                  "subtype": 11,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "Action.Two actions",
-                      "type": 0,
-                      "subtype": 1,
-                      "params": [
-                        {
-                          "name": "action1",
-                          "value": {
-                            "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
-                            "type": 0,
-                            "subtype": 10527,
-                            "params": [
-                              {
-                                "name": "Card Id",
-                                "value": {
-                                  "name": "Value.Variable",
-                                  "type": 2,
-                                  "subtype": 1,
-                                  "params": [
-                                    {
-                                      "name": "var_name",
-                                      "value": "card_id"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action2",
-                          "value": {
-                            "name": "Action.Two actions",
-                            "type": 0,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "action1",
-                                "value": {
-                                  "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
-                                  "type": 0,
-                                  "subtype": 10526,
-                                  "params": []
-                                }
-                              },
-                              {
-                                "name": "action2",
-                                "value": {
-                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
-                                  "type": 0,
-                                  "subtype": 10528,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "id": 529
-      },
-      {
-        "name": "Drag & Drop - Buildings",
-        "enabled": true,
-        "brick": {
-          "name": "Action.[145] #002:If-then",
-          "type": 0,
-          "subtype": 10145,
-          "params": [
-            {
-              "name": "Condition",
-              "value": {
-                "name": "Condition.[151] #004:Lesser or equal",
-                "type": 1,
-                "subtype": 10151,
-                "params": [
-                  {
-                    "name": "Value 1",
-                    "value": {
-                      "name": "Value.Game Attribute",
-                      "type": 2,
-                      "subtype": 13,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "input_lock"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "Value 2",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Action",
+              "name": "action1",
               "value": {
                 "name": "Action.Two actions",
                 "type": 0,
@@ -24579,6 +24445,63 @@
                   {
                     "name": "action2",
                     "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "card_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Card Id",
+                            "type": 2,
+                            "subtype": 11,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
+                      "type": 0,
+                      "subtype": 10527,
+                      "params": [
+                        {
+                          "name": "Card Id",
+                          "value": {
+                            "name": "Value.Variable",
+                            "type": 2,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
                       "name": "Action.Two actions",
                       "type": 0,
                       "subtype": 1,
@@ -24595,39 +24518,102 @@
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Action.Two actions",
+                            "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
                             "type": 0,
-                            "subtype": 1,
+                            "subtype": 10528,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 529
+      },
+      {
+        "name": "{OLD} Drag & Drop - Buildings",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set variable",
+                "type": 0,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "var_name",
+                    "value": "current_place"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.[146] #Current place",
+                      "type": 2,
+                      "subtype": 10146,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.[526] Drag & Drop Aux - Move ALL Cards from targetPlace to currentPlace",
+                      "type": 0,
+                      "subtype": 10526,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
+                            "type": 0,
+                            "subtype": 10527,
                             "params": [
                               {
-                                "name": "action1",
+                                "name": "Card Id",
                                 "value": {
-                                  "name": "Action.[527] Drag & Drop Aux - Move 1 Card [Id] and its Tokens from currentPlace to transitoryPlace",
-                                  "type": 0,
-                                  "subtype": 10527,
-                                  "params": [
-                                    {
-                                      "name": "Card Id",
-                                      "value": {
-                                        "name": "Condition.[189] ~004:Is a Building",
-                                        "type": 1,
-                                        "subtype": 10189,
-                                        "params": []
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "action2",
-                                "value": {
-                                  "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
-                                  "type": 0,
-                                  "subtype": 10528,
+                                  "name": "Condition.[189] ~004:Is a Building",
+                                  "type": 1,
+                                  "subtype": 10189,
                                   "params": []
                                 }
                               }
                             ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.[528] Drag & Drop Aux - Move ALL Cards from transitoryPlace to targetPlace",
+                            "type": 0,
+                            "subtype": 10528,
+                            "params": []
                           }
                         }
                       ]
@@ -24641,7 +24627,7 @@
         "id": 530
       },
       {
-        "name": "Drag & Drop - Creatures/Buildings",
+        "name": "{OLD} Drag & Drop - Creatures/Buildings",
         "enabled": true,
         "brick": {
           "name": "Action.[145] #002:If-then",
@@ -25791,7 +25777,7 @@
         "id": 541
       },
       {
-        "name": "~Drag & Drop v2 (Event Tracker)",
+        "name": "{v2} Drag & Drop (Event Tracker)",
         "enabled": true,
         "brick": {
           "name": "Action.Two actions",
@@ -25801,7 +25787,7 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[529] ~Drag & Drop v2",
+                "name": "Action.[529] {v2} Drag & Drop",
                 "type": 0,
                 "subtype": 10529,
                 "params": []
@@ -25810,10 +25796,48 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[545] Clear Duration attrs",
+                "name": "Action.Two actions",
                 "type": 0,
-                "subtype": 10545,
-                "params": []
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "order"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[545] Clear Duration attrs",
+                      "type": 0,
+                      "subtype": 10545,
+                      "params": []
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -29629,6 +29653,362 @@
           ]
         },
         "id": 620
+      },
+      {
+        "name": "{v2} Drag & Drop (Token)",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "target_card_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "token_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Card Id",
+                            "type": 2,
+                            "subtype": 11,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Iterator",
+                      "type": 0,
+                      "subtype": 5,
+                      "params": [
+                        {
+                          "name": "condition",
+                          "value": {
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "target_place"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[343] Can Receive Tokens",
+                                  "type": 1,
+                                  "subtype": 10343,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "target_card_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Card Id",
+                                  "type": 2,
+                                  "subtype": 11,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[145] #002:If-then",
+                      "type": 0,
+                      "subtype": 10145,
+                      "params": [
+                        {
+                          "name": "Condition",
+                          "value": {
+                            "name": "Condition.Greater than",
+                            "type": 1,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "target_card_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Action",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.[568] ~Show Token Fly Animation",
+                                  "type": 0,
+                                  "subtype": 10568,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Action.Set attribute",
+                                        "type": 0,
+                                        "subtype": 7,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "place"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "target_place"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.[500] ~Link Token to [Card Id] & consequences",
+                                        "type": 0,
+                                        "subtype": 10500,
+                                        "params": [
+                                          {
+                                            "name": "Card Id",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "target_card_id"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 626
+      },
+      {
+        "name": "Trigger event 'Token Gifted' + build context",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set variable",
+                "type": 0,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "var_name",
+                    "value": "gifted_token_id"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Token Id"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Event",
+                "type": 0,
+                "subtype": 11,
+                "params": [
+                  {
+                    "name": "event_name",
+                    "value": "token_gifted"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 627
       },
       {
         "name": "#001:True",
