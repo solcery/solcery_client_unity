@@ -14835,7 +14835,7 @@
         "y1": 4999,
         "y2": 7221,
         "face": 1,
-        "zOrder": 3,
+        "zOrder": 10,
         "caption": "Event Discard",
         "frame": true,
         "id": 95
@@ -14876,18 +14876,23 @@
         "id": 97
       },
       {
-        "name": "Token Reserve",
+        "name": "Token Storage",
         "enabled": true,
-        "placeId": 50,
+        "placeId": 6,
         "interactableForActiveLocalPlayer": true,
-        "x1": 468,
-        "x2": 1656,
+        "visible": true,
+        "x1": 7976,
+        "x2": 9164,
         "y1": 183,
-        "y2": 1294,
+        "y2": 4813,
         "layout": 7,
-        "zOrder": 6,
-        "caption": "Token Reserve",
+        "zOrder": 99,
+        "caption": "Token Storage",
         "frame": true,
+        "drag_n_drop": 136,
+        "drag_n_drops": [
+          136
+        ],
         "id": 98
       },
       {
@@ -15405,18 +15410,18 @@
         "id": 480
       },
       {
-        "name": "Token Storage",
+        "name": "Token Reserve",
         "enabled": true,
-        "placeId": 6,
-        "visible": true,
-        "x1": 7976,
-        "x2": 9164,
+        "placeId": 50,
+        "x1": 468,
+        "x2": 1656,
         "y1": 183,
-        "y2": 4813,
+        "y2": 1294,
         "layout": 7,
         "zOrder": 6,
-        "caption": "Token Storage",
+        "caption": "Token Reserve",
         "frame": true,
+        "drag_n_drops": [],
         "id": 520
       },
       {
@@ -15871,7 +15876,7 @@
           40,
           30,
           20,
-          5
+          3
         ],
         "destination_condition": 1,
         "required_card_types": [
@@ -15904,7 +15909,7 @@
           23,
           24,
           25,
-          5
+          3
         ],
         "required_card_types": [
           1
