@@ -74,6 +74,7 @@ namespace Solcery.Widgets_new.Effects
             var rect = eclipseCard.Layout.RectTransform.rect;
             var maxSize = Mathf.Max(rect.size.x, rect.size.y);
             var effectLayout = eclipseCard.Layout.EffectLayout;
+            effectLayout.gameObject.SetActive(true);
             effectLayout.Image.texture = renderData.RenderTexture;
             effectLayout.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
             effectLayout.RectTransform.localPosition = new Vector2((maxSize - rect.size.x) / 2f, 0f);
@@ -85,7 +86,11 @@ namespace Solcery.Widgets_new.Effects
                 {
                     effectLayout.CanvasGroup.alpha = alpha;
                 }))
-                .AppendCallback(() => { onMoveComplete?.Invoke(); })
+                .AppendCallback(() =>
+                {
+                    effectLayout.gameObject.SetActive(false);
+                    onMoveComplete?.Invoke();
+                })
                 .Play();
         }
 

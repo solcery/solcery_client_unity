@@ -1,5 +1,6 @@
 using Solcery.Ui;
 using Solcery.Ui.DragDrop;
+using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Effects;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Solcery.Widgets_new.Canvas
             _uiRoot = uiRoot;
             _dragDropRoot = dragDropRoot;
             _widgetEffects = WidgetEffects.Create(uiRoot.Effects);
+            _uiRoot.FullModeLayout.gameObject.SetActive(false);
         }
         
         Transform IWidgetCanvas.GetWorldCanvas()
@@ -39,7 +41,12 @@ namespace Solcery.Widgets_new.Canvas
         {
             return _widgetEffects;
         }
-        
+
+        EclipseCardFullModeLayout IWidgetCanvas.GetFullModeLayout()
+        {
+            return _uiRoot.FullModeLayout;
+        }
+
         RootDragDropLayout IWidgetCanvas.GetDragDropCanvas()
         {
             return _dragDropRoot;

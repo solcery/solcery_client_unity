@@ -1,3 +1,4 @@
+using Solcery.Widgets_new.Eclipse.Cards;
 using UnityEngine;
 
 namespace Solcery.Ui
@@ -7,5 +8,6 @@ namespace Solcery.Ui
         public RectTransform Background;
         public RectTransform Game;
         public RootUiEffects Effects;
+        public EclipseCardFullModeLayout FullModeLayout;
     }
 }

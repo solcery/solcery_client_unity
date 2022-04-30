@@ -51,6 +51,7 @@ namespace Solcery.Games
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
         TooltipController IGame.TooltipController => _tooltipController;
+        EclipseCardFullModeController IGame.FullModeController => _fullModeController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
 
@@ -78,7 +79,8 @@ namespace Solcery.Games
         private JObject _gameContentJson;
         private readonly Queue<GameStatePackage> _gameStatePackages;
         private JObject _gameState;
-        private readonly TooltipController _tooltipController;
+        private TooltipController _tooltipController;
+        private EclipseCardFullModeController _fullModeController;
         private readonly IGameContentAttributes _contentAttributes;
         
         public static IGame Create(IGameInitDto dto)
@@ -94,6 +96,7 @@ namespace Solcery.Games
             CreateModel();
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
+            _fullModeController = EclipseCardFullModeController.Create(_widgetCanvas);
             _contentAttributes = GameContentAttributes.Create();
         }
         
@@ -313,7 +316,11 @@ namespace Solcery.Games
             _eclipseCardInContainerWidgetPool = null;
             _serviceResource.Destroy();
             _serviceResource = null;
-
+            _fullModeController.Destroy();
+            _fullModeController = null;
+            _tooltipController.Destroy();
+            _tooltipController = null;
+            
             _widgetCanvas = null;
         }
     }

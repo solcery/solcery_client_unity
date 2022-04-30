@@ -125,7 +125,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var rttData = Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
             if (rttData != null)
             {
-                eclipseCard.SetActive(false);
+                eclipseCard.Layout.SetActive(false);
                 WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard,
                     rttData,
                     0.5f,
@@ -164,7 +164,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
             Layout.AddCard(eclipseCard);
             _cards.Add(objectId, eclipseCard);
-            eclipseCard.SetActive(true);
+            eclipseCard.Layout.SetActive(true);
         }
 
         private void RemoveCards(EcsWorld world, int[] entityIds)

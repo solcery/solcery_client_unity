@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Solcery.Services.Events;
+using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
@@ -65,6 +66,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
+            effectLayout.gameObject.SetActive(false);
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -133,7 +135,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _sprite = null;
             }
         }
-        
+
+        public void SetActive(bool active)
+        {
+            FrontTransform.gameObject.SetActive(active);
+        }
+
         public void RaycastOn()
         {
             foreach (var targetSetting in _raycastTargetSettings)
@@ -154,8 +161,20 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
+            switch (eventData.button)
+            {
+                case PointerEventData.InputButton.Left:
+                    OnOnPointerLeftButtonClick(eventData);
+                    break;
+                case PointerEventData.InputButton.Right:
+                    OnOnPointerRightButtonClick();
+                    break;
+            }
+        }
+
+        private void OnOnPointerLeftButtonClick(PointerEventData eventData)
+        {
             ParentPlaceWidget = transform.parent.GetComponentInParent<PlaceWidgetLayout>().PlaceWidget;
-            
             RectTransformUtility.ScreenPointToWorldPointInRectangle
             (
                 rectTransform, 
@@ -163,8 +182,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-            
             ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
+        }
+        
+        private void OnOnPointerRightButtonClick()
+        {
+            ServiceEvents.Current.BroadcastEvent(OnEclipseCardFullEventData.Create(this));
         }
     }
 }

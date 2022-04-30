@@ -106,5 +106,9 @@ namespace Solcery.Widgets_new.Tooltip
                 _tooltipLayout.gameObject.SetActive(value);
             }
         }
+        
+        public void Destroy()
+        {
+        }
     }
 }

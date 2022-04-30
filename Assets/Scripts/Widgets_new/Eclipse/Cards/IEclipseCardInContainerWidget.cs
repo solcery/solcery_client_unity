@@ -19,6 +19,5 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);
         Vector3 GetTokenPosition(int slot);
-        void SetActive(bool active);
     }
 }

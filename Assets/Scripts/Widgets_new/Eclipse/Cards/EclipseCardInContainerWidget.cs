@@ -90,12 +90,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
             return _layout.transform.position;
         }
-
-        public void SetActive(bool active)
-        {
-            _layout.FrontTransform.gameObject.SetActive(active);
-        }
-
+        
         void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardTypes eclipseCardType)
         {
             _eclipseCardType = eclipseCardType;

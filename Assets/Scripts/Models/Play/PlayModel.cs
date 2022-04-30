@@ -5,6 +5,7 @@ using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
 using Solcery.Models.Play.DragDrop.OnDrop;
 using Solcery.Models.Play.DragDrop.Parameters;
+using Solcery.Models.Play.EclipseCard;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -52,7 +53,9 @@ namespace Solcery.Models.Play
             // TODO tooltip
             _systems.Add(SystemOnTooltipHide.Create());
             _systems.Add(SystemOnTooltipShow.Create());
-            _systems.Add(SystemTooltipUpdate.Create());
+            
+            // TODO eclipse card
+            _systems.Add(SystemOnEclipseCardFull.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
