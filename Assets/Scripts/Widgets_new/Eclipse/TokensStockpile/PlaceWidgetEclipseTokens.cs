@@ -177,20 +177,38 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             // todo
         }
         
-        // переписать на нормальное дуление
         private void RemoveTokens(EcsWorld world, int[] entityIds)
         {
-            foreach (var token in _tokensByType)
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var keys = _tokens.Keys.ToList();
+            
+            foreach (var entityId in entityIds)
             {
-                Game.ListTokensInContainerWidgetPool.Push(token.Value);
+                var objectId = objectIdPool.Get(entityId).Id;
+                keys.Remove(objectId);
+            }
+           
+            foreach (var key in keys)
+            {
+                var eid = _tokens[key].AttachEntityId;
+                if (eid >= 0)
+                {
+                    world.DelEntity(eid);
+                }
+
+                _tokens[key].UpdateAttachEntityId();
+                Game.TokenInContainerWidgetPool.Push(_tokens[key]);
+                _tokens.Remove(key);
             }
             
-            _tokensByType.Clear();
-            foreach (var token in _tokens)
+            foreach (var tokensList in _tokensByType)
             {
-                Game.TokenInContainerWidgetPool.Push(token.Value);
+                tokensList.Value.ClearCounter();
+                if (tokensList.Value.Layout.Content.childCount == 0)
+                {
+                    Game.ListTokensInContainerWidgetPool.Push(tokensList.Value);
+                }
             }
-            _tokens.Clear();
         }
         
         protected override void DestroyImpl()
@@ -210,11 +228,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             _tokens = null;
         }
         
-        void AttachDragAndDrop(EcsWorld world, int entityId, int objectId, ITokenInContainerWidget eclipseCard)
+        void AttachDragAndDrop(EcsWorld world, int entityId, int objectId, ITokenInContainerWidget eclipseToken)
         {
             var eid = world.NewEntity();
             world.GetPool<ComponentDragDropTag>().Add(eid);
-            world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+            world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseToken;
             world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId =
                 Layout.LinkedEntityId;
             world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType =
@@ -222,7 +240,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
                     : EclipseCardTypes.None;
             world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
-            eclipseCard.UpdateAttachEntityId(eid);        
+            eclipseToken.UpdateAttachEntityId(eid);        
         }
         
         #region IApplyDropWidget
