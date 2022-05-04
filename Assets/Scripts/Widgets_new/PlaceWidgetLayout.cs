@@ -14,7 +14,6 @@ namespace Solcery.Widgets_new
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
-        [SerializeField] private Image fill;
         [SerializeField] protected CanvasGroup canvasGroup;
         [SerializeField] private TextMeshProUGUI caption;
         [SerializeField] private GameObject borders;
@@ -23,15 +22,7 @@ namespace Solcery.Widgets_new
         private int _orderZ;
         private int _linkedEntityId;
         private PlaceWidget _placeWidget;
-
-        public void Awake()
-        {
-            if (background != null)
-            {
-                background.gameObject.SetActive(false);
-            }
-        }
-
+        
         public void UpdatePlaceWidget(PlaceWidget placeWidget)
         {
             _placeWidget = placeWidget;
@@ -78,18 +69,18 @@ namespace Solcery.Widgets_new
             {
                 if (ColorUtility.TryParseHtmlString(fillColor, out var bgColor))
                 {
-                    if (fill != null)
+                    if (background != null)
                     {
-                        fill.gameObject.SetActive(true);
-                        fill.color = bgColor;
+                        background.gameObject.SetActive(true);
+                        background.color = bgColor;
                         return;
                     }
                 }
             }
 
-            if (fill != null)
+            if (background != null)
             {
-                fill.gameObject.SetActive(false);
+                background.gameObject.SetActive(false);
             }
         }
 
