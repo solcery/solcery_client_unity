@@ -1,36 +1,32 @@
 using System.Collections.Generic;
+using Solcery.Services.Events;
+using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Tokens
 {
-    public class TokenInContainerWidgetLayout : MonoBehaviour
+    public class TokenInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
+        [HideInInspector]
+        public int EntityId;
+        public PlaceWidget ParentPlaceWidget;
+        
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
         private Image image;
         [SerializeField]
-        private TextMeshProUGUI count;
-        [SerializeField]
         private List<Graphic> raycastObjects;
         
         private Sprite _sprite;
-        
-        [HideInInspector]
-        public int EntityId;
-        
-        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new();
+        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
         public RectTransform RectTransform => rectTransform;
         public Image Icon => image;
-
-        public void UpdateCount(int value)
-        {
-            count.text = value.ToString();
-        }
-
+        
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();
@@ -40,7 +36,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
             image.sprite = _sprite;
         }
         
-        public void UpdateParent(Transform parent)
+        public void UpdateParent(Transform parent, bool isDragDrop = false)
         {
             rectTransform.SetParent(parent, false);
         }
@@ -79,6 +75,19 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
                 Destroy(_sprite);
                 _sprite = null;
             }
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            ParentPlaceWidget = transform.parent.GetComponentInParent<PlaceWidgetLayout>().PlaceWidget;
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
         }
     }
 }

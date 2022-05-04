@@ -48,6 +48,7 @@ namespace Solcery.Games
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
         IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
+        IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
         TooltipController IGame.TooltipController => _tooltipController;
@@ -74,6 +75,7 @@ namespace Solcery.Games
         private IPlaceWidgetFactory _placeWidgetFactory;
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
+        private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private IServiceRenderWidget _serviceRenderWidget;
         private JObject _gameContentJson;
@@ -126,6 +128,8 @@ namespace Solcery.Games
                 "ui/ui_card", CardInContainerWidget.Create);
             _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_token", TokenInContainerWidget.Create);
+            _listTokensInContainerWidgetPool = WidgetPool<IListTokensInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_eclipse_list_tokens", ListTokensInContainerWidget.Create);
             _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
         }

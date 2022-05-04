@@ -300,13 +300,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
             //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
-            if (dropWidget is not IEclipseCardInContainerWidget ew)
+            if (dropWidget is IEclipseCardInContainerWidget ew)
             {
-                return;
+                Layout.AddCard(ew);
+                _cards.Add(dropWidget.ObjectId, ew);
             }
-
-            Layout.AddCard(ew);
-            _cards.Add(dropWidget.ObjectId, ew);
         }
 
         #endregion

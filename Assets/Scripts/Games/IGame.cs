@@ -27,6 +27,7 @@ namespace Solcery.Games
         public IPlaceWidgetFactory PlaceWidgetFactory { get; }
         public IWidgetPool<ICardInContainerWidget> CardInContainerWidgetPool { get; }
         public IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }
+        IWidgetPool<IListTokensInContainerWidget> ListTokensInContainerWidgetPool { get; }
         public IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
         public JObject GameContent { get; }
         public JObject GameStatePopAndClear { get; }

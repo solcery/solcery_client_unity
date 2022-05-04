@@ -3,18 +3,22 @@ using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 {
-    public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>, IPlaceWidgetTokenCollection
+    public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
     {
+        private Dictionary<int, IListTokensInContainerWidget> _tokensByType;
         private Dictionary<int, ITokenInContainerWidget> _tokens;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
@@ -24,6 +28,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
         
         private PlaceWidgetEclipseTokens(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
+            _tokensByType = new Dictionary<int, IListTokensInContainerWidget>();
             _tokens = new Dictionary<int, ITokenInContainerWidget>();
             Layout.UpdateVisible(true);
         }
@@ -35,7 +40,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             {
                 return;
             }
-            
+
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var eclipseTokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
@@ -46,28 +51,73 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId))
                 {
                     var typeId = objectTypePool.Get(entityId).Type;
-                    if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+                    var objectId = objectIdPool.Get(entityId).Id;
+                    var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+
+                    if (!_tokensByType.ContainsKey(typeId))
                     {
-                        var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                        
-                        if (!_tokens.TryGetValue(typeId, out var tokenLayout))
-                        {
-                            if (Game.TokenInContainerWidgetPool.TryPop(out tokenLayout))
-                            {
-                                tokenLayout.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
-                                tokenLayout.UpdateParent(Layout.Content);
-                                _tokens.Add(typeId, tokenLayout);
-                            }
-                        }
-                        
-                        ProcessTokenAttributes(world, tokenLayout, attributes);
+                        AttachListTokens(typeId);
                     }
+
+                    if (!_tokens.TryGetValue(objectId, out var eclipseToken))
+                    {
+                        eclipseToken = AttachToken(world, entityId, objectId, typeId, cardTypes);
+                    }
+
+                    UpdateToken(world, eclipseToken, attributes);
                 }
             }
         }
 
-        private void ProcessTokenAttributes(EcsWorld world, ITokenInContainerWidget tokenLayout, Dictionary<string, IAttributeValue> attributes)
+        private void AttachListTokens(int typeId)
         {
+            if (Game.ListTokensInContainerWidgetPool.TryPop(out var listTokens))
+            {
+                listTokens.UpdateParent(Layout.Content);
+                listTokens.ClearCounter();
+                _tokensByType.Add(typeId, listTokens);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(Layout.Content);
+            }
+        }
+
+        private ITokenInContainerWidget AttachToken(EcsWorld world,
+            int entityId, 
+            int objectId,
+            int typeId,
+            Dictionary<int, JObject> cardTypes)
+        {
+            if (world.GetPool<ComponentEclipseTokenTag>().Has(entityId))
+            {
+                var objectTypePool = world.GetPool<ComponentObjectType>();
+                if (Game.TokenInContainerWidgetPool.TryPop(out var eclipseToken))
+                {
+                    if (objectTypePool.Has(entityId)
+                        && cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+                    {
+                        eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
+                    }
+                    
+                    if (_tokensByType.TryGetValue(typeId, out var tokenList))
+                    {
+                        tokenList.AddToken(eclipseToken);
+                        _tokens.Add(objectId, eclipseToken);
+                        AttachDragAndDrop(world, entityId, objectId, eclipseToken);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Can't attach token to list of token!");
+                    }
+                }
+
+                return eclipseToken;
+            }
+
+            return null;
+        }
+
+        private void UpdateToken(EcsWorld world, ITokenInContainerWidget eclipseToken, Dictionary<string, IAttributeValue> attributes)
+        {
+            eclipseToken.Active = true;
             if (attributes.TryGetValue("anim_token_fly", out var animTokenFlyAttribute) && animTokenFlyAttribute.Current > 0)
             {
                 var fromPlaceId = attributes.TryGetValue("anim_token_fly_from_place", out var fromPlaceAttribute) ? fromPlaceAttribute.Current : 0;
@@ -75,7 +125,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
                 if (WidgetExtensions.TryGetTokenFromPosition(world, fromPlaceId, formCardId, fromSlotId, out var from))
                 {
-                    TokenAnimFly(tokenLayout, from);
+                    TokenAnimFly(eclipseToken, from);
                 }
                 else
                 {
@@ -84,25 +134,22 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             }
             else
             {
-                TokenAnimFlyCompleted(tokenLayout);
+                TokenAnimFlyCompleted(eclipseToken);
             }
             
             if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
                 animDestroyAttribute.Current > 0)
             {
-                TokenAnimDestroy(tokenLayout);
+                TokenAnimDestroy(eclipseToken);
             }
         }
 
         public bool TryGetTokenPosition(EcsWorld world, int cardId, int slotId, out Vector3 position)
         {
-            if (world.TryGetCardTypeByCardId(cardId, out var type))
+            if (_tokens.TryGetValue(cardId, out var widget))
             {
-                if (_tokens.TryGetValue(type, out var widget))
-                {
-                    position = widget.Layout.RectTransform.position;
-                    return true;
-                }
+                position = widget.Layout.RectTransform.position;
+                return true;
             }
 
             position = Vector3.zero;
@@ -119,7 +166,10 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 
         private void TokenAnimFlyCompleted(ITokenInContainerWidget tokenLayout)
         {
-            tokenLayout.IncreaseCounter();
+            if (_tokensByType.TryGetValue(tokenLayout.TypeId, out var listTokens))
+            {
+                listTokens.IncreaseCounter();
+            }
         }
 
         private void TokenAnimDestroy(ITokenInContainerWidget tokenLayout)
@@ -127,31 +177,31 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             // todo
         }
         
+        // переписать на нормальное дуление
         private void RemoveTokens(EcsWorld world, int[] entityIds)
         {
+            foreach (var token in _tokensByType)
+            {
+                Game.ListTokensInContainerWidgetPool.Push(token.Value);
+            }
+            
+            _tokensByType.Clear();
             foreach (var token in _tokens)
             {
-                token.Value.ClearCounter();
+                Game.TokenInContainerWidgetPool.Push(token.Value);
             }
-            
-            var objectTypePool = world.GetPool<ComponentObjectType>();
-            var keys = _tokens.Keys.ToList();
-
-            foreach (var entityId in entityIds)
-            {
-                var typeId = objectTypePool.Get(entityId).Type;
-                keys.Remove(typeId);
-            }
-            
-            foreach (var key in keys)
-            {
-                Game.TokenInContainerWidgetPool.Push(_tokens[key]);
-                _tokens.Remove(key);
-            }
+            _tokens.Clear();
         }
         
         protected override void DestroyImpl()
         {
+            foreach (var tokensList in _tokensByType)
+            {
+                tokensList.Value.Destroy();
+            }
+            _tokensByType.Clear();
+            _tokensByType = null;
+            
             foreach (var tokenInContainerWidget in _tokens)
             {
                 tokenInContainerWidget.Value.Destroy();
@@ -159,5 +209,65 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             _tokens.Clear();
             _tokens = null;
         }
+        
+        void AttachDragAndDrop(EcsWorld world, int entityId, int objectId, ITokenInContainerWidget eclipseCard)
+        {
+            var eid = world.NewEntity();
+            world.GetPool<ComponentDragDropTag>().Add(eid);
+            world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+            world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId =
+                Layout.LinkedEntityId;
+            world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType =
+                world.GetPool<ComponentEclipseCardType>().Has(entityId)
+                    ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
+                    : EclipseCardTypes.None;
+            world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
+            eclipseCard.UpdateAttachEntityId(eid);        
+        }
+        
+        #region IApplyDropWidget
+        
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        {
+            if (dropWidget is ITokenInContainerWidget ew)
+            {
+                if (_tokensByType.TryGetValue(ew.TypeId, out var listTokens))
+                {
+                    listTokens.AddToken(ew);
+                    if (ew.Active)
+                    {
+                        listTokens.IncreaseCounter();
+                    }
+
+                    _tokens.Add(dropWidget.ObjectId, ew);
+                }
+                else
+                {
+                    Debug.LogWarning("Something wrong with tokens DD!");
+                }
+            }
+        }
+
+        #endregion
+        
+        #region IApplyDragWidget
+
+        void IApplyDragWidget.OnDragWidget(IDraggableWidget dragWidget)
+        {
+            if (dragWidget is ITokenInContainerWidget ew)
+            {
+                if (_tokensByType.TryGetValue(ew.TypeId, out var listTokens))
+                {
+                    listTokens.DecreaseCounter();
+                    _tokens.Remove(dragWidget.ObjectId);
+                }
+                else
+                {
+                    Debug.LogWarning("Something wrong with tokens DD!");
+                }
+            }
+        }
+
+        #endregion
     }
 }
