@@ -12,5 +12,13 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         {
             transform.SetParent(parent, false);
         }
+
+        public void UpdateCounter(int count)
+        {
+            var active = count > 0;
+            Content.gameObject.SetActive(active);
+            Counter.gameObject.SetActive(active);
+            Counter.text = count.ToString();
+        }
     }
 }

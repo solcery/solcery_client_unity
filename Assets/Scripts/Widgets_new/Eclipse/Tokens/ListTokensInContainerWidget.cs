@@ -32,17 +32,17 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         public void IncreaseCounter()
         {
-            _layout.Counter.text = (++_counter).ToString();
+            _layout.UpdateCounter(++_counter);
         }
 
         public void DecreaseCounter()
         {
-            _layout.Counter.text = (--_counter).ToString();
+            _layout.UpdateCounter(--_counter);
         }
         
         public void ClearCounter()
         {
-            _layout.Counter.text = (_counter = 0).ToString();
+            _layout.UpdateCounter(_counter = 0);
         }
 
         void IPoolingWidget.UpdateParent(Transform parent)
