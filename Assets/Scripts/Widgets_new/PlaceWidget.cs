@@ -87,8 +87,8 @@ namespace Solcery.Widgets_new
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
 
-                var backgroundColor = placeDataObject.TryGetValue("bgColor", out string bgColor) ? bgColor : null;
-                Layout.UpdateBackgroundColor(backgroundColor);
+                var fillColor = placeDataObject.TryGetValue("fill", out string fill) ? fill : null;
+                Layout.UpdateFillColor(fillColor);
 
                 Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
                 Layout.UpdateOutOfBorder(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
@@ -98,7 +98,7 @@ namespace Solcery.Widgets_new
                     var tooltipBehavior = Layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
                     tooltipBehavior.SetTooltipId(tooltipId);
                 }
-
+                
                 Layout.UpdateVisible(false);
                 Layout.UpdatePlaceWidget(this);
             }

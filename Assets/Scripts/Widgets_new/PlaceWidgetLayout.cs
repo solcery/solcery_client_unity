@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace Solcery.Widgets_new
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
+        [SerializeField] private Image fill;
         [SerializeField] protected CanvasGroup canvasGroup;
         [SerializeField] private TextMeshProUGUI caption;
         [SerializeField] private GameObject borders;
@@ -21,6 +23,14 @@ namespace Solcery.Widgets_new
         private int _orderZ;
         private int _linkedEntityId;
         private PlaceWidget _placeWidget;
+
+        public void Awake()
+        {
+            if (background != null)
+            {
+                background.gameObject.SetActive(false);
+            }
+        }
 
         public void UpdatePlaceWidget(PlaceWidget placeWidget)
         {
@@ -61,25 +71,25 @@ namespace Solcery.Widgets_new
         public virtual void UpdateAlpha(int alpha)
         {
         }
-
-        public void UpdateBackgroundColor(string backgroundColor)
+        
+        public void UpdateFillColor(string fillColor)
         {
-            if (backgroundColor != null)
+            if (fillColor != null)
             {
-                if (ColorUtility.TryParseHtmlString(backgroundColor, out var bgColor))
+                if (ColorUtility.TryParseHtmlString(fillColor, out var bgColor))
                 {
-                    if (background != null)
+                    if (fill != null)
                     {
-                        background.gameObject.SetActive(true);
-                        background.color = bgColor;
+                        fill.gameObject.SetActive(true);
+                        fill.color = bgColor;
                         return;
                     }
                 }
             }
 
-            if (background != null)
+            if (fill != null)
             {
-                background.gameObject.SetActive(false);
+                fill.gameObject.SetActive(false);
             }
         }
 
