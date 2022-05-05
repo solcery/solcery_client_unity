@@ -118,6 +118,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 AnimEclipseCardDestroy(eclipseCard);
             }
+            
+            var order = attributes.TryGetValue("order", out var orderAttribute) ? orderAttribute.Current : 0;
+            eclipseCard.UpdateSiblingIndex(order);
         }
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard)
