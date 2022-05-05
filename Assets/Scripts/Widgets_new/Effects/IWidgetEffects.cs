@@ -13,6 +13,11 @@ namespace Solcery.Widgets_new.Effects
             float time,
             Action onMoveComplete);
         
+        public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            float time,
+            Vector3 from,
+            Action onMoveComplete);
+        
         public void MoveToken(RectTransform rectTransform,
             Sprite sprite,
             Vector3 from,
@@ -23,6 +28,7 @@ namespace Solcery.Widgets_new.Effects
             Sprite sprite,
             float time,
             Action onMoveComplete);
+
         void Destroy();
     }
 }

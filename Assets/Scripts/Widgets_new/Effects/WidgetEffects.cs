@@ -66,6 +66,37 @@ namespace Solcery.Widgets_new.Effects
                 .Play();
         }
 
+        public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            float time,
+            Vector3 from,
+            Action onMoveComplete)
+        {
+            var to = eclipseCard.Layout.RectTransform.position;
+            var effect = Object.Instantiate(eclipseCard.Layout, _effectRoot.transform, false)
+                .GetComponent<EclipseCardInContainerWidgetLayout>();
+            effect.RectTransform.anchorMin = new Vector2(.5f, .5f);
+            effect.RectTransform.anchorMax = new Vector2(.5f, .5f);
+            effect.RectTransform.position = from;
+            effect.RectTransform.sizeDelta = eclipseCard.Layout.RectTransform.rect.size;
+            effect.SetActive(true);
+            
+            DOTween.Sequence()
+                .Append(effect.RectTransform.DOMove(to, time))
+                .AppendCallback(() =>
+                {
+                    Object.Destroy(effect.gameObject);
+                    onMoveComplete?.Invoke();
+                })
+                .Play();
+            
+            
+            DOTween.Sequence(effect.RectTransform.DOMove(to, time).OnComplete(() =>
+            {
+                Object.Destroy(effect.gameObject);
+                onMoveComplete?.Invoke();
+            }).SetEase(Ease.Linear)).Play();
+        }
+
         public void DestroyEclipseCard(IEclipseCardInContainerWidget eclipseCard,
             IWidgetRenderData renderData,
             float time,

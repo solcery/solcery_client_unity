@@ -13,8 +13,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 {
     public interface IEclipseCardInContainerWidget : IPoolingWidget, IDraggableWidget, IEntityId
     {
+        int EntityId { get; }
         EclipseCardInContainerWidgetLayout Layout { get; }
-        void UpdateFromCardTypeData(int objectId, JObject data);
+        void UpdateFromCardTypeData(int entityId, int objectId, JObject data);
         void SetEclipseCardType(EclipseCardTypes eclipseCardType);
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);

@@ -15,13 +15,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
     public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
         [HideInInspector]
-        public int EntityId;
+        public int AttachEntityId;
         public PlaceWidget ParentPlaceWidget;
         
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
         private RectTransform frontTransform;
+        [SerializeField]
+        private RectTransform backTransform;
         [SerializeField]
         private EclipseCardEffectLayout effectLayout;
         [SerializeField]
@@ -50,6 +52,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMin;
         public RectTransform RectTransform => rectTransform;
         public RectTransform FrontTransform => frontTransform;
+        public RectTransform BackTransform => backTransform;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
 
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
@@ -182,7 +185,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(AttachEntityId, position, eventData));
         }
         
         private void OnOnPointerRightButtonClick()

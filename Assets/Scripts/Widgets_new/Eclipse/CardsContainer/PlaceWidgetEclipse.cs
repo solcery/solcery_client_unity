@@ -13,6 +13,7 @@ using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
@@ -72,7 +73,32 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 }
             }
 
+            
             AttachTokensForCard(world, cardTypes);
+            UpdateCardsAnimation(world);
+        }
+
+        private void UpdateCardsAnimation(EcsWorld world)
+        {
+            Layout.RebuildScroll();
+            foreach (var card in _cards.Values)
+            {
+                var attributes = world.GetPool<ComponentObjectAttributes>().Get(card.EntityId).Attributes;
+
+                if (attributes.TryGetValue("anim_card_fly", out var animTokenFlyAttribute) &&
+                    animTokenFlyAttribute.Current > 0)
+                {
+                    var fromPlaceId = attributes.TryGetValue("anim_card_fly_from_place", out var fromPlaceAttribute)
+                        ? fromPlaceAttribute.Current
+                        : 0;
+                    var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
+                    card.Layout.SetActive(false);
+                    WidgetCanvas.GetEffects().MoveEclipseCard(card, 1f, from, () =>
+                    {
+                        card.Layout.SetActive(true);
+                    });
+                }
+            }
         }
 
         private void PrepareToken(EcsWorld world, int entityId)
@@ -147,7 +173,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     if (objectTypePool.Has(entityId)
                         && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                     {
-                        eclipseCard.UpdateFromCardTypeData(objectId, cardTypeDataObject);
+                        eclipseCard.UpdateFromCardTypeData(entityId, objectId, cardTypeDataObject);
                         eclipseCard.SetEclipseCardType(eclipseCartTypePool.Get(entityId).CardType);
                     }
                     

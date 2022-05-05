@@ -17,8 +17,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
         private EclipseCardTypes _eclipseCardType;
+        private int _entityId;
         private int _objectId;
 
+        int IEclipseCardInContainerWidget.EntityId => _entityId;
+        
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
             return new EclipseCardInContainerWidget(game, prefab, poolTransform);
@@ -30,8 +33,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
         }
 
-        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, JObject data)
         {
+            _entityId = entityId;
             _objectId = objectId;
             
             if (data.TryGetValue("name", out string name))
@@ -185,11 +189,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         #region Ecs support
 
-        int IEntityId.AttachEntityId => _layout.EntityId;
+        int IEntityId.AttachEntityId => _layout.AttachEntityId;
 
         void IEntityId.UpdateAttachEntityId(int entityId)
         {
-            _layout.EntityId = entityId;
+            _layout.AttachEntityId = entityId;
         }
 
         #endregion
