@@ -62,9 +62,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     if (!_tokens.TryGetValue(objectId, out var eclipseToken))
                     {
                         eclipseToken = AttachToken(world, entityId, objectId, typeId, cardTypes);
+                        AttachDragAndDrop(world, entityId, objectId, eclipseToken);
                     }
 
                     UpdateToken(world, eclipseToken, attributes);
+                    UpdateDragAndDrop(world, eclipseToken);
                 }
             }
         }
@@ -101,7 +103,6 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     {
                         tokenList.AddToken(eclipseToken);
                         _tokens.Add(objectId, eclipseToken);
-                        AttachDragAndDrop(world, entityId, objectId, eclipseToken);
                     }
                     else
                     {
@@ -227,7 +228,17 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             _tokens.Clear();
             _tokens = null;
         }
-        
+
+        // todo подумать как сделать получше
+        // функция, которая актуализирует SourcePlaceEntityId, т.к. при Drop этот параметр меняется на 
+        // id плейса, в который юзер пытается переместить токен, но токен нельзя переместить в пустой плейс
+        // и по факту он остается в текущем плейсе но с неверным SourcePlaceEntityId  
+        void UpdateDragAndDrop(EcsWorld world, ITokenInContainerWidget eclipseToken)
+        {
+            world.GetPool<ComponentDragDropSourcePlaceEntityId>().Get(eclipseToken.AttachEntityId).SourcePlaceEntityId =
+                Layout.LinkedEntityId;
+        }
+
         void AttachDragAndDrop(EcsWorld world, int entityId, int objectId, ITokenInContainerWidget eclipseToken)
         {
             var eid = world.NewEntity();
