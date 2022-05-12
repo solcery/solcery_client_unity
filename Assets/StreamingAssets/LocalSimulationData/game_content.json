@@ -892,29 +892,10 @@
                   {
                     "name": "else",
                     "value": {
-                      "name": "Action.Set variable",
+                      "name": "Action.Void",
                       "type": 0,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "var_name",
-                          "value": "game_defeat"
-                        },
-                        {
-                          "name": "value",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 1
-                              }
-                            ]
-                          }
-                        }
-                      ]
+                      "subtype": 0,
+                      "params": []
                     }
                   }
                 ]
@@ -17118,7 +17099,7 @@
         "id": 628
       },
       {
-        "name": "Fullscreen Msg - Player Phase",
+        "name": "Msg - Next Turn",
         "enabled": true,
         "description": "Next Turn",
         "id": 633
@@ -17153,6 +17134,89 @@
           ]
         },
         "id": 663
+      },
+      {
+        "name": "Test Game FINISHED",
+        "enabled": true,
+        "description": "Does AMAZING THINGS",
+        "action": {
+          "name": "Action.Set game attribute",
+          "type": 0,
+          "subtype": 9,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "finished"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 1
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 665
+      },
+      {
+        "name": "Play Again",
+        "enabled": true,
+        "action": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[162] ~002: Clear Place [Id]",
+                "type": 0,
+                "subtype": 10162,
+                "params": [
+                  {
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Value.[631] Place - Fullscreen Msg Area",
+                      "type": 2,
+                      "subtype": 10631,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.[314] Phase 0 - Init",
+                "type": 0,
+                "subtype": 10314,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 675
+      },
+      {
+        "name": "Msg - Victory",
+        "enabled": true,
+        "description": "YOU SURVIVED!",
+        "id": 676
+      },
+      {
+        "name": "Msg - Defeat",
+        "enabled": true,
+        "description": "GAME OVER",
+        "id": 677
       }
     ]
   },
@@ -17807,11 +17871,11 @@
         "visible": true,
         "x1": 1000,
         "x2": 9000,
-        "y1": 3000,
-        "y2": 7000,
+        "y1": 5000,
+        "y2": 9000,
         "layout": 3,
         "zOrder": 99,
-        "fill": "3c3c46bf",
+        "fill": "#3c3c46bf",
         "id": 629
       }
     ]
@@ -17919,7 +17983,7 @@
         "id": 437
       },
       {
-        "name": "MD - Msg - Player Phase ",
+        "name": "Msg - Player Phase ",
         "enabled": true,
         "cardType": 443,
         "place": 1,
@@ -17928,7 +17992,7 @@
         "id": 445
       },
       {
-        "name": "MD - Msg - Building Phase",
+        "name": "Msg - Building Phase",
         "enabled": true,
         "cardType": 546,
         "place": 1,
@@ -17964,6 +18028,51 @@
         "id": 454
       },
       {
+        "name": "MD - Fiery Fiend",
+        "enabled": true,
+        "cardType": 268,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 455
+      },
+      {
+        "name": "MD - Creature Snow Spider",
+        "enabled": true,
+        "cardType": 316,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 456
+      },
+      {
+        "name": "MD - Creature Paranoid Prospector",
+        "enabled": true,
+        "cardType": 267,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 457
+      },
+      {
+        "name": "MD - Creature Bossy Baneling",
+        "enabled": true,
+        "cardType": 261,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 458
+      },
+      {
+        "name": "MD - Creature Nosy Neigbor",
+        "enabled": true,
+        "cardType": 263,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 459
+      },
+      {
         "name": "Test button 4",
         "enabled": true,
         "cardType": 462,
@@ -17973,7 +18082,70 @@
         "id": 467
       },
       {
-        "name": "MD - Msg - Turn Number Text",
+        "name": "MD - Friendly Fishperson",
+        "enabled": true,
+        "cardType": 264,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 468
+      },
+      {
+        "name": "MD - Toucan Taskmaster",
+        "enabled": true,
+        "cardType": 270,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 469
+      },
+      {
+        "name": "MD - Creature Bewitched Bullfrog",
+        "enabled": true,
+        "cardType": 265,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 470
+      },
+      {
+        "name": "MD - Creature Killjoy Cultist",
+        "enabled": true,
+        "cardType": 266,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 471
+      },
+      {
+        "name": "MD - Creature Burly Bigfoot",
+        "enabled": true,
+        "cardType": 260,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 473
+      },
+      {
+        "name": "MD - Harrowing Harvester",
+        "enabled": true,
+        "cardType": 262,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 474
+      },
+      {
+        "name": "MD - Twisted Templar",
+        "enabled": true,
+        "cardType": 269,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 475
+      },
+      {
+        "name": "Msg - Turn Number Text",
         "enabled": true,
         "cardType": 481,
         "place": 1,
@@ -17982,7 +18154,7 @@
         "id": 485
       },
       {
-        "name": "MD - Msg - Turn Number Widget",
+        "name": "Msg - Turn Number Widget",
         "enabled": true,
         "cardType": 482,
         "place": 1,
@@ -17991,12 +18163,21 @@
         "id": 486
       },
       {
+        "name": "MD - Event - Harsh Winds",
+        "enabled": true,
+        "cardType": 241,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 490
+      },
+      {
         "name": "MD - Event - Cold Snap",
         "enabled": true,
         "cardType": 243,
         "place": 1,
-        "amount": 5,
-        "preset": "loogris layout",
+        "amount": 1,
+        "preset": "tech demo",
         "id": 491
       },
       {
@@ -18018,7 +18199,97 @@
         "id": 533
       },
       {
-        "name": "MD - Msg - Creature Phase",
+        "name": "MD - Event - Heat Wave",
+        "enabled": true,
+        "cardType": 245,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 571
+      },
+      {
+        "name": "MD - Event - Spoil & Rot",
+        "enabled": true,
+        "cardType": 246,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 572
+      },
+      {
+        "name": "MD - Event - Purple Comet",
+        "enabled": true,
+        "cardType": 247,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 573
+      },
+      {
+        "name": "MD - Event - Shared Suffering",
+        "enabled": true,
+        "cardType": 248,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 574
+      },
+      {
+        "name": "MD - Event - Extra Rations",
+        "enabled": true,
+        "cardType": 249,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 583
+      },
+      {
+        "name": "MD - Event - Spreading Fear",
+        "enabled": true,
+        "cardType": 252,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 584
+      },
+      {
+        "name": "MD - Event - Fruits of Laziness",
+        "enabled": true,
+        "cardType": 254,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 585
+      },
+      {
+        "name": "MD - Event - Ill-timed Feast",
+        "enabled": true,
+        "cardType": 253,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 586
+      },
+      {
+        "name": "MD - Event - Ritual Sacrifice",
+        "enabled": true,
+        "cardType": 255,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 589
+      },
+      {
+        "name": "MD - Event - Frenzied Hustle",
+        "enabled": true,
+        "cardType": 256,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 590
+      },
+      {
+        "name": "Msg - Creature Phase",
         "enabled": true,
         "cardType": 607,
         "place": 1,
@@ -18027,7 +18298,7 @@
         "id": 621
       },
       {
-        "name": "MD - Msg - Event Phase",
+        "name": "Msg - Event Phase",
         "enabled": true,
         "cardType": 608,
         "place": 1,
@@ -18036,7 +18307,7 @@
         "id": 622
       },
       {
-        "name": "MD - Msg - Eclipse Phase",
+        "name": "Msg - Eclipse Phase",
         "enabled": true,
         "cardType": 618,
         "place": 1,
@@ -18045,7 +18316,7 @@
         "id": 623
       },
       {
-        "name": "MD - Msg - Draw Phase",
+        "name": "Msg - Draw Phase",
         "enabled": true,
         "cardType": 609,
         "place": 1,
@@ -18054,13 +18325,67 @@
         "id": 624
       },
       {
-        "name": "MD - Fullscreen Msg - Player Phase",
+        "name": "Msg - Next Turn",
         "enabled": true,
         "cardType": 633,
         "place": 1,
         "amount": 1,
         "preset": "core",
         "id": 634
+      },
+      {
+        "name": "MD - Building Watchtower",
+        "enabled": true,
+        "cardType": 271,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 635
+      },
+      {
+        "name": "MD - Building Barracks",
+        "enabled": true,
+        "cardType": 272,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 636
+      },
+      {
+        "name": "MD - Building Gold Mine",
+        "enabled": true,
+        "cardType": 273,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 638
+      },
+      {
+        "name": "MD - Building Kobold Tunnel",
+        "enabled": true,
+        "cardType": 274,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 639
+      },
+      {
+        "name": "MD - Building Decrepit Mill",
+        "enabled": true,
+        "cardType": 275,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 640
+      },
+      {
+        "name": "MD - Building Baker’s House",
+        "enabled": true,
+        "cardType": 276,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 641
       },
       {
         "name": "Tokens in Storage -- Food",
@@ -18088,6 +18413,33 @@
         "amount": 5,
         "preset": "loogris layout",
         "id": 656
+      },
+      {
+        "name": "Msg - Victory",
+        "enabled": true,
+        "cardType": 676,
+        "place": 1,
+        "amount": 1,
+        "preset": "core",
+        "id": 685
+      },
+      {
+        "name": "Msg - Defeat",
+        "enabled": true,
+        "cardType": 677,
+        "place": 1,
+        "amount": 1,
+        "preset": "core",
+        "id": 686
+      },
+      {
+        "name": "Button - Play Again",
+        "enabled": true,
+        "cardType": 675,
+        "place": 1,
+        "amount": 1,
+        "preset": "core",
+        "id": 687
       }
     ]
   },
@@ -18460,6 +18812,13 @@
         "code": "input_lock",
         "admin_descr": "Used for blocking player input when it's not player turn",
         "id": 216
+      },
+      {
+        "name": "Fast mode",
+        "enabled": true,
+        "code": "fast_mode",
+        "admin_descr": "Bool. Shortens pause times when > 0",
+        "id": 673
       }
     ]
   },
@@ -18470,7 +18829,8 @@
         "name": "Teuzet",
         "enabled": true,
         "pubkey": "9kXLhvDcWc4wzuapQpWkKVnJ8wKVhEDomwoFxkn58nfX",
-        "layoutPreset": "some layout",
+        "brickPalette": {},
+        "readonlyBricks": true,
         "layoutPresets": [
           "some layout",
           "some second layout"
@@ -18488,7 +18848,8 @@
           "test buildings",
           "test eclipse",
           "test events",
-          "test buttons"
+          "test buttons",
+          "tech demo"
         ],
         "id": 577
       },
@@ -18496,11 +18857,13 @@
         "name": "Loogris",
         "enabled": true,
         "pubkey": "CmxScbqG1imzdkmehMD1VoHait6oYx7o6CLtaHbDkdG1",
+        "brickPalette": {},
         "layoutPresets": [
           "loogris layout",
           "core",
           "test creatures",
-          "test buildings"
+          "test buildings",
+          "test buttons"
         ],
         "id": 578
       },
@@ -19689,7 +20052,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -19786,7 +20149,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -19817,47 +20180,19 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Action.[582] Apply to Event Tracker (with Pause)",
+                      "name": "Action.Two actions",
                       "type": 0,
-                      "subtype": 10582,
+                      "subtype": 1,
                       "params": [
                         {
-                          "name": "Action",
+                          "name": "action1",
                           "value": {
-                            "name": "Action.Two actions",
+                            "name": "Action.[606] ~Apply to Event Tracker (by Order, with Pause)",
                             "type": 0,
-                            "subtype": 1,
+                            "subtype": 10606,
                             "params": [
                               {
-                                "name": "action1",
-                                "value": {
-                                  "name": "Action.Set attribute",
-                                  "type": 0,
-                                  "subtype": 7,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "anim_highlight"
-                                    },
-                                    {
-                                      "name": "value",
-                                      "value": {
-                                        "name": "Value.Constant",
-                                        "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 1
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "action2",
+                                "name": "Action",
                                 "value": {
                                   "name": "Action.Two actions",
                                   "type": 0,
@@ -19872,42 +20207,18 @@
                                         "params": [
                                           {
                                             "name": "attr_name",
-                                            "value": "duration"
+                                            "value": "anim_highlight"
                                           },
                                           {
                                             "name": "value",
                                             "value": {
-                                              "name": "Value.Subtraction",
+                                              "name": "Value.Constant",
                                               "type": 2,
-                                              "subtype": 6,
+                                              "subtype": 0,
                                               "params": [
                                                 {
-                                                  "name": "value1",
-                                                  "value": {
-                                                    "name": "Value.Attribute",
-                                                    "type": 2,
-                                                    "subtype": 2,
-                                                    "params": [
-                                                      {
-                                                        "name": "attr_name",
-                                                        "value": "duration"
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                {
-                                                  "name": "value2",
-                                                  "value": {
-                                                    "name": "Value.Constant",
-                                                    "type": 2,
-                                                    "subtype": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "value",
-                                                        "value": 1
-                                                      }
-                                                    ]
-                                                  }
+                                                  "name": "value",
+                                                  "value": 1
                                                 }
                                               ]
                                             }
@@ -19918,41 +20229,55 @@
                                     {
                                       "name": "action2",
                                       "value": {
-                                        "name": "Action.If-Then-Else",
+                                        "name": "Action.Two actions",
                                         "type": 0,
-                                        "subtype": 2,
+                                        "subtype": 1,
                                         "params": [
                                           {
-                                            "name": "if",
+                                            "name": "action1",
                                             "value": {
-                                              "name": "Condition.[151] #004:Lesser or equal",
-                                              "type": 1,
-                                              "subtype": 10151,
+                                              "name": "Action.Set attribute",
+                                              "type": 0,
+                                              "subtype": 7,
                                               "params": [
                                                 {
-                                                  "name": "Value 1",
-                                                  "value": {
-                                                    "name": "Value.Attribute",
-                                                    "type": 2,
-                                                    "subtype": 2,
-                                                    "params": [
-                                                      {
-                                                        "name": "attr_name",
-                                                        "value": "duration"
-                                                      }
-                                                    ]
-                                                  }
+                                                  "name": "attr_name",
+                                                  "value": "duration"
                                                 },
                                                 {
-                                                  "name": "Value 2",
+                                                  "name": "value",
                                                   "value": {
-                                                    "name": "Value.Constant",
+                                                    "name": "Value.Subtraction",
                                                     "type": 2,
-                                                    "subtype": 0,
+                                                    "subtype": 6,
                                                     "params": [
                                                       {
-                                                        "name": "value",
-                                                        "value": 0
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Value.Attribute",
+                                                          "type": 2,
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "duration"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 1
+                                                            }
+                                                          ]
+                                                        }
                                                       }
                                                     ]
                                                   }
@@ -19961,43 +20286,100 @@
                                             }
                                           },
                                           {
-                                            "name": "then",
+                                            "name": "action2",
                                             "value": {
-                                              "name": "Action.Two actions",
+                                              "name": "Action.If-Then-Else",
                                               "type": 0,
-                                              "subtype": 1,
+                                              "subtype": 2,
                                               "params": [
                                                 {
-                                                  "name": "action1",
+                                                  "name": "if",
                                                   "value": {
-                                                    "name": "Action.If-Then-Else",
-                                                    "type": 0,
-                                                    "subtype": 2,
+                                                    "name": "Condition.[151] #004:Lesser or equal",
+                                                    "type": 1,
+                                                    "subtype": 10151,
                                                     "params": [
                                                       {
-                                                        "name": "if",
+                                                        "name": "Value 1",
                                                         "value": {
-                                                          "name": "Condition.[188] ~003:Is an Event",
-                                                          "type": 1,
-                                                          "subtype": 10188,
-                                                          "params": []
+                                                          "name": "Value.Attribute",
+                                                          "type": 2,
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "duration"
+                                                            }
+                                                          ]
                                                         }
                                                       },
                                                       {
-                                                        "name": "then",
+                                                        "name": "Value 2",
                                                         "value": {
-                                                          "name": "Action.[346] Trigger event 'Activation' + build context",
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 0
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "then",
+                                                  "value": {
+                                                    "name": "Action.Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "Action.If-Then-Else",
                                                           "type": 0,
-                                                          "subtype": 10346,
-                                                          "params": []
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "if",
+                                                              "value": {
+                                                                "name": "Condition.[188] ~003:Is an Event",
+                                                                "type": 1,
+                                                                "subtype": 10188,
+                                                                "params": []
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "then",
+                                                              "value": {
+                                                                "name": "Action.[346] Trigger event 'Activation' + build context",
+                                                                "type": 0,
+                                                                "subtype": 10346,
+                                                                "params": []
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "else",
+                                                              "value": {
+                                                                "name": "Action.[499] Trigger event 'Death' + build context",
+                                                                "type": 0,
+                                                                "subtype": 10499,
+                                                                "params": []
+                                                              }
+                                                            }
+                                                          ]
                                                         }
                                                       },
                                                       {
-                                                        "name": "else",
+                                                        "name": "action2",
                                                         "value": {
-                                                          "name": "Action.[499] Trigger event 'Death' + build context",
+                                                          "name": "Action.[580] Disable Highlight on Card",
                                                           "type": 0,
-                                                          "subtype": 10499,
+                                                          "subtype": 10580,
                                                           "params": []
                                                         }
                                                       }
@@ -20005,7 +20387,7 @@
                                                   }
                                                 },
                                                 {
-                                                  "name": "action2",
+                                                  "name": "else",
                                                   "value": {
                                                     "name": "Action.[580] Disable Highlight on Card",
                                                     "type": 0,
@@ -20015,31 +20397,31 @@
                                                 }
                                               ]
                                             }
-                                          },
-                                          {
-                                            "name": "else",
-                                            "value": {
-                                              "name": "Action.[580] Disable Highlight on Card",
-                                              "type": 0,
-                                              "subtype": 10580,
-                                              "params": []
-                                            }
                                           }
                                         ]
                                       }
                                     }
                                   ]
                                 }
+                              },
+                              {
+                                "name": "Pause length",
+                                "value": {
+                                  "name": "Value.[317] ~Pause: Phase Start",
+                                  "type": 2,
+                                  "subtype": 10317,
+                                  "params": []
+                                }
                               }
                             ]
                           }
                         },
                         {
-                          "name": "Pause length",
+                          "name": "action2",
                           "value": {
-                            "name": "Value.[604] ~Pause: Event Action Step",
-                            "type": 2,
-                            "subtype": 10604,
+                            "name": "Action.Void",
+                            "type": 0,
+                            "subtype": 0,
                             "params": []
                           }
                         }
@@ -20347,7 +20729,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -23199,7 +23581,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -25557,48 +25939,234 @@
                                                       {
                                                         "name": "Action",
                                                         "value": {
-                                                          "name": "Action.Iterator",
+                                                          "name": "Action.Loop",
                                                           "type": 0,
-                                                          "subtype": 5,
+                                                          "subtype": 3,
                                                           "params": [
                                                             {
-                                                              "name": "condition",
+                                                              "name": "counter_var",
+                                                              "value": "slot_counter"
+                                                            },
+                                                            {
+                                                              "name": "iterations",
                                                               "value": {
-                                                                "name": "Condition.And",
-                                                                "type": 1,
-                                                                "subtype": 7,
+                                                                "name": "Value.Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
                                                                 "params": [
                                                                   {
-                                                                    "name": "cond1",
+                                                                    "name": "value",
+                                                                    "value": 4
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "action",
+                                                              "value": {
+                                                                "name": "Action.Iterator",
+                                                                "type": 0,
+                                                                "subtype": 5,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "condition",
                                                                     "value": {
-                                                                      "name": "Condition.Equal",
+                                                                      "name": "Condition.And",
                                                                       "type": 1,
-                                                                      "subtype": 2,
+                                                                      "subtype": 7,
                                                                       "params": [
                                                                         {
-                                                                          "name": "value1",
+                                                                          "name": "cond1",
                                                                           "value": {
-                                                                            "name": "Value.Attribute",
-                                                                            "type": 2,
-                                                                            "subtype": 2,
+                                                                            "name": "Condition.And",
+                                                                            "type": 1,
+                                                                            "subtype": 7,
                                                                             "params": [
                                                                               {
-                                                                                "name": "attr_name",
-                                                                                "value": "linked_card_id"
+                                                                                "name": "cond1",
+                                                                                "value": {
+                                                                                  "name": "Condition.Equal",
+                                                                                  "type": 1,
+                                                                                  "subtype": 2,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "value1",
+                                                                                      "value": {
+                                                                                        "name": "Value.Attribute",
+                                                                                        "type": 2,
+                                                                                        "subtype": 2,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "attr_name",
+                                                                                            "value": "linked_card_id"
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "value2",
+                                                                                      "value": {
+                                                                                        "name": "Value.Variable",
+                                                                                        "type": 2,
+                                                                                        "subtype": 1,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "var_name",
+                                                                                            "value": "linked_card_id"
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "name": "cond2",
+                                                                                "value": {
+                                                                                  "name": "Condition.Greater than",
+                                                                                  "type": 1,
+                                                                                  "subtype": 3,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "value1",
+                                                                                      "value": {
+                                                                                        "name": "Value.Attribute",
+                                                                                        "type": 2,
+                                                                                        "subtype": 2,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "attr_name",
+                                                                                            "value": "reactive"
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "value2",
+                                                                                      "value": {
+                                                                                        "name": "Value.Constant",
+                                                                                        "type": 2,
+                                                                                        "subtype": 0,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "value",
+                                                                                            "value": 0
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
                                                                               }
                                                                             ]
                                                                           }
                                                                         },
                                                                         {
-                                                                          "name": "value2",
+                                                                          "name": "cond2",
                                                                           "value": {
-                                                                            "name": "Value.Variable",
-                                                                            "type": 2,
-                                                                            "subtype": 1,
+                                                                            "name": "Condition.And",
+                                                                            "type": 1,
+                                                                            "subtype": 7,
                                                                             "params": [
                                                                               {
-                                                                                "name": "var_name",
-                                                                                "value": "linked_card_id"
+                                                                                "name": "cond1",
+                                                                                "value": {
+                                                                                  "name": "Condition.Equal",
+                                                                                  "type": 1,
+                                                                                  "subtype": 2,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "value1",
+                                                                                      "value": {
+                                                                                        "name": "Value.Attribute",
+                                                                                        "type": 2,
+                                                                                        "subtype": 2,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "attr_name",
+                                                                                            "value": "slot"
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "value2",
+                                                                                      "value": {
+                                                                                        "name": "Value.Addition",
+                                                                                        "type": 2,
+                                                                                        "subtype": 5,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "value1",
+                                                                                            "value": {
+                                                                                              "name": "Value.Variable",
+                                                                                              "type": 2,
+                                                                                              "subtype": 1,
+                                                                                              "params": [
+                                                                                                {
+                                                                                                  "name": "var_name",
+                                                                                                  "value": "slot_counter"
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            "name": "value2",
+                                                                                            "value": {
+                                                                                              "name": "Value.Constant",
+                                                                                              "type": 2,
+                                                                                              "subtype": 0,
+                                                                                              "params": [
+                                                                                                {
+                                                                                                  "name": "value",
+                                                                                                  "value": 1
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "name": "cond2",
+                                                                                "value": {
+                                                                                  "name": "Condition.[151] #004:Lesser or equal",
+                                                                                  "type": 1,
+                                                                                  "subtype": 10151,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "Value 1",
+                                                                                      "value": {
+                                                                                        "name": "Value.Variable",
+                                                                                        "type": 2,
+                                                                                        "subtype": 1,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "var_name",
+                                                                                            "value": "to_destroy"
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "Value 2",
+                                                                                      "value": {
+                                                                                        "name": "Value.Constant",
+                                                                                        "type": 2,
+                                                                                        "subtype": 0,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "value",
+                                                                                            "value": 0
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
                                                                               }
                                                                             ]
                                                                           }
@@ -25607,65 +26175,27 @@
                                                                     }
                                                                   },
                                                                   {
-                                                                    "name": "cond2",
+                                                                    "name": "action",
                                                                     "value": {
-                                                                      "name": "Condition.Greater than",
-                                                                      "type": 1,
-                                                                      "subtype": 3,
+                                                                      "name": "Action.[498] Trigger event 'Token Added' + build context",
+                                                                      "type": 0,
+                                                                      "subtype": 10498,
+                                                                      "params": []
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "name": "limit",
+                                                                    "value": {
+                                                                      "name": "Value.Constant",
+                                                                      "type": 2,
+                                                                      "subtype": 0,
                                                                       "params": [
                                                                         {
-                                                                          "name": "value1",
-                                                                          "value": {
-                                                                            "name": "Value.Attribute",
-                                                                            "type": 2,
-                                                                            "subtype": 2,
-                                                                            "params": [
-                                                                              {
-                                                                                "name": "attr_name",
-                                                                                "value": "reactive"
-                                                                              }
-                                                                            ]
-                                                                          }
-                                                                        },
-                                                                        {
-                                                                          "name": "value2",
-                                                                          "value": {
-                                                                            "name": "Value.Constant",
-                                                                            "type": 2,
-                                                                            "subtype": 0,
-                                                                            "params": [
-                                                                              {
-                                                                                "name": "value",
-                                                                                "value": 0
-                                                                              }
-                                                                            ]
-                                                                          }
+                                                                          "name": "value",
+                                                                          "value": 1
                                                                         }
                                                                       ]
                                                                     }
-                                                                  }
-                                                                ]
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "action",
-                                                              "value": {
-                                                                "name": "Action.[498] Trigger event 'Token Added' + build context",
-                                                                "type": 0,
-                                                                "subtype": 10498,
-                                                                "params": []
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "limit",
-                                                              "value": {
-                                                                "name": "Value.Variable",
-                                                                "type": 2,
-                                                                "subtype": 1,
-                                                                "params": [
-                                                                  {
-                                                                    "name": "var_name",
-                                                                    "value": "reactive_tokens"
                                                                   }
                                                                 ]
                                                               }
@@ -25975,7 +26505,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -27085,7 +27615,7 @@
                   {
                     "name": "Condition",
                     "value": {
-                      "name": "Condition.[550] Allow Pause in Mech",
+                      "name": "Condition.[550] Pause - Fast Mode Enabled",
                       "type": 1,
                       "subtype": 10550,
                       "params": []
@@ -27170,7 +27700,7 @@
                               {
                                 "name": "Condition",
                                 "value": {
-                                  "name": "Condition.[550] Allow Pause in Mech",
+                                  "name": "Condition.[550] Pause - Fast Mode Enabled",
                                   "type": 1,
                                   "subtype": 10550,
                                   "params": []
@@ -28368,7 +28898,7 @@
                                     {
                                       "name": "Condition",
                                       "value": {
-                                        "name": "Condition.[550] Allow Pause in Mech",
+                                        "name": "Condition.[550] Pause - Fast Mode Enabled",
                                         "type": 1,
                                         "subtype": 10550,
                                         "params": []
@@ -28437,7 +28967,7 @@
                                           {
                                             "name": "Condition",
                                             "value": {
-                                              "name": "Condition.[550] Allow Pause in Mech",
+                                              "name": "Condition.[550] Pause - Fast Mode Enabled",
                                               "type": 1,
                                               "subtype": 10550,
                                               "params": []
@@ -28506,7 +29036,7 @@
                                                 {
                                                   "name": "Condition",
                                                   "value": {
-                                                    "name": "Condition.[550] Allow Pause in Mech",
+                                                    "name": "Condition.[550] Pause - Fast Mode Enabled",
                                                     "type": 1,
                                                     "subtype": 10550,
                                                     "params": []
@@ -28575,7 +29105,7 @@
                                                       {
                                                         "name": "Condition",
                                                         "value": {
-                                                          "name": "Condition.[550] Allow Pause in Mech",
+                                                          "name": "Condition.[550] Pause - Fast Mode Enabled",
                                                           "type": 1,
                                                           "subtype": 10550,
                                                           "params": []
@@ -30574,7 +31104,7 @@
                   {
                     "name": "Condition",
                     "value": {
-                      "name": "Condition.[550] Allow Pause in Mech",
+                      "name": "Condition.[550] Pause - Fast Mode Enabled",
                       "type": 1,
                       "subtype": 10550,
                       "params": []
@@ -30705,7 +31235,7 @@
                                     {
                                       "name": "Condition",
                                       "value": {
-                                        "name": "Condition.[550] Allow Pause in Mech",
+                                        "name": "Condition.[550] Pause - Fast Mode Enabled",
                                         "type": 1,
                                         "subtype": 10550,
                                         "params": []
@@ -30769,7 +31299,7 @@
                                           {
                                             "name": "Condition",
                                             "value": {
-                                              "name": "Condition.[550] Allow Pause in Mech",
+                                              "name": "Condition.[550] Pause - Fast Mode Enabled",
                                               "type": 1,
                                               "subtype": 10550,
                                               "params": []
@@ -30833,7 +31363,7 @@
                                                 {
                                                   "name": "Condition",
                                                   "value": {
-                                                    "name": "Condition.[550] Allow Pause in Mech",
+                                                    "name": "Condition.[550] Pause - Fast Mode Enabled",
                                                     "type": 1,
                                                     "subtype": 10550,
                                                     "params": []
@@ -30897,7 +31427,7 @@
                                                       {
                                                         "name": "Condition",
                                                         "value": {
-                                                          "name": "Condition.[550] Allow Pause in Mech",
+                                                          "name": "Condition.[550] Pause - Fast Mode Enabled",
                                                           "type": 1,
                                                           "subtype": 10550,
                                                           "params": []
@@ -30961,7 +31491,7 @@
                                                             {
                                                               "name": "Condition",
                                                               "value": {
-                                                                "name": "Condition.[550] Allow Pause in Mech",
+                                                                "name": "Condition.[550] Pause - Fast Mode Enabled",
                                                                 "type": 1,
                                                                 "subtype": 10550,
                                                                 "params": []
@@ -31148,7 +31678,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -31766,7 +32296,7 @@
                               {
                                 "name": "Condition",
                                 "value": {
-                                  "name": "Condition.[550] Allow Pause in Mech",
+                                  "name": "Condition.[550] Pause - Fast Mode Enabled",
                                   "type": 1,
                                   "subtype": 10550,
                                   "params": []
@@ -32031,7 +32561,7 @@
                                     {
                                       "name": "Condition",
                                       "value": {
-                                        "name": "Condition.[550] Allow Pause in Mech",
+                                        "name": "Condition.[550] Pause - Fast Mode Enabled",
                                         "type": 1,
                                         "subtype": 10550,
                                         "params": []
@@ -32327,7 +32857,7 @@
                               {
                                 "name": "Condition",
                                 "value": {
-                                  "name": "Condition.[550] Allow Pause in Mech",
+                                  "name": "Condition.[550] Pause - Fast Mode Enabled",
                                   "type": 1,
                                   "subtype": 10550,
                                   "params": []
@@ -32781,7 +33311,7 @@
                         {
                           "name": "Condition",
                           "value": {
-                            "name": "Condition.[550] Allow Pause in Mech",
+                            "name": "Condition.[550] Pause - Fast Mode Enabled",
                             "type": 1,
                             "subtype": 10550,
                             "params": []
@@ -33535,7 +34065,7 @@
                                     {
                                       "name": "Card Type Id",
                                       "value": {
-                                        "name": "Value.[632] TplId - Fullscreen Msg - Player Phase",
+                                        "name": "Value.[632] TplId - Msg - Next Turn",
                                         "type": 2,
                                         "subtype": 10632,
                                         "params": []
@@ -33599,13 +34129,23 @@
                               {
                                 "name": "duration",
                                 "value": {
-                                  "name": "Value.Constant",
+                                  "name": "Value.[664] ~Pause - Selective Time Coef",
                                   "type": 2,
-                                  "subtype": 0,
+                                  "subtype": 10664,
                                   "params": [
                                     {
-                                      "name": "value",
-                                      "value": 500
+                                      "name": "Pause time",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 1000
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
@@ -33801,7 +34341,7 @@
                               {
                                 "name": "Condition",
                                 "value": {
-                                  "name": "Condition.[550] Allow Pause in Mech",
+                                  "name": "Condition.[550] Pause - Fast Mode Enabled",
                                   "type": 1,
                                   "subtype": 10550,
                                   "params": []
@@ -34227,13 +34767,23 @@
                                     {
                                       "name": "duration",
                                       "value": {
-                                        "name": "Value.Constant",
+                                        "name": "Value.[664] ~Pause - Selective Time Coef",
                                         "type": 2,
-                                        "subtype": 0,
+                                        "subtype": 10664,
                                         "params": [
                                           {
-                                            "name": "value",
-                                            "value": 500
+                                            "name": "Pause time",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 1000
+                                                }
+                                              ]
+                                            }
                                           }
                                         ]
                                       }
@@ -34293,77 +34843,10 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.If-Then-Else",
+                "name": "Action.[674] Show Msg - End Game (by game_victory)",
                 "type": 0,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "if",
-                    "value": {
-                      "name": "Condition.Greater than",
-                      "type": 1,
-                      "subtype": 3,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Value.Variable",
-                            "type": 2,
-                            "subtype": 1,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "game_victory"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 0
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "then",
-                    "value": {
-                      "name": "Action.Console log",
-                      "type": 0,
-                      "subtype": 256,
-                      "params": [
-                        {
-                          "name": "message",
-                          "value": "msg_victory"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "else",
-                    "value": {
-                      "name": "Action.Console log",
-                      "type": 0,
-                      "subtype": 256,
-                      "params": [
-                        {
-                          "name": "message",
-                          "value": "msg_game_over"
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "subtype": 10674,
+                "params": []
               }
             },
             {
@@ -34428,13 +34911,36 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.Console log",
+                "name": "Action.Iterator",
                 "type": 0,
-                "subtype": 256,
+                "subtype": 5,
                 "params": [
                   {
-                    "name": "message",
-                    "value": "clear_all_attrs"
+                    "name": "condition",
+                    "value": {
+                      "name": "Condition.[148] #001:True",
+                      "type": 1,
+                      "subtype": 10148,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.[660] ~Reset all Attrs on Card",
+                      "type": 0,
+                      "subtype": 10660,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "limit",
+                    "value": {
+                      "name": "Value.[147] #Cards total",
+                      "type": 2,
+                      "subtype": 10147,
+                      "params": []
+                    }
                   }
                 ]
               }
@@ -34553,15 +35059,10 @@
                                     {
                                       "name": "Card Type Id",
                                       "value": {
-                                        "name": "Value.Constant",
+                                        "name": "Value.[680] TplId - Button - Play Again",
                                         "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 0
-                                          }
-                                        ]
+                                        "subtype": 10680,
+                                        "params": []
                                       }
                                     }
                                   ]
@@ -35179,7 +35680,7 @@
         "id": 657
       },
       {
-        "name": "Handle Gold Token On [Card Id]",
+        "name": "{TODELETE} Handle Gold Token On [Card Id]",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -35348,7 +35849,7 @@
         "id": 658
       },
       {
-        "name": "Handle Gold Token On [Card Id]",
+        "name": "{TODELETE} Handle Gold Token On [Card Id]",
         "enabled": true,
         "brick": {
           "name": "Action.Iterator",
@@ -35515,6 +36016,1079 @@
           ]
         },
         "id": 659
+      },
+      {
+        "name": "~Reset all Attrs on Card",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Set attribute",
+                "type": 0,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "place"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "number"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "type"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.Set attribute",
+                                  "type": 0,
+                                  "subtype": 7,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "linked_card_id"
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 0
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Action.Set attribute",
+                                        "type": 0,
+                                        "subtype": 7,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "slot"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 0
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.Two actions",
+                                        "type": 0,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "Action.Set attribute",
+                                              "type": 0,
+                                              "subtype": 7,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "token_slots"
+                                                },
+                                                {
+                                                  "name": "value",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 0
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Action.Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Action.Set attribute",
+                                                    "type": 0,
+                                                    "subtype": 7,
+                                                    "params": [
+                                                      {
+                                                        "name": "attr_name",
+                                                        "value": "duration"
+                                                      },
+                                                      {
+                                                        "name": "value",
+                                                        "value": {
+                                                          "name": "Value.Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 0
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Action.Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "Action.Set attribute",
+                                                          "type": 0,
+                                                          "subtype": 7,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "show_duration"
+                                                            },
+                                                            {
+                                                              "name": "value",
+                                                              "value": {
+                                                                "name": "Value.Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": 0
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "action2",
+                                                        "value": {
+                                                          "name": "Action.Two actions",
+                                                          "type": 0,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "action1",
+                                                              "value": {
+                                                                "name": "Action.Set attribute",
+                                                                "type": 0,
+                                                                "subtype": 7,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "attr_name",
+                                                                    "value": "order"
+                                                                  },
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": {
+                                                                      "name": "Value.Constant",
+                                                                      "type": 2,
+                                                                      "subtype": 0,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "value": 0
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "action2",
+                                                              "value": {
+                                                                "name": "Action.Two actions",
+                                                                "type": 0,
+                                                                "subtype": 1,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "action1",
+                                                                    "value": {
+                                                                      "name": "Action.Set attribute",
+                                                                      "type": 0,
+                                                                      "subtype": 7,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "attr_name",
+                                                                          "value": "reactive"
+                                                                        },
+                                                                        {
+                                                                          "name": "value",
+                                                                          "value": {
+                                                                            "name": "Value.Constant",
+                                                                            "type": 2,
+                                                                            "subtype": 0,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "value",
+                                                                                "value": 0
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "name": "action2",
+                                                                    "value": {
+                                                                      "name": "Action.Two actions",
+                                                                      "type": 0,
+                                                                      "subtype": 1,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "action1",
+                                                                          "value": {
+                                                                            "name": "Action.Set attribute",
+                                                                            "type": 0,
+                                                                            "subtype": 7,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "attr_name",
+                                                                                "value": "anti_token"
+                                                                              },
+                                                                              {
+                                                                                "name": "value",
+                                                                                "value": {
+                                                                                  "name": "Value.Constant",
+                                                                                  "type": 2,
+                                                                                  "subtype": 0,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "value",
+                                                                                      "value": 0
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "name": "action2",
+                                                                          "value": {
+                                                                            "name": "Action.Two actions",
+                                                                            "type": 0,
+                                                                            "subtype": 1,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "action1",
+                                                                                "value": {
+                                                                                  "name": "Action.Set attribute",
+                                                                                  "type": 0,
+                                                                                  "subtype": 7,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "attr_name",
+                                                                                      "value": "to_destroy"
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "value",
+                                                                                      "value": {
+                                                                                        "name": "Value.Constant",
+                                                                                        "type": 2,
+                                                                                        "subtype": 0,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "value",
+                                                                                            "value": 0
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "name": "action2",
+                                                                                "value": {
+                                                                                  "name": "Action.Two actions",
+                                                                                  "type": 0,
+                                                                                  "subtype": 1,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "action1",
+                                                                                      "value": {
+                                                                                        "name": "Action.Set attribute",
+                                                                                        "type": 0,
+                                                                                        "subtype": 7,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "attr_name",
+                                                                                            "value": "anim_highlight"
+                                                                                          },
+                                                                                          {
+                                                                                            "name": "value",
+                                                                                            "value": {
+                                                                                              "name": "Value.Constant",
+                                                                                              "type": 2,
+                                                                                              "subtype": 0,
+                                                                                              "params": [
+                                                                                                {
+                                                                                                  "name": "value",
+                                                                                                  "value": 0
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    },
+                                                                                    {
+                                                                                      "name": "action2",
+                                                                                      "value": {
+                                                                                        "name": "Action.Two actions",
+                                                                                        "type": 0,
+                                                                                        "subtype": 1,
+                                                                                        "params": [
+                                                                                          {
+                                                                                            "name": "action1",
+                                                                                            "value": {
+                                                                                              "name": "Action.Set attribute",
+                                                                                              "type": 0,
+                                                                                              "subtype": 7,
+                                                                                              "params": [
+                                                                                                {
+                                                                                                  "name": "attr_name",
+                                                                                                  "value": "anim_token_fly"
+                                                                                                },
+                                                                                                {
+                                                                                                  "name": "value",
+                                                                                                  "value": {
+                                                                                                    "name": "Value.Constant",
+                                                                                                    "type": 2,
+                                                                                                    "subtype": 0,
+                                                                                                    "params": [
+                                                                                                      {
+                                                                                                        "name": "value",
+                                                                                                        "value": 0
+                                                                                                      }
+                                                                                                    ]
+                                                                                                  }
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          },
+                                                                                          {
+                                                                                            "name": "action2",
+                                                                                            "value": {
+                                                                                              "name": "Action.Two actions",
+                                                                                              "type": 0,
+                                                                                              "subtype": 1,
+                                                                                              "params": [
+                                                                                                {
+                                                                                                  "name": "action1",
+                                                                                                  "value": {
+                                                                                                    "name": "Action.Set attribute",
+                                                                                                    "type": 0,
+                                                                                                    "subtype": 7,
+                                                                                                    "params": [
+                                                                                                      {
+                                                                                                        "name": "attr_name",
+                                                                                                        "value": "anim_card_fly"
+                                                                                                      },
+                                                                                                      {
+                                                                                                        "name": "value",
+                                                                                                        "value": {
+                                                                                                          "name": "Value.Constant",
+                                                                                                          "type": 2,
+                                                                                                          "subtype": 0,
+                                                                                                          "params": [
+                                                                                                            {
+                                                                                                              "name": "value",
+                                                                                                              "value": 0
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      }
+                                                                                                    ]
+                                                                                                  }
+                                                                                                },
+                                                                                                {
+                                                                                                  "name": "action2",
+                                                                                                  "value": {
+                                                                                                    "name": "Action.Void",
+                                                                                                    "type": 0,
+                                                                                                    "subtype": 0,
+                                                                                                    "params": []
+                                                                                                  }
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 660
+      },
+      {
+        "name": "Show Msg - End Game (by game_victory)",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[162] ~002: Clear Place [Id]",
+                "type": 0,
+                "subtype": 10162,
+                "params": [
+                  {
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Value.[631] Place - Fullscreen Msg Area",
+                      "type": 2,
+                      "subtype": 10631,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.[161] ~001: Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                "type": 0,
+                "subtype": 10161,
+                "params": [
+                  {
+                    "name": "cond",
+                    "value": {
+                      "name": "Condition.And",
+                      "type": 1,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Condition.[155] #008:Is in place [X]",
+                            "type": 1,
+                            "subtype": 10155,
+                            "params": [
+                              {
+                                "name": "Place Id",
+                                "value": {
+                                  "name": "Value.[163] Place 01. Main Deck/MD",
+                                  "type": 2,
+                                  "subtype": 10163,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Condition.[154] #007:Is card type",
+                            "type": 1,
+                            "subtype": 10154,
+                            "params": [
+                              {
+                                "name": "Card Type Id",
+                                "value": {
+                                  "name": "Value.If-Then-Else",
+                                  "type": 2,
+                                  "subtype": 4,
+                                  "params": [
+                                    {
+                                      "name": "if",
+                                      "value": {
+                                        "name": "Condition.Greater than",
+                                        "type": 1,
+                                        "subtype": 3,
+                                        "params": [
+                                          {
+                                            "name": "value1",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "victory"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "value2",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 0
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "then",
+                                      "value": {
+                                        "name": "Value.[678] TplId - Msg - VICTORY",
+                                        "type": 2,
+                                        "subtype": 10678,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "else",
+                                      "value": {
+                                        "name": "Value.[679] TplId - Msg - DEFEAT",
+                                        "type": 2,
+                                        "subtype": 10679,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "destPlace",
+                    "value": {
+                      "name": "Value.[631] Place - Fullscreen Msg Area",
+                      "type": 2,
+                      "subtype": 10631,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Void",
+                      "type": 0,
+                      "subtype": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cnt",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 674
+      },
+      {
+        "name": "While [Cond] [Do]",
+        "enabled": true,
+        "brick": {
+          "name": "Action.[145] #002:If-then",
+          "type": 0,
+          "subtype": 10145,
+          "params": [
+            {
+              "name": "Condition",
+              "value": {
+                "name": "Condition.Argument",
+                "type": 1,
+                "subtype": 5,
+                "params": [
+                  {
+                    "name": "name",
+                    "value": "Cond"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Action",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Argument",
+                      "type": 0,
+                      "subtype": 4,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Do"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[681] While [Cond] [Do]",
+                      "type": 0,
+                      "subtype": 10681,
+                      "params": [
+                        {
+                          "name": "Cond",
+                          "value": {
+                            "name": "Condition.Argument",
+                            "type": 1,
+                            "subtype": 5,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Cond"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Do",
+                          "value": {
+                            "name": "Action.Argument",
+                            "type": 0,
+                            "subtype": 4,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Do"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 681
+      },
+      {
+        "name": "Recalculate Order in Event Tracker",
+        "enabled": true,
+        "brick": {
+          "name": "Action.[681] While [Cond] [Do]",
+          "type": 0,
+          "subtype": 10681,
+          "params": [
+            {
+              "name": "Cond",
+              "value": {
+                "name": "Condition.[153] #006:Not equal",
+                "type": 1,
+                "subtype": 10153,
+                "params": [
+                  {
+                    "name": "Value 1",
+                    "value": {
+                      "name": "Value.Sum Iterator",
+                      "type": 2,
+                      "subtype": 14,
+                      "params": [
+                        {
+                          "name": "iter_condition",
+                          "value": {
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.[167] Place 05. Event Tracker",
+                                        "type": 2,
+                                        "subtype": 10167,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[362] Is a Card (not a Token)",
+                                  "type": 1,
+                                  "subtype": 10362,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "target_value",
+                          "value": {
+                            "name": "Value.Attribute",
+                            "type": 2,
+                            "subtype": 2,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "order"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.[147] #Cards total",
+                            "type": 2,
+                            "subtype": 10147,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Value 2",
+                    "value": {
+                      "name": "Value.Sum Iterator",
+                      "type": 2,
+                      "subtype": 14,
+                      "params": [
+                        {
+                          "name": "iter_condition",
+                          "value": {
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.[167] Place 05. Event Tracker",
+                                        "type": 2,
+                                        "subtype": 10167,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[362] Is a Card (not a Token)",
+                                  "type": 1,
+                                  "subtype": 10362,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "target_value",
+                          "value": {
+                            "name": "Value.Set variable",
+                            "type": 2,
+                            "subtype": 15,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_number"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Addition",
+                                  "type": 2,
+                                  "subtype": 5,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "card_number"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 1
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.[147] #Cards total",
+                            "type": 2,
+                            "subtype": 10147,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Do",
+              "value": {
+                "name": "Action.[643] Recalculate Orders in Event Tracker by Order of the removed Card",
+                "type": 0,
+                "subtype": 10643,
+                "params": [
+                  {
+                    "name": "order",
+                    "value": {
+                      "name": "Value.Variable",
+                      "type": 2,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "NOT_SET"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 682
       },
       {
         "name": "#001:True",
@@ -37071,16 +38645,40 @@
         "id": 516
       },
       {
-        "name": "Allow Pause in Mech",
+        "name": "Pause - Fast Mode Enabled",
         "enabled": true,
         "brick": {
-          "name": "Condition.Constant",
+          "name": "Condition.Greater than",
           "type": 1,
-          "subtype": 0,
+          "subtype": 3,
           "params": [
             {
-              "name": "value",
-              "value": true
+              "name": "value1",
+              "value": {
+                "name": "Value.Game Attribute",
+                "type": 2,
+                "subtype": 13,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "fast_mode"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "value2",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
+              }
             }
           ]
         },
@@ -37221,6 +38819,41 @@
           ]
         },
         "id": 588
+      },
+      {
+        "name": "~001:Is a Creature",
+        "enabled": true,
+        "brick": {
+          "name": "Condition.Equal",
+          "type": 1,
+          "subtype": 2,
+          "params": [
+            {
+              "name": "value1",
+              "value": {
+                "name": "Value.Attribute",
+                "type": 2,
+                "subtype": 2,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "type"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "value2",
+              "value": {
+                "name": "Value.[297] Type - Creature",
+                "type": 2,
+                "subtype": 10297,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 666
       },
       {
         "name": "#Current place",
@@ -40224,7 +41857,7 @@
         "id": 631
       },
       {
-        "name": "TplId - Fullscreen Msg - Player Phase",
+        "name": "TplId - Msg - Next Turn",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -40240,7 +41873,94 @@
         "id": 632
       },
       {
-        "name": "~Pause - Selective Coef",
+        "name": "~Pause - Selective Time Coef",
+        "enabled": true,
+        "brick": {
+          "name": "Value.If-Then-Else",
+          "type": 2,
+          "subtype": 4,
+          "params": [
+            {
+              "name": "if",
+              "value": {
+                "name": "Condition.[550] Pause - Fast Mode Enabled",
+                "type": 1,
+                "subtype": 10550,
+                "params": []
+              }
+            },
+            {
+              "name": "then",
+              "value": {
+                "name": "Value.Division",
+                "type": 2,
+                "subtype": 8,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Pause time"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Value.[672] ~Pause: Hastened divider",
+                      "type": 2,
+                      "subtype": 10672,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "else",
+              "value": {
+                "name": "Value.Multiplication",
+                "type": 2,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Value.Argument",
+                      "type": 2,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "name",
+                          "value": "Pause time"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Value.[667] ~Pause: Default coef",
+                      "type": 2,
+                      "subtype": 10667,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 664
+      },
+      {
+        "name": "~Pause: Default coef",
         "enabled": true,
         "brick": {
           "name": "Value.Constant",
@@ -40253,7 +41973,71 @@
             }
           ]
         },
-        "id": 664
+        "id": 667
+      },
+      {
+        "name": "~Pause: Hastened divider",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 3
+            }
+          ]
+        },
+        "id": 672
+      },
+      {
+        "name": "TplId - Msg - VICTORY",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 676
+            }
+          ]
+        },
+        "id": 678
+      },
+      {
+        "name": "TplId - Msg - DEFEAT",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 677
+            }
+          ]
+        },
+        "id": 679
+      },
+      {
+        "name": "TplId - Button - Play Again",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 675
+            }
+          ]
+        },
+        "id": 680
       }
     ]
   }
