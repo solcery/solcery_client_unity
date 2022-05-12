@@ -80,19 +80,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void UpdatedCardsOrder(EcsWorld world)
         {
-            const string orderAttributeName = "order";
-            var cardsSorted = _cards.Values.ToList();
-            cardsSorted.Sort((x, y) => 
-            {
-                var attributesX = world.GetPool<ComponentObjectAttributes>().Get(x.EntityId).Attributes;
-                var orderX = attributesX.TryGetValue(orderAttributeName, out var orderAttributeX) ? orderAttributeX.Current : 0;
-
-                var attributesY = world.GetPool<ComponentObjectAttributes>().Get(x.EntityId).Attributes;
-                var orderY = attributesY.TryGetValue(orderAttributeName, out var orderAttributeY) ? orderAttributeY.Current : 0;
-
-                return orderX.CompareTo(orderY);
-            });
-
+            var cardsSorted = _cards.Values.OrderBy(card=>card.Order).ToList();
             for (var i = 0; i < cardsSorted.Count; i++)
             {
                 cardsSorted[i].UpdateSiblingIndex(i);
@@ -165,6 +153,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             // anims
             var animHighlight = attributes.TryGetValue("anim_highlight", out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
             eclipseCard.Layout.Highlight.SetActive(animHighlight);
+            
+            // order
+            var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
+            eclipseCard.SetOrder(order);;
         }
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard)

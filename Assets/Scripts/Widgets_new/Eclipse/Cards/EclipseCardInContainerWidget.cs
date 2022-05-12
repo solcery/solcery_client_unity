@@ -19,7 +19,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private EclipseCardTypes _eclipseCardType;
         private int _entityId;
         private int _objectId;
+        private int _order;
 
+        int IEclipseCardInContainerWidget.Order => _order;
         int IEclipseCardInContainerWidget.EntityId => _entityId;
         
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
@@ -106,6 +108,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout.UpdateParent(parent);
         }
 
+        void IEclipseCardInContainerWidget.SetOrder(int order)
+        {
+            _order = order;
+        }
+        
         void IEclipseCardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
         {
             _layout.UpdateSiblingIndex(siblingIndex);

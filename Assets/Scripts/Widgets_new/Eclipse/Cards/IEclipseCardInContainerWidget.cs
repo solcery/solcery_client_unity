@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 {
     public interface IEclipseCardInContainerWidget : IPoolingWidget, IDraggableWidget, IEntityId
     {
+        int Order { get; }
         int EntityId { get; }
         EclipseCardInContainerWidgetLayout Layout { get; }
         void UpdateFromCardTypeData(int entityId, int objectId, JObject data);
@@ -20,5 +21,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);
         Vector3 GetTokenPosition(int slot);
+        void SetOrder(int order);
     }
 }
