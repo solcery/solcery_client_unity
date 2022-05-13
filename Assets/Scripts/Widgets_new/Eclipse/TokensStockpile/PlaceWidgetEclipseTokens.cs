@@ -45,7 +45,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var eclipseTokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
             var cardTypes = world.GetCardTypes();
-
+    
             foreach (var entityId in entityIds)
             {
                 if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId))
@@ -183,6 +183,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var keys = _tokens.Keys.ToList();
             
+            // clear tokens
             foreach (var entityId in entityIds)
             {
                 var objectId = objectIdPool.Get(entityId).Id;
@@ -202,13 +203,22 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 _tokens.Remove(key);
             }
             
+            keys.Clear();
+
+            // clear token types
             foreach (var tokensList in _tokensByType)
             {
                 tokensList.Value.ClearCounter();
                 if (tokensList.Value.Layout.Content.childCount == 0)
                 {
-                    Game.ListTokensInContainerWidgetPool.Push(tokensList.Value);
+                    keys.Add(tokensList.Key);
                 }
+            }
+
+            foreach (var key in keys)
+            {
+                Game.ListTokensInContainerWidgetPool.Push(_tokensByType[key]);
+                _tokensByType.Remove(key);
             }
         }
         
