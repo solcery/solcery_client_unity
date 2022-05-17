@@ -51,8 +51,8 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnDrop.Create(game));
             
             // TODO tooltip
-            _systems.Add(SystemOnTooltipHide.Create());
             _systems.Add(SystemOnTooltipShow.Create());
+            _systems.Add(SystemOnTooltipHide.Create());
             
             // TODO eclipse card
             _systems.Add(SystemOnEclipseCardFull.Create());

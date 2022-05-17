@@ -56,8 +56,8 @@ namespace Solcery.Models.Play.Tooltip
                 && tooltips.TryGetValue(onTooltipShowEventData.TooltipId, out var tooltipDataObject))
             {
                 var text = tooltipDataObject.GetValue<string>("text");
-                var delay = tooltipDataObject.GetValue<float>("delay");
-                GameApplication.Game().TooltipController.Show(text, onTooltipShowEventData.WorldPosition, delay);
+                var delayMs = tooltipDataObject.GetValue<float>("delay");
+                GameApplication.Game().TooltipController.Show(text, onTooltipShowEventData.WorldPosition, delayMs);
             }
             
             _uiEventData = null;

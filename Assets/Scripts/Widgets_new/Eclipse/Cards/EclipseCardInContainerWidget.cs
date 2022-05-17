@@ -73,7 +73,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                     tokenLayout.UpdateSprite(texture);
                 }
 
-                if (data.TryGetValue("tooltip_id", out int tooltipId))
+                if (data.TryGetValue("tooltip", out int tooltipId))
                 {
                     tokenLayout.UpdateTooltip(tooltipId);
                 }

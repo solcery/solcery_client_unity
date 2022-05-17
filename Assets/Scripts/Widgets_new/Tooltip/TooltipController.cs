@@ -9,7 +9,7 @@ namespace Solcery.Widgets_new.Tooltip
         private const float BorderOffset = 50f;
         private const string PrefabPathKey = "ui/ui_tooltip";
         private TooltipLayout _tooltipLayout;
-        private float? _delay;
+        private float? _delaySec;
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly IServiceResource _serviceResource;
         
@@ -22,23 +22,23 @@ namespace Solcery.Widgets_new.Tooltip
         {
             _widgetCanvas = widgetCanvas;
             _serviceResource = serviceResource;
-            _delay = null;
+            _delaySec = null;
         }
 
         public void Update(float dt)
         {
-            if (_delay != null && _delay.Value >= 0)
+            if (_delaySec != null && _delaySec.Value >= 0)
             {
-                _delay -= dt;
-                if (_delay <= 0)
+                _delaySec -= dt;
+                if (_delaySec <= 0)
                 {
-                    _delay = null;
+                    _delaySec = null;
                     SetTooltipActive(true);
                 }
             }
         }
         
-        public void Show(string text, Vector2 targetPosition, float delay = 0)
+        public void Show(string text, Vector2 targetPosition, float delayMs = 0)
         {
             if (_tooltipLayout == null)
             {
@@ -46,17 +46,17 @@ namespace Solcery.Widgets_new.Tooltip
             }
             
             _tooltipLayout.Text.text = text;
-            _tooltipLayout.transform.position = GetPosition(targetPosition);
-            if (delay >= 0)
+            _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
+            if (delayMs >= 0)
             {
                 Hide();
-                _delay = delay;
+                _delaySec = delayMs / 1000f;
             }
         }
 
         public void Hide()
         {
-            _delay = null;
+            _delaySec = null;
             SetTooltipActive(false);
         }
 
@@ -67,6 +67,8 @@ namespace Solcery.Widgets_new.Tooltip
                 && component is TooltipLayout layout)
             {
                 _tooltipLayout = layout;
+                _tooltipLayout.RectTransform.anchorMin = Vector2.zero; 
+                _tooltipLayout.RectTransform.anchorMax = Vector2.zero;
                 _tooltipLayout.gameObject.SetActive(false);
             }
             else
@@ -82,7 +84,7 @@ namespace Solcery.Widgets_new.Tooltip
             var halfTooltipHeight = sizeDelta.y * 0.5f;
             var leftLimit = Screen.safeArea.x + halfTooltipWidth + BorderOffset;
             var rightLimit = Screen.safeArea.width - halfTooltipWidth - BorderOffset;
-            var topLimit = Screen.safeArea.height - halfTooltipHeight - BorderOffset ;
+            var topLimit = Screen.safeArea.height - halfTooltipHeight - BorderOffset;
             var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
 
             var newX = targetPosition.x;
