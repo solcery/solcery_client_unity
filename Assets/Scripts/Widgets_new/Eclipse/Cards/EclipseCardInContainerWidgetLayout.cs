@@ -50,13 +50,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
+        
+        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
+        private bool _fullMode;
+        
         public RectTransform RectTransform => rectTransform;
         public RectTransform FrontTransform => frontTransform;
         public RectTransform BackTransform => backTransform;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
-
-        private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
-
+        
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public GameObject Highlight => highlight;
@@ -162,8 +164,21 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
+        public void SetFullMode(float height, Vector3 position)
+        {
+            _fullMode = true;
+            RectTransform.sizeDelta = new Vector2(0, height);
+            RectTransform.anchorMin = new Vector2(.5f, .5f);
+            RectTransform.anchorMax = new Vector2(.5f, .5f);
+            transform.position = position;
+            RaycastOff();
+        }
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
+            if (_fullMode)
+                return;
+
             switch (eventData.button)
             {
                 case PointerEventData.InputButton.Left:

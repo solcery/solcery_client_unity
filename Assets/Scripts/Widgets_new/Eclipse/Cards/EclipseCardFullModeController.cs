@@ -30,11 +30,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _fullModeLayout.gameObject.SetActive(true);
             var obj = Object.Instantiate(_eclipseCard.gameObject, _fullModeLayout.PlaceRectTransform, false);
             _clone = obj.GetComponent<EclipseCardInContainerWidgetLayout>();
-            _clone.RectTransform.sizeDelta = new Vector2(0, _eclipseCard.RectTransform.rect.height);
-            _clone.RectTransform.anchorMin = new Vector2(.5f, .5f);
-            _clone.RectTransform.anchorMax = new Vector2(.5f, .5f);
-            _clone.transform.position = _eclipseCard.RectTransform.position;
-            _clone.RaycastOff();
+            _clone.SetFullMode(_eclipseCard.RectTransform.rect.height, _eclipseCard.RectTransform.position);
             _eclipseCard.SetActive(false);
             PlayAnimation(_clone.RectTransform, 0.3f, _fullModeLayout.PlaceRectTransform.rect.height, _fullModeLayout.transform.position);
         }
