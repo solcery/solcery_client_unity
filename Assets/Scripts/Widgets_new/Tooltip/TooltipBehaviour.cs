@@ -6,8 +6,8 @@ namespace Solcery.Widgets_new.Tooltip
 {
     public abstract class TooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler
     {
-        public int TooltipId = -1;
-        public bool Active = false;
+        protected int TooltipId = -1;
+        protected bool Active = false;
         
         public abstract void OnPointerMove(PointerEventData eventData);
         
