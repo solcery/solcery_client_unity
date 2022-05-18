@@ -10,6 +10,7 @@ namespace Solcery.Widgets_new.Canvas
     {
         Transform GetWorldCanvas();
         RectTransform GetUiCanvas();
+        RectTransform GetTooltipsCanvas();
         RootDragDropLayout GetDragDropCanvas();
         IWidgetEffects GetEffects();
         EclipseCardFullModeLayout GetFullModeLayout();

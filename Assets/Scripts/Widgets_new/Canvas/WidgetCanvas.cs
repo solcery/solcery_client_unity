@@ -47,6 +47,11 @@ namespace Solcery.Widgets_new.Canvas
             return _uiRoot.FullModeLayout;
         }
 
+        RectTransform IWidgetCanvas.GetTooltipsCanvas()
+        {
+            return _uiRoot.Tooltips;
+        }
+        
         RootDragDropLayout IWidgetCanvas.GetDragDropCanvas()
         {
             return _dragDropRoot;

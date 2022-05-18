@@ -63,7 +63,7 @@ namespace Solcery.Widgets_new.Tooltip
         private void Initialize()
         {
             if (_serviceResource.TryGetWidgetPrefabForKey(PrefabPathKey, out var go)
-                && Object.Instantiate(go, _widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(TooltipLayout), out var component)
+                && Object.Instantiate(go, _widgetCanvas.GetTooltipsCanvas()).TryGetComponent(typeof(TooltipLayout), out var component)
                 && component is TooltipLayout layout)
             {
                 _tooltipLayout = layout;

@@ -33,7 +33,8 @@ namespace Solcery.Widgets_new.Tooltip
         protected override void HideTooltip()
         {
             base.HideTooltip();
-            TooltipId = null;
+            TooltipId = default;
+            Active = false;
         }
     }
 }
