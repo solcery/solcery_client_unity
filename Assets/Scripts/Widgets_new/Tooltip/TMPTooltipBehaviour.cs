@@ -34,7 +34,6 @@ namespace Solcery.Widgets_new.Tooltip
         {
             base.HideTooltip();
             TooltipId = default;
-            Active = false;
         }
     }
 }
