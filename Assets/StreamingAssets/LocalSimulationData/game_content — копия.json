@@ -822,7 +822,6 @@
       {
         "name": "Token - Hot",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=5>",
         "picture": "https://i.ibb.co/cgcVfnY/token-hot.png",
         "type": 2,
         "action_on_create": {
@@ -870,12 +869,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 708,
         "id": 199
       },
       {
         "name": "Token - Cold",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=2>",
         "picture": "https://i.ibb.co/c80hK25/token-cold.png",
         "type": 2,
         "action_on_create": {
@@ -923,12 +922,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 709,
         "id": 217
       },
       {
         "name": "Token - Order",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=0>",
         "picture": "https://i.ibb.co/86qF1R0/token-order.png",
         "type": 2,
         "action_on_create": {
@@ -976,12 +975,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 710,
         "id": 218
       },
       {
         "name": "Token - Chaos",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=3>",
         "picture": "https://i.ibb.co/RpF3g7n/token-chaos.png",
         "type": 2,
         "action_on_create": {
@@ -1029,12 +1028,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 711,
         "id": 219
       },
       {
         "name": "Token - Joy",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=4>",
         "picture": "https://i.ibb.co/TbtFmfv/token-joy.png",
         "type": 2,
         "action_on_create": {
@@ -1082,12 +1081,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 712,
         "id": 220
       },
       {
         "name": "Token - Stress",
         "enabled": true,
-        "description": "<b>Antitoken</b> for <sprite index=7>",
         "picture": "https://i.ibb.co/3fwJpW1/token-stress.png",
         "type": 2,
         "action_on_create": {
@@ -1135,12 +1134,12 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 713,
         "id": 221
       },
       {
         "name": "Token - Food",
         "enabled": true,
-        "description": "Clears the <b>Oldest</b> Token on the Creature",
         "picture": "https://i.ibb.co/LZBqDx3/token-food.png",
         "type": 2,
         "action_on_create": {
@@ -1424,13 +1423,12 @@
           "subtype": 10541,
           "params": []
         },
-        "tooltip": 279,
+        "tooltip": 714,
         "id": 222
       },
       {
         "name": "Token - Shield",
         "enabled": true,
-        "description": "Protects the Creature from gaining the next Token once",
         "picture": "https://i.ibb.co/0CsDqzK/token-shield.png",
         "type": 2,
         "action_on_create": {
@@ -1775,6 +1773,7 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 715,
         "id": 223
       },
       {
@@ -7393,7 +7392,7 @@
       {
         "name": "Seething Salamander*",
         "enabled": true,
-        "description": "Produces 1 <sprite index=9> for each <sprite index=2> on itself",
+        "description": "Produces 1 <link=\"279\"><sprite index=9></link> for each <sprite index=2> on itself",
         "picture": "https://i.ibb.co/3vQx8Y3/1-49-Lizard.jpg",
         "type": 1,
         "action_on_create": {
@@ -7551,7 +7550,6 @@
           "params": []
         },
         "gd_filter": "creature",
-        "tooltip": 279,
         "id": 258
       },
       {
@@ -12528,7 +12526,6 @@
           "params": []
         },
         "gd_filter": "building",
-        "tooltip": 279,
         "id": 276
       },
       {
@@ -19176,6 +19173,62 @@
         "text": "I'm just a simple tooltip with icon <sprite index=1> , <b>bold</b>, <size=120%>size</size>, and even <color=#FF0000>C</color><color=#00FF00>O</color><color=#0000FF>L</color><color=#FF00FF>O</color><color=#FFFF00>R</color>",
         "delay": 300,
         "id": 279
+      },
+      {
+        "name": "Hot Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=5>",
+        "delay": 300,
+        "id": 708
+      },
+      {
+        "name": "Cold Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=2>",
+        "delay": 300,
+        "id": 709
+      },
+      {
+        "name": "Order Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=0>",
+        "delay": 300,
+        "id": 710
+      },
+      {
+        "name": "Chaos Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=3>",
+        "delay": 300,
+        "id": 711
+      },
+      {
+        "name": "Joy Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=4>",
+        "delay": 300,
+        "id": 712
+      },
+      {
+        "name": "Stress Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for <sprite index=7>",
+        "delay": 300,
+        "id": 713
+      },
+      {
+        "name": "Food Token Tooltip",
+        "enabled": true,
+        "text": "<b>Clears</b> any first Token on the Creature",
+        "delay": 300,
+        "id": 714
+      },
+      {
+        "name": "Shield Token Tooltip",
+        "enabled": true,
+        "text": "<b>Antitoken</b> for any Token gained after",
+        "delay": 300,
+        "id": 715
       }
     ]
   },

@@ -51,6 +51,8 @@ namespace Solcery.Services.Resources.Loaders.Texture
             {
                 _loadedIsSuccess = true;
                 _texture = ((DownloadHandlerTexture) _webRequest.downloadHandler).texture;
+                _texture.Compress(true);
+                Debug.Log($"Load texture from uri {_uri} WxH {_texture.width}x{_texture.height} format {_texture.format}");
             }
             
             _webRequest.Dispose();
@@ -66,6 +68,8 @@ namespace Solcery.Services.Resources.Loaders.Texture
                 _inProgress = false;
                 _webRequest.Abort();
             }
+            
+            _webRequest.Dispose();
         }
     }
 }
