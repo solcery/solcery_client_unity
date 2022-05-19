@@ -9,5 +9,6 @@ namespace Solcery.Ui
         public RectTransform Game;
         public RootUiEffects Effects;
         public EclipseCardFullModeLayout FullModeLayout;
+        public RectTransform Tooltips;
     }
 }

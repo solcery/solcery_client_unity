@@ -6,13 +6,14 @@ namespace Solcery.Widgets_new.Tooltip
 {
     public abstract class TooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler
     {
-        protected int? TooltipId;
+        protected int TooltipId = -1;
+        protected bool Active = false;
         
         public abstract void OnPointerMove(PointerEventData eventData);
         
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            if (TooltipId != null)
+            if (Active)
             {
                 HideTooltip();
             }
@@ -20,27 +21,26 @@ namespace Solcery.Widgets_new.Tooltip
         
         public void SetTooltipId(int tooltipId)
         {
+            Active = false;
             TooltipId = tooltipId;
         }
 
         protected void ShowTooltip(Vector2 position)
         {
-            if (TooltipId != null)
+            if (TooltipId != -1)
             {
-                ServiceEvents.Current.BroadcastEvent(OnTooltipShowEventData.Create(TooltipId.Value, position));
-            }
-            else
-            {
-                Debug.Log("TooltipId doesn't set!");
+                Active = true;
+                ServiceEvents.Current.BroadcastEvent(OnTooltipShowEventData.Create(TooltipId, position));
             }
         }
 
         protected virtual void HideTooltip()
         {
-            if (TooltipId == null)
+            if (!Active)
                 return;
-
-            ServiceEvents.Current.BroadcastEvent(OnTooltipHideEventData.Create(TooltipId.Value));
+            
+            Active = false;
+            ServiceEvents.Current.BroadcastEvent(OnTooltipHideEventData.Create(TooltipId));
         }        
     }
 }
