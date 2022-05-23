@@ -104,5 +104,10 @@ namespace Solcery.Widgets_new
                 }
             }
         }
+
+        public void UpdateBlocksRaycasts(bool blocksRaycasts)
+        {
+            canvasGroup.blocksRaycasts = blocksRaycasts;
+        }
     }
 }

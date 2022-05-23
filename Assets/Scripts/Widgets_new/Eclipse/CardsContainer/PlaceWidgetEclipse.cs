@@ -13,7 +13,6 @@ using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
@@ -44,8 +43,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             if (entityIds.Length <= 0)
             {
+                Layout.UpdateBlocksRaycasts(false);
                 return;
             }
+            
+            Layout.UpdateBlocksRaycasts(true);
 
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
@@ -156,7 +158,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             
             // order
             var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
-            eclipseCard.SetOrder(order);;
+            eclipseCard.SetOrder(order);
         }
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard)
