@@ -7863,7 +7863,7 @@
         "id": 259
       },
       {
-        "name": "Yes-man Yeti *",
+        "name": "Yawning Yeti *",
         "enabled": true,
         "description": "Transforms gained <link=\"709\"><sprite index=5></link> into <link=\"715\"><sprite index=8></link>. <link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each <link=\"715\"><sprite index=8></link> on self",
         "picture": "https://i.ibb.co/bzRzFfh/1-100-Yeti.jpg",
@@ -11649,10 +11649,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -11832,10 +11837,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -12015,10 +12025,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -12208,10 +12223,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -12391,10 +12411,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -12593,10 +12618,15 @@
             {
               "name": "Pause length",
               "value": {
-                "name": "Value.[602] ~Pause: Building Action Step",
+                "name": "Value.Constant",
                 "type": 2,
-                "subtype": 10602,
-                "params": []
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
               }
             }
           ]
@@ -12633,7 +12663,7 @@
         "id": 276
       },
       {
-        "name": "Consused Cat-A-Roo",
+        "name": "Confused Cat-A-Roo",
         "enabled": true,
         "description": "Gives 1 <link=\"711\"><sprite index=0></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/PcNSyQ4/2-7.jpg",
@@ -13164,7 +13194,6 @@
       {
         "name": "Token - Gold",
         "enabled": true,
-        "description": "Makes a Creature immediately use its Ability",
         "picture": "https://i.ibb.co/82yyRmp/token-gold.png",
         "type": 2,
         "action_on_create": {
@@ -13357,6 +13386,7 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 720,
         "id": 312
       },
       {
@@ -21280,8 +21310,6 @@
         "y2": 7200,
         "face": 1,
         "zOrder": 10,
-        "caption": "Event Discard",
-        "frame": true,
         "id": 95
       },
       {
@@ -21950,10 +21978,9 @@
         "id": 850
       },
       {
-        "name": "Card Showcase",
+        "name": "Event Card Showcase",
         "enabled": true,
         "placeId": 55,
-        "interactableForActiveLocalPlayer": true,
         "visible": true,
         "x1": 3400,
         "x2": 6600,
@@ -22018,15 +22045,6 @@
         "amount": 10,
         "preset": "loogris layout",
         "id": 126
-      },
-      {
-        "name": "Test Building 1 - Loogris",
-        "enabled": true,
-        "cardType": 276,
-        "place": 5,
-        "amount": 1,
-        "preset": "loogris layout",
-        "id": 131
       },
       {
         "name": "MD - End Turn button",
@@ -22506,13 +22524,13 @@
         "id": 641
       },
       {
-        "name": "Tokens in Storage -- Food",
+        "name": "Tokens in Storage -- Shields",
         "enabled": true,
-        "cardType": 222,
+        "cardType": 223,
         "place": 6,
         "amount": 5,
         "preset": "loogris layout",
-        "id": 652
+        "id": 655
       },
       {
         "name": "Msg - Victory",
@@ -22996,9 +23014,9 @@
         "id": 719
       },
       {
-        "name": "Order Token Tooltip",
+        "name": "Gold Token Tooltip",
         "enabled": true,
-        "text": "Anititoken for <link=\"711\"><sprite index=0></link>",
+        "text": "<b>Activate</b>s Creature recieving this",
         "delay": 300,
         "id": 720
       },
@@ -44454,6 +44472,117 @@
           ]
         },
         "id": 876
+      },
+      {
+        "name": "{v2} Drag & Drop (without swap)",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "origin_place"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.[146] #Current place",
+                            "type": 2,
+                            "subtype": 10146,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "card_id"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Value.Card Id",
+                            "type": 2,
+                            "subtype": 11,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.[527] Drag & Drop Aux 1 - Move 1 Card [Id] and its Tokens from originPlace to transitoryPlace",
+                      "type": 0,
+                      "subtype": 10527,
+                      "params": [
+                        {
+                          "name": "Card Id",
+                          "value": {
+                            "name": "Value.Variable",
+                            "type": 2,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "card_id"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[528] Drag & Drop Aux 3 - Move ALL Cards from transitoryPlace to targetPlace",
+                      "type": 0,
+                      "subtype": 10528,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 877
       },
       {
         "name": "#001:True",
