@@ -55,6 +55,18 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             {
                 _layout.UpdateSprite(texture);
             }
+
+            if (data.TryGetValue("timer_text", out string timerText))
+            {
+                _layout.TimerLayout.UpdateTimerTextActive(true);
+                _layout.TimerLayout.UpdateTimerText(timerText);
+            }
+            else
+            {
+                _layout.TimerLayout.UpdateTimerTextActive(false);
+            }
+
+            
         }
         
         EclipseCardTokenLayout GetToken(int slot)
