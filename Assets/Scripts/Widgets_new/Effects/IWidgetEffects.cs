@@ -14,6 +14,7 @@ namespace Solcery.Widgets_new.Effects
             Action onMoveComplete);
         
         public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            Transform parent,
             float time,
             Vector3 from,
             Action onMoveComplete);
