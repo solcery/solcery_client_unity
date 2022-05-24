@@ -43,12 +43,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             if (entityIds.Length <= 0)
             {
-                Layout.UpdateBlocksRaycasts(false);
                 return;
             }
             
-            Layout.UpdateBlocksRaycasts(true);
-
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var cardTypes = world.GetCardTypes();
