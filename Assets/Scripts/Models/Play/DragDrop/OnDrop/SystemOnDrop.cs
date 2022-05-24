@@ -5,6 +5,7 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Commands.Datas.OnDrop;
 using Solcery.Models.Shared.DragDrop.Parameters;
+using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Widgets_new;
@@ -77,6 +78,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
                 if (targetLayout != null
                     && targetLayout.LinkedEntityId != sourcePlaceEntityId
                     && CheckPlaceDestinations(world, onDropEventData.DragDropEntityId, targetLayout.PlaceId)
+                    && CheckDestinationCondition(world, onDropEventData.DragDropEntityId, targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
                     sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId =
@@ -126,6 +128,41 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             }
 
             return targetDropWidget != null;
+        }
+
+        private bool CheckDestinationCondition(EcsWorld world, int dragDropEntityId, int targetPlaceId)
+        {
+            var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
+
+            if (destinationConditionPool.Has(dragDropEntityId))
+            {
+                var destinationConditionType =
+                    destinationConditionPool.Get(dragDropEntityId).ParametersDestinationConditionType;
+
+                var filter = world.Filter<ComponentObjectTag>().Inc<ComponentObjectAttributes>().End();
+                var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
+                var countObjectOnPlace = 0;
+
+                foreach (var entityId in filter)
+                {
+                    if (objectAttributesPool.Get(entityId).Attributes.TryGetValue("place", out var placeId) 
+                        && placeId.Current == targetPlaceId)
+                    {
+                        countObjectOnPlace++;
+                    }
+                }
+
+                switch (destinationConditionType)
+                {
+                    case DragDropParametersDestinationConditionTypes.Empty:
+                        return countObjectOnPlace <= 0;
+                    
+                    case DragDropParametersDestinationConditionTypes.NonEmpty:
+                        return countObjectOnPlace > 0;
+                }
+            }
+            
+            return false;
         }
     }
 }
