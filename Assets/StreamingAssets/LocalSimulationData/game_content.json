@@ -21550,7 +21550,6 @@
       {
         "name": "TECH Disable Raycast",
         "enabled": true,
-        "picture": "https://i.ibb.co/LRknsMv/sun.png",
         "action_on_create": {
           "name": "Action.Set attribute",
           "type": 0,
@@ -22894,31 +22893,6 @@
         "cardType": 883,
         "place": 1,
         "amount": 1,
-        "initializer": {
-          "name": "Action.Set attribute",
-          "type": 0,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "attr_name",
-              "value": "disable_raycasts_on_place"
-            },
-            {
-              "name": "value",
-              "value": {
-                "name": "Value.Constant",
-                "type": 2,
-                "subtype": 0,
-                "params": [
-                  {
-                    "name": "value",
-                    "value": 1
-                  }
-                ]
-              }
-            }
-          ]
-        },
         "preset": "core",
         "id": 886
       }
@@ -25666,29 +25640,10 @@
                                                 {
                                                   "name": "action1",
                                                   "value": {
-                                                    "name": "Action.[145] #002:If-then",
+                                                    "name": "Action.[885] Show/Hide Showcase Place",
                                                     "type": 0,
-                                                    "subtype": 10145,
-                                                    "params": [
-                                                      {
-                                                        "name": "Condition",
-                                                        "value": {
-                                                          "name": "Condition.[149] #002:False",
-                                                          "type": 1,
-                                                          "subtype": 10149,
-                                                          "params": []
-                                                        }
-                                                      },
-                                                      {
-                                                        "name": "Action",
-                                                        "value": {
-                                                          "name": "Action.[885] Show/Hide Showcase Place",
-                                                          "type": 0,
-                                                          "subtype": 10885,
-                                                          "params": []
-                                                        }
-                                                      }
-                                                    ]
+                                                    "subtype": 10885,
+                                                    "params": []
                                                   }
                                                 },
                                                 {
@@ -27794,9 +27749,9 @@
                   {
                     "name": "action",
                     "value": {
-                      "name": "Action.[854] ~Move a Card from regular Place to eclipse [PlaceId] with [Pause]",
+                      "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                       "type": 0,
-                      "subtype": 10854,
+                      "subtype": 10889,
                       "params": [
                         {
                           "name": "Target place",
@@ -27805,6 +27760,20 @@
                             "type": 2,
                             "subtype": 10164,
                             "params": []
+                          }
+                        },
+                        {
+                          "name": "Fly time",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 25
+                              }
+                            ]
                           }
                         },
                         {
@@ -28016,17 +27985,45 @@
                                           {
                                             "name": "action",
                                             "value": {
-                                              "name": "Action.[702] ~Move a Card from regular Place to eclipse [PlaceId]",
+                                              "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                               "type": 0,
-                                              "subtype": 10702,
+                                              "subtype": 10889,
                                               "params": [
                                                 {
-                                                  "name": "target place",
+                                                  "name": "Target place",
                                                   "value": {
                                                     "name": "Value.[164] Place 02. Event Deck",
                                                     "type": 2,
                                                     "subtype": 10164,
                                                     "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "Fly time",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 25
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "Pause",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 25
+                                                      }
+                                                    ]
                                                   }
                                                 }
                                               ]
@@ -28110,17 +28107,45 @@
                                     {
                                       "name": "action",
                                       "value": {
-                                        "name": "Action.[702] ~Move a Card from regular Place to eclipse [PlaceId]",
+                                        "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                         "type": 0,
-                                        "subtype": 10702,
+                                        "subtype": 10889,
                                         "params": [
                                           {
-                                            "name": "target place",
+                                            "name": "Target place",
                                             "value": {
                                               "name": "Value.[164] Place 02. Event Deck",
                                               "type": 2,
                                               "subtype": 10164,
                                               "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "Fly time",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 25
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "Pause",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 25
+                                                }
+                                              ]
                                             }
                                           }
                                         ]
@@ -28215,17 +28240,45 @@
                                     {
                                       "name": "action",
                                       "value": {
-                                        "name": "Action.[702] ~Move a Card from regular Place to eclipse [PlaceId]",
+                                        "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                         "type": 0,
-                                        "subtype": 10702,
+                                        "subtype": 10889,
                                         "params": [
                                           {
-                                            "name": "target place",
+                                            "name": "Target place",
                                             "value": {
                                               "name": "Value.[164] Place 02. Event Deck",
                                               "type": 2,
                                               "subtype": 10164,
                                               "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "Fly time",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 25
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "Pause",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 25
+                                                }
+                                              ]
                                             }
                                           }
                                         ]
@@ -28392,12 +28445,12 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[702] ~Move a Card from regular Place to eclipse [PlaceId]",
+                                  "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                   "type": 0,
-                                  "subtype": 10702,
+                                  "subtype": 10889,
                                   "params": [
                                     {
-                                      "name": "target place",
+                                      "name": "Target place",
                                       "value": {
                                         "name": "Value.Addition",
                                         "type": 2,
@@ -28454,6 +28507,34 @@
                                                 }
                                               ]
                                             }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Fly time",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 500
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Pause",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 50
                                           }
                                         ]
                                       }
@@ -28871,9 +28952,9 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Action.[854] ~Move a Card from regular Place to eclipse [PlaceId] with [Pause]",
+                                        "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                         "type": 0,
-                                        "subtype": 10854,
+                                        "subtype": 10889,
                                         "params": [
                                           {
                                             "name": "Target place",
@@ -28882,6 +28963,20 @@
                                               "type": 2,
                                               "subtype": 10171,
                                               "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "Fly time",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 500
+                                                }
+                                              ]
                                             }
                                           },
                                           {
@@ -29023,9 +29118,9 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Action.[854] ~Move a Card from regular Place to eclipse [PlaceId] with [Pause]",
+                                        "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                                         "type": 0,
-                                        "subtype": 10854,
+                                        "subtype": 10889,
                                         "params": [
                                           {
                                             "name": "Target place",
@@ -29034,6 +29129,20 @@
                                               "type": 2,
                                               "subtype": 10171,
                                               "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "Fly time",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 500
+                                                }
+                                              ]
                                             }
                                           },
                                           {
@@ -29219,9 +29328,9 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[854] ~Move a Card from regular Place to eclipse [PlaceId] with [Pause]",
+                            "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                             "type": 0,
-                            "subtype": 10854,
+                            "subtype": 10889,
                             "params": [
                               {
                                 "name": "Target place",
@@ -29230,6 +29339,20 @@
                                   "type": 2,
                                   "subtype": 10177,
                                   "params": []
+                                }
+                              },
+                              {
+                                "name": "Fly time",
+                                "value": {
+                                  "name": "Value.Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 500
+                                    }
+                                  ]
                                 }
                               },
                               {
@@ -43550,17 +43673,45 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[702] ~Move a Card from regular Place to eclipse [PlaceId]",
+                      "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
                       "type": 0,
-                      "subtype": 10702,
+                      "subtype": 10889,
                       "params": [
                         {
-                          "name": "target place",
+                          "name": "Target place",
                           "value": {
                             "name": "Value.[166] Place 04. Eclipse ",
                             "type": 2,
                             "subtype": 10166,
                             "params": []
+                          }
+                        },
+                        {
+                          "name": "Fly time",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 500
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Pause",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 50
+                              }
+                            ]
                           }
                         }
                       ]
@@ -45046,7 +45197,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 250
+                                "value": 500
                               }
                             ]
                           }
@@ -45060,7 +45211,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 250
+                                "value": 350
                               }
                             ]
                           }
@@ -51120,7 +51271,7 @@
           "params": [
             {
               "name": "value",
-              "value": 1000
+              "value": 750
             }
           ]
         },
@@ -51136,7 +51287,7 @@
           "params": [
             {
               "name": "value",
-              "value": 1000
+              "value": 750
             }
           ]
         },
