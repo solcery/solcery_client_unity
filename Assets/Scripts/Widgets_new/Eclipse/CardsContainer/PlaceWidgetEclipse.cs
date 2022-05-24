@@ -27,6 +27,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
 
+        private bool _defaultBlockRaycasts;
+
         private PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
@@ -35,23 +37,38 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _tokensPerCardCache = new Dictionary<int, List<int>>();
             Layout.UpdateVisible(true);
             Layout.SetAnchor(TextAnchor.MiddleLeft);
+
+            _defaultBlockRaycasts = Layout.BlockRaycasts;
         }
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
             RemoveCards(world, entityIds);
+            Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
 
             if (entityIds.Length <= 0)
             {
                 return;
             }
-            
+
+            var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var cardTypes = world.GetCardTypes();
 
             foreach (var entityId in entityIds)
             {
+                var attributes = objectAttributesPool.Has(entityId)
+                    ? objectAttributesPool.Get(entityId).Attributes
+                    : new Dictionary<string, IAttributeValue>();
+
+                if (attributes.ContainsKey("disable_raycasts_on_place")
+                    && attributes["disable_raycasts_on_place"].Current > 0)
+                {
+                    Layout.UpdateBlocksRaycasts(false);
+                    continue;
+                }
+
                 var objectId = objectIdPool.Get(entityId).Id;
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 

@@ -11,6 +11,7 @@ namespace Solcery.Widgets_new
         public int OrderZ => _orderZ;
         public int LinkedEntityId => _linkedEntityId;
         public PlaceWidget PlaceWidget => _placeWidget;
+        public bool BlockRaycasts => canvasGroup.blocksRaycasts;
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
