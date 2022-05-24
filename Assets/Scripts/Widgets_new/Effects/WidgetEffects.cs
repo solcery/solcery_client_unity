@@ -67,12 +67,13 @@ namespace Solcery.Widgets_new.Effects
         }
 
         public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+            Transform parent,
             float time,
             Vector3 from,
             Action onMoveComplete)
         {
             var to = eclipseCard.Layout.RectTransform.position;
-            var effect = Object.Instantiate(eclipseCard.Layout, _effectRoot.transform, false)
+            var effect = Object.Instantiate(eclipseCard.Layout, parent, false)
                 .GetComponent<EclipseCardInContainerWidgetLayout>();
             effect.RectTransform.anchorMin = new Vector2(.5f, .5f);
             effect.RectTransform.anchorMax = new Vector2(.5f, .5f);

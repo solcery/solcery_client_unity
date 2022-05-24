@@ -38,7 +38,7 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void Show(string text, Vector2 targetPosition, float delayMs = 0)
+        public void Show(string text, Vector2 targetPosition, float delaySec)
         {
             if (_tooltipLayout == null)
             {
@@ -47,10 +47,10 @@ namespace Solcery.Widgets_new.Tooltip
             
             _tooltipLayout.Text.text = text;
             _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
-            if (delayMs >= 0)
+            if (delaySec >= 0)
             {
                 Hide();
-                _delaySec = delayMs / 1000f;
+                _delaySec = delaySec;
             }
         }
 
