@@ -53,7 +53,7 @@ namespace Solcery.Models.Play.DragDrop.Parameters
                         destinationConditionPool.Add(entity).ParametersDestinationConditionType =
                             dndObject.TryGetEnum("destination_condition", out DragDropParametersDestinationConditionTypes dct)
                                 ? dct
-                                : DragDropParametersDestinationConditionTypes.None;
+                                : DragDropParametersDestinationConditionTypes.Any;
 
                         ref var componentCardTypes = ref requiredEclipseCardTypesPool.Add(entity);
                         foreach (var cardTypeToken in dndObject.GetValue<JArray>("required_card_types"))

@@ -139,6 +139,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
                 var destinationConditionType =
                     destinationConditionPool.Get(dragDropEntityId).ParametersDestinationConditionType;
 
+                if (destinationConditionType == DragDropParametersDestinationConditionTypes.Any)
+                {
+                    return true;
+                }
+
                 var filter = world.Filter<ComponentObjectTag>().Inc<ComponentObjectAttributes>().End();
                 var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
                 var countObjectOnPlace = 0;
