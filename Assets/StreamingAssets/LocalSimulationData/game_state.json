@@ -281,132 +281,6 @@
           },
           {
             "id": 3,
-            "tplId": 628,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 11
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 4,
             "tplId": 236,
             "attrs": [
               {
@@ -532,7 +406,7 @@
             ]
           },
           {
-            "id": 5,
+            "id": 4,
             "tplId": 286,
             "attrs": [
               {
@@ -658,7 +532,7 @@
             ]
           },
           {
-            "id": 6,
+            "id": 5,
             "tplId": 287,
             "attrs": [
               {
@@ -784,259 +658,7 @@
             ]
           },
           {
-            "id": 7,
-            "tplId": 663,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 12
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 8,
-            "tplId": 303,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 13
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 9,
+            "id": 6,
             "tplId": 443,
             "attrs": [
               {
@@ -1162,7 +784,7 @@
             ]
           },
           {
-            "id": 10,
+            "id": 7,
             "tplId": 546,
             "attrs": [
               {
@@ -1288,7 +910,7 @@
             ]
           },
           {
-            "id": 11,
+            "id": 8,
             "tplId": 244,
             "attrs": [
               {
@@ -1414,7 +1036,7 @@
             ]
           },
           {
-            "id": 12,
+            "id": 9,
             "tplId": 271,
             "attrs": [
               {
@@ -1540,7 +1162,7 @@
             ]
           },
           {
-            "id": 13,
+            "id": 10,
             "tplId": 258,
             "attrs": [
               {
@@ -1666,7 +1288,7 @@
             ]
           },
           {
-            "id": 14,
+            "id": 11,
             "tplId": 268,
             "attrs": [
               {
@@ -1792,7 +1414,7 @@
             ]
           },
           {
-            "id": 15,
+            "id": 12,
             "tplId": 316,
             "attrs": [
               {
@@ -1918,7 +1540,7 @@
             ]
           },
           {
-            "id": 16,
+            "id": 13,
             "tplId": 267,
             "attrs": [
               {
@@ -2044,7 +1666,7 @@
             ]
           },
           {
-            "id": 17,
+            "id": 14,
             "tplId": 261,
             "attrs": [
               {
@@ -2170,7 +1792,7 @@
             ]
           },
           {
-            "id": 18,
+            "id": 15,
             "tplId": 263,
             "attrs": [
               {
@@ -2296,133 +1918,7 @@
             ]
           },
           {
-            "id": 19,
-            "tplId": 462,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 14
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 20,
+            "id": 16,
             "tplId": 264,
             "attrs": [
               {
@@ -2548,7 +2044,7 @@
             ]
           },
           {
-            "id": 21,
+            "id": 17,
             "tplId": 270,
             "attrs": [
               {
@@ -2674,7 +2170,7 @@
             ]
           },
           {
-            "id": 22,
+            "id": 18,
             "tplId": 265,
             "attrs": [
               {
@@ -2800,7 +2296,7 @@
             ]
           },
           {
-            "id": 23,
+            "id": 19,
             "tplId": 266,
             "attrs": [
               {
@@ -2926,7 +2422,7 @@
             ]
           },
           {
-            "id": 24,
+            "id": 20,
             "tplId": 260,
             "attrs": [
               {
@@ -3052,7 +2548,7 @@
             ]
           },
           {
-            "id": 25,
+            "id": 21,
             "tplId": 269,
             "attrs": [
               {
@@ -3178,7 +2674,7 @@
             ]
           },
           {
-            "id": 26,
+            "id": 22,
             "tplId": 481,
             "attrs": [
               {
@@ -3304,7 +2800,7 @@
             ]
           },
           {
-            "id": 27,
+            "id": 23,
             "tplId": 482,
             "attrs": [
               {
@@ -3430,7 +2926,7 @@
             ]
           },
           {
-            "id": 28,
+            "id": 24,
             "tplId": 241,
             "attrs": [
               {
@@ -3556,7 +3052,7 @@
             ]
           },
           {
-            "id": 29,
+            "id": 25,
             "tplId": 243,
             "attrs": [
               {
@@ -3682,259 +3178,7 @@
             ]
           },
           {
-            "id": 30,
-            "tplId": 505,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 15
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 31,
-            "tplId": 517,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 16
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 32,
+            "id": 26,
             "tplId": 245,
             "attrs": [
               {
@@ -4060,7 +3304,7 @@
             ]
           },
           {
-            "id": 33,
+            "id": 27,
             "tplId": 246,
             "attrs": [
               {
@@ -4186,7 +3430,7 @@
             ]
           },
           {
-            "id": 34,
+            "id": 28,
             "tplId": 247,
             "attrs": [
               {
@@ -4312,7 +3556,7 @@
             ]
           },
           {
-            "id": 35,
+            "id": 29,
             "tplId": 248,
             "attrs": [
               {
@@ -4438,7 +3682,7 @@
             ]
           },
           {
-            "id": 36,
+            "id": 30,
             "tplId": 249,
             "attrs": [
               {
@@ -4564,7 +3808,7 @@
             ]
           },
           {
-            "id": 37,
+            "id": 31,
             "tplId": 252,
             "attrs": [
               {
@@ -4690,7 +3934,7 @@
             ]
           },
           {
-            "id": 38,
+            "id": 32,
             "tplId": 254,
             "attrs": [
               {
@@ -4816,7 +4060,7 @@
             ]
           },
           {
-            "id": 39,
+            "id": 33,
             "tplId": 253,
             "attrs": [
               {
@@ -4942,7 +4186,7 @@
             ]
           },
           {
-            "id": 40,
+            "id": 34,
             "tplId": 255,
             "attrs": [
               {
@@ -5068,7 +4312,7 @@
             ]
           },
           {
-            "id": 41,
+            "id": 35,
             "tplId": 256,
             "attrs": [
               {
@@ -5194,7 +4438,7 @@
             ]
           },
           {
-            "id": 42,
+            "id": 36,
             "tplId": 607,
             "attrs": [
               {
@@ -5320,7 +4564,7 @@
             ]
           },
           {
-            "id": 43,
+            "id": 37,
             "tplId": 608,
             "attrs": [
               {
@@ -5446,7 +4690,7 @@
             ]
           },
           {
-            "id": 44,
+            "id": 38,
             "tplId": 618,
             "attrs": [
               {
@@ -5572,7 +4816,7 @@
             ]
           },
           {
-            "id": 45,
+            "id": 39,
             "tplId": 609,
             "attrs": [
               {
@@ -5698,7 +4942,7 @@
             ]
           },
           {
-            "id": 46,
+            "id": 40,
             "tplId": 633,
             "attrs": [
               {
@@ -5824,7 +5068,7 @@
             ]
           },
           {
-            "id": 47,
+            "id": 41,
             "tplId": 271,
             "attrs": [
               {
@@ -5950,7 +5194,7 @@
             ]
           },
           {
-            "id": 48,
+            "id": 42,
             "tplId": 272,
             "attrs": [
               {
@@ -6076,7 +5320,7 @@
             ]
           },
           {
-            "id": 49,
+            "id": 43,
             "tplId": 273,
             "attrs": [
               {
@@ -6202,7 +5446,7 @@
             ]
           },
           {
-            "id": 50,
+            "id": 44,
             "tplId": 274,
             "attrs": [
               {
@@ -6328,7 +5572,7 @@
             ]
           },
           {
-            "id": 51,
+            "id": 45,
             "tplId": 275,
             "attrs": [
               {
@@ -6454,7 +5698,7 @@
             ]
           },
           {
-            "id": 52,
+            "id": 46,
             "tplId": 276,
             "attrs": [
               {
@@ -6580,7 +5824,7 @@
             ]
           },
           {
-            "id": 53,
+            "id": 47,
             "tplId": 676,
             "attrs": [
               {
@@ -6706,7 +5950,7 @@
             ]
           },
           {
-            "id": 54,
+            "id": 48,
             "tplId": 677,
             "attrs": [
               {
@@ -6832,7 +6076,7 @@
             ]
           },
           {
-            "id": 55,
+            "id": 49,
             "tplId": 675,
             "attrs": [
               {
@@ -6958,133 +6202,7 @@
             ]
           },
           {
-            "id": 56,
-            "tplId": 688,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 51
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "token_slots",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "creature_number",
-                "value": 0
-              },
-              {
-                "key": "token_count",
-                "value": 0
-              },
-              {
-                "key": "token_type",
-                "value": 0
-              },
-              {
-                "key": "token_origin",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "creature",
-                "value": 0
-              },
-              {
-                "key": "highlighted",
-                "value": 0
-              },
-              {
-                "key": "slot",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "destroyed",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "anti_token",
-                "value": 0
-              },
-              {
-                "key": "to_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "reactive",
-                "value": 0
-              },
-              {
-                "key": "produced_token_type",
-                "value": 0
-              },
-              {
-                "key": "disable_raycasts_on_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 57,
+            "id": 50,
             "tplId": 861,
             "attrs": [
               {
@@ -7210,7 +6328,7 @@
             ]
           },
           {
-            "id": 58,
+            "id": 51,
             "tplId": 883,
             "attrs": [
               {
@@ -7336,7 +6454,7 @@
             ]
           },
           {
-            "id": 59,
+            "id": 52,
             "tplId": 785,
             "attrs": [
               {
@@ -7378,6 +6496,258 @@
               {
                 "key": "duration",
                 "value": 12
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "anti_token",
+                "value": 0
+              },
+              {
+                "key": "to_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "reactive",
+                "value": 0
+              },
+              {
+                "key": "produced_token_type",
+                "value": 0
+              },
+              {
+                "key": "disable_raycasts_on_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 53,
+            "tplId": 924,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "anti_token",
+                "value": 0
+              },
+              {
+                "key": "to_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "reactive",
+                "value": 0
+              },
+              {
+                "key": "produced_token_type",
+                "value": 0
+              },
+              {
+                "key": "disable_raycasts_on_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 54,
+            "tplId": 688,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "token_slots",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
               },
               {
                 "key": "creature",

@@ -5,7 +5,7 @@
       {
         "name": "Test Creature*",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 <link=\"713\"><sprite index=4></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/x2n47rC/2-44.jpg",
         "type": 1,
         "action_on_create": {
@@ -1806,7 +1806,7 @@
       {
         "name": "Harsh Winds",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to {Creatures} without <link=\"716\"><b>Neighbors</b></link>",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to <b>Creatures</b> without <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/2g01JCW/1-61-Obelisk-2.jpg",
         "type": 3,
         "action_on_create": {
@@ -2160,7 +2160,7 @@
       {
         "name": "Cold Snap",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to all {Creatures} in the Bottom <link=\"906\"><b>Lane</b></link> if it has any free Slots",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to all <b>Creatures</b> in the Bottom <link=\"916\"><b>Lane</b></link> if it has any free Slots",
         "picture": "https://i.ibb.co/rkyJSGf/1-42-Ice-hut.jpg",
         "type": 3,
         "action_on_create": {
@@ -2685,7 +2685,7 @@
       {
         "name": "Heat Wave",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to {Creatures} with <link=\"716\"><b>Neighbors</b></link>",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to <b>Creatures</b> with <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/64gfZBB/1-21-Desert.jpg",
         "type": 3,
         "action_on_create": {
@@ -2866,7 +2866,7 @@
       {
         "name": "Spoil & Rot",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: <link=\"906\"><b>Destroys</b></link> 1 <b>Token</b> in <b>Storage</b> for each <link=\"708\"><sprite index=2></link> on {Creatures}",
+        "description": "<link=\"914\"><b>Activation</b></link>: <link=\"915\"><b>Destroys</b></link> 1 <b>Token</b> in <b>Storage</b> for each <link=\"708\"><sprite index=2></link> on <b>Creatures</b>",
         "picture": "https://i.ibb.co/9H8Kvx6/defiled-leaves.jpg",
         "type": 3,
         "action_on_create": {
@@ -2959,12 +2959,12 @@
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Action.Pause",
+                            "name": "Action.[706] ~Pause",
                             "type": 0,
-                            "subtype": 10,
+                            "subtype": 10706,
                             "params": [
                               {
-                                "name": "duration",
+                                "name": "Pause time",
                                 "value": {
                                   "name": "Value.[604] ~Pause: Event Action Step",
                                   "type": 2,
@@ -3105,7 +3105,7 @@
       {
         "name": "Purple Comet",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: gives 2 <link=\"711\"><sprite index=0></link> to <b>Leftmost</b> {Creatures}",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 2 <link=\"711\"><sprite index=0></link> to <b>Leftmost</b> <b>Creatures</b>",
         "picture": "https://i.ibb.co/prXnFFC/1-56-Meteor.jpg",
         "type": 3,
         "action_on_create": {
@@ -3462,7 +3462,7 @@
       {
         "name": "Shared Suffering",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Makes {Creatures} steal the last <b>Token</b> from their right <link=\"716\"><b>Neighbors</b></link>;<br>Gives 1 <link=\"711\"><sprite index=0></link> to those who can't",
+        "description": "<link=\"914\"><b>Activation</b></link>: Makes <b>Creatures</b> steal the last <b>Token</b> from their right <link=\"716\"><b>Neighbors</b></link>;<br>Gives 1 <link=\"711\"><sprite index=0></link> to those who can't",
         "picture": "https://i.ibb.co/sCpNY4T/Priestskill-03.jpg",
         "type": 3,
         "action_on_create": {
@@ -3911,7 +3911,7 @@
       {
         "name": "Extra Rations",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"710\"><sprite index=3></link> to <b>Rightmost</b> Creatures;<br>{Produces} 1 <link=\"714\"><sprite index=1></link> for each <link=\"906\"><b>Death</b></link> caused",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"710\"><sprite index=3></link> to <b>Rightmost</b> Creatures;<br><link=\"719\"><b>Produces</b></link> 1 <link=\"714\"><sprite index=1></link> for each <link=\"922\"><b>Death</b></link> caused",
         "picture": "https://i.ibb.co/BZC5dn8/1-54-Meat.jpg",
         "type": 3,
         "action_on_create": {
@@ -4511,7 +4511,7 @@
       {
         "name": "Spreading Fear",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Makes {Creatures} give 1 [Stress] to both <link=\"716\"><b>Neighbors</b></link>",
+        "description": "<link=\"914\"><b>Activation</b></link>: Makes <b>Creatures</b> give 1 <link=\"713\"><sprite index=4></link> to both <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/N2wP0SV/1-18-Curse.jpg",
         "type": 3,
         "action_on_create": {
@@ -4783,7 +4783,7 @@
       {
         "name": "Ill-Timed Feast",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to {Creatures} in <link=\"717\"><b>Inner</b></link> Slots of the Central <link=\"906\"><b>Lane</b></link>",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to <b>Creatures</b> in <link=\"717\"><b>Inner</b></link> Slots of the Central <link=\"916\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/qp0nGDC/1-63-Pancakes.jpg",
         "type": 3,
         "action_on_create": {
@@ -4973,7 +4973,7 @@
       {
         "name": "Fruits of Laziness",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Makes each <b>Building</b> <link=\"906\"><b>Destroy</b></link> an amount <link=\"718\"><sprite index=9></link> equal to number of <link=\"712\"><sprite index=7></link> on {Creatures}",
+        "description": "<link=\"914\"><b>Activation</b></link>: Makes each <b>Building</b> <link=\"915\"><b>Destroy</b></link> an amount <link=\"718\"><sprite index=9></link> equal to number of <link=\"712\"><sprite index=7></link> on <b>Creatures</b>",
         "picture": "https://i.ibb.co/VCSHpRn/1-8-Beer.jpg",
         "type": 3,
         "action_on_create": {
@@ -5346,7 +5346,7 @@
       {
         "name": "Ritual Sacrifice",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: <link=\"906\"><b>Destroys</b></link> <b>Rightmost</b> <b>Creature</b> in Top <link=\"906\"><b>Lane</b></link>, then <link=\"906\"><b>Destroys</b></link> all {Tokens} on remaining {Creatures} in that <link=\"906\"><b>Lane</b></link>",
+        "description": "<link=\"914\"><b>Activation</b></link>: <link=\"915\"><b>Destroys</b></link> <b>Rightmost</b> <b>Creature</b> in Top <link=\"916\"><b>Lane</b></link>, then <link=\"915\"><b>Destroys</b></link> all <b>Tokens</b> on remaining <b>Creatures</b> in that <link=\"916\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/s5jVWy2/1-37-Heart.jpg",
         "type": 3,
         "action_on_create": {
@@ -5752,7 +5752,7 @@
       {
         "name": "Frenzied Hustle",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: {Activates} <b>Leftmost</b> {Creatures} 3 times;<br>{Produces} 1 <link=\"715\"><sprite index=8></link> for each <link=\"906\"><b>Death</b></link> caused",
+        "description": "<link=\"914\"><b>Activation</b></link>: <link=\"906\"><b>Activates</b></link> <b>Leftmost</b> <b>Creatures</b> 3 times;<br><link=\"719\"><b>Produces</b></link> 1 <link=\"715\"><sprite index=8></link> for each <link=\"922\"><b>Death</b></link> caused",
         "picture": "https://i.ibb.co/2YT1GDH/Druideskill-23.jpg",
         "type": 3,
         "action_on_create": {
@@ -6389,7 +6389,7 @@
       {
         "name": "Spontaneous Mutation",
         "enabled": true,
-        "description": "<link=\"906\"><b>Activation</b></link>: Each Creature gets a random Token",
+        "description": "<link=\"914\"><b>Activation</b></link>: Each <b>Creature</b> gets a random <b>Token</b>",
         "picture": "https://i.ibb.co/ng0YX7Z/1-75-Sight.jpg",
         "type": 3,
         "action_on_create": {
@@ -8354,7 +8354,7 @@
       {
         "name": "Bossy Baneling",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each [Stress] on it",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"713\"><sprite index=4></link> to Right <link=\"716\"><b>Neighbor</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each <link=\"713\"><sprite index=4></link> on it",
         "picture": "https://i.ibb.co/wWhQkjr/2-33.jpg",
         "type": 1,
         "action_on_create": {
@@ -8799,7 +8799,7 @@
       {
         "name": "Nosy Neighbor",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 <link=\"713\"><sprite index=4></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/rxDLZDQ/1-99-Wood-spider.jpg",
         "type": 1,
         "action_on_create": {
@@ -9891,7 +9891,7 @@
       {
         "name": "Killjoy Cultist",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each <link=\"712\"><sprite index=7></link> in its <link=\"906\"><b>Lane</b></link>, then removes all <link=\"712\"><sprite index=7></link> in its <link=\"906\"><b>Lane</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each <link=\"712\"><sprite index=7></link> in its <link=\"916\"><b>Lane</b></link>, then removes all <link=\"712\"><sprite index=7></link> in its <link=\"916\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/PMMCqcg/1-17-Cultist.jpg",
         "type": 1,
         "action_on_create": {
@@ -10428,7 +10428,7 @@
       {
         "name": "Paranoid Prospector",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each 2 free <b>Creature</b> Slots on its <link=\"906\"><b>Lane</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each 2 free <b>Creature</b> Slots on its <link=\"916\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/6w7ZvGG/2-11.jpg",
         "type": 1,
         "action_on_create": {
@@ -10688,7 +10688,7 @@
       {
         "name": "Fiery Fiend",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to every other <b>Creature</b> on its <link=\"906\"><b>Lane</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each <link=\"708\"><sprite index=2></link> on its {Line}",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to every other <b>Creature</b> on its <link=\"916\"><b>Lane</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each <link=\"708\"><sprite index=2></link> on its {Line}",
         "picture": "https://i.ibb.co/cQXJYSR/2-24.jpg",
         "type": 1,
         "action_on_create": {
@@ -11944,7 +11944,7 @@
       {
         "name": "Gold Mine",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> in <link=\"717\"><b>Inner</b></link> slot.<br><link=\"719\"><b>Production</b></link>: <link=\"720\"><sprite index=6></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> in <link=\"721\"><b>Outer</b></link> slot.<br><link=\"719\"><b>Production</b></link>: <link=\"720\"><sprite index=6></link>",
         "picture": "https://i.ibb.co/cXSXw0h/1-35-Gold-mine.jpg",
         "type": 4,
         "action_on_create": {
@@ -14011,20 +14011,10 @@
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Action.Pause",
+                            "name": "Action.Void",
                             "type": 0,
-                            "subtype": 10,
-                            "params": [
-                              {
-                                "name": "duration",
-                                "value": {
-                                  "name": "Value.[317] ~Pause: Phase Start",
-                                  "type": 2,
-                                  "subtype": 10317,
-                                  "params": []
-                                }
-                              }
-                            ]
+                            "subtype": 0,
+                            "params": []
                           }
                         }
                       ]
@@ -14853,25 +14843,10 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.Pause",
+                            "name": "Action.Void",
                             "type": 0,
-                            "subtype": 10,
-                            "params": [
-                              {
-                                "name": "duration",
-                                "value": {
-                                  "name": "Value.Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 500
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
+                            "subtype": 0,
+                            "params": []
                           }
                         },
                         {
@@ -15801,12 +15776,12 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.Pause",
+                            "name": "Action.[706] ~Pause",
                             "type": 0,
-                            "subtype": 10,
+                            "subtype": 10706,
                             "params": [
                               {
-                                "name": "duration",
+                                "name": "Pause time",
                                 "value": {
                                   "name": "Value.Constant",
                                   "type": 2,
@@ -16265,12 +16240,12 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.Pause",
+                            "name": "Action.[706] ~Pause",
                             "type": 0,
-                            "subtype": 10,
+                            "subtype": 10706,
                             "params": [
                               {
-                                "name": "duration",
+                                "name": "Pause time",
                                 "value": {
                                   "name": "Value.Constant",
                                   "type": 2,
@@ -17504,113 +17479,6 @@
         "id": 663
       },
       {
-        "name": "Fast Mode On/Off",
-        "enabled": true,
-        "description": "I AM SPEED",
-        "action": {
-          "name": "Action.If-Then-Else",
-          "type": 0,
-          "subtype": 2,
-          "params": [
-            {
-              "name": "if",
-              "value": {
-                "name": "Condition.Greater than",
-                "type": 1,
-                "subtype": 3,
-                "params": [
-                  {
-                    "name": "value1",
-                    "value": {
-                      "name": "Value.Game Attribute",
-                      "type": 2,
-                      "subtype": 13,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "fast_mode"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "value2",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "then",
-              "value": {
-                "name": "Action.Set game attribute",
-                "type": 0,
-                "subtype": 9,
-                "params": [
-                  {
-                    "name": "attr_name",
-                    "value": "fast_mode"
-                  },
-                  {
-                    "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "else",
-              "value": {
-                "name": "Action.Set game attribute",
-                "type": 0,
-                "subtype": 9,
-                "params": [
-                  {
-                    "name": "attr_name",
-                    "value": "fast_mode"
-                  },
-                  {
-                    "name": "value",
-                    "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 1
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "id": 665
-      },
-      {
         "name": "Play Again",
         "enabled": true,
         "action": {
@@ -17663,7 +17531,7 @@
         "id": 677
       },
       {
-        "name": "Fast Mode On/Off",
+        "name": "Toggle Fast Mode",
         "enabled": true,
         "description": "I AM SPEED",
         "action": {
@@ -18808,7 +18676,7 @@
       {
         "name": "Plague of Locusts",
         "enabled": true,
-        "description": "<link=\"780\"><b>Omen</b></link>: places a <b>Locust Swarm</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more <link=\"714\"><sprite index=1></link> in Storage",
+        "description": "<link=\"780\"><b>Omen</b></link>: Places <b>Locust Swarm</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more <link=\"714\"><sprite index=1></link> in Storage",
         "picture": "https://i.ibb.co/NrWdWw1/32-Evil.jpg",
         "type": 3,
         "action_on_create": {
@@ -19109,7 +18977,7 @@
       {
         "name": "Locust Swarm",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: <link=\"906\"><b>Destroys</b></link> half the <link=\"714\"><sprite index=1></link> in <b>Storage</b>, rounded down",
+        "description": "<link=\"914\"><b>Activation</b></link>: <link=\"915\"><b>Destroys</b></link> half the <link=\"714\"><sprite index=1></link> in <b>Storage</b>, rounded down",
         "picture": "https://i.ibb.co/K5Kd8sj/29-Wave-of-evil.jpg",
         "type": 3,
         "action_on_create": {
@@ -19309,7 +19177,7 @@
       {
         "name": "Hell and High Water",
         "enabled": true,
-        "description": "<link=\"780\"><b>Omen</b></link>: places <b>Flame</b> and <b>Flood</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more {Creatures}",
+        "description": "<link=\"780\"><b>Omen</b></link>: places <b>Flame</b> and <b>Flood</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more <b>Creatures</b>",
         "picture": "https://i.ibb.co/Gch06yF/Shamanskill-31.jpg",
         "type": 3,
         "action_on_create": {
@@ -19618,7 +19486,7 @@
       {
         "name": "Flame",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to each <b>Creature</b> in Top and Center {Lanes}",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to each <b>Creature</b> in Top and Center <link=\"916\"><b>Lanes</b></link>",
         "picture": "https://i.ibb.co/B3LnLnL/1-25-Fireball.jpg",
         "type": 3,
         "action_on_create": {
@@ -19917,7 +19785,7 @@
       {
         "name": "Flood",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to each <b>Creature</b> in Center and Bottom {Lanes}",
+        "description": "<link=\"914\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to each <b>Creature</b> in Center and Bottom <link=\"916\"><b>Lanes</b></link>",
         "picture": "https://i.ibb.co/pXg3rNc/1-52-Mana-storm.jpg",
         "type": 3,
         "action_on_create": {
@@ -20216,7 +20084,7 @@
       {
         "name": "Age of Triskelion",
         "enabled": true,
-        "description": "<link=\"780\"><b>Omen</b></link>: Places <b>Oak</b>, <b>Ash</b> and <b>Thorn</b> into <b>Event Tracker</b>.<br><link=\"906\"><b>Action</b></link>: {Activates} all {Omens}.<br><link=\"778\"><b>Survival</b></link>: Have 3 different of each: {Creatures}, {Tokens} on {Creatures} and {Tokens} in <b>Storage</b>",
+        "description": "<link=\"780\"><b>Omen</b></link>: Places <b>Oak</b>, <b>Ash</b> and <b>Thorn</b> into <b>Event Tracker</b>.<br><link=\"906\"><b>Action</b></link>: <link=\"906\"><b>Activates</b></link> all {Omens}.<br><link=\"778\"><b>Survival</b></link>: Have 3 different of each: <b>Creatures</b>, <b>Tokens</b> on <b>Creatures</b> and <b>Tokens</b> in <b>Storage</b>",
         "picture": "https://i.ibb.co/x2Jg50S/triskelion.jpg",
         "type": 3,
         "action_on_create": {
@@ -21352,7 +21220,7 @@
       {
         "name": "Thorn",
         "enabled": true,
-        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 [Stress] to each <b>Creature</b>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"713\"><sprite index=4></link> to each <b>Creature</b>",
         "picture": "https://i.ibb.co/LZjtPmf/Druideskill-09.jpg",
         "type": 3,
         "action_on_create": {
@@ -21528,6 +21396,7 @@
           "subtype": 10541,
           "params": []
         },
+        "tooltip": 934,
         "id": 809
       },
       {
@@ -22086,17 +21955,26 @@
             {
               "name": "action1",
               "value": {
-                "name": "Action.[162] ~002: Clear Place [Id]",
+                "name": "Action.Set game attribute",
                 "type": 0,
-                "subtype": 10162,
+                "subtype": 9,
                 "params": [
                   {
-                    "name": "Target Place",
+                    "name": "attr_name",
+                    "value": "finished"
+                  },
+                  {
+                    "name": "value",
                     "value": {
-                      "name": "Value.[631] Place - Fullscreen Msg Area",
+                      "name": "Value.Constant",
                       "type": 2,
-                      "subtype": 10631,
-                      "params": []
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
                     }
                   }
                 ]
@@ -22105,10 +21983,58 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.[314] Phase 0 - Init",
+                "name": "Action.Two actions",
                 "type": 0,
-                "subtype": 10314,
-                "params": []
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.[651] ~Deinit",
+                      "type": 0,
+                      "subtype": 10651,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Action.[162] ~002: Clear Place [Id]",
+                            "type": 0,
+                            "subtype": 10162,
+                            "params": [
+                              {
+                                "name": "Target Place",
+                                "value": {
+                                  "name": "Value.[631] Place - Fullscreen Msg Area",
+                                  "type": 2,
+                                  "subtype": 10631,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Action.[314] Phase 0 - Init",
+                            "type": 0,
+                            "subtype": 10314,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -22858,8 +22784,8 @@
         "visible": true,
         "x1": 468,
         "x2": 1656,
-        "y1": 350,
-        "y2": 950,
+        "y1": 300,
+        "y2": 900,
         "layout": 4,
         "zOrder": 96,
         "id": 910
@@ -22872,8 +22798,8 @@
         "visible": true,
         "x1": 468,
         "x2": 1656,
-        "y1": 1350,
-        "y2": 1850,
+        "y1": 1200,
+        "y2": 1800,
         "layout": 4,
         "zOrder": 96,
         "id": 911
@@ -23478,22 +23404,22 @@
         "id": 894
       },
       {
-        "name": "Big button 1",
+        "name": "MD -- Restart Button",
         "enabled": true,
         "cardType": 924,
-        "place": 56,
+        "place": 1,
         "amount": 1,
-        "preset": "big buttons",
-        "id": 912
+        "preset": "tech demo",
+        "id": 936
       },
       {
-        "name": "Big button 2",
+        "name": "MD -- Fast Mode Button",
         "enabled": true,
         "cardType": 688,
-        "place": 57,
+        "place": 1,
         "amount": 1,
-        "preset": "big buttons",
-        "id": 913
+        "preset": "tech demo",
+        "id": 937
       }
     ]
   },
@@ -23855,42 +23781,42 @@
       {
         "name": "Hot Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Cold}",
+        "text": "<b>Counters</b> <link=\"709\"><sprite index=5></link>",
         "delay": 300,
         "id": 708
       },
       {
         "name": "Cold Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Hot}",
+        "text": "<b>Counters</b> <link=\"708\"><sprite index=2></link>",
         "delay": 300,
         "id": 709
       },
       {
         "name": "Order Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Chaos}",
+        "text": "<b>Counters</b> <link=\"711\"><sprite index=0></link>",
         "delay": 300,
         "id": 710
       },
       {
         "name": "Chaos Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Order}",
+        "text": "<b>Counters</b> <link=\"710\"><sprite index=3></link>",
         "delay": 300,
         "id": 711
       },
       {
         "name": "Joy Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Stress}",
+        "text": "<b>Counters</b> <link=\"713\"><sprite index=4></link>",
         "delay": 300,
         "id": 712
       },
       {
         "name": "Stress Token Tooltip",
         "enabled": true,
-        "text": "<b>Counters</b> {Joy}",
+        "text": "<b>Counters</b> <link=\"712\"><sprite index=7></link>",
         "delay": 300,
         "id": 713
       },
@@ -23960,14 +23886,14 @@
       {
         "name": "Omen Tooltip",
         "enabled": true,
-        "text": "Activates when all <b>Token</b> Slots are filled",
+        "text": "Activates when all <b>Token</b> Slots are filled with <link=\"934\"><sprite index=10></link>",
         "delay": 300,
         "id": 780
       },
       {
         "name": "Creature Work Tooltip",
         "enabled": true,
-        "text": "Creates a <link=\"903\"><b>Work</b></link> <b>Token</b> and gives it to the <b>Building</b> on the same <link=\"906\"><b>Lane</b></link>",
+        "text": "Creates a <link=\"903\"><b>Work</b></link> <b>Token</b> and gives it to the <b>Building</b> on the same <link=\"916\"><b>Lane</b></link>",
         "delay": 300,
         "id": 903
       },
@@ -24009,16 +23935,16 @@
       {
         "name": "Death Tooltip",
         "enabled": true,
-        "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"906\"><b>Destroyed</b></link> and loses all its {Tokens}.",
+        "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"915\"><b>Destroyed</b></link> and loses all its <b>Tokens</b>.",
         "delay": 300,
         "id": 922
       },
       {
-        "name": "Death Tooltip",
+        "name": "Omen Token Tooltip",
         "enabled": true,
-        "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"906\"><b>Destroyed</b></link> and loses all its {Tokens}.",
+        "text": "Measures the time until a new <b>Eclipse</b> <link=\"780\"><b>Omen</b></link> activation",
         "delay": 300,
-        "id": 926
+        "id": 934
       }
     ]
   },
@@ -24227,7 +24153,7 @@
         "readonlyBricks": true,
         "layoutPresets": [
           "core",
-          "test buttons",
+          "//test buttons",
           "tech demo",
           "//test creatures",
           "starting creatures",
@@ -24241,13 +24167,13 @@
         "pubkey": "CmxScbqG1imzdkmehMD1VoHait6oYx7o6CLtaHbDkdG1",
         "css": ".brick.action {     background-color: #586e75;     color: #eee8d5; }  .brick.action.readonly {     background-color: #586e75;     color: #eee8d5 }  .brick.action:hover {     background-color: #93a1a1;     color: #eee8d5 }  .brick.condition {     background-color: #268bd2;     color: #eee8d5 }  .brick.condition.readonly {     background-color: #268bd2;     color: #eee8d5 }  .brick.condition:hover {     background-color: #2aa198;     color: #eee8d5 }  .brick.value {     background-color: #6c71c4;     color: #eee8d5 }  .brick.value.readonly {     background-color: #6c71c4;     color: #eee8d5 }  .brick.value:hover {     background-color: #d33682;     color: #eee8d5 }  .brickeditor-bg.active {     background-color: #002b36;     color: #eee8d5 }  .brickeditor-bg.readonly {     background-color: #002b36;     color: #eee8d5; }",
         "layoutPresets": [
-          "loogris layout",
+          "/loogris layout",
           "core",
-          "// test creatures",
+          "/test creatures",
           "test buttons",
-          "// test buildings",
-          "// tech demo",
-          "// starting creatures",
+          "/test buildings",
+          "tech demo",
+          "/starting creatures",
           "big buttons"
         ],
         "id": 578
@@ -24487,45 +24413,93 @@
       },
       {
         "source": "{EventAction}",
-        "result": "<link=\"906\"><b>Activation</b></link>",
+        "result": "<link=\"914\"><b>Activation</b></link>",
         "enabled": true,
         "id": 917
       },
       {
         "source": "{Destroy}",
-        "result": "<link=\"906\"><b>Destroy</b></link>",
+        "result": "<link=\"915\"><b>Destroy</b></link>",
         "enabled": true,
         "id": 918
       },
       {
         "source": "{Destroys}",
-        "result": "<link=\"906\"><b>Destroys</b></link>",
+        "result": "<link=\"915\"><b>Destroys</b></link>",
         "enabled": true,
         "id": 919
       },
       {
         "source": "{Lane}",
-        "result": "<link=\"906\"><b>Lane</b></link>",
+        "result": "<link=\"916\"><b>Lane</b></link>",
         "enabled": true,
         "id": 920
       },
       {
         "source": "{Death}",
-        "result": "<link=\"906\"><b>Death</b></link>",
+        "result": "<link=\"922\"><b>Death</b></link>",
         "enabled": true,
         "id": 921
       },
       {
         "source": "{Destroyed}",
-        "result": "<link=\"906\"><b>Destroyed</b></link>",
+        "result": "<link=\"915\"><b>Destroyed</b></link>",
         "enabled": true,
         "id": 923
       },
       {
         "source": "[Omen]",
-        "result": "<link=\"718\"><sprite index=10></link>",
+        "result": "<link=\"934\"><sprite index=10></link>",
         "enabled": true,
         "id": 925
+      },
+      {
+        "source": "{Creatures}",
+        "result": "<b>Creatures</b>",
+        "enabled": true,
+        "id": 928
+      },
+      {
+        "source": "{Buildings}",
+        "result": "<b>Buildings</b>",
+        "enabled": true,
+        "id": 929
+      },
+      {
+        "source": "{Events}",
+        "result": "<b>Events</b>",
+        "enabled": true,
+        "id": 930
+      },
+      {
+        "source": "{Activates}",
+        "result": "<link=\"906\"><b>Activates</b></link>",
+        "enabled": true,
+        "id": 931
+      },
+      {
+        "source": "{Produces}",
+        "result": "<link=\"719\"><b>Produces</b></link>",
+        "enabled": true,
+        "id": 932
+      },
+      {
+        "source": "[Stress]",
+        "result": "<link=\"713\"><sprite index=4></link>",
+        "enabled": true,
+        "id": 933
+      },
+      {
+        "source": "{Tokens}",
+        "result": "<b>Tokens</b>",
+        "enabled": true,
+        "id": 935
+      },
+      {
+        "source": "{Lanes}",
+        "result": "<link=\"916\"><b>Lanes</b></link>",
+        "enabled": true,
+        "id": 943
       }
     ]
   },
@@ -26291,39 +26265,10 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[145] #002:If-then",
+                      "name": "Action.Void",
                       "type": 0,
-                      "subtype": 10145,
-                      "params": [
-                        {
-                          "name": "Condition",
-                          "value": {
-                            "name": "Condition.[550] Pause - Fast Mode Enabled",
-                            "type": 1,
-                            "subtype": 10550,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "Action",
-                          "value": {
-                            "name": "Action.Pause",
-                            "type": 0,
-                            "subtype": 10,
-                            "params": [
-                              {
-                                "name": "duration",
-                                "value": {
-                                  "name": "Value.[317] ~Pause: Phase Start",
-                                  "type": 2,
-                                  "subtype": 10317,
-                                  "params": []
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
+                      "subtype": 0,
+                      "params": []
                     }
                   },
                   {
@@ -26522,9 +26467,9 @@
                   {
                     "name": "action1",
                     "value": {
-                      "name": "Action.[851] Init - Select Eclipse",
+                      "name": "Action.[940] Init -- Place Big Buttons",
                       "type": 0,
-                      "subtype": 10851,
+                      "subtype": 10940,
                       "params": []
                     }
                   },
@@ -26538,9 +26483,9 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Action.[356] Init - Form Event Deck",
+                            "name": "Action.[851] Init - Select Eclipse",
                             "type": 0,
-                            "subtype": 10356,
+                            "subtype": 10851,
                             "params": []
                           }
                         },
@@ -26554,9 +26499,9 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[357] Init - Place Starting Creatures",
+                                  "name": "Action.[356] Init - Form Event Deck",
                                   "type": 0,
-                                  "subtype": 10357,
+                                  "subtype": 10356,
                                   "params": []
                                 }
                               },
@@ -26570,9 +26515,9 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Action.[438] Init - Place Starting Buildings",
+                                        "name": "Action.[357] Init - Place Starting Creatures",
                                         "type": 0,
-                                        "subtype": 10438,
+                                        "subtype": 10357,
                                         "params": []
                                       }
                                     },
@@ -26586,9 +26531,9 @@
                                           {
                                             "name": "action1",
                                             "value": {
-                                              "name": "Action.[539] Show/Hide End Turn Button",
+                                              "name": "Action.[438] Init - Place Starting Buildings",
                                               "type": 0,
-                                              "subtype": 10539,
+                                              "subtype": 10438,
                                               "params": []
                                             }
                                           },
@@ -26602,9 +26547,9 @@
                                                 {
                                                   "name": "action1",
                                                   "value": {
-                                                    "name": "Action.[885] Show/Hide Showcase Place",
+                                                    "name": "Action.[539] Show/Hide End Turn Button",
                                                     "type": 0,
-                                                    "subtype": 10885,
+                                                    "subtype": 10539,
                                                     "params": []
                                                   }
                                                 },
@@ -26618,91 +26563,10 @@
                                                       {
                                                         "name": "action1",
                                                         "value": {
-                                                          "name": "Action.[161] ~Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                                                          "name": "Action.[885] Show/Hide Showcase Place",
                                                           "type": 0,
-                                                          "subtype": 10161,
-                                                          "params": [
-                                                            {
-                                                              "name": "cond",
-                                                              "value": {
-                                                                "name": "Condition.And",
-                                                                "type": 1,
-                                                                "subtype": 7,
-                                                                "params": [
-                                                                  {
-                                                                    "name": "cond1",
-                                                                    "value": {
-                                                                      "name": "Condition.[155] #008:Is in place [X]",
-                                                                      "type": 1,
-                                                                      "subtype": 10155,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "Place Id",
-                                                                          "value": {
-                                                                            "name": "Value.[163] Place 01. Main Deck/MD",
-                                                                            "type": 2,
-                                                                            "subtype": 10163,
-                                                                            "params": []
-                                                                          }
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  },
-                                                                  {
-                                                                    "name": "cond2",
-                                                                    "value": {
-                                                                      "name": "Condition.[154] #007:Is card type",
-                                                                      "type": 1,
-                                                                      "subtype": 10154,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "Card Type Id",
-                                                                          "value": {
-                                                                            "name": "Value.[483] TplId - Msg - Turn Number Text",
-                                                                            "type": 2,
-                                                                            "subtype": 10483,
-                                                                            "params": []
-                                                                          }
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  }
-                                                                ]
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "destPlace",
-                                                              "value": {
-                                                                "name": "Value.[487] Place - Turn Number Text",
-                                                                "type": 2,
-                                                                "subtype": 10487,
-                                                                "params": []
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "action",
-                                                              "value": {
-                                                                "name": "Action.Void",
-                                                                "type": 0,
-                                                                "subtype": 0,
-                                                                "params": []
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "cnt",
-                                                              "value": {
-                                                                "name": "Value.Constant",
-                                                                "type": 2,
-                                                                "subtype": 0,
-                                                                "params": [
-                                                                  {
-                                                                    "name": "value",
-                                                                    "value": 1
-                                                                  }
-                                                                ]
-                                                              }
-                                                            }
-                                                          ]
+                                                          "subtype": 10885,
+                                                          "params": []
                                                         }
                                                       },
                                                       {
@@ -26755,9 +26619,9 @@
                                                                               {
                                                                                 "name": "Card Type Id",
                                                                                 "value": {
-                                                                                  "name": "Value.[484] TplId - Msg - Turn Number Widget",
+                                                                                  "name": "Value.[483] TplId - Msg - Turn Number Text",
                                                                                   "type": 2,
-                                                                                  "subtype": 10484,
+                                                                                  "subtype": 10483,
                                                                                   "params": []
                                                                                 }
                                                                               }
@@ -26770,18 +26634,18 @@
                                                                   {
                                                                     "name": "destPlace",
                                                                     "value": {
-                                                                      "name": "Value.[488] Place - Turn Number Widget",
+                                                                      "name": "Value.[487] Place - Turn Number Text",
                                                                       "type": 2,
-                                                                      "subtype": 10488,
+                                                                      "subtype": 10487,
                                                                       "params": []
                                                                     }
                                                                   },
                                                                   {
                                                                     "name": "action",
                                                                     "value": {
-                                                                      "name": "Action.[346] Trigger event 'Activation' + build context",
+                                                                      "name": "Action.Void",
                                                                       "type": 0,
-                                                                      "subtype": 10346,
+                                                                      "subtype": 0,
                                                                       "params": []
                                                                     }
                                                                   },
@@ -26805,10 +26669,110 @@
                                                             {
                                                               "name": "action2",
                                                               "value": {
-                                                                "name": "Action.[450] Show Msg - Player Phase",
+                                                                "name": "Action.Two actions",
                                                                 "type": 0,
-                                                                "subtype": 10450,
-                                                                "params": []
+                                                                "subtype": 1,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "action1",
+                                                                    "value": {
+                                                                      "name": "Action.[161] ~Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                                                                      "type": 0,
+                                                                      "subtype": 10161,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "cond",
+                                                                          "value": {
+                                                                            "name": "Condition.And",
+                                                                            "type": 1,
+                                                                            "subtype": 7,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "cond1",
+                                                                                "value": {
+                                                                                  "name": "Condition.[155] #008:Is in place [X]",
+                                                                                  "type": 1,
+                                                                                  "subtype": 10155,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "Place Id",
+                                                                                      "value": {
+                                                                                        "name": "Value.[163] Place 01. Main Deck/MD",
+                                                                                        "type": 2,
+                                                                                        "subtype": 10163,
+                                                                                        "params": []
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "name": "cond2",
+                                                                                "value": {
+                                                                                  "name": "Condition.[154] #007:Is card type",
+                                                                                  "type": 1,
+                                                                                  "subtype": 10154,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "Card Type Id",
+                                                                                      "value": {
+                                                                                        "name": "Value.[484] TplId - Msg - Turn Number Widget",
+                                                                                        "type": 2,
+                                                                                        "subtype": 10484,
+                                                                                        "params": []
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "name": "destPlace",
+                                                                          "value": {
+                                                                            "name": "Value.[488] Place - Turn Number Widget",
+                                                                            "type": 2,
+                                                                            "subtype": 10488,
+                                                                            "params": []
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "name": "action",
+                                                                          "value": {
+                                                                            "name": "Action.[346] Trigger event 'Activation' + build context",
+                                                                            "type": 0,
+                                                                            "subtype": 10346,
+                                                                            "params": []
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "name": "cnt",
+                                                                          "value": {
+                                                                            "name": "Value.Constant",
+                                                                            "type": 2,
+                                                                            "subtype": 0,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "value",
+                                                                                "value": 1
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "name": "action2",
+                                                                    "value": {
+                                                                      "name": "Action.[450] Show Msg - Player Phase",
+                                                                      "type": 0,
+                                                                      "subtype": 10450,
+                                                                      "params": []
+                                                                    }
+                                                                  }
+                                                                ]
                                                               }
                                                             }
                                                           ]
@@ -47876,6 +47840,140 @@
         "id": 889
       },
       {
+        "name": "Init -- Place Big Buttons",
+        "enabled": true,
+        "brick": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[161] ~Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                "type": 0,
+                "subtype": 10161,
+                "params": [
+                  {
+                    "name": "cond",
+                    "value": {
+                      "name": "Condition.[154] #007:Is card type",
+                      "type": 1,
+                      "subtype": 10154,
+                      "params": [
+                        {
+                          "name": "Card Type Id",
+                          "value": {
+                            "name": "Value.[938] Restart Button",
+                            "type": 2,
+                            "subtype": 10938,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "destPlace",
+                    "value": {
+                      "name": "Value.[941] Place. Big Button 1",
+                      "type": 2,
+                      "subtype": 10941,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Void",
+                      "type": 0,
+                      "subtype": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cnt",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.[161] ~Move [N] Cards by [Cond] to Place [Id] & [DO] ",
+                "type": 0,
+                "subtype": 10161,
+                "params": [
+                  {
+                    "name": "cond",
+                    "value": {
+                      "name": "Condition.[154] #007:Is card type",
+                      "type": 1,
+                      "subtype": 10154,
+                      "params": [
+                        {
+                          "name": "Card Type Id",
+                          "value": {
+                            "name": "Value.[939] Fast Mode Button",
+                            "type": 2,
+                            "subtype": 10939,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "destPlace",
+                    "value": {
+                      "name": "Value.[942] Place. Big Button 2",
+                      "type": 2,
+                      "subtype": 10942,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.Void",
+                      "type": 0,
+                      "subtype": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cnt",
+                    "value": {
+                      "name": "Value.Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "id": 940
+      },
+      {
         "name": "#001:True",
         "enabled": true,
         "brick": {
@@ -54684,6 +54782,70 @@
           ]
         },
         "id": 890
+      },
+      {
+        "name": "Restart Button",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 924
+            }
+          ]
+        },
+        "id": 938
+      },
+      {
+        "name": "Fast Mode Button",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 688
+            }
+          ]
+        },
+        "id": 939
+      },
+      {
+        "name": "Place. Big Button 1",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 57
+            }
+          ]
+        },
+        "id": 941
+      },
+      {
+        "name": "Place. Big Button 2",
+        "enabled": true,
+        "brick": {
+          "name": "Value.Constant",
+          "type": 2,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "value",
+              "value": 56
+            }
+          ]
+        },
+        "id": 942
       }
     ]
   }
