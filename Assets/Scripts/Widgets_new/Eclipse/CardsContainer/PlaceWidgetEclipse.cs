@@ -171,7 +171,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             
             // anims
             var animHighlight = attributes.TryGetValue("anim_highlight", out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
-            eclipseCard.Layout.Highlight.SetActive(animHighlight);
+            eclipseCard.Layout.UpdateHighlight(animHighlight);
             
             // order
             var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;

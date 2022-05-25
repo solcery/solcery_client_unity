@@ -39,7 +39,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private TMP_Text descriptionText;
         [SerializeField]
-        private GameObject highlight;
+        private GameObject[] highlights;
         [SerializeField]
         private List<Graphic> raycastObjects;
 
@@ -61,7 +61,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
-        public GameObject Highlight => highlight;
 
         private void Awake()
         {
@@ -131,7 +130,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 new Vector2(0.5f, 0.5f), 100.0f);
             iconImage.sprite = _sprite;
         }
-        
+
+        public void UpdateHighlight(bool active)
+        {
+            foreach (var highlight in highlights)
+            {
+                highlight.SetActive(active);
+            }
+        }
+
         private void DestroySprite()
         {
             if (_sprite != null)
