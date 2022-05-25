@@ -22410,6 +22410,7 @@
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 4",
+        "frame": true,
         "drag_n_drop": 285,
         "drag_n_drops": [
           285
@@ -22850,29 +22851,29 @@
         "id": 860
       },
       {
-        "name": "Big Button 1",
+        "name": "Big Button 2",
         "enabled": true,
         "placeId": 56,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
         "x1": 468,
         "x2": 1656,
-        "y1": 2100,
-        "y2": 3300,
+        "y1": 350,
+        "y2": 950,
         "layout": 4,
         "zOrder": 96,
         "id": 910
       },
       {
-        "name": "Big Button 2",
+        "name": "Big Button 1",
         "enabled": true,
         "placeId": 57,
         "interactableForActiveLocalPlayer": true,
         "visible": true,
         "x1": 468,
         "x2": 1656,
-        "y1": 3700,
-        "y2": 4900,
+        "y1": 1350,
+        "y2": 1850,
         "layout": 4,
         "zOrder": 96,
         "id": 911
@@ -24011,6 +24012,13 @@
         "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"906\"><b>Destroyed</b></link> and loses all its {Tokens}.",
         "delay": 300,
         "id": 922
+      },
+      {
+        "name": "Death Tooltip",
+        "enabled": true,
+        "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"906\"><b>Destroyed</b></link> and loses all its {Tokens}.",
+        "delay": 300,
+        "id": 926
       }
     ]
   },
@@ -24236,7 +24244,7 @@
           "loogris layout",
           "core",
           "// test creatures",
-          "// test buttons",
+          "test buttons",
           "// test buildings",
           "// tech demo",
           "// starting creatures",
@@ -24512,6 +24520,12 @@
         "result": "<link=\"906\"><b>Destroyed</b></link>",
         "enabled": true,
         "id": 923
+      },
+      {
+        "source": "[Omen]",
+        "result": "<link=\"718\"><sprite index=10></link>",
+        "enabled": true,
+        "id": 925
       }
     ]
   },
