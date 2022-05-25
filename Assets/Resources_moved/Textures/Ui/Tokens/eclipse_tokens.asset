@@ -136,6 +136,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: eclipse_tokens_9
     m_HashCode: 1227987988
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 10
+    m_Scale: 1
+    m_Name: eclipse_tokens_10
+    m_HashCode: 1868898220
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -146,7 +152,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 0
-      m_Y: 256
+      m_Y: 512
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -161,7 +167,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 256
-      m_Y: 256
+      m_Y: 512
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -176,7 +182,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 512
-      m_Y: 256
+      m_Y: 512
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -191,7 +197,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 768
-      m_Y: 256
+      m_Y: 512
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -206,7 +212,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1024
-      m_Y: 256
+      m_Y: 512
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -221,7 +227,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 0
-      m_Y: 0
+      m_Y: 256
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -236,7 +242,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 256
-      m_Y: 0
+      m_Y: 256
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -251,7 +257,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 512
-      m_Y: 0
+      m_Y: 256
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -266,7 +272,7 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 768
-      m_Y: 0
+      m_Y: 256
       m_Width: 256
       m_Height: 256
     m_Scale: 1
@@ -281,11 +287,26 @@ MonoBehaviour:
       m_HorizontalAdvance: 256
     m_GlyphRect:
       m_X: 1024
-      m_Y: 0
+      m_Y: 256
       m_Width: 256
       m_Height: 256
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: 318539142, guid: 9e9df9b66dcbb4e2cba76d42dc38ec21, type: 3}
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 256
+      m_Height: 256
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 256
+      m_HorizontalAdvance: 256
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 256
+      m_Height: 256
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 1776050486, guid: 9e9df9b66dcbb4e2cba76d42dc38ec21, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
