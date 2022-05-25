@@ -98,7 +98,8 @@ namespace Solcery.Games.Contexts
                     
                     objectId = Random.Range(0, 100000);
                 } while (objectIdHash.Contains(objectId));
-                
+
+                objectIdHash.Add(objectId);
                 _world.GetPool<ComponentObjectTag>().Add(entityId);
                 _world.GetPool<ComponentObjectId>().Add(entityId).Id = objectId;
                 _world.GetPool<ComponentObjectType>().Add(entityId).Type = cardTypeId;

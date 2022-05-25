@@ -10,6 +10,7 @@ namespace Solcery.Models.Simulation.Game.Destroy
     public sealed class SystemDestroyObjects : ISystemDestroyObjects
     {
         private EcsFilter _filterDestroyedObjects;
+        private EcsFilter _filterComponentObjectIdHash;
         
         public static ISystemDestroyObjects Create()
         {
@@ -21,14 +22,30 @@ namespace Solcery.Models.Simulation.Game.Destroy
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             _filterDestroyedObjects = systems.GetWorld().Filter<ComponentObjectDeletedTag>().End();
+            _filterComponentObjectIdHash = systems.GetWorld().Filter<ComponentObjectIdHash>().End();
         }
         
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            foreach (var entityId in _filterDestroyedObjects)
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+
+            foreach (var oidEntityId in _filterComponentObjectIdHash)
             {
-                world.DelEntity(entityId);
+                var objectIdHash = world.GetPool<ComponentObjectIdHash>().Get(oidEntityId).ObjectIdHash;
+                
+                foreach (var entityId in _filterDestroyedObjects)
+                {
+                    if (objectIdPool.Has(entityId))
+                    {
+                        var objId = objectIdPool.Get(entityId).Id;
+                        objectIdHash.Remove(objId);
+                    }
+                    
+                    world.DelEntity(entityId);
+                }
+                
+                break;
             }
         }
     }
