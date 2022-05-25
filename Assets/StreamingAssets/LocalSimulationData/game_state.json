@@ -29,7 +29,7 @@
         "objects": [
           {
             "id": 1,
-            "tplId": 799,
+            "tplId": 776,
             "attrs": [
               {
                 "key": "place",
@@ -45,7 +45,7 @@
               },
               {
                 "key": "token_slots",
-                "value": 4
+                "value": 3
               },
               {
                 "key": "type",
@@ -6471,7 +6471,7 @@
               },
               {
                 "key": "token_slots",
-                "value": 4
+                "value": 5
               },
               {
                 "key": "type",
@@ -6495,7 +6495,7 @@
               },
               {
                 "key": "duration",
-                "value": 4
+                "value": 5
               },
               {
                 "key": "creature",
@@ -7328,6 +7328,132 @@
               {
                 "key": "disable_raycasts_on_place",
                 "value": 1
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 59,
+            "tplId": 785,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 1
+              },
+              {
+                "key": "token_slots",
+                "value": 2
+              },
+              {
+                "key": "type",
+                "value": 5
+              },
+              {
+                "key": "creature_number",
+                "value": 0
+              },
+              {
+                "key": "token_count",
+                "value": 0
+              },
+              {
+                "key": "token_type",
+                "value": 0
+              },
+              {
+                "key": "token_origin",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 12
+              },
+              {
+                "key": "creature",
+                "value": 0
+              },
+              {
+                "key": "highlighted",
+                "value": 0
+              },
+              {
+                "key": "slot",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "destroyed",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "anti_token",
+                "value": 0
+              },
+              {
+                "key": "to_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "reactive",
+                "value": 0
+              },
+              {
+                "key": "produced_token_type",
+                "value": 0
+              },
+              {
+                "key": "disable_raycasts_on_place",
+                "value": 0
               },
               {
                 "key": "anim_card_fly_time",

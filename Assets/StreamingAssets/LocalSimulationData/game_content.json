@@ -5,7 +5,7 @@
       {
         "name": "Test Creature*",
         "enabled": true,
-        "description": "Gives 1 <link=\"712\"><sprite index=7></link> to Left, gives 1 Stress to Right",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/x2n47rC/2-44.jpg",
         "type": 1,
         "action_on_create": {
@@ -272,12 +272,13 @@
           ]
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 115
       },
       {
         "name": "Test Building",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"714\"><sprite index=1></link>. Gains <link=\"718\"><sprite index=9></link> from slots 1&5",
+        "description": "Produces Food. Gains Work from slots 1&5",
         "picture": "https://i.ibb.co/m0Xm6Gv/1-34-Goblin-s-dwelling.jpg",
         "type": 4,
         "action_on_create": {
@@ -534,7 +535,7 @@
       {
         "name": "{OLD} Test Event",
         "enabled": true,
-        "description": "Places 1 <link=\"708\"><sprite index=2></link> on every Creature",
+        "description": "Places 1 Hot on every Creature",
         "picture": "https://i.ibb.co/cJX7cBs/1-25-Fireball.jpg",
         "type": 3,
         "action_on_create": {
@@ -1803,9 +1804,9 @@
         "id": 236
       },
       {
-        "name": "Event Harsh Winds *",
+        "name": "Harsh Winds",
         "enabled": true,
-        "description": "Gives 1 <link=\"709\"><sprite index=5></link> to Creatures without <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to {Creatures} without <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/2g01JCW/1-61-Obelisk-2.jpg",
         "type": 3,
         "action_on_create": {
@@ -1989,12 +1990,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 241
       },
       {
         "name": "Earth Elemental",
         "enabled": true,
-        "description": "Treats any Gifted token as <link=\"714\"><sprite index=1></link>; <link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> if it has at least 2 Tokens",
+        "description": "Treats any Gifted token as Food; Produces 1 Work if it has at least 2 Tokens",
         "picture": "https://i.ibb.co/9nTQvvW/2-56.jpg",
         "type": 1,
         "action_on_create": {
@@ -2155,9 +2158,9 @@
         "id": 242
       },
       {
-        "name": "Event Cold Snap *",
+        "name": "Cold Snap",
         "enabled": true,
-        "description": "Target: Bottom Line; If the Line has Free Slots, Creatures get 1 <link=\"709\"><sprite index=5></link>",
+        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to all {Creatures} in the Bottom <link=\"906\"><b>Lane</b></link> if it has any free Slots",
         "picture": "https://i.ibb.co/rkyJSGf/1-42-Ice-hut.jpg",
         "type": 3,
         "action_on_create": {
@@ -2421,12 +2424,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 243
       },
       {
-        "name": "Daring Dragonling*",
+        "name": "Daring Dragonling",
         "enabled": true,
-        "description": "Gives 1 <link=\"708\"><sprite index=2></link> to both <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to both <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/wp2w87t/2-17.jpg",
         "type": 1,
         "action_on_create": {
@@ -2674,12 +2679,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 244
       },
       {
-        "name": "Event Heat Wave *",
+        "name": "Heat Wave",
         "enabled": true,
-        "description": "Gives 1 <link=\"708\"><sprite index=2></link> to Creatures with <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to {Creatures} with <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/64gfZBB/1-21-Desert.jpg",
         "type": 3,
         "action_on_create": {
@@ -2853,12 +2859,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 245
       },
       {
-        "name": "Event Spoil & Rot *",
+        "name": "Spoil & Rot",
         "enabled": true,
-        "description": "Destroys 1 Token in the <b>Storage</b> for each <link=\"708\"><sprite index=2></link> on Creatures",
+        "description": "<link=\"906\"><b>Activation</b></link>: <link=\"906\"><b>Destroys</b></link> 1 <b>Token</b> in <b>Storage</b> for each <link=\"708\"><sprite index=2></link> on {Creatures}",
         "picture": "https://i.ibb.co/9H8Kvx6/defiled-leaves.jpg",
         "type": 3,
         "action_on_create": {
@@ -3090,12 +3098,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 246
       },
       {
-        "name": "Event Purple Comet *",
+        "name": "Purple Comet",
         "enabled": true,
-        "description": "<b>Leftmost</b> Creatures get 2 <link=\"711\"><sprite index=0></link>",
+        "description": "<link=\"906\"><b>Activation</b></link>: gives 2 <link=\"711\"><sprite index=0></link> to <b>Leftmost</b> {Creatures}",
         "picture": "https://i.ibb.co/prXnFFC/1-56-Meteor.jpg",
         "type": 3,
         "action_on_create": {
@@ -3445,12 +3455,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 247
       },
       {
-        "name": "Event Shared Suffering *",
+        "name": "Shared Suffering",
         "enabled": true,
-        "description": "Creatures take last Token from their Right <link=\"716\"><b>Neighbor</b></link>; If they can't - they gain 1 <link=\"711\"><sprite index=0></link>",
+        "description": "<link=\"906\"><b>Activation</b></link>: Makes {Creatures} steal the last <b>Token</b> from their right <link=\"716\"><b>Neighbors</b></link>;<br>Gives 1 <link=\"711\"><sprite index=0></link> to those who can't",
         "picture": "https://i.ibb.co/sCpNY4T/Priestskill-03.jpg",
         "type": 3,
         "action_on_create": {
@@ -3892,12 +3904,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 248
       },
       {
-        "name": "Event Extra Rations *",
+        "name": "Extra Rations",
         "enabled": true,
-        "description": "<b>Rightmost</b> Creatures get 1 <link=\"710\"><sprite index=3></link>; <link=\"719\"><b>Produce</b></link> 1 <link=\"714\"><sprite index=1></link> for each death since <b>Activation</b>",
+        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"710\"><sprite index=3></link> to <b>Rightmost</b> Creatures;<br>{Produces} 1 <link=\"714\"><sprite index=1></link> for each <link=\"906\"><b>Death</b></link> caused",
         "picture": "https://i.ibb.co/BZC5dn8/1-54-Meat.jpg",
         "type": 3,
         "action_on_create": {
@@ -4490,12 +4504,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 249
       },
       {
-        "name": "Event Spreading Fear *",
+        "name": "Spreading Fear",
         "enabled": true,
-        "description": "Creatures give 1 Stress to their Left <link=\"716\"><b>Neighbor</b></link>, then 1 Stress to their Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Activation</b></link>: Makes {Creatures} give 1 [Stress] to both <link=\"716\"><b>Neighbors</b></link>",
         "picture": "https://i.ibb.co/N2wP0SV/1-18-Curse.jpg",
         "type": 3,
         "action_on_create": {
@@ -4760,12 +4776,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 252
       },
       {
-        "name": "Event Ill-Timed Feast *",
+        "name": "Ill-Timed Feast",
         "enabled": true,
-        "description": "Target: Central Line; Gives 1 <link=\"712\"><sprite index=7></link> to Creatures in <link=\"717\"><b>Innermost</b></link> Slots",
+        "description": "<link=\"906\"><b>Activation</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to {Creatures} in <link=\"717\"><b>Inner</b></link> Slots of the Central <link=\"906\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/qp0nGDC/1-63-Pancakes.jpg",
         "type": 3,
         "action_on_create": {
@@ -4948,12 +4966,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "TIme",
         "id": 253
       },
       {
-        "name": "Event Fruits of Laziness *",
+        "name": "Fruits of Laziness",
         "enabled": true,
-        "description": "Each Building loses <link=\"718\"><sprite index=9></link> equal to the number of <link=\"712\"><sprite index=7></link> on Creatures",
+        "description": "<link=\"906\"><b>Activation</b></link>: Makes each <b>Building</b> <link=\"906\"><b>Destroy</b></link> an amount <link=\"718\"><sprite index=9></link> equal to number of <link=\"712\"><sprite index=7></link> on {Creatures}",
         "picture": "https://i.ibb.co/VCSHpRn/1-8-Beer.jpg",
         "type": 3,
         "action_on_create": {
@@ -5319,12 +5339,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "TIme",
         "id": 254
       },
       {
-        "name": "Event Ritual Sacrifice *",
+        "name": "Ritual Sacrifice",
         "enabled": true,
-        "description": "Target: Top Line; <b>Rightmost</b> Creature Dies then Creatures lose all Tokens",
+        "description": "<link=\"906\"><b>Activation</b></link>: <link=\"906\"><b>Destroys</b></link> <b>Rightmost</b> <b>Creature</b> in Top <link=\"906\"><b>Lane</b></link>, then <link=\"906\"><b>Destroys</b></link> all {Tokens} on remaining {Creatures} in that <link=\"906\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/s5jVWy2/1-37-Heart.jpg",
         "type": 3,
         "action_on_create": {
@@ -5723,12 +5745,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 255
       },
       {
-        "name": "Event Frenzied Hustle *",
+        "name": "Frenzied Hustle",
         "enabled": true,
-        "description": "<b>Leftmost</b> Creatures <b>Activate</b> 3 times; <link=\"719\"><b>Produce</b></link> 1 <link=\"715\"><sprite index=8></link> for each death since <b>Activation</b>",
+        "description": "<link=\"906\"><b>Activation</b></link>: {Activates} <b>Leftmost</b> {Creatures} 3 times;<br>{Produces} 1 <link=\"715\"><sprite index=8></link> for each <link=\"906\"><b>Death</b></link> caused",
         "picture": "https://i.ibb.co/2YT1GDH/Druideskill-23.jpg",
         "type": 3,
         "action_on_create": {
@@ -6358,12 +6382,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "Time",
         "id": 256
       },
       {
-        "name": "Event - Spontaneous Mutation *",
+        "name": "Spontaneous Mutation",
         "enabled": true,
-        "description": "Each Creature gets a random Token",
+        "description": "<link=\"906\"><b>Activation</b></link>: Each Creature gets a random Token",
         "picture": "https://i.ibb.co/ng0YX7Z/1-75-Sight.jpg",
         "type": 3,
         "action_on_create": {
@@ -7420,12 +7446,14 @@
           "subtype": 10525,
           "params": []
         },
+        "gd_filter": "Event",
+        "timer_text": "TIme",
         "id": 257
       },
       {
-        "name": "Seething Salamander*",
+        "name": "Seething Salamander",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each <link=\"708\"><sprite index=2></link> on self",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each <link=\"708\"><sprite index=2></link> on itself",
         "picture": "https://i.ibb.co/1RMwdVQ/1-49-Lizard.jpg",
         "type": 1,
         "action_on_create": {
@@ -7583,6 +7611,7 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 258
       },
       {
@@ -7882,9 +7911,9 @@
         "id": 259
       },
       {
-        "name": "Yawning Yeti *",
+        "name": "Yawning Yeti",
         "enabled": true,
-        "description": "Transforms gained <link=\"709\"><sprite index=5></link> into <link=\"715\"><sprite index=8></link>. <link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each <link=\"715\"><sprite index=8></link> on self",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each <link=\"715\"><sprite index=8></link> on itself.<br><link=\"905\"><b>Token Gain</b></link>: transforms <link=\"709\"><sprite index=5></link> into <link=\"715\"><sprite index=8></link>",
         "picture": "https://i.ibb.co/bzRzFfh/1-100-Yeti.jpg",
         "type": 1,
         "action_on_create": {
@@ -8319,12 +8348,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 260
       },
       {
-        "name": "Bossy Baneling*",
+        "name": "Bossy Baneling",
         "enabled": true,
-        "description": "Gives 1 Stress to Right <link=\"716\"><b>Neighbor</b></link> then <link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each Stress on that <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each [Stress] on it",
         "picture": "https://i.ibb.co/wWhQkjr/2-33.jpg",
         "type": 1,
         "action_on_create": {
@@ -8587,12 +8617,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 261
       },
       {
         "name": "{!} Harrowing Harvester",
         "enabled": true,
-        "description": "Gives 2 Stress to Left <link=\"716\"><b>Neighbor</b></link>; <link=\"719\"><b>Produce</b></link>s 4 <link=\"718\"><sprite index=9></link> for each Death on its Line",
+        "description": "Gives 2 Stress to Left Neighbor; Produces 4 Work for each Death on its Line",
         "picture": "https://i.ibb.co/CHQCWVn/2-35.jpg",
         "type": 1,
         "action_on_create": {
@@ -8766,9 +8797,9 @@
         "id": 262
       },
       {
-        "name": "Nosy Neighbor*",
+        "name": "Nosy Neighbor",
         "enabled": true,
-        "description": "Gives 1 <link=\"712\"><sprite index=7></link> to the Left <link=\"716\"><b>Neighbor</b></link> then gives 1 Stress to the Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Left <link=\"716\"><b>Neighbor</b></link> and 1 [Stress] to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/rxDLZDQ/1-99-Wood-spider.jpg",
         "type": 1,
         "action_on_create": {
@@ -9016,12 +9047,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 263
       },
       {
-        "name": "Friendly Fishperson*",
+        "name": "Friendly Fishperson",
         "enabled": true,
-        "description": "Gives 1 <link=\"712\"><sprite index=7></link> to the Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/CmnT6wv/2-15.jpg",
         "type": 1,
         "action_on_create": {
@@ -9145,12 +9177,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 264
       },
       {
-        "name": "Bewitched Bullfrog*",
+        "name": "Bewitched Bullfrog",
         "enabled": true,
-        "description": "Transforms into a random Creature if both <link=\"716\"><b>Neighbor</b></link>s have <link=\"712\"><sprite index=7></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Transforms into a random <b>Creature</b> if both <link=\"716\"><b>Neighbors</b></link> have <link=\"712\"><sprite index=7></link>",
         "picture": "https://i.ibb.co/cD28k77/2-10.jpg",
         "type": 1,
         "action_on_create": {
@@ -9852,12 +9885,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 265
       },
       {
-        "name": "Killjoy Cultist *",
+        "name": "Killjoy Cultist",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each <link=\"712\"><sprite index=7></link> in its Line then clears all <link=\"712\"><sprite index=7></link> in its Line",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each <link=\"712\"><sprite index=7></link> in its <link=\"906\"><b>Lane</b></link>, then removes all <link=\"712\"><sprite index=7></link> in its <link=\"906\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/PMMCqcg/1-17-Cultist.jpg",
         "type": 1,
         "action_on_create": {
@@ -10388,12 +10422,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 266
       },
       {
-        "name": "Paranoid Prospector*",
+        "name": "Paranoid Prospector",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s 1 <link=\"718\"><sprite index=9></link> for each 2 free Slots on its Line",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"903\"><b>Works</b></link> 1 time for each 2 free <b>Creature</b> Slots on its <link=\"906\"><b>Lane</b></link>",
         "picture": "https://i.ibb.co/6w7ZvGG/2-11.jpg",
         "type": 1,
         "action_on_create": {
@@ -10647,12 +10682,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 267
       },
       {
-        "name": "Fiery Fiend*",
+        "name": "Fiery Fiend",
         "enabled": true,
-        "description": "Gives 1 <link=\"708\"><sprite index=2></link> to every other Creature on its Line then produces 1 <link=\"718\"><sprite index=9></link> for each <link=\"708\"><sprite index=2></link> on its Line",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to every other <b>Creature</b> on its <link=\"906\"><b>Lane</b></link>, then <link=\"903\"><b>Works</b></link> 1 time for each <link=\"708\"><sprite index=2></link> on its {Line}",
         "picture": "https://i.ibb.co/cQXJYSR/2-24.jpg",
         "type": 1,
         "action_on_create": {
@@ -11060,12 +11096,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 268
       },
       {
-        "name": "Twisted Templar*",
+        "name": "Twisted Templar",
         "enabled": true,
-        "description": "Gives itself 1 <link=\"711\"><sprite index=0></link> without any <link=\"716\"><b>Neighbor</b></link>s, otherwise produces 1 <link=\"718\"><sprite index=9></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives itself 1 <link=\"711\"><sprite index=0></link> without any <link=\"716\"><b>Neighbors</b></link>,<br>otherwise <link=\"903\"><b>Works</b></link> 1 time",
         "picture": "https://i.ibb.co/t2SV7rV/2-9.jpg",
         "type": 1,
         "action_on_create": {
@@ -11277,12 +11314,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 269
       },
       {
-        "name": "Toucan Taskmaster*",
+        "name": "Toucan Taskmaster",
         "enabled": true,
-        "description": "Gives 1 <link=\"710\"><sprite index=3></link> to the Left <link=\"716\"><b>Neighbor</b></link> then it produces 1 <link=\"718\"><sprite index=9></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"710\"><sprite index=3></link> to Left <link=\"716\"><b>Neighbor</b></link>, then makes it <link=\"903\"><b>Work</b></link> 1 time",
         "picture": "https://i.ibb.co/Xzr6ch1/1-9-Bird.jpg",
         "type": 1,
         "action_on_create": {
@@ -11512,12 +11550,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 270
       },
       {
-        "name": "Watchtower*",
+        "name": "Watchtower",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"715\"><sprite index=8></link>. 1 <link=\"718\"><sprite index=9></link> per Creature w/o <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> without <link=\"716\"><b>Neighbors</b></link>.<br><link=\"719\"><b>Production</b></link>: <link=\"715\"><sprite index=8></link>",
         "picture": "https://i.ibb.co/37G6Sqy/1-89-Tower.jpg",
         "type": 4,
         "action_on_create": {
@@ -11710,12 +11749,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 271
       },
       {
-        "name": "Barracks*",
+        "name": "Barracks",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"715\"><sprite index=8></link>. 1 <link=\"718\"><sprite index=9></link> per Creature in <link=\"717\"><b>Innermost</b></link> slots",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> in <link=\"717\"><b>Inner</b></link> slot.<br><link=\"719\"><b>Production</b></link>: <link=\"715\"><sprite index=8></link>",
         "picture": "https://i.ibb.co/JvvmmV2/1-6-Barracks.jpg",
         "type": 4,
         "action_on_create": {
@@ -11898,12 +11938,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 272
       },
       {
-        "name": "Gold Mine*",
+        "name": "Gold Mine",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"720\"><sprite index=6></link>. 1 <link=\"718\"><sprite index=9></link> per Creature in <link=\"721\"><b>Outermost</b></link> slots",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> in <link=\"717\"><b>Inner</b></link> slot.<br><link=\"719\"><b>Production</b></link>: <link=\"720\"><sprite index=6></link>",
         "picture": "https://i.ibb.co/cXSXw0h/1-35-Gold-mine.jpg",
         "type": 4,
         "action_on_create": {
@@ -12086,12 +12127,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 273
       },
       {
-        "name": "Kobold Tunnel*",
+        "name": "Kobold Tunnel",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"720\"><sprite index=6></link>. 1 <link=\"718\"><sprite index=9></link> per Creature w/o <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> without <link=\"716\"><b>Neighbors</b></link>.<br><link=\"719\"><b>Production</b></link>: <link=\"720\"><sprite index=6></link>",
         "picture": "https://i.ibb.co/KhGX3bf/1-20-Den.jpg",
         "type": 4,
         "action_on_create": {
@@ -12284,12 +12326,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 274
       },
       {
-        "name": "Decrepit Mill*",
+        "name": "Decrepit Mill",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"714\"><sprite index=1></link>. 1 <link=\"718\"><sprite index=9></link> per Creature in <link=\"721\"><b>Outermost</b></link> slots",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> in <link=\"721\"><b>Outer</b></link> slot.<br><link=\"719\"><b>Production</b></link>: <link=\"714\"><sprite index=1></link>",
         "picture": "https://i.ibb.co/Sw1n8cD/1-57-Mill.jpg",
         "type": 4,
         "action_on_create": {
@@ -12472,12 +12515,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 275
       },
       {
-        "name": "Baker’s House*",
+        "name": "Baker’s House",
         "enabled": true,
-        "description": "<link=\"719\"><b>Produce</b></link>s <link=\"714\"><sprite index=1></link>. 1 <link=\"718\"><sprite index=9></link> per Creature with 2 <link=\"716\"><b>Neighbor</b></link>s",
+        "description": "<link=\"906\"><b>Action</b></link>: Gains 1 <link=\"718\"><sprite index=9></link> from each <b>Creature</b> with 2 <link=\"716\"><b>Neighbors</b></link>.<br><link=\"719\"><b>Production</b></link>: <link=\"714\"><sprite index=1></link>",
         "picture": "https://i.ibb.co/SQjXMcF/1-71-Shack-1.jpg",
         "type": 4,
         "action_on_create": {
@@ -12503,7 +12547,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 4
+                    "value": 5
                   }
                 ]
               }
@@ -12517,7 +12561,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 4
+                    "value": 5
                   }
                 ]
               }
@@ -12679,12 +12723,13 @@
           "subtype": 10857,
           "params": []
         },
+        "timer_text": "Time",
         "id": 276
       },
       {
         "name": "Confused Cat-A-Roo",
         "enabled": true,
-        "description": "Gives 1 <link=\"711\"><sprite index=0></link> to Right <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"711\"><sprite index=0></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/PcNSyQ4/2-7.jpg",
         "type": 1,
         "action_on_create": {
@@ -12827,12 +12872,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 286
       },
       {
         "name": "Glacial Goldfish",
         "enabled": true,
-        "description": "Gives 1 <link=\"709\"><sprite index=5></link> to Left <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to Left <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/zhh5DWZ/1-41-Ice-fish.jpg",
         "type": 1,
         "action_on_create": {
@@ -12975,12 +13021,13 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 287
       },
       {
         "name": "Test Order Event",
         "enabled": true,
-        "description": "Adds 1 <link=\"710\"><sprite index=3></link> to all creatures in top row",
+        "description": "Adds 1 Order to all creatures in top row",
         "picture": "https://i.ibb.co/RbYSd5m/1-44-Infernal-nest.jpg",
         "type": 3,
         "action_on_create": {
@@ -13409,9 +13456,9 @@
         "id": 312
       },
       {
-        "name": "Snow Spider*",
+        "name": "Snow Spider",
         "enabled": true,
-        "description": "Gives 1 <link=\"709\"><sprite index=5></link> to Left <link=\"716\"><b>Neighbor</b></link> then gives 1 <link=\"709\"><sprite index=5></link> to its Left <link=\"716\"><b>Neighbor</b></link>",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to Left <link=\"716\"><b>Neighbor</b></link> and its Left <link=\"716\"><b>Neighbor</b></link>",
         "picture": "https://i.ibb.co/0sF4Rjj/1-24-Fantom.jpg",
         "type": 1,
         "action_on_create": {
@@ -13822,6 +13869,7 @@
           "params": []
         },
         "gd_filter": "creature",
+        "timer_text": "Time",
         "id": 316
       },
       {
@@ -17774,7 +17822,7 @@
       {
         "name": "DegenApe",
         "enabled": true,
-        "description": "Gives 1 Stress to Left <link=\"716\"><b>Neighbor</b></link>, then 1 Stress to Right <link=\"716\"><b>Neighbor</b></link>, then 1 <link=\"712\"><sprite index=7></link> to self",
+        "description": "Gives 1 Stress to Left Neighbor, then 1 Stress to Right Neighbor, then 1 Joy to self",
         "picture": "https://i.ibb.co/41xvB8N/degen-ape-1.jpg",
         "type": 1,
         "action_on_create": {
@@ -17960,7 +18008,7 @@
       {
         "name": "Boryoku Baby Dragon",
         "enabled": true,
-        "description": "Give <link=\"712\"><sprite index=7></link> to left neighbor, then <link=\"712\"><sprite index=7></link> to right neighbor. Transforms recived <link=\"708\"><sprite index=2></link> tokens into <link=\"714\"><sprite index=1></link>",
+        "description": "Give Joy to left neighbor, then Joy to right neighbor. Transforms recived Hot tokens into Food",
         "picture": "https://i.ibb.co/zhX5f95/boryoku-babies-1.jpg",
         "type": 1,
         "action_on_create": {
@@ -18208,7 +18256,7 @@
       {
         "name": "The Orc",
         "enabled": true,
-        "description": "Give <link=\"715\"><sprite index=8></link> to self",
+        "description": "Give Shield to self",
         "picture": "https://i.ibb.co/XF00sHr/orcs-2.jpg",
         "type": 1,
         "action_on_create": {
@@ -18270,7 +18318,7 @@
       {
         "name": "Blocksmith",
         "enabled": true,
-        "description": "If no Tokens on self, produces 2 <link=\"718\"><sprite index=9></link>",
+        "description": "If no Tokens on self, produces 2 Work",
         "picture": "https://i.ibb.co/rF0nPPL/blocksmiths-1.jpg",
         "type": 1,
         "action_on_create": {
@@ -18393,7 +18441,7 @@
       {
         "name": "Cet on Crek",
         "enabled": true,
-        "description": "If 2 <link=\"712\"><sprite index=7></link> on self, transfrom Left <link=\"716\"><b>Neighbor</b></link> into Cet, transform Right <link=\"716\"><b>Neighbor</b></link> into Cet, remove all <link=\"712\"><sprite index=7></link> from self",
+        "description": "If 2 Joy on self, transfrom Left Neighbor into Cet, transform Right Neighbor into Cet, remove all Joy from self",
         "picture": "https://i.ibb.co/hgr5Z5j/cets-on-crek-1.jpg",
         "type": 1,
         "action_on_create": {
@@ -18455,7 +18503,7 @@
       {
         "name": "Catalina Whale",
         "enabled": true,
-        "description": "Transform recieved <link=\"709\"><sprite index=5></link> into <link=\"718\"><sprite index=9></link> for Building. Die on recieving <link=\"708\"><sprite index=2></link>",
+        "description": "Transform recieved Cold into Work for Building. Die on recieving Hot",
         "picture": "https://i.ibb.co/jV1sWyb/catalina-whale-mixer-1.jpg",
         "type": 1,
         "action_on_create": {
@@ -18517,7 +18565,7 @@
       {
         "name": "Grim",
         "enabled": true,
-        "description": "Give 1 <link=\"711\"><sprite index=0></link> to Left <link=\"716\"><b>Neighbor</b></link> then Give 1 <link=\"711\"><sprite index=0></link> to Right <link=\"716\"><b>Neighbor</b></link>. <link=\"719\"><b>Produce</b></link> 4 <link=\"718\"><sprite index=9></link> for every death since <b>Activation</b>",
+        "description": "Give 1 Chaos to Left Neighbor then Give 1 Chaos to Right Neighbor. Produce 4 Work for every death since Activation",
         "picture": "https://i.ibb.co/vkJZ9ss/grim-2.jpg",
         "type": 1,
         "action_on_create": {
@@ -18760,7 +18808,7 @@
       {
         "name": "Plague of Locusts",
         "enabled": true,
-        "description": "<link=\"778\"><b>Survival</b></link>: Have more than 5 <link=\"714\"><sprite index=1></link> in <b>Storage</b>; <link=\"780\"><b>Omen</b></link>: Put \"Locust Swarm\" into <b>Event Tracker</b>",
+        "description": "<link=\"780\"><b>Omen</b></link>: places a <b>Locust Swarm</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more <link=\"714\"><sprite index=1></link> in Storage",
         "picture": "https://i.ibb.co/NrWdWw1/32-Evil.jpg",
         "type": 3,
         "action_on_create": {
@@ -19055,12 +19103,13 @@
             }
           ]
         },
+        "timer_text": "Time",
         "id": 776
       },
       {
-        "name": "Omen - Locust Swarm",
+        "name": "Locust Swarm",
         "enabled": true,
-        "description": "Lose half of the <link=\"714\"><sprite index=1></link> in <b>Storage</b>, rounded down",
+        "description": "<link=\"906\"><b>Action</b></link>: <link=\"906\"><b>Destroys</b></link> half the <link=\"714\"><sprite index=1></link> in <b>Storage</b>, rounded down",
         "picture": "https://i.ibb.co/K5Kd8sj/29-Wave-of-evil.jpg",
         "type": 3,
         "action_on_create": {
@@ -19254,12 +19303,13 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 783
       },
       {
         "name": "Hell and High Water",
         "enabled": true,
-        "description": "<link=\"778\"><b>Survival</b></link>: Have at least 5 Creatures; <link=\"780\"><b>Omen</b></link>: Put \"Flame\", then \"Flood\" into <b>Event Tracker</b>",
+        "description": "<link=\"780\"><b>Omen</b></link>: places <b>Flame</b> and <b>Flood</b> into <b>Event Tracker</b>.<br><link=\"778\"><b>Survival</b></link>: Have 5 or more {Creatures}",
         "picture": "https://i.ibb.co/Gch06yF/Shamanskill-31.jpg",
         "type": 3,
         "action_on_create": {
@@ -19562,12 +19612,13 @@
           ]
         },
         "gd_filter": "Eclipse",
+        "timer_text": "Time",
         "id": 785
       },
       {
-        "name": "Omen - Flame",
+        "name": "Flame",
         "enabled": true,
-        "description": "Give 1 <link=\"708\"><sprite index=2></link> to each Creature in Top and Mid Lines",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to each <b>Creature</b> in Top and Center {Lanes}",
         "picture": "https://i.ibb.co/B3LnLnL/1-25-Fireball.jpg",
         "type": 3,
         "action_on_create": {
@@ -19860,12 +19911,13 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 794
       },
       {
-        "name": "Omen - Flood",
+        "name": "Flood",
         "enabled": true,
-        "description": "Give 1 <link=\"709\"><sprite index=5></link> to each Creature in Mid and Bot Lines",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"709\"><sprite index=5></link> to each <b>Creature</b> in Center and Bottom {Lanes}",
         "picture": "https://i.ibb.co/pXg3rNc/1-52-Mana-storm.jpg",
         "type": 3,
         "action_on_create": {
@@ -20158,12 +20210,13 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 795
       },
       {
         "name": "Age of Triskelion",
         "enabled": true,
-        "description": "<b>Activate</b> all \"Oak\" then \"Ash\" then \"Thorn\" events. <link=\"778\"><b>Survival</b></link>: Have 3 different types of each: Creatures, Tokens on Creatures and Tokens in <b>Storage</b>; <link=\"780\"><b>Omen</b></link>: Put \"Oak\", then \"Ash\", then \"Thorn\" into <b>Event Tracker</b>",
+        "description": "<link=\"780\"><b>Omen</b></link>: Places <b>Oak</b>, <b>Ash</b> and <b>Thorn</b> into <b>Event Tracker</b>.<br><link=\"906\"><b>Action</b></link>: {Activates} all {Omens}.<br><link=\"778\"><b>Survival</b></link>: Have 3 different of each: {Creatures}, {Tokens} on {Creatures} and {Tokens} in <b>Storage</b>",
         "picture": "https://i.ibb.co/x2Jg50S/triskelion.jpg",
         "type": 3,
         "action_on_create": {
@@ -20969,12 +21022,13 @@
           ]
         },
         "gd_filter": "Eclipse",
+        "timer_text": "Time",
         "id": 799
       },
       {
-        "name": "Omen - Oak",
+        "name": "Oak",
         "enabled": true,
-        "description": "Give 1 <link=\"710\"><sprite index=3></link> to each Creature",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"710\"><sprite index=3></link> to each <b>Creature</b>",
         "picture": "https://i.ibb.co/ySMTMVS/Shamanskill-39.jpg",
         "type": 3,
         "action_on_create": {
@@ -21130,12 +21184,13 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 803
       },
       {
-        "name": "Omen - Ash",
+        "name": "Ash",
         "enabled": true,
-        "description": "Give 1 <link=\"708\"><sprite index=2></link> to each Creature",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"708\"><sprite index=2></link> to each <b>Creature</b>",
         "picture": "https://i.ibb.co/PcdfTbB/Druideskill-10.jpg",
         "type": 3,
         "action_on_create": {
@@ -21291,12 +21346,13 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 804
       },
       {
-        "name": "Omen - Thorn",
+        "name": "Thorn",
         "enabled": true,
-        "description": "Give 1 Stress to each Creature",
+        "description": "<link=\"906\"><b>Action</b></link>: Gives 1 [Stress] to each <b>Creature</b>",
         "picture": "https://i.ibb.co/LZjtPmf/Druideskill-09.jpg",
         "type": 3,
         "action_on_create": {
@@ -21452,6 +21508,7 @@
           "params": []
         },
         "gd_filter": "Eclipse Omen Event",
+        "timer_text": "Time",
         "id": 805
       },
       {
@@ -21577,6 +21634,486 @@
         },
         "gd_filter": "Button",
         "id": 883
+      },
+      {
+        "name": "Yelling Yeti",
+        "enabled": true,
+        "description": "Transforms gained Cold into Shield. <br><b>Works</b> 1 time for each Shield on itself",
+        "picture": "https://i.ibb.co/bzRzFfh/1-100-Yeti.jpg",
+        "type": 1,
+        "action_on_create": {
+          "name": "Action.[337] Default OnCreate - Creature",
+          "type": 0,
+          "subtype": 10337,
+          "params": [
+            {
+              "name": "Slots",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 3
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Timer",
+              "value": {
+                "name": "Value.Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 3
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "action_on_activation": {
+          "name": "Action.Loop",
+          "type": 0,
+          "subtype": 3,
+          "params": [
+            {
+              "name": "counter_var",
+              "value": "yeti_loop_var"
+            },
+            {
+              "name": "iterations",
+              "value": {
+                "name": "Value.[313] Number of Tokens [Token type] in Place X",
+                "type": 2,
+                "subtype": 10313,
+                "params": [
+                  {
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Value.Variable",
+                      "type": 2,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "act_place_creature"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Token Type Tpl",
+                    "value": {
+                      "name": "Value.[225] Token TplId- Shield",
+                      "type": 2,
+                      "subtype": 10225,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action",
+              "value": {
+                "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
+                "type": 0,
+                "subtype": 10535,
+                "params": [
+                  {
+                    "name": "tpl",
+                    "value": {
+                      "name": "Value.[310] Token TplId - Work",
+                      "type": 2,
+                      "subtype": 10310,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "action",
+                    "value": {
+                      "name": "Action.[502] ~Move & Link Token to [PlaceId]",
+                      "type": 0,
+                      "subtype": 10502,
+                      "params": [
+                        {
+                          "name": "Target Place",
+                          "value": {
+                            "name": "Value.[172] Row X Building",
+                            "type": 2,
+                            "subtype": 10172,
+                            "params": [
+                              {
+                                "name": "Row Id",
+                                "value": {
+                                  "name": "Value.[342] Row Id by Place Id",
+                                  "type": 2,
+                                  "subtype": 10342,
+                                  "params": [
+                                    {
+                                      "name": "Current Place",
+                                      "value": {
+                                        "name": "Value.Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "act_place_creature"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "action_on_token_added": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[519] Default onTokenAdded - Creature",
+                "type": 0,
+                "subtype": 10519,
+                "params": []
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Action.Iterator",
+                      "type": 0,
+                      "subtype": 5,
+                      "params": [
+                        {
+                          "name": "condition",
+                          "value": {
+                            "name": "Condition.[516] #008:Is [Card Id]",
+                            "type": 1,
+                            "subtype": 10516,
+                            "params": [
+                              {
+                                "name": "Card Id",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "token_id"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "Action.Set variable",
+                            "type": 0,
+                            "subtype": 6,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "added_token_tpl"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Value.Card type Id",
+                                  "type": 2,
+                                  "subtype": 12,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Action.[145] #002:If-then",
+                      "type": 0,
+                      "subtype": 10145,
+                      "params": [
+                        {
+                          "name": "Condition",
+                          "value": {
+                            "name": "Condition.Equal",
+                            "type": 1,
+                            "subtype": 2,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Value.Variable",
+                                  "type": 2,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "added_token_tpl"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Value.[227] Token TplId - Cold",
+                                  "type": 2,
+                                  "subtype": 10227,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Action",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.Iterator",
+                                  "type": 0,
+                                  "subtype": 5,
+                                  "params": [
+                                    {
+                                      "name": "condition",
+                                      "value": {
+                                        "name": "Condition.[516] #008:Is [Card Id]",
+                                        "type": 1,
+                                        "subtype": 10516,
+                                        "params": [
+                                          {
+                                            "name": "Card Id",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "token_id"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action",
+                                      "value": {
+                                        "name": "Action.[557] Remove Tokens and shift others",
+                                        "type": 0,
+                                        "subtype": 10557,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "limit",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 1
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Action.Set variable",
+                                        "type": 0,
+                                        "subtype": 6,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "yeti_place"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.[146] #Current place",
+                                              "type": 2,
+                                              "subtype": 10146,
+                                              "params": []
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
+                                        "type": 0,
+                                        "subtype": 10535,
+                                        "params": [
+                                          {
+                                            "name": "tpl",
+                                            "value": {
+                                              "name": "Value.[225] Token TplId- Shield",
+                                              "type": 2,
+                                              "subtype": 10225,
+                                              "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "action",
+                                            "value": {
+                                              "name": "Action.[502] ~Move & Link Token to [PlaceId]",
+                                              "type": 0,
+                                              "subtype": 10502,
+                                              "params": [
+                                                {
+                                                  "name": "Target Place",
+                                                  "value": {
+                                                    "name": "Value.Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "yeti_place"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "action_on_death": {
+          "name": "Action.[525] Default onDeath - General",
+          "type": 0,
+          "subtype": 10525,
+          "params": []
+        },
+        "gd_filter": "creature",
+        "id": 892
+      },
+      {
+        "name": "Restart Game",
+        "enabled": true,
+        "action": {
+          "name": "Action.Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Action.[162] ~002: Clear Place [Id]",
+                "type": 0,
+                "subtype": 10162,
+                "params": [
+                  {
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Value.[631] Place - Fullscreen Msg Area",
+                      "type": 2,
+                      "subtype": 10631,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Action.[314] Phase 0 - Init",
+                "type": 0,
+                "subtype": 10314,
+                "params": []
+              }
+            }
+          ]
+        },
+        "id": 924
       }
     ]
   },
@@ -21873,7 +22410,6 @@
         "layout": 6,
         "zOrder": 10,
         "caption": "Creature 4",
-        "frame": true,
         "drag_n_drop": 285,
         "drag_n_drops": [
           285
@@ -22212,8 +22748,6 @@
         "y2": 1294,
         "layout": 7,
         "zOrder": 5,
-        "caption": "Token Reserve",
-        "frame": true,
         "drag_n_drops": [],
         "id": 520
       },
@@ -22314,6 +22848,34 @@
         "layout": 4,
         "zOrder": 99,
         "id": 860
+      },
+      {
+        "name": "Big Button 1",
+        "enabled": true,
+        "placeId": 56,
+        "interactableForActiveLocalPlayer": true,
+        "visible": true,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 2100,
+        "y2": 3300,
+        "layout": 4,
+        "zOrder": 96,
+        "id": 910
+      },
+      {
+        "name": "Big Button 2",
+        "enabled": true,
+        "placeId": 57,
+        "interactableForActiveLocalPlayer": true,
+        "visible": true,
+        "x1": 468,
+        "x2": 1656,
+        "y1": 3700,
+        "y2": 4900,
+        "layout": 4,
+        "zOrder": 96,
+        "id": 911
       }
     ]
   },
@@ -22330,9 +22892,9 @@
         "id": 121
       },
       {
-        "name": "MD - Eclipse",
+        "name": "MD - Eclipse - Plague of Locusts",
         "enabled": true,
-        "cardType": 799,
+        "cardType": 776,
         "place": 1,
         "amount": 1,
         "preset": "tech demo",
@@ -22341,7 +22903,7 @@
       {
         "name": "Test Creature 1 -- Loogris",
         "enabled": true,
-        "cardType": 260,
+        "cardType": 244,
         "place": 21,
         "amount": 1,
         "preset": "loogris layout",
@@ -22879,15 +23441,6 @@
         "id": 866
       },
       {
-        "name": "Test Creature 1",
-        "enabled": true,
-        "cardType": 258,
-        "place": 22,
-        "amount": 1,
-        "preset": "test creatures",
-        "id": 879
-      },
-      {
         "name": "TECH Disable Raycast on Place",
         "enabled": true,
         "cardType": 883,
@@ -22895,6 +23448,51 @@
         "amount": 1,
         "preset": "core",
         "id": 886
+      },
+      {
+        "name": "MD - Eclipse - Hell & High Water",
+        "enabled": true,
+        "cardType": 785,
+        "place": 1,
+        "amount": 1,
+        "preset": "tech demo",
+        "id": 891
+      },
+      {
+        "name": "MD - Test Yeti 1",
+        "enabled": true,
+        "cardType": 260,
+        "place": 21,
+        "amount": 1,
+        "preset": "test creatures",
+        "id": 893
+      },
+      {
+        "name": "MD - Test Yeti 2",
+        "enabled": true,
+        "cardType": 892,
+        "place": 22,
+        "amount": 1,
+        "preset": "test creatures",
+        "id": 894
+      },
+      {
+        "name": "Big button 1",
+        "enabled": true,
+        "cardType": 924,
+        "place": 56,
+        "amount": 1,
+        "preset": "big buttons",
+        "id": 912
+      },
+      {
+        "name": "Big button 2",
+        "enabled": true,
+        "cardType": 688,
+        "place": 57,
+        "amount": 1,
+        "preset": "big buttons",
+        "id": 913
       }
     ]
   },
@@ -23256,114 +23854,163 @@
       {
         "name": "Hot Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for <link=\"709\"><sprite index=5></link>",
+        "text": "<b>Counters</b> {Cold}",
         "delay": 300,
         "id": 708
       },
       {
         "name": "Cold Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for <link=\"708\"><sprite index=2></link>",
+        "text": "<b>Counters</b> {Hot}",
         "delay": 300,
         "id": 709
       },
       {
         "name": "Order Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for <link=\"711\"><sprite index=0></link>",
+        "text": "<b>Counters</b> {Chaos}",
         "delay": 300,
         "id": 710
       },
       {
         "name": "Chaos Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for <link=\"710\"><sprite index=3></link>",
+        "text": "<b>Counters</b> {Order}",
         "delay": 300,
         "id": 711
       },
       {
         "name": "Joy Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for Stress",
+        "text": "<b>Counters</b> {Stress}",
         "delay": 300,
         "id": 712
       },
       {
         "name": "Stress Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for <link=\"712\"><sprite index=7></link>",
+        "text": "<b>Counters</b> {Joy}",
         "delay": 300,
         "id": 713
       },
       {
         "name": "Food Token Tooltip",
         "enabled": true,
-        "text": "Removes first Token on the Creature",
+        "text": "Removes the first <b>Token</b> on the <b>Creature</b>",
         "delay": 300,
         "id": 714
       },
       {
         "name": "Shield Token Tooltip",
         "enabled": true,
-        "text": "<b>Antitoken</b> for any Token gained except <link=\"715\"><sprite index=8></link>",
+        "text": "<b>Counters</b> the next <b>Token</b> <b>Gained</b>, except {Shield}",
         "delay": 300,
         "id": 715
       },
       {
         "name": "Neighbor Tooltip",
         "enabled": true,
-        "text": "Creature in the same Line and adjacent to this. <link=\"721\"><b>Outermost</b></link> Creatures have no more than one <link=\"716\"><b>Neighbor</b></link>",
+        "text": "A <b>Creature</b> that is horizontally adjacent to the current one",
         "delay": 300,
         "id": 716
       },
       {
-        "name": "Innermost Tooltip",
+        "name": "Inner Tooltip",
         "enabled": true,
-        "text": "2, 3 and 4 Slots in Line. Inversion of <b><link=\"721\"><b>Outermost</b></link></b>",
+        "text": "<b>Creature</b> Slots # 2, 3 and 4",
         "delay": 300,
         "id": 717
       },
       {
         "name": "Work Token Tooltip",
         "enabled": true,
-        "text": "Used by Buildings to <link=\"719\"><b>Produce</b></link>",
+        "text": "Used by <b>Building</b>s to <link=\"719\"><b>Produce</b></link> Tokens",
         "delay": 300,
         "id": 718
       },
       {
-        "name": "Produce Tooltip",
+        "name": "Production Tooltip",
         "enabled": true,
-        "text": "Token that Building gives to <b>Storage</b> when filled with <link=\"718\"><sprite index=9></link>",
+        "text": "When a <b>Building</b> is filled with <link=\"903\"><b>Work</b></link>, it creates a new <b>Token</b> and places it into <b>Storage</b>",
         "delay": 300,
         "id": 719
       },
       {
         "name": "Gold Token Tooltip",
         "enabled": true,
-        "text": "<b>Activate</b>s Creature recieving this",
+        "text": "Makes the target <b>Creature</b> use its {Action]",
         "delay": 300,
         "id": 720
       },
       {
-        "name": "Outermost Tooltip",
+        "name": "Outer Tooltip",
         "enabled": true,
-        "text": "1 and 5 Slots in Line. Inversion of <link=\"717\"><b>Innermost</b></link>",
+        "text": "<b>Creature</b> Slots # 1 and 5",
         "delay": 300,
         "id": 721
       },
       {
         "name": "Survival Tooltip",
         "enabled": true,
-        "text": "After Eclipse <b>Activate</b>s, if this condition is fulfilled, you win the game.",
+        "text": "This condition must be met on the final <b>Eclipse</b> Turn to win the game",
         "delay": 300,
         "id": 778
       },
       {
         "name": "Omen Tooltip",
         "enabled": true,
-        "text": "<b>Activate</b>s when all Token Slots are filled, after which removes all Tokens",
+        "text": "Activates when all <b>Token</b> Slots are filled",
         "delay": 300,
         "id": 780
+      },
+      {
+        "name": "Creature Work Tooltip",
+        "enabled": true,
+        "text": "Creates a <link=\"903\"><b>Work</b></link> <b>Token</b> and gives it to the <b>Building</b> on the same <link=\"906\"><b>Lane</b></link>",
+        "delay": 300,
+        "id": 903
+      },
+      {
+        "name": "Token Gain Tooltip",
+        "enabled": true,
+        "text": "The process of receiving a <b>Token</b> from any source",
+        "delay": 300,
+        "id": 905
+      },
+      {
+        "name": "Action Tooltip",
+        "enabled": true,
+        "text": "Basic ability of the Card that is used on its Turn",
+        "delay": 300,
+        "id": 906
+      },
+      {
+        "name": "Event Activation Tooltip",
+        "enabled": true,
+        "text": "Ability that is used after <b>Event</b> Timer reaches 0",
+        "delay": 300,
+        "id": 914
+      },
+      {
+        "name": "Destruction Tooltip",
+        "enabled": true,
+        "text": "A Card or Token that gets Destroyed immediately leaves the game.",
+        "delay": 300,
+        "id": 915
+      },
+      {
+        "name": "Lane Tooltip",
+        "enabled": true,
+        "text": "A separate part of your Realm. Includes 1 {Bulding} Slot and 5 <b>Creature</b> slots on the same row.",
+        "delay": 300,
+        "id": 916
+      },
+      {
+        "name": "Death Tooltip",
+        "enabled": true,
+        "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"906\"><b>Destroyed</b></link> and loses all its {Tokens}.",
+        "delay": 300,
+        "id": 922
       }
     ]
   },
@@ -23550,6 +24197,68 @@
       }
     ]
   },
+  "users": {
+    "name": "users",
+    "objects": [
+      {
+        "name": "Teuzet",
+        "enabled": true,
+        "pubkey": "9kXLhvDcWc4wzuapQpWkKVnJ8wKVhEDomwoFxkn58nfX",
+        "layoutPresets": [
+          "core",
+          "test buttons",
+          "tech demo"
+        ],
+        "id": 576
+      },
+      {
+        "name": "Ellador",
+        "enabled": true,
+        "pubkey": "ESrHRyZKaC9VjTdvd7QHppxevXpiasUAbzx2XGBRanrv",
+        "css": ".brick.action { background-color: #39372d; } .brick.action.readonly { background-color: #39372d; } .brick.action:hover { background-color: #565343; } .brick.condition { background-color: #2d392d; } .brick.condition.readonly { background-color: #2d392d; } .brick.condition:hover { background-color: #435643; } .brick.value { background-color: #2d3937; } .brick.value.readonly { background-color: #2d3937; } .brick.value { background-color: #435643; } .brickeditor-bg.active { background-color: #101510; } .brickeditor-bg.readonly { background-color: #151010; }",
+        "readonlyBricks": true,
+        "layoutPresets": [
+          "core",
+          "test buttons",
+          "tech demo",
+          "//test creatures",
+          "starting creatures",
+          "// loogris layout"
+        ],
+        "id": 577
+      },
+      {
+        "name": "Loogris",
+        "enabled": true,
+        "pubkey": "CmxScbqG1imzdkmehMD1VoHait6oYx7o6CLtaHbDkdG1",
+        "css": ".brick.action {     background-color: #586e75;     color: #eee8d5; }  .brick.action.readonly {     background-color: #586e75;     color: #eee8d5 }  .brick.action:hover {     background-color: #93a1a1;     color: #eee8d5 }  .brick.condition {     background-color: #268bd2;     color: #eee8d5 }  .brick.condition.readonly {     background-color: #268bd2;     color: #eee8d5 }  .brick.condition:hover {     background-color: #2aa198;     color: #eee8d5 }  .brick.value {     background-color: #6c71c4;     color: #eee8d5 }  .brick.value.readonly {     background-color: #6c71c4;     color: #eee8d5 }  .brick.value:hover {     background-color: #d33682;     color: #eee8d5 }  .brickeditor-bg.active {     background-color: #002b36;     color: #eee8d5 }  .brickeditor-bg.readonly {     background-color: #002b36;     color: #eee8d5; }",
+        "layoutPresets": [
+          "loogris layout",
+          "core",
+          "// test creatures",
+          "// test buttons",
+          "// test buildings",
+          "// tech demo",
+          "// starting creatures",
+          "big buttons"
+        ],
+        "id": 578
+      },
+      {
+        "name": "Irina",
+        "enabled": true,
+        "pubkey": "25MhYRx9CFLyQxf5HQKLPFd86QbkNFUWwUcVvQcTvPHJ",
+        "css": ".brick.action { background-color: #39372d; } .brick.action.readonly { background-color: #39372d; } .brick.action:hover { background-color: #565343; } .brick.condition { background-color: #2d392d; } .brick.condition.readonly { background-color: #2d392d; } .brick.condition:hover { background-color: #435643; } .brick.value { background-color: #2d3937; } .brick.value.readonly { background-color: #2d3937; } .brick.value { background-color: #435643; } .brickeditor-bg.active { background-color: #101510; } .brickeditor-bg.readonly { background-color: #151010; }",
+        "readonlyBricks": true,
+        "layoutPresets": [
+          "core",
+          "test buttons",
+          "tech demo"
+        ],
+        "id": 579
+      }
+    ]
+  },
   "gd_tags": {
     "name": "gd_tags",
     "objects": [
@@ -23564,6 +24273,245 @@
         "enabled": true,
         "description": "This Card reacts to Tokens that are added to it",
         "id": 693
+      }
+    ]
+  },
+  "stringReplaceRules": {
+    "name": "stringReplaceRules",
+    "objects": [
+      {
+        "source": "[Chaos]",
+        "result": "<link=\"711\"><sprite index=0></link>",
+        "enabled": true,
+        "id": 744
+      },
+      {
+        "source": "[Food]",
+        "result": "<link=\"714\"><sprite index=1></link>",
+        "enabled": true,
+        "id": 745
+      },
+      {
+        "source": "[Hot]",
+        "result": "<link=\"708\"><sprite index=2></link>",
+        "enabled": true,
+        "id": 746
+      },
+      {
+        "source": "[Order]",
+        "result": "<link=\"710\"><sprite index=3></link>",
+        "enabled": true,
+        "id": 747
+      },
+      {
+        "source": "[Cold]",
+        "result": "<link=\"709\"><sprite index=5></link>",
+        "enabled": true,
+        "id": 748
+      },
+      {
+        "source": "[Gold]",
+        "result": "<link=\"720\"><sprite index=6></link>",
+        "enabled": true,
+        "id": 749
+      },
+      {
+        "source": "[Joy]",
+        "result": "<link=\"712\"><sprite index=7></link>",
+        "enabled": true,
+        "id": 750
+      },
+      {
+        "source": "[Shield]",
+        "result": "<link=\"715\"><sprite index=8></link>",
+        "enabled": true,
+        "id": 751
+      },
+      {
+        "source": "[Work]",
+        "result": "<link=\"718\"><sprite index=9></link>",
+        "enabled": true,
+        "id": 752
+      },
+      {
+        "source": "{Neighbor}",
+        "result": "<link=\"716\"><b>Neighbor</b></link>",
+        "enabled": true,
+        "id": 753
+      },
+      {
+        "source": "{Inner}",
+        "result": "<link=\"717\"><b>Inner</b></link>",
+        "enabled": true,
+        "id": 754
+      },
+      {
+        "source": "{Produce}",
+        "result": "<link=\"719\"><b>Produce</b></link>",
+        "enabled": true,
+        "id": 755
+      },
+      {
+        "source": "{Outer}",
+        "result": "<link=\"721\"><b>Outer</b></link>",
+        "enabled": true,
+        "id": 756
+      },
+      {
+        "source": "{Leftmost}",
+        "result": "<b>Leftmost</b>",
+        "enabled": true,
+        "id": 757
+      },
+      {
+        "source": "{Rightmost}",
+        "result": "<b>Rightmost</b>",
+        "enabled": true,
+        "id": 758
+      },
+      {
+        "source": "{Storage}",
+        "result": "<b>Storage</b>",
+        "enabled": true,
+        "id": 759
+      },
+      {
+        "source": "{Counters}",
+        "result": "<b>Counters</b>",
+        "enabled": true,
+        "id": 760
+      },
+      {
+        "source": "{Action}",
+        "result": "<link=\"906\"><b>Action</b></link>",
+        "enabled": true,
+        "id": 761
+      },
+      {
+        "source": "{Survival}",
+        "result": "<link=\"778\"><b>Survival</b></link>",
+        "enabled": true,
+        "id": 777
+      },
+      {
+        "source": "{Omen}",
+        "result": "<link=\"780\"><b>Omen</b></link>",
+        "enabled": true,
+        "id": 779
+      },
+      {
+        "source": "{Event Tracker}",
+        "result": "<b>Event Tracker</b>",
+        "enabled": true,
+        "id": 781
+      },
+      {
+        "source": "{Token}",
+        "result": "<b>Token</b>",
+        "enabled": true,
+        "id": 895
+      },
+      {
+        "source": "{Creature}",
+        "result": "<b>Creature</b>",
+        "enabled": true,
+        "id": 896
+      },
+      {
+        "source": "{Building}",
+        "result": "<b>Building</b>",
+        "enabled": true,
+        "id": 897
+      },
+      {
+        "source": "{Event}",
+        "result": "<b>Event</b>",
+        "enabled": true,
+        "id": 898
+      },
+      {
+        "source": "{Eclipse}",
+        "result": "<b>Eclipse</b>",
+        "enabled": true,
+        "id": 899
+      },
+      {
+        "source": "{Gained}",
+        "result": "<b>Gained</b>",
+        "enabled": true,
+        "id": 900
+      },
+      {
+        "source": "{Production}",
+        "result": "<link=\"719\"><b>Production</b></link>",
+        "enabled": true,
+        "id": 901
+      },
+      {
+        "source": "{Works}",
+        "result": "<link=\"903\"><b>Works</b></link>",
+        "enabled": true,
+        "id": 902
+      },
+      {
+        "source": "{Token Gain}",
+        "result": "<link=\"905\"><b>Token Gain</b></link>",
+        "enabled": true,
+        "id": 904
+      },
+      {
+        "source": "{Neighbors}",
+        "result": "<link=\"716\"><b>Neighbors</b></link>",
+        "enabled": true,
+        "id": 907
+      },
+      {
+        "source": "{Work}",
+        "result": "<link=\"903\"><b>Work</b></link>",
+        "enabled": true,
+        "id": 908
+      },
+      {
+        "source": "//",
+        "result": "<br>",
+        "enabled": true,
+        "id": 909
+      },
+      {
+        "source": "{EventAction}",
+        "result": "<link=\"906\"><b>Activation</b></link>",
+        "enabled": true,
+        "id": 917
+      },
+      {
+        "source": "{Destroy}",
+        "result": "<link=\"906\"><b>Destroy</b></link>",
+        "enabled": true,
+        "id": 918
+      },
+      {
+        "source": "{Destroys}",
+        "result": "<link=\"906\"><b>Destroys</b></link>",
+        "enabled": true,
+        "id": 919
+      },
+      {
+        "source": "{Lane}",
+        "result": "<link=\"906\"><b>Lane</b></link>",
+        "enabled": true,
+        "id": 920
+      },
+      {
+        "source": "{Death}",
+        "result": "<link=\"906\"><b>Death</b></link>",
+        "enabled": true,
+        "id": 921
+      },
+      {
+        "source": "{Destroyed}",
+        "result": "<link=\"906\"><b>Destroyed</b></link>",
+        "enabled": true,
+        "id": 923
       }
     ]
   },
@@ -28293,7 +29241,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 3
+                                            "value": 1
                                           }
                                         ]
                                       }
@@ -32817,55 +33765,17 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Action.[523] ~Delete [N] Tokens with [Cond] on Card [Id]",
+                                  "name": "Action.[706] ~Pause",
                                   "type": 0,
-                                  "subtype": 10523,
+                                  "subtype": 10706,
                                   "params": [
                                     {
-                                      "name": "Card Id",
+                                      "name": "Pause time",
                                       "value": {
-                                        "name": "Value.Variable",
+                                        "name": "Value.[602] ~Pause: Building Action Step",
                                         "type": 2,
-                                        "subtype": 1,
-                                        "params": [
-                                          {
-                                            "name": "var_name",
-                                            "value": "this_card_id"
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "Cond",
-                                      "value": {
-                                        "name": "Condition.[154] #007:Is card type",
-                                        "type": 1,
-                                        "subtype": 10154,
-                                        "params": [
-                                          {
-                                            "name": "Card Type Id",
-                                            "value": {
-                                              "name": "Value.[310] Token TplId - Work",
-                                              "type": 2,
-                                              "subtype": 10310,
-                                              "params": []
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "Cnt",
-                                      "value": {
-                                        "name": "Value.Variable",
-                                        "type": 2,
-                                        "subtype": 1,
-                                        "params": [
-                                          {
-                                            "name": "var_name",
-                                            "value": "token_slots"
-                                          }
-                                        ]
+                                        "subtype": 10602,
+                                        "params": []
                                       }
                                     }
                                   ]
@@ -32881,20 +33791,53 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Action.[706] ~Pause",
+                                        "name": "Action.[523] ~Delete [N] Tokens with [Cond] on Card [Id]",
                                         "type": 0,
-                                        "subtype": 10706,
+                                        "subtype": 10523,
                                         "params": [
                                           {
-                                            "name": "Pause time",
+                                            "name": "Card Id",
                                             "value": {
-                                              "name": "Value.Constant",
+                                              "name": "Value.Variable",
                                               "type": 2,
-                                              "subtype": 0,
+                                              "subtype": 1,
                                               "params": [
                                                 {
-                                                  "name": "value",
-                                                  "value": 500
+                                                  "name": "var_name",
+                                                  "value": "this_card_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "Cond",
+                                            "value": {
+                                              "name": "Condition.[154] #007:Is card type",
+                                              "type": 1,
+                                              "subtype": 10154,
+                                              "params": [
+                                                {
+                                                  "name": "Card Type Id",
+                                                  "value": {
+                                                    "name": "Value.[310] Token TplId - Work",
+                                                    "type": 2,
+                                                    "subtype": 10310,
+                                                    "params": []
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "Cnt",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "token_slots"
                                                 }
                                               ]
                                             }
@@ -32911,6 +33854,25 @@
                                         "params": [
                                           {
                                             "name": "action1",
+                                            "value": {
+                                              "name": "Action.[706] ~Pause",
+                                              "type": 0,
+                                              "subtype": 10706,
+                                              "params": [
+                                                {
+                                                  "name": "Pause time",
+                                                  "value": {
+                                                    "name": "Value.[602] ~Pause: Building Action Step",
+                                                    "type": 2,
+                                                    "subtype": 10602,
+                                                    "params": []
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
                                             "value": {
                                               "name": "Action.[535] ~Create a Token [Tpl Id] on this Card & [DO]",
                                               "type": 0,
@@ -32945,30 +33907,6 @@
                                                           "subtype": 10168,
                                                           "params": []
                                                         }
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          },
-                                          {
-                                            "name": "action2",
-                                            "value": {
-                                              "name": "Action.[706] ~Pause",
-                                              "type": 0,
-                                              "subtype": 10706,
-                                              "params": [
-                                                {
-                                                  "name": "Pause time",
-                                                  "value": {
-                                                    "name": "Value.Constant",
-                                                    "type": 2,
-                                                    "subtype": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "value",
-                                                        "value": 500
                                                       }
                                                     ]
                                                   }
@@ -35308,34 +36246,82 @@
                               {
                                 "name": "cond1",
                                 "value": {
-                                  "name": "Condition.Equal",
+                                  "name": "Condition.And",
                                   "type": 1,
-                                  "subtype": 2,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "value1",
+                                      "name": "cond1",
                                       "value": {
-                                        "name": "Value.Attribute",
-                                        "type": 2,
+                                        "name": "Condition.Equal",
+                                        "type": 1,
                                         "subtype": 2,
                                         "params": [
                                           {
-                                            "name": "attr_name",
-                                            "value": "linked_card_id"
+                                            "name": "value1",
+                                            "value": {
+                                              "name": "Value.Attribute",
+                                              "type": 2,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "linked_card_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "value2",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "_linked_card_id"
+                                                }
+                                              ]
+                                            }
                                           }
                                         ]
                                       }
                                     },
                                     {
-                                      "name": "value2",
+                                      "name": "cond2",
                                       "value": {
-                                        "name": "Value.Variable",
-                                        "type": 2,
-                                        "subtype": 1,
+                                        "name": "Condition.Equal",
+                                        "type": 1,
+                                        "subtype": 2,
                                         "params": [
                                           {
-                                            "name": "var_name",
-                                            "value": "_linked_card_id"
+                                            "name": "value1",
+                                            "value": {
+                                              "name": "Value.Attribute",
+                                              "type": 2,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "slot"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "value2",
+                                            "value": {
+                                              "name": "Value.Variable",
+                                              "type": 2,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "var_name",
+                                                  "value": "_slot"
+                                                }
+                                              ]
+                                            }
                                           }
                                         ]
                                       }
@@ -35346,39 +36332,10 @@
                               {
                                 "name": "cond2",
                                 "value": {
-                                  "name": "Condition.Equal",
+                                  "name": "Condition.[190] ~002:Is a Token",
                                   "type": 1,
-                                  "subtype": 2,
-                                  "params": [
-                                    {
-                                      "name": "value1",
-                                      "value": {
-                                        "name": "Value.Attribute",
-                                        "type": 2,
-                                        "subtype": 2,
-                                        "params": [
-                                          {
-                                            "name": "attr_name",
-                                            "value": "slot"
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "value2",
-                                      "value": {
-                                        "name": "Value.Variable",
-                                        "type": 2,
-                                        "subtype": 1,
-                                        "params": [
-                                          {
-                                            "name": "var_name",
-                                            "value": "_slot"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
+                                  "subtype": 10190,
+                                  "params": []
                                 }
                               }
                             ]
@@ -35484,34 +36441,82 @@
                                           {
                                             "name": "cond1",
                                             "value": {
-                                              "name": "Condition.Equal",
+                                              "name": "Condition.And",
                                               "type": 1,
-                                              "subtype": 2,
+                                              "subtype": 7,
                                               "params": [
                                                 {
-                                                  "name": "value1",
+                                                  "name": "cond1",
                                                   "value": {
-                                                    "name": "Value.Attribute",
-                                                    "type": 2,
+                                                    "name": "Condition.Equal",
+                                                    "type": 1,
                                                     "subtype": 2,
                                                     "params": [
                                                       {
-                                                        "name": "attr_name",
-                                                        "value": "linked_card_id"
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Value.Attribute",
+                                                          "type": 2,
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "linked_card_id"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Value.Variable",
+                                                          "type": 2,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "var_name",
+                                                              "value": "_linked_card_id"
+                                                            }
+                                                          ]
+                                                        }
                                                       }
                                                     ]
                                                   }
                                                 },
                                                 {
-                                                  "name": "value2",
+                                                  "name": "cond2",
                                                   "value": {
-                                                    "name": "Value.Variable",
-                                                    "type": 2,
-                                                    "subtype": 1,
+                                                    "name": "Condition.Equal",
+                                                    "type": 1,
+                                                    "subtype": 2,
                                                     "params": [
                                                       {
-                                                        "name": "var_name",
-                                                        "value": "_linked_card_id"
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Value.Attribute",
+                                                          "type": 2,
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "slot"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Value.Variable",
+                                                          "type": 2,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "var_name",
+                                                              "value": "_slot"
+                                                            }
+                                                          ]
+                                                        }
                                                       }
                                                     ]
                                                   }
@@ -35522,39 +36527,10 @@
                                           {
                                             "name": "cond2",
                                             "value": {
-                                              "name": "Condition.Equal",
+                                              "name": "Condition.[190] ~002:Is a Token",
                                               "type": 1,
-                                              "subtype": 2,
-                                              "params": [
-                                                {
-                                                  "name": "value1",
-                                                  "value": {
-                                                    "name": "Value.Attribute",
-                                                    "type": 2,
-                                                    "subtype": 2,
-                                                    "params": [
-                                                      {
-                                                        "name": "attr_name",
-                                                        "value": "slot"
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                {
-                                                  "name": "value2",
-                                                  "value": {
-                                                    "name": "Value.Variable",
-                                                    "type": 2,
-                                                    "subtype": 1,
-                                                    "params": [
-                                                      {
-                                                        "name": "var_name",
-                                                        "value": "_slot"
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
+                                              "subtype": 10190,
+                                              "params": []
                                             }
                                           }
                                         ]
@@ -45149,61 +46125,180 @@
             {
               "name": "action2",
               "value": {
-                "name": "Action.Iterator",
+                "name": "Action.If-Then-Else",
                 "type": 0,
-                "subtype": 5,
+                "subtype": 2,
                 "params": [
                   {
-                    "name": "condition",
+                    "name": "if",
                     "value": {
-                      "name": "Condition.[155] #008:Is in place [X]",
+                      "name": "Condition.[150] #003:Greater or equal",
                       "type": 1,
-                      "subtype": 10155,
+                      "subtype": 10150,
                       "params": [
                         {
-                          "name": "Place Id",
+                          "name": "Value 1",
                           "value": {
-                            "name": "Value.[164] Place 02. Event Deck",
+                            "name": "Value.Game Attribute",
                             "type": 2,
-                            "subtype": 10164,
-                            "params": []
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "non_creatures_drawn"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Value 2",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 2
+                              }
+                            ]
                           }
                         }
                       ]
                     }
                   },
                   {
-                    "name": "action",
+                    "name": "then",
                     "value": {
-                      "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
+                      "name": "Action.Iterator",
                       "type": 0,
-                      "subtype": 10889,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "Target place",
+                          "name": "condition",
                           "value": {
-                            "name": "Value.[864] Place - Showcase",
-                            "type": 2,
-                            "subtype": 10864,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "Fly time",
-                          "value": {
-                            "name": "Value.Constant",
-                            "type": 2,
-                            "subtype": 0,
+                            "name": "Condition.And",
+                            "type": 1,
+                            "subtype": 7,
                             "params": [
                               {
-                                "name": "value",
-                                "value": 500
+                                "name": "cond1",
+                                "value": {
+                                  "name": "Condition.[155] #008:Is in place [X]",
+                                  "type": 1,
+                                  "subtype": 10155,
+                                  "params": [
+                                    {
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Value.[164] Place 02. Event Deck",
+                                        "type": 2,
+                                        "subtype": 10164,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Condition.[187] ~001:Is a Creature",
+                                  "type": 1,
+                                  "subtype": 10187,
+                                  "params": []
+                                }
                               }
                             ]
                           }
                         },
                         {
-                          "name": "Pause",
+                          "name": "action",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
+                                  "type": 0,
+                                  "subtype": 10889,
+                                  "params": [
+                                    {
+                                      "name": "Target place",
+                                      "value": {
+                                        "name": "Value.[864] Place - Showcase",
+                                        "type": 2,
+                                        "subtype": 10864,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "Fly time",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 500
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Pause",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 350
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.Set game attribute",
+                                  "type": 0,
+                                  "subtype": 9,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "non_creatures_drawn"
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 0
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
                           "value": {
                             "name": "Value.Constant",
                             "type": 2,
@@ -45211,7 +46306,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 350
+                                "value": 1
                               }
                             ]
                           }
@@ -45220,15 +46315,200 @@
                     }
                   },
                   {
-                    "name": "limit",
+                    "name": "else",
                     "value": {
-                      "name": "Value.Constant",
-                      "type": 2,
-                      "subtype": 0,
+                      "name": "Action.Iterator",
+                      "type": 0,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "value",
-                          "value": 1
+                          "name": "condition",
+                          "value": {
+                            "name": "Condition.[155] #008:Is in place [X]",
+                            "type": 1,
+                            "subtype": 10155,
+                            "params": [
+                              {
+                                "name": "Place Id",
+                                "value": {
+                                  "name": "Value.[164] Place 02. Event Deck",
+                                  "type": 2,
+                                  "subtype": 10164,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "Action.Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Action.[889] ~Fly a Card to [PlaceId] with [FlyTime] and [Pause]",
+                                  "type": 0,
+                                  "subtype": 10889,
+                                  "params": [
+                                    {
+                                      "name": "Target place",
+                                      "value": {
+                                        "name": "Value.[864] Place - Showcase",
+                                        "type": 2,
+                                        "subtype": 10864,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "Fly time",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 500
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Pause",
+                                      "value": {
+                                        "name": "Value.Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 350
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Action.If-Then-Else",
+                                  "type": 0,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "if",
+                                      "value": {
+                                        "name": "Condition.[187] ~001:Is a Creature",
+                                        "type": 1,
+                                        "subtype": 10187,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "then",
+                                      "value": {
+                                        "name": "Action.Set game attribute",
+                                        "type": 0,
+                                        "subtype": 9,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "non_creatures_drawn"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 0
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "else",
+                                      "value": {
+                                        "name": "Action.Set game attribute",
+                                        "type": 0,
+                                        "subtype": 9,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "non_creatures_drawn"
+                                          },
+                                          {
+                                            "name": "value",
+                                            "value": {
+                                              "name": "Value.Addition",
+                                              "type": 2,
+                                              "subtype": 5,
+                                              "params": [
+                                                {
+                                                  "name": "value1",
+                                                  "value": {
+                                                    "name": "Value.Game Attribute",
+                                                    "type": 2,
+                                                    "subtype": 13,
+                                                    "params": [
+                                                      {
+                                                        "name": "attr_name",
+                                                        "value": "non_creatures_drawn"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "value2",
+                                                  "value": {
+                                                    "name": "Value.Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 1
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Value.Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
