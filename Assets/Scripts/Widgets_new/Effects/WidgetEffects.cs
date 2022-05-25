@@ -37,11 +37,17 @@ namespace Solcery.Widgets_new.Effects
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
 
-            effect.RectTransform.DOJump(to, Random.Range(0.5f, 1.5f),0, time).OnComplete(() =>
+            effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
             {
                 Object.Destroy(effect.gameObject);
                 onMoveComplete?.Invoke();
             }).SetEase(Ease.Linear).Play();
+            
+            DOTween.Sequence()
+                .Append(effect.RectTransform.DOScale(new Vector3(3f, 3f, 1f), time / 2))
+                .Append(effect.RectTransform.DOScale(new Vector3(1f, 1f, 1f), time / 2))
+                .Play();
+
         }
 
         public void DestroyToken(RectTransform rectTransform, 
