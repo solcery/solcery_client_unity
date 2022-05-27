@@ -32,14 +32,14 @@ namespace Solcery.Models.Simulation.Game.Destroy
 
             foreach (var oidEntityId in _filterComponentObjectIdHash)
             {
-                var objectIdHash = world.GetPool<ComponentObjectIdHash>().Get(oidEntityId).ObjectIdHash;
+                var objectIdHashes = world.GetPool<ComponentObjectIdHash>().Get(oidEntityId).ObjectIdHashes;
                 
                 foreach (var entityId in _filterDestroyedObjects)
                 {
                     if (objectIdPool.Has(entityId))
                     {
                         var objId = objectIdPool.Get(entityId).Id;
-                        objectIdHash.Remove(objId);
+                        objectIdHashes.ReleaseId(objId);
                     }
                     
                     world.DelEntity(entityId);

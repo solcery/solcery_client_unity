@@ -1,4 +1,3 @@
-using System;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts;
@@ -14,7 +13,6 @@ using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Simulation.Game;
 using Solcery.Utils;
-using Random = UnityEngine.Random;
 
 namespace Solcery.Games.Contexts
 {
@@ -82,24 +80,8 @@ namespace Solcery.Games.Contexts
 
             foreach (var objectIdHashEntityId in _filterComponentObjectIdHash)
             {
-                var objectIdHash = _world.GetPool<ComponentObjectIdHash>().Get(objectIdHashEntityId).ObjectIdHash;
-
-                int objectId;
-                var iterator = 0;
-                
-                do
-                {
-                    iterator++;
-
-                    if (iterator >= 10000)
-                    {
-                        throw new Exception("Can't generate object id!");
-                    }
-                    
-                    objectId = Random.Range(0, 100000);
-                } while (objectIdHash.Contains(objectId));
-
-                objectIdHash.Add(objectId);
+                var objectIdHashes = _world.GetPool<ComponentObjectIdHash>().Get(objectIdHashEntityId).ObjectIdHashes;
+                var objectId = objectIdHashes.GetId();
                 _world.GetPool<ComponentObjectTag>().Add(entityId);
                 _world.GetPool<ComponentObjectId>().Add(entityId).Id = objectId;
                 _world.GetPool<ComponentObjectType>().Add(entityId).Type = cardTypeId;
@@ -130,7 +112,7 @@ namespace Solcery.Games.Contexts
 
                 @object = entityId;
                 
-                Log.Print($"Create new object with entity id {entityId}");
+                Log.Print($"Create new object with entityId {entityId} and objectId {objectId}");
                 
                 return true;
             }

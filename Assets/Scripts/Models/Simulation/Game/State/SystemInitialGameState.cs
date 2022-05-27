@@ -11,6 +11,7 @@ using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Models.Simulation.Game.State
 {
@@ -56,7 +57,7 @@ namespace Solcery.Models.Simulation.Game.State
             }
 
             var objectIdHashPoolEntityId = world.NewEntity();
-            var objectIdHash = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHash;
+            var objectIdHashes = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHashes;
             
             // Update game attributes
             var gameAttributeArray = _initialGameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
@@ -75,12 +76,16 @@ namespace Solcery.Models.Simulation.Game.State
                     entityHashMap.Add(entityObject.GetValue<int>("id"), entityObject);
                 }
             }
+
+            var maxObjectId = 0;
             
             foreach (var entityObject in entityHashMap)
             {
-                objectIdHash.Add(entityObject.Key);
+                maxObjectId = Mathf.Max(maxObjectId, entityObject.Key);
                 CreateEntity(world, entityObject.Value);
             }
+            
+            objectIdHashes.UpdateHeadId(maxObjectId);
                 
             entityHashMap.Clear();
             _staticAttributes.Cleanup();
