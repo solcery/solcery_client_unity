@@ -120,5 +120,24 @@ namespace Solcery.Games.Contexts
             @object = -1;
             return false;
         }
+
+        bool IContext.TryResetObjectAttrs(object @object)
+        {
+            var entityId = (int) @object;
+            var objectAttrsPool = _world.GetPool<ComponentObjectAttributes>();
+
+            if (objectAttrsPool.Has(entityId))
+            {
+                return false;
+            }
+
+            var objectAttrs = objectAttrsPool.Get(entityId).Attributes;
+            foreach (var attribute in objectAttrs)
+            {
+                attribute.Value.UpdateValue(0);
+            }
+
+            return true;
+        }
     }
 }
