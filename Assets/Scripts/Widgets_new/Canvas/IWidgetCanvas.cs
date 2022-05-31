@@ -1,4 +1,7 @@
+using Solcery.Ui;
 using Solcery.Ui.DragDrop;
+using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Effects;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Canvas
@@ -7,7 +10,10 @@ namespace Solcery.Widgets_new.Canvas
     {
         Transform GetWorldCanvas();
         RectTransform GetUiCanvas();
+        RectTransform GetTooltipsCanvas();
         RootDragDropLayout GetDragDropCanvas();
+        IWidgetEffects GetEffects();
+        EclipseCardFullModeLayout GetFullModeLayout();
         void Destroy();
     }
 }

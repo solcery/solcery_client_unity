@@ -15,11 +15,15 @@ namespace Solcery.Widgets_new.Tooltip
         
         public override void OnPointerMove(PointerEventData eventData)
         {
-            var position = eventData.position;
-            if (RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, position))
-            {
-                ShowTooltip(position);
-            }
+            RectTransformUtility.ScreenPointToWorldPointInRectangle
+            (
+                _rectTransform, 
+                eventData.position, 
+                Camera.current,
+                out var position
+            );
+            
+            ShowTooltip(position);
         }
     }
 }

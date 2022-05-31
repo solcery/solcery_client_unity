@@ -65,17 +65,23 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
 
                 if (placeDragDropEntityIdPool.Has(placeEntityId))
                 {
-                    var dragDropParameterEntityId = placeDragDropEntityIdPool.Get(placeEntityId).DragDropEntityId;
-                    var requiredEclipseCardType =
-                        world.GetPool<ComponentDragDropParametersRequiredEclipseCardType>()
-                            .Get(dragDropParameterEntityId).RequiredEclipseCardType;
+                    var dragDropEntityIds = placeDragDropEntityIdPool.Get(placeEntityId).DragDropEntityIds;
 
-                    if (requiredEclipseCardType == eclipseCardType)
+                    foreach (var dragDropEntityId in dragDropEntityIds)
                     {
-                        world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
-                            .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform,
-                                onDragEventData.WorldPosition);
-                        _game.WidgetCanvas.GetDragDropCanvas().UpdateOnDrag(onDragEventData.DragEntityId);
+                        var requiredEclipseCardTypes =
+                            world.GetPool<ComponentDragDropParametersRequiredEclipseCardTypes>()
+                                .Get(dragDropEntityId).RequiredEclipseCardTypes;
+
+                        if (requiredEclipseCardTypes.Contains(eclipseCardType))
+                        {
+                            world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
+                                .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform,
+                                    onDragEventData.WorldPosition);
+                            _game.WidgetCanvas.GetDragDropCanvas()
+                                .UpdateOnDrag(onDragEventData.DragEntityId, dragDropEntityId);
+                            break;
+                        }
                     }
                 }
             }

@@ -1,22 +1,35 @@
 using Solcery.Games;
+using Solcery.Games.DTO;
+using Solcery.Services.Renderer.DTO;
+using Solcery.Ui;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery
 {
     public class GameApplication : MonoBehaviour
     {
         [SerializeField]
-        private Transform gameCanvas;
+        private Transform worldGame;
         [SerializeField]
-        private RectTransform uiCanvas;
+        private RootUiGame uiGame;
         [SerializeField]
         private RootDragDropLayout dragDropCanvas;
+        [SerializeField]
+        private Camera rootCamera;
+        [SerializeField]
+        private Transform renderFrame;
+        [SerializeField]
+        private GameObject renderPrefab;
+        [SerializeField]
+        private Graphic raycastBlockTouches;
         
         private IGame _game;
 
         private static GameApplication _instance;
+        public static GameApplication Instance => _instance;
         
         public static IGame Game()
         {
@@ -30,7 +43,12 @@ namespace Solcery
 
         private void Start()
         {
-            _game = Games.Game.Create(WidgetCanvas.Create(gameCanvas, uiCanvas, dragDropCanvas));
+            #if !UNITY_EDITOR && UNITY_WEBGL
+            WebGLInput.captureAllKeyboardInput = false;
+            #endif
+            _game = Games.Game.Create(GameInitDto.Create(rootCamera,
+                WidgetCanvas.Create(worldGame, uiGame, dragDropCanvas),
+                ServiceRenderDto.Create(renderFrame, renderPrefab)));
             _game.Init();
         }
 
@@ -43,6 +61,19 @@ namespace Solcery
         {
             _game?.Destroy();
             _game = null;
+        }
+
+        public Vector3 WorldToCanvas(Vector3 worldPosition)
+        {
+            var dX = worldPosition.x / Screen.width;
+            var dY = worldPosition.y / Screen.height;
+            var rect = uiGame.Game.rect;
+            return new Vector3(rect.width * dX, rect.height * dY);
+        }
+
+        public void EnableBlockTouches(bool enable)
+        {
+            raycastBlockTouches.raycastTarget = enable;
         }
     }
 }

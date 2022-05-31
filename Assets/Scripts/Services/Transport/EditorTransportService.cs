@@ -1,26 +1,27 @@
 #if UNITY_EDITOR || LOCAL_SIMULATION
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation;
-using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Services.Transport
 {
     public sealed class EditorTransportService : ITransportService
     {
+        private IGame _game;
         private IServiceLocalSimulation _localSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         
-        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IGame game)
         {
-            return new EditorTransportService(gameTransportCallbacks, serviceBricks);
+            return new EditorTransportService(gameTransportCallbacks, game);
         }
 
-        private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IServiceBricks serviceBricks)
+        private EditorTransportService(IGameTransportCallbacks gameTransportCallbacks, IGame game)
         {
-            _localSimulation = ServiceLocalSimulation.Create(serviceBricks);
+            _game = game;
+            _localSimulation = ServiceLocalSimulation.Create();
             _gameTransportCallbacks = gameTransportCallbacks;
         }
         
@@ -43,12 +44,13 @@ namespace Solcery.Services.Transport
         {
             var gameState = JObject.Parse(obj);
             _localSimulation.EventOnUpdateGameState += OnUpdateGameState;
-            _localSimulation.Init(_gameContent, gameState);
+            _localSimulation.Init(_game, gameState);
             _gameContent = null;
         }
 
         private void OnUpdateGameState(JObject gameStateJson)
         {
+            Debug.Log($"OnUpdateGameState {gameStateJson}");
             _gameTransportCallbacks.OnReceivingGameState(gameStateJson);
         }
 

@@ -4,6 +4,8 @@ using Solcery.Games;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Commands.Datas.OnDrop;
+using Solcery.Models.Shared.DragDrop.Parameters;
+using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Widgets_new;
@@ -75,14 +77,15 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
 
                 if (targetLayout != null
                     && targetLayout.LinkedEntityId != sourcePlaceEntityId
-                    && CheckPlaceDestinations(world, 
-                        sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId, 
-                        targetLayout.PlaceId)
+                    && CheckPlaceDestinations(world, onDropEventData.DragDropEntityId, targetLayout.PlaceId)
+                    && CheckDestinationCondition(world, onDropEventData.DragDropEntityId, targetLayout.PlaceId)
                     && TryGetTargetDropWidget(world, targetLayout.LinkedEntityId, out targetDropWidget))
                 {
+                    sourcePlaceEntityIdPool.Get(onDropEventData.DragEntityId).SourcePlaceEntityId =
+                        targetLayout.LinkedEntityId;
                     var objectId = world.GetPool<ComponentDragDropObjectId>().Get(onDropEventData.DragEntityId).ObjectId;
-                    var command =
-                        CommandOnDropData.CreateFromParameters(objectId, targetLayout.PlaceId,
+                    var dragDropId = world.GetPool<ComponentDragDropParametersId>().Get(onDropEventData.DragDropEntityId).Id;
+                    var command = CommandOnDropData.CreateFromParameters(objectId, dragDropId, targetLayout.PlaceId,
                             TriggerTargetEntityTypes.Card);
                     _game.TransportService.SendCommand(command.ToJson());
                 }
@@ -106,12 +109,11 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             return placeWidgetLayout != null;
         }
 
-        private bool CheckPlaceDestinations(EcsWorld world, int sourcePlaceEntityId, int targetPlaceId)
+        private bool CheckPlaceDestinations(EcsWorld world, int dragDropEntityId, int targetPlaceId)
         {
-            var dragDropParameterEntityId = world.GetPool<ComponentPlaceDragDropEntityId>().Get(sourcePlaceEntityId).DragDropEntityId;
             var dragDropParameterDestinationPool = world.GetPool<ComponentDragDropParametersDestinations>();
-            return dragDropParameterDestinationPool.Has(dragDropParameterEntityId) && dragDropParameterDestinationPool
-                .Get(dragDropParameterEntityId).PlaceIds.Contains(targetPlaceId);
+            return dragDropParameterDestinationPool.Has(dragDropEntityId) && dragDropParameterDestinationPool
+                .Get(dragDropEntityId).PlaceIds.Contains(targetPlaceId);
         }
 
         private bool TryGetTargetDropWidget(EcsWorld world, int targetPlaceEntityId, out IApplyDropWidget targetDropWidget)
@@ -126,6 +128,46 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             }
 
             return targetDropWidget != null;
+        }
+
+        private bool CheckDestinationCondition(EcsWorld world, int dragDropEntityId, int targetPlaceId)
+        {
+            var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
+
+            if (destinationConditionPool.Has(dragDropEntityId))
+            {
+                var destinationConditionType =
+                    destinationConditionPool.Get(dragDropEntityId).ParametersDestinationConditionType;
+
+                if (destinationConditionType == DragDropParametersDestinationConditionTypes.Any)
+                {
+                    return true;
+                }
+
+                var filter = world.Filter<ComponentObjectTag>().Inc<ComponentObjectAttributes>().End();
+                var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
+                var countObjectOnPlace = 0;
+
+                foreach (var entityId in filter)
+                {
+                    if (objectAttributesPool.Get(entityId).Attributes.TryGetValue("place", out var placeId) 
+                        && placeId.Current == targetPlaceId)
+                    {
+                        countObjectOnPlace++;
+                    }
+                }
+
+                switch (destinationConditionType)
+                {
+                    case DragDropParametersDestinationConditionTypes.Empty:
+                        return countObjectOnPlace <= 0;
+                    
+                    case DragDropParametersDestinationConditionTypes.NonEmpty:
+                        return countObjectOnPlace > 0;
+                }
+            }
+            
+            return false;
         }
     }
 }

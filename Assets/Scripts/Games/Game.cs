@@ -4,7 +4,12 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
+using Solcery.DebugViewers;
+using Solcery.Games.Contents;
+using Solcery.Games.DTO;
+using Solcery.Games.States;
 using Solcery.Models.Play;
+using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
 using Solcery.React;
 #endif
@@ -28,11 +33,13 @@ using Solcery.Widgets_new.Simple.Pictures;
 using Solcery.Widgets_new.Simple.Titles;
 using Solcery.Widgets_new.Simple.Widgets;
 using Solcery.Widgets_new.Tooltip;
+using UnityEngine;
 
 namespace Solcery.Games
 {
     public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
+        Camera IGame.MainCamera => _mainCamera;
         ITransportService IGame.TransportService => _transportService;
         IServiceBricks IGame.ServiceBricks => _serviceBricks;
         IServiceResource IGame.ServiceResource => _serviceResource;
@@ -41,20 +48,25 @@ namespace Solcery.Games
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
         IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
+        IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         JObject IGame.GameContent => _gameContentJson;
         TooltipController IGame.TooltipController => _tooltipController;
-        
+        EclipseCardFullModeController IGame.FullModeController => _fullModeController;
+        IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
+        IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
+
         JObject IGame.GameStatePopAndClear
         {
             get
             {
-                var lastGameContent = _gameStates.Count > 0 ? _gameStates.Pop() : null;
-                _gameStates.Clear();
-                return lastGameContent;
+                var newGs = _gameState;
+                _gameState = null;
+                return newGs;
             }
         }
 
+        private Camera _mainCamera;
         private ITransportService _transportService;
         private IServiceBricks _serviceBricks;
         private IServiceResource _serviceResource;
@@ -63,23 +75,31 @@ namespace Solcery.Games
         private IPlaceWidgetFactory _placeWidgetFactory;
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
+        private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
+        private IServiceRenderWidget _serviceRenderWidget;
         private JObject _gameContentJson;
-        private readonly Stack<JObject> _gameStates;
-        private readonly TooltipController _tooltipController;
-
-        public static IGame Create(IWidgetCanvas widgetCanvas)
+        private readonly Queue<GameStatePackage> _gameStatePackages;
+        private JObject _gameState;
+        private TooltipController _tooltipController;
+        private EclipseCardFullModeController _fullModeController;
+        private readonly IGameContentAttributes _contentAttributes;
+        
+        public static IGame Create(IGameInitDto dto)
         {
-            return new Game(widgetCanvas);
+            return new Game(dto);
         }
 
-        private Game(IWidgetCanvas widgetCanvas)
+        private Game(IGameInitDto dto)
         {
-            _widgetCanvas = widgetCanvas;
-            _gameStates = new Stack<JObject>();
+            _mainCamera = dto.MainCamera;
+            _widgetCanvas = dto.WidgetCanvas;
+            _gameStatePackages = new Queue<GameStatePackage>();
             CreateModel();
-            CreateServices(widgetCanvas);
-            _tooltipController = TooltipController.Create(widgetCanvas, _serviceResource);
+            CreateServices(dto);
+            _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
+            _fullModeController = EclipseCardFullModeController.Create(_widgetCanvas);
+            _contentAttributes = GameContentAttributes.Create();
         }
         
         private void CreateModel()
@@ -87,26 +107,30 @@ namespace Solcery.Games
             _playModel = PlayModel.Create();
         }
         
-        private void CreateServices(IWidgetCanvas widgetCanvas)
+        private void CreateServices(IGameInitDto dto)
         {
+            _serviceRenderWidget = ServiceRenderWidget.Create(dto.ServiceRenderDto);
+            
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
 #if UNITY_EDITOR || LOCAL_SIMULATION
-            _transportService = EditorTransportService.Create(this, _serviceBricks);
+            _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
             _transportService = WebGlTransportService.Create(this);
 #endif
 
             _serviceResource = ServiceResource.Create(this);
-            _placeWidgetFactory = PlaceWidgetFactory.Create(this, widgetCanvas);
+            _placeWidgetFactory = PlaceWidgetFactory.Create(this, _widgetCanvas);
             RegistrationPlaceWidgetTypes();
 
-            _cardInContainerWidgetPool = WidgetPool<ICardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _cardInContainerWidgetPool = WidgetPool<ICardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_card", CardInContainerWidget.Create);
-            _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _tokenInContainerWidgetPool = WidgetPool<ITokenInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_token", TokenInContainerWidget.Create);
-            _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(widgetCanvas.GetUiCanvas(), this,
+            _listTokensInContainerWidgetPool = WidgetPool<IListTokensInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_eclipse_list_tokens", ListTokensInContainerWidget.Create);
+            _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
         }
 
@@ -130,6 +154,7 @@ namespace Solcery.Games
         {
             Cleanup();
             _gameContentJson = gameContentJson;
+            _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
 
             if (gameContentJson.TryGetValue("customBricks", out JObject customBricks) &&
                 customBricks.TryGetValue("objects", out JArray customBricksArray))
@@ -148,13 +173,17 @@ namespace Solcery.Games
 
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
-            _gameStates.Push(gameStateJson);
+            GameApplication.Instance.EnableBlockTouches(true);
+            var gamePackage = GameStatePackage.Create(gameStateJson);
+            DebugViewer.Instance.AddGameStatePackage(gamePackage);
+            _gameStatePackages.Enqueue(gamePackage);
         }
 
         private void Init(JObject gameContentJson)
         {
             _playModel.Init(this, gameContentJson);
             LoaderScreen.Hide();
+            GameApplication.Instance.EnableBlockTouches(false);
         }
 
         private void RegistrationPlaceWidgetTypes()
@@ -191,6 +220,10 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.GameAttribute, BrickValueGameAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.CardId, BrickValueCardId.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.CardTypeId, BrickValueCardTypeId.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorSum, BrickValueIteratorSum.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.SetVariable, BrickValueSetVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMax, BrickValueIteratorMax.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMin, BrickValueIteratorMin.Create);
 
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
@@ -204,6 +237,11 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetAttribute, BrickActionSetAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetGameAttribute, BrickActionSetGameAttribute.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Iterator, BrickActionIterator.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Event, BrickActionEvent.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Pause, BrickActionPause.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.CreateObject, BrickActionCreateObject.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.DeleteObject, BrickActionDeleteObject.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ClearAttrs, BrickActionClearAttrs.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
@@ -214,6 +252,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.GreaterThan, BrickConditionGreaterThan.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.LesserThan, BrickConditionLesserThan.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Argument, BrickConditionArgument.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorOr, BrickConditionIteratorOr.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorAnd, BrickConditionIteratorAnd.Create);
         }
 
         private void Cleanup()
@@ -230,6 +270,31 @@ namespace Solcery.Games
         {
             _tooltipController.Update(dt);
             _transportService.Update(dt);
+
+            if (_gameStatePackages.Count > 0)
+            {
+                var state = _gameStatePackages.Peek();
+
+                if (!state.IsCompleted)
+                {
+                    var msec = (int)(dt * 1000f);
+                    if (state.TryGetGameState(msec, out var gameState))
+                    {
+                        _gameState = gameState;
+                    }
+                }
+
+                if (state.IsCompleted)
+                {
+                    _gameStatePackages.Dequeue();
+                }
+
+                if (_gameStatePackages.Count <= 0)
+                {
+                    GameApplication.Instance.EnableBlockTouches(false);
+                }
+            }
+            
             _playModel.Update(dt);
         }
 
@@ -256,7 +321,11 @@ namespace Solcery.Games
             _eclipseCardInContainerWidgetPool = null;
             _serviceResource.Destroy();
             _serviceResource = null;
-
+            _fullModeController.Destroy();
+            _fullModeController = null;
+            _tooltipController.Destroy();
+            _tooltipController = null;
+            
             _widgetCanvas = null;
         }
     }

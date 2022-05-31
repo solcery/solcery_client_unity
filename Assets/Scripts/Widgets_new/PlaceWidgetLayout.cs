@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace Solcery.Widgets_new
         public int OrderZ => _orderZ;
         public int LinkedEntityId => _linkedEntityId;
         public PlaceWidget PlaceWidget => _placeWidget;
+        public bool BlockRaycasts => canvasGroup.blocksRaycasts;
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
@@ -21,7 +23,7 @@ namespace Solcery.Widgets_new
         private int _orderZ;
         private int _linkedEntityId;
         private PlaceWidget _placeWidget;
-
+        
         public void UpdatePlaceWidget(PlaceWidget placeWidget)
         {
             _placeWidget = placeWidget;
@@ -61,12 +63,12 @@ namespace Solcery.Widgets_new
         public virtual void UpdateAlpha(int alpha)
         {
         }
-
-        public void UpdateBackgroundColor(string backgroundColor)
+        
+        public void UpdateFillColor(string fillColor)
         {
-            if (backgroundColor != null)
+            if (fillColor != null)
             {
-                if (ColorUtility.TryParseHtmlString(backgroundColor, out var bgColor))
+                if (ColorUtility.TryParseHtmlString(fillColor, out var bgColor))
                 {
                     if (background != null)
                     {
@@ -102,6 +104,11 @@ namespace Solcery.Widgets_new
                     caption.text = text;
                 }
             }
+        }
+
+        public void UpdateBlocksRaycasts(bool blocksRaycasts)
+        {
+            canvasGroup.blocksRaycasts = blocksRaycasts;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Solcery.Widgets_new.Tooltip
 
         public override void OnPointerMove(PointerEventData eventData)
         {
-            var linkIndex = TMP_TextUtilities.FindIntersectingLink(_text, eventData.position, null);;
+            var linkIndex = TMP_TextUtilities.FindIntersectingLink(_text, eventData.position, Camera.main);;
             if (linkIndex != -1)
             {
                 var linkId = _text.textInfo.linkInfo[linkIndex].GetLinkID();
@@ -33,7 +33,7 @@ namespace Solcery.Widgets_new.Tooltip
         protected override void HideTooltip()
         {
             base.HideTooltip();
-            TooltipId = null;
+            TooltipId = -1;
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Solcery.Widgets_new
         
         protected T Layout;
         protected IGame Game;
+        protected IWidgetCanvas WidgetCanvas;
         protected readonly PlaceWidgetCardFace CardFace;
         protected readonly bool InteractableForActiveLocalPlayer;
         protected readonly int PlaceId;
@@ -50,7 +51,8 @@ namespace Solcery.Widgets_new
         protected PlaceWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             Game = game;
-
+            WidgetCanvas = widgetCanvas;
+            
             if (Game.ServiceResource.TryGetWidgetPrefabForKey(prefabPathKey, out var go)
                 && Object.Instantiate(go, widgetCanvas.GetUiCanvas()).TryGetComponent(typeof(T), out var component)
                 && component is T layout)
@@ -65,6 +67,10 @@ namespace Solcery.Widgets_new
                 var y1 = placeDataObject.TryGetValue("y1", out int yt1) ? yt1 / AnchorDivider : 0f;
                 var y2 = placeDataObject.TryGetValue("y2", out int yt2) ? yt2 / AnchorDivider : 0f;
                 Layout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
+                if (x1 >= x2 || y1 >= y2)
+                {
+                    Debug.LogWarning($"Wrong anchors on place with id \"{PlaceId}\"");
+                }
 
                 var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
@@ -81,8 +87,8 @@ namespace Solcery.Widgets_new
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
 
-                var backgroundColor = placeDataObject.TryGetValue("bgColor", out string bgColor) ? bgColor : null;
-                Layout.UpdateBackgroundColor(backgroundColor);
+                var fillColor = placeDataObject.TryGetValue("fill", out string fill) ? fill : null;
+                Layout.UpdateFillColor(fillColor);
 
                 Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
                 Layout.UpdateOutOfBorder(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
@@ -92,7 +98,7 @@ namespace Solcery.Widgets_new
                     var tooltipBehavior = Layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
                     tooltipBehavior.SetTooltipId(tooltipId);
                 }
-
+                
                 Layout.UpdateVisible(false);
                 Layout.UpdatePlaceWidget(this);
             }

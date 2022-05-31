@@ -62,6 +62,8 @@ sysinfo.txt
 crashlytics-build.properties
 
 .DS_Store
-CI/WebGl
 Assets/Tests/Logs
 Assets/Tests/Logs.meta
+CI/WebGl
+CI/WebGl_image/WebGl
+CI/WebGl_with_cms_image/WebGl

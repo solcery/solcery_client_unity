@@ -7,7 +7,7 @@ namespace Solcery.React
         [DllImport("__Internal")] private static extern void OnUnityLoaded(string message);
         [DllImport("__Internal")] private static extern void OnGameOverPopupButtonClicked();
         [DllImport("__Internal")] private static extern void OpenLinkInNewTab(string link);
-        [DllImport("__Internal")] private static extern void CastCard(int cardId);
+        [DllImport("__Internal")] private static extern void SendCommand(string command);
         
         public void CallOnUnityLoaded()
         {
@@ -36,12 +36,12 @@ namespace Solcery.React
 #endif
         }
 
-        public void CallCastCard(int cardId)
+        public void CallSendCommand(string command)
         {
-            UnityEngine.Debug.Log($"CallCastCard: {cardId}");
+            UnityEngine.Debug.Log($"CallSendCommand: {command}");
 
 #if (UNITY_WEBGL && !UNITY_EDITOR)
-            CastCard(cardId);
+            SendCommand(command);
 #endif
         }
     }

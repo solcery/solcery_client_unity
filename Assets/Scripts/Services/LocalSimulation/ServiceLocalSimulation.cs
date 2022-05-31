@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation;
-using Solcery.BrickInterpretation.Runtime;
+using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Solcery.Games;
 using Solcery.Models.Simulation;
 using Solcery.Services.Commands;
+using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation
 {
-    public sealed class ServiceLocalSimulation : IServiceLocalSimulation, IServiceLocalSimulationApplyGameState
+    public sealed class ServiceLocalSimulation : IServiceLocalSimulation, IServiceLocalSimulationApplyGameState, IServiceLocalSimulationApplyGameStateNew
     {
         event Action<JObject> IServiceLocalSimulation.EventOnUpdateGameState
         {
@@ -29,24 +30,38 @@ namespace Solcery.Services.LocalSimulation
         private readonly List<Action<JObject>> _listOnUpdateGameState;
         private ISimulationModel _simulationModel;
         private IServiceCommands _serviceCommands;
-        private IServiceBricks _serviceBricks;
 
-        public static IServiceLocalSimulation Create(IServiceBricks serviceBricks)
+        private Queue<IContextGameStates> _gameStates;
+
+        public static IServiceLocalSimulation Create()
         {
-            return new ServiceLocalSimulation(serviceBricks);
+            return new ServiceLocalSimulation();
         }
         
-        private ServiceLocalSimulation(IServiceBricks serviceBricks)
+        private ServiceLocalSimulation()
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
             _serviceCommands = ServiceCommands.Create();
-            _serviceBricks = serviceBricks;
             _simulationModel = SimulationModel.Create();
+            _gameStates = new Queue<IContextGameStates>();
         }
 
-        void IServiceLocalSimulation.Init(JObject gameContent, JObject gameState)
+        void IServiceLocalSimulation.Init(IGame game, JObject gameState)
         {
-            _simulationModel.Init(this, _serviceCommands, _serviceBricks, gameContent, gameState);
+            if (!gameState.TryGetValue("states", out JArray states) 
+                || states.Count <= 0
+                || states[0] is not JObject stateObject
+                || !stateObject.TryGetValue("value", out JObject gs))
+            {
+                gs = new JObject
+                {
+                    {"attrs", new JArray()},
+                    {"objects", new JArray()}
+                };
+                Debug.LogError("Invalid initial game state!");
+            }
+            
+            _simulationModel.Init(this, game, _serviceCommands, gs);
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 
@@ -60,18 +75,30 @@ namespace Solcery.Services.LocalSimulation
         {
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
+        
+        void IServiceLocalSimulationApplyGameStateNew.ApplySimulatedGameStates(IContextGameStates gameStates)
+        {
+            _gameStates.Enqueue(gameStates);
+        }
 
         void IServiceLocalSimulation.Update(float dt)
         {
-            if (_serviceCommands.IsEmpty())
+            if (!_serviceCommands.IsEmpty())
             {
-                return;
-            }
-            
-            dt /= _serviceCommands.CountCommand();
-            while (!_serviceCommands.IsEmpty())
-            {
-                _simulationModel?.Update(dt);
+                dt /= _serviceCommands.CountCommand();
+                while (!_serviceCommands.IsEmpty())
+                {
+                    _simulationModel?.Update(dt);
+                }
+
+                while (_gameStates.Count > 0)
+                {
+                    var gss = _gameStates.Dequeue();
+                    if (gss.TryGetGameState((int) (Time.deltaTime * 1000), out var gsd))
+                    {
+                        CallAllActionWithParams(_listOnUpdateGameState, gsd);
+                    }
+                }
             }
         }
 
@@ -92,9 +119,8 @@ namespace Solcery.Services.LocalSimulation
             _simulationModel = null;
             _serviceCommands.Destroy();
             _serviceCommands = null;
-            _serviceBricks = null;
         }
-        
+
         private void CallAllActionWithParams(List<Action<JObject>> listActions, JObject @params)
         {
             foreach (var action in listActions)

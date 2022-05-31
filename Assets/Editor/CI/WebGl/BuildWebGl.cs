@@ -2,32 +2,52 @@ using Solcery.Editor.CI.Utils;
 using Solcery.Editor.CI.WebGl.Configuration.Dev;
 using Solcery.Editor.CI.WebGl.Configuration.Prod;
 using UnityEditor;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+using UnityEditor.Build.Pipeline.Utilities;
 
 namespace Solcery.Editor.CI.WebGl
 {
     public static class BuildWebGl
     {
-        [MenuItem("Build/WebGl/Develop")]
+        private static void BuildAddressableAsset(string profileId)
+        {
+            var addressableAssetSettings = AddressableAssetSettingsDefaultObject.Settings;            
+            var id = addressableAssetSettings.profileSettings.GetProfileId(profileId);
+            addressableAssetSettings.activeProfileId = id;
+            EditorUtility.SetDirty(AddressableAssetSettingsDefaultObject.Settings);
+            AddressableAssetSettings.CleanPlayerContent();
+            BuildCache.PurgeCache(false);
+            AddressableAssetSettings.BuildPlayerContent();
+        }
+
         public static void BuildDevelop()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
         }
-        
-        [MenuItem("Build/WebGl/Develop with local simulation")]
+
+        public static void BuildDevelopWithCms(string branch)
+        {
+            BuildUtils.AddDefineSymbols(BuildConfigurationDev.Create());
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGlWithCms),
+                BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
+                false, BuildOptions.Development);
+            DocketUtils.DockerImageWebGlWithCmsUp(branch);
+        }
+
         public static void BuildDevelopWithLocalSimulation()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.CreateWithLocalSimulation());
-            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathDevelopWebGl),
+            Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
                 false, BuildOptions.Development);
-            DocketUtils.DockerImageUp();
+            DocketUtils.DockerImageWebGlUp();
         }
 
-        [MenuItem("Build/WebGl/Release")]
         public static void BuildRelease()
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationProd.Create());
@@ -48,7 +68,7 @@ namespace Solcery.Editor.CI.WebGl
             }
 
             var outputPath = BuildUtils.GetOutputPath(isDevelopBuild
-                ? BuildSettings.DefaultOutputPathDevelopWebGl
+                ? BuildSettings.DefaultOutputPathWebGl
                 : BuildSettings.DefaultOutputPathReleaseWebGl);
 
             var linkerTarget = WebGLLinkerTarget.Wasm;
@@ -76,6 +96,7 @@ namespace Solcery.Editor.CI.WebGl
 
         private static string Build(string outputPath, string emscriptenArgs, WebGLLinkerTarget linkerTarget, WebGLCompressionFormat compressionFormat, bool dataCaching, BuildOptions buildOptions)
         {
+            BuildAddressableAsset("Default");
             BuildUtils.PrepareOutputDirectory(outputPath);
             PlayerSettings.WebGL.linkerTarget = linkerTarget;
             PlayerSettings.WebGL.compressionFormat = compressionFormat;

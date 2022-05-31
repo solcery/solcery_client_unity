@@ -1,6 +1,7 @@
 #if UNITY_EDITOR || LOCAL_SIMULATION
 using System;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 
 namespace Solcery.Services.LocalSimulation
 {
@@ -8,7 +9,7 @@ namespace Solcery.Services.LocalSimulation
     {
         event Action<JObject> EventOnUpdateGameState; 
 
-        void Init(JObject gameContent, JObject gameState);
+        void Init(IGame game, JObject gameState);
         void PushCommand(JObject command);
         void Update(float dt);
         void Cleanup();

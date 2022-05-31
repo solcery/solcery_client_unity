@@ -11,6 +11,7 @@ using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Models.Simulation.Game.State
 {
@@ -20,6 +21,7 @@ namespace Solcery.Models.Simulation.Game.State
     {
         private JObject _initialGameState;
         private EcsFilter _filterEntityTypes;
+        private EcsFilter _filterObjectIdHash;
         private IStaticAttributes _staticAttributes;
         
         public static ISystemGameStateInitial Create(JObject initialGameState)
@@ -46,6 +48,16 @@ namespace Solcery.Models.Simulation.Game.State
             
             var world = systems.GetWorld();
             _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
+            _filterObjectIdHash = world.Filter<ComponentObjectIdHash>().End();
+            var objectIdHashPool = world.GetPool<ComponentObjectIdHash>();
+
+            foreach (var oih in _filterObjectIdHash)
+            {
+                world.DelEntity(oih);
+            }
+
+            var objectIdHashPoolEntityId = world.NewEntity();
+            var objectIdHashes = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHashes;
             
             // Update game attributes
             var gameAttributeArray = _initialGameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
@@ -64,11 +76,16 @@ namespace Solcery.Models.Simulation.Game.State
                     entityHashMap.Add(entityObject.GetValue<int>("id"), entityObject);
                 }
             }
+
+            var maxObjectId = 0;
             
             foreach (var entityObject in entityHashMap)
             {
+                maxObjectId = Mathf.Max(maxObjectId, entityObject.Key);
                 CreateEntity(world, entityObject.Value);
             }
+            
+            objectIdHashes.UpdateHeadId(maxObjectId);
                 
             entityHashMap.Clear();
             _staticAttributes.Cleanup();
