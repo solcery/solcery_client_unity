@@ -1,4 +1,6 @@
+using Newtonsoft.Json.Linq;
 using Solcery.Services.Resources;
+using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
 
@@ -7,6 +9,7 @@ namespace Solcery.Widgets_new.Tooltip
     public class TooltipController
     {
         private const float BorderOffset = 50f;
+        private const float VerticalOffset = 30f;
         private const string PrefabPathKey = "ui/ui_tooltip";
         private TooltipLayout _tooltipLayout;
         private float? _delaySec;
@@ -38,15 +41,20 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void Show(string text, Vector2 targetPosition, float delaySec)
+        public void Show(JObject tooltipDataObject, Vector2 targetPosition)
         {
             if (_tooltipLayout == null)
             {
                 Initialize();
             }
             
-            _tooltipLayout.Text.text = text;
+            _tooltipLayout.UpdateText(tooltipDataObject.GetValue<string>("text"));
             _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
+            var fillColor = tooltipDataObject.TryGetValue("fill_color", out string fillColorAttribute) ? fillColorAttribute : null;
+            _tooltipLayout.UpdateFillColor(fillColor);
+            var fontSize = tooltipDataObject.TryGetValue("font_size", out int fontSizeAttribute) ? fontSizeAttribute : 36;
+            _tooltipLayout.UpdateFontSize(fontSize);
+            var delaySec = tooltipDataObject.GetValue<int>("delay").ToSec();
             if (delaySec >= 0)
             {
                 Hide();
@@ -88,11 +96,11 @@ namespace Solcery.Widgets_new.Tooltip
             var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
 
             var newX = targetPosition.x;
-            var newY = targetPosition.y + halfTooltipHeight;
+            var newY = targetPosition.y + halfTooltipHeight + VerticalOffset;
             
             if (newY > topLimit)
             {
-                newY = targetPosition.y - halfTooltipHeight;
+                newY = targetPosition.y - halfTooltipHeight - VerticalOffset;
             }
 
             newX = Mathf.Clamp(newX, leftLimit, rightLimit);

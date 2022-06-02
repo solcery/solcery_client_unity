@@ -57,7 +57,8 @@ namespace Solcery.Models.Play.Tooltip
             {
                 var text = tooltipDataObject.GetValue<string>("text");
                 var delaySec = tooltipDataObject.GetValue<int>("delay").ToSec();
-                GameApplication.Game().TooltipController.Show(text, onTooltipShowEventData.WorldPosition, delaySec);
+                var fillColor = tooltipDataObject.TryGetValue("fill_color", out string fillColorAttribute) ? fillColorAttribute : null;
+                GameApplication.Game().TooltipController.Show(tooltipDataObject, onTooltipShowEventData.WorldPosition);
             }
             
             _uiEventData = null;
