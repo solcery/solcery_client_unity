@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,7 @@ namespace Solcery.Widgets_new
         [SerializeField] private Image background;
         [SerializeField] protected CanvasGroup canvasGroup;
         [SerializeField] private TextMeshProUGUI caption;
-        [SerializeField] private GameObject borders;
+        [SerializeField] private Image frame;
 
         private int _placeId;
         private int _orderZ;
@@ -85,14 +84,28 @@ namespace Solcery.Widgets_new
             }
         }
 
-        public void UpdateOutOfBorder(bool active)
+        public void UpdateFrameActive(bool active)
         {
-            if (borders != null)
+            if (frame != null)
             {
-                borders.SetActive(active);
+                frame.gameObject.SetActive(active);
             }
         }
 
+        public void UpdateFrameColor(string frameColor)
+        {
+            if (frameColor != null)
+            {
+                if (ColorUtility.TryParseHtmlString(frameColor, out var color))
+                {
+                    if (frame != null)
+                    {
+                        frame.color = color;
+                    }
+                }
+            }
+        }
+        
         public void UpdateCaption(string text)
         {
             if (caption != null)
@@ -106,6 +119,20 @@ namespace Solcery.Widgets_new
             }
         }
 
+        public void UpdateCaptionColor(string captionColor)
+        {
+            if (captionColor != null)
+            {
+                if (ColorUtility.TryParseHtmlString(captionColor, out var color))
+                {
+                    if (caption != null)
+                    {
+                        caption.color = color;
+                    }
+                }
+            }        
+        }
+        
         public void UpdateBlocksRaycasts(bool blocksRaycasts)
         {
             canvasGroup.blocksRaycasts = blocksRaycasts;

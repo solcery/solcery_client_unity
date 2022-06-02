@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1910107799375027177}
   - component: {fileID: 6860475057074479116}
   m_Layer: 5
-  m_Name: borders
+  m_Name: frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96.65
+  m_fontSize: 23.05
   m_fontSizeBase: 11.27
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -522,7 +522,7 @@ RectTransform:
   - {fileID: 4103995740963364616}
   - {fileID: 3036195201827809748}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -553,7 +553,7 @@ MonoBehaviour:
   background: {fileID: 1604439240257909497}
   canvasGroup: {fileID: 264010417701515722}
   caption: {fileID: 5523749509819162272}
-  borders: {fileID: 171182986653446998}
+  frame: {fileID: 6860475057074479116}
   scroll: {fileID: 6803960377442209090}
   horizontalLayoutGroup: {fileID: 9069596869621574779}
 --- !u!225 &264010417701515722
