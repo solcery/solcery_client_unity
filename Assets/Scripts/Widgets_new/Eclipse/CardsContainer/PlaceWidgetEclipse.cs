@@ -292,7 +292,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 var fromSlotId = attributes.TryGetValue("anim_token_fly_from_slot", out var fromSlotAttribute) ? fromSlotAttribute.Current : 0;
                 if (WidgetExtensions.TryGetTokenFromPosition(world, fromPlaceId, formCardId, fromSlotId, out var from))
                 {
-                    AnimTokenFly(tokenLayout, from);
+                    var animTokenFlyTimeSec = attributes.TryGetValue("anim_token_fly_time", out var  animTokenFlyTimeAttribute)
+                        ? animTokenFlyTimeAttribute.Current.ToSec()
+                        : 0f;
+                    AnimTokenFly(tokenLayout, from, animTokenFlyTimeSec);
                 }
                 else
                 {
@@ -307,13 +310,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private void AnimTokenFly(EclipseCardTokenLayout tokenLayout, Vector3 from)
+        private void AnimTokenFly(EclipseCardTokenLayout tokenLayout, Vector3 from, float timeSec)
         {
             tokenLayout.Icon.gameObject.SetActive(false);
             WidgetCanvas.GetEffects().MoveToken(tokenLayout.RectTransform, 
                 tokenLayout.Icon.sprite,
                 from,
-                0.5f,
+                timeSec,
                 () => { tokenLayout.Icon.gameObject.SetActive(true); });
         }
 
