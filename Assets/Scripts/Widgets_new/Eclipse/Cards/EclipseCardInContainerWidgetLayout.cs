@@ -107,19 +107,22 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             DestroySprite();
         }
 
-        public void UpdateName(string newName)
+        public void UpdateName(string newName, float fontSize)
         {
+            nameText.fontSize = fontSize;
             nameText.text = newName;
         }
 
-        public void UpdateDescription(string newDescription)
+        public void UpdateDescription(string newDescription, float fontSize)
         {
             descriptionText.text = newDescription;
+            descriptionText.fontSize = fontSize;
         }
 
-        public void UpdateType(string newType)
+        public void UpdateType(string type, float fontSize)
         {
-            typeText.text = newType;
+            typeText.text = type;
+            typeText.fontSize = fontSize;
         }
         
         public void UpdateSprite(Texture2D texture)

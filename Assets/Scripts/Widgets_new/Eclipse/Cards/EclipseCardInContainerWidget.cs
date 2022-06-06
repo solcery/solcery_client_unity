@@ -35,19 +35,25 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
         }
 
-        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, JObject data)
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, EclipseCardTypes type, JObject data)
         {
             _entityId = entityId;
             _objectId = objectId;
+            _eclipseCardType = type;
             
+            var typeFontSize = data.TryGetValue("type_font_size", out int typeFontSizeAttribute) ? typeFontSizeAttribute : 5f;
+            _layout.UpdateType(type.ToString(), typeFontSize);
+
             if (data.TryGetValue("name", out string name))
             {
-                _layout.UpdateName(name);
+                var nameFontSize = data.TryGetValue("name_font_size", out int nameFontSizeAttribute) ? nameFontSizeAttribute : 8f;
+                _layout.UpdateName(name, nameFontSize);
             }
             
             if (data.TryGetValue("description", out string description))
             {
-                _layout.UpdateDescription(description);
+                var descriptionFontSize = data.TryGetValue("description_font_size", out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 30f;
+                _layout.UpdateDescription(description, descriptionFontSize);
             }
 
             if (data.TryGetValue("picture", out string picture) 
@@ -107,12 +113,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
 
             return _layout.transform.position;
-        }
-        
-        void IEclipseCardInContainerWidget.SetEclipseCardType(EclipseCardTypes eclipseCardType)
-        {
-            _eclipseCardType = eclipseCardType;
-            _layout.UpdateType(eclipseCardType.ToString());
         }
 
         void IPoolingWidget.UpdateParent(Transform parent)
