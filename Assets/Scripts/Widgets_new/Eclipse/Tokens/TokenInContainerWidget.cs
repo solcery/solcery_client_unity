@@ -163,11 +163,11 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         #region Ecs support
         
-        int IEntityId.AttachEntityId => _layout.EntityId;
+        int IEntityId.AttachEntityId => _layout.entityId;
 
         void IEntityId.UpdateAttachEntityId(int entityId)
         {
-            _layout.EntityId = entityId;
+            _layout.entityId = entityId;
         }
         
         #endregion

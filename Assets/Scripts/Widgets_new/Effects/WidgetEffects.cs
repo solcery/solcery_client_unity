@@ -36,9 +36,11 @@ namespace Solcery.Widgets_new.Effects
             effect.Image.sprite = sprite;
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
+            effect.UpdateMoveAnimation(true);
 
             effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
             {
+                effect.UpdateMoveAnimation(false);
                 Object.Destroy(effect.gameObject);
                 onMoveComplete?.Invoke();
             }).SetEase(Ease.Linear).Play();
@@ -60,12 +62,14 @@ namespace Solcery.Widgets_new.Effects
             effect.Image.sprite = sprite;
             effect.transform.position = rectTransform.transform.position;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
+            effect.UpdateDestroyAnimation(true);
 
             DOTween.Sequence()
                 .Append(effect.RectTransform.DOScale(new Vector3(1.5f, 1.5f, 1f), time / 2))
                 .Append(effect.RectTransform.DOScale(new Vector3(0, 0, 0), time / 2))
                 .AppendCallback(() =>
                 {
+                    effect.UpdateDestroyAnimation(false);
                     Object.Destroy(effect.gameObject);
                     onMoveComplete?.Invoke();
                 })
