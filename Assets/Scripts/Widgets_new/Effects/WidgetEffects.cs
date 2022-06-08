@@ -36,20 +36,24 @@ namespace Solcery.Widgets_new.Effects
             effect.Image.sprite = sprite;
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
-            effect.UpdateMoveAnimation(true);
 
-            effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
+            effect.UpdateCreateAnimation(true);
+            DOTween.To(_ => { }, 0, 0, 0.2f).OnComplete(() =>
             {
-                effect.UpdateMoveAnimation(false);
-                Object.Destroy(effect.gameObject);
-                onMoveComplete?.Invoke();
-            }).SetEase(Ease.Linear).Play();
+                effect.UpdateCreateAnimation(false);
+                effect.UpdateMoveAnimation(true);
+                effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
+                {
+                    effect.UpdateMoveAnimation(false);
+                    Object.Destroy(effect.gameObject);
+                    onMoveComplete?.Invoke();
+                }).SetEase(Ease.Linear).Play();
             
-            DOTween.Sequence()
-                .Append(effect.RectTransform.DOScale(new Vector3(3f, 3f, 1f), time / 2))
-                .Append(effect.RectTransform.DOScale(new Vector3(1f, 1f, 1f), time / 2))
-                .Play();
-
+                DOTween.Sequence()
+                    .Append(effect.RectTransform.DOScale(new Vector3(3f, 3f, 1f), time / 2))
+                    .Append(effect.RectTransform.DOScale(new Vector3(1f, 1f, 1f), time / 2))
+                    .Play();
+            }).Play();
         }
 
         public void DestroyToken(RectTransform rectTransform, 

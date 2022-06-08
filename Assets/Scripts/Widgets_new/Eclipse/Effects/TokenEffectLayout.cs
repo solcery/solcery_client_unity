@@ -9,9 +9,16 @@ namespace Solcery.Widgets_new.Eclipse.Effects
         public RectTransform RectTransform;
 
         [SerializeField]
+        private GameObject createAnimation;
+        [SerializeField]
         private GameObject moveAnimation;
         [SerializeField]
         private GameObject destroyAnimation;
+
+        public void UpdateCreateAnimation(bool isShow)
+        {
+            createAnimation.SetActive(isShow);
+        }
 
         public void UpdateMoveAnimation(bool isShow)
         {
