@@ -59,7 +59,7 @@ namespace Solcery.Widgets_new
             {
                 Layout = layout;
 
-                PlaceId = placeDataObject.TryGetValue("placeId", out int pid) ? pid : -1;
+                PlaceId = placeDataObject.TryGetValue(GameJsonKeys.PlaceId, out int pid) ? pid : -1;
                 DragDropId = placeDataObject.TryGetValue("drag_n_drop", out int dnd) ? dnd : -1;
 
                 var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
@@ -72,7 +72,7 @@ namespace Solcery.Widgets_new
                     Debug.LogWarning($"Wrong anchors on place with id \"{PlaceId}\"");
                 }
 
-                var orderZ = placeDataObject.TryGetValue("zOrder", out int ordZ) ? ordZ : 0;
+                var orderZ = placeDataObject.TryGetValue(GameJsonKeys.PlaceZOrder, out int ordZ) ? ordZ : 0;
                 Layout.UpdateOrderZ(orderZ);
 
                 Layout.name = $"{PlaceId}_{orderZ}_{Layout.name}";
@@ -82,7 +82,8 @@ namespace Solcery.Widgets_new
                     : PlaceWidgetCardFace.Up;
 
                 InteractableForActiveLocalPlayer =
-                    placeDataObject.TryGetValue("interactableForActiveLocalPlayer", out bool ifalp) && ifalp;
+                    placeDataObject.TryGetValue(GameJsonKeys.PlaceInteractableForActiveLocalPlayer, out bool ifalp) 
+                    && ifalp;
 
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
@@ -91,14 +92,14 @@ namespace Solcery.Widgets_new
                 var captionColor = placeDataObject.TryGetValue("caption_color", out string captionColorAttribute) ? captionColorAttribute : null;
                 Layout.UpdateCaptionColor(captionColor);
 
-                var fillColor = placeDataObject.TryGetValue("fill_color", out string fillColorAttribute) ? fillColorAttribute : null;
+                var fillColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
                 Layout.UpdateFillColor(fillColor);
 
-                Layout.UpdateFrameActive(placeDataObject.TryGetValue("frame", out bool withBorders) && withBorders);
+                Layout.UpdateFrameActive(placeDataObject.TryGetValue(GameJsonKeys.PlaceShowFrame, out bool withBorders) && withBorders);
                 var frameColor = placeDataObject.TryGetValue("frame_color", out string frameColorAttribute) ? frameColorAttribute : null;
                 Layout.UpdateFrameColor(frameColor);
                 
-                if (placeDataObject.TryGetValue("tooltip_id", out int tooltipId))
+                if (placeDataObject.TryGetValue(GameJsonKeys.PlaceTooltipId, out int tooltipId))
                 {
                     var tooltipBehavior = Layout.gameObject.AddComponent<RectTransformTooltipBehaviour>();
                     tooltipBehavior.SetTooltipId(tooltipId);

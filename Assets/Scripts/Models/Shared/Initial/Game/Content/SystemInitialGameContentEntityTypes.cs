@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 
@@ -41,7 +42,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
             }
 
             // Подготовим entity types, для ускорения сделаем хеш мапу
-            if (_gameContent.TryGetValue("cardTypes", out JObject entityTypesObject) 
+            if (_gameContent.TryGetValue(GameJsonKeys.CardTypes, out JObject entityTypesObject) 
                 && entityTypesObject.TryGetValue("objects", out JArray entityTypeArray))
             {
                 var entityTypeMap = new Dictionary<int, JObject>(entityTypeArray.Count);

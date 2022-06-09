@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Utils;
 
 namespace Solcery.Services.Resources.Patterns
@@ -27,7 +28,7 @@ namespace Solcery.Services.Resources.Patterns
 
         public void ProcessGameContent(JObject gameContentData)
         {
-            var objects = gameContentData.GetValue<JObject>("cardTypes").GetValue<JArray>("objects");
+            var objects = gameContentData.GetValue<JObject>(GameJsonKeys.CardTypes).GetValue<JArray>("objects");
             foreach (var objectToken in objects)
             {
                 if (objectToken is JObject objectData)

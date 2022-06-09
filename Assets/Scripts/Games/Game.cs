@@ -156,7 +156,7 @@ namespace Solcery.Games
             _gameContentJson = gameContentJson;
             _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
 
-            if (gameContentJson.TryGetValue("customBricks", out JObject customBricks) &&
+            if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
                 customBricks.TryGetValue("objects", out JArray customBricksArray))
             {
                 _serviceBricks.RegistrationCustomBricksData(customBricksArray);

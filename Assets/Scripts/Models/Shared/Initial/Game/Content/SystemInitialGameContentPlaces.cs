@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Places;
@@ -56,7 +57,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                         var entityIndex = world.NewEntity();
                         world.GetPool<ComponentPlaceTag>().Add(entityIndex);
                         world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
-                            placeObject.GetValue<int>("placeId");
+                            placeObject.GetValue<int>(GameJsonKeys.PlaceId);
                         if (placeObject.TryGetValue("drag_n_drops", out JArray dragDropIdArray))
                         {
                             var idHash = new HashSet<int>();

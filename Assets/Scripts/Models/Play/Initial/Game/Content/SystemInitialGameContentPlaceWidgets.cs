@@ -39,7 +39,7 @@ namespace Solcery.Models.Play.Initial.Game.Content
                 foreach (var placeToken in placeArray)
                 {
                     if (placeToken is JObject placeObject 
-                        && placeObject.TryGetValue("placeId", out int placeId))
+                        && placeObject.TryGetValue(GameJsonKeys.PlaceId, out int placeId))
                     {
                         placeHashMap.Add(placeId, placeObject);
                     }

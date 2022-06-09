@@ -24,13 +24,13 @@ namespace Solcery.Games.Contents
         {
             _attributeNameList.Clear();
 
-            if (gameContent.TryGetValue("attributes", out JObject attrsObj)
+            if (gameContent.TryGetValue(GameJsonKeys.GlobalCardAttributes, out JObject attrsObj)
                 && attrsObj.TryGetValue("objects", out JArray attrsArray))
             {
                 foreach (var attrToken in attrsArray)
                 {
                     if (attrToken is JObject attrObj 
-                        && attrObj.TryGetValue("code", out string name)
+                        && attrObj.TryGetValue(GameJsonKeys.GlobalCardAttributeCode, out string name)
                         && !_attributeNameList.Contains(name))
                     {
                         _attributeNameList.Add(name);
