@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -367,7 +367,7 @@ RectTransform:
   - {fileID: 3624777865583671733}
   - {fileID: 5251829676436168910}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -397,6 +397,8 @@ MonoBehaviour:
   rectTransform: {fileID: 3200764471413365605}
   background: {fileID: 4232893098707507883}
   canvasGroup: {fileID: 777092362560798080}
+  caption: {fileID: 0}
+  frame: {fileID: 0}
   button: {fileID: 1454105546520647339}
   buttonText: {fileID: 416998793259155807}
 --- !u!225 &777092362560798080
