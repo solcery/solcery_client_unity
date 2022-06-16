@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
     public class TokenInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
         [HideInInspector]
-        public int EntityId;
+        public int entityId;
         public PlaceWidget ParentPlaceWidget;
         
         [SerializeField]
@@ -87,7 +86,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
                 Camera.current,
                 out var position
             );
-            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(entityId, position, eventData));
         }
     }
 }

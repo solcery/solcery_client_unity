@@ -37,17 +37,23 @@ namespace Solcery.Widgets_new.Effects
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
 
-            effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
+            effect.UpdateCreateAnimation(true);
+            DOTween.To(_ => { }, 0, 0, 0.2f).OnComplete(() =>
             {
-                Object.Destroy(effect.gameObject);
-                onMoveComplete?.Invoke();
-            }).SetEase(Ease.Linear).Play();
+                effect.UpdateCreateAnimation(false);
+                effect.UpdateMoveAnimation(true);
+                effect.RectTransform.DOJump(to, Random.Range(1f, 2.0f),0, time).OnComplete(() =>
+                {
+                    effect.UpdateMoveAnimation(false);
+                    Object.Destroy(effect.gameObject);
+                    onMoveComplete?.Invoke();
+                }).SetEase(Ease.Linear).Play();
             
-            DOTween.Sequence()
-                .Append(effect.RectTransform.DOScale(new Vector3(3f, 3f, 1f), time / 2))
-                .Append(effect.RectTransform.DOScale(new Vector3(1f, 1f, 1f), time / 2))
-                .Play();
-
+                DOTween.Sequence()
+                    .Append(effect.RectTransform.DOScale(new Vector3(3f, 3f, 1f), time / 2))
+                    .Append(effect.RectTransform.DOScale(new Vector3(1f, 1f, 1f), time / 2))
+                    .Play();
+            }).Play();
         }
 
         public void DestroyToken(RectTransform rectTransform, 
@@ -60,12 +66,14 @@ namespace Solcery.Widgets_new.Effects
             effect.Image.sprite = sprite;
             effect.transform.position = rectTransform.transform.position;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
+            effect.UpdateDestroyAnimation(true);
 
             DOTween.Sequence()
                 .Append(effect.RectTransform.DOScale(new Vector3(1.5f, 1.5f, 1f), time / 2))
                 .Append(effect.RectTransform.DOScale(new Vector3(0, 0, 0), time / 2))
                 .AppendCallback(() =>
                 {
+                    effect.UpdateDestroyAnimation(false);
                     Object.Destroy(effect.gameObject);
                     onMoveComplete?.Invoke();
                 })
@@ -109,20 +117,17 @@ namespace Solcery.Widgets_new.Effects
             float time,
             Action onMoveComplete)
         {
-            var rect = eclipseCard.Layout.RectTransform.rect;
-            var maxSize = Mathf.Max(rect.size.x, rect.size.y);
             var effectLayout = eclipseCard.Layout.EffectLayout;
             effectLayout.gameObject.SetActive(true);
-            effectLayout.Image.texture = renderData.RenderTexture;
-            effectLayout.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
-            effectLayout.RectTransform.localPosition = new Vector2((maxSize - rect.size.x) / 2f, 0f);
+            effectLayout.Image.material.SetFloat("_Destruct", 0f);
+            effectLayout.Image.material.SetTexture("_MainTex_RT", renderData.RenderTexture);
+            effectLayout.ParticleSystem.Play();
 
-            effectLayout.CanvasGroup.alpha = 1f;
-            var alpha = effectLayout.CanvasGroup.alpha;
+            var alpha = 0f;
             DOTween.Sequence()
-                .Append(DOTween.To(() => alpha, x => alpha = x, 0f, time).OnUpdate(() =>
+                .Append(DOTween.To(() => alpha, x => alpha = x, 1f, time).OnUpdate(() =>
                 {
-                    effectLayout.CanvasGroup.alpha = alpha;
+                    effectLayout.Image.material.SetFloat("_Destruct", alpha);
                 }))
                 .AppendCallback(() =>
                 {

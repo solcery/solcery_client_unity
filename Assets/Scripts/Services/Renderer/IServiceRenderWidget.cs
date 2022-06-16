@@ -5,7 +5,7 @@ namespace Solcery.Services.Renderer
 {
     public interface IServiceRenderWidget
     {
-        IWidgetRenderData CreateWidgetRender(RectTransform widget);
+        IWidgetRenderData CreateWidgetRender(RectTransform widget, int size = 512);
         void ReleaseWidgetRender(RectTransform widget);
     }
 }

@@ -21,14 +21,14 @@ namespace Solcery.Services.Renderer
             _widgetRenderList = new Dictionary<RectTransform, IWidgetRenderData>();
         }
 
-        IWidgetRenderData IServiceRenderWidget.CreateWidgetRender(RectTransform widget)
+        IWidgetRenderData IServiceRenderWidget.CreateWidgetRender(RectTransform widget, int size)
         {
             if (_widgetRenderList.ContainsKey(widget))
             {
                 return _widgetRenderList[widget];
             }
             
-            var renderObject = WidgetRenderData.Create(widget, _dto.WidgetRenderPrefab, _dto.Frame);
+            var renderObject = WidgetRenderData.Create(widget, _dto.WidgetRenderPrefab, _dto.Frame, size);
             _widgetRenderList.Add(widget, renderObject);
             return renderObject;
         }
