@@ -1,6 +1,7 @@
 using Solcery.Services.Renderer.Layouts;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
+using Object = UnityEngine.Object;
 
 namespace Solcery.Services.Renderer.Widgets
 {
@@ -15,12 +16,12 @@ namespace Solcery.Services.Renderer.Widgets
 
         private RectTransform _widgetRectTransform;
 
-        public static IWidgetRenderData Create(RectTransform widget, GameObject renderObjectPrefab, Transform parent)
+        public static IWidgetRenderData Create(RectTransform widget, GameObject renderObjectPrefab, Transform parent, int size)
         {
-            return new WidgetRenderData(widget, renderObjectPrefab, parent);
+            return new WidgetRenderData(widget, renderObjectPrefab, parent, size);
         }
 
-        private WidgetRenderData(RectTransform widget, GameObject renderObjectPrefab, Transform parent)
+        private WidgetRenderData(RectTransform widget, GameObject renderObjectPrefab, Transform parent, int size)
         {
             _renderObject = Object.Instantiate(renderObjectPrefab, parent);
             _renderObject.transform.position = Vector3.zero;
@@ -28,12 +29,26 @@ namespace Solcery.Services.Renderer.Widgets
             var renderObjectLayout = _renderObject.GetComponent<WidgetRendererLayout>();
 
             var rect = widget.rect;
-            var width = rect.width;
-            var height = rect.height;
-            var powerOf2 = NearestPowerOf2_4(Mathf.CeilToInt(Mathf.Max(width, height)));
-            _uv = new Vector2(width / powerOf2, height / powerOf2);
-            
-            _renderTexture = new RenderTexture(powerOf2, powerOf2, 16, GraphicsFormat.R8G8B8A8_UNorm);
+            var width = Mathf.CeilToInt(rect.width);
+            var height = Mathf.CeilToInt(rect.height);
+
+            if (width > height)
+            {
+                var aspect = height / (float)width;
+                width = NearestPowerOf2_4(size);
+                height = Mathf.CeilToInt(aspect * width);
+            }
+            else
+            {
+                var aspect = width / (float)height;
+                height = NearestPowerOf2_4(size);
+                width = Mathf.CeilToInt(aspect * height);
+            }
+
+            //var powerOf2 = NearestPowerOf2_4(Mathf.CeilToInt(Mathf.Max(width, height)));
+            _uv = Vector2.one; //new Vector2(width / powerOf2, height / powerOf2);
+
+            _renderTexture = new RenderTexture(width, height, 0, GraphicsFormat.R8G8B8A8_UNorm); //new RenderTexture(powerOf2, powerOf2, 16, GraphicsFormat.R8G8B8A8_UNorm);
             renderObjectLayout.RenderCamera.targetTexture = _renderTexture;
             renderObjectLayout.RenderRectTransform.ForceUpdateRectTransforms();
             
@@ -45,7 +60,7 @@ namespace Solcery.Services.Renderer.Widgets
             _widgetRectTransform.anchoredPosition3D = Vector3.zero;
             _widgetRectTransform.anchorMin = Vector2.up;
             _widgetRectTransform.anchorMax = Vector2.up;
-            _widgetRectTransform.sizeDelta = new Vector2(0, powerOf2);
+            _widgetRectTransform.sizeDelta = new Vector2(width, height);
             _widgetRectTransform.ForceUpdateRectTransforms();
         }
         

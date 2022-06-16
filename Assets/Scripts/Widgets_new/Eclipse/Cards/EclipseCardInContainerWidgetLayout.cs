@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Solcery.Services.Events;
+using Solcery.Services.Renderer.Widgets;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
@@ -90,7 +91,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
 
             rectTransform.localScale = Vector3.one;
-            //rectTransform.rotation = Quaternion.identity;
         }
         
         public void UpdateSiblingIndex(int siblingIndex)
@@ -153,6 +153,33 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void SetActive(bool active)
         {
             FrontTransform.gameObject.SetActive(active);
+
+            if (active)
+            {
+                RaycastOn();
+            }
+            else
+            {
+                RaycastOff();
+            }
+        }
+        
+        //private Material m_Material;
+
+        public void PlayDestroyAnimation(IWidgetRenderData widgetRenderData)
+        {
+            // m_Material = destroyCardRenderer.material;
+            // //m_Material.SetTexture(MainTexRtId, widgetRenderData.RenderTexture);
+            // m_Material.mainTexture = widgetRenderData.RenderTexture;
+            // //MainTex(RT)
+            // destroyTransform.gameObject.SetActive(true);
+        }
+
+        public void StopDestroyAnimation()
+        {
+            // m_Material.SetTexture(MainTexRtId, null);
+            // Destroy(m_Material);
+            // destroyTransform.gameObject.SetActive(false);
         }
 
         public void RaycastOn()
