@@ -117,20 +117,17 @@ namespace Solcery.Widgets_new.Effects
             float time,
             Action onMoveComplete)
         {
-            var rect = eclipseCard.Layout.RectTransform.rect;
-            var maxSize = Mathf.Max(rect.size.x, rect.size.y);
             var effectLayout = eclipseCard.Layout.EffectLayout;
             effectLayout.gameObject.SetActive(true);
-            effectLayout.Image.texture = renderData.RenderTexture;
-            effectLayout.RectTransform.sizeDelta = new Vector2(maxSize, maxSize);
-            effectLayout.RectTransform.localPosition = new Vector2((maxSize - rect.size.x) / 2f, 0f);
+            effectLayout.Image.material.SetFloat("_Destruct", 0f);
+            effectLayout.Image.material.SetTexture("_MainTex_RT", renderData.RenderTexture);
+            effectLayout.ParticleSystem.Play();
 
-            effectLayout.CanvasGroup.alpha = 1f;
-            var alpha = effectLayout.CanvasGroup.alpha;
+            var alpha = 0f;
             DOTween.Sequence()
-                .Append(DOTween.To(() => alpha, x => alpha = x, 0f, time).OnUpdate(() =>
+                .Append(DOTween.To(() => alpha, x => alpha = x, 1f, time).OnUpdate(() =>
                 {
-                    effectLayout.CanvasGroup.alpha = alpha;
+                    effectLayout.Image.material.SetFloat("_Destruct", alpha);
                 }))
                 .AppendCallback(() =>
                 {
