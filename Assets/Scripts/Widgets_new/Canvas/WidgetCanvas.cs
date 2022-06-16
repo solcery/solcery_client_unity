@@ -24,7 +24,6 @@ namespace Solcery.Widgets_new.Canvas
             _uiRoot = uiRoot;
             _dragDropRoot = dragDropRoot;
             _widgetEffects = WidgetEffects.Create(uiRoot.Effects);
-            _uiRoot.FullModeLayout.gameObject.SetActive(false);
         }
         
         Transform IWidgetCanvas.GetWorldCanvas()
@@ -41,12 +40,7 @@ namespace Solcery.Widgets_new.Canvas
         {
             return _widgetEffects;
         }
-
-        EclipseCardFullModeLayout IWidgetCanvas.GetFullModeLayout()
-        {
-            return _uiRoot.FullModeLayout;
-        }
-
+        
         RectTransform IWidgetCanvas.GetTooltipsCanvas()
         {
             return _uiRoot.Tooltips;

@@ -83,7 +83,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             
             _layout.AddOnClickListener(() =>
             {
-                var command = CommandOnClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
+                var command = CommandOnLeftClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
                 _game.TransportService.SendCommand(command.ToJson());
             });
         }

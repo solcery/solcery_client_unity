@@ -66,7 +66,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _layout.TimerLayout.UpdateTimerTextActive(false);
             }
 
-            
+            _layout.EntityId = entityId;
         }
         
         EclipseCardTokenLayout GetToken(int slot)

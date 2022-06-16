@@ -1,11 +1,11 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
 using Solcery.Models.Play.DragDrop.OnDrop;
 using Solcery.Models.Play.DragDrop.Parameters;
-using Solcery.Models.Play.EclipseCard;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
@@ -50,12 +50,14 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnDragMove.Create());
             _systems.Add(SystemOnDrop.Create(game));
             
+            // TODO clicks
+            _systems.Add(SystemOnLeftClick.Create(game));
+            _systems.Add(SystemOnRightClick.Create(game));
+            
             // TODO tooltip
             _systems.Add(SystemOnTooltipShow.Create());
             _systems.Add(SystemOnTooltipHide.Create());
             
-            // TODO eclipse card
-            _systems.Add(SystemOnEclipseCardFull.Create());
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());

@@ -13,7 +13,6 @@ namespace Solcery.Widgets_new.Canvas
         RectTransform GetTooltipsCanvas();
         RootDragDropLayout GetDragDropCanvas();
         IWidgetEffects GetEffects();
-        EclipseCardFullModeLayout GetFullModeLayout();
         void Destroy();
     }
 }

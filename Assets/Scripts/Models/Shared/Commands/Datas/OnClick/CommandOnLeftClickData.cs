@@ -7,7 +7,7 @@ using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Commands.Datas.OnClick
 {
-    public sealed class CommandOnClickData : CommandData
+    public sealed class CommandOnLeftClickData : CommandData
     {
         public int ObjectId => _objectId;
         public TriggerTargetEntityTypes TriggerTargetEntityType => _triggerTargetEntityTypes;
@@ -17,7 +17,7 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
         
         public static CommandData CreateFromParameters(int objectId, TriggerTargetEntityTypes triggerTargetEntityTypes)
         {
-            return new CommandOnClickData(objectId, triggerTargetEntityTypes);
+            return new CommandOnLeftClickData(objectId, triggerTargetEntityTypes);
         }
         
         public static CommandData CreateFromJson(JObject obj)
@@ -25,12 +25,10 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
             var objectId = obj.GetValue<int>("object_id");
             var triggerTargetEntityTypes = obj.TryGetEnum("trigger_target_entity_type", out TriggerTargetEntityTypes ttet) 
                 ? ttet : TriggerTargetEntityTypes.None;
-            return new CommandOnClickData(objectId, triggerTargetEntityTypes);
+            return new CommandOnLeftClickData(objectId, triggerTargetEntityTypes);
         }
         
-        private CommandOnClickData() { }
-        
-        private CommandOnClickData(int objectId, TriggerTargetEntityTypes triggerTargetEntityTypes)
+        private CommandOnLeftClickData(int objectId, TriggerTargetEntityTypes triggerTargetEntityTypes)
         {
             _objectId = objectId;
             _triggerTargetEntityTypes = triggerTargetEntityTypes;
@@ -38,7 +36,7 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
 
         protected override CommandTypes GetCommandType()
         {
-            return CommandTypes.OnClick;
+            return CommandTypes.OnLeftClick;
         }
 
         protected override void ConvertCommandToJson(JObject obj)

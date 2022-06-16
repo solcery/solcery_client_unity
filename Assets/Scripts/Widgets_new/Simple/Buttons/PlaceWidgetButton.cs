@@ -4,8 +4,10 @@ using Solcery.Games;
 using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
+using Solcery.Services.Events;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 
 namespace Solcery.Widgets_new.Simple.Buttons
 {
@@ -37,13 +39,10 @@ namespace Solcery.Widgets_new.Simple.Buttons
                 Layout.UpdateButtonText("No card id.");
                 return;
             }
-
-            var objectId = objectIdPool.Get(entityId).Id;
             
             Layout.AddOnClickListener(() =>
             {
-                var command = CommandOnClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
-                Game.TransportService.SendCommand(command.ToJson());
+                ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
             });
             
             var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();

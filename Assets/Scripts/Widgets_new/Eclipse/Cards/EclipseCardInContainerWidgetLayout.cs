@@ -15,6 +15,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
     public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
         [HideInInspector]
+        public int EntityId;
+        [HideInInspector]
         public int AttachEntityId;
         public PlaceWidget ParentPlaceWidget;
         
@@ -212,7 +214,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         private void OnOnPointerRightButtonClick()
         {
-            ServiceEvents.Current.BroadcastEvent(OnEclipseCardFullEventData.Create(this));
+            ServiceEvents.Current.BroadcastEvent(OnRightClickEventData.Create(EntityId));
         }
     }
 }

@@ -32,7 +32,6 @@ namespace Solcery.Games
         public JObject GameContent { get; }
         public JObject GameStatePopAndClear { get; }
         public TooltipController TooltipController { get; }
-        public EclipseCardFullModeController FullModeController { get; }
         public IGameContentAttributes GameContentAttributes { get; }
         public IServiceRenderWidget ServiceRenderWidget { get; }
 

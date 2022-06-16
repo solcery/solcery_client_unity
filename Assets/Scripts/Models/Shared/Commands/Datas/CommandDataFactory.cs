@@ -12,8 +12,11 @@ namespace Solcery.Models.Shared.Commands.Datas
 
             switch (commandType)
             {
-                case CommandTypes.OnClick:
-                    return CommandOnClickData.CreateFromJson(obj);
+                case CommandTypes.OnLeftClick:
+                    return CommandOnLeftClickData.CreateFromJson(obj);
+                
+                case CommandTypes.OnRightClick:
+                    return CommandOnRightClickData.CreateFromJson(obj);
                 
                 case CommandTypes.OnDrop:
                     return CommandOnDropData.CreateFromJson(obj);

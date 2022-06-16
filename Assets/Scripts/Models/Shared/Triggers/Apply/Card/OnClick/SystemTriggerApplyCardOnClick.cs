@@ -12,6 +12,7 @@ using UnityEngine;
 
 namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
 {
+    // тут нужно разделитьы
     public interface ISystemTriggerApplyCardOnClick : IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem { }
 
     public sealed class SystemTriggerApplyCardOnClick : ISystemTriggerApplyCardOnClick

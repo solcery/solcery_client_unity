@@ -34,8 +34,6 @@ namespace Solcery.Models.Shared.Commands.Datas.OnDrop
             return new CommandOnDropData(objectId, dragDropId, targetPlaceId, triggerTargetEntityTypes);
         }
         
-        private CommandOnDropData() { }
-        
         private CommandOnDropData(int objectId, int dragDropId, int targetPlaceId, TriggerTargetEntityTypes triggerTargetEntityTypes)
         {
             _objectId = objectId;
