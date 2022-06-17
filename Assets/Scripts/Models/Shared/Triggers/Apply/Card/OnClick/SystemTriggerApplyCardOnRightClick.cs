@@ -1,6 +1,5 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Utils;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contexts;
 using Solcery.Models.Shared.Context;
@@ -8,27 +7,28 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types.OnClick;
 using Solcery.Services.LocalSimulation;
+using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
 {
-    public interface ISystemTriggerApplyCardOnClick : IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem { }
-
-    public sealed class SystemTriggerApplyCardOnClick : ISystemTriggerApplyCardOnClick
+    public interface ISystemTriggerApplyCardOnRightClick : IEcsInitSystem, IEcsRunSystem, IEcsDestroySystem { }
+    
+    public class SystemTriggerApplyCardOnRightClick : ISystemTriggerApplyCardOnRightClick
     {
         private IServiceBricks _serviceBricks;
-        private IServiceLocalSimulationApplyGameStateNew _applyGameState;
+        private readonly IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
         private EcsFilter _filterContext;
         private EcsFilter _filterEntityTypes;
         private EcsFilter _filterEntities;
-
-        public static ISystemTriggerApplyCardOnClick Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        
+        public static ISystemTriggerApplyCardOnRightClick Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            return new SystemTriggerApplyCardOnClick(serviceBricks, applyGameState);
+            return new SystemTriggerApplyCardOnRightClick(serviceBricks, applyGameState);
         }
         
-        private SystemTriggerApplyCardOnClick(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        private SystemTriggerApplyCardOnRightClick(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
             _serviceBricks = serviceBricks;
             _applyGameState = applyGameState;
@@ -41,7 +41,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
             _filterTriggers = world.Filter<ComponentTriggerTag>()
                 .Inc<ComponentTriggerTargetObjectId>()
                 .Inc<ComponentTriggerEntityCardTag>()
-                .Inc<ComponentTriggerOnClickTag>()
+                .Inc<ComponentTriggerOnRightClickTag>()
                 .End();
 
             _filterContext = world.Filter<ComponentContextObject>()
@@ -63,7 +63,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
             _filterEntityTypes = null;
             _filterEntities = null;
         }
-        
+
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
@@ -90,56 +90,57 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                         entityTypesId = etid;
                         break;
                     }
-                
-                    if (entityTypesId == -1 || 
-                        !entityTypesPool.Get(entityTypesId).Types.TryGetValue(entityType, out var entityTypeData) 
-                        || !entityTypeData.TryGetValue("action", out JObject brick))
+
+                    if (entityTypesId == -1 ||
+                        !entityTypesPool.Get(entityTypesId).Types.TryGetValue(entityType, out var entityTypeData)
+                        || !entityTypeData.TryGetValue("action_on_right_click", out JObject brick))
                     {
+                        Debug.Log("Can't find action_on_right_click!");
                         continue;
                     }
 
                     InitContext(entityId, world);
-                    
+
                     // TODO: fix it!!!
                     var context = CurrentContext.Create(world);
-                    
+
                     Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
-                    
+
                     // TODO: fix it!!!
                     _applyGameState.ApplySimulatedGameStates(context.GameStates);
-                    
+
                     DestroyContext(world);
-                    
+
                     break;
                 }
-                
+
                 world.DelEntity(triggerEntityId);
             }
         }
 
         private void InitContext(int targetEntityId, EcsWorld world)
-        {
-            var contextObjectPool = world.GetPool<ComponentContextObject>();
-            var contextArgsPool = world.GetPool<ComponentContextArgs>();
-            var contextVarsPool = world.GetPool<ComponentContextVars>();
-
-            foreach (var entityId in _filterContext)
             {
-                world.DelEntity(entityId);
+                var contextObjectPool = world.GetPool<ComponentContextObject>();
+                var contextArgsPool = world.GetPool<ComponentContextArgs>();
+                var contextVarsPool = world.GetPool<ComponentContextVars>();
+
+                foreach (var entityId in _filterContext)
+                {
+                    world.DelEntity(entityId);
+                }
+
+                var contextEntityId = world.NewEntity();
+                contextObjectPool.Add(contextEntityId).Push(targetEntityId);
+                contextArgsPool.Add(contextEntityId);
+                contextVarsPool.Add(contextEntityId);
             }
 
-            var contextEntityId = world.NewEntity();
-            contextObjectPool.Add(contextEntityId).Push(targetEntityId);
-            contextArgsPool.Add(contextEntityId);
-            contextVarsPool.Add(contextEntityId);
-        }
-
-        private void DestroyContext(EcsWorld world)
-        {
-            foreach (var entityId in _filterContext)
+            private void DestroyContext(EcsWorld world)
             {
-                world.DelEntity(entityId);
+                foreach (var entityId in _filterContext)
+                {
+                    world.DelEntity(entityId);
+                }
             }
         }
-    }
 }

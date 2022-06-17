@@ -22,7 +22,8 @@ namespace Solcery.Models.Shared.Triggers.Apply
         {
             _systems = new List<IEcsSystem>
             {
-                SystemTriggerApplyCardOnClick.Create(serviceBricks, applyGameState),
+                SystemTriggerApplyCardOnLeftClick.Create(serviceBricks, applyGameState),
+                SystemTriggerApplyCardOnRightClick.Create(serviceBricks, applyGameState),
                 SystemTriggerApplyCardOnDrop.Create(serviceBricks, applyGameState)
             };
         }

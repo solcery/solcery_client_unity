@@ -9,9 +9,6 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
 {
     public sealed class CommandOnLeftClickData : CommandData
     {
-        public int ObjectId => _objectId;
-        public TriggerTargetEntityTypes TriggerTargetEntityType => _triggerTargetEntityTypes;
-        
         private readonly int _objectId;
         private readonly TriggerTargetEntityTypes _triggerTargetEntityTypes;
         
@@ -56,7 +53,7 @@ namespace Solcery.Models.Shared.Commands.Datas.OnClick
             }
             
             world.GetPool<ComponentTriggerTag>().Add(entityId);
-            world.GetPool<ComponentTriggerOnClickTag>().Add(entityId);
+            world.GetPool<ComponentTriggerOnLeftClickTag>().Add(entityId);
             world.GetPool<ComponentTriggerTargetObjectId>().Add(entityId).TargetObjectId = _objectId;
         }
 
