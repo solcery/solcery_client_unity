@@ -88,15 +88,15 @@ namespace Solcery.Widgets_new
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
 
-                Layout.UpdateCaption(placeDataObject.TryGetValue("caption", out string caption) ? caption : null);
-                var captionColor = placeDataObject.TryGetValue("caption_color", out string captionColorAttribute) ? captionColorAttribute : null;
+                Layout.UpdateCaption(placeDataObject.TryGetValue(GameJsonKeys.PlaceCaption, out string caption) ? caption : null);
+                var captionColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionColor, out string captionColorAttribute) ? captionColorAttribute : null;
                 Layout.UpdateCaptionColor(captionColor);
 
                 var fillColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
                 Layout.UpdateFillColor(fillColor);
 
-                Layout.UpdateFrameActive(placeDataObject.TryGetValue(GameJsonKeys.PlaceShowFrame, out bool withBorders) && withBorders);
-                var frameColor = placeDataObject.TryGetValue("frame_color", out string frameColorAttribute) ? frameColorAttribute : null;
+                Layout.UpdateFrameActive(placeDataObject.TryGetValue(GameJsonKeys.PlaceShowFrame, out bool showFrame) && showFrame);
+                var frameColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceFrameColor, out string frameColorAttribute) ? frameColorAttribute : null;
                 Layout.UpdateFrameColor(frameColor);
                 
                 if (placeDataObject.TryGetValue(GameJsonKeys.PlaceTooltipId, out int tooltipId))

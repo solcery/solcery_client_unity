@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Services.Resources;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
@@ -48,13 +49,13 @@ namespace Solcery.Widgets_new.Tooltip
                 Initialize();
             }
             
-            _tooltipLayout.UpdateText(tooltipDataObject.GetValue<string>("text"));
+            _tooltipLayout.UpdateText(tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText));
             _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
-            var fillColor = tooltipDataObject.TryGetValue("fill_color", out string fillColorAttribute) ? fillColorAttribute : null;
+            var fillColor = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
             _tooltipLayout.UpdateFillColor(fillColor);
-            var fontSize = tooltipDataObject.TryGetValue("font_size", out int fontSizeAttribute) ? fontSizeAttribute : 36;
+            var fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;
             _tooltipLayout.UpdateFontSize(fontSize);
-            var delaySec = tooltipDataObject.GetValue<int>("delay").ToSec();
+            var delaySec = tooltipDataObject.GetValue<int>(GameJsonKeys.TooltipDelay).ToSec();
             if (delaySec >= 0)
             {
                 Hide();

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Simple.Widgets
 {
-    public sealed class PlaceWidgetWidgetLayout : PlaceWidgetSimpleLayout
+    public sealed class PlaceWidgetPictureWithNumberLayout : PlaceWidgetSimpleLayout
     {
         [SerializeField]
         private Image image;

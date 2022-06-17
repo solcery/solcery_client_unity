@@ -16,17 +16,17 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 {
-    public class PlaceWidgetEclipseTokens : PlaceWidget<PlaceWidgetEclipseTokensLayout>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
+    public class PlaceWidgetEclipseTokenStorage : PlaceWidget<PlaceWidgetEclipseTokenStorageLayout>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
     {
         private Dictionary<int, IListTokensInContainerWidget> _tokensByType;
         private Dictionary<int, ITokenInContainerWidget> _tokens;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
-            return new PlaceWidgetEclipseTokens(widgetCanvas, game, prefabPathKey, placeDataObject);
+            return new PlaceWidgetEclipseTokenStorage(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
         
-        private PlaceWidgetEclipseTokens(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) : base(widgetCanvas, game, prefabPathKey, placeDataObject)
+        private PlaceWidgetEclipseTokenStorage(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
             _tokensByType = new Dictionary<int, IListTokensInContainerWidget>();
             _tokens = new Dictionary<int, ITokenInContainerWidget>();

@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Simple.Titles
 {
-    public sealed class PlaceWidgetTitleLayout : PlaceWidgetSimpleLayout
+    public sealed class PlaceWidgetTextLayout : PlaceWidgetSimpleLayout
     {
         [SerializeField]
-        private TMP_Text titleText;
+        private TextMeshProUGUI text;
 
         public void UpdateTitle(string title)
         {
-            titleText.text = title ?? "";
+            text.text = title ?? "";
         }
     }
 }

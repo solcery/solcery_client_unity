@@ -7,14 +7,14 @@ using Solcery.Widgets_new.Canvas;
 
 namespace Solcery.Widgets_new.Simple.Titles
 {
-    public sealed class PlaceWidgetTitle : PlaceWidget<PlaceWidgetTitleLayout>
+    public sealed class PlaceWidgetText : PlaceWidget<PlaceWidgetTextLayout>
     {
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
-            return new PlaceWidgetTitle(widgetCanvas, game, prefabPathKey, placeDataObject);
+            return new PlaceWidgetText(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
 
-        private PlaceWidgetTitle(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+        private PlaceWidgetText(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
         
         public override void Update(EcsWorld world, int[] entityIds)

@@ -186,18 +186,19 @@ namespace Solcery.Games
         private void RegistrationPlaceWidgetTypes()
         {
             // Simple
-            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Widget, PlaceWidgetWidget.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.PictureWithNumber, PlaceWidgetPictureWithNumber.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Button, PlaceWidgetButton.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Picture, PlaceWidgetPicture.Create);
-            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Title, PlaceWidgetTitle.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Text, PlaceWidgetText.Create);
             
             // Container
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.LayedOut, PlaceWidgetHand.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.Stacked, PlaceWidgetStack.Create);
             
             // Eclipse
-            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseLayedOut, PlaceWidgetEclipse.Create);
-            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokensStockpile, PlaceWidgetEclipseTokens.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseEventTracker, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokenStorage, PlaceWidgetEclipseTokenStorage.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCard, PlaceWidgetEclipse.Create);
         }
 
         private void RegistrationBrickTypes()

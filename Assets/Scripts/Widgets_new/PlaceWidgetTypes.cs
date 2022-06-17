@@ -20,17 +20,21 @@ namespace Solcery.Widgets_new
         Stacked = 0,
         [EnumPlaceWidgetPrefabPath("ui/ui_hand")]
         LayedOut = 1,
-        [EnumPlaceWidgetPrefabPath("ui/ui_widget")]
-        Widget = 2,
-        [EnumPlaceWidgetPrefabPath("ui/ui_title")]
-        Title = 3,
+        [EnumPlaceWidgetPrefabPath("ui/ui_picture_with_number")]
+        PictureWithNumber = 2,
+        [EnumPlaceWidgetPrefabPath("ui/ui_text")]
+        Text = 3,
         [EnumPlaceWidgetPrefabPath("ui/ui_button")]
         Button = 4,
         [EnumPlaceWidgetPrefabPath("ui/ui_picture")]
         Picture = 5,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
-        EclipseLayedOut = 6,
-        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_tokens_stockpile")]
-        EclipseTokensStockpile = 7
+        EclipseOneCard = 6,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        EclipseOneCardFull = 7,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_token_storage")]
+        EclipseTokenStorage = 8,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        EclipseEventTracker = 9
     }
 }

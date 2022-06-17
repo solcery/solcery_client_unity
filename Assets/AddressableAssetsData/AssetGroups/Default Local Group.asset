@@ -18,57 +18,70 @@ MonoBehaviour:
   m_GUID: 3828cc652ae2442108ee048291445fca
   m_SerializeEntries:
   - m_GUID: 224af77f0d7ea41a58e8dde882e4b417
-    m_Address: ui/ui_widget
+    m_Address: ui/ui_picture_with_number
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eb604258e38324851af2b62792b6a927
     m_Address: ui/ui_button
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1c5eb07ba73f4fa8baac533d6af57de
     m_Address: ui/ui_picture
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9977d4c4ccd8d4eda8973a97f7d4c0c0
-    m_Address: ui/ui_title
+    m_Address: ui/ui_text
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d0716bedbcac48a3be10b53cb1f2c34
     m_Address: ui/ui_hand
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8b2ef1a32238840e4b17ea26d0356ff0
     m_Address: ui/ui_stack
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ce160d0e5eac845a2b0a38043390dc3a
     m_Address: ui/ui_card
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a42386bb4982d4faaa9bab17512bb251
     m_Address: ui/ui_eclipse_hand
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3959e001564194704b49ea03540a6bd4
     m_Address: ui/ui_eclipse_token
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9807fe7af893340e8aa573a2eadf1389
-    m_Address: ui/ui_eclipse_tokens_stockpile
+    m_Address: ui/ui_eclipse_token_storage
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3c6ecbe9411b840208d4cf8c52ea30cc
     m_Address: ui/ui_eclipse_card
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f73f2d8c3fcd44ababf3222f5e2febb
     m_Address: ui/ui_tooltip
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e5f17b403a9274bae8f35502ea642ba5
     m_Address: ui/ui_eclipse_list_tokens
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f49114169a154bc2bcc588cc3759c96, type: 2}
   m_SchemaSet:

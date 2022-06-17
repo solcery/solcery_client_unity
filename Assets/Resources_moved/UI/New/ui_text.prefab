@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5182149164947569076}
   - component: {fileID: 5182149164947569077}
   m_Layer: 5
-  m_Name: description
+  m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
+  m_fontSize: 111.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4367503023739469970}
   - component: {fileID: 3594480238727635821}
   m_Layer: 5
-  m_Name: ui_title
+  m_Name: ui_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ RectTransform:
   - {fileID: 8924049137790440334}
   - {fileID: 5182149164947569098}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -199,7 +199,9 @@ MonoBehaviour:
   rectTransform: {fileID: 5182149165515819797}
   background: {fileID: 5616480330971490313}
   canvasGroup: {fileID: 3594480238727635821}
-  titleText: {fileID: 5182149164947569077}
+  caption: {fileID: 0}
+  frame: {fileID: 0}
+  text: {fileID: 5182149164947569077}
 --- !u!225 &3594480238727635821
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -7,16 +7,16 @@ using Solcery.Widgets_new.Canvas;
 
 namespace Solcery.Widgets_new.Simple.Widgets
 {
-    public sealed class PlaceWidgetWidget : PlaceWidget<PlaceWidgetWidgetLayout>
+    public sealed class PlaceWidgetPictureWithNumber : PlaceWidget<PlaceWidgetPictureWithNumberLayout>
     {
         private string _lastPictureName;
         
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
-            return new PlaceWidgetWidget(widgetCanvas, game, prefabPathKey, placeDataObject);
+            return new PlaceWidgetPictureWithNumber(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
 
-        private PlaceWidgetWidget(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+        private PlaceWidgetPictureWithNumber(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
             _lastPictureName = "";
