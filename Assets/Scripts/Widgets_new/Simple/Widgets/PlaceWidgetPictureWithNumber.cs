@@ -22,7 +22,7 @@ namespace Solcery.Widgets_new.Simple.Widgets
             _lastPictureName = "";
         }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
             Layout.UpdateVisible(entityIds.Length > 0);
             

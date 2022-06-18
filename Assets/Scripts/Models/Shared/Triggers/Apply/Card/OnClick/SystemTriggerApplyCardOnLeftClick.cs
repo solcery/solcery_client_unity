@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contexts;
-using Solcery.Models.Shared.Context;
+//using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types.OnClick;
@@ -19,7 +19,6 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         private IServiceBricks _serviceBricks;
         private readonly IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
-        private EcsFilter _filterContext;
         private EcsFilter _filterEntityTypes;
         private EcsFilter _filterEntities;
 
@@ -44,11 +43,6 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                 .Inc<ComponentTriggerOnLeftClickTag>()
                 .End();
 
-            _filterContext = world.Filter<ComponentContextObject>()
-                .Inc<ComponentContextArgs>()
-                .Inc<ComponentContextVars>()
-                .End();
-
             _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
 
             _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
@@ -59,7 +53,6 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
         {
             _serviceBricks = null;
             _filterTriggers = null;
-            _filterContext = null;
             _filterEntityTypes = null;
             _filterEntities = null;
         }
@@ -99,47 +92,24 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                         continue;
                     }
 
-                    InitContext(entityId, world);
+                    //InitContext(entityId, world);
                     
                     // TODO: fix it!!!
                     var context = CurrentContext.Create(world);
+                    context.Object.Push(entityId);
                     
                     Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
                     
                     // TODO: fix it!!!
                     _applyGameState.ApplySimulatedGameStates(context.GameStates);
+                    CurrentContext.Destroy(world, context);
                     
-                    DestroyContext(world);
+                    //DestroyContext(world);
                     
                     break;
                 }
                 
                 world.DelEntity(triggerEntityId);
-            }
-        }
-
-        private void InitContext(int targetEntityId, EcsWorld world)
-        {
-            var contextObjectPool = world.GetPool<ComponentContextObject>();
-            var contextArgsPool = world.GetPool<ComponentContextArgs>();
-            var contextVarsPool = world.GetPool<ComponentContextVars>();
-
-            foreach (var entityId in _filterContext)
-            {
-                world.DelEntity(entityId);
-            }
-
-            var contextEntityId = world.NewEntity();
-            contextObjectPool.Add(contextEntityId).Push(targetEntityId);
-            contextArgsPool.Add(contextEntityId);
-            contextVarsPool.Add(contextEntityId);
-        }
-
-        private void DestroyContext(EcsWorld world)
-        {
-            foreach (var entityId in _filterContext)
-            {
-                world.DelEntity(entityId);
             }
         }
     }

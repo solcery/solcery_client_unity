@@ -41,10 +41,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _defaultBlockRaycasts = Layout.BlockRaycasts;
         }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
             RemoveCards(world, entityIds);
             Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
+            Layout.gameObject.SetActive(isVisible);
 
             if (entityIds.Length <= 0)
             {
@@ -90,11 +91,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
 
             AttachTokensForCard(world, cardTypes);
-            UpdatedCardsOrder(world);
+            UpdatedCardsOrder();
             UpdateCardsAnimation(world);
         }
 
-        private void UpdatedCardsOrder(EcsWorld world)
+        private void UpdatedCardsOrder()
         {
             var cardsSorted = _cards.Values.OrderBy(card=>card.Order).ToList();
             for (var i = 0; i < cardsSorted.Count; i++)

@@ -30380,6 +30380,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30397,6 +30407,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30412,6 +30432,16 @@
         "y2": 12200,
         "layout": 6,
         "z_order": 50,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": []
       },
       {
@@ -30426,6 +30456,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30442,6 +30482,16 @@
         "y2": 5950,
         "layout": 3,
         "z_order": 5,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "show_frame": true
       },
       {
@@ -30453,6 +30503,16 @@
         "y2": 1294,
         "layout": 8,
         "z_order": 5,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": []
       },
       {
@@ -30467,6 +30527,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "fill_color": "#231e1ed9"
       },
       {
@@ -30481,6 +30551,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30498,6 +30578,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30515,6 +30605,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30532,6 +30632,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [],
         "fill_color": "#231e1ed9"
       },
@@ -30544,6 +30654,16 @@
         "y1": 11000,
         "y2": 13500,
         "face": 1,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 50
       },
       {
@@ -30556,6 +30676,16 @@
         "y1": 3400,
         "y2": 4100,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 99
       },
       {
@@ -30568,6 +30698,16 @@
         "y1": 5100,
         "y2": 7500,
         "layout": 6,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 11
       },
       {
@@ -30580,6 +30720,16 @@
         "y1": 3300,
         "y2": 3600,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30594,6 +30744,16 @@
         "face": 1,
         "layout": 2,
         "z_order": 5,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "show_frame": false
       },
       {
@@ -30608,6 +30768,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30625,6 +30795,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30642,6 +30822,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30659,6 +30849,16 @@
         "face": 1,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "fill_color": "#231e1ed9"
       },
       {
@@ -30670,6 +30870,16 @@
         "y1": 5000,
         "y2": 7200,
         "face": 1,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 10
       },
       {
@@ -30682,6 +30892,16 @@
         "y1": 4100,
         "y2": 4400,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30694,6 +30914,16 @@
         "y2": 9500,
         "layout": 6,
         "z_order": 20,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": []
       },
       {
@@ -30706,6 +30936,16 @@
         "y1": 2900,
         "y2": 3200,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30720,6 +30960,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           566,
           567
@@ -30738,6 +30988,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [],
         "fill_color": "#231e1ed9"
       },
@@ -30753,6 +31013,16 @@
         "face": 1,
         "layout": 3,
         "z_order": 5,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "show_frame": false
       },
       {
@@ -30765,6 +31035,16 @@
         "y1": 2500,
         "y2": 2800,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30777,6 +31057,16 @@
         "y1": 2100,
         "y2": 2400,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30789,6 +31079,16 @@
         "y1": 1200,
         "y2": 1800,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 96
       },
       {
@@ -30802,6 +31102,16 @@
         "y2": 5200,
         "layout": 4,
         "z_order": 10,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "show_frame": false
       },
       {
@@ -30816,6 +31126,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30833,6 +31153,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [],
         "fill_color": "#231e1ed9"
       },
@@ -30846,6 +31176,16 @@
         "y2": 12200,
         "layout": 6,
         "z_order": 50,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": []
       },
       {
@@ -30860,6 +31200,16 @@
         "layout": 8,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           564
         ],
@@ -30877,6 +31227,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30894,6 +31254,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30909,6 +31279,16 @@
         "y1": 4500,
         "y2": 4800,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -30921,6 +31301,16 @@
         "y2": 9000,
         "layout": 3,
         "z_order": 30,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "fill_color": "#231e1ed9"
       },
       {
@@ -30933,6 +31323,16 @@
         "y1": 300,
         "y2": 900,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 96
       },
       {
@@ -30947,6 +31347,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30964,6 +31374,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30981,6 +31401,16 @@
         "layout": 6,
         "z_order": 10,
         "show_frame": true,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "drag_n_drops": [
           568
         ],
@@ -30996,6 +31426,16 @@
         "y1": 3700,
         "y2": 4000,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 95
       },
       {
@@ -31008,6 +31448,16 @@
         "y1": 600,
         "y2": 1300,
         "layout": 4,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "z_order": 99
       },
       {
@@ -31021,6 +31471,16 @@
         "y2": 7500,
         "layout": 6,
         "z_order": 11,
+        "visibility_condition": {
+          "type": 1,
+          "subtype": 0,
+          "params": [
+            {
+              "name": "lolo",
+              "value": true
+            }
+          ]
+        },
         "show_frame": false
       }
     ]
