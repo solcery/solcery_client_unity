@@ -31194,7 +31194,7 @@
                 "params": [
                   {
                     "name": "attr_name",
-                    "value": "place_45_visible"
+                    "value": "place_45_visibility"
                   }
                 ]
               }
