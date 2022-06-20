@@ -30,7 +30,7 @@ namespace Solcery.Widgets_new
         Picture = 5,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
         EclipseOneCard = 6,
-        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_full")]
         EclipseOneCardFull = 7,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_token_storage")]
         EclipseTokenStorage = 8,

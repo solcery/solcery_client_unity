@@ -40,23 +40,23 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _entityId = entityId;
             _objectId = objectId;
             
-            if (data.TryGetValue("name", out string name))
+            if (data.TryGetValue(GameJsonKeys.CardName, out string name))
             {
                 _layout.UpdateName(name);
             }
             
-            if (data.TryGetValue("description", out string description))
+            if (data.TryGetValue(GameJsonKeys.CardDescription, out string description))
             {
                 _layout.UpdateDescription(description);
             }
 
-            if (data.TryGetValue("picture", out string picture) 
+            if (data.TryGetValue(GameJsonKeys.CardPicture, out string picture) 
                 && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
             {
                 _layout.UpdateSprite(texture);
             }
 
-            if (data.TryGetValue("timer_text", out string timerText))
+            if (data.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
             {
                 _layout.TimerLayout.UpdateTimerTextActive(true);
                 _layout.TimerLayout.UpdateTimerText(timerText);
@@ -79,7 +79,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             var tokenLayout = GetToken(slot);
             if (tokenLayout != null)
             {
-                if (data.TryGetValue("picture", out string picture)
+                if (data.TryGetValue(GameJsonKeys.TokenPicture, out string picture)
                     && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
                 {
                     tokenLayout.UpdateSprite(texture);
