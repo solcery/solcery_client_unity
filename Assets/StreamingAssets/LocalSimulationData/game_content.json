@@ -4396,7 +4396,7 @@
           "params": [
             {
               "name": "value",
-              "value": 417
+              "value": 418
             }
           ]
         }
@@ -6792,7 +6792,7 @@
           "params": [
             {
               "name": "value",
-              "value": 355
+              "value": 356
             }
           ]
         }
@@ -6918,7 +6918,7 @@
           "params": [
             {
               "name": "value",
-              "value": 392
+              "value": 393
             }
           ]
         }
@@ -6933,7 +6933,7 @@
           "params": [
             {
               "name": "value",
-              "value": 338
+              "value": 339
             }
           ]
         }
@@ -6948,7 +6948,7 @@
           "params": [
             {
               "name": "value",
-              "value": 384
+              "value": 385
             }
           ]
         }
@@ -9591,7 +9591,7 @@
           "params": [
             {
               "name": "value",
-              "value": 390
+              "value": 391
             }
           ]
         }
@@ -9606,7 +9606,7 @@
           "params": [
             {
               "name": "value",
-              "value": 423
+              "value": 424
             }
           ]
         }
@@ -10871,7 +10871,7 @@
           "params": [
             {
               "name": "value",
-              "value": 371
+              "value": 372
             }
           ]
         }
@@ -12799,7 +12799,7 @@
           "params": [
             {
               "name": "value",
-              "value": 406
+              "value": 407
             }
           ]
         }
@@ -13575,7 +13575,7 @@
           "params": [
             {
               "name": "value",
-              "value": 344
+              "value": 345
             }
           ]
         }
@@ -13590,7 +13590,7 @@
           "params": [
             {
               "name": "value",
-              "value": 394
+              "value": 395
             }
           ]
         }
@@ -13669,7 +13669,7 @@
           "params": [
             {
               "name": "value",
-              "value": 408
+              "value": 409
             }
           ]
         }
@@ -13684,7 +13684,7 @@
           "params": [
             {
               "name": "value",
-              "value": 428
+              "value": 429
             }
           ]
         }
@@ -13714,7 +13714,7 @@
           "params": [
             {
               "name": "value",
-              "value": 431
+              "value": 432
             }
           ]
         }
@@ -17447,7 +17447,7 @@
           "params": [
             {
               "name": "value",
-              "value": 377
+              "value": 378
             }
           ]
         }
@@ -18976,7 +18976,7 @@
           "params": [
             {
               "name": "value",
-              "value": 367
+              "value": 368
             }
           ]
         }
@@ -21045,7 +21045,7 @@
           "params": [
             {
               "name": "value",
-              "value": 352
+              "value": 353
             }
           ]
         }
@@ -21183,7 +21183,7 @@
           "params": [
             {
               "name": "value",
-              "value": 411
+              "value": 412
             }
           ]
         }
@@ -21213,7 +21213,7 @@
           "params": [
             {
               "name": "value",
-              "value": 362
+              "value": 363
             }
           ]
         }
@@ -21228,7 +21228,7 @@
           "params": [
             {
               "name": "value",
-              "value": 414
+              "value": 415
             }
           ]
         }
@@ -21243,7 +21243,7 @@
           "params": [
             {
               "name": "value",
-              "value": 379
+              "value": 380
             }
           ]
         }
@@ -21636,7 +21636,7 @@
           "params": [
             {
               "name": "value",
-              "value": 329
+              "value": 330
             }
           ]
         }
@@ -21796,7 +21796,7 @@
           "params": [
             {
               "name": "value",
-              "value": 416
+              "value": 417
             }
           ]
         }
@@ -21826,7 +21826,7 @@
           "params": [
             {
               "name": "value",
-              "value": 383
+              "value": 384
             }
           ]
         }
@@ -23761,7 +23761,7 @@
           "params": [
             {
               "name": "value",
-              "value": 354
+              "value": 355
             }
           ]
         }
@@ -23776,7 +23776,7 @@
           "params": [
             {
               "name": "value",
-              "value": 372
+              "value": 373
             }
           ]
         }
@@ -23806,7 +23806,7 @@
           "params": [
             {
               "name": "value",
-              "value": 366
+              "value": 367
             }
           ]
         }
@@ -25558,7 +25558,7 @@
           "params": [
             {
               "name": "value",
-              "value": 361
+              "value": 362
             }
           ]
         }
@@ -25588,7 +25588,7 @@
           "params": [
             {
               "name": "value",
-              "value": 378
+              "value": 379
             }
           ]
         }
@@ -26443,7 +26443,7 @@
           "params": [
             {
               "name": "value",
-              "value": 380
+              "value": 381
             }
           ]
         }
@@ -28790,7 +28790,7 @@
           "params": [
             {
               "name": "value",
-              "value": 339
+              "value": 340
             }
           ]
         }
@@ -28835,7 +28835,7 @@
           "params": [
             {
               "name": "value",
-              "value": 347
+              "value": 348
             }
           ]
         }
@@ -28910,7 +28910,7 @@
           "params": [
             {
               "name": "value",
-              "value": 427
+              "value": 428
             }
           ]
         }
@@ -28940,7 +28940,7 @@
           "params": [
             {
               "name": "value",
-              "value": 341
+              "value": 342
             }
           ]
         }
@@ -30362,6 +30362,10 @@
       {
         "id": 249,
         "code": "omens_for_showcase"
+      },
+      {
+        "id": 250,
+        "code": "place_45_visibility"
       }
     ]
   },
@@ -30369,10 +30373,16 @@
     "name": "places",
     "objects": [
       {
-        "id": 250,
+        "id": 251,
         "place_id": 23,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 5085,
         "x2": 5965,
         "y1": 5000,
@@ -30381,15 +30391,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 251,
+        "id": 252,
         "place_id": 25,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 7045,
         "x2": 7925,
         "y1": 5000,
@@ -30398,14 +30414,20 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 252,
+        "id": 253,
         "place_id": 53,
         "visible": true,
+        "visibility_condition": {
+          "name": "#002:False",
+          "subtype": 10068,
+          "type": 1,
+          "params": []
+        },
         "x1": 2075,
         "x2": 2955,
         "y1": 11000,
@@ -30415,10 +30437,16 @@
         "drag_n_drops": []
       },
       {
-        "id": 253,
+        "id": 254,
         "place_id": 21,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 3125,
         "x2": 4005,
         "y1": 5000,
@@ -30427,15 +30455,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 254,
+        "id": 255,
         "place_id": 10,
         "interactable_for_active_local_player": false,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 8300,
         "x2": 9500,
         "y1": 5250,
@@ -30445,8 +30479,14 @@
         "show_frame": true
       },
       {
-        "id": 255,
+        "id": 256,
         "place_id": 50,
+        "visibility_condition": {
+          "name": "#002:False",
+          "subtype": 10068,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 183,
@@ -30456,10 +30496,16 @@
         "drag_n_drops": []
       },
       {
-        "id": 256,
+        "id": 257,
         "place_id": 4,
         "interactable_for_active_local_player": false,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 8360,
         "x2": 9440,
         "y1": 6800,
@@ -30470,10 +30516,16 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 257,
+        "id": 258,
         "place_id": 31,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 3125,
         "x2": 4005,
         "y1": 2600,
@@ -30482,15 +30534,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 258,
+        "id": 259,
         "place_id": 34,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 6065,
         "x2": 6945,
         "y1": 2600,
@@ -30499,15 +30557,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 259,
+        "id": 260,
         "place_id": 35,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 7045,
         "x2": 7925,
         "y1": 2600,
@@ -30516,15 +30580,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 260,
+        "id": 261,
         "place_id": 30,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 2075,
         "x2": 2955,
         "y1": 2600,
@@ -30536,9 +30606,15 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 261,
+        "id": 262,
         "place_id": 1,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": -2000,
         "x2": -1000,
         "y1": 11000,
@@ -30547,10 +30623,16 @@
         "z_order": 50
       },
       {
-        "id": 262,
+        "id": 263,
         "place_id": 8,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 4200,
         "x2": 5800,
         "y1": 3400,
@@ -30559,10 +30641,16 @@
         "z_order": 99
       },
       {
-        "id": 263,
+        "id": 264,
         "place_id": 9,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 100,
         "x2": 1100,
         "y1": 5100,
@@ -30571,10 +30659,16 @@
         "z_order": 11
       },
       {
-        "id": 264,
+        "id": 265,
         "place_id": 14,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 3300,
@@ -30583,10 +30677,16 @@
         "z_order": 95
       },
       {
-        "id": 265,
+        "id": 266,
         "place_id": 19,
         "interactable_for_active_local_player": false,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 9100,
         "x2": 9500,
         "y1": 6000,
@@ -30597,10 +30697,16 @@
         "show_frame": false
       },
       {
-        "id": 266,
+        "id": 267,
         "place_id": 44,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 6065,
         "x2": 6945,
         "y1": 200,
@@ -30609,15 +30715,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 267,
+        "id": 268,
         "place_id": 33,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 5085,
         "x2": 5965,
         "y1": 2600,
@@ -30626,15 +30738,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 268,
+        "id": 269,
         "place_id": 42,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 4105,
         "x2": 4985,
         "y1": 200,
@@ -30643,15 +30761,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 269,
+        "id": 270,
         "place_id": 2,
         "interactable_for_active_local_player": false,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 622,
         "x2": 1502,
         "y1": 7600,
@@ -30662,9 +30786,15 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 270,
+        "id": 271,
         "place_id": 3,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 500,
         "x2": 1700,
         "y1": 5000,
@@ -30673,10 +30803,16 @@
         "z_order": 10
       },
       {
-        "id": 271,
+        "id": 272,
         "place_id": 12,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 4100,
@@ -30685,9 +30821,15 @@
         "z_order": 95
       },
       {
-        "id": 272,
+        "id": 273,
         "place_id": 55,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 3400,
         "x2": 6600,
         "y1": 1500,
@@ -30697,10 +30839,16 @@
         "drag_n_drops": []
       },
       {
-        "id": 273,
+        "id": 274,
         "place_id": 15,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 2900,
@@ -30709,10 +30857,16 @@
         "z_order": 95
       },
       {
-        "id": 274,
+        "id": 275,
         "place_id": 5,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 2075,
         "x2": 7925,
         "y1": 7600,
@@ -30721,16 +30875,22 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          566,
-          567
+          567,
+          568
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 275,
+        "id": 276,
         "place_id": 20,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 2075,
         "x2": 2955,
         "y1": 5000,
@@ -30742,10 +30902,16 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 276,
+        "id": 277,
         "place_id": 18,
         "interactable_for_active_local_player": false,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 8300,
         "x2": 9000,
         "y1": 6000,
@@ -30756,10 +30922,16 @@
         "show_frame": false
       },
       {
-        "id": 277,
+        "id": 278,
         "place_id": 16,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 2500,
@@ -30768,10 +30940,16 @@
         "z_order": 95
       },
       {
-        "id": 278,
+        "id": 279,
         "place_id": 51,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 2100,
@@ -30780,10 +30958,16 @@
         "z_order": 95
       },
       {
-        "id": 279,
+        "id": 280,
         "place_id": 57,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 1200,
@@ -30792,10 +30976,16 @@
         "z_order": 96
       },
       {
-        "id": 280,
+        "id": 281,
         "place_id": 7,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 8300,
         "x2": 9500,
         "y1": 4500,
@@ -30805,10 +30995,16 @@
         "show_frame": false
       },
       {
-        "id": 281,
+        "id": 282,
         "place_id": 41,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 3125,
         "x2": 4005,
         "y1": 200,
@@ -30817,15 +31013,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 282,
+        "id": 283,
         "place_id": 40,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 2075,
         "x2": 2955,
         "y1": 200,
@@ -30837,9 +31039,15 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 283,
+        "id": 284,
         "place_id": 52,
         "visible": true,
+        "visibility_condition": {
+          "name": "#002:False",
+          "subtype": 10068,
+          "type": 1,
+          "params": []
+        },
         "x1": 3125,
         "x2": 4005,
         "y1": 11000,
@@ -30849,10 +31057,16 @@
         "drag_n_drops": []
       },
       {
-        "id": 284,
+        "id": 285,
         "place_id": 6,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 8300,
         "x2": 9500,
         "y1": 200,
@@ -30861,15 +31075,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          564
+          565
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 285,
+        "id": 286,
         "place_id": 43,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 5085,
         "x2": 5965,
         "y1": 200,
@@ -30878,15 +31098,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 286,
+        "id": 287,
         "place_id": 24,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 6065,
         "x2": 6945,
         "y1": 5000,
@@ -30895,15 +31121,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 287,
+        "id": 288,
         "place_id": 11,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 4500,
@@ -30912,9 +31144,15 @@
         "z_order": 95
       },
       {
-        "id": 288,
+        "id": 289,
         "place_id": 17,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 1000,
         "x2": 9000,
         "y1": 5000,
@@ -30924,10 +31162,16 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 289,
+        "id": 290,
         "place_id": 56,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 300,
@@ -30936,10 +31180,45 @@
         "z_order": 96
       },
       {
-        "id": 290,
+        "id": 291,
         "place_id": 45,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "Greater than",
+          "type": 1,
+          "subtype": 3,
+          "params": [
+            {
+              "name": "value1",
+              "value": {
+                "name": "Game Attribute",
+                "type": 2,
+                "subtype": 13,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "place_45_visible"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "value2",
+              "value": {
+                "name": "Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "x1": 7045,
         "x2": 7925,
         "y1": 200,
@@ -30948,15 +31227,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 291,
+        "id": 292,
         "place_id": 32,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 4105,
         "x2": 4985,
         "y1": 2600,
@@ -30965,15 +31250,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 292,
+        "id": 293,
         "place_id": 22,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 4105,
         "x2": 4985,
         "y1": 5000,
@@ -30982,15 +31273,21 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          568
+          569
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 293,
+        "id": 294,
         "place_id": 13,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 468,
         "x2": 1656,
         "y1": 3700,
@@ -30999,10 +31296,16 @@
         "z_order": 95
       },
       {
-        "id": 294,
+        "id": 295,
         "place_id": 54,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#001:True",
+          "subtype": 10155,
+          "type": 1,
+          "params": []
+        },
         "x1": 4200,
         "x2": 5800,
         "y1": 600,
@@ -31011,10 +31314,16 @@
         "z_order": 99
       },
       {
-        "id": 295,
+        "id": 296,
         "place_id": 58,
         "interactable_for_active_local_player": true,
         "visible": true,
+        "visibility_condition": {
+          "name": "#002:False",
+          "subtype": 10068,
+          "type": 1,
+          "params": []
+        },
         "x1": 100,
         "x2": 1100,
         "y1": 5100,
@@ -31029,135 +31338,135 @@
     "name": "card_attributes",
     "objects": [
       {
-        "id": 296,
+        "id": 297,
         "code": "type"
       },
       {
-        "id": 297,
+        "id": 298,
         "code": "token_type"
       },
       {
-        "id": 298,
+        "id": 299,
         "code": "token_origin"
       },
       {
-        "id": 299,
+        "id": 300,
         "code": "reactive"
       },
       {
-        "id": 300,
+        "id": 301,
         "code": "show_duration"
       },
       {
-        "id": 301,
+        "id": 302,
         "code": "slot"
       },
       {
-        "id": 302,
+        "id": 303,
         "code": "anim_token_fly_from_slot"
       },
       {
-        "id": 303,
+        "id": 304,
         "code": "token_count"
       },
       {
-        "id": 304,
+        "id": 305,
         "code": "duration"
       },
       {
-        "id": 305,
+        "id": 306,
         "code": "anim_card_fly"
       },
       {
-        "id": 306,
+        "id": 307,
         "code": "creature"
       },
       {
-        "id": 307,
+        "id": 308,
         "code": "produced_token_type"
       },
       {
-        "id": 308,
+        "id": 309,
         "code": "anim_token_fly_from_card_id"
       },
       {
-        "id": 309,
+        "id": 310,
         "code": "anim_token_fly_from_place"
       },
       {
-        "id": 310,
+        "id": 311,
         "code": "destroyed"
       },
       {
-        "id": 311,
+        "id": 312,
         "code": "highlighted"
       },
       {
-        "id": 312,
+        "id": 313,
         "code": "anim_destroy"
       },
       {
-        "id": 313,
+        "id": 314,
         "code": "anim_token_fly"
       },
       {
-        "id": 314,
+        "id": 315,
         "code": "anim_highlight"
       },
       {
-        "id": 315,
+        "id": 316,
         "code": "disable_raycasts_on_place"
       },
       {
-        "id": 316,
+        "id": 317,
         "code": "token_slots"
       },
       {
-        "id": 317,
+        "id": 318,
         "code": "anti_token"
       },
       {
-        "id": 318,
+        "id": 319,
         "code": "order"
       },
       {
-        "id": 319,
+        "id": 320,
         "code": "number"
       },
       {
-        "id": 320,
+        "id": 321,
         "code": "creature_number"
       },
       {
-        "id": 321,
+        "id": 322,
         "code": "linked_card_id"
       },
       {
-        "id": 322,
+        "id": 323,
         "code": "to_destroy"
       },
       {
-        "id": 323,
+        "id": 324,
         "code": "anim_card_fly_from_place"
       },
       {
-        "id": 324,
+        "id": 325,
         "code": "place"
       },
       {
-        "id": 325,
+        "id": 326,
         "code": "anim_card_fly_time"
       },
       {
-        "id": 326,
+        "id": 327,
         "code": "is_starting_card"
       },
       {
-        "id": 327,
+        "id": 328,
         "code": "is_additional_card"
       },
       {
-        "id": 328,
+        "id": 329,
         "code": "is_building_site"
       }
     ]
@@ -31166,11 +31475,11 @@
     "name": "card_types",
     "objects": [
       {
-        "id": 329,
+        "id": 330,
         "name": "Shield",
         "type": 2,
         "picture": "https://i.ibb.co/X8rwn3d/token-shield.png",
-        "tooltip_id": 554,
+        "tooltip_id": 555,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -31515,7 +31824,7 @@
         }
       },
       {
-        "id": 330,
+        "id": 331,
         "name": "Daring Dragonling",
         "type": 1,
         "picture": "https://i.ibb.co/wp2w87t/2-17.jpg",
@@ -31767,7 +32076,7 @@
         }
       },
       {
-        "id": 331,
+        "id": 332,
         "name": "Ritual Sacrifice",
         "type": 3,
         "picture": "https://i.ibb.co/s5jVWy2/1-37-Heart.jpg",
@@ -32171,7 +32480,7 @@
         }
       },
       {
-        "id": 332,
+        "id": 333,
         "name": "Frenzied Hustle",
         "type": 3,
         "picture": "https://i.ibb.co/2YT1GDH/Druideskill-23.jpg",
@@ -32806,7 +33115,7 @@
         }
       },
       {
-        "id": 333,
+        "id": 334,
         "name": "Seething Salamander",
         "type": 1,
         "picture": "https://i.ibb.co/1RMwdVQ/1-49-Lizard.jpg",
@@ -32968,7 +33277,7 @@
         }
       },
       {
-        "id": 334,
+        "id": 335,
         "name": "Old spider",
         "action_on_left_click": {
           "name": "Two actions",
@@ -33263,7 +33572,7 @@
         }
       },
       {
-        "id": 335,
+        "id": 336,
         "name": "Toucan Taskmaster",
         "type": 1,
         "picture": "https://i.ibb.co/Xzr6ch1/1-9-Bird.jpg",
@@ -33497,7 +33806,7 @@
         }
       },
       {
-        "id": 336,
+        "id": 337,
         "name": "Watchtower",
         "type": 4,
         "picture": "https://i.ibb.co/37G6Sqy/1-89-Tower.jpg",
@@ -33694,7 +34003,7 @@
         }
       },
       {
-        "id": 337,
+        "id": 338,
         "name": "Confused Cat-A-Roo",
         "type": 1,
         "picture": "https://i.ibb.co/PcNSyQ4/2-7.jpg",
@@ -33841,17 +34150,17 @@
         }
       },
       {
-        "id": 338,
+        "id": 339,
         "name": "Msg - Creature Phase",
         "description": "Creature Phase"
       },
       {
-        "id": 339,
+        "id": 340,
         "name": "Msg - Event Phase",
         "description": "Event Phase"
       },
       {
-        "id": 340,
+        "id": 341,
         "name": "Reptilian Renegade Lizard",
         "type": 1,
         "picture": "https://i.ibb.co/yQNcsV9/reptilians-5.jpg",
@@ -33911,7 +34220,7 @@
         }
       },
       {
-        "id": 341,
+        "id": 342,
         "name": "TECH Disable Raycast",
         "action_on_create": {
           "name": "Set attribute",
@@ -33940,7 +34249,7 @@
         }
       },
       {
-        "id": 342,
+        "id": 343,
         "name": "Kobold Tunnel",
         "type": 4,
         "picture": "https://i.ibb.co/KhGX3bf/1-20-Den.jpg",
@@ -34137,17 +34446,17 @@
         }
       },
       {
-        "id": 343,
+        "id": 344,
         "name": "Msg - Realm Turn",
         "description": "Realm phase: you can't move cards"
       },
       {
-        "id": 344,
+        "id": 345,
         "name": "Msg - Eclipse Phase",
         "description": "Eclipse Phase"
       },
       {
-        "id": 345,
+        "id": 346,
         "name": "Test Fill Token Storage",
         "description": "Does AMAZING THINGS",
         "action_on_left_click": {
@@ -34949,7 +35258,7 @@
         }
       },
       {
-        "id": 346,
+        "id": 347,
         "name": "Catalina Whale",
         "type": 1,
         "picture": "https://i.ibb.co/jV1sWyb/catalina-whale-mixer-1.jpg",
@@ -35349,11 +35658,11 @@
         }
       },
       {
-        "id": 347,
+        "id": 348,
         "name": "Food",
         "type": 2,
         "picture": "https://i.ibb.co/Wtj1bQC/token-food.png",
-        "tooltip_id": 556,
+        "tooltip_id": 557,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10033,
@@ -35637,7 +35946,7 @@
         }
       },
       {
-        "id": 348,
+        "id": 349,
         "name": "Start Game",
         "action_on_left_click": {
           "name": "Phase 0 - Init",
@@ -35647,7 +35956,7 @@
         }
       },
       {
-        "id": 349,
+        "id": 350,
         "name": "Spreading Fear",
         "type": 3,
         "picture": "https://i.ibb.co/N2wP0SV/1-18-Curse.jpg",
@@ -35917,7 +36226,7 @@
         }
       },
       {
-        "id": 350,
+        "id": 351,
         "name": "Baker’s House",
         "type": 4,
         "picture": "https://i.ibb.co/SQjXMcF/1-71-Shack-1.jpg",
@@ -36123,7 +36432,7 @@
         }
       },
       {
-        "id": 351,
+        "id": 352,
         "name": "Test Creature Phase",
         "action_on_left_click": {
           "name": "{v3} Phase 2 - Creatures",
@@ -36133,12 +36442,12 @@
         }
       },
       {
-        "id": 352,
+        "id": 353,
         "name": "Msg - Building Phase",
         "description": "Building Phase"
       },
       {
-        "id": 353,
+        "id": 354,
         "name": "Hell and High Water",
         "type": 3,
         "picture": "https://i.ibb.co/Gch06yF/Shamanskill-31.jpg",
@@ -36323,7 +36632,7 @@
                                               "params": [
                                                 {
                                                   "name": "value",
-                                                  "value": 406
+                                                  "value": 407
                                                 }
                                               ]
                                             }
@@ -36403,7 +36712,7 @@
                                               "params": [
                                                 {
                                                   "name": "value",
-                                                  "value": 390
+                                                  "value": 391
                                                 }
                                               ]
                                             }
@@ -36445,11 +36754,11 @@
         }
       },
       {
-        "id": 354,
+        "id": 355,
         "name": "Hot",
         "type": 2,
         "picture": "https://i.ibb.co/F6WffGc/token-hot.png",
-        "tooltip_id": 542,
+        "tooltip_id": 543,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -36497,11 +36806,11 @@
         }
       },
       {
-        "id": 355,
+        "id": 356,
         "name": "Joy",
         "type": 2,
         "picture": "https://i.ibb.co/Zc6GQvZ/token-joy.png",
-        "tooltip_id": 540,
+        "tooltip_id": 541,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -36549,7 +36858,7 @@
         }
       },
       {
-        "id": 356,
+        "id": 357,
         "name": "Ill-Timed Feast",
         "type": 3,
         "picture": "https://i.ibb.co/qp0nGDC/1-63-Pancakes.jpg",
@@ -36737,7 +37046,7 @@
         }
       },
       {
-        "id": 357,
+        "id": 358,
         "name": "Friendly Fishperson",
         "type": 1,
         "picture": "https://i.ibb.co/CmnT6wv/2-15.jpg",
@@ -36865,7 +37174,7 @@
         }
       },
       {
-        "id": 358,
+        "id": 359,
         "name": "Bewitched Bullfrog",
         "type": 1,
         "picture": "https://i.ibb.co/cD28k77/2-10.jpg",
@@ -37571,7 +37880,7 @@
         }
       },
       {
-        "id": 359,
+        "id": 360,
         "name": "Fiery Fiend",
         "type": 1,
         "picture": "https://i.ibb.co/cQXJYSR/2-24.jpg",
@@ -37983,7 +38292,7 @@
         }
       },
       {
-        "id": 360,
+        "id": 361,
         "name": "Test Building Phase",
         "action_on_left_click": {
           "name": "{v3} Phase 1 - Buildings",
@@ -37993,11 +38302,11 @@
         }
       },
       {
-        "id": 361,
+        "id": 362,
         "name": "Token - Gold",
         "type": 2,
         "picture": "https://i.ibb.co/82yyRmp/token-gold.png",
-        "tooltip_id": 552,
+        "tooltip_id": 553,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10033,
@@ -38190,7 +38499,7 @@
         }
       },
       {
-        "id": 362,
+        "id": 363,
         "name": "Msg - Turn Number Widget",
         "picture": "https://i.ibb.co/PcZpYWQ/label.png",
         "action_on_activation": {
@@ -38244,7 +38553,7 @@
         }
       },
       {
-        "id": 363,
+        "id": 364,
         "name": "Test Event Phase",
         "action_on_left_click": {
           "name": "{v3} Phase 3 - Events",
@@ -38254,7 +38563,7 @@
         }
       },
       {
-        "id": 364,
+        "id": 365,
         "name": "MOUS IN DA HOUS",
         "type": 1,
         "timer_text": "Time",
@@ -38313,7 +38622,7 @@
         }
       },
       {
-        "id": 365,
+        "id": 366,
         "name": "Test Order Event",
         "type": 3,
         "picture": "https://i.ibb.co/RbYSd5m/1-44-Infernal-nest.jpg",
@@ -38515,17 +38824,17 @@
         }
       },
       {
-        "id": 366,
+        "id": 367,
         "name": "Msg - Draw Phase",
         "description": "Draw Phase"
       },
       {
-        "id": 367,
+        "id": 368,
         "name": "Msg - Defeat",
         "description": "GAME OVER"
       },
       {
-        "id": 368,
+        "id": 369,
         "name": "DeGod",
         "type": 1,
         "picture": "https://i.ibb.co/2swtNwj/de-gods-1.jpg",
@@ -38585,7 +38894,7 @@
         }
       },
       {
-        "id": 369,
+        "id": 370,
         "name": "Famous Fox",
         "type": 1,
         "picture": "https://i.ibb.co/3YhPN6Z/fabolous-foxes-1.jpg",
@@ -38645,7 +38954,7 @@
         }
       },
       {
-        "id": 370,
+        "id": 371,
         "name": "Grim",
         "type": 1,
         "picture": "https://i.ibb.co/vkJZ9ss/grim-2.jpg",
@@ -38950,7 +39259,7 @@
         }
       },
       {
-        "id": 371,
+        "id": 372,
         "name": "Confirm",
         "description": "Showcase OK button",
         "action_on_left_click": {
@@ -38961,11 +39270,11 @@
         }
       },
       {
-        "id": 372,
+        "id": 373,
         "name": "Cold",
         "type": 2,
         "picture": "https://i.ibb.co/YBSBk5H/token-cold.png",
-        "tooltip_id": 543,
+        "tooltip_id": 544,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -39013,7 +39322,7 @@
         }
       },
       {
-        "id": 373,
+        "id": 374,
         "name": "Earth Elemental",
         "type": 1,
         "picture": "https://i.ibb.co/9nTQvvW/2-56.jpg",
@@ -39175,7 +39484,7 @@
         }
       },
       {
-        "id": 374,
+        "id": 375,
         "name": "Barracks",
         "type": 4,
         "picture": "https://i.ibb.co/JvvmmV2/1-6-Barracks.jpg",
@@ -39362,7 +39671,7 @@
         }
       },
       {
-        "id": 375,
+        "id": 376,
         "name": "Decrepit Mill",
         "type": 4,
         "picture": "https://i.ibb.co/Sw1n8cD/1-57-Mill.jpg",
@@ -39549,7 +39858,7 @@
         }
       },
       {
-        "id": 376,
+        "id": 377,
         "name": "Snow Spider",
         "type": 1,
         "picture": "https://i.ibb.co/0sF4Rjj/1-24-Fantom.jpg",
@@ -39964,7 +40273,7 @@
         }
       },
       {
-        "id": 377,
+        "id": 378,
         "name": "End Turn",
         "description": "Starts main turn sequence",
         "action_on_left_click": {
@@ -39975,12 +40284,12 @@
         }
       },
       {
-        "id": 378,
+        "id": 379,
         "name": "Msg - Player Phase",
         "description": "Player Phase"
       },
       {
-        "id": 379,
+        "id": 380,
         "name": "Play Again",
         "action_on_left_click": {
           "name": "Two actions",
@@ -40019,11 +40328,11 @@
         }
       },
       {
-        "id": 380,
+        "id": 381,
         "name": "Token - Omen",
         "type": 2,
         "picture": "https://i.ibb.co/2cM7bNq/token-omen.png",
-        "tooltip_id": 550,
+        "tooltip_id": 551,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10033,
@@ -40038,7 +40347,7 @@
         }
       },
       {
-        "id": 381,
+        "id": 382,
         "name": "Shared Suffering",
         "type": 3,
         "picture": "https://i.ibb.co/sCpNY4T/Priestskill-03.jpg",
@@ -40485,7 +40794,7 @@
         }
       },
       {
-        "id": 382,
+        "id": 383,
         "name": "Bossy Baneling",
         "type": 1,
         "picture": "https://i.ibb.co/wWhQkjr/2-33.jpg",
@@ -40752,7 +41061,7 @@
         }
       },
       {
-        "id": 383,
+        "id": 384,
         "name": "Toggle Fast Mode",
         "description": "I AM SPEED",
         "action_on_left_click": {
@@ -40858,7 +41167,7 @@
         }
       },
       {
-        "id": 384,
+        "id": 385,
         "name": "Oak",
         "type": 3,
         "picture": "https://i.ibb.co/ySMTMVS/Shamanskill-39.jpg",
@@ -41018,7 +41327,7 @@
         }
       },
       {
-        "id": 385,
+        "id": 386,
         "name": "Degen Dojo Disciple",
         "type": 1,
         "picture": "https://i.ibb.co/w4MgKQK/dojo-1.jpg",
@@ -41237,7 +41546,7 @@
         }
       },
       {
-        "id": 386,
+        "id": 387,
         "name": "Test Creature 2",
         "type": 1,
         "picture": "https://i.ibb.co/bzRzFfh/1-100-Yeti.jpg",
@@ -41675,7 +41984,7 @@
         }
       },
       {
-        "id": 387,
+        "id": 388,
         "name": "Nosy Neighbor",
         "type": 1,
         "picture": "https://i.ibb.co/rxDLZDQ/1-99-Wood-spider.jpg",
@@ -41927,28 +42236,104 @@
         }
       },
       {
-        "id": 388,
-        "name": "Test Game FINISHED",
+        "id": 389,
+        "name": "Test Toggle Place 45 Visibility",
         "description": "Does AMAZING THINGS",
         "action_on_left_click": {
-          "name": "Set game attribute",
+          "name": "If-Then-Else",
           "type": 0,
-          "subtype": 9,
+          "subtype": 2,
           "params": [
             {
-              "name": "attr_name",
-              "value": "finished"
-            },
-            {
-              "name": "value",
+              "name": "if",
               "value": {
-                "name": "Constant",
-                "type": 2,
-                "subtype": 0,
+                "name": "Greater than",
+                "type": 1,
+                "subtype": 3,
                 "params": [
                   {
+                    "name": "value1",
+                    "value": {
+                      "name": "Game Attribute",
+                      "type": 2,
+                      "subtype": 13,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "place_45_visibility"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "then",
+              "value": {
+                "name": "Set game attribute",
+                "type": 0,
+                "subtype": 9,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "place_45_visibility"
+                  },
+                  {
                     "name": "value",
-                    "value": 1
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "else",
+              "value": {
+                "name": "Set game attribute",
+                "type": 0,
+                "subtype": 9,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "place_45_visibility"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -41957,7 +42342,7 @@
         }
       },
       {
-        "id": 389,
+        "id": 390,
         "name": "Enable `loogris_branch`",
         "action_on_left_click": {
           "name": "Set game attribute",
@@ -41986,7 +42371,7 @@
         }
       },
       {
-        "id": 390,
+        "id": 391,
         "name": "Flood",
         "type": 3,
         "picture": "https://i.ibb.co/pXg3rNc/1-52-Mana-storm.jpg",
@@ -42283,7 +42668,7 @@
         }
       },
       {
-        "id": 391,
+        "id": 392,
         "name": "Age of Triskelion",
         "type": 3,
         "picture": "https://i.ibb.co/x2Jg50S/triskelion.jpg",
@@ -42969,12 +43354,12 @@
         }
       },
       {
-        "id": 392,
+        "id": 393,
         "name": "Msg - Turn Number Text",
         "description": "Turn:"
       },
       {
-        "id": 393,
+        "id": 394,
         "name": "Test Draw Phase",
         "action_on_left_click": {
           "name": "Two actions",
@@ -43003,12 +43388,12 @@
         }
       },
       {
-        "id": 394,
+        "id": 395,
         "name": "Msg - New Turn",
         "description": "New Turn"
       },
       {
-        "id": 395,
+        "id": 396,
         "name": "The Orc",
         "type": 1,
         "picture": "https://i.ibb.co/XF00sHr/orcs-2.jpg",
@@ -43103,7 +43488,7 @@
         }
       },
       {
-        "id": 396,
+        "id": 397,
         "name": "Yawning Yeti",
         "type": 1,
         "picture": "https://i.ibb.co/bzRzFfh/1-100-Yeti.jpg",
@@ -43532,7 +43917,7 @@
         }
       },
       {
-        "id": 397,
+        "id": 398,
         "name": "{!} Harrowing Harvester",
         "type": 1,
         "picture": "https://i.ibb.co/CHQCWVn/2-35.jpg",
@@ -43706,7 +44091,7 @@
         }
       },
       {
-        "id": 398,
+        "id": 399,
         "name": "Glacial Goldfish",
         "type": 1,
         "picture": "https://i.ibb.co/zhh5DWZ/1-41-Ice-fish.jpg",
@@ -43853,7 +44238,7 @@
         }
       },
       {
-        "id": 399,
+        "id": 400,
         "name": "Boryoku Baby Dragon",
         "type": 1,
         "picture": "https://i.ibb.co/zhX5f95/boryoku-babies-1.jpg",
@@ -44334,7 +44719,7 @@
         }
       },
       {
-        "id": 400,
+        "id": 401,
         "name": "SOLGod",
         "type": 1,
         "picture": "https://i.ibb.co/tsMZn0v/sol-gods-1.jpg",
@@ -44727,7 +45112,7 @@
         }
       },
       {
-        "id": 401,
+        "id": 402,
         "name": "Cold Snap",
         "type": 3,
         "picture": "https://i.ibb.co/rkyJSGf/1-42-Ice-hut.jpg",
@@ -44996,7 +45381,7 @@
         }
       },
       {
-        "id": 402,
+        "id": 403,
         "name": "Spoil & Rot",
         "type": 3,
         "picture": "https://i.ibb.co/9H8Kvx6/defiled-leaves.jpg",
@@ -45233,7 +45618,7 @@
         }
       },
       {
-        "id": 403,
+        "id": 404,
         "name": "Spontaneous Mutation",
         "type": 3,
         "picture": "https://i.ibb.co/ng0YX7Z/1-75-Sight.jpg",
@@ -46295,7 +46680,7 @@
         }
       },
       {
-        "id": 404,
+        "id": 405,
         "name": "Gold Mine",
         "type": 4,
         "picture": "https://i.ibb.co/cXSXw0h/1-35-Gold-mine.jpg",
@@ -46482,7 +46867,7 @@
         }
       },
       {
-        "id": 405,
+        "id": 406,
         "name": "Blocksmith",
         "type": 1,
         "picture": "https://i.ibb.co/rF0nPPL/blocksmiths-1.jpg",
@@ -46735,7 +47120,7 @@
         }
       },
       {
-        "id": 406,
+        "id": 407,
         "name": "Flame",
         "type": 3,
         "picture": "https://i.ibb.co/B3LnLnL/1-25-Fireball.jpg",
@@ -47032,7 +47417,7 @@
         }
       },
       {
-        "id": 407,
+        "id": 408,
         "name": "Test Creature *",
         "type": 1,
         "picture": "https://i.ibb.co/x2n47rC/2-44.jpg",
@@ -47303,11 +47688,11 @@
         }
       },
       {
-        "id": 408,
+        "id": 409,
         "name": "Stress",
         "type": 2,
         "picture": "https://i.ibb.co/5xr6Yqn/token-stress.png",
-        "tooltip_id": 559,
+        "tooltip_id": 560,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -47355,7 +47740,7 @@
         }
       },
       {
-        "id": 409,
+        "id": 410,
         "name": "Purple Comet",
         "type": 3,
         "picture": "https://i.ibb.co/prXnFFC/1-56-Meteor.jpg",
@@ -47710,7 +48095,7 @@
         }
       },
       {
-        "id": 410,
+        "id": 411,
         "name": "SMB",
         "type": 1,
         "picture": "https://i.ibb.co/jJSVyXt/smb-2.jpg",
@@ -48317,11 +48702,11 @@
         }
       },
       {
-        "id": 411,
+        "id": 412,
         "name": "Chaos",
         "type": 2,
         "picture": "https://i.ibb.co/ggxkvrX/token-chaos.png",
-        "tooltip_id": 558,
+        "tooltip_id": 559,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -48369,7 +48754,7 @@
         }
       },
       {
-        "id": 412,
+        "id": 413,
         "name": "Harsh Winds",
         "type": 3,
         "picture": "https://i.ibb.co/2g01JCW/1-61-Obelisk-2.jpg",
@@ -48558,7 +48943,7 @@
         }
       },
       {
-        "id": 413,
+        "id": 414,
         "name": "Paranoid Prospector",
         "type": 1,
         "picture": "https://i.ibb.co/6w7ZvGG/2-11.jpg",
@@ -48816,12 +49201,12 @@
         }
       },
       {
-        "id": 414,
+        "id": 415,
         "name": "Msg - Victory",
         "description": "YOU SURVIVED!"
       },
       {
-        "id": 415,
+        "id": 416,
         "name": "Cet on Crek",
         "type": 1,
         "picture": "https://i.ibb.co/hgr5Z5j/cets-on-crek-1.jpg",
@@ -48881,7 +49266,7 @@
         }
       },
       {
-        "id": 416,
+        "id": 417,
         "name": "Locust Swarm",
         "type": 3,
         "picture": "https://i.ibb.co/K5Kd8sj/29-Wave-of-evil.jpg",
@@ -49079,7 +49464,7 @@
         }
       },
       {
-        "id": 417,
+        "id": 418,
         "name": "Ash",
         "type": 3,
         "picture": "https://i.ibb.co/PcdfTbB/Druideskill-10.jpg",
@@ -49239,7 +49624,7 @@
         }
       },
       {
-        "id": 418,
+        "id": 419,
         "name": "Test Building",
         "type": 4,
         "picture": "https://i.ibb.co/m0Xm6Gv/1-34-Goblin-s-dwelling.jpg",
@@ -49495,7 +49880,7 @@
         }
       },
       {
-        "id": 419,
+        "id": 420,
         "name": "Test Eclipse",
         "type": 3,
         "picture": "https://i.ibb.co/27Dh20Y/1-81-Star-fire.jpg",
@@ -49633,7 +50018,7 @@
         }
       },
       {
-        "id": 420,
+        "id": 421,
         "name": "Extra Rations",
         "type": 3,
         "picture": "https://i.ibb.co/BZC5dn8/1-54-Meat.jpg",
@@ -50231,7 +50616,7 @@
         }
       },
       {
-        "id": 421,
+        "id": 422,
         "name": "Fruits of Laziness",
         "type": 3,
         "picture": "https://i.ibb.co/VCSHpRn/1-8-Beer.jpg",
@@ -50602,7 +50987,7 @@
         }
       },
       {
-        "id": 422,
+        "id": 423,
         "name": "Twisted Templar",
         "type": 1,
         "picture": "https://i.ibb.co/t2SV7rV/2-9.jpg",
@@ -50818,7 +51203,7 @@
         }
       },
       {
-        "id": 423,
+        "id": 424,
         "name": "Restart Game",
         "action_on_left_click": {
           "name": "Two actions",
@@ -50914,7 +51299,7 @@
         }
       },
       {
-        "id": 424,
+        "id": 425,
         "name": "Okay Bear",
         "type": 1,
         "picture": "https://i.ibb.co/1GZzLpx/okay-bears-1.jpg",
@@ -50975,7 +51360,7 @@
         }
       },
       {
-        "id": 425,
+        "id": 426,
         "name": "The Stoned Frog",
         "type": 1,
         "timer_text": "Time",
@@ -51034,7 +51419,7 @@
         }
       },
       {
-        "id": 426,
+        "id": 427,
         "name": "Plague of Locusts",
         "type": 3,
         "picture": "https://i.ibb.co/NrWdWw1/32-Evil.jpg",
@@ -51251,7 +51636,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 416
+                                            "value": 417
                                           }
                                         ]
                                       }
@@ -51328,7 +51713,7 @@
         }
       },
       {
-        "id": 427,
+        "id": 428,
         "name": "Thorn",
         "type": 3,
         "picture": "https://i.ibb.co/LZjtPmf/Druideskill-09.jpg",
@@ -51488,11 +51873,11 @@
         }
       },
       {
-        "id": 428,
+        "id": 429,
         "name": "Order",
         "type": 2,
         "picture": "https://i.ibb.co/ZfQ8jtp/token-order.png",
-        "tooltip_id": 560,
+        "tooltip_id": 561,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -51540,7 +51925,7 @@
         }
       },
       {
-        "id": 429,
+        "id": 430,
         "name": "Heat Wave",
         "type": 3,
         "picture": "https://i.ibb.co/64gfZBB/1-21-Desert.jpg",
@@ -51719,7 +52104,7 @@
         }
       },
       {
-        "id": 430,
+        "id": 431,
         "name": "Killjoy Cultist",
         "type": 1,
         "picture": "https://i.ibb.co/PMMCqcg/1-17-Cultist.jpg",
@@ -51883,7 +52268,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 431
+                                            "value": 432
                                           }
                                         ]
                                       }
@@ -51965,7 +52350,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 408
+                                            "value": 409
                                           }
                                         ]
                                       }
@@ -52031,7 +52416,7 @@
         }
       },
       {
-        "id": 431,
+        "id": 432,
         "name": "Token - Work",
         "type": 2,
         "picture": "https://i.ibb.co/9nKLLcV/token-work.png",
@@ -52049,7 +52434,7 @@
         }
       },
       {
-        "id": 432,
+        "id": 433,
         "name": "DegenApe",
         "type": 1,
         "picture": "https://i.ibb.co/41xvB8N/degen-ape-1.jpg",
@@ -52359,7 +52744,7 @@
         }
       },
       {
-        "id": 433,
+        "id": 434,
         "name": "Boryoku Dragon",
         "type": 1,
         "picture": "https://i.ibb.co/fDvvPss/boryoku-dragonz-3.jpg",
@@ -52713,7 +53098,7 @@
         }
       },
       {
-        "id": 434,
+        "id": 435,
         "name": "Test Eclipse Phase",
         "action_on_left_click": {
           "name": "{v3} Phase 4 - Eclipse",
@@ -52723,7 +53108,7 @@
         }
       },
       {
-        "id": 435,
+        "id": 436,
         "name": "Test Button",
         "description": "Generic test button. Override my Use Action as you please",
         "action_on_left_click": {
@@ -52734,7 +53119,7 @@
         }
       },
       {
-        "id": 436,
+        "id": 437,
         "name": "Building Site (outermost)",
         "type": 4,
         "picture": "https://i.ibb.co/rk1GXXx/1-96-Well.jpg",
@@ -52993,7 +53378,7 @@
         }
       },
       {
-        "id": 437,
+        "id": 438,
         "name": "Building Site (innermost)",
         "type": 4,
         "picture": "https://i.ibb.co/rk1GXXx/1-96-Well.jpg",
@@ -53252,7 +53637,7 @@
         }
       },
       {
-        "id": 438,
+        "id": 439,
         "name": "Building Site (all)",
         "type": 4,
         "picture": "https://i.ibb.co/rk1GXXx/1-96-Well.jpg",
@@ -53497,127 +53882,127 @@
     "name": "tooltips",
     "objects": [
       {
-        "id": 539,
+        "id": 540,
         "text": "The process of receiving a <b>Token</b> from any source",
         "delay": 300
       },
       {
-        "id": 540,
+        "id": 541,
         "text": "<b>Counters</b> <link=\"713\"><sprite index=4></link>",
         "delay": 300
       },
       {
-        "id": 541,
+        "id": 542,
         "text": "Used by <b>Building</b>s to <link=\"719\"><b>Produce</b></link> Tokens",
         "delay": 300
       },
       {
-        "id": 542,
+        "id": 543,
         "text": "<b>Counters</b> <link=\"709\"><sprite index=5></link>",
         "delay": 300
       },
       {
-        "id": 543,
+        "id": 544,
         "text": "<b>Counters</b> <link=\"708\"><sprite index=2></link>",
         "delay": 300
       },
       {
-        "id": 544,
+        "id": 545,
         "text": "A <b>Creature</b> that is horizontally adjacent to the current one",
         "delay": 300
       },
       {
-        "id": 545,
+        "id": 546,
         "text": "A Card or Token that gets Destroyed immediately leaves the game.",
         "delay": 300
       },
       {
-        "id": 546,
+        "id": 547,
         "text": "A separate part of your Realm. Includes 1 {Bulding} Slot and 5 <b>Creature</b> slots on the same row.",
         "delay": 300
       },
       {
-        "id": 547,
+        "id": 548,
         "text": "<b>Creature</b> Slots # 2, 3 and 4",
         "delay": 300
       },
       {
-        "id": 548,
+        "id": 549,
         "text": "<b>Creature</b> Slots # 1 and 5",
         "delay": 300
       },
       {
-        "id": 549,
+        "id": 550,
         "text": "Ability that is used after <b>Event</b> Timer reaches 0",
         "delay": 300
       },
       {
-        "id": 550,
+        "id": 551,
         "text": "Measures the time until a new <b>Eclipse</b> <link=\"780\"><b>Omen</b></link> activation",
         "delay": 300
       },
       {
-        "id": 551,
+        "id": 552,
         "text": "This condition must be met on the final <b>Eclipse</b> Turn to win the game",
         "delay": 300
       },
       {
-        "id": 552,
+        "id": 553,
         "text": "Makes the target <b>Creature</b> use its <link=\"906\"><b>Action</b></link>",
         "delay": 300
       },
       {
-        "id": 553,
+        "id": 554,
         "text": "I'm just a simple tooltip with icon <sprite index=1> , <b>bold</b>, <size=120%>size</size>, and even <color=#FF0000>C</color><color=#00FF00>O</color><color=#0000FF>L</color><color=#FF00FF>O</color><color=#FFFF00>R</color>",
         "delay": 300
       },
       {
-        "id": 554,
+        "id": 555,
         "text": "<b>Counters</b> the next <b>Token</b> <b>Gained</b>, except <link=\"715\"><sprite index=8></link>",
         "delay": 300
       },
       {
-        "id": 555,
+        "id": 556,
         "text": "Basic ability of the Card that is used on its Turn",
         "delay": 300
       },
       {
-        "id": 556,
+        "id": 557,
         "text": "Removes the first <b>Token</b> on the <b>Creature</b>",
         "delay": 300
       },
       {
-        "id": 557,
+        "id": 558,
         "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"915\"><b>Destroyed</b></link> and loses all its <b>Tokens</b>.",
         "delay": 300
       },
       {
-        "id": 558,
+        "id": 559,
         "text": "<b>Counters</b> <link=\"710\"><sprite index=3></link>",
         "delay": 300
       },
       {
-        "id": 559,
+        "id": 560,
         "text": "<b>Counters</b> <link=\"712\"><sprite index=7></link>",
         "delay": 300
       },
       {
-        "id": 560,
+        "id": 561,
         "text": "<b>Counters</b> <link=\"711\"><sprite index=0></link>",
         "delay": 300
       },
       {
-        "id": 561,
+        "id": 562,
         "text": "When a <b>Building</b> is filled with <link=\"903\"><b>Work</b></link>, it creates a new <b>Token</b> and places it into <b>Storage</b>",
         "delay": 300
       },
       {
-        "id": 562,
+        "id": 563,
         "text": "Activates when all <b>Token</b> Slots are filled with <link=\"934\"><sprite index=10></link>",
         "delay": 300
       },
       {
-        "id": 563,
+        "id": 564,
         "text": "Creates a <link=\"903\"><b>Work</b></link> <b>Token</b> and gives it to the <b>Building</b> on the same <link=\"916\"><b>Lane</b></link>",
         "delay": 300
       }
@@ -53627,7 +54012,7 @@
     "name": "drag_n_drops",
     "objects": [
       {
-        "id": 564,
+        "id": 565,
         "destinations": [
           41,
           42,
@@ -53657,7 +54042,7 @@
         }
       },
       {
-        "id": 565,
+        "id": 566,
         "destinations": [
           40,
           30,
@@ -53675,7 +54060,7 @@
         }
       },
       {
-        "id": 566,
+        "id": 567,
         "destinations": [
           41,
           42,
@@ -53705,7 +54090,7 @@
         }
       },
       {
-        "id": 567,
+        "id": 568,
         "destinations": [
           40,
           30,
@@ -53723,7 +54108,7 @@
         }
       },
       {
-        "id": 568,
+        "id": 569,
         "destinations": [
           41,
           42,
