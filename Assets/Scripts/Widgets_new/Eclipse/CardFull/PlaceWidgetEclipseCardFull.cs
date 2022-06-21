@@ -4,8 +4,10 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.Events;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 
 namespace Solcery.Widgets_new.Eclipse.CardFull
 {
@@ -23,7 +25,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public override void Update(EcsWorld world, int[] entityIds)
         {
             Layout.UpdateVisible(false);
-            
+            Layout.ClearAllOnClickListener();
+
             if (entityIds.Length <= 0)
             {
                 return;
@@ -50,6 +53,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             break;
                         default:
                             Layout.UpdateVisible(true);
+                            Layout.AddOnClickListener(() => CloseFullView(entityId));
                             UpdateCard(world, entityId, eclipseCardType, cardTypeDataObject);
                             break;
                     }
@@ -83,6 +87,16 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 {
                     Layout.UpdateSprite(texture);
                 }
+                
+                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
+                {
+                    Layout.TimerLayout.UpdateTimerTextActive(true);
+                    Layout.TimerLayout.UpdateTimerText(timerText);
+                }
+                else
+                {
+                    Layout.TimerLayout.UpdateTimerTextActive(false);
+                }
             }
         }
 
@@ -106,6 +120,11 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     }
                 }
             }
+        }
+
+        private void CloseFullView(int entityId)
+        {
+            ServiceEvents.Current.BroadcastEvent(OnRightClickEventData.Create(entityId));
         }
     }
 }

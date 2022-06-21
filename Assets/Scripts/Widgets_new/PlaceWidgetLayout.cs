@@ -53,7 +53,7 @@ namespace Solcery.Widgets_new
             rectTransform.SetSiblingIndex(siblingIndex);
         }
 
-        public void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
+        public virtual void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
         {
             rectTransform.anchorMin = anchorMin;
             rectTransform.anchorMax = anchorMax;

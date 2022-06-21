@@ -1,13 +1,17 @@
+using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Simple;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.CardFull
 {
     public class PlaceWidgetEclipseCardFullLayout : PlaceWidgetSimpleLayout
     {
+        [SerializeField]
+        private RectTransform cardTransform;
         [SerializeField]
         private Image iconImage;
         [SerializeField]
@@ -18,10 +22,21 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private TextMeshProUGUI descriptionText;
         [SerializeField]
         private EclipseCardTokensLayout tokensLayout;
+        [SerializeField]
+        private EclipseCardTimerLayout timerLayout;
+        [SerializeField]
+        private Button closeButton;
 
         private Sprite _sprite;
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
-        
+        public EclipseCardTimerLayout TimerLayout => timerLayout;
+
+        public override void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
+        {
+            cardTransform.anchorMin = anchorMin;
+            cardTransform.anchorMax = anchorMax;
+        }
+
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();
@@ -44,6 +59,16 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public void UpdateType(string newType)
         {
             typeText.text = newType;
+        }
+        
+        public void ClearAllOnClickListener()
+        {
+            closeButton.onClick.RemoveAllListeners();
+        }
+
+        public void AddOnClickListener(UnityAction onClick)
+        {
+            closeButton.onClick.AddListener(onClick);
         }
 
         private void DestroySprite()
