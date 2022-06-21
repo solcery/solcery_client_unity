@@ -47,7 +47,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
             Layout.gameObject.SetActive(isVisible);
 
-            if (entityIds.Length <= 0)
+            if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
             }

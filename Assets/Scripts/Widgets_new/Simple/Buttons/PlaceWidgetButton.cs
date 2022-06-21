@@ -21,10 +21,10 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
         public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
-            Layout.UpdateVisible(entityIds.Length > 0);
+            Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
             Layout.ClearAllOnClickListener();
             
-            if (entityIds.Length <= 0)
+            if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
             }
