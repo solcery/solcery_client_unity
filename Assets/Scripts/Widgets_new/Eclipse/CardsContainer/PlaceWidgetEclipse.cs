@@ -62,7 +62,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 var attributes = objectAttributesPool.Has(entityId)
                     ? objectAttributesPool.Get(entityId).Attributes
                     : new Dictionary<string, IAttributeValue>();
-
+                
+                // TODO: удалить старый механизм блокировки рейкастов!
                 if (attributes.ContainsKey("disable_raycasts_on_place")
                     && attributes["disable_raycasts_on_place"].Current > 0)
                 {
