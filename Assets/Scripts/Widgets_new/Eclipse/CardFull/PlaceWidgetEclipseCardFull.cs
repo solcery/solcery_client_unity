@@ -63,41 +63,55 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         private void UpdateCard(EcsWorld world, int entityId, EclipseCardTypes type, JObject cardTypeDataObject)
         {
-            var attributesPool = world.GetPool<ComponentObjectAttributes>();
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
             {
-                var attributes = attributesPool.Get(entityId).Attributes;
-                var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
-                Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
-                
-                Layout.UpdateType(type.ToString());
-
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardName, out string name))
-                {
-                    Layout.UpdateName(name);
-                }
-
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string description))
-                {
-                    Layout.UpdateDescription(description);
-                }
-
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardPicture, out string picture)
-                    && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
-                {
-                    Layout.UpdateSprite(texture);
-                }
-                
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
-                {
-                    Layout.TimerLayout.UpdateTimerTextActive(true);
-                    Layout.TimerLayout.UpdateTimerText(timerText);
-                }
-                else
-                {
-                    Layout.TimerLayout.UpdateTimerTextActive(false);
-                }
+                UpdateCardAttributes(world, entityId);
+                UpdateCardType(type, cardTypeDataObject);
             }
+        }
+
+        private void UpdateCardAttributes(EcsWorld world, int entityId)
+        {
+            var attributesPool = world.GetPool<ComponentObjectAttributes>();
+            var attributes = attributesPool.Get(entityId).Attributes;
+            var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
+            Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
+                
+            var showTimer = attributes.TryGetValue(GameJsonKeys.CardShowDuration, out var showDurationAttribute) && showDurationAttribute.Current > 0;
+            var timerDuration = attributes.TryGetValue(GameJsonKeys.CardDuration, out var durationAttribute) ? durationAttribute.Current : 0;
+            Layout.TimerLayout.gameObject.SetActive(showTimer);
+            Layout.TimerLayout.UpdateTimerValue(timerDuration);
+        }
+
+        private void UpdateCardType(EclipseCardTypes type, JObject cardTypeDataObject)
+        {
+            Layout.UpdateType(type.ToString());
+
+            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardName, out string name))
+            {
+                Layout.UpdateName(name);
+            }
+
+            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string description))
+            {
+                Layout.UpdateDescription(description);
+            }
+
+            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardPicture, out string picture)
+                && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            {
+                Layout.UpdateSprite(texture);
+            }
+                
+            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
+            {
+                Layout.TimerLayout.UpdateTimerTextActive(true);
+                Layout.TimerLayout.UpdateTimerText(timerText);
+            }
+            else
+            {
+                Layout.TimerLayout.UpdateTimerTextActive(false);
+            }        
         }
 
         private void UpdateToken(EcsWorld world, int entityId, JObject cardTypeDataObject)

@@ -10,6 +10,8 @@ namespace Solcery.Games
         public static readonly string CardTokenSlots = "token_slots";
         public static readonly string CardTimerText = "timer_text";
         public static readonly string CardTooltipId = "tooltip_id";
+        public static readonly string CardShowDuration = "show_duration";
+        public static readonly string CardDuration = "duration";
         
         // Token
         public static readonly string TokenSlot = "slot";

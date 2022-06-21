@@ -160,13 +160,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
             
             // timer
-            var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
-            var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
+            var showTimer = attributes.TryGetValue(GameJsonKeys.CardShowDuration, out var showDurationAttribute) && showDurationAttribute.Current > 0;
+            var timerDuration = attributes.TryGetValue(GameJsonKeys.CardDuration, out var durationAttribute) ? durationAttribute.Current : 0;
             eclipseCard.Layout.TimerLayout.gameObject.SetActive(showTimer);
             eclipseCard.Layout.TimerLayout.UpdateTimerValue(timerDuration);
             
             // tokens
-            var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
+            var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
             eclipseCard.Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
             
             // anims
