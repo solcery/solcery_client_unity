@@ -22,16 +22,21 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         public override void Update(EcsWorld world, int[] entityIds)
         {
+            Layout.UpdateVisible(false);
+            
             if (entityIds.Length <= 0)
             {
                 return;
             }
-            
+
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
 
             foreach (var entityId in entityIds)
             {
+                if (!eclipseCartTypePool.Has(entityId))
+                    break;
+
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 var cardTypes = world.GetCardTypes();
 
@@ -44,6 +49,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             UpdateToken(world, entityId, cardTypeDataObject);
                             break;
                         default:
+                            Layout.UpdateVisible(true);
                             UpdateCard(world, entityId, eclipseCardType, cardTypeDataObject);
                             break;
                     }
@@ -72,7 +78,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     Layout.UpdateDescription(description);
                 }
 
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string picture)
+                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardPicture, out string picture)
                     && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
                 {
                     Layout.UpdateSprite(texture);
