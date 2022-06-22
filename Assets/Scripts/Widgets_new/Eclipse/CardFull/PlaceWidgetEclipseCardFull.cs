@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
@@ -37,9 +36,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
             foreach (var entityId in entityIds)
             {
-                if (!eclipseCartTypePool.Has(entityId))
-                    break;
-
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 var cardTypes = world.GetCardTypes();
 
