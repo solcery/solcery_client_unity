@@ -48,7 +48,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             UpdateToken(world, entityId, cardTypeDataObject);
                             break;
                         default:
-                            Layout.AddOnClickListener(() => CloseFullView(entityId));
+                            Layout.AddOnClickListener(() => OnLeftClickEvent(entityId));
                             UpdateCard(world, entityId, eclipseCardType, cardTypeDataObject);
                             break;
                     }
@@ -131,9 +131,9 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             }
         }
 
-        private void CloseFullView(int entityId)
+        private void OnLeftClickEvent(int entityId)
         {
-            ServiceEvents.Current.BroadcastEvent(OnRightClickEventData.Create(entityId));
+            ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
         }
     }
 }
