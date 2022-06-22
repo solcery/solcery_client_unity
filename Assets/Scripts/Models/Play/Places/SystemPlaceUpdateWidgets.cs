@@ -9,23 +9,23 @@ using Solcery.Widgets_new;
 
 namespace Solcery.Models.Play.Places
 {
-    public interface ISystemPlaceWidgetsUpdate : IEcsInitSystem, IEcsRunSystem
+    public interface ISystemPlaceUpdateWidgets : IEcsInitSystem, IEcsRunSystem
     {
     }
 
-    public sealed class SystemPlaceWidgetsUpdate : ISystemPlaceWidgetsUpdate
+    public sealed class SystemPlaceUpdateWidgets : ISystemPlaceUpdateWidgets
     {
         private IGame _game;
         private EcsFilter _filterPlaceWithPlaceWidget;
         private EcsFilter _filterEntities;
         private EcsFilter _filterGameStateUpdate;
 
-        public static ISystemPlaceWidgetsUpdate Create(IGame game)
+        public static ISystemPlaceUpdateWidgets Create(IGame game)
         {
-            return new SystemPlaceWidgetsUpdate(game);
+            return new SystemPlaceUpdateWidgets(game);
         }
 
-        private SystemPlaceWidgetsUpdate(IGame game)
+        private SystemPlaceUpdateWidgets(IGame game)
         {
             _game = game;
         }
@@ -61,14 +61,16 @@ namespace Solcery.Models.Play.Places
 
             var world = systems.GetWorld();
             var poolPlaceId = world.GetPool<ComponentPlaceId>();
+            var poolPlaceVisible = world.GetPool<ComponentPlaceIsVisible>();
             var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
             // TODO: New place widget update
             foreach (var entityId in _filterPlaceWithPlaceWidget)
             {
                 var placeId = poolPlaceId.Get(entityId).Id;
+                var placeIsVisible = poolPlaceVisible.Get(entityId).IsVisible;
                 var entityIds = entitiesInPlace.TryGetValue(placeId, out var eid) ? eid.ToArray() : new int[]{};
                 var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
-                placeWidget.Update(world, entityIds);
+                placeWidget.Update(world, placeIsVisible, entityIds);
             }
             
             PlaceWidget.RefreshPlaceWidgetOrderZ(_game.WidgetCanvas.GetUiCanvas());

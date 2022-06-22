@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
@@ -35,6 +36,7 @@ namespace Solcery.Models.Play
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
             _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
+            _systems.Add(SystemPlaceInitVisibility.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
@@ -43,7 +45,8 @@ namespace Solcery.Models.Play
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             // TODO сюда добавляем новые системы и тд
-            _systems.Add(SystemPlaceWidgetsUpdate.Create(game));
+            _systems.Add(SystemPlaceUpdateVisibility.Create(game.ServiceBricks as IServiceBricksInternal));
+            _systems.Add(SystemPlaceUpdateWidgets.Create(game));
             
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));

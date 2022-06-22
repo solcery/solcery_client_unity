@@ -1,9 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Objects;
-using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
@@ -21,12 +19,12 @@ namespace Solcery.Widgets_new.Simple.Buttons
         private PlaceWidgetButton(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject) 
             : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
-            Layout.UpdateVisible(entityIds.Length > 0);
+            Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
             Layout.ClearAllOnClickListener();
             
-            if (entityIds.Length <= 0)
+            if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
             }

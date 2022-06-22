@@ -22,16 +22,16 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
         }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
-            Layout.UpdateVisible(false);
+            Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
             Layout.ClearAllOnClickListener();
-
-            if (entityIds.Length <= 0)
+            
+            if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
             }
-
+            
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
 
@@ -52,7 +52,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             UpdateToken(world, entityId, cardTypeDataObject);
                             break;
                         default:
-                            Layout.UpdateVisible(true);
                             Layout.AddOnClickListener(() => CloseFullView(entityId));
                             UpdateCard(world, entityId, eclipseCardType, cardTypeDataObject);
                             break;

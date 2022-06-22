@@ -51,11 +51,12 @@ namespace Solcery.Widgets_new.Container.Hands
             _cards = new Dictionary<int, ICardInContainerWidget>();
         }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
-            Layout.UpdateVisible(entityIds.Length > 0);
             RemoveCards(world, entityIds);
-            if (entityIds.Length <= 0)
+            Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
+            
+            if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
             }

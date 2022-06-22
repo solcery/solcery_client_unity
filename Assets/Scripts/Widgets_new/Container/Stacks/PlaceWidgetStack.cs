@@ -16,7 +16,7 @@ namespace Solcery.Widgets_new.Container.Stacks
         private PlaceWidgetStack(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
 
-        public override void Update(EcsWorld world, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
             var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
             Layout.UpdateTextVisible(!cardFaceVisible);
@@ -25,7 +25,7 @@ namespace Solcery.Widgets_new.Container.Stacks
                 Layout.UpdateText(entityIds.Length.ToString());
             }
             
-            base.Update(world, entityIds);
+            base.Update(world, isVisible, entityIds);
         }
     }
 }
