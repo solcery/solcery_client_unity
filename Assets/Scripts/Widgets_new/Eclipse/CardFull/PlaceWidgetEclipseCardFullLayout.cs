@@ -24,8 +24,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private EclipseCardTokensLayout tokensLayout;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
-        [SerializeField]
-        private Button closeButton;
+        [SerializeField] 
+        private ClickHandlerBehaviour[] clickHandlers;
 
         private Sprite _sprite;
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
@@ -63,14 +63,28 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         
         public void ClearAllOnClickListener()
         {
-            closeButton.onClick.RemoveAllListeners();
+            foreach (var clickHandler in clickHandlers)
+            {
+                clickHandler.Cleanup();
+            }
         }
 
-        public void AddOnClickListener(UnityAction onClick)
+        public void AddOnLeftClickListener(UnityAction onLeftClick)
         {
-            closeButton.onClick.AddListener(onClick);
+            foreach (var clickHandler in clickHandlers)
+            {
+                clickHandler.OnLeftClick = onLeftClick;
+            }
         }
 
+        public void AddOnRightClickListener(UnityAction onRightClick)
+        {
+            foreach (var clickHandler in clickHandlers)
+            {
+                clickHandler.OnRightClick = onRightClick;
+            }
+        }
+        
         private void DestroySprite()
         {
             if (_sprite != null)
