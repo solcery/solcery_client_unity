@@ -34,7 +34,7 @@
             "value": 0
           },
           {
-            "key": "eclipse_card_full_visibility",
+            "key": "showcase_visible",
             "value": 0
           }
         ],
@@ -2523,7 +2523,7 @@
           },
           {
             "id": 18,
-            "tplId": 275,
+            "tplId": 346,
             "attrs": [
               {
                 "key": "type",
@@ -5151,7 +5151,7 @@
           },
           {
             "id": 36,
-            "tplId": 346,
+            "tplId": 351,
             "attrs": [
               {
                 "key": "type",
@@ -8801,7 +8801,7 @@
           },
           {
             "id": 61,
-            "tplId": 263,
+            "tplId": 275,
             "attrs": [
               {
                 "key": "type",

@@ -2782,7 +2782,7 @@
                             "params": [
                               {
                                 "name": "attr_name",
-                                "value": "eclipse_card_full_visibility"
+                                "value": "showcase_visible"
                               }
                             ]
                           }
@@ -2813,7 +2813,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "eclipse_card_full_visibility"
+                          "value": "showcase_visible"
                         },
                         {
                           "name": "value",
@@ -2841,7 +2841,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "eclipse_card_full_visibility"
+                          "value": "showcase_visible"
                         },
                         {
                           "name": "value",
@@ -29621,7 +29621,7 @@
         "name": "Shield",
         "type": 2,
         "picture": "https://i.ibb.co/X8rwn3d/token-shield.png",
-        "tooltip_id": 501,
+        "tooltip_id": 502,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -32717,6 +32717,113 @@
         "picture": "https://i.ibb.co/PcNSyQ4/2-7.jpg",
         "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"711\"><sprite index=0></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "timer_text": "Time",
+        "action_on_left_click": {
+          "name": "@If-then",
+          "subtype": 10082,
+          "type": 0,
+          "params": [
+            {
+              "name": "Condition",
+              "value": {
+                "name": "@Is in place [X]",
+                "subtype": 10097,
+                "type": 1,
+                "params": [
+                  {
+                    "name": "Place Id",
+                    "value": {
+                      "name": "Place - Showcase",
+                      "subtype": 10029,
+                      "type": 2,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Action",
+              "value": {
+                "name": "Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "@Move to Place [Id]",
+                            "subtype": 10060,
+                            "type": 0,
+                            "params": [
+                              {
+                                "name": "Dest Place",
+                                "value": {
+                                  "name": "Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "current_place"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "current_place"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Show/Hide Showcase Place",
+                      "subtype": 10023,
+                      "type": 0,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "action_on_right_click": {
           "name": "Move a Card to/from Showcase",
           "subtype": 10237,
@@ -34376,7 +34483,7 @@
         "name": "Food",
         "type": 2,
         "picture": "https://i.ibb.co/Wtj1bQC/token-food.png",
-        "tooltip_id": 503,
+        "tooltip_id": 504,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10030,
@@ -35472,7 +35579,7 @@
         "name": "Hot",
         "type": 2,
         "picture": "https://i.ibb.co/F6WffGc/token-hot.png",
-        "tooltip_id": 489,
+        "tooltip_id": 490,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -35524,7 +35631,7 @@
         "name": "Joy",
         "type": 2,
         "picture": "https://i.ibb.co/Zc6GQvZ/token-joy.png",
-        "tooltip_id": 487,
+        "tooltip_id": 488,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -36113,6 +36220,113 @@
         "picture": "https://i.ibb.co/CmnT6wv/2-15.jpg",
         "description": "<link=\"906\"><b>Action</b></link>: Gives 1 <link=\"712\"><sprite index=7></link> to Right <link=\"716\"><b>Neighbor</b></link>",
         "timer_text": "Time",
+        "action_on_left_click": {
+          "name": "@If-then",
+          "subtype": 10082,
+          "type": 0,
+          "params": [
+            {
+              "name": "Condition",
+              "value": {
+                "name": "@Is in place [X]",
+                "subtype": 10097,
+                "type": 1,
+                "params": [
+                  {
+                    "name": "Place Id",
+                    "value": {
+                      "name": "Place - Showcase",
+                      "subtype": 10029,
+                      "type": 2,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Action",
+              "value": {
+                "name": "Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "@Move to Place [Id]",
+                            "subtype": 10060,
+                            "type": 0,
+                            "params": [
+                              {
+                                "name": "Dest Place",
+                                "value": {
+                                  "name": "Attribute",
+                                  "type": 2,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "current_place"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Set attribute",
+                            "type": 0,
+                            "subtype": 7,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "current_place"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Show/Hide Showcase Place",
+                      "subtype": 10023,
+                      "type": 0,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "action_on_right_click": {
           "name": "Move a Card to/from Showcase",
           "subtype": 10237,
@@ -37210,7 +37424,7 @@
         "name": "Token - Gold",
         "type": 2,
         "picture": "https://i.ibb.co/82yyRmp/token-gold.png",
-        "tooltip_id": 499,
+        "tooltip_id": 500,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10030,
@@ -38178,7 +38392,7 @@
         "name": "Cold",
         "type": 2,
         "picture": "https://i.ibb.co/YBSBk5H/token-cold.png",
-        "tooltip_id": 490,
+        "tooltip_id": 491,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -39236,7 +39450,7 @@
         "name": "Token - Omen",
         "type": 2,
         "picture": "https://i.ibb.co/2cM7bNq/token-omen.png",
-        "tooltip_id": 497,
+        "tooltip_id": 498,
         "action_on_create": {
           "name": "Default OnCreate - Token",
           "subtype": 10030,
@@ -46709,7 +46923,7 @@
         "name": "Stress",
         "type": 2,
         "picture": "https://i.ibb.co/5xr6Yqn/token-stress.png",
-        "tooltip_id": 506,
+        "tooltip_id": 507,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -47723,7 +47937,7 @@
         "name": "Chaos",
         "type": 2,
         "picture": "https://i.ibb.co/ggxkvrX/token-chaos.png",
-        "tooltip_id": 505,
+        "tooltip_id": 506,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -50903,7 +51117,7 @@
         "name": "Order",
         "type": 2,
         "picture": "https://i.ibb.co/ZfQ8jtp/token-order.png",
-        "tooltip_id": 507,
+        "tooltip_id": 508,
         "action_on_create": {
           "name": "Two actions",
           "type": 0,
@@ -52901,6 +53115,112 @@
             }
           ]
         }
+      },
+      {
+        "id": 351,
+        "name": "Test Toggle Showcase Visibility",
+        "description": "Does AMAZING THINGS",
+        "action_on_left_click": {
+          "name": "If-Then-Else",
+          "type": 0,
+          "subtype": 2,
+          "params": [
+            {
+              "name": "if",
+              "value": {
+                "name": "Greater than",
+                "type": 1,
+                "subtype": 3,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Game Attribute",
+                      "type": 2,
+                      "subtype": 13,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "showcase_visible"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "then",
+              "value": {
+                "name": "Set game attribute",
+                "type": 0,
+                "subtype": 9,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "showcase_visible"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "else",
+              "value": {
+                "name": "Set game attribute",
+                "type": 0,
+                "subtype": 9,
+                "params": [
+                  {
+                    "name": "attr_name",
+                    "value": "showcase_visible"
+                  },
+                  {
+                    "name": "value",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
       }
     ]
   },
@@ -52908,7 +53228,7 @@
     "name": "places",
     "objects": [
       {
-        "id": 351,
+        "id": 352,
         "place_id": 23,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -52926,12 +53246,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 352,
+        "id": 353,
         "place_id": 25,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -52949,12 +53269,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 353,
+        "id": 354,
         "place_id": 53,
         "visible": true,
         "visibility_condition": {
@@ -52972,7 +53292,7 @@
         "drag_n_drops": []
       },
       {
-        "id": 354,
+        "id": 355,
         "place_id": 21,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -52990,12 +53310,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 355,
+        "id": 356,
         "place_id": 10,
         "interactable_for_active_local_player": false,
         "visible": true,
@@ -53014,7 +53334,7 @@
         "show_frame": true
       },
       {
-        "id": 356,
+        "id": 357,
         "place_id": 50,
         "visibility_condition": {
           "name": "@False",
@@ -53031,7 +53351,7 @@
         "drag_n_drops": []
       },
       {
-        "id": 357,
+        "id": 358,
         "place_id": 4,
         "interactable_for_active_local_player": false,
         "visible": true,
@@ -53051,7 +53371,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 358,
+        "id": 359,
         "place_id": 31,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53069,12 +53389,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 359,
+        "id": 360,
         "place_id": 34,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53092,12 +53412,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 360,
+        "id": 361,
         "place_id": 35,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53115,12 +53435,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 361,
+        "id": 362,
         "place_id": 30,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53141,7 +53461,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 362,
+        "id": 363,
         "place_id": 1,
         "visible": true,
         "visibility_condition": {
@@ -53158,7 +53478,7 @@
         "z_order": 50
       },
       {
-        "id": 363,
+        "id": 364,
         "place_id": 8,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53176,7 +53496,7 @@
         "z_order": 99
       },
       {
-        "id": 364,
+        "id": 365,
         "place_id": 9,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53194,7 +53514,7 @@
         "z_order": 11
       },
       {
-        "id": 365,
+        "id": 366,
         "place_id": 14,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53212,7 +53532,7 @@
         "z_order": 95
       },
       {
-        "id": 366,
+        "id": 367,
         "place_id": 19,
         "interactable_for_active_local_player": false,
         "visible": true,
@@ -53232,7 +53552,7 @@
         "show_frame": false
       },
       {
-        "id": 367,
+        "id": 368,
         "place_id": 44,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53250,12 +53570,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 368,
+        "id": 369,
         "place_id": 33,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53273,12 +53593,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 369,
+        "id": 370,
         "place_id": 42,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53296,12 +53616,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 370,
+        "id": 371,
         "place_id": 2,
         "interactable_for_active_local_player": false,
         "visible": true,
@@ -53321,7 +53641,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 371,
+        "id": 372,
         "place_id": 3,
         "visible": true,
         "visibility_condition": {
@@ -53338,7 +53658,7 @@
         "z_order": 10
       },
       {
-        "id": 372,
+        "id": 373,
         "place_id": 12,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53356,7 +53676,7 @@
         "z_order": 95
       },
       {
-        "id": 373,
+        "id": 374,
         "place_id": 55,
         "visible": true,
         "visibility_condition": {
@@ -53367,13 +53687,27 @@
             {
               "name": "value1",
               "value": {
-                "name": "Game Attribute",
+                "name": "Number of Cards with [Cond] in [Place Id]",
+                "subtype": 10068,
                 "type": 2,
-                "subtype": 13,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "eclipse_card_full_visibility"
+                    "name": "Target Place",
+                    "value": {
+                      "name": "Place - Showcase",
+                      "subtype": 10029,
+                      "type": 2,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "Cond",
+                    "value": {
+                      "name": "@True",
+                      "subtype": 10149,
+                      "type": 1,
+                      "params": []
+                    }
                   }
                 ]
               }
@@ -53403,7 +53737,7 @@
         "drag_n_drops": []
       },
       {
-        "id": 374,
+        "id": 375,
         "place_id": 15,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53421,7 +53755,7 @@
         "z_order": 95
       },
       {
-        "id": 375,
+        "id": 376,
         "place_id": 5,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53439,13 +53773,13 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          483,
-          484
+          484,
+          485
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 376,
+        "id": 377,
         "place_id": 20,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53466,7 +53800,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 377,
+        "id": 378,
         "place_id": 18,
         "interactable_for_active_local_player": false,
         "visible": true,
@@ -53486,7 +53820,7 @@
         "show_frame": false
       },
       {
-        "id": 378,
+        "id": 379,
         "place_id": 16,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53504,7 +53838,7 @@
         "z_order": 95
       },
       {
-        "id": 379,
+        "id": 380,
         "place_id": 51,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53522,7 +53856,7 @@
         "z_order": 95
       },
       {
-        "id": 380,
+        "id": 381,
         "place_id": 57,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53540,7 +53874,7 @@
         "z_order": 96
       },
       {
-        "id": 381,
+        "id": 382,
         "place_id": 7,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53559,7 +53893,7 @@
         "show_frame": false
       },
       {
-        "id": 382,
+        "id": 383,
         "place_id": 41,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53577,12 +53911,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 383,
+        "id": 384,
         "place_id": 40,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53603,7 +53937,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 384,
+        "id": 385,
         "place_id": 52,
         "visible": true,
         "visibility_condition": {
@@ -53621,7 +53955,7 @@
         "drag_n_drops": []
       },
       {
-        "id": 385,
+        "id": 386,
         "place_id": 6,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53639,12 +53973,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          481
+          482
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 386,
+        "id": 387,
         "place_id": 43,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53662,12 +53996,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 387,
+        "id": 388,
         "place_id": 24,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53685,12 +54019,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 388,
+        "id": 389,
         "place_id": 11,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53708,7 +54042,7 @@
         "z_order": 95
       },
       {
-        "id": 389,
+        "id": 390,
         "place_id": 17,
         "visible": true,
         "visibility_condition": {
@@ -53726,7 +54060,7 @@
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 390,
+        "id": 391,
         "place_id": 56,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53744,7 +54078,7 @@
         "z_order": 96
       },
       {
-        "id": 391,
+        "id": 392,
         "place_id": 45,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53791,12 +54125,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 392,
+        "id": 393,
         "place_id": 32,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53814,12 +54148,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 393,
+        "id": 394,
         "place_id": 22,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53837,12 +54171,12 @@
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [
-          485
+          486
         ],
         "fill_color": "#231e1ed9"
       },
       {
-        "id": 394,
+        "id": 395,
         "place_id": 13,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53860,7 +54194,7 @@
         "z_order": 95
       },
       {
-        "id": 395,
+        "id": 396,
         "place_id": 54,
         "interactable_for_active_local_player": true,
         "visible": true,
@@ -53878,7 +54212,7 @@
         "z_order": 99
       },
       {
-        "id": 396,
+        "id": 397,
         "place_id": 58,
         "interactable_for_active_local_player": true,
         "visible": false,
@@ -53897,7 +54231,7 @@
         "show_frame": false
       },
       {
-        "id": 397,
+        "id": 398,
         "place_id": 59,
         "interactable_for_active_local_player": true,
         "visible": false,
@@ -53921,7 +54255,7 @@
     "name": "drag_n_drops",
     "objects": [
       {
-        "id": 481,
+        "id": 482,
         "destinations": [
           41,
           42,
@@ -53951,7 +54285,7 @@
         }
       },
       {
-        "id": 482,
+        "id": 483,
         "destinations": [
           40,
           30,
@@ -53969,7 +54303,7 @@
         }
       },
       {
-        "id": 483,
+        "id": 484,
         "destinations": [
           41,
           42,
@@ -53999,7 +54333,7 @@
         }
       },
       {
-        "id": 484,
+        "id": 485,
         "destinations": [
           40,
           30,
@@ -54017,7 +54351,7 @@
         }
       },
       {
-        "id": 485,
+        "id": 486,
         "destinations": [
           41,
           42,
@@ -54051,127 +54385,127 @@
     "name": "tooltips",
     "objects": [
       {
-        "id": 486,
+        "id": 487,
         "text": "The process of receiving a <b>Token</b> from any source",
         "delay": 300
       },
       {
-        "id": 487,
+        "id": 488,
         "text": "<b>Counters</b> <link=\"713\"><sprite index=4></link>",
         "delay": 300
       },
       {
-        "id": 488,
+        "id": 489,
         "text": "Used by <b>Building</b>s to <link=\"719\"><b>Produce</b></link> Tokens",
         "delay": 300
       },
       {
-        "id": 489,
+        "id": 490,
         "text": "<b>Counters</b> <link=\"709\"><sprite index=5></link>",
         "delay": 300
       },
       {
-        "id": 490,
+        "id": 491,
         "text": "<b>Counters</b> <link=\"708\"><sprite index=2></link>",
         "delay": 300
       },
       {
-        "id": 491,
+        "id": 492,
         "text": "A <b>Creature</b> that is horizontally adjacent to the current one",
         "delay": 300
       },
       {
-        "id": 492,
+        "id": 493,
         "text": "A Card or Token that gets Destroyed immediately leaves the game.",
         "delay": 300
       },
       {
-        "id": 493,
+        "id": 494,
         "text": "A separate part of your Realm. Includes 1 {Bulding} Slot and 5 <b>Creature</b> slots on the same row.",
         "delay": 300
       },
       {
-        "id": 494,
+        "id": 495,
         "text": "<b>Creature</b> Slots # 2, 3 and 4",
         "delay": 300
       },
       {
-        "id": 495,
+        "id": 496,
         "text": "<b>Creature</b> Slots # 1 and 5",
         "delay": 300
       },
       {
-        "id": 496,
+        "id": 497,
         "text": "Ability that is used after <b>Event</b> Timer reaches 0",
         "delay": 300
       },
       {
-        "id": 497,
+        "id": 498,
         "text": "Measures the time until a new <b>Eclipse</b> <link=\"780\"><b>Omen</b></link> activation",
         "delay": 300
       },
       {
-        "id": 498,
+        "id": 499,
         "text": "This condition must be met on the final <b>Eclipse</b> Turn to win the game",
         "delay": 300
       },
       {
-        "id": 499,
+        "id": 500,
         "text": "Makes the target <b>Creature</b> use its <link=\"906\"><b>Action</b></link>",
         "delay": 300
       },
       {
-        "id": 500,
+        "id": 501,
         "text": "I'm just a simple tooltip with icon <sprite index=1> , <b>bold</b>, <size=120%>size</size>, and even <color=#FF0000>C</color><color=#00FF00>O</color><color=#0000FF>L</color><color=#FF00FF>O</color><color=#FFFF00>R</color>",
         "delay": 300
       },
       {
-        "id": 501,
+        "id": 502,
         "text": "<b>Counters</b> the next <b>Token</b> <b>Gained</b>, except <link=\"715\"><sprite index=8></link>",
         "delay": 300
       },
       {
-        "id": 502,
+        "id": 503,
         "text": "Basic ability of the Card that is used on its Turn",
         "delay": 300
       },
       {
-        "id": 503,
+        "id": 504,
         "text": "Removes the first <b>Token</b> on the <b>Creature</b>",
         "delay": 300
       },
       {
-        "id": 504,
+        "id": 505,
         "text": "When a <b>Creature</b>'s <b>Token</b> Slots are filled, it gets <link=\"915\"><b>Destroyed</b></link> and loses all its <b>Tokens</b>.",
         "delay": 300
       },
       {
-        "id": 505,
+        "id": 506,
         "text": "<b>Counters</b> <link=\"710\"><sprite index=3></link>",
         "delay": 300
       },
       {
-        "id": 506,
+        "id": 507,
         "text": "<b>Counters</b> <link=\"712\"><sprite index=7></link>",
         "delay": 300
       },
       {
-        "id": 507,
+        "id": 508,
         "text": "<b>Counters</b> <link=\"711\"><sprite index=0></link>",
         "delay": 300
       },
       {
-        "id": 508,
+        "id": 509,
         "text": "When a <b>Building</b> is filled with <link=\"903\"><b>Work</b></link>, it creates a new <b>Token</b> and places it into <b>Storage</b>",
         "delay": 300
       },
       {
-        "id": 509,
+        "id": 510,
         "text": "Activates when all <b>Token</b> Slots are filled with <link=\"934\"><sprite index=10></link>",
         "delay": 300
       },
       {
-        "id": 510,
+        "id": 511,
         "text": "Creates a <link=\"903\"><b>Work</b></link> <b>Token</b> and gives it to the <b>Building</b> on the same <link=\"916\"><b>Lane</b></link>",
         "delay": 300
       }
@@ -54181,143 +54515,143 @@
     "name": "card_attributes",
     "objects": [
       {
-        "id": 559,
+        "id": 560,
         "code": "type"
       },
       {
-        "id": 560,
+        "id": 561,
         "code": "token_type"
       },
       {
-        "id": 561,
+        "id": 562,
         "code": "token_origin"
       },
       {
-        "id": 562,
+        "id": 563,
         "code": "reactive"
       },
       {
-        "id": 563,
+        "id": 564,
         "code": "show_duration"
       },
       {
-        "id": 564,
+        "id": 565,
         "code": "slot"
       },
       {
-        "id": 565,
+        "id": 566,
         "code": "anim_token_fly_from_slot"
       },
       {
-        "id": 566,
+        "id": 567,
         "code": "token_count"
       },
       {
-        "id": 567,
+        "id": 568,
         "code": "duration"
       },
       {
-        "id": 568,
+        "id": 569,
         "code": "anim_card_fly"
       },
       {
-        "id": 569,
+        "id": 570,
         "code": "creature"
       },
       {
-        "id": 570,
+        "id": 571,
         "code": "produced_token_type"
       },
       {
-        "id": 571,
+        "id": 572,
         "code": "anim_token_fly_from_card_id"
       },
       {
-        "id": 572,
+        "id": 573,
         "code": "anim_token_fly_from_place"
       },
       {
-        "id": 573,
+        "id": 574,
         "code": "destroyed"
       },
       {
-        "id": 574,
+        "id": 575,
         "code": "highlighted"
       },
       {
-        "id": 575,
+        "id": 576,
         "code": "anim_destroy"
       },
       {
-        "id": 576,
+        "id": 577,
         "code": "anim_token_fly"
       },
       {
-        "id": 577,
+        "id": 578,
         "code": "anim_highlight"
       },
       {
-        "id": 578,
+        "id": 579,
         "code": "disable_raycasts_on_place"
       },
       {
-        "id": 579,
+        "id": 580,
         "code": "token_slots"
       },
       {
-        "id": 580,
+        "id": 581,
         "code": "anti_token"
       },
       {
-        "id": 581,
+        "id": 582,
         "code": "order"
       },
       {
-        "id": 582,
+        "id": 583,
         "code": "number"
       },
       {
-        "id": 583,
+        "id": 584,
         "code": "creature_number"
       },
       {
-        "id": 584,
+        "id": 585,
         "code": "linked_card_id"
       },
       {
-        "id": 585,
+        "id": 586,
         "code": "to_destroy"
       },
       {
-        "id": 586,
+        "id": 587,
         "code": "anim_card_fly_from_place"
       },
       {
-        "id": 587,
+        "id": 588,
         "code": "place"
       },
       {
-        "id": 588,
+        "id": 589,
         "code": "anim_card_fly_time"
       },
       {
-        "id": 589,
+        "id": 590,
         "code": "is_starting_card"
       },
       {
-        "id": 590,
+        "id": 591,
         "code": "is_additional_card"
       },
       {
-        "id": 591,
+        "id": 592,
         "code": "is_building_site"
       },
       {
-        "id": 592,
+        "id": 593,
         "code": "current_place"
       },
       {
-        "id": 593,
+        "id": 594,
         "code": "anim_token_fly_time"
       }
     ]
@@ -54326,36 +54660,36 @@
     "name": "game_attributes",
     "objects": [
       {
-        "id": 594,
+        "id": 595,
         "code": "non_creatures_drawn"
       },
       {
-        "id": 595,
+        "id": 596,
         "code": "finished"
       },
       {
-        "id": 596,
+        "id": 597,
         "code": "cards_drawn"
       },
       {
-        "id": 597,
+        "id": 598,
         "code": "fast_mode"
       },
       {
-        "id": 598,
+        "id": 599,
         "code": "loogris_branch"
       },
       {
-        "id": 599,
+        "id": 600,
         "code": "omens_for_showcase"
       },
       {
-        "id": 600,
+        "id": 601,
         "code": "place_45_visibility"
       },
       {
-        "id": 601,
-        "code": "eclipse_card_full_visibility"
+        "id": 602,
+        "code": "showcase_visible"
       }
     ]
   }
