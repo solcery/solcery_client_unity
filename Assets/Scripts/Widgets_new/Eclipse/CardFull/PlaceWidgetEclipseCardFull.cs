@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.Events;
@@ -67,15 +69,16 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
             {
-                UpdateCardAttributes(world, entityId);
+                var attributesPool = world.GetPool<ComponentObjectAttributes>();
+                var attributes = attributesPool.Get(entityId).Attributes;
+                UpdateCardMainAttributes(attributes);
                 UpdateCardType(type, cardTypeDataObject);
+                UpdateCardAnimation(world, attributes);
             }
         }
 
-        private void UpdateCardAttributes(EcsWorld world, int entityId)
+        private void UpdateCardMainAttributes(Dictionary<string, IAttributeValue> attributes)
         {
-            var attributesPool = world.GetPool<ComponentObjectAttributes>();
-            var attributes = attributesPool.Get(entityId).Attributes;
             var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
             Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
                 
@@ -85,6 +88,26 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             Layout.TimerLayout.UpdateTimerValue(timerDuration);
         }
 
+        private void UpdateCardAnimation(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
+                animCardFlyAttribute.Current > 0)
+            {
+                var fromPlaceId = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyFromPlace, out var fromPlaceAttribute)
+                    ? fromPlaceAttribute.Current
+                    : 0;
+                var animCardFlyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyTime, out var  animCardFlyTimeAttribute)
+                    ? animCardFlyTimeAttribute.Current.ToSec()
+                    : 1f;
+                var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
+                Layout.CardTransform.gameObject.SetActive(false);
+                WidgetCanvas.GetEffects().MoveEclipseCard(Layout.CardTransform, animCardFlyTimeSec, from, () =>
+                {
+                    Layout.CardTransform.gameObject.SetActive(true);
+                });
+            }
+        }
+        
         private void UpdateCardType(EclipseCardTypes type, JObject cardTypeDataObject)
         {
             Layout.UpdateType(type.ToString());

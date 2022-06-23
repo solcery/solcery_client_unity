@@ -30,6 +30,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private Sprite _sprite;
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
+        public RectTransform CardTransform => cardTransform;
 
         public override void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
         {
