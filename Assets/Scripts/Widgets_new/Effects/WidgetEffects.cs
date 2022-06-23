@@ -95,16 +95,6 @@ namespace Solcery.Widgets_new.Effects
             effect.RectTransform.sizeDelta = eclipseCard.Layout.RectTransform.rect.size;
             effect.SetActive(true);
             
-            DOTween.Sequence()
-                .Append(effect.RectTransform.DOMove(to, time))
-                .AppendCallback(() =>
-                {
-                    Object.Destroy(effect.gameObject);
-                    onMoveComplete?.Invoke();
-                })
-                .Play();
-            
-            
             DOTween.Sequence(effect.RectTransform.DOMove(to, time).OnComplete(() =>
             {
                 Object.Destroy(effect.gameObject);
