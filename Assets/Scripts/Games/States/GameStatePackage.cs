@@ -239,6 +239,23 @@ namespace Solcery.Games.States
                             case ContextGameStateTypes.Delay:
                                 _states.Add(PauseState.Create(GetDelay(value)));
                                 break;
+
+                            case ContextGameStateTypes.Timer:
+                            {
+                                var isStart = value.GetValue<bool>("start");
+
+                                if (isStart)
+                                {
+                                    var durationMsec = value.GetValue<int>("duration");
+                                    var targetObjectId = value.GetValue<int>("object_id");
+                                    _states.Add(TimerState.CreateStartTimer(durationMsec, targetObjectId));
+                                }
+                                else
+                                {
+                                    _states.Add(TimerState.CreateStopTimer());
+                                }
+                            }
+                                break;
                         }
                     }
                 }
@@ -250,7 +267,7 @@ namespace Solcery.Games.States
             return value.GetValue<int>("delay");
         }
 
-        public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
+        public bool TryGetState(int deltaTimeMsec, out State resultState)
         {
             var state = _states[0];
 
@@ -258,7 +275,12 @@ namespace Solcery.Games.States
             {
                 case GameState gs:
                     _states.Remove(state);
-                    gameState = gs.GameStateObject;
+                    resultState = gs;
+                    return true;
+                
+                case TimerState ts:
+                    _states.Remove(state);
+                    resultState = ts;
                     return true;
                 
                 case PauseState ps when ps.IsCompleted(deltaTimeMsec):
@@ -266,7 +288,7 @@ namespace Solcery.Games.States
                     break;
             }
 
-            gameState = null;
+            resultState = null;
             return false;
         }
     }

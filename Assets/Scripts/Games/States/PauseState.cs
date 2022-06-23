@@ -6,7 +6,7 @@ namespace Solcery.Games.States
         
         private int _delay;
 
-        public static PauseState Create(int delay)
+        public static State Create(int delay)
         {
             return new PauseState(delay);
         }

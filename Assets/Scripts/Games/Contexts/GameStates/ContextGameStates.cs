@@ -220,6 +220,40 @@ namespace Solcery.Games.Contexts.GameStates
             }
         }
         
+        private sealed class TimerStateData : StateData
+        {
+            private readonly bool _isStart;
+            private readonly int _durationMsec;
+            private readonly int _targetObjectId;
+            
+            public static TimerStateData CreateStartTimer(int durationMsec, int targetObjectId)
+            {
+                return new TimerStateData(true, durationMsec, targetObjectId);
+            }
+
+            public static TimerStateData CreateStopTimer()
+            {
+                return new TimerStateData(false, 0, -1);
+            }
+
+            private TimerStateData(bool isStart, int durationMsec, int targetObjectId)
+            {
+                _isStart = isStart;
+                _durationMsec = durationMsec;
+                _targetObjectId = targetObjectId;
+            }
+            
+            public JObject ToJson()
+            {
+                return new JObject
+                {
+                    {"start", new JValue(_isStart)},
+                    {"duration", new JValue(_durationMsec)},
+                    {"object_id", new JValue(_targetObjectId)}
+                };
+            }
+        }
+        
         public bool IsEmpty => _states.Count <= 0;
 
         private readonly EcsWorld _world;
@@ -241,7 +275,7 @@ namespace Solcery.Games.Contexts.GameStates
             _states = new List<StateData>();
         }
         
-        public void PushGameState()
+        void IContextGameStates.PushGameState()
         {
             var gameState = GameStateData.Create();
             
@@ -291,10 +325,22 @@ namespace Solcery.Games.Contexts.GameStates
             _states.Add(gameState);
         }
 
-        public void PushDelay(int msec)
+        void IContextGameStates.PushDelay(int msec)
         {
             var delayState = PauseStateData.Create(msec);
             _states.Add(delayState);
+        }
+
+        void IContextGameStates.PushStartTimer(int durationMsec, int targetObjectId)
+        {
+            var timerStartState = TimerStateData.CreateStartTimer(durationMsec, targetObjectId);
+            _states.Add(timerStartState);
+        }
+
+        void IContextGameStates.PushStopTimer()
+        {
+            var timerStopState = TimerStateData.CreateStopTimer();
+            _states.Add(timerStopState);
         }
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
@@ -310,6 +356,10 @@ namespace Solcery.Games.Contexts.GameStates
                 {
                     case PauseStateData psd:
                         stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.Delay, psd.ToJson()));
+                        break;
+                    
+                    case TimerStateData tsd:
+                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.Timer, tsd.ToJson()));
                         break;
                     
                     case GameStateData gsd:

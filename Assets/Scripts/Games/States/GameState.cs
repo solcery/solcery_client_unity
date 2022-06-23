@@ -6,7 +6,7 @@ namespace Solcery.Games.States
     {
         public readonly JObject GameStateObject;
         
-        public static GameState Create(JObject gameState)
+        public static State Create(JObject gameState)
         {
             return new GameState(gameState);
         }

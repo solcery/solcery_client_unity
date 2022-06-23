@@ -65,6 +65,16 @@ namespace Solcery.Games
             }
         }
 
+        TimerState IGame.TimerStateAndClear
+        {
+            get
+            {
+                var newTs = _timerState;
+                _timerState = null;
+                return newTs;
+            }
+        }
+
         private Camera _mainCamera;
         private ITransportService _transportService;
         private IServiceBricks _serviceBricks;
@@ -80,6 +90,7 @@ namespace Solcery.Games
         private JObject _gameContentJson;
         private readonly Queue<GameStatePackage> _gameStatePackages;
         private JObject _gameState;
+        private TimerState _timerState;
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         
@@ -276,9 +287,18 @@ namespace Solcery.Games
                 if (!state.IsCompleted)
                 {
                     var msec = (int)(dt * 1000f);
-                    if (state.TryGetGameState(msec, out var gameState))
+                    if (state.TryGetState(msec, out var outState))
                     {
-                        _gameState = gameState;
+                        switch (outState)
+                        {
+                            case GameState gs:
+                                _gameState = gs.GameStateObject;
+                                break;
+                            
+                            case TimerState ts:
+                                _timerState = ts;
+                                break;
+                        }
                     }
                 }
 
