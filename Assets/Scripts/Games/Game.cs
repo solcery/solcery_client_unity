@@ -4,7 +4,7 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
-using Solcery.DebugViewers;
+//using Solcery.DebugViewers;
 using Solcery.Games.Contents;
 using Solcery.Games.DTO;
 using Solcery.Games.States;
@@ -173,7 +173,8 @@ namespace Solcery.Games
         {
             GameApplication.Instance.EnableBlockTouches(true);
             var gamePackage = GameStatePackage.Create(gameStateJson);
-            DebugViewer.Instance.AddGameStatePackage(gamePackage);
+            // TODO Fix it!!!
+            //DebugViewer.Instance.AddGameStatePackage(gamePackage);
             _gameStatePackages.Enqueue(gamePackage);
         }
 
