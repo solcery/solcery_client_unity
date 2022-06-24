@@ -12,6 +12,9 @@ namespace Solcery.Games
         public static readonly string CardTooltipId = "tooltip_id";
         public static readonly string CardShowDuration = "show_duration";
         public static readonly string CardDuration = "duration";
+        public static readonly string CardAnimCardFly = "anim_card_fly";
+        public static readonly string CardAnimCardFlyFromPlace = "anim_card_fly_from_place";
+        public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
         
         // Token
         public static readonly string TokenSlot = "slot";

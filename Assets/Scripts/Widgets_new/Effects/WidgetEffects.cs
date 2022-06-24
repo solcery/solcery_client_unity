@@ -80,22 +80,21 @@ namespace Solcery.Widgets_new.Effects
                 .Play();
         }
 
-        public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
-            Transform parent,
+        public void MoveEclipseCard(RectTransform eclipseCard,
             float time,
             Vector3 from,
             Action onMoveComplete)
         {
-            var to = eclipseCard.Layout.RectTransform.position;
-            var effect = Object.Instantiate(eclipseCard.Layout, parent, false)
-                .GetComponent<EclipseCardInContainerWidgetLayout>();
-            effect.RectTransform.anchorMin = new Vector2(.5f, .5f);
-            effect.RectTransform.anchorMax = new Vector2(.5f, .5f);
-            effect.RectTransform.position = from;
-            effect.RectTransform.sizeDelta = eclipseCard.Layout.RectTransform.rect.size;
-            effect.SetActive(true);
+            var to = eclipseCard.position;
+            var effect = Object.Instantiate(eclipseCard.gameObject, _effectRoot.transform, false)
+                .GetComponent<RectTransform>();
+            effect.anchorMin = new Vector2(.5f, .5f);
+            effect.anchorMax = new Vector2(.5f, .5f);
+            effect.position = from;
+            effect.sizeDelta = eclipseCard.rect.size;
+            effect.gameObject.SetActive(true);
             
-            DOTween.Sequence(effect.RectTransform.DOMove(to, time).OnComplete(() =>
+            DOTween.Sequence(effect.DOMove(to, time).OnComplete(() =>
             {
                 Object.Destroy(effect.gameObject);
                 onMoveComplete?.Invoke();

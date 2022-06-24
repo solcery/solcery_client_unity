@@ -112,23 +112,23 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(eclipseCard.EntityId).Attributes;
 
-                if (attributes.TryGetValue("anim_card_fly", out var animCardFlyAttribute) &&
+                if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
                     animCardFlyAttribute.Current > 0)
                 {
-                    var fromPlaceId = attributes.TryGetValue("anim_card_fly_from_place", out var fromPlaceAttribute)
+                    var fromPlaceId = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyFromPlace, out var fromPlaceAttribute)
                         ? fromPlaceAttribute.Current
                         : 0;
-                    var animCardFlyTimeSec = attributes.TryGetValue("anim_card_fly_time", out var  animCardFlyTimeAttribute)
+                    var animCardFlyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyTime, out var  animCardFlyTimeAttribute)
                         ? animCardFlyTimeAttribute.Current.ToSec()
                         : 1f;
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                     eclipseCard.Layout.SetActive(false);
-                    WidgetCanvas.GetEffects().MoveEclipseCard(eclipseCard, Layout.transform, animCardFlyTimeSec, from, () =>
+                    WidgetCanvas.GetEffects().MoveEclipseCard(eclipseCard.Layout.FrontTransform, animCardFlyTimeSec, from, () =>
                     {
                         eclipseCard.Layout.SetActive(true);
                     });
                 }
-                
+
                 if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
                     animDestroyAttribute.Current > 0)
                 {
