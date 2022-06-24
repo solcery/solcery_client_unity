@@ -252,35 +252,35 @@ namespace Solcery.DebugViewers
             Hide();
         }
 
-        void IDebugViewer.AddGameStatePackage(GameStatePackage gameStatePackage)
-        {
-            foreach (var state in gameStatePackage.States)
-            {
-                switch (state)
-                {
-                    case GameState gs:
-                        var previousFullState = _gameStates.Count > 0 ? _gameStates[^1].FullState : null;
-                        var gameState = DebugGameState.Create(
-                            _states.Count, 
-                            previousFullState, 
-                            gs.GameStateObject,
-                            diffScrollView.content, 
-                            _debugGameStateViewPool,
-                            _attrDebugViewPool,
-                            _objectDebugViewPool,
-                            _objectAttrDebugViewPool);
-                        _states.Add(DebugStateInfo.Create(DebugStateTypes.Game, _gameStates.Count));
-                        _gameStates.Add(gameState);
-                        break;
-                    
-                    case PauseState ps:
-                        var delayState = DebugDelayState.Create(_states.Count, ps.Delay, diffScrollView.content,
-                            _debugDelayStateViewPool);
-                        _states.Add(DebugStateInfo.Create(DebugStateTypes.Delay, _delayStates.Count));
-                        _delayStates.Add(delayState);
-                        break;
-                }
-            }
-        }
+        // void IDebugViewer.AddGameStatePackage(GameStatePackage gameStatePackage)
+        // {
+        //     foreach (var state in gameStatePackage.States)
+        //     {
+        //         switch (state)
+        //         {
+        //             case GameState gs:
+        //                 var previousFullState = _gameStates.Count > 0 ? _gameStates[^1].FullState : null;
+        //                 var gameState = DebugGameState.Create(
+        //                     _states.Count, 
+        //                     previousFullState, 
+        //                     gs.GameStateObject,
+        //                     diffScrollView.content, 
+        //                     _debugGameStateViewPool,
+        //                     _attrDebugViewPool,
+        //                     _objectDebugViewPool,
+        //                     _objectAttrDebugViewPool);
+        //                 _states.Add(DebugStateInfo.Create(DebugStateTypes.Game, _gameStates.Count));
+        //                 _gameStates.Add(gameState);
+        //                 break;
+        //             
+        //             case PauseState ps:
+        //                 var delayState = DebugDelayState.Create(_states.Count, ps.Delay, diffScrollView.content,
+        //                     _debugDelayStateViewPool);
+        //                 _states.Add(DebugStateInfo.Create(DebugStateTypes.Delay, _delayStates.Count));
+        //                 _delayStates.Add(delayState);
+        //                 break;
+        //         }
+        //     }
+        // }
     }
 }

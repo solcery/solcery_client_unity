@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contents;
+using Solcery.Games.States.New;
 using Solcery.Models.Play;
 using Solcery.Services.Renderer;
 using Solcery.Services.Resources;
@@ -30,7 +31,7 @@ namespace Solcery.Games
         IWidgetPool<IListTokensInContainerWidget> ListTokensInContainerWidgetPool { get; }
         public IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
         public JObject GameContent { get; }
-        public JObject GameStatePopAndClear { get; }
+        public IUpdateStateQueue UpdateStateQueue { get; }
         public TooltipController TooltipController { get; }
         public IGameContentAttributes GameContentAttributes { get; }
         public IServiceRenderWidget ServiceRenderWidget { get; }
