@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
+using Solcery.Games.States.New.States;
 using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using UnityEngine;
@@ -42,8 +43,8 @@ namespace Solcery.Models.Play.Timer
             var isNewTimer = false;
             
             // обновим таймер если нужно
-            var newTimerState = _game.TimerStateAndClear;
-            if (newTimerState != null)
+            var updateState = _game.UpdateStateQueue.CurrentState;
+            if (updateState is UpdateTimerState updateTimerState)
             {
                 // удалим все текущие таймеры
                 foreach (var timerEntity in _filterTimer)
@@ -52,12 +53,12 @@ namespace Solcery.Models.Play.Timer
                 }
 
                 // если требуется, запустим новый таймер
-                if (newTimerState.IsStart)
+                if (updateTimerState.IsStart)
                 {
                     var timerEntity = world.NewEntity();
                     world.GetPool<ComponentTimerTag>().Add(timerEntity);
-                    poolTimerDuration.Add(timerEntity).DurationMsec = newTimerState.DurationMsec;
-                    poolTimerTargetObjectId.Add(timerEntity).TargetObjectId = newTimerState.TargetObjectId;
+                    poolTimerDuration.Add(timerEntity).DurationMsec = updateTimerState.DurationMsec;
+                    poolTimerTargetObjectId.Add(timerEntity).TargetObjectId = updateTimerState.TargetObjectId;
                     isNewTimer = true;
                 }
             }

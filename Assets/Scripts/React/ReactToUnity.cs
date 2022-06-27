@@ -61,19 +61,19 @@ namespace Solcery.React
 
         public void UpdateGameContent(string data)
         {
-            UnityEngine.Debug.Log($"UpdateGameContent {data}");
+            //UnityEngine.Debug.Log($"UpdateGameContent {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameContent, data);
         }
 
         public void UpdateGameDisplay(string data)
         {
-            UnityEngine.Debug.Log($"UpdateGameDisplay {data}");
+            //UnityEngine.Debug.Log($"UpdateGameDisplay {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameDisplay, data);
         }
 
         public void UpdateGameState(string data)
         {
-            UnityEngine.Debug.Log($"UpdateGameState {data}");
+            //UnityEngine.Debug.Log($"UpdateGameState {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameState, data);
         }
     }

@@ -6,6 +6,6 @@ namespace Solcery.DebugViewers
     {
         void Show();
         void Hide();
-        void AddGameStatePackage(GameStatePackage gameStatePackage);
+        //void AddGameStatePackage(GameStatePackage gameStatePackage);
     }
 }

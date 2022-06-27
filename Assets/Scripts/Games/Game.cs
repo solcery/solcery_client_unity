@@ -1,13 +1,12 @@
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
-using Solcery.DebugViewers;
+//using Solcery.DebugViewers;
 using Solcery.Games.Contents;
 using Solcery.Games.DTO;
-using Solcery.Games.States;
+using Solcery.Games.States.New;
 using Solcery.Models.Play;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -23,6 +22,7 @@ using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Container.Hands;
 using Solcery.Widgets_new.Container.Stacks;
+using Solcery.Widgets_new.Eclipse.CardFull;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.CardsContainer;
 using Solcery.Widgets_new.Eclipse.Tokens;
@@ -54,26 +54,7 @@ namespace Solcery.Games
         TooltipController IGame.TooltipController => _tooltipController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
-
-        JObject IGame.GameStatePopAndClear
-        {
-            get
-            {
-                var newGs = _gameState;
-                _gameState = null;
-                return newGs;
-            }
-        }
-
-        TimerState IGame.TimerStateAndClear
-        {
-            get
-            {
-                var newTs = _timerState;
-                _timerState = null;
-                return newTs;
-            }
-        }
+        IUpdateStateQueue IGame.UpdateStateQueue => _updateStateQueue;
 
         private Camera _mainCamera;
         private ITransportService _transportService;
@@ -88,11 +69,9 @@ namespace Solcery.Games
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private IServiceRenderWidget _serviceRenderWidget;
         private JObject _gameContentJson;
-        private readonly Queue<GameStatePackage> _gameStatePackages;
-        private JObject _gameState;
-        private TimerState _timerState;
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
+        private IUpdateStateQueue _updateStateQueue;
         
         public static IGame Create(IGameInitDto dto)
         {
@@ -103,7 +82,8 @@ namespace Solcery.Games
         {
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
-            _gameStatePackages = new Queue<GameStatePackage>();
+            _updateStateQueue = UpdateStateQueue.Create();
+            //_gameStatePackages = new Queue<GameStatePackage>();
             CreateModel();
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
@@ -182,9 +162,7 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
             GameApplication.Instance.EnableBlockTouches(true);
-            var gamePackage = GameStatePackage.Create(gameStateJson);
-            DebugViewer.Instance.AddGameStatePackage(gamePackage);
-            _gameStatePackages.Enqueue(gamePackage);
+            _updateStateQueue.PushGameState(gameStateJson);
         }
 
         private void Init(JObject gameContentJson)
@@ -210,6 +188,7 @@ namespace Solcery.Games
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseEventTracker, PlaceWidgetEclipse.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokenStorage, PlaceWidgetEclipseTokenStorage.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCard, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCardFull, PlaceWidgetEclipseCardFull.Create);
         }
 
         private void RegistrationBrickTypes()
@@ -251,6 +230,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.CreateObject, BrickActionCreateObject.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.DeleteObject, BrickActionDeleteObject.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ClearAttrs, BrickActionClearAttrs.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StartTimer, BrickActionStartTimer.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StopTimer, BrickActionStopTimer.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
@@ -279,41 +260,12 @@ namespace Solcery.Games
         {
             _tooltipController.Update(dt);
             _transportService.Update(dt);
-
-            if (_gameStatePackages.Count > 0)
-            {
-                var state = _gameStatePackages.Peek();
-
-                if (!state.IsCompleted)
-                {
-                    var msec = (int)(dt * 1000f);
-                    if (state.TryGetState(msec, out var outState))
-                    {
-                        switch (outState)
-                        {
-                            case GameState gs:
-                                _gameState = gs.GameStateObject;
-                                break;
-                            
-                            case TimerState ts:
-                                _timerState = ts;
-                                break;
-                        }
-                    }
-                }
-
-                if (state.IsCompleted)
-                {
-                    _gameStatePackages.Dequeue();
-                }
-
-                if (_gameStatePackages.Count <= 0)
-                {
-                    GameApplication.Instance.EnableBlockTouches(false);
-                }
-            }
-            
             _playModel.Update(dt);
+            
+            if (_updateStateQueue.CurrentState == null)
+            {
+                GameApplication.Instance.EnableBlockTouches(false);
+            }
         }
 
         void IGame.Destroy()
@@ -322,6 +274,7 @@ namespace Solcery.Games
             
             _playModel.Destroy();
             _playModel = null;
+            _updateStateQueue = null;
             
             _serviceBricks.Destroy();
             _serviceBricks = null;

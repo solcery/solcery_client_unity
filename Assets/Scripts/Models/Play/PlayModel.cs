@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
+using Solcery.Games.States.New;
 using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
@@ -21,6 +22,8 @@ namespace Solcery.Models.Play
         public EcsWorld World { get; private set; }
         
         private EcsSystems _systems;
+        private IUpdateStateQueue _updateStateQueue;
+        private bool _isInit;
 
         public static IPlayModel Create()
         {
@@ -72,24 +75,35 @@ namespace Solcery.Models.Play
             
             // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
             _systems.Add(SystemGameStateRemoveUpdateTag.Create());
-            
-            
 
             _systems.Init();
+
+            _updateStateQueue = game.UpdateStateQueue;
+            _isInit = true;
         }
 
         void IPlayModel.Update(float dt)
         {
-            _systems?.Run();
+            if (!_isInit)
+            {
+                return;    
+            }
+            
+            _updateStateQueue.Update((int)(dt * 1000f));
+            _systems.Run();
         }
         
         void IPlayModel.Destroy()
         {
+            _isInit = false;
+            
             _systems?.Destroy();
             _systems = null;
             
             World?.Destroy();
             World = null;
+
+            _updateStateQueue = null;
         }
     }
 }

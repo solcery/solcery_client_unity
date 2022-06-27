@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Games.States.New.States;
 using Solcery.Models.Shared.Attributes.Interactable;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Game.Attributes;
@@ -52,12 +53,14 @@ namespace Solcery.Models.Play.Game.State
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
-            var gameStateJson = _game.GameStatePopAndClear;
+            var us = _game.UpdateStateQueue.CurrentState;
 
-            if (gameStateJson == null)
+            if (us is not UpdateGameState ugs)
             {
                 return;
             }
+
+            var gameStateJson = ugs.GameState;
 
             var world = systems.GetWorld();
             
@@ -83,37 +86,58 @@ namespace Solcery.Models.Play.Game.State
                 }
             }
             
-            // Update game entity
-            var entityArray = gameStateJson.GetValue<JArray>("objects");
-            var entityHashMap = new Dictionary<int, JObject>(entityArray.Count);
-            foreach (var entityToken in entityArray)
+            // New game state method
             {
-                if (entityToken is JObject entityObject)
+                // Update game entity
+                var destroyHash = new HashSet<int>();
+                if (gameStateJson.TryGetValue("deleted_objects", out JArray destroyArray))
                 {
-                    entityHashMap.Add(entityObject.GetValue<int>("id"), entityObject);
-                }
-            }
-
-            foreach (var entityIndex in _filterEntities)
-            {
-                var entityId = world.GetPool<ComponentObjectId>().Get(entityIndex).Id;
-
-                if (!entityHashMap.ContainsKey(entityId))
-                {
-                    world.DelEntity(entityIndex);
-                    continue;
+                    foreach (var objectIdToken in destroyArray)
+                    {
+                        destroyHash.Add(objectIdToken.Value<int>());
+                    }
                 }
 
-                UpdateEntity(world, entityIndex, entityHashMap[entityId]);
-                entityHashMap.Remove(entityId);
-            }
+                var updateObjects = new Dictionary<int, JObject>();
+                if (gameStateJson.TryGetValue("objects", out JArray objectArray))
+                {
+                    foreach (var objectToken in objectArray)
+                    {
+                        if (objectToken is JObject objectObject
+                            && objectObject.TryGetValue("id", out int id)
+                            && !updateObjects.ContainsKey(id))
+                        {
+                            updateObjects.Add(id, objectObject);
+                        }
+                    }
+                }
 
-            foreach (var entityObject in entityHashMap)
-            {
-                CreateEntity(world, entityObject.Value);
-            }
+                var poolObjectId = world.GetPool<ComponentObjectId>();
+                foreach (var entityId in _filterEntities)
+                {
+                    var objectId = poolObjectId.Get(entityId).Id;
+
+                    if (destroyHash.Contains(objectId))
+                    {
+                        destroyHash.Remove(objectId);
+                        world.DelEntity(entityId);
+                        continue;
+                    }
+
+                    if (updateObjects.TryGetValue(objectId, out var objectData))
+                    {
+                        updateObjects.Remove(objectId);
+                        UpdateEntity(world, entityId, objectData);
+                    }
+                }
+
+                foreach (var updateObject in updateObjects)
+                {
+                    CreateEntity(world, updateObject.Value);
+                }
                 
-            entityHashMap.Clear();
+                updateObjects.Clear();
+            }
         }
         
         private void UpdateAttributes(JArray gameAttributeArray, Dictionary<string, IAttributeValue> attributesHashMap)

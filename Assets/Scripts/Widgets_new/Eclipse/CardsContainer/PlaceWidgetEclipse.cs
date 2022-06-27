@@ -112,23 +112,23 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(eclipseCard.EntityId).Attributes;
 
-                if (attributes.TryGetValue("anim_card_fly", out var animCardFlyAttribute) &&
+                if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
                     animCardFlyAttribute.Current > 0)
                 {
-                    var fromPlaceId = attributes.TryGetValue("anim_card_fly_from_place", out var fromPlaceAttribute)
+                    var fromPlaceId = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyFromPlace, out var fromPlaceAttribute)
                         ? fromPlaceAttribute.Current
                         : 0;
-                    var animCardFlyTimeSec = attributes.TryGetValue("anim_card_fly_time", out var  animCardFlyTimeAttribute)
+                    var animCardFlyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyTime, out var  animCardFlyTimeAttribute)
                         ? animCardFlyTimeAttribute.Current.ToSec()
                         : 1f;
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                     eclipseCard.Layout.SetActive(false);
-                    WidgetCanvas.GetEffects().MoveEclipseCard(eclipseCard, Layout.transform, animCardFlyTimeSec, from, () =>
+                    WidgetCanvas.GetEffects().MoveEclipseCard(eclipseCard.Layout.FrontTransform, animCardFlyTimeSec, from, () =>
                     {
                         eclipseCard.Layout.SetActive(true);
                     });
                 }
-                
+
                 if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
                     animDestroyAttribute.Current > 0)
                 {
@@ -162,13 +162,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
             
             // timer
-            var showTimer = attributes.TryGetValue("show_duration", out var showDurationAttribute) && showDurationAttribute.Current > 0;
-            var timerDuration = attributes.TryGetValue("duration", out var durationAttribute) ? durationAttribute.Current : 0;
+            var showTimer = attributes.TryGetValue(GameJsonKeys.CardShowDuration, out var showDurationAttribute) && showDurationAttribute.Current > 0;
+            var timerDuration = attributes.TryGetValue(GameJsonKeys.CardDuration, out var durationAttribute) ? durationAttribute.Current : 0;
             eclipseCard.Layout.TimerLayout.gameObject.SetActive(showTimer);
             eclipseCard.Layout.TimerLayout.UpdateTimerValue(timerDuration);
             
             // tokens
-            var tokenSlots = attributes.TryGetValue("token_slots", out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
+            var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
             eclipseCard.Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
             
             // anims
@@ -265,7 +265,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                             && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                         {
                             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                            if (attributes.TryGetValue("slot", out var tokenSlotAttribute))
+                            if (attributes.TryGetValue(GameJsonKeys.TokenSlot, out var tokenSlotAttribute))
                             {
                                 var tokenLayout = cardWidget.AttachToken(tokenSlotAttribute.Current, cardTypeDataObject);
                                 if (tokenLayout != null)
