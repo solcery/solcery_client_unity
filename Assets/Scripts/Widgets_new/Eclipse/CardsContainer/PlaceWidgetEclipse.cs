@@ -204,8 +204,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     if (objectTypePool.Has(entityId)
                         && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
                     {
-                        eclipseCard.UpdateFromCardTypeData(entityId, objectId, cardTypeDataObject);
-                        eclipseCard.SetEclipseCardType(eclipseCartTypePool.Get(entityId).CardType);
+                        eclipseCard.UpdateFromCardTypeData(entityId, objectId,eclipseCartTypePool.Get(entityId).CardType, cardTypeDataObject);
                     }
                     
                     // drug and drop

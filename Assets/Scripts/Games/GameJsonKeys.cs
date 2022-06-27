@@ -15,6 +15,9 @@ namespace Solcery.Games
         public static readonly string CardAnimCardFly = "anim_card_fly";
         public static readonly string CardAnimCardFlyFromPlace = "anim_card_fly_from_place";
         public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
+        public static readonly string CardNameFontSize = "name_font_size";
+        public static readonly string CardDescriptionFontSize = "description_font_size";
+        public static readonly string CardTypeFontSize = "type_font_size";
         
         // Token
         public static readonly string TokenSlot = "slot";
