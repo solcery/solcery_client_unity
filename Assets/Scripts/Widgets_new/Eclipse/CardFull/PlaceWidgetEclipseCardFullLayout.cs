@@ -47,19 +47,22 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             iconImage.sprite = _sprite;
         }
         
-        public void UpdateName(string newName)
+        public void UpdateName(string newName, float fontSize)
         {
             nameText.text = newName;
+            nameText.fontSize = fontSize;
         }
 
-        public void UpdateDescription(string newDescription)
+        public void UpdateDescription(string newDescription, float fontSize)
         {
             descriptionText.text = newDescription;
+            descriptionText.fontSize = fontSize;
         }
         
-        public void UpdateType(string newType)
+        public void UpdateType(string newType, float fontSize)
         {
             typeText.text = newType;
+            typeText.fontSize = fontSize;
         }
         
         public void ClearAllOnClickListener()

@@ -16,8 +16,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         int Order { get; }
         int EntityId { get; }
         EclipseCardInContainerWidgetLayout Layout { get; }
-        void UpdateFromCardTypeData(int entityId, int objectId, JObject data);
-        void SetEclipseCardType(EclipseCardTypes eclipseCardType);
+        void UpdateFromCardTypeData(int entityId, int objectId, EclipseCardTypes type, JObject data);
         void UpdateSiblingIndex(int siblingIndex);
         EclipseCardTokenLayout AttachToken(int slot, JObject data);
         Vector3 GetTokenPosition(int slot);
