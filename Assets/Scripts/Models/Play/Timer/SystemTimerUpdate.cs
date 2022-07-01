@@ -46,6 +46,7 @@ namespace Solcery.Models.Play.Timer
             var updateState = _game.UpdateStateQueue.CurrentState;
             if (updateState is UpdateTimerState updateTimerState)
             {
+                _game.WidgetCanvas.GetTimer().text = "FINISH";
                 // удалим все текущие таймеры
                 foreach (var timerEntity in _filterTimer)
                 {
@@ -74,6 +75,9 @@ namespace Solcery.Models.Play.Timer
             {
                 foreach (var timerEntity in _filterTimer)
                 {
+                    var t = Mathf.Max(poolTimerDuration.Get(timerEntity).FinishTime - Time.unscaledTime, 0f);
+                    _game.WidgetCanvas.GetTimer().text = $"{t:F2} sec";
+                    
                     // проверка на то что таймер еще жив
                     if (poolTimerDuration.Get(timerEntity).FinishTime > Time.unscaledTime)
                     {
@@ -85,6 +89,7 @@ namespace Solcery.Models.Play.Timer
                     world.DelEntity(timerEntity);
                     var command = CommandOnLeftClickData.CreateFromParameters(targetObjectId, TriggerTargetEntityTypes.Card);
                     _game.TransportService.SendCommand(command.ToJson());
+                    _game.WidgetCanvas.GetTimer().text = "FINISH";
                 }
             }
         }
