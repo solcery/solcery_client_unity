@@ -30,7 +30,7 @@ namespace Solcery.Models.Play.Timer
         {
             var world = systems.GetWorld();
             _filterTimer = world.Filter<ComponentTimerTag>()
-                .Inc<ComponentTimerDuration>()
+                .Inc<ComponentTimerFinishTime>()
                 .Inc<ComponentTimerTargetObjectId>()
                 .End();
         }
@@ -38,7 +38,7 @@ namespace Solcery.Models.Play.Timer
         void IEcsRunSystem.Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            var poolTimerDuration = world.GetPool<ComponentTimerDuration>();
+            var poolTimerDuration = world.GetPool<ComponentTimerFinishTime>();
             var poolTimerTargetObjectId = world.GetPool<ComponentTimerTargetObjectId>();
             var isNewTimer = false;
             
@@ -50,6 +50,7 @@ namespace Solcery.Models.Play.Timer
                 foreach (var timerEntity in _filterTimer)
                 {
                     world.DelEntity(timerEntity);
+                    //Debug.Log("Stop timer!");
                 }
 
                 // если требуется, запустим новый таймер
@@ -57,9 +58,15 @@ namespace Solcery.Models.Play.Timer
                 {
                     var timerEntity = world.NewEntity();
                     world.GetPool<ComponentTimerTag>().Add(timerEntity);
-                    poolTimerDuration.Add(timerEntity).DurationMsec = updateTimerState.DurationMsec;
+
+                    var startTime = Time.unscaledTime;
+                    var finishTime = startTime + updateTimerState.DurationMsec / 1000f;
+                    
+                    poolTimerDuration.Add(timerEntity).FinishTime = finishTime;
                     poolTimerTargetObjectId.Add(timerEntity).TargetObjectId = updateTimerState.TargetObjectId;
                     isNewTimer = true;
+                    
+                    //Debug.Log($"Start timer start time {startTime} and finish time {finishTime}!");
                 }
             }
 
@@ -67,18 +74,15 @@ namespace Solcery.Models.Play.Timer
             {
                 foreach (var timerEntity in _filterTimer)
                 {
-                    var duration = poolTimerDuration.Get(timerEntity).DurationMsec - (int)(Time.deltaTime * 1000);
-
                     // проверка на то что таймер еще жив
-                    if (duration > 0)
+                    if (poolTimerDuration.Get(timerEntity).FinishTime > Time.unscaledTime)
                     {
-                        poolTimerDuration.Get(timerEntity).DurationMsec = duration;
                         return;
                     }
                     
                     // удалим таймер
-                    world.DelEntity(timerEntity);
                     var targetObjectId = poolTimerTargetObjectId.Get(timerEntity).TargetObjectId;
+                    world.DelEntity(timerEntity);
                     var command = CommandOnLeftClickData.CreateFromParameters(targetObjectId, TriggerTargetEntityTypes.Card);
                     _game.TransportService.SendCommand(command.ToJson());
                 }

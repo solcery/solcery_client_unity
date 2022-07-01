@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games.Contexts.GameStates;
 using Solcery.Utils;
+//using UnityEngine;
 
 namespace Solcery.Games.States.New.States
 {
@@ -22,6 +23,8 @@ namespace Solcery.Games.States.New.States
             IsStart = updateStateData.GetValue<bool>("start");
             DurationMsec = updateStateData.TryGetValue("duration", out int dms) ? dms : 0;
             TargetObjectId = updateStateData.TryGetValue("object_id", out int toi) ? toi : -1;
+            
+            //Debug.Log($"Timer is start => {IsStart} duration => {DurationMsec} target object id {TargetObjectId}");
         }
 
         public override void Update(int deltaTimeMsec) { }
