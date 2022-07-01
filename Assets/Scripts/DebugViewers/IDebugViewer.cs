@@ -1,4 +1,4 @@
-using Solcery.Games.States;
+using Newtonsoft.Json.Linq;
 
 namespace Solcery.DebugViewers
 {
@@ -6,6 +6,6 @@ namespace Solcery.DebugViewers
     {
         void Show();
         void Hide();
-        //void AddGameStatePackage(GameStatePackage gameStatePackage);
+        void AddGameStatePackage(JObject gameStateJson);
     }
 }

@@ -2,8 +2,8 @@
   "dependencies": {
     "com.solcery.bricksinterpretationsystem": "https://github.com/solcery/solcery_client_bricks_interpretation_system.git",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.addressables": "1.20.0",
-    "com.unity.ide.rider": "3.0.14",
+    "com.unity.addressables": "1.20.3",
+    "com.unity.ide.rider": "3.0.15",
     "com.unity.nuget.newtonsoft-json": "3.0.2",
     "com.unity.render-pipelines.universal": "13.1.8",
     "com.unity.textmeshpro": "3.0.6",

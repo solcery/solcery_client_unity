@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.DebugViewers.StateQueues;
 using Solcery.DebugViewers.States;
 using Solcery.DebugViewers.States.Delays;
 using Solcery.DebugViewers.States.Games;
 using Solcery.DebugViewers.Views.Attrs;
 using Solcery.DebugViewers.Views.Objects;
-using Solcery.Games.States;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
@@ -70,6 +71,8 @@ namespace Solcery.DebugViewers
         private JObject _deltaParameters;
         private JObject _fullParameters;
         private DebugState _currentState;
+
+        private IDebugUpdateStateQueue _updateStateQueue;
 
         private void Awake()
         {
@@ -252,7 +255,12 @@ namespace Solcery.DebugViewers
             Hide();
         }
 
-        // void IDebugViewer.AddGameStatePackage(GameStatePackage gameStatePackage)
+        void IDebugViewer.AddGameStatePackage(JObject gameStateJson)
+        {
+            _updateStateQueue.AddUpdateStates(gameStateJson);
+        }
+
+        // void IDebugViewer.AddGameStatePackage(JObject gameStateJson)
         // {
         //     foreach (var state in gameStatePackage.States)
         //     {
