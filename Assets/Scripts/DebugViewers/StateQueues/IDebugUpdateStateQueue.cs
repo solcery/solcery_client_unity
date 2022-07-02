@@ -5,6 +5,7 @@ namespace Solcery.DebugViewers.StateQueues
 {
     public interface IDebugUpdateStateQueue
     {
+        DebugUpdateStateBinary CurrentUpdateState();
         DebugUpdateStateBinary FirstUpdateState();
         DebugUpdateStateBinary LastUpdateState();
         DebugUpdateStateBinary NextUpdateState();

@@ -41,7 +41,7 @@ namespace Solcery.DebugViewers.StateQueues.Binary.Game
             return new DebugUpdateGameStateBinary();
         }
 
-        private DebugUpdateGameStateBinary()
+        private DebugUpdateGameStateBinary() : base(DebugStateTypes.Game)
         {
             _attrList = new List<IDUGSBAttrValue>();
             _removedObjectIdList = new List<int>();

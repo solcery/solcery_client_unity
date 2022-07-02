@@ -34,7 +34,7 @@ namespace Solcery.DebugViewers.StateQueues.Binary.Timer
             return new DebugUpdateTimerStateBinary();
         }
         
-        private DebugUpdateTimerStateBinary() { }
+        private DebugUpdateTimerStateBinary() : base(DebugStateTypes.Timer) { }
         
         protected override void FromJsonImpl(JObject value)
         {

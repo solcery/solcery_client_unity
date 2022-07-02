@@ -8,15 +8,29 @@ namespace Solcery.DebugViewers.StateQueues.Binary
 {
     public abstract class DebugUpdateStateBinary
     {
-        public void InitFromJson(JObject value)
+        public int Index => _index;
+        public DebugStateTypes Type => _type;
+
+        private int _index;
+        private readonly DebugStateTypes _type;
+
+        protected DebugUpdateStateBinary(DebugStateTypes type)
         {
+            _type = type;
+        }
+        
+        public void InitFromJson(int index, JObject value)
+        {
+            _index = index;
             FromJsonImpl(value);
         }
 
         protected abstract void FromJsonImpl(JObject value);
 
-        public void ReadFromFile(string path)
+        public void ReadFromFile(int index, string path)
         {
+            _index = index;
+            
             if (!File.Exists(path))
             {
                 return;
@@ -47,6 +61,7 @@ namespace Solcery.DebugViewers.StateQueues.Binary
 
         public void Cleanup()
         {
+            _index = -1;
             CleanupImpl();
         }
 

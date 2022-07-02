@@ -34,7 +34,7 @@ namespace Solcery.DebugViewers.StateQueues.Binary.Pause
             return new DebugUpdatePauseStateBinary();
         }
         
-        private DebugUpdatePauseStateBinary() { }
+        private DebugUpdatePauseStateBinary() : base(DebugStateTypes.Pause) { }
 
         protected override void FromJsonImpl(JObject value)
         {

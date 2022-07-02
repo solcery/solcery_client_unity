@@ -38,6 +38,11 @@ namespace Solcery.DebugViewers.StateQueues
             Directory.CreateDirectory(directory);
         }
 
+        DebugUpdateStateBinary IDebugUpdateStateQueue.CurrentUpdateState()
+        {
+            return null;
+        }
+
         DebugUpdateStateBinary IDebugUpdateStateQueue.FirstUpdateState()
         {
             return null;
@@ -74,7 +79,7 @@ namespace Solcery.DebugViewers.StateQueues
                         case ContextGameStateTypes.Delay:
                             {
                                 var state = DebugUpdatePauseStateBinary.Get();
-                                state.InitFromJson(stateValue);
+                                state.InitFromJson(fileIndex, stateValue);
                                 state.WriteForFile(string.Format(_pathPattern, fileIndex));
                                 DebugUpdatePauseStateBinary.Release(state);
                                 _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.Delay, fileIndex));
@@ -85,7 +90,7 @@ namespace Solcery.DebugViewers.StateQueues
                             {
                                 var state = DebugUpdateGameStateBinary.Get();
                                 _lastFullGameState = CalculateFullGameState(stateValue);
-                                state.InitFromJson(_lastFullGameState);
+                                state.InitFromJson(fileIndex, _lastFullGameState);
                                 state.WriteForFile(string.Format(_pathPattern, fileIndex));
                                 DebugUpdateGameStateBinary.Release(state);
                                 _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.GameState, fileIndex));
