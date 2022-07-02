@@ -297,7 +297,13 @@ namespace Solcery.DebugViewers.StateQueues
 
         void IDebugUpdateStateQueue.Cleanup()
         {
+            _files.Clear();
             
+            var directory = Path.Combine(Application.persistentDataPath, PathDirectoryPattern);
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory, true);
+            }
         }
     }
 }
