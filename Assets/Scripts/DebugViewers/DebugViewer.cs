@@ -76,6 +76,11 @@ namespace Solcery.DebugViewers
 
         private void Awake()
         {
+#if !UNITY_EDITOR
+            gameObject.SetActive(false);
+            return;
+#endif
+
             _instance = this;
             
             debugShowButton.onClick.AddListener(Show);
@@ -107,6 +112,8 @@ namespace Solcery.DebugViewers
             };
             
             _currentState = null;
+            
+            _updateStateQueue = DebugUpdateStateQueue.Create();
         }
 
         private void OnDestroy()
@@ -134,6 +141,8 @@ namespace Solcery.DebugViewers
             _attrDebugViewPool.Cleanup();
             _objectDebugViewPool.Cleanup();
             _objectAttrDebugViewPool.Cleanup();
+            
+            _updateStateQueue.Cleanup();
         }
 
         private void Show()

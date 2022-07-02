@@ -67,7 +67,8 @@ namespace Solcery.Utils.BinaryConverter.Writer
         public void Cleanup()
         {
             Reset();
-            _data = null;
+            _maxLength = 64;
+            _data = new byte[_maxLength];
         }
 
         public byte[] CopyData()

@@ -13,8 +13,8 @@ namespace Solcery.DebugViewers.StateQueues
 {
     public sealed class DebugUpdateStateQueue : IDebugUpdateStateQueue
     {
-        private const string PathDirectoryPattern = "ugs";
-        private const string PathPattern = "update_state_{0}.json";
+        private const string PathDirectoryPattern = "usb";
+        private const string PathPattern = "update_state_{0}.usb";
 
         private readonly List<Tuple<ContextGameStateTypes, int>> _files;
         private readonly string _pathPattern;
@@ -38,27 +38,27 @@ namespace Solcery.DebugViewers.StateQueues
             Directory.CreateDirectory(directory);
         }
 
-        public DebugUpdateStateBinary FirstUpdateState()
+        DebugUpdateStateBinary IDebugUpdateStateQueue.FirstUpdateState()
         {
             return null;
         }
 
-        public DebugUpdateStateBinary LastUpdateState()
+        DebugUpdateStateBinary IDebugUpdateStateQueue.LastUpdateState()
         {
             return null;
         }
 
-        public DebugUpdateStateBinary NextUpdateState()
+        DebugUpdateStateBinary IDebugUpdateStateQueue.NextUpdateState()
         {
             return null;
         }
 
-        public DebugUpdateStateBinary PreviewUpdateState()
+        DebugUpdateStateBinary IDebugUpdateStateQueue.PreviewUpdateState()
         {
             return null;
         }
         
-        public void AddUpdateStates(JObject gameStateJson)
+        void IDebugUpdateStateQueue.AddUpdateStates(JObject gameStateJson)
         {
             var stateArray = gameStateJson.GetValue<JArray>("states");
             foreach (var stateToken in stateArray)
@@ -102,32 +102,202 @@ namespace Solcery.DebugViewers.StateQueues
         {
             var result = new JObject();
 
-            if (_lastFullGameState == null)
-            {
-                AddAttrs(result, null, gameState.GetValue<JArray>("attrs"));
-            }
+            var attrs = _lastFullGameState != null && _lastFullGameState.TryGetValue("attrs", out JArray rattrs)
+                ? rattrs
+                : null;
+            var objects = _lastFullGameState != null && _lastFullGameState.TryGetValue("objects", out JArray robjects)
+                ? robjects
+                : null;
+            AddAttrs(result, attrs, gameState.GetValue<JArray>("attrs"));
+            AddRemovedObjectId(result, gameState);
+            AddObjects(result, objects, gameState.GetValue<JArray>("objects"));
             
-            return null;
+            return result;
         }
 
         private void AddAttrs(JObject target, JArray preview, JArray current)
         {
-            var attrs = new JArray();
-            target.Add("attrs", attrs);
+            JArray attrs;
+
+            if (!target.TryGetValue("attrs", out attrs))
+            {
+                attrs = new JArray();
+                target.Add("attrs", attrs);
+            }
 
             var index = 0;
             var maxIndex = Mathf.Max(preview?.Count ?? 0, current?.Count ?? 0);
+            var cache = new Dictionary<string, JObject>(attrs.Count);
+
+            foreach (var attrToken in attrs)
+            {
+                if (attrToken is JObject attrObject
+                    && attrObject.TryGetValue("key", out string key))
+                {
+                    cache.Add(key, attrObject);
+                }
+            }
+            
             while (true)
             {
                 if (maxIndex <= index)
                 {
                     break;
                 }
-                
-                
-                
+
+                {
+                    if (preview != null
+                        && preview.Count > index
+                        && preview[index] is JObject po
+                        && po.TryGetValue("key", out string key)
+                        && po.TryGetValue("current", out int value))
+                    {
+                        if (cache.TryGetValue(key, out var obj))
+                        {
+                            if (obj.ContainsKey("preview"))
+                            {
+                                obj["preview"] = new JValue(value);
+                            }
+                            else
+                            {
+                                obj.Add("preview", new JValue(value));
+                            }
+                        }
+                        else
+                        {
+                            obj = new JObject
+                            {
+                                {"key", new JValue(key)},
+                                {"current", new JValue(value)},
+                                {"preview", new JValue(value)}
+                            };
+                            
+                            cache.Add(key, obj);
+                            attrs.Add(obj);
+                        }
+                    }
+                }
+
+                {
+                    if (current != null
+                        && current.Count > index
+                        && current[index] is JObject po
+                        && po.TryGetValue("key", out string key)
+                        && po.TryGetValue("value", out int value))
+                    {
+                        if (cache.TryGetValue(key, out var obj))
+                        {
+                            if (obj.ContainsKey("current"))
+                            {
+                                obj["current"] = new JValue(value);
+                            }
+                            else
+                            {
+                                obj.Add("current", new JValue(value));
+                            }
+                        }
+                        else
+                        {
+                            obj = new JObject
+                            {
+                                {"key", new JValue(key)},
+                                {"current", new JValue(value)},
+                                {"preview", new JValue(value)}
+                            };
+
+                            cache.Add(key, obj);
+                            attrs.Add(obj);
+                        }
+                    }
+                }
+
                 ++index;
             }
+        }
+
+        private void AddRemovedObjectId(JObject target, JObject current)
+        {
+            if (current.TryGetValue("deleted_objects", out JArray roia))
+            {
+                var dobj = new JArray();
+                target.Add("deleted_objects", dobj);
+                foreach (var token in roia)
+                {
+                    dobj.Add(new JValue(token.Value<int>()));
+                }
+            }
+        }
+
+        private void AddObjects(JObject target, JArray preview, JArray current)
+        {
+            var objects = new JArray();
+            target.Add("objects", objects);
+
+            var index = 0;
+            var maxIndex = Mathf.Max(preview?.Count ?? 0, current?.Count ?? 0);
+            var cache = new Dictionary<int, JObject>();
+            while (true)
+            {
+                if (maxIndex <= index)
+                {
+                    break;
+                }
+
+                // preview
+                {
+                    if (preview != null
+                        && preview.Count > index
+                        && preview[index] is JObject po
+                        && po.TryGetValue("id", out int id)
+                        && po.TryGetValue("tplId", out int tplId)
+                        && po.TryGetValue("attrs", out JArray attrs))
+                    {
+                        if (!cache.TryGetValue(id, out var obj))
+                        {
+                            obj = new JObject
+                            {
+                                {"id", new JValue(id)},
+                                {"tplId", new JValue(tplId)}
+                            };
+                            objects.Add(obj);
+                            cache.Add(id, obj);
+                        }
+                        
+                        AddAttrs(obj, attrs, null);
+                    }
+                }
+                
+                // current
+                {
+                    if (current != null
+                        && current.Count > index
+                        && current[index] is JObject po
+                        && po.TryGetValue("id", out int id)
+                        && po.TryGetValue("tplId", out int tplId)
+                        && po.TryGetValue("attrs", out JArray attrs))
+                    {
+                        if (!cache.TryGetValue(id, out var obj))
+                        {
+                            obj = new JObject
+                            {
+                                {"id", new JValue(id)},
+                                {"tplId", new JValue(tplId)}
+                            };
+                            objects.Add(obj);
+                            cache.Add(id, obj);
+                        }
+                        
+                        AddAttrs(obj, null, attrs);
+                    }
+                }
+
+                ++index;
+            }
+        }
+
+        void IDebugUpdateStateQueue.Cleanup()
+        {
+            
         }
     }
 }

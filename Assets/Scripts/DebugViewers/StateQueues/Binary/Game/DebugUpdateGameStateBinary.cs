@@ -66,10 +66,12 @@ namespace Solcery.DebugViewers.StateQueues.Binary.Game
             
             // removed object ids
             {
-                var rol = value.GetValue<JArray>("deleted_objects");
-                foreach (var rot in rol)
+                if (value.TryGetValue("deleted_objects", out JArray rol))
                 {
-                    _removedObjectIdList.Add(rot.Value<int>());
+                    foreach (var rot in rol)
+                    {
+                        _removedObjectIdList.Add(rot.Value<int>());
+                    }
                 }
             }
             

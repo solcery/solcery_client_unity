@@ -3,6 +3,7 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
 using Solcery.BrickInterpretation.Runtime.Values;
+using Solcery.DebugViewers;
 //using Solcery.DebugViewers;
 using Solcery.Games.Contents;
 using Solcery.Games.DTO;
@@ -83,7 +84,6 @@ namespace Solcery.Games
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
             _updateStateQueue = UpdateStateQueue.Create();
-            //_gameStatePackages = new Queue<GameStatePackage>();
             CreateModel();
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
@@ -162,6 +162,7 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
             GameApplication.Instance.EnableBlockTouches(true);
+            DebugViewer.Instance.AddGameStatePackage(gameStateJson);
             _updateStateQueue.PushGameState(gameStateJson);
         }
 
