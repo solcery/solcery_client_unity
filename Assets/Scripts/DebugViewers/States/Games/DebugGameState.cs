@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Solcery.DebugViewers.StateQueues.Binary.Game;
 using Solcery.DebugViewers.States.Games.Attrs;
 using Solcery.DebugViewers.States.Games.Objects;
 using Solcery.DebugViewers.Views.Attrs;
@@ -12,44 +13,35 @@ namespace Solcery.DebugViewers.States.Games
 {
     public sealed class DebugGameState : DebugState<DebugGameStateLayout>
     {
-        public JObject FullState => _fullState;
-
         private DebugStateViewPool<DebugGameStateLayout> _viewPool;
         private DebugStateViewPool<DebugViewAttrLayout> _attrDebugViewPool;
         private DebugStateViewPool<DebugViewObjectLayout> _objectDebugViewPool;
         private DebugStateViewPool<DebugViewAttrLayout> _objectAttrDebugViewPool;
         private RectTransform _content;
-        
-        private readonly JObject _fullState;
 
         private readonly IAttrsValue _attrsValue;
         private readonly IObjectsValue _objectsValue;
         private readonly Dictionary<string, Vector2> _keyToPosition;
 
         public static DebugGameState Create(
-            int stateIndex, 
-            JObject previousFullState, 
-            JObject currentFullState, 
+            DebugUpdateGameStateBinary binary, 
             RectTransform content, 
             DebugStateViewPool<DebugGameStateLayout> viewPool,
             DebugStateViewPool<DebugViewAttrLayout> attrDebugViewPool,
             DebugStateViewPool<DebugViewObjectLayout> objectDebugViewPool,
             DebugStateViewPool<DebugViewAttrLayout> objectAttrDebugViewPool)
         {
-            return new DebugGameState(stateIndex, previousFullState, currentFullState, content, viewPool, attrDebugViewPool, objectDebugViewPool, objectAttrDebugViewPool);
+            return new DebugGameState(binary, content, viewPool, attrDebugViewPool, objectDebugViewPool, objectAttrDebugViewPool);
         }
         
         private DebugGameState(
-            int stateIndex, 
-            JObject previousFullState, 
-            JObject currentFullState, 
+            DebugUpdateGameStateBinary binary, 
             RectTransform content, 
             DebugStateViewPool<DebugGameStateLayout> viewPool,
             DebugStateViewPool<DebugViewAttrLayout> attrDebugViewPool,
             DebugStateViewPool<DebugViewObjectLayout> objectDebugViewPool,
-            DebugStateViewPool<DebugViewAttrLayout> objectAttrDebugViewPool) : base(stateIndex)
+            DebugStateViewPool<DebugViewAttrLayout> objectAttrDebugViewPool) : base(binary.Index)
         {
-            _fullState = currentFullState;
             _content = content;
             _viewPool = viewPool;
             _attrDebugViewPool = attrDebugViewPool;
@@ -57,10 +49,8 @@ namespace Solcery.DebugViewers.States.Games
             _objectAttrDebugViewPool = objectAttrDebugViewPool;
             _keyToPosition = new Dictionary<string, Vector2>();
 
-            _attrsValue = AttrsValue.Create(currentFullState?.GetValue<JArray>("attrs"),
-                previousFullState?.GetValue<JArray>("attrs"));
-            _objectsValue = ObjectsValue.Create(currentFullState?.GetValue<JArray>("objects"),
-                previousFullState?.GetValue<JArray>("objects"));
+            _attrsValue = AttrsValue.Create(binary.Attrs);
+            _objectsValue = ObjectsValue.Create(binary.Objects);
         }
         
         public override void Draw(RectTransform content, JObject parameters)

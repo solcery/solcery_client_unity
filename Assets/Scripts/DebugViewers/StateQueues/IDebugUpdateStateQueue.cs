@@ -10,6 +10,7 @@ namespace Solcery.DebugViewers.StateQueues
         DebugUpdateStateBinary LastUpdateState();
         DebugUpdateStateBinary NextUpdateState();
         DebugUpdateStateBinary PreviewUpdateState();
+        void ReleaseUpdateState(DebugUpdateStateBinary binary);
         void AddUpdateStates(JObject gameStateJson);
         void Cleanup();
     }

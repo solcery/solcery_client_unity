@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.DebugViewers.StateQueues;
 using Solcery.DebugViewers.StateQueues.Binary;
+using Solcery.DebugViewers.StateQueues.Binary.Game;
+using Solcery.DebugViewers.StateQueues.Binary.Pause;
 using Solcery.DebugViewers.States;
-using Solcery.DebugViewers.States.Delays;
 using Solcery.DebugViewers.States.Games;
+using Solcery.DebugViewers.States.Pause;
 using Solcery.DebugViewers.Views.Attrs;
 using Solcery.DebugViewers.Views.Objects;
 using TMPro;
@@ -56,7 +58,7 @@ namespace Solcery.DebugViewers
         public static IDebugViewer Instance => _instance;
         private static IDebugViewer _instance;
 
-        private DebugStateViewPool<DebugDelayStateLayout> _debugDelayStateViewPool;
+        private DebugStateViewPool<DebugPauseStateLayout> _debugDelayStateViewPool;
         private DebugStateViewPool<DebugGameStateLayout> _debugGameStateViewPool;
         private DebugStateViewPool<DebugViewAttrLayout> _attrDebugViewPool;
         private DebugStateViewPool<DebugViewObjectLayout> _objectDebugViewPool;
@@ -87,7 +89,7 @@ namespace Solcery.DebugViewers
             fullButton.onClick.AddListener(Full);
             moveToObject.onValueChanged.AddListener(OnValueChange);
             
-            _debugDelayStateViewPool = DebugStateViewPool<DebugDelayStateLayout>.Create(pool, delayStateViewPrefab, 10);
+            _debugDelayStateViewPool = DebugStateViewPool<DebugPauseStateLayout>.Create(pool, delayStateViewPrefab, 10);
             _debugGameStateViewPool = DebugStateViewPool<DebugGameStateLayout>.Create(pool, gameStateViewPrefab, 10);
             _attrDebugViewPool = DebugStateViewPool<DebugViewAttrLayout>.Create(pool, attrDebugViewPrefab, 10);
             _objectDebugViewPool = DebugStateViewPool<DebugViewObjectLayout>.Create(pool, objectDebugViewPrefab, 10);
@@ -151,7 +153,26 @@ namespace Solcery.DebugViewers
 
         private DebugState CreateDebugState(DebugUpdateStateBinary binary)
         {
-            return null;
+            DebugState result = null;
+            switch (binary)
+            {
+                case DebugUpdatePauseStateBinary bps:
+                    result = DebugPauseState.Create(bps, diffScrollView.content, _debugDelayStateViewPool);
+                    break;
+                
+                case DebugUpdateGameStateBinary bgs:
+                    result = DebugGameState.Create(
+                        bgs,
+                        diffScrollView.content, 
+                        _debugGameStateViewPool,
+                    _attrDebugViewPool,
+                        _objectDebugViewPool,
+                    _objectAttrDebugViewPool);
+                    break;
+            }
+            
+            _updateStateQueue.ReleaseUpdateState(binary);
+            return result;
         }
 
         private void First()

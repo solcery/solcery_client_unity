@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
-using Solcery.Utils;
+using Solcery.DebugViewers.StateQueues.Binary.Game.Object;
 
 namespace Solcery.DebugViewers.States.Games.Objects
 {
@@ -13,56 +11,19 @@ namespace Solcery.DebugViewers.States.Games.Objects
         private readonly List<string> _objectKeys;
         private readonly List<IObjectValue> _objects;
 
-        public static IObjectsValue Create(JArray currentObjectsArray, JArray oldObjectsArray)
+        public static IObjectsValue Create(IReadOnlyList<IDUGSBObjectValue> objects)
         {
-            return new ObjectsValue(currentObjectsArray, oldObjectsArray);
+            return new ObjectsValue(objects);
         }
 
-        private ObjectsValue(JArray currentObjectsArray, JArray oldObjectsArray)
+        private ObjectsValue(IReadOnlyList<IDUGSBObjectValue> objects)
         {
             _objects = new List<IObjectValue>();
             _objectKeys = new List<string>();
-            
-            var objectsCount = Mathf.Max(currentObjectsArray?.Count ?? 0, oldObjectsArray?.Count ?? 0);
-            var currentObjects = new Dictionary<int, JObject>();
-            var oldObjects = new Dictionary<int, JObject>();
-            var ids = new HashSet<int>();
-
-            for (var objectIndex = 0; objectIndex < objectsCount; objectIndex++)
+            foreach (var objectValue in objects)
             {
-                if (currentObjectsArray != null 
-                    && currentObjectsArray.Count > objectIndex 
-                    && currentObjectsArray[objectIndex] is JObject cao
-                    && cao.TryGetValue("id", out int caid))
-                {
-                    if (!ids.Contains(caid))
-                    {
-                        ids.Add(caid);
-                    }
-                    
-                    currentObjects.Add(caid, cao);
-                }
-                
-                if (oldObjectsArray != null 
-                    && oldObjectsArray.Count > objectIndex 
-                    && oldObjectsArray[objectIndex] is JObject oao
-                    && oao.TryGetValue("id", out int oaid))
-                {
-                    if (!ids.Contains(oaid))
-                    {
-                        ids.Add(oaid);
-                    }
-                    
-                    oldObjects.Add(oaid, oao);
-                }
-            }
-
-            foreach (var id in ids)
-            {
-                var currentObject = currentObjects.TryGetValue(id, out var co) ? co : null;
-                var oldObject = oldObjects.TryGetValue(id, out var oo) ? oo : null;
-                _objectKeys.Add(id.ToString());
-                _objects.Add(ObjectValue.Create(currentObject, oldObject));
+                _objectKeys.Add(objectValue.Id.ToString());
+                _objects.Add(ObjectValue.Create(objectValue));
             }
         }
     }

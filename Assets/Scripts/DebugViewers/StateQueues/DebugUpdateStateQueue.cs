@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.DebugViewers.StateQueues.Binary;
 using Solcery.DebugViewers.StateQueues.Binary.Game;
 using Solcery.DebugViewers.StateQueues.Binary.Pause;
+using Solcery.DebugViewers.StateQueues.Binary.Timer;
 using Solcery.Games.Contexts.GameStates;
 using Solcery.Utils;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Solcery.DebugViewers.StateQueues
         private readonly List<Tuple<ContextGameStateTypes, int>> _files;
         private readonly string _pathPattern;
 
+        private int _currentIndex;
+
         public static IDebugUpdateStateQueue Create()
         {
             return new DebugUpdateStateQueue();
@@ -27,6 +30,7 @@ namespace Solcery.DebugViewers.StateQueues
         private DebugUpdateStateQueue()
         {
             _files = new List<Tuple<ContextGameStateTypes, int>>();
+            _currentIndex = 0;
             var directory = Path.Combine(Application.persistentDataPath, PathDirectoryPattern);
             _pathPattern = Path.Combine(directory, PathPattern);
 
@@ -38,29 +42,79 @@ namespace Solcery.DebugViewers.StateQueues
             Directory.CreateDirectory(directory);
         }
 
+        private DebugUpdateStateBinary GetUpdateStateBinaryForIndex(int index)
+        {
+            if (_files.Count <= index)
+            {
+                return null;
+            }
+
+            var file = _files[index];
+
+            switch (file.Item1)
+            {
+                case ContextGameStateTypes.Delay:
+                    var ps = DebugUpdatePauseStateBinary.Get();
+                    ps.ReadFromFile(index, string.Format(_pathPattern, index));
+                    return ps;
+                
+                case ContextGameStateTypes.GameState:
+                    var gs = DebugUpdateGameStateBinary.Get();
+                    gs.ReadFromFile(index, string.Format(_pathPattern, index));
+                    return gs;
+                
+                default:
+                    return null;
+            }
+        }
+
         DebugUpdateStateBinary IDebugUpdateStateQueue.CurrentUpdateState()
         {
-            return null;
+            return GetUpdateStateBinaryForIndex(_currentIndex);
         }
 
         DebugUpdateStateBinary IDebugUpdateStateQueue.FirstUpdateState()
         {
-            return null;
+            _currentIndex = 0;
+            return GetUpdateStateBinaryForIndex(_currentIndex);
         }
 
         DebugUpdateStateBinary IDebugUpdateStateQueue.LastUpdateState()
         {
-            return null;
+            _currentIndex = _files.Count - 1;
+            return GetUpdateStateBinaryForIndex(_currentIndex);
         }
 
         DebugUpdateStateBinary IDebugUpdateStateQueue.NextUpdateState()
         {
-            return null;
+            _currentIndex++;
+            _currentIndex = Mathf.Min(_currentIndex, _files.Count - 1);
+            return GetUpdateStateBinaryForIndex(_currentIndex);
         }
 
         DebugUpdateStateBinary IDebugUpdateStateQueue.PreviewUpdateState()
         {
-            return null;
+            _currentIndex--;
+            _currentIndex = Mathf.Max(_currentIndex, 0);
+            return GetUpdateStateBinaryForIndex(_currentIndex);
+        }
+
+        void IDebugUpdateStateQueue.ReleaseUpdateState(DebugUpdateStateBinary binary)
+        {
+            switch (binary)
+            {
+                case DebugUpdatePauseStateBinary bps:
+                    DebugUpdatePauseStateBinary.Release(bps);
+                    break;
+                
+                case DebugUpdateGameStateBinary bgs:
+                    DebugUpdateGameStateBinary.Release(bgs);
+                    break;
+                
+                case DebugUpdateTimerStateBinary bts:
+                    DebugUpdateTimerStateBinary.Release(bts);
+                    break;
+            }
         }
         
         void IDebugUpdateStateQueue.AddUpdateStates(JObject gameStateJson)
@@ -83,6 +137,7 @@ namespace Solcery.DebugViewers.StateQueues
                                 state.WriteForFile(string.Format(_pathPattern, fileIndex));
                                 DebugUpdatePauseStateBinary.Release(state);
                                 _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.Delay, fileIndex));
+                                _currentIndex = _files.Count - 1;
                             }
                             break;
 
@@ -94,6 +149,7 @@ namespace Solcery.DebugViewers.StateQueues
                                 state.WriteForFile(string.Format(_pathPattern, fileIndex));
                                 DebugUpdateGameStateBinary.Release(state);
                                 _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.GameState, fileIndex));
+                                _currentIndex = _files.Count - 1;
                             }
                             break;
                     }
@@ -267,6 +323,11 @@ namespace Solcery.DebugViewers.StateQueues
                             objects.Add(obj);
                             cache.Add(id, obj);
                         }
+
+                        if (obj.ContainsKey("new"))
+                        {
+                            obj.Remove("new");
+                        }
                         
                         AddAttrs(obj, attrs, null);
                     }
@@ -285,6 +346,7 @@ namespace Solcery.DebugViewers.StateQueues
                         {
                             obj = new JObject
                             {
+                                {"new", new JValue(true)},
                                 {"id", new JValue(id)},
                                 {"tplId", new JValue(tplId)}
                             };
@@ -302,6 +364,7 @@ namespace Solcery.DebugViewers.StateQueues
 
         void IDebugUpdateStateQueue.Cleanup()
         {
+            _currentIndex = 0;
             _files.Clear();
             
             var directory = Path.Combine(Application.persistentDataPath, PathDirectoryPattern);

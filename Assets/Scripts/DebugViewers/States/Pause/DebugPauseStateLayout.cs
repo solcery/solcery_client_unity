@@ -1,10 +1,9 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-namespace Solcery.DebugViewers.States.Delays
+namespace Solcery.DebugViewers.States.Pause
 {
-    public sealed class DebugDelayStateLayout : MonoBehaviour
+    public sealed class DebugPauseStateLayout : MonoBehaviour
     {
         public TMP_Text Delay;
 

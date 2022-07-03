@@ -1,24 +1,25 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.DebugViewers.StateQueues.Binary.Pause;
 using UnityEngine;
 
-namespace Solcery.DebugViewers.States.Delays
+namespace Solcery.DebugViewers.States.Pause
 {
-    public sealed class DebugDelayState : DebugState<DebugDelayStateLayout>
+    public sealed class DebugPauseState : DebugState<DebugPauseStateLayout>
     {
-        private DebugStateViewPool<DebugDelayStateLayout> _viewPool;
-        private RectTransform _content;
+        private readonly DebugStateViewPool<DebugPauseStateLayout> _viewPool;
+        private readonly RectTransform _content;
         private readonly int _delayMSec;
         private readonly List<string> _fakeMoveToKeys;
 
-        public static DebugDelayState Create(int stateIndex, int delayMSec, RectTransform content, DebugStateViewPool<DebugDelayStateLayout> viewPool)
+        public static DebugPauseState Create(DebugUpdatePauseStateBinary binary, RectTransform content, DebugStateViewPool<DebugPauseStateLayout> viewPool)
         {
-            return new DebugDelayState(stateIndex, delayMSec, content, viewPool);
+            return new DebugPauseState(binary, content, viewPool);
         }
 
-        private DebugDelayState(int stateIndex, int delayMSec, RectTransform content, DebugStateViewPool<DebugDelayStateLayout> viewPool) : base(stateIndex)
+        private DebugPauseState(DebugUpdatePauseStateBinary binary, RectTransform content, DebugStateViewPool<DebugPauseStateLayout> viewPool) : base(binary.Index)
         {
-            _delayMSec = delayMSec;
+            _delayMSec = binary.DelayMSec;
             _content = content;
             _viewPool = viewPool;
             _fakeMoveToKeys = new List<string>();

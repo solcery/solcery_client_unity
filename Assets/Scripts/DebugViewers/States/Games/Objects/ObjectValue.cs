@@ -1,6 +1,5 @@
-using Newtonsoft.Json.Linq;
+using Solcery.DebugViewers.StateQueues.Binary.Game.Object;
 using Solcery.DebugViewers.States.Games.Attrs;
-using Solcery.Utils;
 
 namespace Solcery.DebugViewers.States.Games.Objects
 {
@@ -18,31 +17,18 @@ namespace Solcery.DebugViewers.States.Games.Objects
         private readonly int _tplId;
         private readonly IAttrsValue _attrs;
 
-        public static IObjectValue Create(JObject currentObject, JObject oldJObject)
+        public static IObjectValue Create(IDUGSBObjectValue objectValue)
         {
-            return new ObjectValue(currentObject, oldJObject);
+            return new ObjectValue(objectValue);
         }
         
-        private ObjectValue(JObject currentObject, JObject oldJObject)
+        private ObjectValue(IDUGSBObjectValue objectValue)
         {
-            _isDestroyed = currentObject == null;
-            _isCreated = oldJObject == null;
-
-            if (currentObject != null)
-            {
-                _id = currentObject.GetValue<int>("id");
-                _tplId = currentObject.GetValue<int>("tplId");
-            }
-            else
-            {
-                if (oldJObject != null)
-                {
-                    _id = oldJObject.GetValue<int>("id");
-                    _tplId = oldJObject.GetValue<int>("tplId");
-                }
-            }
-
-            _attrs = AttrsValue.Create(currentObject?.GetValue<JArray>("attrs"), oldJObject?.GetValue<JArray>("attrs"));
+            _isDestroyed = false;
+            _isCreated = objectValue.IsNew;
+            _id = objectValue.Id;
+            _tplId = objectValue.TplId;
+            _attrs = AttrsValue.Create(objectValue.Attrs);
         }
     }
 }

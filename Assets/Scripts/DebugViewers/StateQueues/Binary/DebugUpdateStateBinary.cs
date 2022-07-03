@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils.BinaryConverter.Reader;
@@ -35,15 +34,15 @@ namespace Solcery.DebugViewers.StateQueues.Binary
             {
                 return;
             }
-
-            using var file = File.OpenRead(path);
-            var buffer = new Span<byte>();
-            file.Read(buffer);
+            
+            // using var file = File.OpenRead(path);
+            // var buffer = new Span<byte>();
+            // file.Read(buffer);
             var reader = BinaryDataReader.Get();
-            reader.SetSource(buffer.ToArray());
+            reader.SetSource(File.ReadAllBytes(path));
             FromBinaryImpl(reader);
             BinaryDataReader.Release(reader);
-            buffer.Clear();
+            //buffer.Clear();
         }
 
         protected abstract void FromBinaryImpl(IBinaryDataReader reader);
