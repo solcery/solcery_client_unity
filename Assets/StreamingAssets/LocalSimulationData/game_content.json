@@ -41799,53 +41799,19 @@
             {
               "name": "action1",
               "value": {
-                "name": "Two actions",
+                "name": "Stop Timer",
                 "type": 0,
-                "subtype": 1,
-                "params": [
-                  {
-                    "name": "action1",
-                    "value": {
-                      "name": "Stop Timer",
-                      "type": 0,
-                      "subtype": 16,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "action2",
-                    "value": {
-                      "name": "End Player Turn",
-                      "subtype": 10166,
-                      "type": 0,
-                      "params": []
-                    }
-                  }
-                ]
+                "subtype": 16,
+                "params": []
               }
             },
             {
               "name": "action2",
               "value": {
-                "name": "Start Timer",
+                "name": "End Player Turn",
+                "subtype": 10166,
                 "type": 0,
-                "subtype": 15,
-                "params": [
-                  {
-                    "name": "duration",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 5000
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "params": []
               }
             }
           ]
