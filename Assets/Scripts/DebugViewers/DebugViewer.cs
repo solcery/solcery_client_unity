@@ -74,7 +74,6 @@ namespace Solcery.DebugViewers
         {
 #if !UNITY_EDITOR
             gameObject.SetActive(false);
-            return;
 #endif
 
             _instance = this;
