@@ -11,6 +11,7 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Timer;
 using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
 
@@ -44,6 +45,9 @@ namespace Solcery.Models.Play
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
 
+            // TODO обновляем таймер
+            _systems.Add(SystemTimerUpdate.Create(game));
+            
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             

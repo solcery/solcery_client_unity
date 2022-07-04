@@ -4,6 +4,7 @@ using Solcery.Services.Renderer.DTO;
 using Solcery.Ui;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace Solcery
 {
     public class GameApplication : MonoBehaviour
     {
+        [SerializeField]
+        private TMP_Text timer;
         [SerializeField]
         private Transform worldGame;
         [SerializeField]
@@ -47,7 +50,7 @@ namespace Solcery
             WebGLInput.captureAllKeyboardInput = false;
             #endif
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
-                WidgetCanvas.Create(worldGame, uiGame, dragDropCanvas),
+                WidgetCanvas.Create(timer, worldGame, uiGame, dragDropCanvas),
                 ServiceRenderDto.Create(renderFrame, renderPrefab)));
             _game.Init();
         }
