@@ -249,7 +249,9 @@ namespace Solcery.DebugViewers
 
         void IDebugViewer.AddGameStatePackage(JObject gameStateJson)
         {
+#if UNITY_EDITOR
             _updateStateQueue.AddUpdateStates(gameStateJson);
+#endif
         }
 
         // void IDebugViewer.AddGameStatePackage(JObject gameStateJson)
