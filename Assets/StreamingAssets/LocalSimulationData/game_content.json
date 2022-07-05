@@ -19999,7 +19999,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 10000
+                                            "value": 100000
                                           }
                                         ]
                                       }
@@ -57917,7 +57917,7 @@
         "x2": 7925,
         "y1": 7600,
         "y2": 9800,
-        "layout": 6,
+        "layout": 9,
         "z_order": 10,
         "show_frame": true,
         "drag_n_drops": [

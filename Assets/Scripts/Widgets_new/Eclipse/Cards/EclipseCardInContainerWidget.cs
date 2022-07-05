@@ -170,12 +170,14 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _dragDropCacheSiblingIndex = _layout.RectTransform.GetSiblingIndex();
             
             _layout.RaycastOff();
+            var size = _layout.RectTransform.rect.size;
             _layout.UpdateParent(parent, true);
             _dragAnchorMin = _layout.RectTransform.anchorMin;
             _dragAnchorMax = _layout.RectTransform.anchorMax;
             _layout.RectTransform.anchorMin = Vector2.zero;
             _layout.RectTransform.anchorMax = Vector2.zero;
             _layout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(position);
+            _layout.RectTransform.sizeDelta = size;
         }
 
         void IDraggableWidget.OnMove(Vector3 position)
