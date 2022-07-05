@@ -34,8 +34,8 @@ RectTransform:
   m_Father: {fileID: 3143025928819917211}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.12}
-  m_AnchorMax: {x: 1, y: 0.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -73,7 +73,7 @@ RectTransform:
   - {fileID: 2018008284442156597}
   - {fileID: 72368415987998546}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.75, y: 0.35}
   m_AnchorMax: {x: 0.85, y: 0.65}
@@ -115,8 +115,10 @@ MonoBehaviour:
   rectTransform: {fileID: 3143025928819917211}
   background: {fileID: 1759370358946952907}
   canvasGroup: {fileID: 155594405924533497}
+  caption: {fileID: 0}
+  frame: {fileID: 0}
   content: {fileID: 3143025930282575442}
-  fakeContent: {fileID: 5897071667314273786}
+  spacing: 0
   text: {fileID: 3143025929730252714}
 --- !u!1 &3143025929257725072
 GameObject:
