@@ -4,9 +4,11 @@ using Solcery.DebugViewers.StateQueues;
 using Solcery.DebugViewers.StateQueues.Binary;
 using Solcery.DebugViewers.StateQueues.Binary.Game;
 using Solcery.DebugViewers.StateQueues.Binary.Pause;
+using Solcery.DebugViewers.StateQueues.Binary.Timer;
 using Solcery.DebugViewers.States;
 using Solcery.DebugViewers.States.Games;
 using Solcery.DebugViewers.States.Pause;
+using Solcery.DebugViewers.States.Timer;
 using Solcery.DebugViewers.Views.Attrs;
 using Solcery.DebugViewers.Views.Objects;
 using TMPro;
@@ -45,7 +47,9 @@ namespace Solcery.DebugViewers
         [SerializeField]
         private RectTransform pool;
         [SerializeField]
-        private GameObject delayStateViewPrefab;
+        private GameObject pauseStateViewPrefab;
+        [SerializeField]
+        private GameObject timerStateViewPrefab;
         [SerializeField]
         private GameObject gameStateViewPrefab;
         [SerializeField]
@@ -58,7 +62,8 @@ namespace Solcery.DebugViewers
         public static IDebugViewer Instance => _instance;
         private static IDebugViewer _instance;
 
-        private DebugStateViewPool<DebugPauseStateLayout> _debugDelayStateViewPool;
+        private DebugStateViewPool<DebugPauseStateLayout> _debugPauseStateViewPool;
+        private DebugStateViewPool<DebugTimerStateLayout> _debugTimerStateViewPool;
         private DebugStateViewPool<DebugGameStateLayout> _debugGameStateViewPool;
         private DebugStateViewPool<DebugViewAttrLayout> _attrDebugViewPool;
         private DebugStateViewPool<DebugViewObjectLayout> _objectDebugViewPool;
@@ -88,7 +93,8 @@ namespace Solcery.DebugViewers
             fullButton.onClick.AddListener(Full);
             moveToObject.onValueChanged.AddListener(OnValueChange);
             
-            _debugDelayStateViewPool = DebugStateViewPool<DebugPauseStateLayout>.Create(pool, delayStateViewPrefab, 10);
+            _debugPauseStateViewPool = DebugStateViewPool<DebugPauseStateLayout>.Create(pool, pauseStateViewPrefab, 10);
+            _debugTimerStateViewPool = DebugStateViewPool<DebugTimerStateLayout>.Create(pool, timerStateViewPrefab, 10);
             _debugGameStateViewPool = DebugStateViewPool<DebugGameStateLayout>.Create(pool, gameStateViewPrefab, 10);
             _attrDebugViewPool = DebugStateViewPool<DebugViewAttrLayout>.Create(pool, attrDebugViewPrefab, 10);
             _objectDebugViewPool = DebugStateViewPool<DebugViewObjectLayout>.Create(pool, objectDebugViewPrefab, 10);
@@ -127,7 +133,8 @@ namespace Solcery.DebugViewers
             _fullParameters = null;
             _currentState?.Cleanup();
             
-            _debugDelayStateViewPool.Cleanup();
+            _debugPauseStateViewPool.Cleanup();
+            _debugTimerStateViewPool.Cleanup();
             _debugGameStateViewPool.Cleanup();
             _attrDebugViewPool.Cleanup();
             _objectDebugViewPool.Cleanup();
@@ -156,7 +163,11 @@ namespace Solcery.DebugViewers
             switch (binary)
             {
                 case DebugUpdatePauseStateBinary bps:
-                    result = DebugPauseState.Create(bps, diffScrollView.content, _debugDelayStateViewPool);
+                    result = DebugPauseState.Create(bps, diffScrollView.content, _debugPauseStateViewPool);
+                    break;
+                
+                case DebugUpdateTimerStateBinary bts:
+                    result = DebugTimerState.Create(bts, diffScrollView.content, _debugTimerStateViewPool);
                     break;
                 
                 case DebugUpdateGameStateBinary bgs:
@@ -252,36 +263,5 @@ namespace Solcery.DebugViewers
             _updateStateQueue.AddUpdateStates(gameStateJson);
 #endif
         }
-
-        // void IDebugViewer.AddGameStatePackage(JObject gameStateJson)
-        // {
-        //     foreach (var state in gameStatePackage.States)
-        //     {
-        //         switch (state)
-        //         {
-        //             case GameState gs:
-        //                 var previousFullState = _gameStates.Count > 0 ? _gameStates[^1].FullState : null;
-        //                 var gameState = DebugGameState.Create(
-        //                     _states.Count, 
-        //                     previousFullState, 
-        //                     gs.GameStateObject,
-        //                     diffScrollView.content, 
-        //                     _debugGameStateViewPool,
-        //                     _attrDebugViewPool,
-        //                     _objectDebugViewPool,
-        //                     _objectAttrDebugViewPool);
-        //                 _states.Add(DebugStateInfo.Create(DebugStateTypes.Game, _gameStates.Count));
-        //                 _gameStates.Add(gameState);
-        //                 break;
-        //             
-        //             case PauseState ps:
-        //                 var delayState = DebugDelayState.Create(_states.Count, ps.Delay, diffScrollView.content,
-        //                     _debugDelayStateViewPool);
-        //                 _states.Add(DebugStateInfo.Create(DebugStateTypes.Delay, _delayStates.Count));
-        //                 _delayStates.Add(delayState);
-        //                 break;
-        //         }
-        //     }
-        // }
     }
 }

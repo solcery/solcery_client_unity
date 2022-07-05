@@ -1717,6 +1717,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1037630828031378665, guid: 3e033babd546a4a7fb0b23afb2101a2a, type: 3}
     - target: {fileID: 6664420257697084874, guid: 98f04d957484c452091cd8bd4f7cab30, type: 3}
+      propertyPath: pauseStateViewPrefab
+      value: 
+      objectReference: {fileID: 1037630828031378665, guid: 3e033babd546a4a7fb0b23afb2101a2a, type: 3}
+    - target: {fileID: 6664420257697084874, guid: 98f04d957484c452091cd8bd4f7cab30, type: 3}
+      propertyPath: timerStateViewPrefab
+      value: 
+      objectReference: {fileID: 1037630828031378665, guid: ced8861683e0645569a6692f8729b374, type: 3}
+    - target: {fileID: 6664420257697084874, guid: 98f04d957484c452091cd8bd4f7cab30, type: 3}
       propertyPath: objectDebugViewPrefab
       value: 
       objectReference: {fileID: 4061254691891569636, guid: f33d57adcc9b34c0cbf3fe39256409e0, type: 3}
