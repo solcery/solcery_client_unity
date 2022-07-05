@@ -53,7 +53,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a42386bb4982d4faaa9bab17512bb251
-    m_Address: ui/ui_eclipse_hand
+    m_Address: ui/ui_eclipse_event_tracker
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -84,6 +84,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: abf8110cf569a40d2a806f85fd4e49a3
     m_Address: ui/ui_eclipse_card_full
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b932e17f86e44fe398389751850deb5
+    m_Address: ui/ui_eclipse_event_tracker_one_card
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -16,19 +16,18 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayout>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
+    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayoutBase>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
     {
         private readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
         private readonly Dictionary<int, List<int>> _tokensPerCardCache;
-        
+        private readonly bool _defaultBlockRaycasts;
+
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
         {
             return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
-
-        private bool _defaultBlockRaycasts;
-
+        
         private PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
@@ -107,7 +106,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void UpdateCardsAnimation(EcsWorld world)
         {
-            Layout.RebuildScroll();
+            Layout.Rebuild();
             foreach (var eclipseCard in _cards.Values)
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(eclipseCard.EntityId).Attributes;

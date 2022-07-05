@@ -28,13 +28,13 @@ namespace Solcery.Widgets_new
         Button = 4,
         [EnumPlaceWidgetPrefabPath("ui/ui_picture")]
         Picture = 5,
-        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_event_tracker_one_card")]
         EclipseOneCard = 6,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_full")]
         EclipseOneCardFull = 7,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_token_storage")]
         EclipseTokenStorage = 8,
-        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_hand")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_event_tracker")]
         EclipseEventTracker = 9
     }
 }
