@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 
 namespace Solcery.Widgets_new.Tooltip
 {
-    public abstract class TooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler
+    public abstract class TooltipBehaviour : MonoBehaviour, IPointerExitHandler, IPointerMoveHandler, IPointerUpHandler
     {
         protected int TooltipId = -1;
-        protected bool Active = false;
+        protected bool Active;
         
         public abstract void OnPointerMove(PointerEventData eventData);
         
@@ -41,6 +41,14 @@ namespace Solcery.Widgets_new.Tooltip
             
             Active = false;
             ServiceEvents.Current.BroadcastEvent(OnTooltipHideEventData.Create(TooltipId));
-        }        
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            if (Active)
+            {
+                HideTooltip();
+            }
+        }
     }
 }
