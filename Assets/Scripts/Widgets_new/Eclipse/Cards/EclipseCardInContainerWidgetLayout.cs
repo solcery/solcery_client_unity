@@ -18,7 +18,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [HideInInspector]
         public int EntityId;
         [HideInInspector]
-        public int AttachEntityId;
+        public int? AttachEntityId = null;
         public PlaceWidget ParentPlaceWidget;
         
         [SerializeField]
@@ -217,6 +217,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         private void OnOnPointerLeftButtonClick(PointerEventData eventData)
         {
+            if (AttachEntityId == null)
+            {
+                return;
+            }
+            
             ParentPlaceWidget = transform.parent.GetComponentInParent<PlaceWidgetLayout>().PlaceWidget;
             RectTransformUtility.ScreenPointToWorldPointInRectangle
             (
@@ -225,7 +230,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(AttachEntityId, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(AttachEntityId.Value, position, eventData));
         }
         
         private void OnOnPointerRightButtonClick()

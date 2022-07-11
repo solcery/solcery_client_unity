@@ -18,11 +18,13 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private EclipseCardInContainerWidgetLayout _layout;
         private EclipseCardTypes _eclipseCardType;
         private int _entityId;
+        private int _cardType;
         private int _objectId;
         private int _order;
 
         int IEclipseCardInContainerWidget.Order => _order;
         int IEclipseCardInContainerWidget.EntityId => _entityId;
+        int IEclipseCardInContainerWidget.CardType => _cardType;
         
         public static IEclipseCardInContainerWidget Create(IGame game, GameObject prefab, Transform poolTransform)
         {
@@ -35,11 +37,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
         }
 
-        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, EclipseCardTypes type, JObject data)
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int objectType, EclipseCardTypes type, JObject data)
         {
             _entityId = entityId;
             _objectId = objectId;
             _eclipseCardType = type;
+            _cardType = objectType;
             
             var typeFontSize = data.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 5f;
             _layout.UpdateType(type.ToString(), typeFontSize);
@@ -210,7 +213,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         #region Ecs support
 
-        int IEntityId.AttachEntityId => _layout.AttachEntityId;
+        int IEntityId.AttachEntityId => _layout.AttachEntityId ?? -1;
 
         void IEntityId.UpdateAttachEntityId(int entityId)
         {

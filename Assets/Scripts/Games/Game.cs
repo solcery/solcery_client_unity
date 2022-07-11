@@ -233,6 +233,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.ClearAttrs, BrickActionClearAttrs.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StartTimer, BrickActionStartTimer.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StopTimer, BrickActionStopTimer.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Transform, BrickActionTransform.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
@@ -245,6 +246,14 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Argument, BrickConditionArgument.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorOr, BrickConditionIteratorOr.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorAnd, BrickConditionIteratorAnd.Create);
+
+            if (!_serviceBricks.TryCheckAllBrickRegistration(out var unregisteredBrickList))
+            {
+                foreach (var ub in unregisteredBrickList)
+                {
+                    Debug.LogWarning(ub);
+                }
+            }
         }
 
         private void Cleanup()

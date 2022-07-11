@@ -81,5 +81,18 @@ namespace Solcery.Games.Contexts
             cardTypeId = -1;
             return false;
         }
+
+        public bool SetCardTypeId(object @object, int cardTypeId)
+        {
+            var poolObjectId = _world.GetPool<ComponentObjectType>();
+            if (@object is int entityId 
+                && poolObjectId.Has(entityId))
+            {
+                poolObjectId.Get(entityId).Type = cardTypeId;
+                return true;
+            }
+
+            return false;
+        }
     }
 }
