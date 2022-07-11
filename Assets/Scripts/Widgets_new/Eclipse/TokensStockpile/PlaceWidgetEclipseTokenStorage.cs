@@ -67,9 +67,22 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                         AttachDragAndDrop(world, entityId, objectId, eclipseToken);
                     }
 
+                    if (eclipseToken.TypeId != typeId)
+                    {
+                        UpdateFromCardTypeData(objectId, typeId, cardTypes, eclipseToken);
+                    }
+
                     UpdateToken(world, eclipseToken, attributes);
                     UpdateDragAndDrop(world, eclipseToken);
                 }
+            }
+        }
+
+        private void UpdateFromCardTypeData(int objectId, int typeId, Dictionary<int, JObject> cardTypes, ITokenInContainerWidget eclipseToken)
+        {
+            if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+            {
+                eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
             }
         }
 
@@ -95,11 +108,13 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 var objectTypePool = world.GetPool<ComponentObjectType>();
                 if (Game.TokenInContainerWidgetPool.TryPop(out var eclipseToken))
                 {
-                    if (objectTypePool.Has(entityId)
-                        && cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
-                    {
-                        eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
-                    }
+                    // if (objectTypePool.Has(entityId)
+                    //     && cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+                    // {
+                    //     eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
+                    // }
+
+                    UpdateFromCardTypeData(objectId, typeId, cardTypes, eclipseToken);
                     
                     if (_tokensByType.TryGetValue(typeId, out var tokenList))
                     {
