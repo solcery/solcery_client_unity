@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Tooltips;
 using Solcery.Services.Events;
 using Solcery.Utils;
@@ -16,13 +17,17 @@ namespace Solcery.Models.Play.Tooltip
     {
         private EventData _uiEventData;
         private EcsFilter _tooltipsFilter;
+        private IGame _game;
         
-        public static ISystemOnTooltipShow Create()
+        public static ISystemOnTooltipShow Create(IGame game)
         {
-            return new SystemOnTooltipShow();
+            return new SystemOnTooltipShow(game);
         }
-        
-        private SystemOnTooltipShow() { }
+
+        private SystemOnTooltipShow(IGame game)
+        {
+            _game = game;
+        }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
@@ -55,7 +60,7 @@ namespace Solcery.Models.Play.Tooltip
             if (_uiEventData is OnTooltipShowEventData onTooltipShowEventData
                 && tooltips.TryGetValue(onTooltipShowEventData.TooltipId, out var tooltipDataObject))
             {
-                GameApplication.Game().TooltipController.Show(tooltipDataObject, onTooltipShowEventData.WorldPosition);
+                GameApplication.Game().TooltipController.Show(_game, world, tooltipDataObject, onTooltipShowEventData.WorldPosition);
             }
             
             _uiEventData = null;

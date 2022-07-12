@@ -4,6 +4,7 @@ namespace Solcery.Games
     {
         // Card
         public static readonly string CardTypes = "card_types";
+        public static readonly string CardType = "type";
         public static readonly string CardName = "name";
         public static readonly string CardDescription = "description";
         public static readonly string CardPicture = "picture";
@@ -39,6 +40,7 @@ namespace Solcery.Games
         public static readonly string TooltipDelay = "font_size";
         public static readonly string TooltipFillColor = "fill_color";
         public static readonly string TooltipFontSize = "font_size";
+        public static readonly string TooltipCardTypeId = "card_type_id";
         
         // Global Card Attribute
         public static readonly string GlobalCardAttributes = "card_attributes";

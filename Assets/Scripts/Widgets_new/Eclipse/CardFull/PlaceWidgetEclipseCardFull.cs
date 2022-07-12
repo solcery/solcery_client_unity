@@ -110,36 +110,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         
         private void UpdateCardType(EclipseCardTypes type, JObject cardTypeDataObject)
         {
-            var typeFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 20f;
-            Layout.UpdateType(type.ToString(), typeFontSize);
-
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardName, out string name))
-            {
-                var nameFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardNameFontSize, out int nameFontSizeAttribute) ? nameFontSizeAttribute : 20f;
-                Layout.UpdateName(name, nameFontSize);
-            }
-
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string description))
-            {
-                var descriptionFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescriptionFontSize, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 40f;
-                Layout.UpdateDescription(description, descriptionFontSize);
-            }
-
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardPicture, out string picture)
-                && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
-            {
-                Layout.UpdateSprite(texture);
-            }
-                
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
-            {
-                Layout.TimerLayout.UpdateTimerTextActive(true);
-                Layout.TimerLayout.UpdateTimerText(timerText);
-            }
-            else
-            {
-                Layout.TimerLayout.UpdateTimerTextActive(false);
-            }        
+            Layout.UpdateCardType(Game, type, cardTypeDataObject);
         }
 
         private void UpdateToken(EcsWorld world, int entityId, JObject cardTypeDataObject)

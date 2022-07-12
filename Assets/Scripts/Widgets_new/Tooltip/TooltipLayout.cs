@@ -1,3 +1,8 @@
+using Newtonsoft.Json.Linq;
+using Solcery.Games;
+using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.CardFull;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,16 +12,28 @@ namespace Solcery.Widgets_new.Tooltip
     public class TooltipLayout : MonoBehaviour
     {
         public RectTransform RectTransform;
-        [SerializeField] private TextMeshProUGUI description;
+        [SerializeField] private TextMeshProUGUI simpleText;
         [SerializeField] private Image background;
-
-        public void UpdateText(string text)
+        [SerializeField] private PlaceWidgetEclipseCardFullLayout eclipseCard;
+        
+        public void ShowEclipseCard(IGame game, JObject cardTypeDataObject)
         {
-            description.text = text;
+            if (cardTypeDataObject.TryGetEnum(GameJsonKeys.CardType, out EclipseCardTypes eclipseCardType))
+            {
+                eclipseCard.UpdateCardType(game, eclipseCardType, cardTypeDataObject);
+                eclipseCard.TokensLayout.UpdateTokenSlots(0);
+                eclipseCard.gameObject.SetActive(true);
+            }
         }
 
-        public void UpdateFillColor(string fillColor)
+        public void ShowSimpleText(JObject tooltipDataObject)
         {
+            if (simpleText == null)
+                return;
+            
+            simpleText.text = tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText);
+            simpleText.fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;;
+            var fillColor = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
             if (fillColor != null)
             {
                 if (ColorUtility.TryParseHtmlString(fillColor, out var bgColor))
@@ -27,11 +44,13 @@ namespace Solcery.Widgets_new.Tooltip
                     }
                 }
             }
+            simpleText.gameObject.SetActive(true);
         }
 
-        public void UpdateFontSize(int fontSize)
+        public void HideContent()
         {
-            description.fontSize = fontSize;
+            simpleText.gameObject.SetActive(false);
+            eclipseCard.gameObject.SetActive(false);
         }
     }
 }

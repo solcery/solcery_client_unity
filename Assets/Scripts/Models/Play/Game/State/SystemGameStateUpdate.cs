@@ -249,7 +249,7 @@ namespace Solcery.Models.Play.Game.State
                 ref var entityTypesComponent = ref world.GetPool<ComponentObjectTypes>().Get(filterEntityTypeId);
                 if (entityTypesComponent.Types.TryGetValue(typeId, out var entityTypeData))
                 {
-                    if (entityTypeData.TryGetEnum("type", out EclipseCardTypes eclipseCardType))
+                    if (entityTypeData.TryGetEnum(GameJsonKeys.CardType, out EclipseCardTypes eclipseCardType))
                     {
                         tagPool.Add(entityIndex);
                         eclipseCartTypePool.Add(entityIndex).CardType = eclipseCardType;

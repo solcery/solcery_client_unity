@@ -65,7 +65,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnRightClick.Create(game));
             
             // TODO tooltip
-            _systems.Add(SystemOnTooltipShow.Create());
+            _systems.Add(SystemOnTooltipShow.Create(game));
             _systems.Add(SystemOnTooltipHide.Create());
             
 

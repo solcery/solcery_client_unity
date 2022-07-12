@@ -1,3 +1,4 @@
+using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Services.Resources;
@@ -42,21 +43,40 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void Show(JObject tooltipDataObject, Vector2 targetPosition)
+        public void Show(IGame game, EcsWorld world, JObject tooltipDataObject, Vector2 targetPosition)
         {
             if (_tooltipLayout == null)
             {
                 Initialize();
             }
+
+            UpdateTooltipContent(game, world, tooltipDataObject);
+            UpdateTooltipDelay(tooltipDataObject);
+            UpdateTooltipPosition(tooltipDataObject, targetPosition);
+        }
+
+        private void UpdateTooltipContent(IGame game, EcsWorld world, JObject tooltipDataObject)
+        {
+            _tooltipLayout.HideContent();
+            var cardTypes = world.GetCardTypes();
+            if (tooltipDataObject.TryGetValue<int>(GameJsonKeys.TooltipCardTypeId, out var cardType) && 
+                cardTypes.TryGetValue(cardType, out var cardTypeDataObject))
+            {
+                _tooltipLayout.ShowEclipseCard(game, cardTypeDataObject);
+            }
             
-            _tooltipLayout.UpdateText(tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText));
+            _tooltipLayout.ShowSimpleText(tooltipDataObject);
+        }
+
+        private void UpdateTooltipPosition(JObject tooltipDataObject, Vector2 targetPosition)
+        {
             _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
-            var fillColor = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
-            _tooltipLayout.UpdateFillColor(fillColor);
-            var fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;
-            _tooltipLayout.UpdateFontSize(fontSize);
+        }
+
+        private void UpdateTooltipDelay(JObject tooltipDataObject)
+        {
             var delaySec = tooltipDataObject.GetValue<int>(GameJsonKeys.TooltipDelay).ToSec();
-            if (delaySec >= 0)
+            if (delaySec > 0)
             {
                 Hide();
                 _delaySec = delaySec;
