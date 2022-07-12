@@ -33,6 +33,11 @@ namespace Solcery.Widgets_new.Tooltip
             
             simpleText.text = tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText);
             simpleText.fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;;
+        }
+
+
+        public void UpdateFillColor(JObject tooltipDataObject)
+        {
             var fillColor = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
             if (fillColor != null)
             {
@@ -51,6 +56,12 @@ namespace Solcery.Widgets_new.Tooltip
         {
             simpleText.gameObject.SetActive(false);
             eclipseCard.gameObject.SetActive(false);
+        }
+        
+        public virtual void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
+        {
+            RectTransform.anchorMin = anchorMin;
+            RectTransform.anchorMax = anchorMax;
         }
     }
 }

@@ -34,7 +34,11 @@ namespace Solcery.Games
         public static readonly string PlaceTooltipId = "tooltip_id";
         public static readonly string PlaceCaption = "caption";
         public static readonly string PlaceCaptionColor = "caption_color";
-        
+        public static readonly string PlaceX1 = "x1";
+        public static readonly string PlaceX2 = "x2";
+        public static readonly string PlaceY1 = "y1";
+        public static readonly string PlaceY2 = "y2";
+
         // Tooltip
         public static readonly string TooltipText = "text";
         public static readonly string TooltipDelay = "font_size";

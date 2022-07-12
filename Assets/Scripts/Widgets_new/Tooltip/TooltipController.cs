@@ -64,13 +64,28 @@ namespace Solcery.Widgets_new.Tooltip
             {
                 _tooltipLayout.ShowEclipseCard(game, cardTypeDataObject);
             }
+            else
+            {
+                _tooltipLayout.ShowSimpleText(tooltipDataObject);
+            }
             
-            _tooltipLayout.ShowSimpleText(tooltipDataObject);
+            _tooltipLayout. UpdateFillColor(tooltipDataObject);
         }
 
         private void UpdateTooltipPosition(JObject tooltipDataObject, Vector2 targetPosition)
         {
-            _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
+            var x1 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceX1, out int xt1) ? xt1 / GameConsts.AnchorDivider : 0f;
+            var x2 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceX2, out int xt2) ? xt2 / GameConsts.AnchorDivider : 0f;
+            var y1 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceY1, out int yt1) ? yt1 / GameConsts.AnchorDivider : 0f;
+            var y2 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceY2, out int yt2) ? yt2 / GameConsts.AnchorDivider : 0f;
+            if (x1 == 0 && x2 == 0 && y1 == 0 && y2 == 0)
+            {
+                _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
+            }
+            else
+            {
+                _tooltipLayout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
+            }
         }
 
         private void UpdateTooltipDelay(JObject tooltipDataObject)

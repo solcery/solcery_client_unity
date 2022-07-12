@@ -17,7 +17,7 @@ namespace Solcery.Models.Play.Tooltip
     {
         private EventData _uiEventData;
         private EcsFilter _tooltipsFilter;
-        private IGame _game;
+        private readonly IGame _game;
         
         public static ISystemOnTooltipShow Create(IGame game)
         {

@@ -12,7 +12,6 @@ namespace Solcery.Widgets_new
 {
     public abstract class PlaceWidget
     {
-
         public static void RefreshPlaceWidgetOrderZ(Transform widgetParentTransform)
         {
             var staticOrderZLayoutCount = StaticOrderZLayout.StaticOrderZCount;
@@ -38,7 +37,6 @@ namespace Solcery.Widgets_new
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
     {
-        private const float AnchorDivider = 10000.0f;
         
         protected T Layout;
         protected IGame Game;
@@ -62,10 +60,10 @@ namespace Solcery.Widgets_new
                 PlaceId = placeDataObject.TryGetValue(GameJsonKeys.PlaceId, out int pid) ? pid : -1;
                 DragDropId = placeDataObject.TryGetValue("drag_n_drop", out int dnd) ? dnd : -1;
 
-                var x1 = placeDataObject.TryGetValue("x1", out int xt1) ? xt1 / AnchorDivider : 0f;
-                var x2 = placeDataObject.TryGetValue("x2", out int xt2) ? xt2 / AnchorDivider : 0f;
-                var y1 = placeDataObject.TryGetValue("y1", out int yt1) ? yt1 / AnchorDivider : 0f;
-                var y2 = placeDataObject.TryGetValue("y2", out int yt2) ? yt2 / AnchorDivider : 0f;
+                var x1 = placeDataObject.TryGetValue(GameJsonKeys.PlaceX1, out int xt1) ? xt1 / GameConsts.AnchorDivider : 0f;
+                var x2 = placeDataObject.TryGetValue(GameJsonKeys.PlaceX2, out int xt2) ? xt2 / GameConsts.AnchorDivider : 0f;
+                var y1 = placeDataObject.TryGetValue(GameJsonKeys.PlaceY1, out int yt1) ? yt1 / GameConsts.AnchorDivider : 0f;
+                var y2 = placeDataObject.TryGetValue(GameJsonKeys.PlaceY2, out int yt2) ? yt2 / GameConsts.AnchorDivider : 0f;
                 Layout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
                 if (x1 >= x2 || y1 >= y2)
                 {
