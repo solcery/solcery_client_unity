@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Canvas
         RectTransform GetTooltipsCanvas();
         RootDragDropLayout GetDragDropCanvas();
         IWidgetEffects GetEffects();
+        float GetScaleFactor();
         void Destroy();
     }
 }

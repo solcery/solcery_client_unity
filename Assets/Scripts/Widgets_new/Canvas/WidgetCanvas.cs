@@ -13,6 +13,7 @@ namespace Solcery.Widgets_new.Canvas
         private RootUiGame _uiRoot;
         private RootDragDropLayout _dragDropRoot;
         private IWidgetEffects _widgetEffects;
+        private UnityEngine.Canvas _uiCanvas;
         
         public static IWidgetCanvas Create(TMP_Text timer, Transform worldRoot, RootUiGame uiRoot, RootDragDropLayout dragDropRoot)
         {
@@ -47,7 +48,12 @@ namespace Solcery.Widgets_new.Canvas
         {
             return _widgetEffects;
         }
-        
+
+        public float GetScaleFactor()
+        {
+            return _uiRoot.UiCanvas.scaleFactor;
+        }
+
         RectTransform IWidgetCanvas.GetTooltipsCanvas()
         {
             return _uiRoot.Tooltips;

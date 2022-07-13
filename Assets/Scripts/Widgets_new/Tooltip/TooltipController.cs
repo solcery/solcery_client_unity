@@ -130,19 +130,20 @@ namespace Solcery.Widgets_new.Tooltip
         private Vector2 GetPosition(Vector2 targetPosition)
         {
             var sizeDelta = _tooltipLayout.RectTransform.sizeDelta;
-            var halfTooltipWidth = sizeDelta.x * 0.5f;
-            var halfTooltipHeight = sizeDelta.y * 0.5f;
+            var scaleFactor = _widgetCanvas.GetScaleFactor();
+            var halfTooltipWidth = sizeDelta.x * scaleFactor * 0.5f;
+            var halfTooltipHeight = sizeDelta.y * scaleFactor * 0.5f;
             var leftLimit = Screen.safeArea.x + halfTooltipWidth + BorderOffset;
             var rightLimit = Screen.safeArea.width - halfTooltipWidth - BorderOffset;
             var topLimit = Screen.safeArea.height - halfTooltipHeight - BorderOffset;
             var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
 
             var newX = targetPosition.x;
-            var newY = targetPosition.y + halfTooltipHeight + VerticalOffset;
+            var newY = targetPosition.y + halfTooltipHeight + VerticalOffset * scaleFactor;
             
             if (newY > topLimit)
             {
-                newY = targetPosition.y - halfTooltipHeight - VerticalOffset;
+                newY = targetPosition.y - halfTooltipHeight - VerticalOffset * scaleFactor;
             }
 
             newX = Mathf.Clamp(newX, leftLimit, rightLimit);

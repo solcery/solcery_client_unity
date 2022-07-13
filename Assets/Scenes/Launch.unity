@@ -1692,6 +1692,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.6629639
       objectReference: {fileID: 0}
+    - target: {fileID: 3673213316691381525, guid: 98f04d957484c452091cd8bd4f7cab30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -48.339188
+      objectReference: {fileID: 0}
     - target: {fileID: 4853609575864848798, guid: 98f04d957484c452091cd8bd4f7cab30, type: 3}
       propertyPath: m_Name
       value: DebugViewer
@@ -2683,6 +2687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea42b593564924f979d5abf4994ac537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UiCanvas: {fileID: 1944453781}
   Background: {fileID: 1140071410}
   Game: {fileID: 1404377787}
   Effects: {fileID: 2105492900}
