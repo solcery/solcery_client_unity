@@ -1921,7 +1921,7 @@
                                               "params": [
                                                 {
                                                   "name": "value",
-                                                  "value": 1000
+                                                  "value": 3000
                                                 }
                                               ]
                                             }
@@ -9221,7 +9221,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 1000
+                                            "value": 3000
                                           }
                                         ]
                                       }
@@ -30451,7 +30451,7 @@
                                         "params": [
                                           {
                                             "name": "value",
-                                            "value": 1000
+                                            "value": 3000
                                           }
                                         ]
                                       }
