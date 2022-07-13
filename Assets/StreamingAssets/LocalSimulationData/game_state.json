@@ -21,10 +21,6 @@
             "value": 0
           },
           {
-            "key": "omens_for_showcase",
-            "value": 0
-          },
-          {
             "key": "place_45_visibility",
             "value": 0
           },
@@ -40,7 +36,7 @@
         "objects": [
           {
             "id": 1,
-            "tplId": 518,
+            "tplId": 514,
             "attrs": [
               {
                 "key": "reactive",
@@ -198,7 +194,7 @@
           },
           {
             "id": 2,
-            "tplId": 505,
+            "tplId": 501,
             "attrs": [
               {
                 "key": "reactive",
@@ -356,7 +352,7 @@
           },
           {
             "id": 3,
-            "tplId": 532,
+            "tplId": 528,
             "attrs": [
               {
                 "key": "reactive",
@@ -514,7 +510,7 @@
           },
           {
             "id": 4,
-            "tplId": 599,
+            "tplId": 595,
             "attrs": [
               {
                 "key": "reactive",
@@ -672,7 +668,7 @@
           },
           {
             "id": 5,
-            "tplId": 488,
+            "tplId": 484,
             "attrs": [
               {
                 "key": "reactive",
@@ -830,7 +826,7 @@
           },
           {
             "id": 6,
-            "tplId": 580,
+            "tplId": 576,
             "attrs": [
               {
                 "key": "reactive",
@@ -988,7 +984,7 @@
           },
           {
             "id": 7,
-            "tplId": 495,
+            "tplId": 491,
             "attrs": [
               {
                 "key": "reactive",
@@ -1146,7 +1142,7 @@
           },
           {
             "id": 8,
-            "tplId": 545,
+            "tplId": 541,
             "attrs": [
               {
                 "key": "reactive",
@@ -1304,7 +1300,7 @@
           },
           {
             "id": 9,
-            "tplId": 486,
+            "tplId": 482,
             "attrs": [
               {
                 "key": "reactive",
@@ -1462,7 +1458,7 @@
           },
           {
             "id": 10,
-            "tplId": 569,
+            "tplId": 565,
             "attrs": [
               {
                 "key": "reactive",
@@ -1620,7 +1616,7 @@
           },
           {
             "id": 11,
-            "tplId": 541,
+            "tplId": 537,
             "attrs": [
               {
                 "key": "reactive",
@@ -1778,7 +1774,7 @@
           },
           {
             "id": 12,
-            "tplId": 582,
+            "tplId": 578,
             "attrs": [
               {
                 "key": "reactive",
@@ -1936,7 +1932,7 @@
           },
           {
             "id": 13,
-            "tplId": 520,
+            "tplId": 516,
             "attrs": [
               {
                 "key": "reactive",
@@ -2094,7 +2090,7 @@
           },
           {
             "id": 14,
-            "tplId": 546,
+            "tplId": 542,
             "attrs": [
               {
                 "key": "reactive",
@@ -2252,7 +2248,7 @@
           },
           {
             "id": 15,
-            "tplId": 525,
+            "tplId": 521,
             "attrs": [
               {
                 "key": "reactive",
@@ -2410,7 +2406,7 @@
           },
           {
             "id": 16,
-            "tplId": 573,
+            "tplId": 569,
             "attrs": [
               {
                 "key": "reactive",
@@ -2568,7 +2564,7 @@
           },
           {
             "id": 17,
-            "tplId": 534,
+            "tplId": 530,
             "attrs": [
               {
                 "key": "reactive",
@@ -2726,7 +2722,7 @@
           },
           {
             "id": 18,
-            "tplId": 521,
+            "tplId": 517,
             "attrs": [
               {
                 "key": "reactive",
@@ -2884,7 +2880,7 @@
           },
           {
             "id": 19,
-            "tplId": 568,
+            "tplId": 564,
             "attrs": [
               {
                 "key": "reactive",
@@ -3042,7 +3038,7 @@
           },
           {
             "id": 20,
-            "tplId": 562,
+            "tplId": 558,
             "attrs": [
               {
                 "key": "reactive",
@@ -3200,7 +3196,7 @@
           },
           {
             "id": 21,
-            "tplId": 570,
+            "tplId": 566,
             "attrs": [
               {
                 "key": "reactive",
@@ -3358,7 +3354,7 @@
           },
           {
             "id": 22,
-            "tplId": 536,
+            "tplId": 532,
             "attrs": [
               {
                 "key": "reactive",
@@ -3516,7 +3512,7 @@
           },
           {
             "id": 23,
-            "tplId": 575,
+            "tplId": 571,
             "attrs": [
               {
                 "key": "reactive",
@@ -3674,7 +3670,7 @@
           },
           {
             "id": 24,
-            "tplId": 533,
+            "tplId": 529,
             "attrs": [
               {
                 "key": "reactive",
@@ -3832,7 +3828,7 @@
           },
           {
             "id": 25,
-            "tplId": 544,
+            "tplId": 540,
             "attrs": [
               {
                 "key": "reactive",
@@ -3844,7 +3840,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 529
+                "value": 525
               },
               {
                 "key": "destroyed",
@@ -3990,7 +3986,7 @@
           },
           {
             "id": 26,
-            "tplId": 540,
+            "tplId": 536,
             "attrs": [
               {
                 "key": "reactive",
@@ -4148,7 +4144,7 @@
           },
           {
             "id": 27,
-            "tplId": 598,
+            "tplId": 594,
             "attrs": [
               {
                 "key": "reactive",
@@ -4306,7 +4302,7 @@
           },
           {
             "id": 28,
-            "tplId": 501,
+            "tplId": 497,
             "attrs": [
               {
                 "key": "reactive",
@@ -4318,7 +4314,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 494
+                "value": 490
               },
               {
                 "key": "destroyed",
@@ -4464,7 +4460,7 @@
           },
           {
             "id": 29,
-            "tplId": 561,
+            "tplId": 557,
             "attrs": [
               {
                 "key": "reactive",
@@ -4622,7 +4618,7 @@
           },
           {
             "id": 30,
-            "tplId": 507,
+            "tplId": 503,
             "attrs": [
               {
                 "key": "reactive",
@@ -4634,7 +4630,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 539
+                "value": 535
               },
               {
                 "key": "destroyed",
@@ -4780,7 +4776,7 @@
           },
           {
             "id": 31,
-            "tplId": 491,
+            "tplId": 487,
             "attrs": [
               {
                 "key": "reactive",
@@ -4792,7 +4788,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 539
+                "value": 535
               },
               {
                 "key": "destroyed",
@@ -4938,7 +4934,7 @@
           },
           {
             "id": 32,
-            "tplId": 558,
+            "tplId": 554,
             "attrs": [
               {
                 "key": "reactive",
@@ -4950,7 +4946,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 529
+                "value": 525
               },
               {
                 "key": "destroyed",
@@ -5096,7 +5092,7 @@
           },
           {
             "id": 33,
-            "tplId": 577,
+            "tplId": 573,
             "attrs": [
               {
                 "key": "reactive",
@@ -5254,7 +5250,7 @@
           },
           {
             "id": 34,
-            "tplId": 566,
+            "tplId": 562,
             "attrs": [
               {
                 "key": "reactive",
@@ -5374,7 +5370,7 @@
               },
               {
                 "key": "place",
-                "value": 1
+                "value": 54
               },
               {
                 "key": "is_building_site",
@@ -5412,7 +5408,7 @@
           },
           {
             "id": 35,
-            "tplId": 515,
+            "tplId": 511,
             "attrs": [
               {
                 "key": "reactive",
@@ -5424,7 +5420,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 494
+                "value": 490
               },
               {
                 "key": "destroyed",
@@ -5570,7 +5566,7 @@
           },
           {
             "id": 36,
-            "tplId": 496,
+            "tplId": 492,
             "attrs": [
               {
                 "key": "reactive",
@@ -5728,7 +5724,7 @@
           },
           {
             "id": 37,
-            "tplId": 593,
+            "tplId": 589,
             "attrs": [
               {
                 "key": "reactive",
@@ -5886,7 +5882,7 @@
           },
           {
             "id": 38,
-            "tplId": 502,
+            "tplId": 498,
             "attrs": [
               {
                 "key": "reactive",
@@ -6044,7 +6040,7 @@
           },
           {
             "id": 39,
-            "tplId": 514,
+            "tplId": 510,
             "attrs": [
               {
                 "key": "reactive",
@@ -6202,7 +6198,7 @@
           },
           {
             "id": 40,
-            "tplId": 528,
+            "tplId": 524,
             "attrs": [
               {
                 "key": "reactive",
@@ -6360,7 +6356,7 @@
           },
           {
             "id": 41,
-            "tplId": 487,
+            "tplId": 483,
             "attrs": [
               {
                 "key": "reactive",
@@ -6518,7 +6514,7 @@
           },
           {
             "id": 42,
-            "tplId": 531,
+            "tplId": 527,
             "attrs": [
               {
                 "key": "reactive",
@@ -6676,7 +6672,7 @@
           },
           {
             "id": 43,
-            "tplId": 492,
+            "tplId": 488,
             "attrs": [
               {
                 "key": "reactive",
@@ -6834,7 +6830,7 @@
           },
           {
             "id": 44,
-            "tplId": 558,
+            "tplId": 554,
             "attrs": [
               {
                 "key": "reactive",
@@ -6846,7 +6842,7 @@
               },
               {
                 "key": "produced_token_type",
-                "value": 529
+                "value": 525
               },
               {
                 "key": "destroyed",
@@ -6992,7 +6988,7 @@
           },
           {
             "id": 45,
-            "tplId": 549,
+            "tplId": 545,
             "attrs": [
               {
                 "key": "reactive",
@@ -7150,7 +7146,7 @@
           },
           {
             "id": 46,
-            "tplId": 538,
+            "tplId": 534,
             "attrs": [
               {
                 "key": "reactive",
@@ -7308,7 +7304,7 @@
           },
           {
             "id": 47,
-            "tplId": 489,
+            "tplId": 485,
             "attrs": [
               {
                 "key": "reactive",
@@ -7466,7 +7462,7 @@
           },
           {
             "id": 48,
-            "tplId": 584,
+            "tplId": 580,
             "attrs": [
               {
                 "key": "reactive",
@@ -7624,7 +7620,7 @@
           },
           {
             "id": 49,
-            "tplId": 509,
+            "tplId": 505,
             "attrs": [
               {
                 "key": "reactive",
@@ -7782,7 +7778,7 @@
           },
           {
             "id": 50,
-            "tplId": 547,
+            "tplId": 543,
             "attrs": [
               {
                 "key": "reactive",
@@ -7940,7 +7936,7 @@
           },
           {
             "id": 51,
-            "tplId": 493,
+            "tplId": 489,
             "attrs": [
               {
                 "key": "reactive",
@@ -8098,7 +8094,7 @@
           },
           {
             "id": 52,
-            "tplId": 559,
+            "tplId": 555,
             "attrs": [
               {
                 "key": "reactive",
@@ -8256,7 +8252,7 @@
           },
           {
             "id": 53,
-            "tplId": 554,
+            "tplId": 550,
             "attrs": [
               {
                 "key": "reactive",
@@ -8414,7 +8410,7 @@
           },
           {
             "id": 54,
-            "tplId": 594,
+            "tplId": 590,
             "attrs": [
               {
                 "key": "reactive",
@@ -8572,7 +8568,7 @@
           },
           {
             "id": 55,
-            "tplId": 510,
+            "tplId": 506,
             "attrs": [
               {
                 "key": "reactive",
@@ -8730,7 +8726,7 @@
           },
           {
             "id": 56,
-            "tplId": 565,
+            "tplId": 561,
             "attrs": [
               {
                 "key": "reactive",
@@ -8888,7 +8884,7 @@
           },
           {
             "id": 57,
-            "tplId": 511,
+            "tplId": 507,
             "attrs": [
               {
                 "key": "reactive",
@@ -9046,7 +9042,7 @@
           },
           {
             "id": 58,
-            "tplId": 587,
+            "tplId": 583,
             "attrs": [
               {
                 "key": "reactive",
@@ -9204,7 +9200,7 @@
           },
           {
             "id": 59,
-            "tplId": 586,
+            "tplId": 582,
             "attrs": [
               {
                 "key": "reactive",
@@ -9362,7 +9358,7 @@
           },
           {
             "id": 60,
-            "tplId": 586,
+            "tplId": 582,
             "attrs": [
               {
                 "key": "reactive",
@@ -9520,7 +9516,7 @@
           },
           {
             "id": 61,
-            "tplId": 563,
+            "tplId": 559,
             "attrs": [
               {
                 "key": "reactive",
@@ -9678,7 +9674,7 @@
           },
           {
             "id": 62,
-            "tplId": 551,
+            "tplId": 547,
             "attrs": [
               {
                 "key": "reactive",
@@ -9836,7 +9832,7 @@
           },
           {
             "id": 63,
-            "tplId": 497,
+            "tplId": 493,
             "attrs": [
               {
                 "key": "reactive",
@@ -9994,7 +9990,7 @@
           },
           {
             "id": 64,
-            "tplId": 585,
+            "tplId": 581,
             "attrs": [
               {
                 "key": "reactive",
@@ -10152,7 +10148,7 @@
           },
           {
             "id": 65,
-            "tplId": 585,
+            "tplId": 581,
             "attrs": [
               {
                 "key": "reactive",
@@ -10310,7 +10306,7 @@
           },
           {
             "id": 66,
-            "tplId": 596,
+            "tplId": 592,
             "attrs": [
               {
                 "key": "reactive",
@@ -10468,7 +10464,7 @@
           },
           {
             "id": 67,
-            "tplId": 611,
+            "tplId": 607,
             "attrs": [
               {
                 "key": "reactive",
@@ -10626,7 +10622,7 @@
           },
           {
             "id": 68,
-            "tplId": 613,
+            "tplId": 609,
             "attrs": [
               {
                 "key": "reactive",
@@ -10784,7 +10780,7 @@
           },
           {
             "id": 69,
-            "tplId": 615,
+            "tplId": 611,
             "attrs": [
               {
                 "key": "reactive",
