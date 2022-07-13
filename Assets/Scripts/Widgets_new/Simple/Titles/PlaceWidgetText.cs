@@ -51,5 +51,10 @@ namespace Solcery.Widgets_new.Simple.Titles
             
             Layout.UpdateTitle("No card type data.");
         }
+
+        public override PlaceWidgetLayout LayoutForObjectId(int objectId)
+        {
+            return Layout;
+        }
     }
 }

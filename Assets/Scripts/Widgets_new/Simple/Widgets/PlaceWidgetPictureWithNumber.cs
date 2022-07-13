@@ -66,5 +66,10 @@ namespace Solcery.Widgets_new.Simple.Widgets
                 }
             }
         }
+
+        public override PlaceWidgetLayout LayoutForObjectId(int objectId)
+        {
+            return Layout;
+        }
     }
 }

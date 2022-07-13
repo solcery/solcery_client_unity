@@ -1,3 +1,4 @@
+using Solcery.Widgets_new.Timer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +18,13 @@ namespace Solcery.Widgets_new
         [SerializeField] protected CanvasGroup canvasGroup;
         [SerializeField] private TextMeshProUGUI caption;
         [SerializeField] private Image frame;
+        [SerializeField] private PlaceWidgetTimerLayout timer;
 
         private int _placeId;
         private int _orderZ;
         private int _linkedEntityId;
         private PlaceWidget _placeWidget;
+        private IPlaceWidgetTimer _widgetTimer;
         
         public void UpdatePlaceWidget(PlaceWidget placeWidget)
         {
@@ -136,6 +139,22 @@ namespace Solcery.Widgets_new
         public void UpdateBlocksRaycasts(bool blocksRaycasts)
         {
             canvasGroup.blocksRaycasts = blocksRaycasts;
+        }
+        
+        public virtual void StartTimer(int durationMsec)
+        {
+            _widgetTimer ??= PlaceWidgetTimer.Create(timer);
+            _widgetTimer?.Start(durationMsec);
+        }
+
+        public virtual void UpdateTimer(int durationMsec)
+        {
+            _widgetTimer?.Update(durationMsec);
+        }
+        //
+        public virtual void StopTimer()
+        {
+            _widgetTimer?.Stop();
         }
     }
 }

@@ -45,15 +45,15 @@ namespace Solcery.Models.Play
             _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
             _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
 
-            // TODO обновляем таймер
-            _systems.Add(SystemTimerUpdate.Create(game));
-            
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
             
             // TODO сюда добавляем новые системы и тд
             _systems.Add(SystemPlaceUpdateVisibility.Create(game.ServiceBricks as IServiceBricksInternal));
             _systems.Add(SystemPlaceUpdateWidgets.Create(game));
+            
+            // TODO обновляем таймер
+            _systems.Add(SystemTimerUpdate.Create(game));
             
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));
