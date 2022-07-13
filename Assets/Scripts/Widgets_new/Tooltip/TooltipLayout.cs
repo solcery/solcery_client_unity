@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects.Eclipse;
@@ -15,7 +16,7 @@ namespace Solcery.Widgets_new.Tooltip
         [SerializeField] private TextMeshProUGUI simpleText;
         [SerializeField] private Image background;
         [SerializeField] private PlaceWidgetEclipseCardFullLayout eclipseCard;
-        
+
         public void ShowEclipseCard(IGame game, JObject cardTypeDataObject)
         {
             if (cardTypeDataObject.TryGetEnum(GameJsonKeys.CardType, out EclipseCardTypes eclipseCardType))
@@ -58,10 +59,16 @@ namespace Solcery.Widgets_new.Tooltip
             eclipseCard.gameObject.SetActive(false);
         }
         
-        public virtual void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
+        public void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)
         {
             RectTransform.anchorMin = anchorMin;
             RectTransform.anchorMax = anchorMax;
+        }
+
+        public void ToDefaultAnchors()
+        {
+            RectTransform.anchoredPosition = Vector2.zero;
+            UpdateAnchor(Vector2.zero, Vector2.zero);
         }
     }
 }

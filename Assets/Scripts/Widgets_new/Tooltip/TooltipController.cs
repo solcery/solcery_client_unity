@@ -13,10 +13,11 @@ namespace Solcery.Widgets_new.Tooltip
         private const float BorderOffset = 50f;
         private const float VerticalOffset = 30f;
         private const string PrefabPathKey = "ui/ui_tooltip";
-        private TooltipLayout _tooltipLayout;
         private float? _delaySec;
         private readonly IWidgetCanvas _widgetCanvas;
         private readonly IServiceResource _serviceResource;
+        private TooltipLayout _tooltipLayout;
+        private int _tooltipId = -1;
         
         public static TooltipController Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
@@ -43,15 +44,21 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void Show(IGame game, EcsWorld world, JObject tooltipDataObject, Vector2 targetPosition)
+        public void Show(int tooltipId, IGame game, EcsWorld world, JObject tooltipDataObject, Vector2 targetPosition)
         {
             if (_tooltipLayout == null)
             {
                 Initialize();
             }
 
-            UpdateTooltipContent(game, world, tooltipDataObject);
-            UpdateTooltipDelay(tooltipDataObject);
+            if (_tooltipId != tooltipId)
+            {
+                _tooltipLayout.ToDefaultAnchors();
+                UpdateTooltipContent(game, world, tooltipDataObject);
+                UpdateTooltipDelay(tooltipDataObject);
+                _tooltipId = tooltipId;
+            }
+
             UpdateTooltipPosition(tooltipDataObject, targetPosition);
         }
 
@@ -100,6 +107,7 @@ namespace Solcery.Widgets_new.Tooltip
 
         public void Hide()
         {
+            _tooltipId = -1;
             _delaySec = null;
             SetTooltipActive(false);
         }
@@ -111,8 +119,6 @@ namespace Solcery.Widgets_new.Tooltip
                 && component is TooltipLayout layout)
             {
                 _tooltipLayout = layout;
-                _tooltipLayout.RectTransform.anchorMin = Vector2.zero; 
-                _tooltipLayout.RectTransform.anchorMax = Vector2.zero;
                 _tooltipLayout.gameObject.SetActive(false);
             }
             else

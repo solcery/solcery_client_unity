@@ -60,7 +60,7 @@ namespace Solcery.Models.Play.Tooltip
             if (_uiEventData is OnTooltipShowEventData onTooltipShowEventData
                 && tooltips.TryGetValue(onTooltipShowEventData.TooltipId, out var tooltipDataObject))
             {
-                GameApplication.Game().TooltipController.Show(_game, world, tooltipDataObject, onTooltipShowEventData.WorldPosition);
+                GameApplication.Game().TooltipController.Show(onTooltipShowEventData.TooltipId, _game, world, tooltipDataObject, onTooltipShowEventData.WorldPosition);
             }
             
             _uiEventData = null;
