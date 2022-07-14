@@ -34,6 +34,7 @@ namespace Solcery.Widgets_new.Tooltip
             
             simpleText.text = tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText);
             simpleText.fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;;
+            simpleText.gameObject.SetActive(true);
         }
 
 
@@ -50,7 +51,6 @@ namespace Solcery.Widgets_new.Tooltip
                     }
                 }
             }
-            simpleText.gameObject.SetActive(true);
         }
 
         public void HideContent()
