@@ -65,6 +65,11 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             }
         }
 
+        public override PlaceWidgetLayout LayoutForObjectId(int objectId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void UpdateCard(EcsWorld world, int entityId, EclipseCardTypes type, JObject cardTypeDataObject)
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))

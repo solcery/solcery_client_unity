@@ -28,6 +28,7 @@ namespace Solcery.Widgets_new.Effects
             Sprite sprite,
             Vector3 from,
             float time,
+            Color color,
             Action onMoveComplete)
         {
             var to = rectTransform.transform.position;
@@ -36,6 +37,7 @@ namespace Solcery.Widgets_new.Effects
             effect.Image.sprite = sprite;
             effect.transform.position = from;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
+            effect.UpdateEffectColor(color);
 
             effect.UpdateCreateAnimation(true);
             DOTween.To(_ => { }, 0, 0, 0.2f).OnComplete(() =>
@@ -59,6 +61,7 @@ namespace Solcery.Widgets_new.Effects
         public void DestroyToken(RectTransform rectTransform, 
             Sprite sprite,
             float time,
+            Color color,
             Action onMoveComplete)
         {
             var effect = Object.Instantiate(_effectRoot.TokenEffect, _effectRoot.transform, false)
@@ -67,6 +70,7 @@ namespace Solcery.Widgets_new.Effects
             effect.transform.position = rectTransform.transform.position;
             effect.RectTransform.sizeDelta = rectTransform.rect.size;
             effect.UpdateDestroyAnimation(true);
+            effect.UpdateEffectColor(color);
 
             DOTween.Sequence()
                 .Append(effect.RectTransform.DOScale(new Vector3(1.5f, 1.5f, 1f), time / 2))

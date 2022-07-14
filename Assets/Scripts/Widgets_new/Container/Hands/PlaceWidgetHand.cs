@@ -115,6 +115,11 @@ namespace Solcery.Widgets_new.Container.Hands
             }
         }
 
+        public override PlaceWidgetLayout LayoutForObjectId(int objectId)
+        {
+            throw new NotImplementedException();
+        }
+
         private PlaceWidget GetPlaceWidget(
             int placeId, 
             EcsPool<ComponentPlaceId> poolPlaceId,

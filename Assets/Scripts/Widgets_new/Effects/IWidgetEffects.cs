@@ -22,11 +22,13 @@ namespace Solcery.Widgets_new.Effects
             Sprite sprite,
             Vector3 from,
             float time,
+            Color color,
             Action onMoveComplete);
 
         public void DestroyToken(RectTransform rectTransform,
             Sprite sprite,
             float time,
+            Color color,
             Action onMoveComplete);
 
         void Destroy();

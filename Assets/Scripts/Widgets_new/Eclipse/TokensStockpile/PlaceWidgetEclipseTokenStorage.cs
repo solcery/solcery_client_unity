@@ -72,10 +72,16 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                         UpdateFromCardTypeData(objectId, typeId, cardTypes, eclipseToken);
                     }
 
-                    UpdateToken(world, eclipseToken, attributes);
+                    var ctd = cardTypes.TryGetValue(typeId, out var res) ? res : new JObject();
+                    UpdateToken(world, eclipseToken, ctd, attributes);
                     UpdateDragAndDrop(world, eclipseToken);
                 }
             }
+        }
+
+        public override PlaceWidgetLayout LayoutForObjectId(int objectId)
+        {
+            throw new System.NotImplementedException();
         }
 
         private void UpdateFromCardTypeData(int objectId, int typeId, Dictionary<int, JObject> cardTypes, ITokenInContainerWidget eclipseToken)
@@ -133,8 +139,16 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             return null;
         }
 
-        private void UpdateToken(EcsWorld world, ITokenInContainerWidget eclipseToken, Dictionary<string, IAttributeValue> attributes)
+        private void UpdateToken(EcsWorld world, ITokenInContainerWidget eclipseToken, JObject cardTypeData, Dictionary<string, IAttributeValue> attributes)
         {
+            var color = Color.white;
+
+            if (cardTypeData.TryGetValue("effect_color", out string hexColor) 
+                && ColorUtility.TryParseHtmlString(hexColor, out var col))
+            {
+                color = col;
+            }
+            
             eclipseToken.Active = true;
             if (attributes.TryGetValue("anim_token_fly", out var animTokenFlyAttribute) && animTokenFlyAttribute.Current > 0)
             {
@@ -146,7 +160,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                     var animTokenFlyTimeSec = attributes.TryGetValue("anim_token_fly_time", out var  animTokenFlyTimeAttribute)
                         ? animTokenFlyTimeAttribute.Current.ToSec()
                         : 0f;
-                    TokenAnimFly(eclipseToken, from, animTokenFlyTimeSec);
+                    TokenAnimFly(eclipseToken, from, animTokenFlyTimeSec, color);
                 }
                 else
                 {
@@ -177,12 +191,14 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             return false;
         }
         
-        private void TokenAnimFly(ITokenInContainerWidget tokenLayout, Vector3 from, float timeSec)
+        private void TokenAnimFly(ITokenInContainerWidget tokenLayout, Vector3 from, float timeSec, Color color)
         {
             WidgetCanvas.GetEffects().MoveToken(tokenLayout.Layout.Icon.rectTransform, 
                 tokenLayout.Layout.Icon.sprite,
                 from,
-                timeSec, () => { TokenAnimFlyCompleted(tokenLayout); });
+                timeSec,
+                color,
+                () => { TokenAnimFlyCompleted(tokenLayout); });
         }
 
         private void TokenAnimFlyCompleted(ITokenInContainerWidget tokenLayout)

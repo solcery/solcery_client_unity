@@ -88,6 +88,10 @@ namespace Solcery.Games
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
             _contentAttributes = GameContentAttributes.Create();
+            
+#if !UNITY_EDITOR
+            dto.WidgetCanvas.GetTimer().gameObject.SetActive(false);
+#endif
         }
         
         private void CreateModel()

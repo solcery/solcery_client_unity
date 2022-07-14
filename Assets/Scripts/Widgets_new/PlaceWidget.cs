@@ -33,6 +33,7 @@ namespace Solcery.Widgets_new
         public abstract int GetDragDropId();
         public abstract void UpdatePlaceId(int placeId);
         public abstract void UpdateLinkedEntityId(int linkedEntityId);
+        public abstract PlaceWidgetLayout LayoutForObjectId(int objectId);
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout

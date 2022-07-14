@@ -9,7 +9,9 @@ namespace Solcery.DebugViewers.States.Timer
     {
         private readonly DebugStateViewPool<DebugTimerStateLayout> _viewPool;
         private readonly RectTransform _content;
-        private readonly int _timerMSec;
+        private readonly bool _isStart;
+        private readonly int _durationMsec;
+        private readonly int _targetObjectId;
         private readonly List<string> _fakeMoveToKeys;
         
         public static DebugTimerState Create(DebugUpdateTimerStateBinary binary, RectTransform content, DebugStateViewPool<DebugTimerStateLayout> viewPool)
@@ -19,7 +21,9 @@ namespace Solcery.DebugViewers.States.Timer
         
         public DebugTimerState(DebugUpdateTimerStateBinary binary, RectTransform content, DebugStateViewPool<DebugTimerStateLayout> viewPool) : base(binary.Index)
         {
-            _timerMSec = binary.Duration;
+            _isStart = binary.IsStart;
+            _durationMsec = binary.DurationMsec;
+            _targetObjectId = binary.TargetObjectId;
             _content = content;
             _viewPool = viewPool;
             _fakeMoveToKeys = new List<string>();
@@ -30,7 +34,8 @@ namespace Solcery.DebugViewers.States.Timer
             Layout = _viewPool.Pop();
             Layout.transform.SetParent(_content);
             Layout.UpdatePosition(Vector3.zero);
-            Layout.Timer.text = $"{_timerMSec}ms";
+            Layout.Timer.text = _isStart ? $"{_durationMsec}ms" : "Finished";
+            Layout.TargetObjectId.text = _isStart ?  $"{_targetObjectId}" : "Finished";
         }
 
         public override void Cleanup()

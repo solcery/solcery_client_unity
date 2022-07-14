@@ -63,6 +63,11 @@ namespace Solcery.DebugViewers.StateQueues
                     gs.ReadFromFile(index, string.Format(_pathPattern, index));
                     return gs;
                 
+                case ContextGameStateTypes.Timer:
+                    var ts = DebugUpdateTimerStateBinary.Get();
+                    ts.ReadFromFile(index, string.Format(_pathPattern, index));
+                    return ts;
+                
                 default:
                     return null;
             }
@@ -137,6 +142,17 @@ namespace Solcery.DebugViewers.StateQueues
                                 state.WriteForFile(string.Format(_pathPattern, fileIndex));
                                 DebugUpdatePauseStateBinary.Release(state);
                                 _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.Delay, fileIndex));
+                                _currentIndex = _files.Count - 1;
+                            }
+                            break;
+
+                        case ContextGameStateTypes.Timer:
+                            {
+                                var state = DebugUpdateTimerStateBinary.Get();
+                                state.InitFromJson(fileIndex, stateValue);
+                                state.WriteForFile(string.Format(_pathPattern, fileIndex));
+                                DebugUpdateTimerStateBinary.Release(state);
+                                _files.Add(new Tuple<ContextGameStateTypes, int>(ContextGameStateTypes.Timer, fileIndex));
                                 _currentIndex = _files.Count - 1;
                             }
                             break;
