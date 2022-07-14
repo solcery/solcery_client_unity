@@ -53,10 +53,10 @@ namespace Solcery.Widgets_new.Tooltip
 
             if (_tooltipId != tooltipId)
             {
-                _tooltipLayout.ToDefaultAnchors();
                 UpdateTooltipContent(game, world, tooltipDataObject);
                 UpdateTooltipDelay(tooltipDataObject);
                 _tooltipId = tooltipId;
+                _tooltipLayout.ToDefaultAnchors();
             }
 
             UpdateTooltipPosition(tooltipDataObject, targetPosition);
@@ -76,7 +76,7 @@ namespace Solcery.Widgets_new.Tooltip
                 _tooltipLayout.ShowSimpleText(tooltipDataObject);
             }
             
-            _tooltipLayout. UpdateFillColor(tooltipDataObject);
+            _tooltipLayout.UpdateFillColor(tooltipDataObject);
         }
 
         private void UpdateTooltipPosition(JObject tooltipDataObject, Vector2 targetPosition)
