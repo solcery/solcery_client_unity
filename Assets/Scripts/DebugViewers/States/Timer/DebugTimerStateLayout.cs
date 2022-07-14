@@ -6,6 +6,7 @@ namespace Solcery.DebugViewers.States.Timer
     public sealed class DebugTimerStateLayout : MonoBehaviour
     {
         public TMP_Text Timer;
+        public TMP_Text TargetObjectId;
 
         private RectTransform _content;
 
