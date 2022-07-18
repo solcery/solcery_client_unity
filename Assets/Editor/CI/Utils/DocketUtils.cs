@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace Solcery.Editor.CI.Utils
@@ -8,7 +10,10 @@ namespace Solcery.Editor.CI.Utils
     {
         public static void DockerImageWebGlUp()
         {
-            RunExecutable(BuildSettings.DefaultPathDevelopWebGl + "docker_compose_build_and_up");
+            var script = Application.platform == RuntimePlatform.OSXEditor
+                ? "docker_compose_build_and_up"
+                : "docker_compose_build_and_up.cmd";
+            RunExecutable(BuildSettings.DefaultPathDevelopWebGl + script);
         }
 
         public static void DockerImageWebGlWithCmsUp(string branch)
@@ -29,11 +34,18 @@ namespace Solcery.Editor.CI.Utils
                 }
             }
 
+            var fileName = "/bin/sh";
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                fileName = Path.GetFullPath(argsStr);
+                argsStr = Path.Combine(Path.GetDirectoryName(argsStr) ?? string.Empty, "docker-compose.yaml");
+            }
+
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "/bin/sh",
+                    FileName = fileName,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
