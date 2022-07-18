@@ -5,6 +5,7 @@ using Solcery.Services.Resources;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Tooltip
 {
@@ -18,6 +19,9 @@ namespace Solcery.Widgets_new.Tooltip
         private readonly IServiceResource _serviceResource;
         private TooltipLayout _tooltipLayout;
         private int _tooltipId = -1;
+
+        private bool _positionUpdated;
+        private Vector3 _targetPosition;
         
         public static TooltipController Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
         {
@@ -40,7 +44,14 @@ namespace Solcery.Widgets_new.Tooltip
                 {
                     _delaySec = null;
                     SetTooltipActive(true);
+                    // because layout don't rebuild content on inactive object
+                    _tooltipLayout.RebuildLayouts();
                 }
+            }
+            if (_positionUpdated && _tooltipLayout.gameObject.activeSelf)
+            {
+                _positionUpdated = false;
+                _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(_targetPosition));
             }
         }
         
@@ -55,8 +66,8 @@ namespace Solcery.Widgets_new.Tooltip
             {
                 UpdateTooltipContent(game, world, tooltipDataObject);
                 UpdateTooltipDelay(tooltipDataObject);
-                _tooltipId = tooltipId;
                 _tooltipLayout.ToDefaultAnchors();
+                _tooltipId = tooltipId;
             }
 
             UpdateTooltipPosition(tooltipDataObject, targetPosition);
@@ -87,7 +98,8 @@ namespace Solcery.Widgets_new.Tooltip
             var y2 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceY2, out int yt2) ? yt2 / GameConsts.AnchorDivider : 0f;
             if (x1 == 0 && x2 == 0 && y1 == 0 && y2 == 0)
             {
-                _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(targetPosition));
+                _targetPosition = targetPosition;
+                _positionUpdated = true;
             }
             else
             {
@@ -109,6 +121,7 @@ namespace Solcery.Widgets_new.Tooltip
         {
             _tooltipId = -1;
             _delaySec = null;
+            _positionUpdated = false;
             SetTooltipActive(false);
         }
 

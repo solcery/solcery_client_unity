@@ -15,6 +15,7 @@ namespace Solcery.Widgets_new.Tooltip
         [SerializeField] private ContentSizeFitter contentSizeFitter;
         [SerializeField] private HorizontalLayoutGroup horizontalLayoutGroup;
         [SerializeField] private TextMeshProUGUI simpleText;
+        [SerializeField] private RectTransform simpleTextRectTransform;
         [SerializeField] private Image background;
         [SerializeField] private PlaceWidgetEclipseCardFullLayout eclipseCard;
 
@@ -88,6 +89,12 @@ namespace Solcery.Widgets_new.Tooltip
             RectTransform.anchoredPosition = Vector2.zero;
             UpdateAnchor(Vector2.zero, Vector2.zero);
             UpdateOffset(Vector2.zero, Vector2.zero);
+        }
+
+        public void RebuildLayouts()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(simpleTextRectTransform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
         }
     }
 }

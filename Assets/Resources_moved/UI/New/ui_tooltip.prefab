@@ -67,6 +67,7 @@ MonoBehaviour:
   contentSizeFitter: {fileID: 4562924187429012284}
   horizontalLayoutGroup: {fileID: 8396606780524670451}
   simpleText: {fileID: 5348860445940434260}
+  simpleTextRectTransform: {fileID: 8524817393414889328}
   background: {fileID: 2307604813889946526}
   eclipseCard: {fileID: 1499555517006562372}
 --- !u!114 &8396606780524670451
@@ -120,6 +121,7 @@ GameObject:
   - component: {fileID: 8524817393414889328}
   - component: {fileID: 1439995483590320626}
   - component: {fileID: 5348860445940434260}
+  - component: {fileID: 2069464191390951723}
   m_Layer: 5
   m_Name: simple_text
   m_TagString: Untagged
@@ -244,6 +246,26 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2069464191390951723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154175271223118829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &9200944134476432295
 GameObject:
   m_ObjectHideFlags: 0
