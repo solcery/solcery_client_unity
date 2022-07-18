@@ -26,6 +26,7 @@ namespace Solcery.Widgets_new.Tooltip
                 horizontalLayoutGroup.enabled = false;
                 eclipseCard.UpdateCardType(game, eclipseCardType, cardTypeDataObject);
                 eclipseCard.TokensLayout.UpdateTokenSlots(0);
+                eclipseCard.TimerLayout.gameObject.SetActive(false);
                 eclipseCard.gameObject.SetActive(true);
             }
         }
