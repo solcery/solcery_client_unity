@@ -44,6 +44,7 @@ namespace Solcery.Widgets_new.Tooltip
 
         public void UpdateFillColor(JObject tooltipDataObject)
         {
+            var colorSet = false;
             var fillColor = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
             if (fillColor != null)
             {
@@ -52,8 +53,14 @@ namespace Solcery.Widgets_new.Tooltip
                     if (background != null)
                     {
                         background.color = bgColor;
+                        colorSet = true;
                     }
                 }
+            }
+
+            if (background != null)
+            {
+                background.gameObject.SetActive(colorSet);
             }
         }
 
