@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Solcery.DebugViewers.Views.Attrs;
+using Solcery.Types;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Solcery.DebugViewers.Views.Objects
     public sealed class DebugViewObjectLayout : MonoBehaviour
     {
         public Vector2 Size => content.sizeDelta;
+
+        public WorldRect WorldRect => WorldRect.Create(content);
         
         [SerializeField]
         private GameObject header;
@@ -76,6 +79,11 @@ namespace Solcery.DebugViewers.Views.Objects
         public void UpdatePosition(Vector3 position)
         {
             content.localPosition = position;
+        }
+
+        public void Enable(bool enable)
+        {
+            gameObject.SetActive(enable);
         }
     }
 }

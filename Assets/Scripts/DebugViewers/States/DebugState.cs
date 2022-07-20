@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Types;
 using UnityEngine;
 
 namespace Solcery.DebugViewers.States
@@ -17,6 +18,8 @@ namespace Solcery.DebugViewers.States
         public abstract void Cleanup();
         public abstract IReadOnlyList<string> AllMoveToKeys();
         public abstract Vector2 GetPositionToKeys(string key);
+        
+        public virtual void OnScrollMove(Vector2 position, WorldRect viewRect) { }
     }
 
     public abstract class DebugState<T> : DebugState  where T : MonoBehaviour

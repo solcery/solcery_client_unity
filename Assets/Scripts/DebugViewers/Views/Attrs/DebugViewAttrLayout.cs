@@ -1,3 +1,4 @@
+using Solcery.Types;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,9 @@ namespace Solcery.DebugViewers.Views.Attrs
     public sealed class DebugViewAttrLayout : MonoBehaviour
     {
         public Vector2 Size => _content.sizeDelta;
-        
+
+        public WorldRect WorldRect => WorldRect.Create(_content);
+
         [SerializeField]
         private TMP_Text keyValue;
         [SerializeField]
@@ -38,6 +41,11 @@ namespace Solcery.DebugViewers.Views.Attrs
         public void UpdatePosition(Vector3 position)
         {
             _content.localPosition = position;
+        }
+        
+        public void Enable(bool enable)
+        {
+            gameObject.SetActive(enable);
         }
     }
 }

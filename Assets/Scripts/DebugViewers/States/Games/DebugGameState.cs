@@ -6,6 +6,7 @@ using Solcery.DebugViewers.States.Games.Attrs;
 using Solcery.DebugViewers.States.Games.Objects;
 using Solcery.DebugViewers.Views.Attrs;
 using Solcery.DebugViewers.Views.Objects;
+using Solcery.Types;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -22,6 +23,9 @@ namespace Solcery.DebugViewers.States.Games
         private readonly IAttrsValue _attrsValue;
         private readonly IObjectsValue _objectsValue;
         private readonly Dictionary<string, Vector2> _keyToPosition;
+        
+        private readonly List<DebugViewAttrLayout> _attrLayouts;
+        private readonly List<DebugViewObjectLayout> _objectLayouts;
 
         public static DebugGameState Create(
             DebugUpdateGameStateBinary binary, 
@@ -48,6 +52,8 @@ namespace Solcery.DebugViewers.States.Games
             _objectDebugViewPool = objectDebugViewPool;
             _objectAttrDebugViewPool = objectAttrDebugViewPool;
             _keyToPosition = new Dictionary<string, Vector2>();
+            _attrLayouts = new List<DebugViewAttrLayout>();
+            _objectLayouts = new List<DebugViewObjectLayout>();
 
             _attrsValue = AttrsValue.Create(binary.Attrs);
             _objectsValue = ObjectsValue.Create(binary.Objects);
@@ -81,6 +87,7 @@ namespace Solcery.DebugViewers.States.Games
                 var currentValue = attrValue.CurrentValue == int.MinValue ? "-" : attrValue.CurrentValue.ToString();
                 var oldValue = attrValue.OldValue == int.MinValue ? "-" : attrValue.OldValue.ToString();
                 attrDebugView.Apply(attrValue.Key, currentValue, oldValue);
+                _attrLayouts.Add(attrDebugView);
                 Layout.PushAttr(attrDebugView);
             }
 
@@ -101,6 +108,7 @@ namespace Solcery.DebugViewers.States.Games
                     objectDebugView.PushAttr(objectAttrDebugView);
                 }
                 
+                _objectLayouts.Add(objectDebugView);
                 _keyToPosition.Add(objectValue.Id.ToString(), Layout.PushObject(objectDebugView));
             }
         }
@@ -154,6 +162,8 @@ namespace Solcery.DebugViewers.States.Games
 
         public override void Cleanup()
         {
+            _attrLayouts.Clear();
+            _objectLayouts.Clear();
             _keyToPosition.Clear();
 
             while (Layout.TryPopAttr(out var attr))
@@ -191,6 +201,26 @@ namespace Solcery.DebugViewers.States.Games
             }
 
             return new Vector2(0f, 0f);
+        }
+
+        private Vector2? _lastScrollPosition;
+        
+        public override void OnScrollMove(Vector2 position, WorldRect viewRect)
+        {
+            if (_lastScrollPosition.HasValue && _lastScrollPosition.Value == position)
+            {
+                return;
+            }
+
+            foreach (var layout in _attrLayouts)
+            {
+                layout.Enable(layout.WorldRect.Overlaps(viewRect));
+            }
+            
+            foreach (var layout in _objectLayouts)
+            {
+                layout.Enable(layout.WorldRect.Overlaps(viewRect));
+            }
         }
     }
 }

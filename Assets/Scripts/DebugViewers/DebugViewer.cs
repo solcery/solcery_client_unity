@@ -11,6 +11,7 @@ using Solcery.DebugViewers.States.Pause;
 using Solcery.DebugViewers.States.Timer;
 using Solcery.DebugViewers.Views.Attrs;
 using Solcery.DebugViewers.Views.Objects;
+using Solcery.Types;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -72,6 +73,7 @@ namespace Solcery.DebugViewers
         private JObject _deltaParameters;
         private JObject _fullParameters;
         private DebugState _currentState;
+        private WorldRect _viewRect;
 
         private IDebugUpdateStateQueue _updateStateQueue;
 
@@ -145,12 +147,18 @@ namespace Solcery.DebugViewers
 
         private void Show()
         {
+            _viewRect = WorldRect.Create(diffScrollView.viewport);
+            
+            Debug.Log($"World Corner {_viewRect.BottomLeft} {_viewRect.BottomRight} {_viewRect.TopLeft} {_viewRect.TopRight}");
+
+            diffScrollView.onValueChanged.AddListener(OnScroll);
             root.SetActive(true);
             Last();
         }
 
         private void Hide()
         {
+            diffScrollView.onValueChanged.RemoveAllListeners();
             _currentState?.Cleanup();
             _currentState = null;
             moveToObject.options = new List<TMP_Dropdown.OptionData>();
@@ -202,7 +210,7 @@ namespace Solcery.DebugViewers
 
         private void Next()
         {
-            ApplyState(CreateDebugState(_updateStateQueue.PreviewUpdateState()), _deltaParameters);
+            ApplyState(CreateDebugState(_updateStateQueue.NextUpdateState()), _deltaParameters);
         }
 
         private void Delta()
@@ -262,6 +270,11 @@ namespace Solcery.DebugViewers
 #if UNITY_EDITOR
             _updateStateQueue.AddUpdateStates(gameStateJson);
 #endif
+        }
+        
+        private void OnScroll(Vector2 arg0)
+        {
+            _currentState?.OnScrollMove(arg0, _viewRect);
         }
     }
 }

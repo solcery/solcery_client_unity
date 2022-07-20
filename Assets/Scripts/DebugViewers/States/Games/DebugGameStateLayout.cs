@@ -10,6 +10,16 @@ namespace Solcery.DebugViewers.States.Games
     {
         public Vector2 Size => _content.sizeDelta;
         
+        public Rect WorldRect
+        {
+            get
+            {
+                var rect = _content.rect;
+                rect.position = _content.position;
+                return rect;
+            }
+        }
+        
         [SerializeField]
         private RectTransform attrs;
         [SerializeField]
