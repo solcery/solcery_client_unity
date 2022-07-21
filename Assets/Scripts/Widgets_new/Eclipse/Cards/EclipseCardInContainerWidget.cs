@@ -47,16 +47,16 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             var typeFontSize = data.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 5f;
             _layout.UpdateType(type.ToString(), typeFontSize);
 
-            if (data.TryGetValue(GameJsonKeys.CardName, out string name))
+            if (data.TryGetValue(GameJsonKeys.CardName, out string cardName))
             {
                 var nameFontSize = data.TryGetValue(GameJsonKeys.CardNameFontSize, out int nameFontSizeAttribute) ? nameFontSizeAttribute : 6f;
-                _layout.UpdateName(name, nameFontSize);
+                _layout.UpdateName(cardName, nameFontSize);
             }
             
-            if (data.TryGetValue(GameJsonKeys.CardDescription, out string description))
+            if (data.TryGetValue(GameJsonKeys.CardDescription, out string cardDescription))
             {
                 var descriptionFontSize = data.TryGetValue(GameJsonKeys.CardDescriptionFontSize, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 10f;
-                _layout.UpdateDescription(description, descriptionFontSize);
+                _layout.UpdateDescription(cardDescription, descriptionFontSize);
             }
 
             if (data.TryGetValue(GameJsonKeys.CardPicture, out string picture) 

@@ -27,7 +27,15 @@ namespace Solcery.Widgets_new.Tooltip
                 horizontalLayoutGroup.enabled = false;
                 eclipseCard.UpdateCardType(game, eclipseCardType, cardTypeDataObject);
                 eclipseCard.TokensLayout.UpdateTokenSlots(0);
-                eclipseCard.TimerLayout.gameObject.SetActive(false);
+                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDefaultTimerValue, out int defaultTimerValue))
+                {
+                    eclipseCard.TimerLayout.UpdateTimerValue(defaultTimerValue);
+                    eclipseCard.TimerLayout.gameObject.SetActive(defaultTimerValue > 0);
+                }
+                else
+                {
+                    eclipseCard.TimerLayout.gameObject.SetActive(false);
+                }
                 eclipseCard.gameObject.SetActive(true);
             }
         }

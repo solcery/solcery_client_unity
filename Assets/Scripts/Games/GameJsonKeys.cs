@@ -19,6 +19,7 @@ namespace Solcery.Games
         public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescriptionFontSize = "description_font_size";
         public static readonly string CardTypeFontSize = "type_font_size";
+        public static readonly string CardDefaultTimerValue = "default_timer_value";
         
         // Token
         public static readonly string TokenSlot = "slot";
