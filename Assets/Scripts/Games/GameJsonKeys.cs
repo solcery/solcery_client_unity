@@ -53,5 +53,8 @@ namespace Solcery.Games
         
         // Custom Bricks
         public static readonly string GlobalCustomBricks = "custom_bricks";
+        
+        // Full card
+        public static readonly string CardDescriptionFontSizeFull = "description_font_size_full";
     }
 }
