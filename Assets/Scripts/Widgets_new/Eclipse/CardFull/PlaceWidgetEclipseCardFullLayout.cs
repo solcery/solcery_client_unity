@@ -49,7 +49,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
             if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string cardDescription))
             {
-                var descriptionFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescriptionFontSize, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 40f;
+                var descriptionFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescriptionFontSizeFull, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 40f;
                 UpdateDescription(cardDescription, descriptionFontSize);
             }
 
