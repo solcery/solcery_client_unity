@@ -2,38 +2,7 @@
 <project version="4">
   <component name="UserContentModel">
     <attachedFolders />
-    <explicitIncludes>
-      <Path>Library/PackageCache/com.cysharp.unitask@69be818a46</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite.di@c0bcb6fa6c</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite.extendedfilters@39571d34da</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite.extendedsystems@6f914d9a72</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite.unity.ugui@072d4c699c</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite.unityeditor@93d8dcde21</Path>
-      <Path>Library/PackageCache/com.leopotam.ecslite@c297b6110b</Path>
-      <Path>Library/PackageCache/com.solcery.bricksinterpretationsystem@3a45c92083</Path>
-      <Path>Library/PackageCache/com.unity.addressables@1.19.15</Path>
-      <Path>Library/PackageCache/com.unity.burst@1.6.0</Path>
-      <Path>Library/PackageCache/com.unity.ext.nunit@1.0.6</Path>
-      <Path>Library/PackageCache/com.unity.ide.rider@3.0.7</Path>
-      <Path>Library/PackageCache/com.unity.mathematics@1.2.5</Path>
-      <Path>Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.2</Path>
-      <Path>Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.5</Path>
-      <Path>Library/PackageCache/com.unity.searcher@4.9.1</Path>
-      <Path>Library/PackageCache/com.unity.test-framework@1.1.30</Path>
-      <Path>Library/PackageCache/com.unity.textmeshpro@3.0.6</Path>
-      <Path>Library/PackageCache/com.unity.timeline@1.6.3</Path>
-      <Path>Packages</Path>
-      <Path>ProjectSettings</Path>
-    </explicitIncludes>
-    <explicitExcludes>
-      <Path>.git</Path>
-      <Path>.idea</Path>
-      <Path>CI</Path>
-      <Path>Library</Path>
-      <Path>Logs</Path>
-      <Path>Temp</Path>
-      <Path>UserSettings</Path>
-      <Path>obj</Path>
-    </explicitExcludes>
+    <explicitIncludes />
+    <explicitExcludes />
   </component>
 </project>
