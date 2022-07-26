@@ -3,6 +3,7 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contents;
 using Solcery.Games.States.New;
 using Solcery.Models.Play;
+using Solcery.Services.GameContent;
 using Solcery.Services.Renderer;
 using Solcery.Services.Resources;
 using Solcery.Services.Transport;
@@ -30,7 +31,7 @@ namespace Solcery.Games
         public IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }
         IWidgetPool<IListTokensInContainerWidget> ListTokensInContainerWidgetPool { get; }
         public IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
-        public JObject GameContent { get; }
+        public IServiceGameContent ServiceGameContent { get; }
         public IUpdateStateQueue UpdateStateQueue { get; }
         public TooltipController TooltipController { get; }
         public IGameContentAttributes GameContentAttributes { get; }

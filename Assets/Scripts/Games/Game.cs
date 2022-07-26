@@ -9,6 +9,7 @@ using Solcery.Games.Contents;
 using Solcery.Games.DTO;
 using Solcery.Games.States.New;
 using Solcery.Models.Play;
+using Solcery.Services.GameContent;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
 using Solcery.React;
@@ -51,7 +52,7 @@ namespace Solcery.Games
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
         IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
-        JObject IGame.GameContent => _gameContentJson;
+        IServiceGameContent IGame.ServiceGameContent => _serviceGameContent;
         TooltipController IGame.TooltipController => _tooltipController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
@@ -69,7 +70,7 @@ namespace Solcery.Games
         private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private IServiceRenderWidget _serviceRenderWidget;
-        private JObject _gameContentJson;
+        private IServiceGameContent _serviceGameContent;
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
@@ -102,6 +103,7 @@ namespace Solcery.Games
         private void CreateServices(IGameInitDto dto)
         {
             _serviceRenderWidget = ServiceRenderWidget.Create(dto.ServiceRenderDto);
+            _serviceGameContent = ServiceGameContent.Create();
             
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
@@ -145,7 +147,7 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
             Cleanup();
-            _gameContentJson = gameContentJson;
+            _serviceGameContent.UpdateGameContent(gameContentJson);
             _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
 
             if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
@@ -153,14 +155,18 @@ namespace Solcery.Games
             {
                 _serviceBricks.RegistrationCustomBricksData(customBricksArray);
             }
-            
+        }
+
+        void IGameTransportCallbacks.OnReceivingGameContentOverrides(JObject gameContentOverridesJson)
+        {
+            _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
             LoaderScreen.SetTitle("Load resources.");
             _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
         }
         
         void IGameResourcesCallback.OnResourcesLoad()
         {
-            Init(_gameContentJson);
+            Init();
         }
 
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
@@ -170,9 +176,9 @@ namespace Solcery.Games
             _updateStateQueue.PushGameState(gameStateJson);
         }
 
-        private void Init(JObject gameContentJson)
+        private void Init()
         {
-            _playModel.Init(this, gameContentJson);
+            _playModel.Init(this);
             LoaderScreen.Hide();
             GameApplication.Instance.EnableBlockTouches(false);
         }
@@ -266,6 +272,7 @@ namespace Solcery.Games
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
 #endif
             _playModel.Destroy();
+            _serviceGameContent.Cleanup();
             _transportService.Cleanup();
             _serviceResource.Cleanup();
         }

@@ -4,7 +4,8 @@ namespace Solcery.Games
 {
     public interface IGameTransportCallbacks
     {
-        public void OnReceivingGameContent(JObject gameContentJson);
-        public void OnReceivingGameState(JObject gameStateJson);
+        void OnReceivingGameContent(JObject gameContentJson);
+        void OnReceivingGameContentOverrides(JObject gameContentOverridesJson);
+        void OnReceivingGameState(JObject gameStateJson);
     }
 }

@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Games.States.New;
@@ -32,18 +31,17 @@ namespace Solcery.Models.Play
 
         private PlayModel() { }
         
-        void IPlayModel.Init(IGame game, JObject gameContentJson)
+        void IPlayModel.Init(IGame game)
         {
             World = new EcsWorld();
-            _systems = new EcsSystems(World);
+            _systems = new EcsSystems(World, game);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
-            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
-            _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
-            _systems.Add(SystemPlaceInitVisibility.Create(game.GameContent));
-            _systems.Add(SystemInitialGameContentPlaceWidgets.Create(game));
-            _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
-            _systems.Add(SystemInitialGameContentTooltips.Create(game.GameContent));
+            _systems.Add(SystemInitialDragDropTypes.Create());
+            _systems.Add(SystemInitialGameContentPlaces.Create());
+            _systems.Add(SystemPlaceInitVisibility.Create());
+            _systems.Add(SystemInitialGameContentPlaceWidgets.Create());
+            _systems.Add(SystemInitialGameContentTooltips.Create());
 
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));

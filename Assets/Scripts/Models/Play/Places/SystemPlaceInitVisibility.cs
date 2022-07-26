@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Places;
 using Solcery.Utils;
 
@@ -12,38 +13,30 @@ namespace Solcery.Models.Play.Places
 
     public sealed class SystemPlaceInitVisibility : ISystemPlaceInitVisibility
     {
-        private JObject _gameContent;
-        
-        public static ISystemPlaceInitVisibility Create(JObject gameContent)
+        public static ISystemPlaceInitVisibility Create()
         {
-            return new SystemPlaceInitVisibility(gameContent);
+            return new SystemPlaceInitVisibility();
         }
         
-        private SystemPlaceInitVisibility(JObject gameContent)
-        {
-            _gameContent = gameContent;
-        }
+        private SystemPlaceInitVisibility() { }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
             var world = systems.GetWorld();
+            var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;
             var placeHash = new Dictionary<int, JObject>();
-            if (_gameContent.TryGetValue("places", out JObject placesObject)
-                && placesObject.TryGetValue("objects", out JArray placeArray))
+            foreach (var placeToken in serviceGameContent.Places)
             {
-                foreach (var placeToken in placeArray)
+                if (placeToken is JObject placeObject 
+                    && placeObject.TryGetValue("place_id", out int placeId))
                 {
-                    if (placeToken is JObject placeObject 
-                        && placeObject.TryGetValue("place_id", out int placeId))
+                    if (placeObject.TryGetValue("visibility_condition", out JObject visibilityBrick))
                     {
-                        if (placeObject.TryGetValue("visibility_condition", out JObject visibilityBrick))
-                        {
-                            placeHash.Add(placeId, visibilityBrick);
-                            continue;
-                        }
-                        
-                        placeHash.Add(placeId, null);
+                        placeHash.Add(placeId, visibilityBrick);
+                        continue;
                     }
+                        
+                    placeHash.Add(placeId, null);
                 }
             }
             
@@ -58,8 +51,6 @@ namespace Solcery.Models.Play.Places
                 poolPlaceVisibilityBrick.Add(placeEntityId).VisibilityBrick =
                     placeHash.ContainsKey(placeId) ? placeHash[placeId] : null;
             }
-
-            _gameContent = null;
         }
     }
 }

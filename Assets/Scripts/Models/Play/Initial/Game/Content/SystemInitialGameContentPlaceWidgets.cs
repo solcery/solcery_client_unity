@@ -12,63 +12,49 @@ namespace Solcery.Models.Play.Initial.Game.Content
 
     public sealed class SystemInitialGameContentPlaceWidgets : ISystemInitialGameContentPlaceWidgets
     {
-        private IGame _game;
-
-        public static ISystemInitialGameContentPlaceWidgets Create(IGame game)
+        public static ISystemInitialGameContentPlaceWidgets Create()
         {
-            return new SystemInitialGameContentPlaceWidgets(game);
+            return new SystemInitialGameContentPlaceWidgets();
         }
         
-        private SystemInitialGameContentPlaceWidgets(IGame game)
-        {
-            _game = game;
-        }
+        private SystemInitialGameContentPlaceWidgets() { }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            if (_game == null)
-            {
-                return;
-            }
+            var game = systems.GetShared<IGame>();
             
-            if (_game.GameContent.TryGetValue("places", out JObject placesObject) 
-                && placesObject.TryGetValue("objects", out JArray placeArray))
-            {
-                var placeHashMap = new Dictionary<int, JObject>(placeArray.Count);
+            var placeHashMap = new Dictionary<int, JObject>(game.ServiceGameContent.Places.Count);
                 
-                foreach (var placeToken in placeArray)
+            foreach (var placeToken in game.ServiceGameContent.Places)
+            {
+                if (placeToken is JObject placeObject 
+                    && placeObject.TryGetValue(GameJsonKeys.PlaceId, out int placeId))
                 {
-                    if (placeToken is JObject placeObject 
-                        && placeObject.TryGetValue(GameJsonKeys.PlaceId, out int placeId))
-                    {
-                        placeHashMap.Add(placeId, placeObject);
-                    }
+                    placeHashMap.Add(placeId, placeObject);
                 }
+            }
 
-                if (placeHashMap.Count > 0)
+            if (placeHashMap.Count > 0)
+            {
+                var world = systems.GetWorld();
+                var filter = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
+                var poolPlaceId = world.GetPool<ComponentPlaceId>();
+                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
+
+                foreach (var entityId in filter)
                 {
-                    var world = systems.GetWorld();
-                    var filter = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
-                    var poolPlaceId = world.GetPool<ComponentPlaceId>();
-                    var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
-
-                    foreach (var entityId in filter)
+                    if (placeHashMap.TryGetValue(poolPlaceId.Get(entityId).Id, out var placeObject))
                     {
-                        if (placeHashMap.TryGetValue(poolPlaceId.Get(entityId).Id, out var placeObject))
+                        // TODO: New place widgets
+                        if (game.PlaceWidgetFactory.TryCreatePlaceWidgetByType(placeObject, out var placeWidget))
                         {
-                            // TODO: New place widgets
-                            if (_game.PlaceWidgetFactory.TryCreatePlaceWidgetByType(placeObject, out var placeWidget))
-                            {
-                                poolPlaceWidgetNew.Add(entityId).Widget = placeWidget;
-                                placeWidget.UpdatePlaceId(poolPlaceId.Get(entityId).Id);
-                                placeWidget.UpdateLinkedEntityId(entityId);
-                            }
+                            poolPlaceWidgetNew.Add(entityId).Widget = placeWidget;
+                            placeWidget.UpdatePlaceId(poolPlaceId.Get(entityId).Id);
+                            placeWidget.UpdateLinkedEntityId(entityId);
                         }
                     }
                 }
             }
-
-            _game = null;
         }
     }
 }

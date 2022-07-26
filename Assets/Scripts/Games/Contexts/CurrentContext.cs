@@ -32,11 +32,11 @@ namespace Solcery.Games.Contexts
         private readonly EcsFilter _filterComponentObjectIdHash;
         private readonly EcsFilter _filterComponentGame;
 
-        public static IContext Create(EcsWorld world)
+        public static IContext Create(IGame game, EcsWorld world)
         {
             DestroyPreviewContextEntity(world);
             CreateContextEntity(world);
-            return new CurrentContext(world);
+            return new CurrentContext(game, world);
         }
 
         public static void Destroy(EcsWorld world, IContext context)
@@ -69,7 +69,7 @@ namespace Solcery.Games.Contexts
         }
         
 
-        private CurrentContext(EcsWorld world)
+        private CurrentContext(IGame game, EcsWorld world)
         {
             GameStates = ContextGameStates.Create(world);
             Object = CurrentContextObject.Create(world);
@@ -77,7 +77,7 @@ namespace Solcery.Games.Contexts
             GameAttrs = CurrentContextGameAttrs.Create(world);
             GameArgs = CurrentContextGameArgs.Create(world);
             GameVars = ComponentContextGameVars.Create(world);
-            GameObjects = CurrentContextGameObjects.Create(world);
+            GameObjects = CurrentContextGameObjects.Create(game, world);
             Log = CurrentLog.Create();
 
             _world = world;

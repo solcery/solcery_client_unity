@@ -8,20 +8,20 @@ namespace Solcery.Games.Contexts
 {
     internal class CurrentContextGameObjects : IContextGameObjects
     {
+        private readonly IGame _game;
         private readonly EcsWorld _world;
         private readonly EcsFilter _filterGameObjects;
-        private readonly EcsFilter _filterObjectTypes;
 
-        public static IContextGameObjects Create(EcsWorld world)
+        public static IContextGameObjects Create(IGame game, EcsWorld world)
         {
-            return new CurrentContextGameObjects(world);
+            return new CurrentContextGameObjects(game, world);
         }
 
-        private CurrentContextGameObjects(EcsWorld world)
+        private CurrentContextGameObjects(IGame game, EcsWorld world)
         {
+            _game = game;
             _world = world;
             _filterGameObjects = _world.Filter<ComponentObjectId>().End();
-            _filterObjectTypes = _world.Filter<ComponentObjectTypes>().End();
         }
         
         List<object> IContextGameObjects.GetAllCardTypeObject()

@@ -36,11 +36,11 @@ namespace Solcery.Models.Simulation
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
             _systems.Add(SystemInitialComponentGame.Create(game));
-            _systems.Add(SystemInitialDragDropTypes.Create(game.GameContent));
-            _systems.Add(SystemInitialGameContentPlaces.Create(game.GameContent));
-            _systems.Add(SystemInitialGameContentEntityTypes.Create(game.GameContent));
+            _systems.Add(SystemInitialDragDropTypes.Create(game.ServiceGameContent));
+            _systems.Add(SystemInitialGameContentPlaces.Create(game.ServiceGameContent));
+            _systems.Add(SystemInitialGameContentEntityTypes.Create(game.ServiceGameContent));
             _systems.Add(SystemGameStateInitial.Create(initialGameState));
-            _systems.Add(SystemInitialGameContentTooltips.Create(initialGameState));
+            _systems.Add(SystemInitialGameContentTooltips.Create(game.ServiceGameContent));
 
             // Process commands
             _systems.Add(SystemProcessCommands.Create(serviceCommands));

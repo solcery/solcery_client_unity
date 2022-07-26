@@ -8,6 +8,7 @@ namespace Solcery.React
         public const string EventOnSetWalletConnected = "EventOnSetWalletConnected";
         public const string EventOnOpenGameOverPopup = "EventOnOpenGameOverPopup";
         public const string EventOnUpdateGameContent = "EventOnUpdateGameContent";
+        public const string EventOnUpdateGameContentOverrides = "EventOnUpdateGameContentOverrides";
         public const string EventOnUpdateGameDisplay = "EventOnUpdateGameDisplay";
         public const string EventOnUpdateGameState = "EventOnUpdateGameState";
         
@@ -49,31 +50,31 @@ namespace Solcery.React
 
         public void SetWalletConnected(string data)
         {
-            UnityEngine.Debug.Log($"SetWalletConnected {data}");
             CallAllCallbackForEventKey(EventOnSetWalletConnected, data);
         }
 
         public void OpenGameOverPopup(string data)
         {
-            UnityEngine.Debug.Log($"OpenGameOverPopup {data}");
             CallAllCallbackForEventKey(EventOnOpenGameOverPopup, data);
         }
 
         public void UpdateGameContent(string data)
         {
-            //UnityEngine.Debug.Log($"UpdateGameContent {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameContent, data);
+        }
+        
+        public void UpdateGameContentOverrides(string data)
+        {
+            CallAllCallbackForEventKey(EventOnUpdateGameContentOverrides, data);
         }
 
         public void UpdateGameDisplay(string data)
         {
-            //UnityEngine.Debug.Log($"UpdateGameDisplay {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameDisplay, data);
         }
 
         public void UpdateGameState(string data)
         {
-            //UnityEngine.Debug.Log($"UpdateGameState {data}");
             CallAllCallbackForEventKey(EventOnUpdateGameState, data);
         }
     }

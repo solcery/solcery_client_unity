@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Tooltips;
 using Solcery.Utils;
 
@@ -10,26 +11,17 @@ namespace Solcery.Models.Shared.Initial.Game.Content
     
     public class SystemInitialGameContentTooltips : ISystemInitialGameContentTooltips
     {
-        private JObject _gameContent;
-
-        public static ISystemInitialGameContentTooltips Create(JObject gameContent)
+        public static ISystemInitialGameContentTooltips Create()
         {
-            return new SystemInitialGameContentTooltips(gameContent);
+            return new SystemInitialGameContentTooltips();
         }
         
-        private SystemInitialGameContentTooltips(JObject gameContent)
-        {
-            _gameContent = gameContent;
-        }
+        private SystemInitialGameContentTooltips() { }
 
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            if (_gameContent == null)
-            {
-                return;
-            }
-
             var world = systems.GetWorld();
+            var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;
             
             var filter = world.Filter<ComponentTooltips>().End();
             var pool = world.GetPool<ComponentTooltips>();
@@ -39,22 +31,16 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                 pool.Del(entityId);
             }
 
-            if (_gameContent.TryGetValue("tooltips", out JObject tooltipsObject)
-                && tooltipsObject.TryGetValue("objects", out JArray tooltipArray))
+            var entityTypeMap = new Dictionary<int, JObject>(serviceGameContent.Tooltips.Count);
+            foreach (var tooltipToken in serviceGameContent.Tooltips)
             {
-                var entityTypeMap = new Dictionary<int, JObject>(tooltipArray.Count);
-                foreach (var tooltipToken in tooltipArray)
+                if (tooltipToken is JObject tooltipObject)
                 {
-                    if (tooltipToken is JObject tooltipObject)
-                    {
-                        entityTypeMap.Add(tooltipObject.GetValue<int>("id"), tooltipObject);
-                    }
+                    entityTypeMap.Add(tooltipObject.GetValue<int>("id"), tooltipObject);
                 }
-                var entityIndex = world.NewEntity();
-                world.GetPool<ComponentTooltips>().Add(entityIndex).Tooltips = entityTypeMap;
             }
-
-            _gameContent = null;
+            var entityIndex = world.NewEntity();
+            world.GetPool<ComponentTooltips>().Add(entityIndex).Tooltips = entityTypeMap;
         }
     }
 }

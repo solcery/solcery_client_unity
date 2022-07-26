@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.DragDrop.Parameters;
+using Solcery.Services.GameContent;
 using Solcery.Utils;
 
 namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
@@ -11,16 +12,16 @@ namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
     
     public class SystemInitialDragDropTypes : ISystemInitialDragDropTypes
     {
-        private JObject _gameContent;
+        private IServiceGameContent _serviceGameContent;
         
-        public static ISystemInitialDragDropTypes Create(JObject gameContent)
+        public static ISystemInitialDragDropTypes Create(IServiceGameContent serviceGameContent)
         {
-            return new SystemInitialDragDropTypes(gameContent);
+            return new SystemInitialDragDropTypes(serviceGameContent);
         }
         
-        private SystemInitialDragDropTypes(JObject gameContent)
+        private SystemInitialDragDropTypes(IServiceGameContent serviceGameContent)
         {
-            _gameContent = gameContent;
+            _serviceGameContent = serviceGameContent;
         }
         
         void IEcsInitSystem.Init(EcsSystems systems)
@@ -30,26 +31,22 @@ namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
             var idPool = world.GetPool<ComponentDragDropParametersId>();
             var actionPool = world.GetPool<ComponentDragDropParametersAction>();
             
-            if (_gameContent.TryGetValue("drag_n_drops", out JObject dndBaseObject)
-                && dndBaseObject.TryGetValue("objects", out JArray dndArray))
+            foreach (var dndToken in _serviceGameContent.DragDrop)
             {
-                foreach (var dndToken in dndArray)
+                if (dndToken is JObject dndObject)
                 {
-                    if (dndToken is JObject dndObject)
-                    {
-                        var entity = world.NewEntity();
-                        tagPool.Add(entity);
-                        idPool.Add(entity).Id = dndObject.GetValue<int>("id");
+                    var entity = world.NewEntity();
+                    tagPool.Add(entity);
+                    idPool.Add(entity).Id = dndObject.GetValue<int>("id");
 
-                        actionPool.Add(entity).Action = 
-                            dndObject.TryGetValue("action_on_drop", out JObject action)
-                                ? action
-                                : new JObject();
-                    }
+                    actionPool.Add(entity).Action = 
+                        dndObject.TryGetValue("action_on_drop", out JObject action)
+                            ? action
+                            : new JObject();
                 }
             }
 
-            _gameContent = null;
+            _serviceGameContent = null;
         }
     }
 }

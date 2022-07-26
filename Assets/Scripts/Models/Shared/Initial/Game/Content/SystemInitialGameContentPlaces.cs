@@ -13,26 +13,17 @@ namespace Solcery.Models.Shared.Initial.Game.Content
 
     public sealed class SystemInitialGameContentPlaces : ISystemInitialGameContentPlaces
     {
-        private JObject _gameContent;
-
-        public static ISystemInitialGameContentPlaces Create(JObject gameContent)
+        public static ISystemInitialGameContentPlaces Create()
         {
-            return new SystemInitialGameContentPlaces(gameContent);
+            return new SystemInitialGameContentPlaces();
         }
         
-        private SystemInitialGameContentPlaces(JObject gameContent)
-        {
-            _gameContent = gameContent;
-        }
+        private SystemInitialGameContentPlaces() { }
 
         void IEcsInitSystem.Init(EcsSystems systems)
         {
-            if (_gameContent == null)
-            {
-                return;
-            }
-            
             var world = systems.GetWorld();
+            var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;
             
             // Только тут мы инитим place, так что можно спокойно удалить если что то есть еще
             var filter = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
@@ -47,44 +38,38 @@ namespace Solcery.Models.Shared.Initial.Game.Content
                 world.DelEntity(entityId);
             }
 
-            if (_gameContent.TryGetValue("places", out JObject placesObject)
-                && placesObject.TryGetValue("objects", out JArray placeArray))
+            foreach (var placeToken in serviceGameContent.Places)
             {
-                foreach (var placeToken in placeArray)
+                if (placeToken is JObject placeObject)
                 {
-                    if (placeToken is JObject placeObject)
+                    var entityIndex = world.NewEntity();
+                    world.GetPool<ComponentPlaceTag>().Add(entityIndex);
+                    world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
+                        placeObject.GetValue<int>(GameJsonKeys.PlaceId);
+                    if (placeObject.TryGetValue("drag_n_drops", out JArray dragDropIdArray))
                     {
-                        var entityIndex = world.NewEntity();
-                        world.GetPool<ComponentPlaceTag>().Add(entityIndex);
-                        world.GetPool<ComponentPlaceId>().Add(entityIndex).Id =
-                            placeObject.GetValue<int>(GameJsonKeys.PlaceId);
-                        if (placeObject.TryGetValue("drag_n_drops", out JArray dragDropIdArray))
+                        var idHash = new HashSet<int>();
+                        foreach (var dragDropIdToken in dragDropIdArray)
                         {
-                            var idHash = new HashSet<int>();
-                            foreach (var dragDropIdToken in dragDropIdArray)
-                            {
-                                idHash.Add(dragDropIdToken.Value<int>());
-                            }
-
-                            ref var entityIdsComponent =
-                                ref world.GetPool<ComponentPlaceDragDropEntityId>().Add(entityIndex);
-                            
-                            foreach (var dragDropEntityId in dragDropFilter)
-                            {
-                                
-                                if (idHash.Contains(dragDropIdPool.Get(dragDropEntityId).Id))
-                                {
-                                    entityIdsComponent.DragDropEntityIds.Add(dragDropEntityId);
-                                    idHash.Remove(dragDropIdPool.Get(dragDropEntityId).Id);
-                                }
-                            }
-                            
+                            idHash.Add(dragDropIdToken.Value<int>());
                         }
+
+                        ref var entityIdsComponent =
+                            ref world.GetPool<ComponentPlaceDragDropEntityId>().Add(entityIndex);
+                            
+                        foreach (var dragDropEntityId in dragDropFilter)
+                        {
+                                
+                            if (idHash.Contains(dragDropIdPool.Get(dragDropEntityId).Id))
+                            {
+                                entityIdsComponent.DragDropEntityIds.Add(dragDropEntityId);
+                                idHash.Remove(dragDropIdPool.Get(dragDropEntityId).Id);
+                            }
+                        }
+                            
                     }
                 }
             }
-
-            _gameContent = null;
         }
     }
 }
