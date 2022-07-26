@@ -55,17 +55,17 @@ namespace Solcery.Services.GameContent.Items
             }
         }
 
-        bool IItemType.TryGetValue(out JToken value, string key, int entityId)
+        bool IItemType.TryGetValue(out JToken token, string key, int entityId)
         {
-            value = null;
+            token = null;
 
-            if (!_data.ContainsKey(entityId) && _defaultData.TryGetValue(key, out value))
+            if (!_data.ContainsKey(entityId) && _defaultData.TryGetValue(key, out token))
             {
                 return true;
             }
 
             if (_data.TryGetValue(entityId, out var subData)
-                && subData.TryGetValue(key, out value))
+                && subData.TryGetValue(key, out token))
             {
                 return true;
             }

@@ -7,7 +7,7 @@ namespace Solcery.Services.GameContent.Items
     {
         IReadOnlyDictionary<int, IItemType> Items { get; }
         void UpdateOverridesItems(JArray itemOverrides);
-        bool TryGetValue(out JToken value, int tplid, string key, int entityId);
+        bool TryGetItemType(out IItemType itemType, int tplid);
         void Cleanup();
     }
 }

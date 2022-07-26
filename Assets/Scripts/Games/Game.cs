@@ -161,7 +161,7 @@ namespace Solcery.Games
         {
             _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
             LoaderScreen.SetTitle("Load resources.");
-            _serviceResource.PreloadResourcesFromGameContent(_gameContentJson);
+            _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
         }
         
         void IGameResourcesCallback.OnResourcesLoad()

@@ -43,16 +43,5 @@ namespace Solcery.Utils
             type = 0;
             return false;
         }
-        
-        public static Dictionary<int, JObject> GetCardTypes(this EcsWorld world)
-        {
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
-            foreach (var objectTypesEntityId in objectTypesFilter)
-            {
-                return world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
-            }
-
-            return null;
-        }
     }
 }

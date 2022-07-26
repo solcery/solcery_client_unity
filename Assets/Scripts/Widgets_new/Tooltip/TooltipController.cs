@@ -1,11 +1,9 @@
-using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Services.Resources;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Tooltip
 {
@@ -55,7 +53,7 @@ namespace Solcery.Widgets_new.Tooltip
             }
         }
         
-        public void Show(int tooltipId, IGame game, EcsWorld world, JObject tooltipDataObject, Vector2 targetPosition)
+        public void Show(int tooltipId, IGame game, JObject tooltipDataObject, Vector2 targetPosition)
         {
             if (_tooltipLayout == null)
             {
@@ -64,7 +62,7 @@ namespace Solcery.Widgets_new.Tooltip
 
             if (_tooltipId != tooltipId)
             {
-                UpdateTooltipContent(game, world, tooltipDataObject);
+                UpdateTooltipContent(game, tooltipDataObject);
                 UpdateTooltipDelay(tooltipDataObject);
                 _tooltipLayout.ToDefaultAnchors();
                 _tooltipId = tooltipId;
@@ -73,14 +71,13 @@ namespace Solcery.Widgets_new.Tooltip
             UpdateTooltipPosition(tooltipDataObject, targetPosition);
         }
 
-        private void UpdateTooltipContent(IGame game, EcsWorld world, JObject tooltipDataObject)
+        private void UpdateTooltipContent(IGame game, JObject tooltipDataObject)
         {
             _tooltipLayout.HideContent();
-            var cardTypes = world.GetCardTypes();
-            if (tooltipDataObject.TryGetValue<int>(GameJsonKeys.TooltipCardTypeId, out var cardType) && 
-                cardTypes.TryGetValue(cardType, out var cardTypeDataObject))
+            if (tooltipDataObject.TryGetValue<int>(GameJsonKeys.TooltipCardTypeId, out var tplid) 
+                && game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid))
             {
-                _tooltipLayout.ShowEclipseCard(game, cardTypeDataObject);
+                _tooltipLayout.ShowEclipseCard(game, itemType);
             }
             else
             {

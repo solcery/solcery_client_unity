@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Services.GameContent;
 using Solcery.Services.Resources.Loaders;
 using Solcery.Services.Resources.Loaders.Multi;
 using Solcery.Services.Resources.Loaders.Texture;
@@ -31,7 +31,7 @@ namespace Solcery.Services.Resources
             _gameResourcesCallback = gameResourcesCallback;
         }
 
-        void IServiceResource.PreloadResourcesFromGameContent(JObject gameContentJson)
+        void IServiceResource.PreloadResourcesFromGameContent(IServiceGameContent serviceGameContent)
         {
             var patternsProcessor = PatternsProcessor.Create();
             patternsProcessor.PatternRegistration(PatternUriTexture.Create());

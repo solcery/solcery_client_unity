@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Triggers.EntityTypes;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
@@ -63,7 +64,7 @@ namespace Solcery.Widgets_new.Cards.Widgets
             _layout.UpdateHighlighted(highlighted);
         }
 
-        void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, JObject data)
+        void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, IItemType itemType)
         {
             if (data.TryGetValue("name", out string name))
             {

@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.CardFull;
 using TMPro;
@@ -19,16 +20,18 @@ namespace Solcery.Widgets_new.Tooltip
         [SerializeField] private Image background;
         [SerializeField] private PlaceWidgetEclipseCardFullLayout eclipseCard;
 
-        public void ShowEclipseCard(IGame game, JObject cardTypeDataObject)
+        public void ShowEclipseCard(IGame game, IItemType itemType)
         {
-            if (cardTypeDataObject.TryGetEnum(GameJsonKeys.CardType, out EclipseCardTypes eclipseCardType))
+            if (itemType.TryGetValue(out var valueToken, GameJsonKeys.CardType)
+                & valueToken.TryGetEnum(out EclipseCardTypes eclipseCardType))
             {
                 contentSizeFitter.enabled = false;
                 horizontalLayoutGroup.enabled = false;
-                eclipseCard.UpdateCardType(game, eclipseCardType, cardTypeDataObject);
+                eclipseCard.UpdateCardType(game, eclipseCardType, itemType);
                 eclipseCard.TokensLayout.UpdateTokenSlots(0);
-                if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDefaultTimerValue, out int defaultTimerValue))
+                if (itemType.TryGetValue(out var timeValueToken, GameJsonKeys.CardDefaultTimerValue))
                 {
+                    var defaultTimerValue = timeValueToken.GetValue<int>();
                     eclipseCard.TimerLayout.UpdateTimerValue(defaultTimerValue);
                     eclipseCard.TimerLayout.gameObject.SetActive(defaultTimerValue > 0);
                 }

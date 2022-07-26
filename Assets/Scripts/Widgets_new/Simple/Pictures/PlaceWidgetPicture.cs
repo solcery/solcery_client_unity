@@ -27,20 +27,13 @@ namespace Solcery.Widgets_new.Simple.Pictures
             }
 
             var entityId = entityIds[0];
-            
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            foreach (var objectTypesEntityId in objectTypesFilter)
+            if (objectTypePool.Has(entityId))
             {
-                var objectTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
-                if (!objectTypePool.Has(entityId))
-                {
-                    break;
-                }
-
-                if (objectTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var objectTypeDataObject) 
-                    && objectTypeDataObject.TryGetValue("picture", out string picture)
-                    && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+                var tplid = objectTypePool.Get(entityId).Type;
+                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
+                    && itemType.TryGetValue(out var valueToken, "picture", entityId)
+                    && Game.ServiceResource.TryGetTextureForKey(valueToken.GetValue<string>(), out var texture))
                 {
                     Layout.UpdatePicture(texture);
                 }

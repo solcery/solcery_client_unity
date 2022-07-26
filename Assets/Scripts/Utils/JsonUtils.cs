@@ -12,6 +12,11 @@ namespace Solcery.Utils
         {
             return token.ContainsKey(key);
         }
+
+        public static T GetValue<T>(this JToken value)
+        {
+            return value.Value<T>();
+        }
         
         public static T GetValue<T>(this JObject token, string key)
         {
@@ -20,7 +25,7 @@ namespace Solcery.Utils
                 return default;
             }
 
-            return value.Value<T>();
+            return value.GetValue<T>();
         }
 
         public static bool TryGetValue<T>(this JObject token, string key, out T ret)
@@ -28,21 +33,16 @@ namespace Solcery.Utils
             if (token != null &&
                 token.TryGetValue(key, StringComparison.Ordinal, out var value))
             {
-                ret = value.Value<T>();
+                ret = value.GetValue<T>();
                 return true;
             }
 
             ret = default;
             return false;
         }
-        
-        public static T GetEnum<T>(this JObject data, string key) where T : struct
-        {
-            if (data == null || !data.TryGetValue(key, StringComparison.Ordinal, out var value))
-            {
-                return default;
-            }
 
+        public static T GetEnum<T>(this JToken value) where T : struct
+        {
             switch (value.Type)
             {
                 case JTokenType.String:
@@ -60,6 +60,16 @@ namespace Solcery.Utils
             }
         }
         
+        public static T GetEnum<T>(this JObject data, string key) where T : struct
+        {
+            if (data == null || !data.TryGetValue(key, StringComparison.Ordinal, out var value))
+            {
+                return default;
+            }
+
+            return value.GetEnum<T>();
+        }
+        
         public static bool TryGetEnum<T>(this JObject data, string key, out T ret) where T : struct
         {
             if (data == null 
@@ -69,7 +79,12 @@ namespace Solcery.Utils
                 ret = default;
                 return false;
             }
-            
+
+            return value.TryGetEnum(out ret);
+        }
+
+        public static bool TryGetEnum<T>(this JToken value, out T ret) where T : struct
+        {
             switch (value.Type)
             {
                 case JTokenType.String:

@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json.Linq;
+using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 
@@ -14,6 +15,6 @@ namespace Solcery.Widgets_new.Cards.Widgets
         void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation);
         void UpdateInteractable(bool interactable);
         void UpdateHighlighted(bool highlighted);
-        void UpdateFromCardTypeData(int objectId, JObject data);
+        void UpdateFromCardTypeData(int objectId, IItemType itemType);
     }
 }

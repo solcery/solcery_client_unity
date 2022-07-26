@@ -35,22 +35,24 @@ namespace Solcery.Games.Contexts
             return result;
         }
 
-        bool IContextGameObjects.TryGetCardTypeData(object @object, out JObject cardTypeData)
+        bool IContextGameObjects.TryGetCardTypeValue(object @object, string key, out JToken value)
         {
+            var poolObjectId = _world.GetPool<ComponentObjectId>();
             var poolObjectType = _world.GetPool<ComponentObjectType>();
-            var poolObjectTypes = _world.GetPool<ComponentObjectTypes>();
             if (@object is int entityId 
+                && poolObjectId.Has(entityId)
                 && poolObjectType.Has(entityId))
             {
-                ref var componentObjectType = ref poolObjectType.Get(entityId);
-                foreach (var uniqObjectTypesEntityTypes in _filterObjectTypes)
+                var id = poolObjectId.Get(entityId).Id;
+                var tplid = poolObjectType.Get(entityId).Type;
+                if (_game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
+                    && itemType.TryGetValue(out value, key, id))
                 {
-                    return poolObjectTypes.Get(uniqObjectTypesEntityTypes).Types
-                        .TryGetValue(componentObjectType.Type, out cardTypeData);
+                    return true;
                 }
             }
 
-            cardTypeData = null;
+            value = null;
             return false;
         }
 
@@ -70,11 +72,11 @@ namespace Solcery.Games.Contexts
 
         bool IContextGameObjects.TryGetCardTypeId(object @object, out int cardTypeId)
         {
-            var poolObjectId = _world.GetPool<ComponentObjectType>();
+            var poolObjectType = _world.GetPool<ComponentObjectType>();
             if (@object is int entityId 
-                && poolObjectId.Has(entityId))
+                && poolObjectType.Has(entityId))
             {
-                cardTypeId = poolObjectId.Get(entityId).Type;
+                cardTypeId  = poolObjectType.Get(entityId).Type;
                 return true;
             }
 

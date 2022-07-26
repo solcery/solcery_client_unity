@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
@@ -36,7 +37,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public RectTransform CardTransform => cardTransform;
 
-        public void UpdateCardType(IGame game, EclipseCardTypes type, JObject cardTypeDataObject)
+        public void UpdateCardType(IGame game, EclipseCardTypes type, IItemType itemType)
         {
             var typeFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 20f;
             UpdateType(type.ToString(), typeFontSize);

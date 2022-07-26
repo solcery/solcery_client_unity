@@ -60,15 +60,14 @@ namespace Solcery.Services.GameContent.Items
             }
         }
 
-        bool IItemTypes.TryGetValue(out JToken value, int tplid, string key, int entityId)
+        bool IItemTypes.TryGetItemType(out IItemType itemType, int tplid)
         {
-            value = null;
-            if (_items.TryGetValue(tplid, out var itemType) 
-                && itemType.TryGetValue(out value, key, entityId))
+            itemType = null;
+            if (_items.TryGetValue(tplid, out itemType))
             {
                 return true;
             }
-
+            
             return false;
         }
 

@@ -28,27 +28,19 @@ namespace Solcery.Widgets_new.Simple.Titles
             }
 
             var entityId = entityIds[0];
-            
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            foreach (var objectTypesEntityId in objectTypesFilter)
+            if (objectTypePool.Has(entityId))
             {
-                var objectTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
-                if (!objectTypePool.Has(entityId))
+                var tplid = objectTypePool.Get(entityId).Type;
+                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
+                    && itemType.TryGetValue(out var valueToken, "description", entityId))
                 {
-                    break;
-                }
-
-                if (objectTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var objectTypeDataObject) 
-                    && objectTypeDataObject.TryGetValue("description", out string description))
-                {
+                    var description = valueToken.GetValue<string>();
                     Layout.UpdateTitle(description);
                     return;
                 }
-                
-                break;
             }
-            
+
             Layout.UpdateTitle("No card type data.");
         }
 

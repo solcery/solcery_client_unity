@@ -6,7 +6,7 @@ namespace Solcery.Services.GameContent.Items
     {
         int Id { get; }
         void UpdateOverrides(int entityId, JObject data);
-        bool TryGetValue(out JToken value, string key, int entityId);
+        bool TryGetValue(out JToken token, string key, int entityId = -1);
         void Cleanup();
     }
 }

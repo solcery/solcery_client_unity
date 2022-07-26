@@ -7,6 +7,7 @@ using Solcery.Games;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
+using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Container.Stacks;
@@ -70,7 +71,7 @@ namespace Solcery.Widgets_new.Container.Hands
                 EcsPool<ComponentObjectAttributes>, 
                 EcsPool<ComponentPlaceId>, 
                 EcsPool<ComponentPlaceWidgetNew>, 
-                Dictionary<int, JObject>,
+                IItemTypes,
                 ICardInContainerWidget> cardUpdater;
             if (cardFaceVisible)
             {
@@ -81,21 +82,16 @@ namespace Solcery.Widgets_new.Container.Hands
                 cardUpdater = CardFaceHideUpdater;
             }
             
-            var objectTypesFilter = world.Filter<ComponentObjectTypes>().End();
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
             var poolPlaceId = world.GetPool<ComponentPlaceId>();
             var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
-            var cardTypes = new Dictionary<int, JObject>();
+            IItemTypes cardTypes = null;
 
             if (cardFaceVisible)
             {
-                foreach (var objectTypesEntityId in objectTypesFilter)
-                {
-                    cardTypes = world.GetPool<ComponentObjectTypes>().Get(objectTypesEntityId).Types;
-                    break;
-                }
+                cardTypes = Game.ServiceGameContent.ItemTypes;
             }
 
             foreach (var entityId in entityIds)
@@ -144,7 +140,7 @@ namespace Solcery.Widgets_new.Container.Hands
             EcsPool<ComponentObjectAttributes> objectAttributesPool,
             EcsPool<ComponentPlaceId> poolPlaceId,
             EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew,
-            Dictionary<int, JObject> cardTypes, 
+            IItemTypes cardTypes, 
             ICardInContainerWidget cardInContainerWidget)
         {
             PlaceWidget oldWidget = null;
@@ -203,16 +199,15 @@ namespace Solcery.Widgets_new.Container.Hands
             EcsPool<ComponentObjectAttributes> objectAttributesPool,
             EcsPool<ComponentPlaceId> poolPlaceId,
             EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew,
-            Dictionary<int, JObject> cardTypes,
+            IItemTypes cardTypes,
             ICardInContainerWidget cardInContainerWidget)
         {
             CardFaceHideUpdater(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget);
-            
             if (objectTypePool.Has(entityId)
-                && cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject)
+                && cardTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).Type)
                 && objectIdPool.Has(entityId))
             {
-                cardInContainerWidget.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, cardTypeDataObject);
+                cardInContainerWidget.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, itemType);
             }
         }
         
