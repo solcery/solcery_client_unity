@@ -42,13 +42,15 @@ namespace Solcery.Widgets_new.Simple.Buttons
             {
                 ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
             });
-            
+
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            if (objectTypePool.Has(entityId))
+            if (objectTypePool.Has(entityId)
+                && objectIdPool.Has(entityId))
             {
+                var id = objectIdPool.Get(entityId).Id;
                 var tplid = objectTypePool.Get(entityId).Type;
                 if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "name", entityId))
+                    && itemType.TryGetValue(out var valueToken, "name", id))
                 {
                     var name = valueToken.GetValue<string>();
                     Layout.UpdateButtonText(name);

@@ -28,12 +28,15 @@ namespace Solcery.Widgets_new.Simple.Titles
             }
 
             var entityId = entityIds[0];
+            var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            if (objectTypePool.Has(entityId))
+            if (objectTypePool.Has(entityId)
+                && objectIdPool.Has(entityId))
             {
+                var id = objectIdPool.Get(entityId).Id;
                 var tplid = objectTypePool.Get(entityId).Type;
                 if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "description", entityId))
+                    && itemType.TryGetValue(out var valueToken, "description", id))
                 {
                     var description = valueToken.GetValue<string>();
                     Layout.UpdateTitle(description);

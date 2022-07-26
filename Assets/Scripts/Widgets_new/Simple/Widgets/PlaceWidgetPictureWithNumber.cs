@@ -32,12 +32,15 @@ namespace Solcery.Widgets_new.Simple.Widgets
             }
 
             var entityId = entityIds[0];
+            var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            if (objectTypePool.Has(entityId))
+            if (objectTypePool.Has(entityId)
+                && objectIdPool.Has(entityId))
             {
+                var id = objectIdPool.Get(entityId).Id;
                 var tplid = objectTypePool.Get(entityId).Type;
                 if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "picture", entityId))
+                    && itemType.TryGetValue(out var valueToken, "picture", id))
                 {
                     var picture = valueToken.GetValue<string>();
                     if (_lastPictureName != picture
