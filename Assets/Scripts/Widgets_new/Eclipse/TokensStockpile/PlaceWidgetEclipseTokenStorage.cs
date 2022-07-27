@@ -7,6 +7,7 @@ using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -46,7 +47,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             var objectIdPool = world.GetPool<ComponentObjectId>();
             var objectTypePool = world.GetPool<ComponentObjectType>();
             var eclipseTokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
-            var cardTypes = world.GetCardTypes();
+            var itemTypes = Game.ServiceGameContent.ItemTypes;
     
             foreach (var entityId in entityIds)
             {
@@ -63,17 +64,17 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 
                     if (!_tokens.TryGetValue(objectId, out var eclipseToken))
                     {
-                        eclipseToken = AttachToken(world, entityId, objectId, typeId, cardTypes);
+                        eclipseToken = AttachToken(world, entityId, objectId, typeId, itemTypes);
                         AttachDragAndDrop(world, entityId, objectId, eclipseToken);
                     }
 
                     if (eclipseToken.TypeId != typeId)
                     {
-                        UpdateFromCardTypeData(objectId, typeId, cardTypes, eclipseToken);
+                        UpdateFromCardTypeData(objectId, typeId, itemTypes, eclipseToken);
                     }
-
-                    var ctd = cardTypes.TryGetValue(typeId, out var res) ? res : new JObject();
-                    UpdateToken(world, eclipseToken, ctd, attributes);
+                    
+                    var itemType = itemTypes.TryGetItemType(out var it, typeId) ? it : null;
+                    UpdateToken(world, eclipseToken, itemType, objectId, attributes);
                     UpdateDragAndDrop(world, eclipseToken);
                 }
             }
@@ -84,11 +85,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             throw new System.NotImplementedException();
         }
 
-        private void UpdateFromCardTypeData(int objectId, int typeId, Dictionary<int, JObject> cardTypes, ITokenInContainerWidget eclipseToken)
+        private void UpdateFromCardTypeData(int objectId, int typeId, IItemTypes itemTypes, ITokenInContainerWidget eclipseToken)
         {
-            if (cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
+            if (itemTypes.TryGetItemType(out var itemType, typeId))
             {
-                eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
+                eclipseToken.UpdateFromCardTypeData(objectId, typeId, itemType);
             }
         }
 
@@ -107,20 +108,13 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             int entityId, 
             int objectId,
             int typeId,
-            Dictionary<int, JObject> cardTypes)
+            IItemTypes itemTypes)
         {
             if (world.GetPool<ComponentEclipseTokenTag>().Has(entityId))
             {
-                var objectTypePool = world.GetPool<ComponentObjectType>();
                 if (Game.TokenInContainerWidgetPool.TryPop(out var eclipseToken))
                 {
-                    // if (objectTypePool.Has(entityId)
-                    //     && cardTypes.TryGetValue(typeId, out var cardTypeDataObject))
-                    // {
-                    //     eclipseToken.UpdateFromCardTypeData(objectId, typeId, cardTypeDataObject);
-                    // }
-
-                    UpdateFromCardTypeData(objectId, typeId, cardTypes, eclipseToken);
+                    UpdateFromCardTypeData(objectId, typeId, itemTypes, eclipseToken);
                     
                     if (_tokensByType.TryGetValue(typeId, out var tokenList))
                     {
@@ -139,12 +133,12 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             return null;
         }
 
-        private void UpdateToken(EcsWorld world, ITokenInContainerWidget eclipseToken, JObject cardTypeData, Dictionary<string, IAttributeValue> attributes)
+        private void UpdateToken(EcsWorld world, ITokenInContainerWidget eclipseToken, IItemType itemType, int objectId, Dictionary<string, IAttributeValue> attributes)
         {
             var color = Color.white;
 
-            if (cardTypeData.TryGetValue("effect_color", out string hexColor) 
-                && ColorUtility.TryParseHtmlString(hexColor, out var col))
+            if (itemType.TryGetValue(out var valueToken, "effect_color", objectId)
+                && ColorUtility.TryParseHtmlString(valueToken.GetValue<string>(), out var col))
             {
                 color = col;
             }

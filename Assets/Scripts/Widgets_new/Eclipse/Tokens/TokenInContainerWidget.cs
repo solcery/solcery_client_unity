@@ -1,5 +1,5 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -47,20 +47,20 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
             _layout.UpdateParent(parent);
         }
 
-        public void UpdateFromCardTypeData(int objectId, int typeId, JObject data)
+        void ITokenInContainerWidget.UpdateFromCardTypeData(int objectId, int typeId, IItemType itemType)
         {
             _objectId = objectId;
             _typeId = typeId;
             
-            if (data.TryGetValue("picture", out string picture)
-                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            if (itemType.TryGetValue(out var valuePictureToken, "picture", objectId)
+                && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);
             }
             
-            if (data.TryGetValue(GameJsonKeys.CardTooltipId, out int tooltipId))
+            if (itemType.TryGetValue(out var valueTooltipToken, GameJsonKeys.CardTooltipId, objectId))
             {
-                InitTooltip(tooltipId);
+                InitTooltip(valueTooltipToken.GetValue<int>());
             }
         }
 
