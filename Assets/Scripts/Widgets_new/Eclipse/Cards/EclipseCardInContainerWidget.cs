@@ -1,6 +1,6 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
 using Solcery.Utils;
@@ -37,38 +37,48 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
         }
 
-        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int objectType, EclipseCardTypes type, JObject data)
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int objectType, EclipseCardTypes type, IItemType itemType)
         {
             _entityId = entityId;
             _objectId = objectId;
             _eclipseCardType = type;
             _cardType = objectType;
-            
-            var typeFontSize = data.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 5f;
+
+            var typeFontSize = itemType.TryGetValue(out var valueFontSizeToken, GameJsonKeys.CardTypeFontSize, objectId)
+                ? valueFontSizeToken.GetValue<int>()
+                : 5f;
             _layout.UpdateType(type.ToString(), typeFontSize);
 
-            if (data.TryGetValue(GameJsonKeys.CardName, out string cardName))
+            if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
             {
-                var nameFontSize = data.TryGetValue(GameJsonKeys.CardNameFontSize, out int nameFontSizeAttribute) ? nameFontSizeAttribute : 6f;
-                _layout.UpdateName(cardName, nameFontSize);
+                var nameFontSize =
+                    itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize,
+                        objectId)
+                        ? valueNameFontSizeAttributeToken.GetValue<int>()
+                        : 6f;
+                _layout.UpdateName(valueCardNameToken.GetValue<string>(), nameFontSize);
             }
             
-            if (data.TryGetValue(GameJsonKeys.CardDescription, out string cardDescription))
+            if (itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId))
             {
-                var descriptionFontSize = data.TryGetValue(GameJsonKeys.CardDescriptionFontSize, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 10f;
-                _layout.UpdateDescription(cardDescription, descriptionFontSize);
+                var descriptionFontSize =
+                    itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken,
+                        GameJsonKeys.CardDescriptionFontSize, objectId)
+                        ? valueDescriptionFontSizeAttributeToken.GetValue<int>()
+                        : 10f;
+                _layout.UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
             }
 
-            if (data.TryGetValue(GameJsonKeys.CardPicture, out string picture) 
-                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.CardPicture, objectId) 
+                && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);
             }
 
-            if (data.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
+            if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
             {
                 _layout.TimerLayout.UpdateTimerTextActive(true);
-                _layout.TimerLayout.UpdateTimerText(timerText);
+                _layout.TimerLayout.UpdateTimerText(valueTimerTextToken.GetValue<string>());
             }
             else
             {
@@ -83,20 +93,20 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             return _layout.TokensLayout.GetTokenByIndex(slot - 1);
         }
         
-        EclipseCardTokenLayout IEclipseCardInContainerWidget.AttachToken(int slot, JObject data)
+        EclipseCardTokenLayout IEclipseCardInContainerWidget.AttachToken(int slot, int objectId, IItemType itemType)
         {
             var tokenLayout = GetToken(slot);
             if (tokenLayout != null)
             {
-                if (data.TryGetValue(GameJsonKeys.TokenPicture, out string picture)
-                    && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+                if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.TokenPicture, objectId)
+                    && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
                 {
                     tokenLayout.UpdateSprite(texture);
                 }
 
-                if (data.TryGetValue(GameJsonKeys.CardTooltipId, out int tooltipId))
+                if (itemType.TryGetValue(out var valueTooltipIdToken, GameJsonKeys.CardTooltipId, objectId))
                 {
-                    tokenLayout.UpdateTooltip(tooltipId);
+                    tokenLayout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
                 }
             }
             else
