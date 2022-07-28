@@ -1,9 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
-using Solcery.Utils;
-using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games;
 using Solcery.Games.Contexts;
-//using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Models.Shared.Triggers.Types.OnClick;
@@ -16,20 +14,17 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
 
     public sealed class SystemTriggerApplyCardOnLeftClick : ISystemTriggerApplyCardOnLeftClick
     {
-        private IServiceBricks _serviceBricks;
         private readonly IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
-        private EcsFilter _filterEntityTypes;
         private EcsFilter _filterEntities;
 
-        public static ISystemTriggerApplyCardOnLeftClick Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        public static ISystemTriggerApplyCardOnLeftClick Create(IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            return new SystemTriggerApplyCardOnLeftClick(serviceBricks, applyGameState);
+            return new SystemTriggerApplyCardOnLeftClick(applyGameState);
         }
         
-        private SystemTriggerApplyCardOnLeftClick(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        private SystemTriggerApplyCardOnLeftClick(IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            _serviceBricks = serviceBricks;
             _applyGameState = applyGameState;
         }
         
@@ -43,27 +38,23 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                 .Inc<ComponentTriggerOnLeftClickTag>()
                 .End();
 
-            _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
-
             _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
                 .End();
         }
         
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            _serviceBricks = null;
             _filterTriggers = null;
-            _filterEntityTypes = null;
             _filterEntities = null;
         }
         
         void IEcsRunSystem.Run(EcsSystems systems)
         {
+            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
             var triggerTargetEntityIdPool = world.GetPool<ComponentTriggerTargetObjectId>();
             var entityIdPool = world.GetPool<ComponentObjectId>();
             var entityTypePool = world.GetPool<ComponentObjectType>();
-            var entityTypesPool = world.GetPool<ComponentObjectTypes>();
 
             foreach (var triggerEntityId in _filterTriggers)
             {
@@ -76,35 +67,21 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                         continue;
                     }
 
-                    var entityType = entityTypePool.Get(entityId).TplId;
-                    var entityTypesId = -1;
-                    foreach (var etid in _filterEntityTypes)
-                    {
-                        entityTypesId = etid;
-                        break;
-                    }
-                
-                    if (entityTypesId == -1 || 
-                        !entityTypesPool.Get(entityTypesId).Types.TryGetValue(entityType, out var entityTypeData) 
-                        || !entityTypeData.TryGetValue("action_on_left_click", out JObject brick))
+                    var tplid = entityTypePool.Get(entityId).TplId;
+
+                    if (!game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
+                        || !itemType.TryGetValue(out var valueBrickToken, "action_on_left_click", targetObjectId)
+                        || valueBrickToken is not JObject brick)
                     {
                         Debug.Log("Can't find action_on_left_click!");
                         continue;
                     }
-
-                    //InitContext(entityId, world);
                     
-                    // TODO: fix it!!!
-                    var context = CurrentContext.Create(world);
+                    var context = CurrentContext.Create(game, world);
                     context.Object.Push(entityId);
-                    
-                    Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
-                    
-                    // TODO: fix it!!!
+                    Debug.Log($"Action brick execute status {game.ServiceBricks.ExecuteBrick(brick, context, 1)}");
                     _applyGameState.ApplySimulatedGameStates(context.GameStates);
                     CurrentContext.Destroy(world, context);
-                    
-                    //DestroyContext(world);
                     
                     break;
                 }

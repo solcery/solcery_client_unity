@@ -6,7 +6,6 @@ using Solcery.Models.Shared.Commands;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Shared.Triggers.Apply;
-using Solcery.Models.Simulation.Game;
 using Solcery.Models.Simulation.Game.Destroy;
 using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
@@ -32,22 +31,20 @@ namespace Solcery.Models.Simulation
         void ISimulationModel.Init(IServiceLocalSimulationApplyGameState applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState)
         {
             _world = new EcsWorld();
-            _systems = new EcsSystems(_world);
+            _systems = new EcsSystems(_world, game);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
-            _systems.Add(SystemInitialComponentGame.Create(game));
-            _systems.Add(SystemInitialDragDropTypes.Create(game.ServiceGameContent));
-            _systems.Add(SystemInitialGameContentPlaces.Create(game.ServiceGameContent));
-            _systems.Add(SystemInitialGameContentEntityTypes.Create(game.ServiceGameContent));
+            _systems.Add(SystemInitialDragDropTypes.Create());
+            _systems.Add(SystemInitialGameContentPlaces.Create());
             _systems.Add(SystemGameStateInitial.Create(initialGameState));
-            _systems.Add(SystemInitialGameContentTooltips.Create(game.ServiceGameContent));
+            _systems.Add(SystemInitialGameContentTooltips.Create());
 
             // Process commands
             _systems.Add(SystemProcessCommands.Create(serviceCommands));
             
             // Apply triggers
             // TODO: fix it!!!
-            _systems.Add(SystemsTriggerApply.Create(game.ServiceBricks, applyGameState as IServiceLocalSimulationApplyGameStateNew));
+            _systems.Add(SystemsTriggerApply.Create(applyGameState as IServiceLocalSimulationApplyGameStateNew));
             
             // Update static attributes
             _systems.Add(SystemStaticAttributesUpdate.Create());

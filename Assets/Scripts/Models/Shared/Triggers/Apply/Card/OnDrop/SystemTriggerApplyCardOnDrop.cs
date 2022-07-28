@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games;
 using Solcery.Games.Contexts;
 using Solcery.Models.Shared.DragDrop.Parameters;
 using Solcery.Models.Shared.Objects;
@@ -14,20 +14,18 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
 
     public sealed class SystemTriggerApplyCardOnDrop : ISystemTriggerApplyCardOnDrop
     {
-        private IServiceBricks _serviceBricks;
         private IServiceLocalSimulationApplyGameStateNew _applyGameState;
         private EcsFilter _filterTriggers;
         private EcsFilter _filterObjects;
         private EcsFilter _filterDragDropParameters;
 
-        public static ISystemTriggerApplyCardOnDrop Create(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        public static ISystemTriggerApplyCardOnDrop Create(IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            return new SystemTriggerApplyCardOnDrop(serviceBricks, applyGameState);
+            return new SystemTriggerApplyCardOnDrop(applyGameState);
         }
 
-        private SystemTriggerApplyCardOnDrop(IServiceBricks serviceBricks, IServiceLocalSimulationApplyGameStateNew applyGameState)
+        private SystemTriggerApplyCardOnDrop(IServiceLocalSimulationApplyGameStateNew applyGameState)
         {
-            _serviceBricks = serviceBricks;
             _applyGameState = applyGameState;
         }
         
@@ -55,7 +53,6 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
         
         void IEcsDestroySystem.Destroy(EcsSystems systems)
         {
-            _serviceBricks = null;
             _filterTriggers = null;
             _filterObjects = null;
             _filterDragDropParameters = null;
@@ -63,6 +60,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
 
         void IEcsRunSystem.Run(EcsSystems systems)
         {
+            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
             var targetObjectIdPool = world.GetPool<ComponentTriggerTargetObjectId>();
             var targetDragDropIdPool = world.GetPool<ComponentTriggerTargetDragDropId>();
@@ -91,16 +89,11 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
                             continue;
                         }
                         
-                        // TODO: fix it!!!
-                        var context = CurrentContext.Create(world);
+                        var context = CurrentContext.Create(game, world);
                         context.Object.Push(objectEntityId);
                         context.GameVars.Update("target_place", targetPlaceId);
-                        
                         var brick = dragDropActionPool.Get(dragDropParameterEntityId).Action;
-                            
-                        Debug.Log($"Action brick execute status {_serviceBricks.ExecuteBrick(brick, context, 1)}");
-                            
-                        // TODO: fix it!!!
+                        Debug.Log($"Action brick execute status {game.ServiceBricks.ExecuteBrick(brick, context, 1)}");
                         _applyGameState.ApplySimulatedGameStates(context.GameStates);
                         CurrentContext.Destroy(world, context);
                         

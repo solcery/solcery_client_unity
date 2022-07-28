@@ -25,7 +25,6 @@ namespace Solcery.Models.Play.Game.State
         
         private EcsFilter _filterGameAttributes;
         private EcsFilter _filterEntities;
-        private EcsFilter _filterEntityTypes;
         private IStaticAttributes _staticAttributes;
         
         public static ISystemGameStateUpdate Create(IGame game)
@@ -43,7 +42,6 @@ namespace Solcery.Models.Play.Game.State
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentObjectTag>().End();
-            _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
             _staticAttributes = StaticAttributes.Create();
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
@@ -63,6 +61,7 @@ namespace Solcery.Models.Play.Game.State
             var gameStateJson = ugs.GameState;
 
             var world = systems.GetWorld();
+            var game = systems.GetShared<IGame>();
             
             // Add Component Game State Update Tag
             world.GetPool<ComponentGameStateUpdateTag>().Add(world.NewEntity());
@@ -127,13 +126,13 @@ namespace Solcery.Models.Play.Game.State
                     if (updateObjects.TryGetValue(objectId, out var objectData))
                     {
                         updateObjects.Remove(objectId);
-                        UpdateEntity(world, entityId, objectData);
+                        UpdateEntity(world, entityId, game, objectData);
                     }
                 }
 
                 foreach (var updateObject in updateObjects)
                 {
-                    CreateEntity(world, updateObject.Value);
+                    CreateEntity(world, game, updateObject.Value);
                 }
                 
                 updateObjects.Clear();
@@ -165,22 +164,18 @@ namespace Solcery.Models.Play.Game.State
             }
         }
         
-        private void UpdateInteractable(int typeId, EcsWorld world, int entityIndex)
+        private void UpdateInteractable(int tplid, EcsWorld world, IGame game, int entityIndex)
         {
-            foreach (var uniqEntityTypes in _filterEntityTypes)
+            if (game.ServiceGameContent.ItemTypes.Items.ContainsKey(tplid))
             {
-                ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityTypes);
-                if (types.Types.ContainsKey(typeId))
+                if (!world.GetPool<ComponentAttributeInteractable>().Has(entityIndex))
                 {
-                    if (!world.GetPool<ComponentAttributeInteractable>().Has(entityIndex))
-                    {
-                        world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Update(1);
-                    }
+                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Update(1);
                 }
             }
         }
 
-        private void CreateEntity(EcsWorld world, JObject entityData)
+        private void CreateEntity(EcsWorld world, IGame game, JObject entityData)
         {
             var entityIndex = world.NewEntity();
             world.GetPool<ComponentObjectTag>().Add(entityIndex);
@@ -189,7 +184,7 @@ namespace Solcery.Models.Play.Game.State
             world.GetPool<ComponentObjectAttributes>().Add(entityIndex).Attributes =
                 new Dictionary<string, IAttributeValue>();
 
-            UpdateEntity(world, entityIndex, entityData);
+            UpdateEntity(world, entityIndex, game, entityData);
         }
 
         private void RemoveAllEclipseCardComponents(EcsWorld world, int entityIndex)
@@ -232,7 +227,7 @@ namespace Solcery.Models.Play.Game.State
             }
         }
 
-        private void UpdateEclipseCardComponents(EcsWorld world, int entityIndex, JObject entityData)
+        private void UpdateEclipseCardComponents(EcsWorld world, int entityIndex, IGame game, JObject entityData)
         {
             RemoveAllEclipseCardComponents(world, entityIndex);
             
@@ -243,51 +238,49 @@ namespace Solcery.Models.Play.Game.State
             var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
             var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
 
-            var typeId = entityData.GetValue<int>("tplId");
-            foreach (var filterEntityTypeId in _filterEntityTypes)
+            var objectId = entityData.GetValue<int>("id");
+            var tplid = entityData.GetValue<int>("tplId");
+            if (game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid))
             {
-                ref var entityTypesComponent = ref world.GetPool<ComponentObjectTypes>().Get(filterEntityTypeId);
-                if (entityTypesComponent.Types.TryGetValue(typeId, out var entityTypeData))
+                if (itemType.TryGetValue(out var valueToken, GameJsonKeys.CardType, objectId)
+                    && valueToken.TryGetEnum(out EclipseCardTypes eclipseCardType))
                 {
-                    if (entityTypeData.TryGetEnum(GameJsonKeys.CardType, out EclipseCardTypes eclipseCardType))
-                    {
-                        tagPool.Add(entityIndex);
-                        eclipseCartTypePool.Add(entityIndex).CardType = eclipseCardType;
+                    tagPool.Add(entityIndex);
+                    eclipseCartTypePool.Add(entityIndex).CardType = eclipseCardType;
                 
-                        switch (eclipseCardType)
-                        {
-                            case EclipseCardTypes.Event:
-                                eventTagPool.Add(entityIndex);
-                                break;
+                    switch (eclipseCardType)
+                    {
+                        case EclipseCardTypes.Event:
+                            eventTagPool.Add(entityIndex);
+                            break;
                     
-                            case EclipseCardTypes.Creature:
-                                creatureTagPool.Add(entityIndex);
-                                break;
+                        case EclipseCardTypes.Creature:
+                            creatureTagPool.Add(entityIndex);
+                            break;
                     
-                            case EclipseCardTypes.Building:
-                                buildingTagPool.Add(entityIndex);
-                                break;
+                        case EclipseCardTypes.Building:
+                            buildingTagPool.Add(entityIndex);
+                            break;
                     
-                            case EclipseCardTypes.Token:
-                                tokenTagPool.Add(entityIndex);
-                                break;
-                        }
+                        case EclipseCardTypes.Token:
+                            tokenTagPool.Add(entityIndex);
+                            break;
                     }
                 }
             }
         }
 
-        private void UpdateEntity(EcsWorld world, int entityIndex, JObject entityData)
+        private void UpdateEntity(EcsWorld world, int entityIndex, IGame game, JObject entityData)
         {
             // Eclipse card support
-            UpdateEclipseCardComponents(world, entityIndex, entityData);
+            UpdateEclipseCardComponents(world, entityIndex, game, entityData);
             
             world.GetPool<ComponentObjectId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
             var typeId = entityData.GetValue<int>("tplId");
             world.GetPool<ComponentObjectType>().Get(entityIndex).TplId = typeId;
 
             // interactable
-            UpdateInteractable(typeId, world, entityIndex);
+            UpdateInteractable(typeId, world, game, entityIndex);
             
             // attributes
             ref var attributesComponent = ref world.GetPool<ComponentObjectAttributes>().Get(entityIndex);

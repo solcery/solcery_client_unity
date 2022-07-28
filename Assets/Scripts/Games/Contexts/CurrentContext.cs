@@ -12,7 +12,6 @@ using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
-using Solcery.Models.Simulation.Game;
 using Solcery.Utils;
 
 namespace Solcery.Games.Contexts
@@ -30,7 +29,8 @@ namespace Solcery.Games.Contexts
 
         private readonly EcsWorld _world;
         private readonly EcsFilter _filterComponentObjectIdHash;
-        private readonly EcsFilter _filterComponentGame;
+
+        private IGame _game;
 
         public static IContext Create(IGame game, EcsWorld world)
         {
@@ -71,6 +71,7 @@ namespace Solcery.Games.Contexts
 
         private CurrentContext(IGame game, EcsWorld world)
         {
+            _game = game;
             GameStates = ContextGameStates.Create(world);
             Object = CurrentContextObject.Create(world);
             ObjectAttrs = CurrentContextObjectAttrs.Create(world);
@@ -82,7 +83,6 @@ namespace Solcery.Games.Contexts
 
             _world = world;
             _filterComponentObjectIdHash = _world.Filter<ComponentObjectIdHash>().End();
-            _filterComponentGame = _world.Filter<ComponentGame>().End();
         }
         
         bool IContext.DeleteObject(object @object)
@@ -120,24 +120,20 @@ namespace Solcery.Games.Contexts
                 _world.GetPool<ComponentObjectType>().Add(entityId).TplId = cardTypeId;
 
                 ref var componentAttributes = ref _world.GetPool<ComponentObjectAttributes>().Add(entityId);
-                foreach (var gameEntityId in _filterComponentGame)
+                var attributeList = _game.GameContentAttributes;
+                foreach (var attribute in attributeList.AttributeNameList)
                 {
-                    var attributeList = _world.GetPool<ComponentGame>().Get(gameEntityId).Game.GameContentAttributes;
-                    foreach (var attribute in attributeList.AttributeNameList)
+                    if (!componentAttributes.Attributes.ContainsKey(attribute))
                     {
-                        if (!componentAttributes.Attributes.ContainsKey(attribute))
+                        if (attribute == "place")
                         {
-                            if (attribute == "place")
-                            {
-                                componentAttributes.Attributes.Add(attribute, AttributeValue.Create(place));
-                            }
-                            else
-                            {
-                                componentAttributes.Attributes.Add(attribute, AttributeValue.Create(0));
-                            }
+                            componentAttributes.Attributes.Add(attribute, AttributeValue.Create(place));
+                        }
+                        else
+                        {
+                            componentAttributes.Attributes.Add(attribute, AttributeValue.Create(0));
                         }
                     }
-                    break;
                 }
                 
                 //_world.GetPool<ComponentObjectAttributes>().Add(entityId).Attributes.Add("place", AttributeValue.Create(place));

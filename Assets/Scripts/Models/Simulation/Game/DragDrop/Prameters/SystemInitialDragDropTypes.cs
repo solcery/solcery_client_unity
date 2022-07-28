@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.DragDrop.Parameters;
-using Solcery.Services.GameContent;
 using Solcery.Utils;
 
 namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
@@ -12,26 +12,22 @@ namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
     
     public class SystemInitialDragDropTypes : ISystemInitialDragDropTypes
     {
-        private IServiceGameContent _serviceGameContent;
-        
-        public static ISystemInitialDragDropTypes Create(IServiceGameContent serviceGameContent)
+        public static ISystemInitialDragDropTypes Create()
         {
-            return new SystemInitialDragDropTypes(serviceGameContent);
+            return new SystemInitialDragDropTypes();
         }
         
-        private SystemInitialDragDropTypes(IServiceGameContent serviceGameContent)
-        {
-            _serviceGameContent = serviceGameContent;
-        }
+        private SystemInitialDragDropTypes() { }
         
         void IEcsInitSystem.Init(EcsSystems systems)
         {
+            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
             var tagPool = world.GetPool<ComponentDragDropParametersTag>();
             var idPool = world.GetPool<ComponentDragDropParametersId>();
             var actionPool = world.GetPool<ComponentDragDropParametersAction>();
             
-            foreach (var dndToken in _serviceGameContent.DragDrop)
+            foreach (var dndToken in game.ServiceGameContent.DragDrop)
             {
                 if (dndToken is JObject dndObject)
                 {
@@ -45,8 +41,6 @@ namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
                             : new JObject();
                 }
             }
-
-            _serviceGameContent = null;
         }
     }
 }

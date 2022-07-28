@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.BrickInterpretation.Runtime;
+using Solcery.Games;
 using Solcery.Games.Contexts;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Shared.Places;
@@ -47,7 +48,8 @@ namespace Solcery.Models.Play.Places
             {
                 return;
             }
-            
+
+            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
             var poolPlaceVisible = world.GetPool<ComponentPlaceIsVisible>();
             var poolPlaceVisibilityBrick = world.GetPool<ComponentPlaceVisibilityBrick>();
@@ -56,7 +58,7 @@ namespace Solcery.Models.Play.Places
                 ref var placeIsVisible = ref poolPlaceVisible.Get(placeEntityId);
                 var placeVisibilityBrick = poolPlaceVisibilityBrick.Get(placeEntityId).VisibilityBrick;
                 
-                var context = CurrentContext.Create(world);
+                var context = CurrentContext.Create(game, world);
                 placeIsVisible.IsVisible = placeVisibilityBrick != null 
                                            && _serviceBricks.ExecuteConditionBrick(placeVisibilityBrick, context, 1, out var result) 
                                            && result;

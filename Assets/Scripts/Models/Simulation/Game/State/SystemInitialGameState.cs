@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
+using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Interactable;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Game.Attributes;
@@ -20,7 +21,6 @@ namespace Solcery.Models.Simulation.Game.State
     public sealed class SystemGameStateInitial : ISystemGameStateInitial
     {
         private JObject _initialGameState;
-        private EcsFilter _filterEntityTypes;
         private EcsFilter _filterObjectIdHash;
         private IStaticAttributes _staticAttributes;
         
@@ -45,9 +45,9 @@ namespace Solcery.Models.Simulation.Game.State
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
             _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
-            
+
+            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
-            _filterEntityTypes = world.Filter<ComponentObjectTypes>().End();
             _filterObjectIdHash = world.Filter<ComponentObjectIdHash>().End();
             var objectIdHashPool = world.GetPool<ComponentObjectIdHash>();
 
@@ -82,7 +82,7 @@ namespace Solcery.Models.Simulation.Game.State
             foreach (var entityObject in entityHashMap)
             {
                 maxObjectId = Mathf.Max(maxObjectId, entityObject.Key);
-                CreateEntity(world, entityObject.Value);
+                CreateEntity(world, game, entityObject.Value);
             }
             
             objectIdHashes.UpdateHeadId(maxObjectId);
@@ -91,7 +91,6 @@ namespace Solcery.Models.Simulation.Game.State
             _staticAttributes.Cleanup();
             _staticAttributes = null;
             _initialGameState = null;
-            _filterEntityTypes = null;
         }
         
         private void UpdateAttributes(JArray gameAttributeArray, Dictionary<string, IAttributeValue> attributesHashMap)
@@ -119,7 +118,7 @@ namespace Solcery.Models.Simulation.Game.State
             }
         }
         
-        private void CreateEntity(EcsWorld world, JObject entityData)
+        private void CreateEntity(EcsWorld world, IGame game, JObject entityData)
         {
             var entityIndex = world.NewEntity();
             world.GetPool<ComponentObjectTag>().Add(entityIndex);
@@ -127,17 +126,17 @@ namespace Solcery.Models.Simulation.Game.State
             world.GetPool<ComponentObjectType>().Add(entityIndex);
             world.GetPool<ComponentObjectAttributes>().Add(entityIndex);
 
-            UpdateEntity(world, entityIndex, entityData);
+            UpdateEntity(world, entityIndex, game, entityData);
         }
         
-        private void UpdateEntity(EcsWorld world, int entityIndex, JObject entityData)
+        private void UpdateEntity(EcsWorld world, int entityIndex, IGame game, JObject entityData)
         {
             world.GetPool<ComponentObjectId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
             var typeId = entityData.GetValue<int>("tplId");
             world.GetPool<ComponentObjectType>().Get(entityIndex).TplId = typeId;
 
             // interactable
-            UpdateInteractable(typeId, world, entityIndex);
+            UpdateInteractable(typeId, world, game, entityIndex);
             
             // attributes
             ref var attributesComponent = ref world.GetPool<ComponentObjectAttributes>().Get(entityIndex);
@@ -146,15 +145,11 @@ namespace Solcery.Models.Simulation.Game.State
             _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributesComponent.Attributes);
         }
         
-        private void UpdateInteractable(int typeId, EcsWorld world, int entityIndex)
+        private void UpdateInteractable(int tplid, EcsWorld world, IGame game, int entityIndex)
         {
-            foreach (var uniqEntityTypes in _filterEntityTypes)
+            if (game.ServiceGameContent.ItemTypes.Items.ContainsKey(tplid))
             {
-                ref var types = ref world.GetPool<ComponentObjectTypes>().Get(uniqEntityTypes);
-                if (types.Types.ContainsKey(typeId))
-                {
-                    world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Update(1);
-                }
+                world.GetPool<ComponentAttributeInteractable>().Add(entityIndex).Update(1);
             }
         }
     }

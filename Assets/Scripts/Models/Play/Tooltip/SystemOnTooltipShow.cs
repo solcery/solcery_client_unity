@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Tooltips;
 using Solcery.Services.Events;
-using Solcery.Utils;
 using Solcery.Widgets_new.Tooltip;
 
 namespace Solcery.Models.Play.Tooltip
@@ -60,7 +59,7 @@ namespace Solcery.Models.Play.Tooltip
             if (_uiEventData is OnTooltipShowEventData onTooltipShowEventData
                 && tooltips.TryGetValue(onTooltipShowEventData.TooltipId, out var tooltipDataObject))
             {
-                GameApplication.Game().TooltipController.Show(onTooltipShowEventData.TooltipId, _game, world, tooltipDataObject, onTooltipShowEventData.WorldPosition);
+                GameApplication.Game().TooltipController.Show(onTooltipShowEventData.TooltipId, _game, tooltipDataObject, onTooltipShowEventData.WorldPosition);
             }
             
             _uiEventData = null;
