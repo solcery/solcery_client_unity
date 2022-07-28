@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
-using UnityEngine;
 
 namespace Solcery.Services.Transport
 {
@@ -30,13 +29,15 @@ namespace Solcery.Services.Transport
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_content.json", OnGameContentLoaded);
         }
 
-        private JObject _gameContent;
-
         private void OnGameContentLoaded(string obj)
         {
-            _gameContent = JObject.Parse(obj);
-            _gameTransportCallbacks.OnReceivingGameContent(_gameContent);
+            _gameTransportCallbacks.OnReceivingGameContent(JObject.Parse(obj));
+            StreamingAssetsUtils.LoadText("LocalSimulationData/game_content_overrides.json", OnGameContentOverridesLoaded);
+        }
 
+        private void OnGameContentOverridesLoaded(string obj)
+        {
+            _gameTransportCallbacks.OnReceivingGameContentOverrides(JObject.Parse(obj));
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_state.json", OnGameStateLoaded);
         }
 
@@ -45,7 +46,6 @@ namespace Solcery.Services.Transport
             var gameState = JObject.Parse(obj);
             _localSimulation.EventOnUpdateGameState += OnUpdateGameState;
             _localSimulation.Init(_game, gameState);
-            _gameContent = null;
         }
 
         private void OnUpdateGameState(JObject gameStateJson)
