@@ -5,8 +5,8 @@ using Solcery.Services.Resources.Loaders;
 using Solcery.Services.Resources.Loaders.Multi;
 using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
-using Solcery.Services.Resources.Patterns;
-using Solcery.Services.Resources.Patterns.Texture;
+// using Solcery.Services.Resources.Patterns;
+// using Solcery.Services.Resources.Patterns.Texture;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -33,18 +33,18 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(IServiceGameContent serviceGameContent)
         {
-            var patternsProcessor = PatternsProcessor.Create();
-            patternsProcessor.PatternRegistration(PatternUriTexture.Create());
-            patternsProcessor.ProcessGameContent(gameContentJson);
+            // var patternsProcessor = PatternsProcessor.Create();
+            // patternsProcessor.PatternRegistration(PatternUriTexture.Create());
+            // patternsProcessor.ProcessGameContent(gameContentJson);
 
             _task = MultiLoadTask.Create();
             _task.Completed += OnCompletedAllTask;
 
-            if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.UriTexture, out var imageUriList))
-            {
-                _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
-            }
-
+            // if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.UriTexture, out var imageUriList))
+            // {
+            //     _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
+            // }
+            _task.AddTask(TaskLoadTextureUri.Create(serviceGameContent.ItemTypes.PictureUriList, OnImagesLoaded));
             _task.AddTask(TaskLoadWidgetPrefab.Create(OnWidgetPrefabLoaded));
             _task.Run();
         }

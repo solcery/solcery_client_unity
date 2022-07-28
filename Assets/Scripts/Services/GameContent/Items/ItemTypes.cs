@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 
@@ -6,10 +7,12 @@ namespace Solcery.Services.GameContent.Items
 {
     public sealed class ItemTypes : IItemTypes, IItemTypesPrivate
     {
+        List<string> IItemTypes.PictureUriList => _pictureUriList.ToList();
         IReadOnlyDictionary<int, IItemType> IItemTypes.Items => _items;
 
         private readonly Dictionary<int, Dictionary<string, JToken>> _overrides;
         private readonly Dictionary<int, IItemType> _items;
+        private readonly HashSet<string> _pictureUriList;
 
         public static IItemTypes Create(JArray itemTypes)
         {
@@ -18,6 +21,7 @@ namespace Solcery.Services.GameContent.Items
 
         private ItemTypes(JArray itemTypes)
         {
+            _pictureUriList = new HashSet<string>();
             _items = new Dictionary<int, IItemType>(itemTypes.Count);
 
             foreach (var itemTypeToken in itemTypes)
@@ -29,6 +33,12 @@ namespace Solcery.Services.GameContent.Items
 
                 var itemType = ItemType.Create(this, itemTypeObject);
                 _items.Add(itemType.TplId, itemType);
+
+                if (itemType.TryGetValue(out var valuePictureToken, "picture")
+                    && !_pictureUriList.Contains(valuePictureToken.GetValue<string>()))
+                {
+                    _pictureUriList.Add(valuePictureToken.GetValue<string>());
+                }
             }
 
             _overrides = new Dictionary<int, Dictionary<string, JToken>>();
@@ -48,6 +58,12 @@ namespace Solcery.Services.GameContent.Items
                         foreach (var data in dataObject)
                         {
                             _overrides[objectId].Add(data.Key, data.Value);
+
+                            if (data.Key == "picture"
+                                && !_pictureUriList.Contains(data.Value.GetValue<string>()))
+                            {
+                                _pictureUriList.Add(data.Value.GetValue<string>());
+                            }
                         }
                     }
                 }
