@@ -34,7 +34,7 @@ namespace Solcery.Widgets_new.Simple.Titles
                 && objectIdPool.Has(entityId))
             {
                 var id = objectIdPool.Get(entityId).Id;
-                var tplid = objectTypePool.Get(entityId).Type;
+                var tplid = objectTypePool.Get(entityId).TplId;
                 if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
                     && itemType.TryGetValue(out var valueToken, "description", id))
                 {

@@ -4,10 +4,11 @@ using Solcery.Utils;
 
 namespace Solcery.Services.GameContent.Items
 {
-    public sealed class ItemTypes : IItemTypes
+    public sealed class ItemTypes : IItemTypes, IItemTypesPrivate
     {
         IReadOnlyDictionary<int, IItemType> IItemTypes.Items => _items;
-        
+
+        private readonly Dictionary<int, Dictionary<string, JToken>> _overrides;
         private readonly Dictionary<int, IItemType> _items;
 
         public static IItemTypes Create(JArray itemTypes)
@@ -26,35 +27,42 @@ namespace Solcery.Services.GameContent.Items
                     continue;
                 }
 
-                var itemType = ItemType.Create(itemTypeObject);
-                _items.Add(itemType.Id, itemType);
+                var itemType = ItemType.Create(this, itemTypeObject);
+                _items.Add(itemType.TplId, itemType);
             }
+
+            _overrides = new Dictionary<int, Dictionary<string, JToken>>();
         }
 
-        void IItemTypes.UpdateOverridesItems(JArray itemOverrides)
+        void IItemTypes.UpdateOverridesItems(JObject itemOverrides)
         {
-            foreach (var itemOverrideToken in itemOverrides)
+            if (itemOverrides.TryGetValue("nfts", out JArray nftsArray))
             {
-                if (itemOverrideToken is not JObject itemOverrideObject)
+                foreach (var nftToken in nftsArray)
                 {
-                    continue;
-                }
-
-                var entityId = itemOverrideObject.GetValue<int>("id");
-                var overridesArray = itemOverrideObject.GetValue<JArray>("overrides");
-
-                foreach (var overrideToken in overridesArray)
-                {
-                    if (overrideToken is not JObject overrideObject)
+                    if (nftToken is JObject nftObject
+                        && nftObject.TryGetValue("id", out int objectId)
+                        && nftObject.TryGetValue("data", out JObject dataObject))
                     {
-                        continue;
+                        _overrides.Add(objectId, new Dictionary<string, JToken>());
+                        foreach (var data in dataObject)
+                        {
+                            _overrides[objectId].Add(data.Key, data.Value);
+                        }
                     }
+                }
+            }
 
-                    var tplid = overrideObject.GetValue<int>("tpl_id");
-
-                    if (_items.TryGetValue(tplid, out var itemType))
+            if (itemOverrides.TryGetValue("card_types", out JArray ctArray))
+            {
+                foreach (var ctToken in ctArray)
+                {
+                    if (ctToken is JObject ctObject
+                        && ctObject.TryGetValue("id", out int tplId)
+                        && ctObject.TryGetValue("override_fields", out JArray overrideKeys)
+                        && _items.TryGetValue(tplId, out var itemType))
                     {
-                        itemType.UpdateOverrides(entityId, overrideObject.GetValue<JObject>("data"));
+                        itemType.UpdateOverrides(overrideKeys);
                     }
                 }
             }
@@ -68,6 +76,18 @@ namespace Solcery.Services.GameContent.Items
                 return true;
             }
             
+            return false;
+        }
+
+        bool IItemTypesPrivate.TryGetOverride(out JToken value, string key, int objectId)
+        {
+            value = null;
+            if (_overrides.TryGetValue(objectId, out var dict)
+                && dict.TryGetValue(key, out value))
+            {
+                return true;
+            }
+
             return false;
         }
 

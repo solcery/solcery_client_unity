@@ -33,7 +33,7 @@ namespace Solcery.Services.GameContent
 
         void IServiceGameContent.UpdateGameContentOverrides(JObject data)
         {
-            _itemTypes?.UpdateOverridesItems(data.GetValue<JArray>("objects"));
+            _itemTypes?.UpdateOverridesItems(data);
         }
 
         void IServiceGameContent.Cleanup()

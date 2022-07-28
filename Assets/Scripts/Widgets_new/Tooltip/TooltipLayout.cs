@@ -27,7 +27,7 @@ namespace Solcery.Widgets_new.Tooltip
             {
                 contentSizeFitter.enabled = false;
                 horizontalLayoutGroup.enabled = false;
-                eclipseCard.UpdateCardType(game, eclipseCardType, itemType);
+                eclipseCard.UpdateCardType(game, eclipseCardType, -1, itemType);
                 eclipseCard.TokensLayout.UpdateTokenSlots(0);
                 if (itemType.TryGetValue(out var timeValueToken, GameJsonKeys.CardDefaultTimerValue))
                 {
@@ -51,7 +51,7 @@ namespace Solcery.Widgets_new.Tooltip
             contentSizeFitter.enabled = true;
             horizontalLayoutGroup.enabled = true;
             simpleText.text = tooltipDataObject.GetValue<string>(GameJsonKeys.TooltipText);
-            simpleText.fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;;
+            simpleText.fontSize = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipFontSize, out int fontSizeAttribute) ? fontSizeAttribute : 36;
             simpleText.gameObject.SetActive(true);
         }
 

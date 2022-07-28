@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Commands.Datas.OnClick;
 using Solcery.Models.Shared.Triggers.EntityTypes;
@@ -66,18 +65,18 @@ namespace Solcery.Widgets_new.Cards.Widgets
 
         void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, IItemType itemType)
         {
-            if (data.TryGetValue("name", out string name))
+            if (itemType.TryGetValue(out var valueNameToken, "name", objectId))
             {
-                _layout.UpdateName(name);
+                _layout.UpdateName(valueNameToken.GetValue<string>());
             }
             
-            if (data.TryGetValue("description", out string description))
+            if (itemType.TryGetValue(out var valueDescriptionToken, "description", objectId))
             {
-                _layout.UpdateDescription(description);
+                _layout.UpdateDescription(valueDescriptionToken.GetValue<string>());
             }
 
-            if (data.TryGetValue("picture", out string picture) 
-                && _game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            if (itemType.TryGetValue(out var valuePictureToken, "picture", objectId) 
+                && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);
             }

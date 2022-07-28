@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
@@ -37,33 +36,44 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public RectTransform CardTransform => cardTransform;
 
-        public void UpdateCardType(IGame game, EclipseCardTypes type, IItemType itemType)
+        public void UpdateCardType(IGame game, EclipseCardTypes type, int objectId, IItemType itemType)
         {
-            var typeFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardTypeFontSize, out int typeFontSizeAttribute) ? typeFontSizeAttribute : 20f;
+            var typeFontSize =
+                itemType.TryGetValue(out var valueTypeFontSizeAttributeToken, GameJsonKeys.CardTypeFontSize, objectId)
+                    ? valueTypeFontSizeAttributeToken.GetValue<int>()
+                    : 20f;
             UpdateType(type.ToString(), typeFontSize);
 
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardName, out string cardName))
+            if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
             {
-                var nameFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardNameFontSize, out int nameFontSizeAttribute) ? nameFontSizeAttribute : 20f;
-                UpdateName(cardName, nameFontSize);
+                var nameFontSize =
+                    itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize,
+                        objectId)
+                        ? valueNameFontSizeAttributeToken.GetValue<int>()
+                        : 20f;
+                UpdateName(valueCardNameToken.GetValue<string>(), nameFontSize);
             }
 
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescription, out string cardDescription))
+            if (itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId))
             {
-                var descriptionFontSize = cardTypeDataObject.TryGetValue(GameJsonKeys.CardDescriptionFontSizeFull, out int descriptionFontSizeAttribute) ? descriptionFontSizeAttribute : 40f;
-                UpdateDescription(cardDescription, descriptionFontSize);
+                var descriptionFontSize =
+                    itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken,
+                        GameJsonKeys.CardDescriptionFontSizeFull, objectId)
+                        ? valueDescriptionFontSizeAttributeToken.GetValue<int>()
+                        : 40f;
+                UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
             }
 
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardPicture, out string picture)
-                && game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.CardPicture, objectId)
+                && game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 UpdateSprite(texture);
             }
                 
-            if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTimerText, out string timerText))
+            if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
             {
                 TimerLayout.UpdateTimerTextActive(true);
-                TimerLayout.UpdateTimerText(timerText);
+                TimerLayout.UpdateTimerText(valueTimerTextToken.GetValue<string>());
             }
             else
             {

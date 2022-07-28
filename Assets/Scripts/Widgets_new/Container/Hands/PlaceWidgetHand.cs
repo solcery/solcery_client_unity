@@ -204,7 +204,7 @@ namespace Solcery.Widgets_new.Container.Hands
         {
             CardFaceHideUpdater(entityId, objectTypePool, objectIdPool, objectAttributesPool, poolPlaceId, poolPlaceWidgetNew, cardTypes, cardInContainerWidget);
             if (objectTypePool.Has(entityId)
-                && cardTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).Type)
+                && cardTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId)
                 && objectIdPool.Has(entityId))
             {
                 cardInContainerWidget.UpdateFromCardTypeData(objectIdPool.Get(entityId).Id, itemType);

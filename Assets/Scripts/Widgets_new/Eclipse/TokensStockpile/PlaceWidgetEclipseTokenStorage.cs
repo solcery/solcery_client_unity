@@ -53,7 +53,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             {
                 if (eclipseTokenTagPool.Has(entityId) && objectTypePool.Has(entityId))
                 {
-                    var typeId = objectTypePool.Get(entityId).Type;
+                    var typeId = objectTypePool.Get(entityId).TplId;
                     var objectId = objectIdPool.Get(entityId).Id;
                     var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
 

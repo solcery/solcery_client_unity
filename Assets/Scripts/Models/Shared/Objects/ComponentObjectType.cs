@@ -4,11 +4,11 @@ namespace Solcery.Models.Shared.Objects
 {
     public struct ComponentObjectType : IEcsAutoReset<ComponentObjectType>
     {
-        public int Type;
+        public int TplId;
 
         public void AutoReset(ref ComponentObjectType c)
         {
-            c.Type = -1;
+            c.TplId = -1;
         }
     }
 }

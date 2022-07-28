@@ -197,7 +197,7 @@ namespace Solcery.Models.Simulation.Game.State
                 entityArray.Add(new JObject
                 {
                     ["id"] = new JValue(entityIdPool.Get(entityId).Id),
-                    ["tplId"] = new JValue(entityTypePool.Get(entityId).Type),
+                    ["tplId"] = new JValue(entityTypePool.Get(entityId).TplId),
                     ["attrs"] = attributesArray
                 });
             }

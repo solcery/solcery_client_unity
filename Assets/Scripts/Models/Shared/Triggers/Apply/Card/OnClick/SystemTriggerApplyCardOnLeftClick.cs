@@ -76,7 +76,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
                         continue;
                     }
 
-                    var entityType = entityTypePool.Get(entityId).Type;
+                    var entityType = entityTypePool.Get(entityId).TplId;
                     var entityTypesId = -1;
                     foreach (var etid in _filterEntityTypes)
                     {

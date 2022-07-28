@@ -309,7 +309,7 @@ namespace Solcery.Games.Contexts.GameStates
                         continue;
                     }
 
-                    var objData = ObjectData.Create(entityIdPool.Get(entityId).Id, entityTypePool.Get(entityId).Type);
+                    var objData = ObjectData.Create(entityIdPool.Get(entityId).Id, entityTypePool.Get(entityId).TplId);
 
                     var attrs = entityAttributesPool.Get(entityId).Attributes;
 

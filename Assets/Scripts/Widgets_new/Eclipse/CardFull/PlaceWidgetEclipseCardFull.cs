@@ -6,6 +6,7 @@ using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.Events;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
@@ -39,15 +40,14 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             foreach (var entityId in entityIds)
             {
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
-                var cardTypes = world.GetCardTypes();
 
-                if (objectTypePool.Has(entityId) &&
-                    cardTypes.TryGetValue(objectTypePool.Get(entityId).Type, out var cardTypeDataObject))
+                if (objectTypePool.Has(entityId) 
+                    && Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId))
                 {
                     switch (eclipseCardType)
                     {
                         case EclipseCardTypes.Token:
-                            UpdateToken(world, entityId, cardTypeDataObject);
+                            UpdateToken(world, entityId, itemType);
                             break;
                         default:
                             Layout.AddOnLeftClickListener(() =>
@@ -58,7 +58,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             {
                                 ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
                             });
-                            UpdateCard(world, entityId, eclipseCardType, cardTypeDataObject);
+                            UpdateCard(world, entityId, eclipseCardType, itemType);
                             break;
                     }
                 }
@@ -70,14 +70,18 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             throw new System.NotImplementedException();
         }
 
-        private void UpdateCard(EcsWorld world, int entityId, EclipseCardTypes type, JObject cardTypeDataObject)
+        private void UpdateCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
         {
-            if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
+            var poolObjectId = world.GetPool<ComponentObjectId>();
+            var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
+            if (poolObjectId.Has(entityId)
+                && poolEclipseCardTag.Has(entityId))
             {
+                var objectId = poolObjectId.Get(entityId).Id;
                 var attributesPool = world.GetPool<ComponentObjectAttributes>();
                 var attributes = attributesPool.Get(entityId).Attributes;
                 UpdateCardMainAttributes(attributes);
-                UpdateCardType(type, cardTypeDataObject);
+                UpdateCardType(type, objectId, itemType);
                 UpdateCardAnimation(world, attributes);
             }
         }
@@ -113,28 +117,31 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             }
         }
         
-        private void UpdateCardType(EclipseCardTypes type, JObject cardTypeDataObject)
+        private void UpdateCardType(EclipseCardTypes type, int objectId, IItemType itemType)
         {
-            Layout.UpdateCardType(Game, type, cardTypeDataObject);
+            Layout.UpdateCardType(Game, type, objectId, itemType);
         }
 
-        private void UpdateToken(EcsWorld world, int entityId, JObject cardTypeDataObject)
+        private void UpdateToken(EcsWorld world, int entityId, IItemType itemType)
         {
+            var poolObjectId = world.GetPool<ComponentObjectId>();
             var attributesPool = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-            if (attributesPool.TryGetValue(GameJsonKeys.TokenSlot, out var tokenSlotAttribute))
+            if (poolObjectId.Has(entityId)
+                && attributesPool.TryGetValue(GameJsonKeys.TokenSlot, out var tokenSlotAttribute))
             {
+                var objectId = poolObjectId.Get(entityId).Id;
                 var tokenLayout =  Layout.TokensLayout.GetTokenByIndex(tokenSlotAttribute.Current - 1);
                 if (tokenLayout != null)
                 {
-                    if (cardTypeDataObject.TryGetValue(GameJsonKeys.TokenPicture, out string picture)
-                        && Game.ServiceResource.TryGetTextureForKey(picture, out var texture))
+                    if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.TokenPicture, objectId)
+                        && Game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
                     {
                         tokenLayout.UpdateSprite(texture);
                     }
 
-                    if (cardTypeDataObject.TryGetValue(GameJsonKeys.CardTooltipId, out int tooltipId))
+                    if (itemType.TryGetValue(out var valueTooltipIdToken, GameJsonKeys.CardTooltipId, objectId))
                     {
-                        tokenLayout.UpdateTooltip(tooltipId);
+                        tokenLayout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
                     }
                 }
             }

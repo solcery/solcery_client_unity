@@ -134,7 +134,7 @@ namespace Solcery.Models.Simulation.Game.State
         {
             world.GetPool<ComponentObjectId>().Get(entityIndex).Id = entityData.GetValue<int>("id");
             var typeId = entityData.GetValue<int>("tplId");
-            world.GetPool<ComponentObjectType>().Get(entityIndex).Type = typeId;
+            world.GetPool<ComponentObjectType>().Get(entityIndex).TplId = typeId;
 
             // interactable
             UpdateInteractable(typeId, world, entityIndex);

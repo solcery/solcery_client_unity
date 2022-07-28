@@ -75,7 +75,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
                 var objectId = objectIdPool.Get(entityId).Id;
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
-                var tplId = world.GetPool<ComponentObjectType>().Get(entityId).Type;
+                var tplId = world.GetPool<ComponentObjectType>().Get(entityId).TplId;
 
                 switch (eclipseCardType)
                 {
@@ -286,7 +286,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     {
                         if (objectIdPool.Has(entityId)
                             && objectTypePool.Has(entityId)
-                            && itemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).Type))
+                            && itemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId))
                         {
                             var objectId = objectIdPool.Get(entityId).Id;
                             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;

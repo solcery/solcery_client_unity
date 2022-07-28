@@ -35,7 +35,7 @@ namespace Solcery.Utils
             {
                 if (objectIdPool.Get(entityId).Id == cardId)
                 {
-                    type = objectTypePool.Get(entityId).Type;
+                    type = objectTypePool.Get(entityId).TplId;
                     return true;
                 }
             }

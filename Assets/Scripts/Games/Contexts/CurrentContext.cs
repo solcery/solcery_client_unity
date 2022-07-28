@@ -117,7 +117,7 @@ namespace Solcery.Games.Contexts
                 var objectId = objectIdHashes.GetId();
                 _world.GetPool<ComponentObjectTag>().Add(entityId);
                 _world.GetPool<ComponentObjectId>().Add(entityId).Id = objectId;
-                _world.GetPool<ComponentObjectType>().Add(entityId).Type = cardTypeId;
+                _world.GetPool<ComponentObjectType>().Add(entityId).TplId = cardTypeId;
 
                 ref var componentAttributes = ref _world.GetPool<ComponentObjectAttributes>().Add(entityId);
                 foreach (var gameEntityId in _filterComponentGame)

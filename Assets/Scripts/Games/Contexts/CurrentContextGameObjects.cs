@@ -44,7 +44,7 @@ namespace Solcery.Games.Contexts
                 && poolObjectType.Has(entityId))
             {
                 var id = poolObjectId.Get(entityId).Id;
-                var tplid = poolObjectType.Get(entityId).Type;
+                var tplid = poolObjectType.Get(entityId).TplId;
                 if (_game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
                     && itemType.TryGetValue(out value, key, id))
                 {
@@ -76,7 +76,7 @@ namespace Solcery.Games.Contexts
             if (@object is int entityId 
                 && poolObjectType.Has(entityId))
             {
-                cardTypeId  = poolObjectType.Get(entityId).Type;
+                cardTypeId  = poolObjectType.Get(entityId).TplId;
                 return true;
             }
 
@@ -90,7 +90,7 @@ namespace Solcery.Games.Contexts
             if (@object is int entityId 
                 && poolObjectId.Has(entityId))
             {
-                poolObjectId.Get(entityId).Type = cardTypeId;
+                poolObjectId.Get(entityId).TplId = cardTypeId;
                 return true;
             }
 

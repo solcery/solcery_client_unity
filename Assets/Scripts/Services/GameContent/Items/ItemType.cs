@@ -6,22 +6,26 @@ namespace Solcery.Services.GameContent.Items
 {
     public sealed class ItemType : IItemType
     {
-        int IItemType.Id => _id;
+        int IItemType.TplId => _tplId;
         
-        private readonly int _id;
+        private readonly int _tplId;
         private readonly Dictionary<string, JToken> _defaultData;
-        private readonly Dictionary<int, Dictionary<string, JToken>> _data;
+        private readonly HashSet<string> _overrideKeys;
 
-        public static IItemType Create(JObject data)
+        private IItemTypesPrivate _itemTypesPrivate;
+
+        public static IItemType Create(IItemTypesPrivate itemTypesPrivate, JObject data)
         {
-            return new ItemType(data);
+            return new ItemType(itemTypesPrivate, data);
         }
 
-        private ItemType(JObject data)
+        private ItemType(IItemTypesPrivate itemTypesPrivate, JObject data)
         {
-            _id = data.GetValue<int>("id");
-            _data = new Dictionary<int, Dictionary<string, JToken>>();
+            _itemTypesPrivate = itemTypesPrivate;
+            
+            _tplId = data.GetValue<int>("id");
             _defaultData = new Dictionary<string, JToken>();
+            _overrideKeys = new HashSet<string>();
 
             foreach (var property in data)
             {
@@ -35,48 +39,34 @@ namespace Solcery.Services.GameContent.Items
             }
         }
         
-        void IItemType.UpdateOverrides(int entityId, JObject data)
+        void IItemType.UpdateOverrides(JArray overrideKeys)
         {
-            if (!_data.ContainsKey(entityId))
+            foreach (var overrideKeyToken in overrideKeys)
             {
-                _data.Add(entityId, new Dictionary<string, JToken>());
-            }
-
-            var dic = _data[entityId];
-            foreach (var property in data)
-            {
-                if (!dic.ContainsKey(property.Key))
+                var overrideKey = overrideKeyToken.GetValue<string>();
+                if (!_overrideKeys.Contains(overrideKey))
                 {
-                    dic.Add(property.Key, property.Value);
-                    continue;
+                    _overrideKeys.Add(overrideKey);
                 }
-
-                dic[property.Key] = property.Value;
             }
         }
 
-        bool IItemType.TryGetValue(out JToken token, string key, int entityId)
+        bool IItemType.TryGetValue(out JToken token, string key, int objectId)
         {
-            token = null;
-
-            if (!_data.ContainsKey(entityId) && _defaultData.TryGetValue(key, out token))
+            if (_overrideKeys.Contains(key)
+                && _itemTypesPrivate.TryGetOverride(out token, key, objectId))
             {
                 return true;
             }
 
-            if (_data.TryGetValue(entityId, out var subData)
-                && subData.TryGetValue(key, out token))
-            {
-                return true;
-            }
-            
-            return false;
+            return _defaultData.TryGetValue(key, out token);
         }
 
         void IItemType.Cleanup()
         {
+            _itemTypesPrivate = null;
             _defaultData.Clear();
-            _data.Clear();
+            _overrideKeys.Clear();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Solcery.Services.GameContent.Items
     public interface IItemTypes
     {
         IReadOnlyDictionary<int, IItemType> Items { get; }
-        void UpdateOverridesItems(JArray itemOverrides);
+        void UpdateOverridesItems(JObject itemOverrides);
         bool TryGetItemType(out IItemType itemType, int tplid);
         void Cleanup();
     }
