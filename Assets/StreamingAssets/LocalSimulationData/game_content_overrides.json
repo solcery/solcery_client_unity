@@ -1,4 +1,34 @@
 {
-  "nfts" : [],
-  "card_types": []
+  "nfts": [
+    {
+      "id": 97,
+      "data": {
+        "name": "DegenApe #1",
+        "picture": "https://www.degenape.academy/images/framed_apes/14.jpg"
+      }
+    },
+    {
+      "id": 98,
+      "data": {
+        "name": "DegenApe #2",
+        "picture": "https://www.degenape.academy/images/framed_apes/10.jpg"
+      }
+    },
+    {
+      "id": 99,
+      "data": {
+        "name": "DegenApe #3",
+        "picture": "https://www.degenape.academy/images/framed_apes/33.jpg"
+      }
+    }
+  ],
+  "card_types": [
+    {
+      "id": 680,
+      "override_fields": [
+        "name",
+        "picture"
+      ]
+    }
+  ]
 }
