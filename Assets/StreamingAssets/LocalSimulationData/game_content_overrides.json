@@ -1,30 +1,51 @@
 {
   "nfts": [
     {
-      "id": 97,
+      "id": 116,
       "data": {
-        "name": "DegenApe #1",
-        "picture": "https://www.degenape.academy/images/framed_apes/14.jpg"
+        "name": "Degen Ape 1",
+        "picture": "https://img-cdn.magiceden.dev/rs:fill:640:640:0:0/plain/https://arweave.net/AOdEP6TAawJJ8_Tj7olx7CFOElIgCQoOgg-STL8EwAU"
       }
     },
     {
-      "id": 98,
+      "id": 117,
       "data": {
-        "name": "DegenApe #2",
-        "picture": "https://www.degenape.academy/images/framed_apes/10.jpg"
+        "name": "SMB 1",
+        "picture": "https://img-cdn.magiceden.dev/rs:fill:640:640:0:0/plain/https://cdn.solanamonkey.business/gen2/3708.png"
       }
     },
     {
-      "id": 99,
+      "id": 118,
       "data": {
-        "name": "DegenApe #3",
-        "picture": "https://www.degenape.academy/images/framed_apes/33.jpg"
+        "name": "Degen Dojo 1",
+        "picture": "https://img-cdn.magiceden.dev/rs:fill:640:640:0:0/plain/https://www.arweave.net/GZAuiMRByzailDArFqX0B721NWw-tqr5iplEu3e60iI?ext=png"
+      }
+    },
+    {
+      "id": 119,
+      "data": {
+        "name": "Blocksmith 1",
+        "picture": "https://img-cdn.magiceden.dev/rs:fill:640:640:0:0/plain/https://bafybeiaesm5l6z2q6w4xuvdfu74fgk7ko45le3ubrdwm5ei5x6gpbl4wbq.ipfs.dweb.link/750.png?ext=png"
       }
     }
   ],
   "card_types": [
     {
-      "id": 680,
+      "id": 463,
+      "override_fields": [
+        "name",
+        "picture"
+      ]
+    },
+    {
+      "id": 466,
+      "override_fields": [
+        "name",
+        "picture"
+      ]
+    },
+    {
+      "id": 482,
       "override_fields": [
         "name",
         "picture"
