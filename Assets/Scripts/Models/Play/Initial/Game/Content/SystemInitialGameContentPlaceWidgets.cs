@@ -19,7 +19,7 @@ namespace Solcery.Models.Play.Initial.Game.Content
         
         private SystemInitialGameContentPlaceWidgets() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var game = systems.GetShared<IGame>();
             

@@ -30,7 +30,7 @@ namespace Solcery.Models.Play.Places
             _game = game;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             _filterPlaceWithPlaceWidget = systems.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>()
                 .Inc<ComponentPlaceWidgetNew>().End();
@@ -38,7 +38,7 @@ namespace Solcery.Models.Play.Places
             _filterGameStateUpdate = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_filterGameStateUpdate.GetEntitiesCount() <= 0)
             {

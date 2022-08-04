@@ -37,7 +37,7 @@ namespace Solcery.Models.Play.Game.State
             _game = game;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
@@ -49,7 +49,7 @@ namespace Solcery.Models.Play.Game.State
             _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var us = _game.UpdateStateQueue.CurrentState;
 
@@ -289,7 +289,7 @@ namespace Solcery.Models.Play.Game.State
             _staticAttributes.ApplyAndUpdateAttributes(world, entityIndex, attributesComponent.Attributes);
         }
 
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             _staticAttributes.Cleanup();
         }

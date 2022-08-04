@@ -20,7 +20,7 @@ namespace Solcery.Models.Shared.Commands
             _serviceCommands = serviceCommands;
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_serviceCommands.IsEmpty() 
                 || !_serviceCommands.TryPopCommand(out var command))

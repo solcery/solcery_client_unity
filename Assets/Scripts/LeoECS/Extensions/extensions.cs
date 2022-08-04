@@ -1,215 +1,348 @@
-// -----------------------------------------------------------------------------------------
-// The MIT License
-// Dependency injection for LeoECS Lite https://github.com/Leopotam/ecslite-extendedsystems
-// Copyright (c) 2021 Leopotam <leopotam@gmail.com>
-// -----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// The Proprietary or MIT-Red License
+// Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
+// ----------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace Leopotam.EcsLite.Di {
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsWorldAttribute : Attribute {
-        public readonly string World;
-
-        public EcsWorldAttribute (string world = default) {
-            World = world;
-        }
+#if LEOECSLITE_DI
+    public interface IEcsInjectSystem : IEcsSystem {
+        void Inject (IEcsSystems systems, params object[] injects);
     }
-
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsPoolAttribute : Attribute {
-        public readonly string World;
-
-        public EcsPoolAttribute (string world = default) {
-            World = world;
-        }
-    }
-
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsFilterAttribute : Attribute {
-        public readonly string World;
-        public readonly Type Inc1;
-        public readonly Type[] Others;
-
-        public EcsFilterAttribute (Type includeType, params Type[] otherIncludes) : this (default, includeType, otherIncludes) { }
-
-        public EcsFilterAttribute (string world, Type includeType, params Type[] otherIncludes) {
-            World = world;
-            Inc1 = includeType;
-            Others = otherIncludes;
-        }
-    }
-
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsFilterExcludeAttribute : Attribute {
-        public readonly Type Exc1;
-        public readonly Type[] Others;
-
-        public EcsFilterExcludeAttribute (Type excludeType, params Type[] otherExcludes) {
-            Exc1 = excludeType;
-            Others = otherExcludes;
-        }
-    }
-
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsSharedAttribute : Attribute { }
-
-    [AttributeUsage (AttributeTargets.Field)]
-    public sealed class EcsInjectAttribute : Attribute { }
-
+#endif
     public static class Extensions {
-        static readonly Type WorldType = typeof (EcsWorld);
-        static readonly Type WorldAttrType = typeof (EcsWorldAttribute);
-        static readonly Type PoolType = typeof (EcsPool<>);
-        static readonly Type PoolAttrType = typeof (EcsPoolAttribute);
-        static readonly Type FilterType = typeof (EcsFilter);
-        static readonly Type FilterAttrType = typeof (EcsFilterAttribute);
-        static readonly Type FilterExcAttrType = typeof (EcsFilterExcludeAttribute);
-        static readonly Type SharedAttrType = typeof (EcsSharedAttribute);
-        static readonly Type InjectAttrType = typeof (EcsInjectAttribute);
-        static readonly MethodInfo WorldGetPoolMethod = typeof (EcsWorld).GetMethod (nameof (EcsWorld.GetPool));
-        static readonly MethodInfo WorldFilterMethod = typeof (EcsWorld).GetMethod (nameof (EcsWorld.Filter));
-        static readonly MethodInfo MaskIncMethod = typeof (EcsFilter.Mask).GetMethod (nameof (EcsFilter.Mask.Inc));
-        static readonly MethodInfo MaskExcMethod = typeof (EcsFilter.Mask).GetMethod (nameof (EcsFilter.Mask.Exc));
-        static readonly Dictionary<Type, MethodInfo> GetPoolMethodsCache = new Dictionary<Type, MethodInfo> (256);
-        static readonly Dictionary<Type, MethodInfo> FilterMethodsCache = new Dictionary<Type, MethodInfo> (256);
-        static readonly Dictionary<Type, MethodInfo> MaskIncMethodsCache = new Dictionary<Type, MethodInfo> (256);
-        static readonly Dictionary<Type, MethodInfo> MaskExcMethodsCache = new Dictionary<Type, MethodInfo> (256);
-
-        public static EcsSystems Inject (this EcsSystems systems, params object[] injects) {
+        public static IEcsSystems Inject (this IEcsSystems systems, params object[] injects) {
             if (injects == null) { injects = Array.Empty<object> (); }
-            IEcsSystem[] allSystems = null;
-            var systemsCount = systems.GetAllSystems (ref allSystems);
-            var shared = systems.GetShared<object> ();
-            var sharedType = shared?.GetType ();
-
-            for (var i = 0; i < systemsCount; i++) {
-                var system = allSystems[i];
-                foreach (var f in system.GetType ().GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) {
-                    // skip statics.
-                    if (f.IsStatic) { continue; }
-                    // EcsWorld.
-                    if (InjectWorld (f, system, systems)) { continue; }
-                    // EcsPool.
-                    if (InjectPool (f, system, systems)) { continue; }
-                    // EcsFilter.
-                    if (InjectFilter (f, system, systems)) { continue; }
-                    // Shared.
-                    if (InjectShared (f, system, shared, sharedType)) { continue; }
-                    // Inject.
-                    if (InjectCustomData (f, system, injects)) { continue; }
+            foreach (var system in systems.GetAllSystems ()) {
+#if LEOECSLITE_DI
+                if (system is IEcsInjectSystem injectSystem) {
+                    injectSystem.Inject (systems, injects);
+                    continue;
                 }
+#endif
+                InjectToSystem (system, systems, injects);
             }
 
             return systems;
         }
 
-        static MethodInfo GetGenericGetPoolMethod (Type componentType) {
-            if (!GetPoolMethodsCache.TryGetValue (componentType, out var pool)) {
-                pool = WorldGetPoolMethod.MakeGenericMethod (componentType);
-                GetPoolMethodsCache[componentType] = pool;
+        public static void InjectToSystem (IEcsSystem system, IEcsSystems systems, object[] injects) {
+            foreach (var f in system.GetType ().GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) {
+                // skip statics.
+                if (f.IsStatic) { continue; }
+                // EcsWorldInject, EcsFilterInject, EcsPoolInject, EcsSharedInject.
+                if (InjectBuiltIns (f, system, systems)) { continue; }
+                // EcsDataInject.
+                if (InjectCustoms (f, system, injects)) { }
             }
-            return pool;
         }
 
-        static MethodInfo GetGenericFilterMethod (Type componentType) {
-            if (!FilterMethodsCache.TryGetValue (componentType, out var filter)) {
-                filter = WorldFilterMethod.MakeGenericMethod (componentType);
-                FilterMethodsCache[componentType] = filter;
-            }
-            return filter;
-        }
-
-        static MethodInfo GetGenericMaskIncMethod (Type componentType) {
-            if (!MaskIncMethodsCache.TryGetValue (componentType, out var inc)) {
-                inc = MaskIncMethod.MakeGenericMethod (componentType);
-                MaskIncMethodsCache[componentType] = inc;
-            }
-            return inc;
-        }
-
-        static MethodInfo GetGenericMaskExcMethod (Type componentType) {
-            if (!MaskExcMethodsCache.TryGetValue (componentType, out var exc)) {
-                exc = MaskExcMethod.MakeGenericMethod (componentType);
-                MaskExcMethodsCache[componentType] = exc;
-            }
-            return exc;
-        }
-
-        static bool InjectWorld (FieldInfo fieldInfo, IEcsSystem system, EcsSystems systems) {
-            if (fieldInfo.FieldType == WorldType) {
-                if (Attribute.IsDefined (fieldInfo, WorldAttrType)) {
-                    var worldAttr = (EcsWorldAttribute) Attribute.GetCustomAttribute (fieldInfo, WorldAttrType);
-                    fieldInfo.SetValue (system, systems.GetWorld (worldAttr.World));
-                }
+        static bool InjectBuiltIns (FieldInfo fieldInfo, IEcsSystem system, IEcsSystems systems) {
+            if (typeof (IEcsDataInject).IsAssignableFrom (fieldInfo.FieldType)) {
+                var instance = (IEcsDataInject) fieldInfo.GetValue (system);
+                instance.Fill (systems);
+                fieldInfo.SetValue (system, instance);
                 return true;
             }
             return false;
         }
 
-        static bool InjectPool (FieldInfo fieldInfo, IEcsSystem system, EcsSystems systems) {
-            if (fieldInfo.FieldType.IsGenericType && fieldInfo.FieldType.GetGenericTypeDefinition () == PoolType) {
-                if (Attribute.IsDefined (fieldInfo, PoolAttrType)) {
-                    var poolAttr = (EcsPoolAttribute) Attribute.GetCustomAttribute (fieldInfo, PoolAttrType);
-                    var world = systems.GetWorld (poolAttr.World);
-                    var componentTypes = fieldInfo.FieldType.GetGenericArguments ();
-                    fieldInfo.SetValue (system, GetGenericGetPoolMethod (componentTypes[0]).Invoke (world, null));
-                }
+        static bool InjectCustoms (FieldInfo fieldInfo, IEcsSystem system, object[] injects) {
+            if (typeof (IEcsCustomDataInject).IsAssignableFrom (fieldInfo.FieldType)) {
+                var instance = (IEcsCustomDataInject) fieldInfo.GetValue (system);
+                instance.Fill (injects);
+                fieldInfo.SetValue (system, instance);
                 return true;
             }
             return false;
         }
+    }
 
-        static bool InjectFilter (FieldInfo fieldInfo, IEcsSystem system, EcsSystems systems) {
-            if (fieldInfo.FieldType == FilterType) {
-                if (Attribute.IsDefined (fieldInfo, FilterAttrType)) {
-                    var filterAttr = (EcsFilterAttribute) Attribute.GetCustomAttribute (fieldInfo, FilterAttrType);
-                    var world = systems.GetWorld (filterAttr.World);
-                    var mask = (EcsFilter.Mask) GetGenericFilterMethod (filterAttr.Inc1).Invoke (world, null);
-                    if (filterAttr.Others != null) {
-                        foreach (var type in filterAttr.Others) {
-                            GetGenericMaskIncMethod (type).Invoke (mask, null);
-                        }
-                    }
-                    if (Attribute.IsDefined (fieldInfo, FilterExcAttrType)) {
-                        var filterExcAttr = (EcsFilterExcludeAttribute) Attribute.GetCustomAttribute (fieldInfo, FilterExcAttrType);
-                        GetGenericMaskExcMethod (filterExcAttr.Exc1).Invoke (mask, null);
-                        if (filterExcAttr.Others != null) {
-                            foreach (var type in filterExcAttr.Others) {
-                                GetGenericMaskExcMethod (type).Invoke (mask, null);
-                            }
-                        }
-                    }
-                    fieldInfo.SetValue (system, mask.End ());
-                }
-                return true;
-            }
-            return false;
+    public interface IEcsDataInject {
+        void Fill (IEcsSystems systems);
+    }
+
+    public interface IEcsCustomDataInject {
+        void Fill (object[] injects);
+    }
+
+    public interface IEcsInclude {
+        EcsWorld.Mask Fill (EcsWorld world);
+    }
+
+    public interface IEcsExclude {
+        EcsWorld.Mask Fill (EcsWorld.Mask mask);
+    }
+
+    public struct EcsFilterInject<TInc> : IEcsDataInject
+        where TInc : struct, IEcsInclude {
+        public EcsFilter Value;
+        public TInc Pools;
+        string _worldName;
+
+        public static implicit operator EcsFilterInject<TInc> (string worldName) {
+            return new EcsFilterInject<TInc> { _worldName = worldName };
         }
 
-        static bool InjectShared (FieldInfo fieldInfo, IEcsSystem system, object shared, Type sharedType) {
-            if (shared != null && Attribute.IsDefined (fieldInfo, SharedAttrType)) {
-                if (fieldInfo.FieldType.IsAssignableFrom (sharedType)) {
-                    fieldInfo.SetValue (system, shared);
-                }
-                return true;
-            }
-            return false;
+        void IEcsDataInject.Fill (IEcsSystems systems) {
+            Pools = default;
+            Value = Pools.Fill (systems.GetWorld (_worldName)).End ();
+        }
+    }
+
+    public struct EcsFilterInject<TInc, TExc> : IEcsDataInject
+        where TInc : struct, IEcsInclude
+        where TExc : struct, IEcsExclude {
+        public EcsFilter Value;
+        public TInc Pools;
+        string _worldName;
+
+        public static implicit operator EcsFilterInject<TInc, TExc> (string worldName) {
+            return new EcsFilterInject<TInc, TExc> { _worldName = worldName };
         }
 
-        static bool InjectCustomData (FieldInfo fieldInfo, IEcsSystem system, object[] injects) {
-            if (injects.Length > 0 && Attribute.IsDefined (fieldInfo, InjectAttrType)) {
+        void IEcsDataInject.Fill (IEcsSystems systems) {
+            Pools = default;
+            TExc exc = default;
+            Value = exc.Fill (Pools.Fill (systems.GetWorld (_worldName))).End ();
+        }
+    }
+
+    public struct EcsPoolInject<T> : IEcsDataInject where T : struct {
+        public EcsPool<T> Value;
+        string _worldName;
+
+        public static implicit operator EcsPoolInject<T> (string worldName) {
+            return new EcsPoolInject<T> { _worldName = worldName };
+        }
+
+        void IEcsDataInject.Fill (IEcsSystems systems) {
+            Value = systems.GetWorld (_worldName).GetPool<T> ();
+        }
+    }
+
+    public struct EcsSharedInject<T> : IEcsDataInject where T : class {
+        public T Value;
+
+        void IEcsDataInject.Fill (IEcsSystems systems) {
+            Value = systems.GetShared<T> ();
+        }
+    }
+
+    public struct EcsCustomInject<T> : IEcsCustomDataInject where T : class {
+        public T Value;
+
+        void IEcsCustomDataInject.Fill (object[] injects) {
+            if (injects.Length > 0) {
+                var vType = typeof (T);
                 foreach (var inject in injects) {
-                    if (fieldInfo.FieldType.IsInstanceOfType (inject)) {
-                        fieldInfo.SetValue (system, inject);
+                    if (vType.IsInstanceOfType (inject)) {
+                        Value = (T) inject;
                         break;
                     }
                 }
-                return true;
             }
-            return false;
+        }
+    }
+
+    public struct EcsWorldInject : IEcsDataInject {
+        public EcsWorld Value;
+        string _worldName;
+
+        public static implicit operator EcsWorldInject (string worldName) {
+            return new EcsWorldInject { _worldName = worldName };
+        }
+
+        void IEcsDataInject.Fill (IEcsSystems systems) {
+            Value = systems.GetWorld (_worldName);
+        }
+    }
+
+    public struct Inc<T1> : IEcsInclude
+        where T1 : struct {
+        public EcsPool<T1> Inc1;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            return world.Filter<T1> ();
+        }
+
+        public EcsWorld.Mask Exclude (EcsWorld.Mask mask) {
+            return mask.Exc<T1> ();
+        }
+    }
+
+    public struct Inc<T1, T2> : IEcsInclude
+        where T1 : struct where T2 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            return world.Filter<T1> ().Inc<T2> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3> : IEcsInclude
+        where T1 : struct where T2 : struct where T3 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3, T4> : IEcsInclude
+        where T1 : struct where T2 : struct where T3 : struct where T4 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+        public EcsPool<T4> Inc4;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            Inc4 = world.GetPool<T4> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ().Inc<T4> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3, T4, T5> : IEcsInclude
+        where T1 : struct where T2 : struct where T3 : struct where T4 : struct where T5 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+        public EcsPool<T4> Inc4;
+        public EcsPool<T5> Inc5;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            Inc4 = world.GetPool<T4> ();
+            Inc5 = world.GetPool<T5> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ().Inc<T4> ().Inc<T5> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3, T4, T5, T6> : IEcsInclude
+        where T1 : struct
+        where T2 : struct
+        where T3 : struct
+        where T4 : struct
+        where T5 : struct
+        where T6 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+        public EcsPool<T4> Inc4;
+        public EcsPool<T5> Inc5;
+        public EcsPool<T6> Inc6;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            Inc4 = world.GetPool<T4> ();
+            Inc5 = world.GetPool<T5> ();
+            Inc6 = world.GetPool<T6> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ().Inc<T4> ().Inc<T5> ().Inc<T6> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3, T4, T5, T6, T7> : IEcsInclude
+        where T1 : struct
+        where T2 : struct
+        where T3 : struct
+        where T4 : struct
+        where T5 : struct
+        where T6 : struct
+        where T7 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+        public EcsPool<T4> Inc4;
+        public EcsPool<T5> Inc5;
+        public EcsPool<T6> Inc6;
+        public EcsPool<T7> Inc7;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            Inc4 = world.GetPool<T4> ();
+            Inc5 = world.GetPool<T5> ();
+            Inc6 = world.GetPool<T6> ();
+            Inc7 = world.GetPool<T7> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ().Inc<T4> ().Inc<T5> ().Inc<T6> ().Inc<T7> ();
+        }
+    }
+
+    public struct Inc<T1, T2, T3, T4, T5, T6, T7, T8> : IEcsInclude
+        where T1 : struct
+        where T2 : struct
+        where T3 : struct
+        where T4 : struct
+        where T5 : struct
+        where T6 : struct
+        where T7 : struct
+        where T8 : struct {
+        public EcsPool<T1> Inc1;
+        public EcsPool<T2> Inc2;
+        public EcsPool<T3> Inc3;
+        public EcsPool<T4> Inc4;
+        public EcsPool<T5> Inc5;
+        public EcsPool<T6> Inc6;
+        public EcsPool<T7> Inc7;
+        public EcsPool<T8> Inc8;
+
+        public EcsWorld.Mask Fill (EcsWorld world) {
+            Inc1 = world.GetPool<T1> ();
+            Inc2 = world.GetPool<T2> ();
+            Inc3 = world.GetPool<T3> ();
+            Inc4 = world.GetPool<T4> ();
+            Inc5 = world.GetPool<T5> ();
+            Inc6 = world.GetPool<T6> ();
+            Inc7 = world.GetPool<T7> ();
+            Inc8 = world.GetPool<T8> ();
+            return world.Filter<T1> ().Inc<T2> ().Inc<T3> ().Inc<T4> ().Inc<T5> ().Inc<T6> ().Inc<T7> ().Inc<T8> ();
+        }
+    }
+
+    public struct Exc<T1> : IEcsExclude
+        where T1 : struct {
+        public EcsWorld.Mask Fill (EcsWorld.Mask mask) {
+            return mask.Exc<T1> ();
+        }
+    }
+
+    public struct Exc<T1, T2> : IEcsExclude
+        where T1 : struct where T2 : struct {
+        public EcsWorld.Mask Fill (EcsWorld.Mask mask) {
+            return mask.Exc<T1> ().Exc<T2> ();
+        }
+    }
+
+    public struct Exc<T1, T2, T3> : IEcsExclude
+        where T1 : struct where T2 : struct where T3 : struct {
+        public EcsWorld.Mask Fill (EcsWorld.Mask mask) {
+            return mask.Exc<T1> ().Exc<T2> ().Exc<T3> ();
+        }
+    }
+
+    public struct Exc<T1, T2, T3, T4> : IEcsExclude
+        where T1 : struct where T2 : struct where T3 : struct where T4 : struct {
+        public EcsWorld.Mask Fill (EcsWorld.Mask mask) {
+            return mask.Exc<T1> ().Exc<T2> ().Exc<T3> ().Exc<T4> ();
         }
     }
 }

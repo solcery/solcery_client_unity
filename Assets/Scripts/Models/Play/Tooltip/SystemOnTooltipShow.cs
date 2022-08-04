@@ -28,19 +28,19 @@ namespace Solcery.Models.Play.Tooltip
             _game = game;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             ServiceEvents.Current.AddListener(OnTooltipShowEventData.OnTooltipShowEventName, this);
             var world = systems.GetWorld();
-            _tooltipsFilter = world.Filter<ComponentTooltips>().End();;
+            _tooltipsFilter = world.Filter<ComponentTooltips>().End();
         }
         
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             ServiceEvents.Current.RemoveListener(OnTooltipShowEventData.OnTooltipShowEventName, this);
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_uiEventData == null)
             {

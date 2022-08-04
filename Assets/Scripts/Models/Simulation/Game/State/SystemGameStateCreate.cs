@@ -138,7 +138,7 @@ namespace Solcery.Models.Simulation.Game.State
             }
         }
         
-        private IServiceLocalSimulationApplyGameState _applyGameState;
+        //private IServiceLocalSimulationApplyGameState _applyGameState;
         private EcsFilter _filterGameAttributes;
         private EcsFilter _filterEntities;
 
@@ -151,10 +151,10 @@ namespace Solcery.Models.Simulation.Game.State
         
         private SystemGameStateCreate(IServiceLocalSimulationApplyGameState applyGameState)
         {
-            _applyGameState = applyGameState;
+            //_applyGameState = applyGameState;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             _diff = GameStateDiffLog.Create();
             
@@ -164,7 +164,7 @@ namespace Solcery.Models.Simulation.Game.State
                 .Inc<ComponentObjectAttributes>().End();
         }
         
-        public void Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var gameState = new JObject();
@@ -209,9 +209,9 @@ namespace Solcery.Models.Simulation.Game.State
             //_applyGameState.ApplySimulatedGameState(gameState);
         }
 
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
-            _applyGameState = null;
+            //_applyGameState = null;
         }
 
         private bool TryCreateAttributeArray(Dictionary<string, IAttributeValue> attributesHashMap, out JArray attributeArray)

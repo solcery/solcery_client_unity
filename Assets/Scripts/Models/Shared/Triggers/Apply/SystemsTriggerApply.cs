@@ -27,7 +27,7 @@ namespace Solcery.Models.Shared.Triggers.Apply
             };
         }
 
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             foreach (var system in _systems)
             {
@@ -38,7 +38,7 @@ namespace Solcery.Models.Shared.Triggers.Apply
             }
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             foreach (var system in _systems)
             {
@@ -49,7 +49,7 @@ namespace Solcery.Models.Shared.Triggers.Apply
             }
         }
 
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             foreach (var system in _systems)
             {

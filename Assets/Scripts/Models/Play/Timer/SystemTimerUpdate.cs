@@ -29,7 +29,7 @@ namespace Solcery.Models.Play.Timer
             _game = game;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             _filterTimer = world.Filter<ComponentTimerTag>()
@@ -45,7 +45,7 @@ namespace Solcery.Models.Play.Timer
                 .End();
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var poolTimerDuration = world.GetPool<ComponentTimerFinishTime>();
@@ -108,7 +108,7 @@ namespace Solcery.Models.Play.Timer
             }
         }
 
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             _game = null;
         }

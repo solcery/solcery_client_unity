@@ -19,17 +19,17 @@ namespace Solcery.Models.Play.Tooltip
         
         private SystemOnTooltipHide() { }     
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             ServiceEvents.Current.AddListener(OnTooltipHideEventData.OnTooltipEventName, this);
         }
         
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             ServiceEvents.Current.RemoveListener(OnTooltipHideEventData.OnTooltipEventName, this);
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_uiEventData == null)
             {

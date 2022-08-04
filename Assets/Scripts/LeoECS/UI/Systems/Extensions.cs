@@ -1,8 +1,6 @@
 // ----------------------------------------------------------------------------
-// The MIT License
-// Ugui bindings https://github.com/Leopotam/ecslite-unity-ugui
-// for LeoECS Lite https://github.com/Leopotam/ecslite
-// Copyright (c) 2021 Leopotam <leopotam@gmail.com>
+// The Proprietary or MIT-Red License
+// Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
 // ----------------------------------------------------------------------------
 
 using System;
@@ -28,7 +26,7 @@ namespace Leopotam.EcsLite.Unity.Ugui {
         /// <param name="worldName">World name.</param>
         /// <param name="skipNoExists">Not throw exception if named action not registered in emitter.</param>
         /// <param name="skipDelHere">Skip DelHere() registration.</param>
-        public static EcsSystems InjectUgui (this EcsSystems ecsSystems, EcsUguiEmitter emitter, string worldName = null, bool skipNoExists = false, bool skipDelHere = false) {
+        public static IEcsSystems InjectUgui (this IEcsSystems ecsSystems, EcsUguiEmitter emitter, string worldName = null, bool skipNoExists = false, bool skipDelHere = false) {
             if (!skipDelHere) {
                 AddDelHereSystems (ecsSystems, worldName);
             }
@@ -37,10 +35,7 @@ namespace Leopotam.EcsLite.Unity.Ugui {
             var goType = typeof (GameObject);
             var componentType = typeof (Component);
             var emitterType = typeof (EcsUguiEmitter);
-            IEcsSystem[] systems = null;
-            var systemsCount = ecsSystems.GetAllSystems (ref systems);
-            for (var i = 0; i < systemsCount; i++) {
-                var system = systems[i];
+            foreach (var system in ecsSystems.GetAllSystems ()) {
                 var systemType = system.GetType ();
                 foreach (var f in systemType.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)) {
                     // skip statics.
@@ -57,7 +52,7 @@ namespace Leopotam.EcsLite.Unity.Ugui {
                         continue;
                     }
                     var name = ((EcsUguiNamedAttribute) Attribute.GetCustomAttribute (f, uiNamedType)).Name;
-#if DEBUG
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
                     if (string.IsNullOrEmpty (name)) { throw new Exception ($"Cant Inject field \"{f.Name}\" at \"{systemType}\" due to [EcsUiNamed] \"Name\" parameter is invalid."); }
                     if (!(f.FieldType == goType || componentType.IsAssignableFrom (f.FieldType))) {
                         throw new Exception ($"Cant Inject field \"{f.Name}\" at \"{systemType}\" due to [EcsUiNamed] attribute can be applied only to GameObject or Component type.");
@@ -79,7 +74,7 @@ namespace Leopotam.EcsLite.Unity.Ugui {
             return ecsSystems;
         }
 
-        static void AddDelHereSystems (EcsSystems ecsSystems, string worldName) {
+        static void AddDelHereSystems (IEcsSystems ecsSystems, string worldName) {
             ecsSystems.DelHere<EcsUguiDragStartEvent> (worldName);
             ecsSystems.DelHere<EcsUguiDragMoveEvent> (worldName);
             ecsSystems.DelHere<EcsUguiDragEndEvent> (worldName);

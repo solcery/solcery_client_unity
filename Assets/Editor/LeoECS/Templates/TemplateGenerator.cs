@@ -1,8 +1,6 @@
 // ----------------------------------------------------------------------------
-// The MIT License
-// UnityEditor integration https://github.com/Leopotam/ecslite-unityeditor
-// for LeoECS Lite https://github.com/Leopotam/ecslite
-// Copyright (c) 2021 Leopotam <leopotam@gmail.com>
+// The Proprietary or MIT-Red License
+// Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
 // ----------------------------------------------------------------------------
 
 using System;

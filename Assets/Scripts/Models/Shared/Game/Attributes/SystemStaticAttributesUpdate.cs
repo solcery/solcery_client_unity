@@ -21,7 +21,7 @@ namespace Solcery.Models.Shared.Game.Attributes
         
         private SystemStaticAttributesUpdate() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             _filter = systems.GetWorld().Filter<ComponentObjectTag>().Inc<ComponentObjectId>()
                 .Inc<ComponentObjectAttributes>().End();
@@ -32,7 +32,7 @@ namespace Solcery.Models.Shared.Game.Attributes
             _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             foreach (var entityId in _filter)

@@ -29,7 +29,7 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
             _applyGameState = applyGameState;
         }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             
@@ -51,14 +51,14 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnDrop
                 .End();
         }
         
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             _filterTriggers = null;
             _filterObjects = null;
             _filterDragDropParameters = null;
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();

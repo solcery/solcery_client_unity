@@ -1,11 +1,11 @@
-// -------------------------------------------------------------------------------------
-// The MIT License
-// Extended systems for LeoECS Lite https://github.com/Leopotam/ecslite-extendedsystems
-// Copyright (c) 2021 Leopotam <leopotam@gmail.com>
-// -------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// The Proprietary or MIT-Red License
+// Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
+// ----------------------------------------------------------------------------
 
 #if ENABLE_IL2CPP
-using CompilerServices;
+using System;
+using Unity.IL2CPP.CompilerServices;
 #endif
 
 namespace Leopotam.EcsLite.ExtendedSystems {
@@ -13,23 +13,50 @@ namespace Leopotam.EcsLite.ExtendedSystems {
         public string Name;
         public bool State;
     }
-
-#if ENABLE_IL2CPP
+    
+    #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
     public static class Extensions {
-        public static EcsSystems AddGroup (this EcsSystems systems, string groupName, bool defaultState, string eventWorldName, params IEcsSystem[] nestedSystems) {
+#if LEOECSLITE_DI
+        public static IEcsSystems AddGroup (this IEcsSystems systems, string groupName, bool defaultState, string eventWorldName, params IEcsSystem[] nestedSystems) {
+            return systems.Add (new EcsGroupSystemWithDi (groupName, defaultState, eventWorldName, nestedSystems));
+        }
+#endif
+        
+#if !LEOECSLITE_DI
+        public static IEcsSystems AddGroup (this IEcsSystems systems, string groupName, bool defaultState, string eventWorldName, params IEcsSystem[] nestedSystems) {
             return systems.Add (new EcsGroupSystem (groupName, defaultState, eventWorldName, nestedSystems));
         }
-
-        public static EcsSystems DelHere<T> (this EcsSystems systems, string worldName = null) where T : struct {
-#if DEBUG
+#endif
+        public static IEcsSystems DelHere<T> (this IEcsSystems systems, string worldName = null) where T : struct {
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
             if (systems.GetWorld (worldName) == null) { throw new System.Exception ($"Requested world \"{(string.IsNullOrEmpty (worldName) ? "[default]" : worldName)}\" not found."); }
 #endif
             return systems.Add (new DelHereSystem<T> (systems.GetWorld (worldName)));
         }
     }
+
+#if ENABLE_IL2CPP
+    [Il2CppSetOption (Option.NullChecks, false)]
+    [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
+#endif
+    #if LEOECSLITE_DI
+    public class EcsGroupSystemWithDi : EcsGroupSystem, IEcsInjectSystem {
+        public EcsGroupSystemWithDi (string name, bool defaultState, string eventsWorldName, params IEcsSystem[] systems) : base (name, defaultState, eventsWorldName, systems) { }
+
+        public void Inject (IEcsSystems systems, params object[] injects) {
+            foreach (var system in GetNestedSystems ()) {
+                if (system is IEcsInjectSystem injectSystem) {
+                    injectSystem.Inject (systems, injects);
+                    continue;
+                }
+                Di.Extensions.InjectToSystem (system, systems, injects);
+            }
+        }
+    }
+#endif
 
 #if ENABLE_IL2CPP
     [Il2CppSetOption (Option.NullChecks, false)]
@@ -44,7 +71,7 @@ namespace Leopotam.EcsLite.ExtendedSystems {
             _pool = world.GetPool<T> ();
         }
 
-        public void Run (EcsSystems systems) {
+        public void Run (IEcsSystems systems) {
             foreach (var entity in _filter) {
                 _pool.Del (entity);
             }
@@ -55,7 +82,7 @@ namespace Leopotam.EcsLite.ExtendedSystems {
     [Il2CppSetOption (Option.NullChecks, false)]
     [Il2CppSetOption (Option.ArrayBoundsChecks, false)]
 #endif
-    public sealed class EcsGroupSystem :
+    public class EcsGroupSystem :
         IEcsPreInitSystem,
         IEcsInitSystem,
         IEcsRunSystem,
@@ -70,8 +97,12 @@ namespace Leopotam.EcsLite.ExtendedSystems {
         EcsPool<EcsGroupSystemState> _pool;
         bool _state;
 
+        protected IEcsSystem[] GetNestedSystems () {
+            return _allSystems;
+        }
+
         public EcsGroupSystem (string name, bool defaultState, string eventsWorldName, params IEcsSystem[] systems) {
-#if DEBUG
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
             if (string.IsNullOrEmpty (name)) { throw new System.Exception ("Group name cant be null or empty."); }
             if (systems == null || systems.Length == 0) { throw new System.Exception ("Systems list cant be null or empty."); }
 #endif
@@ -88,34 +119,34 @@ namespace Leopotam.EcsLite.ExtendedSystems {
             }
         }
 
-        public void PreInit (EcsSystems systems) {
+        public void PreInit (IEcsSystems systems) {
             var world = systems.GetWorld (_eventsWorldName);
             _pool = world.GetPool<EcsGroupSystemState> ();
             _filter = world.Filter<EcsGroupSystemState> ().End ();
             for (var i = 0; i < _allSystems.Length; i++) {
                 if (_allSystems[i] is IEcsPreInitSystem preInitSystem) {
                     preInitSystem.PreInit (systems);
-#if DEBUG
-                    var worldName = systems.CheckForLeakedEntities ();
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
+                    var worldName = EcsSystems.CheckForLeakedEntities (systems);
                     if (worldName != null) { throw new System.Exception ($"Empty entity detected in world \"{worldName}\" after {preInitSystem.GetType ().Name}.PreInit()."); }
 #endif
                 }
             }
         }
 
-        public void Init (EcsSystems systems) {
+        public void Init (IEcsSystems systems) {
             for (var i = 0; i < _allSystems.Length; i++) {
                 if (_allSystems[i] is IEcsInitSystem initSystem) {
                     initSystem.Init (systems);
-#if DEBUG
-                    var worldName = systems.CheckForLeakedEntities ();
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
+                    var worldName = EcsSystems.CheckForLeakedEntities (systems);
                     if (worldName != null) { throw new System.Exception ($"Empty entity detected in world \"{worldName}\" after {initSystem.GetType ().Name}.Init()."); }
 #endif
                 }
             }
         }
 
-        public void Run (EcsSystems systems) {
+        public void Run (IEcsSystems systems) {
             foreach (var entity in _filter) {
                 ref var evt = ref _pool.Get (entity);
                 if (evt.Name == _name) {
@@ -126,32 +157,32 @@ namespace Leopotam.EcsLite.ExtendedSystems {
             if (_state) {
                 for (var i = 0; i < _runSystemsCount; i++) {
                     _runSystems[i].Run (systems);
-#if DEBUG
-                    var worldName = systems.CheckForLeakedEntities ();
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
+                    var worldName = EcsSystems.CheckForLeakedEntities (systems);
                     if (worldName != null) { throw new System.Exception ($"Empty entity detected in world \"{worldName}\" after {_runSystems[i].GetType ().Name}.Run()."); }
 #endif
                 }
             }
         }
 
-        public void Destroy (EcsSystems systems) {
+        public void Destroy (IEcsSystems systems) {
             for (var i = _allSystems.Length - 1; i >= 0; i--) {
                 if (_allSystems[i] is IEcsDestroySystem destroySystem) {
                     destroySystem.Destroy (systems);
-#if DEBUG
-                    var worldName = systems.CheckForLeakedEntities ();
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
+                    var worldName = EcsSystems.CheckForLeakedEntities (systems);
                     if (worldName != null) { throw new System.Exception ($"Empty entity detected in world \"{worldName}\" after {destroySystem.GetType ().Name}.Destroy()."); }
 #endif
                 }
             }
         }
 
-        public void PostDestroy (EcsSystems systems) {
+        public void PostDestroy (IEcsSystems systems) {
             for (var i = _allSystems.Length - 1; i >= 0; i--) {
                 if (_allSystems[i] is IEcsPostDestroySystem postDestroySystem) {
                     postDestroySystem.PostDestroy (systems);
-#if DEBUG
-                    var worldName = systems.CheckForLeakedEntities ();
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
+                    var worldName = EcsSystems.CheckForLeakedEntities (systems);
                     if (worldName != null) { throw new System.Exception ($"Empty entity detected in world \"{worldName}\" after {postDestroySystem.GetType ().Name}.PostDestroy()."); }
 #endif
                 }
@@ -159,3 +190,21 @@ namespace Leopotam.EcsLite.ExtendedSystems {
         }
     }
 }
+
+#if ENABLE_IL2CPP
+// Unity IL2CPP performance optimization attribute.
+namespace Unity.IL2CPP.CompilerServices {
+    enum Option {
+        NullChecks = 1,
+        ArrayBoundsChecks = 2
+    }
+
+    [AttributeUsage (AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
+    class Il2CppSetOptionAttribute : Attribute {
+        public Option Option { get; private set; }
+        public object Value { get; private set; }
+
+        public Il2CppSetOptionAttribute (Option option, object value) { Option = option; Value = value; }
+    }
+}
+#endif

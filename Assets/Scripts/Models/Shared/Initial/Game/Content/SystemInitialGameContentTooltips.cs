@@ -18,7 +18,7 @@ namespace Solcery.Models.Shared.Initial.Game.Content
         
         private SystemInitialGameContentTooltips() { }
 
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;

@@ -27,17 +27,17 @@ namespace Solcery.Models.Play.Click
             _game = game;
         }     
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             ServiceEvents.Current.AddListener(OnLeftClickEventData.OnLeftClickEventName, this);
         }
         
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             ServiceEvents.Current.RemoveListener(OnLeftClickEventData.OnLeftClickEventName, this);
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_uiEventData == null)
             {

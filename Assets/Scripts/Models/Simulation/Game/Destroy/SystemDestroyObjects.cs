@@ -19,13 +19,13 @@ namespace Solcery.Models.Simulation.Game.Destroy
 
         private SystemDestroyObjects() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             _filterDestroyedObjects = systems.GetWorld().Filter<ComponentObjectDeletedTag>().End();
             _filterComponentObjectIdHash = systems.GetWorld().Filter<ComponentObjectIdHash>().End();
         }
         
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var objectIdPool = world.GetPool<ComponentObjectId>();

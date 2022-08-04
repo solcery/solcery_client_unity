@@ -21,7 +21,7 @@ namespace Solcery.Models.Play.DragDrop.Parameters
         
         private SystemInitialDragDropTypes() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;
             var world = systems.GetWorld();

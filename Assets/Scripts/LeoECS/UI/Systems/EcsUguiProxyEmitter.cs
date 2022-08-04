@@ -1,8 +1,6 @@
 // ----------------------------------------------------------------------------
-// The MIT License
-// Ugui bindings https://github.com/Leopotam/ecslite-unity-ugui
-// for LeoECS Lite https://github.com/Leopotam/ecslite
-// Copyright (c) 2021 Leopotam <leopotam@gmail.com>
+// The Proprietary or MIT-Red License
+// Copyright (c) 2012-2022 Leopotam <leopotam@yandex.ru>
 // ----------------------------------------------------------------------------
 
 using UnityEngine;
@@ -39,7 +37,7 @@ namespace Leopotam.EcsLite.Unity.Ugui {
                 : GetComponentInParent<EcsUguiEmitter> ();
             // fix for GetComponentInParent.
             if (parent == this) { parent = null; }
-#if DEBUG
+#if DEBUG && !LEOECSLITE_NO_SANITIZE_CHECKS
             if (parent == null) {
                 Debug.LogError ("EcsUiEmitter not found in hierarchy", this);
                 return false;

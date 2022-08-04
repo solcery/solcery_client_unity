@@ -17,12 +17,12 @@ namespace Solcery.Models.Play.Game.State
 
         private SystemGameStateRemoveUpdateTag() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             _filterGameStateUpdateTag = systems.GetWorld().Filter<ComponentGameStateUpdateTag>().End();
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             foreach (var index in _filterGameStateUpdateTag)
             {

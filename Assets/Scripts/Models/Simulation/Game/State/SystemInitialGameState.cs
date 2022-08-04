@@ -34,7 +34,7 @@ namespace Solcery.Models.Simulation.Game.State
             _initialGameState = initialGameState;
         }
         
-        public void Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             if (_initialGameState == null)
             {

@@ -20,7 +20,7 @@ namespace Solcery.Models.Play.Places
         
         private SystemPlaceInitVisibility() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var serviceGameContent = systems.GetShared<IGame>().ServiceGameContent;

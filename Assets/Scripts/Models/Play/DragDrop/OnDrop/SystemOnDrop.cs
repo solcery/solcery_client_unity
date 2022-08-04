@@ -32,12 +32,12 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             _game = game;
         }
 
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             ServiceEvents.Current.AddListener(OnDropEventData.OnDropEventName, this);
         }
         
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             ServiceEvents.Current.RemoveListener(OnDropEventData.OnDropEventName, this);
         }
@@ -50,7 +50,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             }
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_uiEventData == null)
             {

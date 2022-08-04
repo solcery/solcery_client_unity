@@ -19,7 +19,7 @@ namespace Solcery.Models.Simulation.Game.DragDrop.Prameters
         
         private SystemInitialDragDropTypes() { }
         
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();

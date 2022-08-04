@@ -27,7 +27,7 @@ namespace Solcery.Models.Play.Places
             _serviceBricks = serviceBricks;
         }
 
-        void IEcsInitSystem.Init(EcsSystems systems)
+        void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             _filterPlaceVisibilityBrick = world.Filter<ComponentPlaceTag>()
@@ -37,12 +37,12 @@ namespace Solcery.Models.Play.Places
             _filterGameStateUpdate = world.Filter<ComponentGameStateUpdateTag>().End();
         }
 
-        void IEcsDestroySystem.Destroy(EcsSystems systems)
+        void IEcsDestroySystem.Destroy(IEcsSystems systems)
         {
             _serviceBricks = null;
         }
 
-        void IEcsRunSystem.Run(EcsSystems systems)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
             if (_filterGameStateUpdate.GetEntitiesCount() <= 0)
             {
