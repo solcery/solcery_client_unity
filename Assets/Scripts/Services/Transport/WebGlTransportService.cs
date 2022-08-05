@@ -79,35 +79,13 @@ namespace Solcery.Services.Transport
         {
             _gameTransportCallbacks = gameTransportCallbacks;
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
+            ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
-        
+
         void ITransportService.CallUnityLoaded()
         {
             UnityToReact.Instance.CallOnUnityLoaded();
-        }
-
-        private void OnGameStateUpdate(string obj)
-        {
-            if (_gameStatePackageData == null)
-            {
-                _gameStatePackageData = JsonPackageData.Create(obj);
-            }
-            else
-            {
-                _gameStatePackageData.Append(obj);
-            }
-
-            if (!_gameStatePackageData.Done)
-            {
-                return;
-            }
-            
-            if (_gameStatePackageData.JsonData is JObject gameContent)
-            {
-                _gameTransportCallbacks?.OnReceivingGameState(gameContent);
-            }
-            _gameStatePackageData = null;
         }
 
         private void OnGameContentUpdate(string obj)
@@ -131,6 +109,52 @@ namespace Solcery.Services.Transport
                 _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
             }
             _gameContentPackageData = null;
+        }
+        
+        private void OnGameContentOverridesUpdate(string obj)
+        {
+            if (_gameContentPackageData == null)
+            {
+                _gameContentPackageData = JsonPackageData.Create(obj);
+            }
+            else
+            {
+                _gameContentPackageData.Append(obj);
+            }
+
+            if (!_gameContentPackageData.Done)
+            {
+                return;
+            }
+            
+            if (_gameContentPackageData.JsonData is JObject gameContent)
+            {
+                _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
+            }
+            _gameContentPackageData = null;
+        }
+        
+        private void OnGameStateUpdate(string obj)
+        {
+            if (_gameStatePackageData == null)
+            {
+                _gameStatePackageData = JsonPackageData.Create(obj);
+            }
+            else
+            {
+                _gameStatePackageData.Append(obj);
+            }
+
+            if (!_gameStatePackageData.Done)
+            {
+                return;
+            }
+            
+            if (_gameStatePackageData.JsonData is JObject gameContent)
+            {
+                _gameTransportCallbacks?.OnReceivingGameState(gameContent);
+            }
+            _gameStatePackageData = null;
         }
 
         void ITransportService.SendCommand(JObject command)
