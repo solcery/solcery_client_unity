@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Solcery.React
 {
@@ -60,11 +61,13 @@ namespace Solcery.React
 
         public void UpdateGameContent(string data)
         {
+            Debug.Log("Execute UpdateGameContent");
             CallAllCallbackForEventKey(EventOnUpdateGameContent, data);
         }
         
         public void UpdateGameContentOverrides(string data)
         {
+            Debug.Log("Execute UpdateGameContentOverrides");
             CallAllCallbackForEventKey(EventOnUpdateGameContentOverrides, data);
         }
 
@@ -75,6 +78,7 @@ namespace Solcery.React
 
         public void UpdateGameState(string data)
         {
+            Debug.Log("Execute UpdateGameState");
             CallAllCallbackForEventKey(EventOnUpdateGameState, data);
         }
     }
