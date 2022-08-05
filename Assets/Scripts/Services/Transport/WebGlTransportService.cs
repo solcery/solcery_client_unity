@@ -68,6 +68,7 @@ namespace Solcery.Services.Transport
     
         private IGameTransportCallbacks _gameTransportCallbacks;
         private IJsonPackageData _gameContentPackageData;
+        private IJsonPackageData _gameContentOverridesPackageData;
         private IJsonPackageData _gameStatePackageData;
         
         public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks)
@@ -113,25 +114,25 @@ namespace Solcery.Services.Transport
         
         private void OnGameContentOverridesUpdate(string obj)
         {
-            if (_gameContentPackageData == null)
+            if (_gameContentOverridesPackageData == null)
             {
-                _gameContentPackageData = JsonPackageData.Create(obj);
+                _gameContentOverridesPackageData = JsonPackageData.Create(obj);
             }
             else
             {
-                _gameContentPackageData.Append(obj);
+                _gameContentOverridesPackageData.Append(obj);
             }
 
-            if (!_gameContentPackageData.Done)
+            if (!_gameContentOverridesPackageData.Done)
             {
                 return;
             }
             
-            if (_gameContentPackageData.JsonData is JObject gameContent)
+            if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
             {
                 _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
             }
-            _gameContentPackageData = null;
+            _gameContentOverridesPackageData = null;
         }
         
         private void OnGameStateUpdate(string obj)
@@ -170,6 +171,7 @@ namespace Solcery.Services.Transport
         private void Cleanup()
         {
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
+            ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
         
