@@ -161,7 +161,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             DestroySprite();
         }
-        
+
         private void LateUpdate()
         {
             if (_newTexture == null && iconFrame.rect.size != _previewIconFrameSize)
