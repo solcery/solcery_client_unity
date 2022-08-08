@@ -16,6 +16,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
             eclipseCardInContainerWidget.UpdateParent(content);
             eclipseCardInContainerWidget.UpdateSiblingIndex(0);
+            eclipseCardInContainerWidget.Layout.RectTransform.anchoredPosition = Vector3.zero;
         }
 
         public override void Rebuild()
