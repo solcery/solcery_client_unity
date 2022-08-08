@@ -27,6 +27,7 @@ using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.Eclipse.CardFull;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.CardsContainer;
+using Solcery.Widgets_new.Eclipse.Nft.Selector;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Eclipse.TokensStockpile;
 using Solcery.Widgets_new.Factories;
@@ -197,6 +198,7 @@ namespace Solcery.Games
             
             // Eclipse
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseEventTracker, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseNftSelector, PlaceWidgetEclipseNftSelector.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokenStorage, PlaceWidgetEclipseTokenStorage.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCard, PlaceWidgetEclipse.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCardFull, PlaceWidgetEclipseCardFull.Create);

@@ -97,6 +97,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2251f4489fab27d479946d8290954374
+    m_Address: ui/ui_eclipse_nft_selector
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f49114169a154bc2bcc588cc3759c96, type: 2}
   m_SchemaSet:

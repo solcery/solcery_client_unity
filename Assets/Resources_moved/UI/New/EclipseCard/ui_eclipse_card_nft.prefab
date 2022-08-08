@@ -75,6 +75,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14740179b7344fdb8c27041413ae9c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityId: 0
+  rectTransform: {fileID: 2313997242396552753}
+  frontTransform: {fileID: 4274307751798005951}
+  backTransform: {fileID: 61680325823398380}
+  iconFrame: {fileID: 8092309973050433742}
+  iconImage: {fileID: 8085276212960042495}
+  iconRectTransform: {fileID: 8158142432038881867}
+  nameText: {fileID: 1590490480440022254}
+  descriptionText: {fileID: 5296461370271986105}
+  raycastObjects:
+  - {fileID: 8085276212960042495}
+  - {fileID: 3506144954602182327}
 --- !u!1 &1934859957571112704
 GameObject:
   m_ObjectHideFlags: 0
