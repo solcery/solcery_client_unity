@@ -39,16 +39,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public RectTransform CardTransform => cardTransform;
-        
-        private Texture2D _newTexture;
-        private Vector2 _previewIconFrameSize;
-        private Vector2 _textureSize;
-
-        private void Awake()
-        {
-            _previewIconFrameSize = iconFrame.rect.size;
-            _textureSize = _previewIconFrameSize;
-        }
 
         public void UpdateCardType(IGame game, EclipseCardTypes type, int objectId, IItemType itemType)
         {
@@ -103,7 +93,11 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         private void UpdateSprite(Texture2D texture)
         {
-            _newTexture = texture;
+            DestroySprite();
+            _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f), 100.0f);
+            iconImage.sprite = _sprite;
+            UpdateIconSize();
         }
         
         private void UpdateName(string newName, float fontSize)
@@ -162,30 +156,26 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             DestroySprite();
         }
 
-        private void LateUpdate()
+        private void UpdateIconSize()
         {
-            if (_newTexture == null && iconFrame.rect.size != _previewIconFrameSize)
+            if (iconImage.sprite == null 
+                || iconImage.sprite.texture == null)
             {
                 return;
             }
-
-            // Update sprite
-            if (_newTexture != null)
-            {
-                DestroySprite();
-                _sprite = Sprite.Create(_newTexture, new Rect(0.0f, 0.0f, _newTexture.width, _newTexture.height),
-                    new Vector2(0.5f, 0.5f), 100.0f);
-                iconImage.sprite = _sprite;
-                _textureSize = new Vector2(_newTexture.width, _newTexture.height);
-                _newTexture = null;
-            }
             
-            // Update size
-            _previewIconFrameSize = iconFrame.rect.size;
-            var iconAspect = _textureSize.y / _textureSize.x;
-            var width = _previewIconFrameSize.x;
+            var texture = iconImage.sprite.texture;
+            var textureSize = new Vector2(texture.width, texture.height);
+            var iconSize = iconFrame.rect.size;
+            var iconAspect = textureSize.y / textureSize.x;
+            var width = iconSize.x;
             var height = iconAspect * width;
             iconRectTransform.sizeDelta = new Vector2(width, height);
+        }
+
+        private void OnEnable()
+        {
+            UpdateIconSize();
         }
     }
 }
