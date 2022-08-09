@@ -194,6 +194,8 @@ namespace Solcery.Models.Play.Game.State
             var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
             var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
             var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
+            var eclipseTagPool = world.GetPool<ComponentEclipseCardEclipseTag>();
+            var nftTagPool = world.GetPool<ComponentEclipseCardNftTag>();
             var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
 
             if (tagPool.Has(entityIndex))
@@ -221,6 +223,16 @@ namespace Solcery.Models.Play.Game.State
                 buildingTagPool.Del(entityIndex);
             }
             
+            if (eclipseTagPool.Has(entityIndex))
+            {
+                eclipseTagPool.Del(entityIndex);
+            }
+            
+            if (nftTagPool.Has(entityIndex))
+            {
+                nftTagPool.Del(entityIndex);
+            }
+            
             if (tokenTagPool.Has(entityIndex))
             {
                 tokenTagPool.Del(entityIndex);
@@ -236,6 +248,8 @@ namespace Solcery.Models.Play.Game.State
             var eventTagPool = world.GetPool<ComponentEclipseCardEventTag>();
             var creatureTagPool = world.GetPool<ComponentEclipseCardCreatureTag>();
             var buildingTagPool = world.GetPool<ComponentEclipseCardBuildingTag>();
+            var eclipseTagPool = world.GetPool<ComponentEclipseCardEclipseTag>();
+            var nftTagPool = world.GetPool<ComponentEclipseCardNftTag>();
             var tokenTagPool = world.GetPool<ComponentEclipseTokenTag>();
 
             var objectId = entityData.GetValue<int>("id");
@@ -260,6 +274,14 @@ namespace Solcery.Models.Play.Game.State
                     
                         case EclipseCardTypes.Building:
                             buildingTagPool.Add(entityIndex);
+                            break;
+                        
+                        case EclipseCardTypes.Eclipse:
+                            eclipseTagPool.Add(entityIndex);
+                            break;
+                        
+                        case EclipseCardTypes.Nft:
+                            nftTagPool.Add(entityIndex);
                             break;
                     
                         case EclipseCardTypes.Token:
