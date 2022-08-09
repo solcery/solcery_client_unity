@@ -39,7 +39,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _tokensPerCardCache = new Dictionary<int, List<int>>();
             Layout.UpdateVisible(true);
             Layout.SetAnchor(TextAnchor.MiddleLeft);
-
             _defaultBlockRaycasts = Layout.BlockRaycasts;
         }
 
