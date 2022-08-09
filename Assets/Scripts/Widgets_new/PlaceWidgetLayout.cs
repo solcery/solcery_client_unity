@@ -16,7 +16,7 @@ namespace Solcery.Widgets_new
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Image background;
         [SerializeField] protected CanvasGroup canvasGroup;
-        [SerializeField] private TextMeshProUGUI caption;
+        [SerializeField] private PlaceWidgetCaptionLayout caption;
         [SerializeField] private Image frame;
         [SerializeField] private PlaceWidgetTimerLayout timer;
 
@@ -109,31 +109,20 @@ namespace Solcery.Widgets_new
             }
         }
         
-        public void UpdateCaption(string text)
+        public void UpdateCaption(string text, PlaceCaptionType type)
         {
             if (caption != null)
             {
-                var active = !string.IsNullOrEmpty(text);
-                caption.gameObject.SetActive(active);
-                if (active)
-                {
-                    caption.text = text;
-                }
+                caption.UpdateCaption(text, type);
             }
         }
 
         public void UpdateCaptionColor(string captionColor)
         {
-            if (captionColor != null)
+            if (caption != null)
             {
-                if (ColorUtility.TryParseHtmlString(captionColor, out var color))
-                {
-                    if (caption != null)
-                    {
-                        caption.color = color;
-                    }
-                }
-            }        
+                caption.UpdateCaptionColor(captionColor);
+            }
         }
         
         public void UpdateBlocksRaycasts(bool blocksRaycasts)
@@ -141,18 +130,18 @@ namespace Solcery.Widgets_new
             canvasGroup.blocksRaycasts = blocksRaycasts;
         }
         
-        public virtual void StartTimer(int durationMsec)
+        public void StartTimer(int durationMsec)
         {
             _widgetTimer ??= PlaceWidgetTimer.Create(timer);
             _widgetTimer?.Start(durationMsec);
         }
 
-        public virtual void UpdateTimer(int durationMsec)
+        public void UpdateTimer(int durationMsec)
         {
             _widgetTimer?.Update(durationMsec);
         }
-        //
-        public virtual void StopTimer()
+        
+        public void StopTimer()
         {
             _widgetTimer?.Stop();
         }

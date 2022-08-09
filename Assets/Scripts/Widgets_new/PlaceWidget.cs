@@ -38,7 +38,6 @@ namespace Solcery.Widgets_new
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
     {
-        
         protected T Layout;
         protected IGame Game;
         protected IWidgetCanvas WidgetCanvas;
@@ -84,12 +83,10 @@ namespace Solcery.Widgets_new
                     placeDataObject.TryGetValue(GameJsonKeys.PlaceInteractableForActiveLocalPlayer, out bool ifalp) 
                     && ifalp;
 
+                UpdateCaption(placeDataObject);
+                
                 var alpha = placeDataObject.TryGetValue("alpha", out int a) ? a : 100;
                 Layout.UpdateAlpha(alpha);
-
-                Layout.UpdateCaption(placeDataObject.TryGetValue(GameJsonKeys.PlaceCaption, out string caption) ? caption : null);
-                var captionColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionColor, out string captionColorAttribute) ? captionColorAttribute : null;
-                Layout.UpdateCaptionColor(captionColor);
 
                 var fillColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceFillColor, out string fillColorAttribute) ? fillColorAttribute : null;
                 Layout.UpdateFillColor(fillColor);
@@ -107,6 +104,17 @@ namespace Solcery.Widgets_new
                 Layout.UpdateVisible(false);
                 Layout.UpdatePlaceWidget(this);
             }
+        }
+
+        private void UpdateCaption(JObject placeDataObject)
+        {
+            var caption = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaption, out string captionAttribute) ? captionAttribute : null;
+            var captionType = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionType, out PlaceCaptionType captionTypeAttribute) ? captionTypeAttribute : PlaceCaptionType.Inside;
+            Layout.UpdateCaption(caption, captionType);
+            
+            var captionColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionColor, out string captionColorAttribute) ? captionColorAttribute : null;
+            Layout.UpdateCaptionColor(captionColor);
+
         }
 
         protected virtual void DestroyImpl() { }
