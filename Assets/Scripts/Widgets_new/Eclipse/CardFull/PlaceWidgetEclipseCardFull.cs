@@ -49,16 +49,13 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                         case EclipseCardTypes.Token:
                             UpdateToken(world, entityId, itemType);
                             break;
+                        case EclipseCardTypes.Nft:
+                            AddClickListeners(entityId);
+                            UpdateNftCard(world, entityId, eclipseCardType, itemType);
+                            break;
                         default:
-                            Layout.AddOnLeftClickListener(() =>
-                            {
-                                ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
-                            });
-                            Layout.AddOnRightClickListener(() =>
-                            {
-                                ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
-                            });
-                            UpdateCard(world, entityId, eclipseCardType, itemType);
+                            AddClickListeners(entityId);
+                            UpdateEclipseCard(world, entityId, eclipseCardType, itemType);
                             break;
                     }
                 }
@@ -70,7 +67,33 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             throw new System.NotImplementedException();
         }
 
-        private void UpdateCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
+        private void AddClickListeners(int entityId)
+        {
+            Layout.AddOnLeftClickListener(() =>
+            {
+                ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
+            });
+            Layout.AddOnRightClickListener(() =>
+            {
+                ServiceEvents.Current.BroadcastEvent(OnLeftClickEventData.Create(entityId));
+            });
+        }
+
+        private void UpdateNftCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
+        {
+            var poolObjectId = world.GetPool<ComponentObjectId>();
+            var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
+            if (poolObjectId.Has(entityId)
+                && poolEclipseCardTag.Has(entityId))
+            {
+                var objectId = poolObjectId.Get(entityId).Id;
+                UpdateCardType(type, objectId, itemType);
+                Layout.TokensLayout.UpdateTokenSlots(0);
+                Layout.TimerLayout.gameObject.SetActive(false);
+            }
+        }
+
+        private void UpdateEclipseCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
         {
             var poolObjectId = world.GetPool<ComponentObjectId>();
             var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
