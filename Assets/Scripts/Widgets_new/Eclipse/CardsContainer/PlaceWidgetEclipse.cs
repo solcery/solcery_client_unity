@@ -60,16 +60,18 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
             foreach (var entityId in entityIds)
             {
-                var attributes = objectAttributesPool.Has(entityId)
-                    ? objectAttributesPool.Get(entityId).Attributes
-                    : new Dictionary<string, IAttributeValue>();
-                
                 // TODO: удалить старый механизм блокировки рейкастов!
-                if (attributes.ContainsKey("disable_raycasts_on_place")
-                    && attributes["disable_raycasts_on_place"].Current > 0)
                 {
-                    Layout.UpdateBlocksRaycasts(false);
-                    continue;
+                    var attributes = objectAttributesPool.Has(entityId)
+                        ? objectAttributesPool.Get(entityId).Attributes
+                        : new Dictionary<string, IAttributeValue>();
+
+                    if (attributes.ContainsKey("disable_raycasts_on_place")
+                        && attributes["disable_raycasts_on_place"].Current > 0)
+                    {
+                        Layout.UpdateBlocksRaycasts(false);
+                        continue;
+                    }
                 }
 
                 var objectId = objectIdPool.Get(entityId).Id;

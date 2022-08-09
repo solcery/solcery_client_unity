@@ -3,7 +3,10 @@ using System.Linq;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Play.DragDrop;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.Nft.Card;
@@ -43,8 +46,119 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             {
                 return;
             }
+            
+            var objectIdPool = world.GetPool<ComponentObjectId>();
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
+            var itemTypes = Game.ServiceGameContent.ItemTypes;
+
+            foreach (var entityId in entityIds)
+            {
+                var objectId = objectIdPool.Get(entityId).Id;
+                var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
+                var tplId = world.GetPool<ComponentObjectType>().Get(entityId).TplId;
+
+                if (eclipseCardType != EclipseCardTypes.Nft)
+                {
+                    continue;
+                }
+                
+                if (!_cards.TryGetValue(objectId, out var eclipseCard))
+                {
+                    eclipseCard = AttachCard(world, entityId, tplId, objectId, itemTypes);
+                }
+
+                // Update tplId
+                if (tplId != eclipseCard.CardType)
+                {
+                    UpdateFromCardTypeData(world, entityId, tplId, objectId, itemTypes, eclipseCard);
+                }
+                        
+                // Update drag drop
+                if (_dropObjectId.Contains(objectId))
+                {
+                    _dropObjectId.Remove(objectId);
+                    UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
+                }
+                        
+                UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard);
+            }
+            
+            UpdatedCardsOrder();
+            _dropObjectId.Clear();
         }
         
+        private void UpdateCard(EcsWorld world, int entityId, IEclipseCardNftInContainerWidget eclipseCard)
+        {
+            var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+            
+            // order
+            var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
+            eclipseCard.SetOrder(order);
+        }
+        
+        private IEclipseCardNftInContainerWidget AttachCard(EcsWorld world, int entityId, int cardType, int objectId, IItemTypes itemTypes)
+        {
+            if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
+            {
+                if (Game.EclipseCardNftInContainerWidgetPool.TryPop(out var eclipseCard))
+                {
+                    UpdateFromCardTypeData(world, entityId, cardType, objectId, itemTypes, eclipseCard);
+                    UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
+                    PutCardToInPlace(objectId, eclipseCard);
+
+                    return eclipseCard;
+                }
+            }
+
+            return null;
+        }
+        
+        private void PutCardToInPlace(int objectId, IEclipseCardNftInContainerWidget eclipseCard)
+        {
+            Layout.AddCard(eclipseCard);
+            _cards.Add(objectId, eclipseCard);
+            eclipseCard.Layout.SetActive(true);
+        }
+        
+        void UpdateDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardNftInContainerWidget eclipseCard)
+        {
+            // Remove old attached entity
+            if (eclipseCard.AttachEntityId != -1)
+            {
+                world.DelEntity(eclipseCard.AttachEntityId);
+            }
+            
+            var eid = world.NewEntity();
+            world.GetPool<ComponentDragDropTag>().Add(eid);
+            world.GetPool<ComponentDragDropView>().Add(eid).View = eclipseCard;
+            world.GetPool<ComponentDragDropSourcePlaceEntityId>().Add(eid).SourcePlaceEntityId =
+                Layout.LinkedEntityId;
+            world.GetPool<ComponentDragDropEclipseCardType>().Add(eid).CardType =
+                world.GetPool<ComponentEclipseCardType>().Has(entityId)
+                    ? world.GetPool<ComponentEclipseCardType>().Get(entityId).CardType
+                    : EclipseCardTypes.None;
+            world.GetPool<ComponentDragDropObjectId>().Add(eid).ObjectId = objectId;
+            eclipseCard.UpdateAttachEntityId(eid);        
+        }
+        
+        private void UpdateFromCardTypeData(EcsWorld world, int entityId, int tplid, int objectId, IItemTypes itemTypes, IEclipseCardNftInContainerWidget eclipseCard)
+        {
+            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
+            if (itemTypes.TryGetItemType(out var itemType, tplid))
+            {
+                eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplid, eclipseCartTypePool.Get(entityId).CardType, itemType);
+            }
+        }
+        
+        private void UpdatedCardsOrder()
+        {
+            var cardsSorted = _cards.Values.OrderBy(card=>card.Order).ToList();
+            for (var i = 0; i < cardsSorted.Count; i++)
+            {
+                cardsSorted[i].UpdateSiblingIndex(i);
+            }
+        }
+
         private void RemoveCards(EcsWorld world, int[] entityIds)
         {
             var objectIdPool = world.GetPool<ComponentObjectId>();
@@ -82,7 +196,12 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
-            throw new System.NotImplementedException();
+            if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            {
+                Layout.AddCard(ew);
+                _cards.Add(dropWidget.ObjectId, ew);
+                _dropObjectId.Add(dropWidget.ObjectId);
+            }
         }
     }
 }
