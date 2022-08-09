@@ -106,7 +106,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
                 if (itemType.TryGetValue(out var valueTooltipIdToken, GameJsonKeys.CardTooltipId, objectId))
                 {
-                    tokenLayout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
+                    // tooltips turned off on small eclipse card 
+                    // tokenLayout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
                 }
             }
             else
