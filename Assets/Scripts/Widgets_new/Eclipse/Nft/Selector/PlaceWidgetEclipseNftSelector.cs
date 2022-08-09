@@ -196,7 +196,12 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
-            throw new System.NotImplementedException();
+            if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            {
+                Layout.AddCard(ew);
+                _cards.Add(dropWidget.ObjectId, ew);
+                _dropObjectId.Add(dropWidget.ObjectId);
+            }
         }
     }
 }
