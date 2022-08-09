@@ -6,6 +6,8 @@ namespace Solcery.Widgets_new
     {
         [EnumPlaceWidgetPrefabPath("")]
         None = -10,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_nft")]
+        EclipseCardNft = -6,
         [EnumPlaceWidgetPrefabPath("ui/ui_tooltip")]
         Tooltip = -5,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card")]
