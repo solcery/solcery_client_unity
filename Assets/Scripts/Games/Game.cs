@@ -27,6 +27,7 @@ using Solcery.Widgets_new.Container.Stacks;
 using Solcery.Widgets_new.Eclipse.CardFull;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.CardsContainer;
+using Solcery.Widgets_new.Eclipse.Nft.Card;
 using Solcery.Widgets_new.Eclipse.Nft.Selector;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Eclipse.TokensStockpile;
@@ -49,15 +50,18 @@ namespace Solcery.Games
         IPlayModel IGame.PlayModel => _playModel;
         IWidgetCanvas IGame.WidgetCanvas => _widgetCanvas;
         IPlaceWidgetFactory IGame.PlaceWidgetFactory => _placeWidgetFactory;
-        IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
-        IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
-        IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
-        IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
         IServiceGameContent IGame.ServiceGameContent => _serviceGameContent;
         TooltipController IGame.TooltipController => _tooltipController;
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
         IUpdateStateQueue IGame.UpdateStateQueue => _updateStateQueue;
+        
+        // Widget pools
+        IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
+        IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
+        IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
+        IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
+        IWidgetPool<IEclipseCardNftInContainerWidget> IGame.EclipseCardNftInContainerWidgetPool => _eclipseCardNftInContainerWidgetPool;
 
         private Camera _mainCamera;
         private ITransportService _transportService;
@@ -66,15 +70,18 @@ namespace Solcery.Games
         private IPlayModel _playModel;
         private IWidgetCanvas _widgetCanvas;
         private IPlaceWidgetFactory _placeWidgetFactory;
-        private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
-        private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
-        private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
-        private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
         private IServiceRenderWidget _serviceRenderWidget;
         private IServiceGameContent _serviceGameContent;
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
+        
+        // Widget pools
+        private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
+        private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
+        private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
+        private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
+        private IWidgetPool<IEclipseCardNftInContainerWidget> _eclipseCardNftInContainerWidgetPool;
         
         public static IGame Create(IGameInitDto dto)
         {
@@ -127,6 +134,8 @@ namespace Solcery.Games
                 "ui/ui_eclipse_list_tokens", ListTokensInContainerWidget.Create);
             _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
+            _eclipseCardNftInContainerWidgetPool = WidgetPool<IEclipseCardNftInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_eclipse_card_nft", EclipseCardNftInContainerWidget.Create);
         }
 
         void IGame.Init()
@@ -313,6 +322,8 @@ namespace Solcery.Games
             _tokenInContainerWidgetPool = null;
             _eclipseCardInContainerWidgetPool.Destroy();
             _eclipseCardInContainerWidgetPool = null;
+            _eclipseCardNftInContainerWidgetPool.Destroy();
+            _eclipseCardNftInContainerWidgetPool = null;
             _serviceResource.Destroy();
             _serviceResource = null;
             _tooltipController.Destroy();

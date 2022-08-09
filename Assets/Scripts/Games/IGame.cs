@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games.Contents;
 using Solcery.Games.States.New;
@@ -11,6 +10,7 @@ using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Cards.Widgets;
 using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.Nft.Card;
 using Solcery.Widgets_new.Eclipse.Tokens;
 using Solcery.Widgets_new.Factories;
 using Solcery.Widgets_new.Tooltip;
@@ -20,25 +20,28 @@ namespace Solcery.Games
 {
     public interface IGame
     {
-        public Camera MainCamera { get; }
-        public ITransportService TransportService { get; }
-        public IServiceBricks ServiceBricks { get; }
-        public IServiceResource ServiceResource { get; }
-        public IPlayModel PlayModel { get; }
-        public IWidgetCanvas WidgetCanvas { get; }
-        public IPlaceWidgetFactory PlaceWidgetFactory { get; }
-        public IWidgetPool<ICardInContainerWidget> CardInContainerWidgetPool { get; }
-        public IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }
+        Camera MainCamera { get; }
+        ITransportService TransportService { get; }
+        IServiceBricks ServiceBricks { get; }
+        IServiceResource ServiceResource { get; }
+        IPlayModel PlayModel { get; }
+        IWidgetCanvas WidgetCanvas { get; }
+        IPlaceWidgetFactory PlaceWidgetFactory { get; }
+        IServiceGameContent ServiceGameContent { get; }
+        IUpdateStateQueue UpdateStateQueue { get; }
+        TooltipController TooltipController { get; }
+        IGameContentAttributes GameContentAttributes { get; }
+        IServiceRenderWidget ServiceRenderWidget { get; }
+        
+        // Widget pools
+        IWidgetPool<ICardInContainerWidget> CardInContainerWidgetPool { get; }
+        IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }
         IWidgetPool<IListTokensInContainerWidget> ListTokensInContainerWidgetPool { get; }
-        public IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
-        public IServiceGameContent ServiceGameContent { get; }
-        public IUpdateStateQueue UpdateStateQueue { get; }
-        public TooltipController TooltipController { get; }
-        public IGameContentAttributes GameContentAttributes { get; }
-        public IServiceRenderWidget ServiceRenderWidget { get; }
+        IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
+        IWidgetPool<IEclipseCardNftInContainerWidget> EclipseCardNftInContainerWidgetPool { get; }
 
-        public void Init();
-        public void Update(float dt);
-        public void Destroy();
+        void Init();
+        void Update(float dt);
+        void Destroy();
     }
 }
