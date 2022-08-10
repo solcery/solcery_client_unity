@@ -296,7 +296,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
         
         #region IApplyDropWidget
         
-        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
             if (dropWidget is ITokenInContainerWidget ew)
             {

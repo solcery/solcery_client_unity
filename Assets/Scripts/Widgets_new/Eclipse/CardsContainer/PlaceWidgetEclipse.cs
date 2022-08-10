@@ -404,7 +404,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         
         #region IApplyDropWidget
         
-        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
             // //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
             // if (dropWidget is IEclipseCardInContainerWidget ew)
@@ -415,11 +415,23 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             // }
             
             //_dropObjectId.Add(dropWidget.ObjectId);
-            Layout.Wait(true);
-            
-            if (dropWidget is IPoolingWidget pw)
+
+            if (discard)
             {
-                pw.BackToPool();
+                if (dropWidget is IEclipseCardInContainerWidget ew)
+                {
+                    Layout.AddCard(ew);
+                    _cards.Add(dropWidget.ObjectId, ew);
+                }
+            }
+            else
+            {
+                Layout.Wait(true);
+
+                if (dropWidget is IPoolingWidget pw)
+                {
+                    pw.BackToPool();
+                }
             }
         }
 

@@ -154,7 +154,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             {
                 if (_layout.ParentPlaceWidget is IApplyDropWidget dropWidget)
                 {
-                    dropWidget.OnDropWidget(this, position);
+                    dropWidget.OnDropWidget(this, position, true);
                 }
                 
                 _layout.UpdateParent(_dragDropCacheParent);
@@ -162,7 +162,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
                 return;
             }
             
-            target.OnDropWidget(this, position);
+            target.OnDropWidget(this, position, false);
         }
         #endregion
 

@@ -197,7 +197,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             _cards.Remove(dragWidget.ObjectId);
         }
 
-        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
             // if (dropWidget is IEclipseCardNftInContainerWidget ew)
             // {
@@ -207,11 +207,23 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             // }
             
             //_dropObjectId.Add(dropWidget.ObjectId);
-            Layout.Wait(true);
 
-            if (dropWidget is IPoolingWidget pw)
+            if (discard)
             {
-                pw.BackToPool();
+                if (dropWidget is IEclipseCardNftInContainerWidget ew)
+                {
+                    Layout.AddCard(ew);
+                    _cards.Add(dropWidget.ObjectId, ew);
+                }
+            }
+            else
+            {
+                Layout.Wait(true);
+
+                if (dropWidget is IPoolingWidget pw)
+                {
+                    pw.BackToPool();
+                }
             }
         }
     }
