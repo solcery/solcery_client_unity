@@ -155,10 +155,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     });
                 }
 
-                if (attributes.TryGetValue("anim_destroy", out var animDestroyAttribute) &&
+                if (attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroy, out var animDestroyAttribute) &&
                     animDestroyAttribute.Current > 0)
                 {
-                    AnimEclipseCardDestroy(eclipseCard);
+                    var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroyTime, out var  animCardDestroyTimeAttribute)
+                        ? animCardDestroyTimeAttribute.Current.ToSec()
+                        : 3f;
+                    AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
                 }
             }
         }
@@ -215,7 +218,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             eclipseCard.SetOrder(order);
         }
 
-        private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard)
+        private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard, float timeSec)
         {
             var rttData = Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
             if (rttData != null)
@@ -223,7 +226,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 eclipseCard.Layout.SetActive(false);
                 WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard,
                     rttData,
-                    0.5f,
+                    timeSec,
                     () => { Game.ServiceRenderWidget.ReleaseWidgetRender(eclipseCard.Layout.RectTransform); });
             }
         }
