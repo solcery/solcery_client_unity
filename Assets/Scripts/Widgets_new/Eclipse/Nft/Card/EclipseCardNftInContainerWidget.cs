@@ -88,6 +88,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _order = order;
         }
 
+        #region Pooling widget
         void IPoolingWidget.UpdateParent(Transform parent)
         {
             _layout.UpdateParent(parent);
@@ -107,6 +108,12 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _layout = null;
             _game = null;
         }
+
+        void IPoolingWidget.BackToPool()
+        {
+            _game.EclipseCardNftInContainerWidgetPool.Push(this);
+        }
+        #endregion
         
         private void Cleanup() { }
 
@@ -147,7 +154,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             {
                 if (_layout.ParentPlaceWidget is IApplyDropWidget dropWidget)
                 {
-                    dropWidget.OnDropWidget(this, position);
+                    dropWidget.OnDropWidget(this, position, true);
                 }
                 
                 _layout.UpdateParent(_dragDropCacheParent);
@@ -155,7 +162,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
                 return;
             }
             
-            target.OnDropWidget(this, position);
+            target.OnDropWidget(this, position, false);
         }
         #endregion
 

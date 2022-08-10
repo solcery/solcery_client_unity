@@ -209,7 +209,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             {
                 if (_layout.ParentPlaceWidget is IApplyDropWidget dropWidget)
                 {
-                    dropWidget.OnDropWidget(this, position);
+                    dropWidget.OnDropWidget(this, position, true);
                 }
                 
                 _layout.UpdateParent(_dragDropCacheParent);
@@ -217,7 +217,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 return;
             }
             
-            target.OnDropWidget(this, position);
+            target.OnDropWidget(this, position, false);
+        }
+        
+        void IPoolingWidget.BackToPool()
+        {
+            _game.EclipseCardInContainerWidgetPool.Push(this);
         }
 
         #endregion

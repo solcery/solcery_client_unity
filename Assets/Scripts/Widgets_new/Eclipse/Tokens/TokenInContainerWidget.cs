@@ -79,6 +79,11 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
             _game = null;
         }
+        
+        void IPoolingWidget.BackToPool()
+        {
+            _game.TokenInContainerWidgetPool.Push(this);
+        }
 
         private void Cleanup()
         {
@@ -155,7 +160,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
             
             if (_layout.ParentPlaceWidget is IApplyDropWidget dropWidget)
             {
-                dropWidget.OnDropWidget(this, position);
+                dropWidget.OnDropWidget(this, position, Active);
             }
         }
 

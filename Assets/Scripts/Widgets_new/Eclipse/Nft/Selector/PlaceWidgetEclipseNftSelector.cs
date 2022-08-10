@@ -8,6 +8,7 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.Nft.Card;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
+            Layout.Wait(false);
             RemoveCards(world, entityIds);
             Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
             Layout.gameObject.SetActive(isVisible);
@@ -73,12 +75,13 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
                     UpdateFromCardTypeData(world, entityId, tplId, objectId, itemTypes, eclipseCard);
                 }
                         
-                // Update drag drop
-                if (_dropObjectId.Contains(objectId))
-                {
-                    _dropObjectId.Remove(objectId);
-                    UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
-                }
+                // // Update drag drop
+                // if (_dropObjectId.Contains(objectId))
+                // {
+                //     _dropObjectId.Remove(objectId);
+                //     //UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
+                // }
+                // Layout.Wait(_dropObjectId.Count > 0);
                         
                 UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard);
             }
@@ -194,13 +197,33 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             _cards.Remove(dragWidget.ObjectId);
         }
 
-        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
-            if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            // if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            // {
+            //     Layout.AddCard(ew);
+            //     _cards.Add(dropWidget.ObjectId, ew);
+            //     _dropObjectId.Add(dropWidget.ObjectId);
+            // }
+            
+            //_dropObjectId.Add(dropWidget.ObjectId);
+
+            if (discard)
             {
-                Layout.AddCard(ew);
-                _cards.Add(dropWidget.ObjectId, ew);
-                _dropObjectId.Add(dropWidget.ObjectId);
+                if (dropWidget is IEclipseCardNftInContainerWidget ew)
+                {
+                    Layout.AddCard(ew);
+                    _cards.Add(dropWidget.ObjectId, ew);
+                }
+            }
+            else
+            {
+                Layout.Wait(true);
+
+                if (dropWidget is IPoolingWidget pw)
+                {
+                    pw.BackToPool();
+                }
             }
         }
     }

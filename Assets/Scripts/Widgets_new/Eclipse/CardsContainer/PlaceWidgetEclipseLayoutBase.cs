@@ -5,8 +5,16 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
     public abstract class PlaceWidgetEclipseLayoutBase : PlaceWidgetLayout
     {
+        [SerializeField]
+        private GameObject waitDropFrame;
+        
         public abstract void SetAnchor(TextAnchor anchor);
         public abstract void AddCard(IEclipseCardInContainerWidget eclipseCardInContainerWidget);
         public abstract void Rebuild();
+        
+        public void Wait(bool isWait)
+        {
+            waitDropFrame.SetActive(isWait);
+        }
     }
 }

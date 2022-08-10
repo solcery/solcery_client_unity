@@ -10,6 +10,7 @@ using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -44,6 +45,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
+            Layout.Wait(false);
             RemoveCards(world, entityIds);
             Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
             Layout.gameObject.SetActive(isVisible);
@@ -96,13 +98,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                             UpdateFromCardTypeData(world, entityId, tplId, objectId, itemTypes, eclipseCard);
                         }
                         
-                        // Update drag drop
-                        if (_dropObjectId.Contains(objectId))
-                        {
-                            _dropObjectId.Remove(objectId);
-                            UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
-                        }
-                        
+                        // // Update drag drop
+                        // if (_dropObjectId.Contains(objectId))
+                        // {
+                        //     _dropObjectId.Remove(objectId);
+                        //     //UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
+                        // }
+
                         UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard);
                         break;
                     }
@@ -402,14 +404,34 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         
         #region IApplyDropWidget
         
-        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
+        void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
-            //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
-            if (dropWidget is IEclipseCardInContainerWidget ew)
+            // //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
+            // if (dropWidget is IEclipseCardInContainerWidget ew)
+            // {
+            //     Layout.AddCard(ew);
+            //     _cards.Add(dropWidget.ObjectId, ew);
+            //     _dropObjectId.Add(dropWidget.ObjectId);
+            // }
+            
+            //_dropObjectId.Add(dropWidget.ObjectId);
+
+            if (discard)
             {
-                Layout.AddCard(ew);
-                _cards.Add(dropWidget.ObjectId, ew);
-                _dropObjectId.Add(dropWidget.ObjectId);
+                if (dropWidget is IEclipseCardInContainerWidget ew)
+                {
+                    Layout.AddCard(ew);
+                    _cards.Add(dropWidget.ObjectId, ew);
+                }
+            }
+            else
+            {
+                Layout.Wait(true);
+
+                if (dropWidget is IPoolingWidget pw)
+                {
+                    pw.BackToPool();
+                }
             }
         }
 

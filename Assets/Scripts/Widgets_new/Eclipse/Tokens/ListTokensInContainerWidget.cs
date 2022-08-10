@@ -60,5 +60,10 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
             _layout = null;
             _game = null;
         }
+        
+        void IPoolingWidget.BackToPool()
+        {
+            _game.ListTokensInContainerWidgetPool.Push(this);
+        }
     }
 }

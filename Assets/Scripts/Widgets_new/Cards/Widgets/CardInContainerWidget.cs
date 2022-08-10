@@ -103,6 +103,11 @@ namespace Solcery.Widgets_new.Cards.Widgets
 
             _game = null;
         }
+        
+        void IPoolingWidget.BackToPool()
+        {
+            _game.CardInContainerWidgetPool.Push(this);
+        }
 
         private void Cleanup()
         {
