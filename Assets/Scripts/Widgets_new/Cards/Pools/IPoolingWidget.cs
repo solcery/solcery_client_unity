@@ -7,5 +7,6 @@ namespace Solcery.Widgets_new.Cards.Pools
         void UpdateParent(Transform parent);
         void Cleanup();
         void Destroy();
+        void BackToPool();
     }
 }

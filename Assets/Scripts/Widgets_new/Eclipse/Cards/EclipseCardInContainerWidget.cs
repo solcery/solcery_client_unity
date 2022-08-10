@@ -219,6 +219,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             
             target.OnDropWidget(this, position);
         }
+        
+        void IPoolingWidget.BackToPool()
+        {
+            _game.EclipseCardInContainerWidgetPool.Push(this);
+        }
 
         #endregion
 

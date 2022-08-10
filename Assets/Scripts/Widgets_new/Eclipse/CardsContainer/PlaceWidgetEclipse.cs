@@ -10,6 +10,7 @@ using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
@@ -404,12 +405,17 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
-            //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
-            if (dropWidget is IEclipseCardInContainerWidget ew)
+            // //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
+            // if (dropWidget is IEclipseCardInContainerWidget ew)
+            // {
+            //     Layout.AddCard(ew);
+            //     _cards.Add(dropWidget.ObjectId, ew);
+            //     _dropObjectId.Add(dropWidget.ObjectId);
+            // }
+            
+            if (dropWidget is IPoolingWidget pw)
             {
-                Layout.AddCard(ew);
-                _cards.Add(dropWidget.ObjectId, ew);
-                _dropObjectId.Add(dropWidget.ObjectId);
+                pw.BackToPool();
             }
         }
 

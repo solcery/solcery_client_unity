@@ -8,6 +8,7 @@ using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.Nft.Card;
 using UnityEngine;
@@ -196,11 +197,16 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position)
         {
-            if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            // if (dropWidget is IEclipseCardNftInContainerWidget ew)
+            // {
+            //     Layout.AddCard(ew);
+            //     _cards.Add(dropWidget.ObjectId, ew);
+            //     _dropObjectId.Add(dropWidget.ObjectId);
+            // }
+
+            if (dropWidget is IPoolingWidget pw)
             {
-                Layout.AddCard(ew);
-                _cards.Add(dropWidget.ObjectId, ew);
-                _dropObjectId.Add(dropWidget.ObjectId);
+                pw.BackToPool();
             }
         }
     }
