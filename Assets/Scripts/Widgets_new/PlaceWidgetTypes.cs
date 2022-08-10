@@ -40,7 +40,7 @@ namespace Solcery.Widgets_new
         EclipseEventTracker = 9,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_nft_selector")]
         EclipseNftSelector = 10,
-        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_full")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_nft_full")]
         EclipseNftCardFull = 11
     }
 }

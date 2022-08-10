@@ -49,10 +49,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                         case EclipseCardTypes.Token:
                             UpdateToken(world, entityId, itemType);
                             break;
-                        case EclipseCardTypes.Nft:
-                            AddClickListeners(entityId);
-                            UpdateNftCard(world, entityId, eclipseCardType, itemType);
-                            break;
                         default:
                             AddClickListeners(entityId);
                             UpdateEclipseCard(world, entityId, eclipseCardType, itemType);
@@ -79,20 +75,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             });
         }
 
-        private void UpdateNftCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
-        {
-            var poolObjectId = world.GetPool<ComponentObjectId>();
-            var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
-            if (poolObjectId.Has(entityId)
-                && poolEclipseCardTag.Has(entityId))
-            {
-                var objectId = poolObjectId.Get(entityId).Id;
-                UpdateCardType(type, objectId, itemType);
-                Layout.TokensLayout.UpdateTokenSlots(0);
-                Layout.TimerLayout.gameObject.SetActive(false);
-            }
-        }
-
         private void UpdateEclipseCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
         {
             var poolObjectId = world.GetPool<ComponentObjectId>();
@@ -104,7 +86,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 var attributesPool = world.GetPool<ComponentObjectAttributes>();
                 var attributes = attributesPool.Get(entityId).Attributes;
                 UpdateCardMainAttributes(attributes);
-                UpdateCardType(type, objectId, itemType);
+                Layout.UpdateCardType(Game, type, objectId, itemType);
                 UpdateCardAnimation(world, attributes);
             }
         }
@@ -140,11 +122,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             }
         }
         
-        private void UpdateCardType(EclipseCardTypes type, int objectId, IItemType itemType)
-        {
-            Layout.UpdateCardType(Game, type, objectId, itemType);
-        }
-
         private void UpdateToken(EcsWorld world, int entityId, IItemType itemType)
         {
             var poolObjectId = world.GetPool<ComponentObjectId>();
