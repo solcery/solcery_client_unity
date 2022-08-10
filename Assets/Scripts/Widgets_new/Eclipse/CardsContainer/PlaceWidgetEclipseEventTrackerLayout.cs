@@ -32,7 +32,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         public override void AddCard(IEclipseCardInContainerWidget eclipseCardInContainerWidget)
         {
             eclipseCardInContainerWidget.UpdateParent(scroll.content);
-            eclipseCardInContainerWidget.UpdateSiblingIndex(0);
+            eclipseCardInContainerWidget.UpdateSiblingIndex(eclipseCardInContainerWidget.Order);
             scroll.horizontal = scroll.content.childCount > 1;
             Rebuild();
         }
