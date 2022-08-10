@@ -39,6 +39,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
         {
+            Layout.Wait(false);
             RemoveCards(world, entityIds);
             Layout.UpdateBlocksRaycasts(_defaultBlockRaycasts);
             Layout.gameObject.SetActive(isVisible);
@@ -74,12 +75,13 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
                     UpdateFromCardTypeData(world, entityId, tplId, objectId, itemTypes, eclipseCard);
                 }
                         
-                // Update drag drop
-                if (_dropObjectId.Contains(objectId))
-                {
-                    _dropObjectId.Remove(objectId);
-                    UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
-                }
+                // // Update drag drop
+                // if (_dropObjectId.Contains(objectId))
+                // {
+                //     _dropObjectId.Remove(objectId);
+                //     //UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
+                // }
+                // Layout.Wait(_dropObjectId.Count > 0);
                         
                 UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard);
             }
@@ -203,6 +205,9 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             //     _cards.Add(dropWidget.ObjectId, ew);
             //     _dropObjectId.Add(dropWidget.ObjectId);
             // }
+            
+            //_dropObjectId.Add(dropWidget.ObjectId);
+            Layout.Wait(true);
 
             if (dropWidget is IPoolingWidget pw)
             {

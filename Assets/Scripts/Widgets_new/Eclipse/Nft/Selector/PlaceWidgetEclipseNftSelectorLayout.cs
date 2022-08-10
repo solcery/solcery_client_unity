@@ -8,9 +8,10 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
     {
         [SerializeField]
         private ScrollRect scroll;
-
         [SerializeField]
         private HorizontalLayoutGroup horizontalLayoutGroup;
+        [SerializeField]
+        private GameObject waitDropFrame;
         
         public void SetAnchor(TextAnchor anchor)
         {
@@ -40,6 +41,11 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
         public void Rebuild()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
+        }
+
+        public void Wait(bool isWait)
+        {
+            waitDropFrame.SetActive(isWait);
         }
     }
 }
