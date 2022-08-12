@@ -69,7 +69,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
                 _layout.UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
             }
             
-            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.CardPicture, objectId) 
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId) 
                 && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);

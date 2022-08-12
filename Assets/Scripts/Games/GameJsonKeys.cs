@@ -2,12 +2,18 @@ namespace Solcery.Games
 {
     public static class GameJsonKeys
     {
+        // Common
+        public static readonly string Picture = "picture";
+        
+        // Widgets
+        public static readonly string WidgetPictureType = "picture_type";
+        public static readonly string WidgetPicturePixelsPerUnitMultiplier = "picture_pixels_per_unit_multiplier";
+        
         // Card
         public static readonly string CardTypes = "card_types";
         public static readonly string CardType = "type";
         public static readonly string CardName = "name";
         public static readonly string CardDescription = "description";
-        public static readonly string CardPicture = "picture";
         public static readonly string CardTokenSlots = "token_slots";
         public static readonly string CardTimerText = "timer_text";
         public static readonly string CardTooltipId = "tooltip_id";
@@ -25,7 +31,6 @@ namespace Solcery.Games
         
         // Token
         public static readonly string TokenSlot = "slot";
-        public static readonly string TokenPicture = "picture";
         
         // Place
         public static readonly string PlaceId = "place_id";

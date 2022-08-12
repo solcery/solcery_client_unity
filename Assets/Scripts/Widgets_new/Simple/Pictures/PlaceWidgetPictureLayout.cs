@@ -20,6 +20,12 @@ namespace Solcery.Widgets_new.Simple.Pictures
             picture.sprite = _sprite;
         }
 
+        public void UpdatePictureType(Image.Type type, float pixelsPerUnitMultiplier)
+        {
+            picture.type = type;
+            picture.pixelsPerUnitMultiplier = pixelsPerUnitMultiplier;
+        }
+
         private void OnDestroy()
         {
             DestroySprite();

@@ -4,6 +4,7 @@ using Solcery.Games;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Simple.Pictures
 {
@@ -33,12 +34,19 @@ namespace Solcery.Widgets_new.Simple.Pictures
                 && objectIdPool.Has(entityId))
             {
                 var id = objectIdPool.Get(entityId).Id;
-                var tplid = objectTypePool.Get(entityId).TplId;
-                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "picture", id)
+                var tplId = objectTypePool.Get(entityId).TplId;
+                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplId)
+                    && itemType.TryGetValue(out var valueToken, GameJsonKeys.Picture, id)
                     && Game.ServiceResource.TryGetTextureForKey(valueToken.GetValue<string>(), out var texture))
                 {
                     Layout.UpdatePicture(texture);
+                    if (itemType.TryGetValue(out var pictureTypeToken, GameJsonKeys.WidgetPictureType, id))
+                    {
+                        var pixelsPerUnitMultiplier = itemType.TryGetValue(out var picturePixelsPerUnitMultiplierToken, GameJsonKeys.WidgetPicturePixelsPerUnitMultiplier, id)
+                            ? picturePixelsPerUnitMultiplierToken.GetValue<float>()
+                            : 1;
+                        Layout.UpdatePictureType(pictureTypeToken.GetValue<Image.Type>(), pixelsPerUnitMultiplier);
+                    }
                 }
             }
         }

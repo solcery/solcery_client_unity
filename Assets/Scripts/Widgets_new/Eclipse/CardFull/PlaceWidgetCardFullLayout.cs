@@ -51,7 +51,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
             }
 
-            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.CardPicture, objectId)
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId)
                 && game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 UpdateSprite(texture);

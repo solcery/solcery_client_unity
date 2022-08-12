@@ -133,7 +133,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 var tokenLayout =  Layout.TokensLayout.GetTokenByIndex(tokenSlotAttribute.Current - 1);
                 if (tokenLayout != null)
                 {
-                    if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.TokenPicture, objectId)
+                    if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId)
                         && Game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
                     {
                         tokenLayout.UpdateSprite(texture);

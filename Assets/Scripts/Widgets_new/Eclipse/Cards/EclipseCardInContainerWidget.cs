@@ -69,7 +69,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _layout.UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
             }
 
-            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.CardPicture, objectId) 
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId) 
                 && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);
@@ -98,7 +98,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             var tokenLayout = GetToken(slot);
             if (tokenLayout != null)
             {
-                if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.TokenPicture, objectId)
+                if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId)
                     && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
                 {
                     tokenLayout.UpdateSprite(texture);
