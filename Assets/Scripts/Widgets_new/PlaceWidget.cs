@@ -109,7 +109,7 @@ namespace Solcery.Widgets_new
         private void UpdateCaption(JObject placeDataObject)
         {
             var caption = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaption, out string captionAttribute) ? captionAttribute : null;
-            var captionType = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionType, out PlaceCaptionType captionTypeAttribute) ? captionTypeAttribute : PlaceCaptionType.Inside;
+            var captionType = placeDataObject.TryGetEnum(GameJsonKeys.PlaceCaptionType, out PlaceCaptionType captionTypeAttribute) ? captionTypeAttribute : PlaceCaptionType.Inside;
             Layout.UpdateCaption(caption, captionType);
             
             var captionColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionColor, out string captionColorAttribute) ? captionColorAttribute : null;

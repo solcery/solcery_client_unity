@@ -2,7 +2,7 @@ namespace Solcery.Widgets_new
 {
     public enum PlaceCaptionType
     {
-        Above,
+        Above = 0,
         Inside
     }
 }
