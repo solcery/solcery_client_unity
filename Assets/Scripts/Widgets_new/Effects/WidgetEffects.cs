@@ -113,7 +113,7 @@ namespace Solcery.Widgets_new.Effects
             var effectLayout = eclipseCard.Layout.EffectLayout;
             effectLayout.gameObject.SetActive(true);
             effectLayout.Image.material.SetFloat("_Destruct", 0f);
-            effectLayout.Image.material.SetTexture("_MainTex_RT", renderData.RenderTexture);
+            effectLayout.Image.material.SetTexture("_MainTex", renderData.RenderTexture);
             effectLayout.ParticleSystem.Play();
 
             var alpha = 0f;
