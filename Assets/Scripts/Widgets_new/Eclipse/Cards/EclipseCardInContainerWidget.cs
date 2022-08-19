@@ -16,7 +16,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         private IGame _game;
         private EclipseCardInContainerWidgetLayout _layout;
-        private EclipseCardTypes _eclipseCardType;
         private int _entityId;
         private int _cardType;
         private int _objectId;
@@ -37,17 +36,19 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _layout = Object.Instantiate(prefab, poolTransform).GetComponent<EclipseCardInContainerWidgetLayout>();
         }
 
-        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int objectType, EclipseCardTypes type, IItemType itemType)
+        void IEclipseCardInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int objectType, IItemType itemType)
         {
             _entityId = entityId;
             _objectId = objectId;
-            _eclipseCardType = type;
             _cardType = objectType;
 
+            var displayedType = itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
+                ? valueDisplayedTypeToken.GetValue<string>()
+                : GameJsonKeys.EmptyString;
             var typeFontSize = itemType.TryGetValue(out var valueFontSizeToken, GameJsonKeys.CardTypeFontSize, objectId)
                 ? valueFontSizeToken.GetValue<int>()
                 : 5f;
-            _layout.UpdateType(type.ToString(), typeFontSize);
+            _layout.UpdateType(displayedType, typeFontSize);
 
             if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
             {

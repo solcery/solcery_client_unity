@@ -29,7 +29,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         
         private Sprite _sprite;
 
-        public virtual void UpdateCardType(IGame game, EclipseCardTypes type, int objectId, IItemType itemType)
+        public virtual void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
             if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
             {

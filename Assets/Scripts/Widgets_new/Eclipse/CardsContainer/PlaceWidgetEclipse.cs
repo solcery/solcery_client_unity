@@ -186,12 +186,12 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
         
-        private void UpdateFromCardTypeData(EcsWorld world, int entityId, int tplid, int objectId, IItemTypes itemTypes, IEclipseCardInContainerWidget eclipseCard)
+        private void UpdateFromCardTypeData(EcsWorld world, int entityId, int tplId, int objectId, IItemTypes itemTypes, IEclipseCardInContainerWidget eclipseCard)
         {
             var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
-            if (itemTypes.TryGetItemType(out var itemType, tplid))
+            if (itemTypes.TryGetItemType(out var itemType, tplId))
             {
-                eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplid, eclipseCartTypePool.Get(entityId).CardType, itemType);
+                eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
             }
         }
 

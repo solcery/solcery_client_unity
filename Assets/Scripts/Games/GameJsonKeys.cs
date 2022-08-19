@@ -2,7 +2,8 @@ namespace Solcery.Games
 {
     public static class GameJsonKeys
     {
-        // Common
+        public const string EmptyString = "Empty value";
+        // Commons
         public static readonly string Picture = "picture";
         
         // Widgets
@@ -12,6 +13,7 @@ namespace Solcery.Games
         // Card
         public static readonly string CardTypes = "card_types";
         public static readonly string CardType = "type";
+        public static readonly string CardDisplayedType = "displayed_type";
         public static readonly string CardName = "name";
         public static readonly string CardDescription = "description";
         public static readonly string CardTokenSlots = "token_slots";

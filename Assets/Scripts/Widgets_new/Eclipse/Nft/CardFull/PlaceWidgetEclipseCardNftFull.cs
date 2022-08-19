@@ -46,7 +46,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.CardFull
                     {
                         case EclipseCardTypes.Nft:
                             AddClickListeners(entityId);
-                            UpdateNftCard(world, entityId, eclipseCardType, itemType);
+                            UpdateNftCard(world, entityId, itemType);
                             break;
                         default:
                             Debug.LogWarning($"Can't show card with type \"{eclipseCardType}\" in full view!");
@@ -61,7 +61,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.CardFull
             throw new System.NotImplementedException();
         }
         
-        private void UpdateNftCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
+        private void UpdateNftCard(EcsWorld world, int entityId, IItemType itemType)
         {
             var poolObjectId = world.GetPool<ComponentObjectId>();
             var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
@@ -69,7 +69,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.CardFull
                 && poolEclipseCardTag.Has(entityId))
             {
                 var objectId = poolObjectId.Get(entityId).Id;
-                Layout.UpdateCardType(Game, type, objectId, itemType);
+                Layout.UpdateCardType(Game, objectId, itemType);
             }
         }
         

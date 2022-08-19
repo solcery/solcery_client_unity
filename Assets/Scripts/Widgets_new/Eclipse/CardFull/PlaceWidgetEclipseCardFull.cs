@@ -51,7 +51,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                             break;
                         default:
                             AddClickListeners(entityId);
-                            UpdateEclipseCard(world, entityId, eclipseCardType, itemType);
+                            UpdateEclipseCard(world, entityId, itemType);
                             break;
                     }
                 }
@@ -75,7 +75,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             });
         }
 
-        private void UpdateEclipseCard(EcsWorld world, int entityId, EclipseCardTypes type, IItemType itemType)
+        private void UpdateEclipseCard(EcsWorld world, int entityId, IItemType itemType)
         {
             var poolObjectId = world.GetPool<ComponentObjectId>();
             var poolEclipseCardTag = world.GetPool<ComponentEclipseCardTag>();
@@ -86,7 +86,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 var attributesPool = world.GetPool<ComponentObjectAttributes>();
                 var attributes = attributesPool.Get(entityId).Attributes;
                 UpdateCardMainAttributes(attributes);
-                Layout.UpdateCardType(Game, type, objectId, itemType);
+                Layout.UpdateCardType(Game, objectId, itemType);
                 UpdateCardAnimation(world, attributes);
             }
         }

@@ -124,9 +124,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             descriptionText.fontSize = fontSize;
         }
 
-        public void UpdateType(string type, float fontSize)
+        public void UpdateType(string displayedType, float fontSize)
         {
-            typeText.text = type;
+            typeText.text = displayedType;
             typeText.fontSize = fontSize;
         }
         

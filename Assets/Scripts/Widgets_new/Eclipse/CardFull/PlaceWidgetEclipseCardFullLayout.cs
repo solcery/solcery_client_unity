@@ -22,15 +22,18 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public RectTransform CardTransform => cardTransform;
 
-        public override void UpdateCardType(IGame game, EclipseCardTypes type, int objectId, IItemType itemType)
+        public override void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
-            base.UpdateCardType(game, type, objectId, itemType);
+            base.UpdateCardType(game, objectId, itemType);
             
+            var displayedType = itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
+                ? valueDisplayedTypeToken.GetValue<string>()
+                : GameJsonKeys.EmptyString;
             var typeFontSize =
                 itemType.TryGetValue(out var valueTypeFontSizeAttributeToken, GameJsonKeys.CardTypeFontSize, objectId)
                     ? valueTypeFontSizeAttributeToken.GetValue<int>()
                     : 20f;
-            UpdateType(type.ToString(), typeFontSize);
+            UpdateType(displayedType, typeFontSize);
 
             if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
             {
@@ -42,9 +45,9 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 TimerLayout.UpdateTimerTextActive(false);
             }        
         }
-        private void UpdateType(string newType, float fontSize)
+        private void UpdateType(string displayedType, float fontSize)
         {
-            typeText.text = newType;
+            typeText.text = displayedType;
             typeText.fontSize = fontSize;
         }
     }
