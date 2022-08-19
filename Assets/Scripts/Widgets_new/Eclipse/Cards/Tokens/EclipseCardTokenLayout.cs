@@ -17,7 +17,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         private TooltipBehaviour _tooltipBehaviour;
         private RectTransform _rectTransform;
         
-        public Image Icon => icon;
+        public Sprite Sprite => icon.sprite;
         public RectTransform RectTransform => _rectTransform;
 
         private bool _active;        
@@ -26,6 +26,18 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
         {
             _rectTransform = icon.GetComponent<RectTransform>();
             _active = false;
+        }
+
+        public void SetIconVisible(bool visible)
+        {
+            if (_active)
+            {
+                icon.gameObject.SetActive(visible);
+            }
+            else
+            {
+                Debug.LogWarning("Can't set visibility for destroyed token!");
+            }
         }
 
         public void UpdateSprite(Texture2D texture)
@@ -44,7 +56,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards.Tokens
             }
             _tooltipBehaviour.SetTooltipId(tooltipId);
         }
-
+        
         public void Cleanup()
         {
             if (icon.sprite != null && _active)

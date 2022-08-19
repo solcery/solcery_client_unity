@@ -353,20 +353,20 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void AnimTokenFly(EclipseCardTokenLayout tokenLayout, Vector3 from, float timeSec, Color color)
         {
-            tokenLayout.Icon.gameObject.SetActive(false);
+            tokenLayout.SetIconVisible(false);
             WidgetCanvas.GetEffects().MoveToken(tokenLayout.RectTransform, 
-                tokenLayout.Icon.sprite,
+                tokenLayout.Sprite,
                 from,
                 timeSec,
                 color,
-                () => { tokenLayout.Icon.gameObject.SetActive(true); });
+                () => { tokenLayout.SetIconVisible(true); });
         }
 
         private void AnimTokenDestroy(EclipseCardTokenLayout tokenLayout, Color color)
         {
-            tokenLayout.Icon.gameObject.SetActive(false);
+            tokenLayout.SetIconVisible(false);
             WidgetCanvas.GetEffects().DestroyToken(tokenLayout.RectTransform,
-                tokenLayout.Icon.sprite,
+                tokenLayout.Sprite,
                 0.5f,
                 color,
                 () => {});
