@@ -70,7 +70,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
 
                     if (eclipseToken.TypeId != typeId)
                     {
-                        UpdateFromCardTypeData(objectId, typeId, itemTypes, eclipseToken);
+                        UpdateFromCardTypeData(entityId, objectId, typeId, itemTypes, eclipseToken);
                     }
                     
                     var itemType = itemTypes.TryGetItemType(out var it, typeId) ? it : null;
@@ -85,11 +85,11 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             throw new System.NotImplementedException();
         }
 
-        private void UpdateFromCardTypeData(int objectId, int typeId, IItemTypes itemTypes, ITokenInContainerWidget eclipseToken)
+        private void UpdateFromCardTypeData(int entityId, int objectId, int typeId, IItemTypes itemTypes, ITokenInContainerWidget eclipseToken)
         {
             if (itemTypes.TryGetItemType(out var itemType, typeId))
             {
-                eclipseToken.UpdateFromCardTypeData(objectId, typeId, itemType);
+                eclipseToken.UpdateFromCardTypeData(entityId, objectId, typeId, itemType);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             {
                 if (Game.TokenInContainerWidgetPool.TryPop(out var eclipseToken))
                 {
-                    UpdateFromCardTypeData(objectId, typeId, itemTypes, eclipseToken);
+                    UpdateFromCardTypeData(entityId, objectId, typeId, itemTypes, eclipseToken);
                     
                     if (_tokensByType.TryGetValue(typeId, out var tokenList))
                     {

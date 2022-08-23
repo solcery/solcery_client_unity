@@ -1,5 +1,7 @@
 using Leopotam.EcsLite;
+using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
+using Solcery.Games.Contexts;
 using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Places;
 using Solcery.Services.Events;
@@ -49,6 +51,8 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                 return;
             }
             
+            var game = systems.GetShared<IGame>();
+            var serviceBricks = game.ServiceBricks as IServiceBricksInternal;
             var world = systems.GetWorld();
             var dragDropTagPool = world.GetPool<ComponentDragDropTag>();
             var dragDropSourcePlaceEntityIdPool = world.GetPool<ComponentDragDropSourcePlaceEntityId>();
@@ -61,7 +65,6 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                 && dragDropEclipseCarTypePool.Has(onDragEventData.DragEntityId))
             {
                 var placeEntityId = dragDropSourcePlaceEntityIdPool.Get(onDragEventData.DragEntityId).SourcePlaceEntityId;
-                var eclipseCardType = dragDropEclipseCarTypePool.Get(onDragEventData.DragEntityId).CardType;
 
                 if (placeDragDropEntityIdPool.Has(placeEntityId))
                 {
@@ -69,19 +72,27 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
 
                     foreach (var dragDropEntityId in dragDropEntityIds)
                     {
-                        var requiredEclipseCardTypes =
-                            world.GetPool<ComponentDragDropParametersRequiredEclipseCardTypes>()
-                                .Get(dragDropEntityId).RequiredEclipseCardTypes;
+                        var originConditionBrick = world.GetPool<ComponentDragDropBrickOriginCondition>()
+                            .Get(dragDropEntityId).ConditionBrick;
+                        
+                        var context = CurrentContext.Create(game, world);
+                        context.Object.Push(onDragEventData.DragObjectEntityId);
 
-                        if (requiredEclipseCardTypes.Contains(eclipseCardType))
+                        if (originConditionBrick == null 
+                            || (serviceBricks != null 
+                                && serviceBricks.ExecuteConditionBrick(originConditionBrick, context, 0, out var result)
+                                && result))
                         {
                             world.GetPool<ComponentDragDropView>().Get(onDragEventData.DragEntityId).View
                                 .OnDrag(_game.WidgetCanvas.GetDragDropCanvas().GetRectTransform,
                                     onDragEventData.WorldPosition);
                             _game.WidgetCanvas.GetDragDropCanvas()
-                                .UpdateOnDrag(onDragEventData.DragEntityId, dragDropEntityId);
+                                .UpdateOnDrag(onDragEventData.DragObjectEntityId, onDragEventData.DragEntityId, dragDropEntityId);
+                            CurrentContext.Destroy(world, context);
                             break;
                         }
+                        
+                        CurrentContext.Destroy(world, context);
                     }
                 }
             }

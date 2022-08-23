@@ -234,7 +234,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 Camera.current,
                 out var position
             );
-            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(AttachEntityId.Value, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, AttachEntityId.Value, position, eventData));
         }
         
         private void OnOnPointerRightButtonClick()

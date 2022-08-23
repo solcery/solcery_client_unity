@@ -22,12 +22,14 @@ namespace Solcery.Ui.DragDrop
         }
 
         private DragDropStates _currentDragDropState = DragDropStates.Free;
+        private int _dragObjectEntityId;
         private int _currentDraggableEntityId;
         private int _currentDragDropEntityId;
 
-        public void UpdateOnDrag(int draggableEntityId, int dragDropEntityId)
+        public void UpdateOnDrag(int dragObjectEntityId, int draggableEntityId, int dragDropEntityId)
         {
             _currentDragDropState = DragDropStates.Drag;
+            _dragObjectEntityId = dragObjectEntityId;
             _currentDraggableEntityId = draggableEntityId;
             _currentDragDropEntityId = dragDropEntityId;
             image.enabled = true;
@@ -48,9 +50,10 @@ namespace Solcery.Ui.DragDrop
                 out var position
             );
 
-            ServiceEvents.Current.BroadcastEvent(OnDropEventData.Create(_currentDraggableEntityId, _currentDragDropEntityId, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDropEventData.Create(_dragObjectEntityId, _currentDraggableEntityId, _currentDragDropEntityId, position, eventData));
 
             _currentDragDropState = DragDropStates.Free;
+            _dragObjectEntityId = -1;
             _currentDraggableEntityId = -1;
             _currentDragDropEntityId = -1;
             image.enabled = false;
