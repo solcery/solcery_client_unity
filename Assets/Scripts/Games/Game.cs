@@ -9,6 +9,7 @@ using Solcery.Games.Contents;
 using Solcery.Games.DTO;
 using Solcery.Games.States.New;
 using Solcery.Models.Play;
+using Solcery.Services.Cache;
 using Solcery.Services.GameContent;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -76,6 +77,7 @@ namespace Solcery.Games
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
+        private ICacheService _cacheService;
         
         // Widget pools
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
@@ -117,6 +119,7 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
+            _cacheService = new CacheService();
 #if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
@@ -145,7 +148,7 @@ namespace Solcery.Games
             ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
 #endif
             LoaderScreen.SetTitle("Load configuration.");
-            _transportService.CallUnityLoaded();
+            _transportService.CallUnityLoaded(_cacheService.GetMetadata());
         }
 
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -158,21 +161,39 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
             Cleanup();
-            _serviceGameContent.UpdateGameContent(gameContentJson);
-            _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
-
-            if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
-                customBricks.TryGetValue("objects", out JArray customBricksArray))
+            const string key = "game_content";
+            _cacheService.ProcessCache(key, ref gameContentJson);
+            if (gameContentJson != null)
             {
-                _serviceBricks.RegistrationCustomBricksData(customBricksArray);
+                _serviceGameContent.UpdateGameContent(gameContentJson);
+                _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
+
+                if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
+                    customBricks.TryGetValue("objects", out JArray customBricksArray))
+                {
+                    _serviceBricks.RegistrationCustomBricksData(customBricksArray);
+                }
+            }
+            else
+            {
+                Debug.LogError($"\"{key}.json\" is null!");
             }
         }
 
         void IGameTransportCallbacks.OnReceivingGameContentOverrides(JObject gameContentOverridesJson)
         {
-            _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
-            LoaderScreen.SetTitle("Load resources.");
-            _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
+            const string key = "game_content_overrides";
+            _cacheService.ProcessCache(key, ref gameContentOverridesJson);
+            if (gameContentOverridesJson != null)
+            {
+                _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
+                LoaderScreen.SetTitle("Load resources.");
+                _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
+            }
+            else
+            {
+                Debug.LogError($"\"{key}.json\" is null!");
+            }
         }
         
         void IGameResourcesCallback.OnResourcesLoad()

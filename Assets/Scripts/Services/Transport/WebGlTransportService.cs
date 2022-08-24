@@ -84,55 +84,71 @@ namespace Solcery.Services.Transport
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
 
-        void ITransportService.CallUnityLoaded()
+        void ITransportService.CallUnityLoaded(JObject metadata)
         {
-            UnityToReact.Instance.CallOnUnityLoaded();
+            UnityToReact.Instance.CallOnUnityLoaded(metadata.ToString());
         }
 
         private void OnGameContentUpdate(string obj)
         {
-            if (_gameContentPackageData == null)
+            if (!string.IsNullOrEmpty(obj))
             {
-                _gameContentPackageData = JsonPackageData.Create(obj);
+                if (_gameContentPackageData == null)
+                {
+                    _gameContentPackageData = JsonPackageData.Create(obj);
+                }
+                else
+                {
+                    _gameContentPackageData.Append(obj);
+                }
+
+                if (!_gameContentPackageData.Done)
+                {
+                    return;
+                }
+
+                if (_gameContentPackageData.JsonData is JObject gameContent)
+                {
+                    _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
+                }
+
+                _gameContentPackageData = null;
             }
             else
             {
-                _gameContentPackageData.Append(obj);
+                _gameTransportCallbacks?.OnReceivingGameContent(null);
             }
-
-            if (!_gameContentPackageData.Done)
-            {
-                return;
-            }
-            
-            if (_gameContentPackageData.JsonData is JObject gameContent)
-            {
-                _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
-            }
-            _gameContentPackageData = null;
         }
         
         private void OnGameContentOverridesUpdate(string obj)
         {
-            if (_gameContentOverridesPackageData == null)
+            if (!string.IsNullOrEmpty(obj))
             {
-                _gameContentOverridesPackageData = JsonPackageData.Create(obj);
+                if (_gameContentOverridesPackageData == null)
+                {
+                    _gameContentOverridesPackageData = JsonPackageData.Create(obj);
+                }
+                else
+                {
+                    _gameContentOverridesPackageData.Append(obj);
+                }
+
+                if (!_gameContentOverridesPackageData.Done)
+                {
+                    return;
+                }
+
+                if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
+                {
+                    _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
+                }
+
+                _gameContentOverridesPackageData = null;
             }
             else
             {
-                _gameContentOverridesPackageData.Append(obj);
+                _gameTransportCallbacks?.OnReceivingGameContentOverrides(null);
             }
-
-            if (!_gameContentOverridesPackageData.Done)
-            {
-                return;
-            }
-            
-            if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
-            {
-                _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
-            }
-            _gameContentOverridesPackageData = null;
         }
         
         private void OnGameStateUpdate(string obj)

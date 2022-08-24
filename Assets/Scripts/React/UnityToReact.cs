@@ -9,12 +9,12 @@ namespace Solcery.React
         [DllImport("__Internal")] private static extern void OpenLinkInNewTab(string link);
         [DllImport("__Internal")] private static extern void SendCommand(string command);
         
-        public void CallOnUnityLoaded()
+        public void CallOnUnityLoaded(string metadata)
         {
             UnityEngine.Debug.Log("CallOnUnityLoaded");
             
 #if (UNITY_WEBGL && !UNITY_EDITOR)
-            OnUnityLoaded ("message");
+            OnUnityLoaded (metadata);
 #endif
         }
 
