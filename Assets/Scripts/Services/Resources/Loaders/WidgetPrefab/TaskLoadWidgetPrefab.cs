@@ -48,6 +48,13 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
         void ILoadTask.Run()
         {
+            if (_prefabLoaders.Count <= 0)
+            {
+                _callback?.Invoke(_widgetPrefabs);
+                Completed?.Invoke(true, this);
+                return;
+            }
+            
             _completedLoaderCount = _prefabLoaders.Count;
 
             while (_prefabLoaders.Count > 0)
