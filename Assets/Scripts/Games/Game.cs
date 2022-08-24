@@ -44,6 +44,7 @@ namespace Solcery.Games
 {
     public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
+        bool IGame.IsPredictable => _updateStateQueue is { IsPredictable: true };
         Camera IGame.MainCamera => _mainCamera;
         ITransportService IGame.TransportService => _transportService;
         IServiceBricks IGame.ServiceBricks => _serviceBricks;

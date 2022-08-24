@@ -5,14 +5,22 @@ namespace Solcery.Games.States.New.States
 {
     public abstract class UpdateState
     {
+        public bool IsPredictable { get; private set; }
         public ContextGameStateTypes UpdateStateType { get; private set; }
 
         protected UpdateState(ContextGameStateTypes updateStateType)
         {
+            IsPredictable = false;
             UpdateStateType = updateStateType;
         }
 
-        public abstract void Init(JObject updateStateData);
+        public void Init(JObject updateStateData, bool isPredictable)
+        {
+            IsPredictable = isPredictable;
+            Init(updateStateData);
+        }
+        
+        protected abstract void Init(JObject updateStateData);
         public abstract void Update(int deltaTimeMsec);
         public abstract bool CanRemove();
         public abstract void Cleanup();
