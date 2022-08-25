@@ -78,7 +78,7 @@ namespace Solcery.Games
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
-        private ICacheService _cacheService;
+        private ICacheAccessor _cacheAccessor;
         
         // Widget pools
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
@@ -120,7 +120,7 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
-            _cacheService = new CacheService();
+            _cacheAccessor = new CacheAccessor();
 #if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
@@ -149,7 +149,7 @@ namespace Solcery.Games
             ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
 #endif
             LoaderScreen.SetTitle("Load configuration.");
-            _transportService.CallUnityLoaded(_cacheService.GetMetadata());
+            _transportService.CallUnityLoaded(_cacheAccessor.GetMetadata());
         }
 
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -163,7 +163,7 @@ namespace Solcery.Games
         {
             Cleanup();
             const string key = "game_content";
-            _cacheService.ProcessCache(key, ref gameContentJson);
+            _cacheAccessor.ProcessCache(key, ref gameContentJson);
             if (gameContentJson != null)
             {
                 _serviceGameContent.UpdateGameContent(gameContentJson);
@@ -184,7 +184,7 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameContentOverrides(JObject gameContentOverridesJson)
         {
             const string key = "game_content_overrides";
-            _cacheService.ProcessCache(key, ref gameContentOverridesJson);
+            _cacheAccessor.ProcessCache(key, ref gameContentOverridesJson);
             if (gameContentOverridesJson != null)
             {
                 _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);

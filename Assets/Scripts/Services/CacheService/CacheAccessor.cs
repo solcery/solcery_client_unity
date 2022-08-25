@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Solcery.Services.Cache
 {
-    public class CacheService : ICacheService
+    public class CacheAccessor : ICacheAccessor
     {
         public readonly string CacheFileDirectory = Application.persistentDataPath + "/Cached/";
         private const string ContentMetadataKey = "content_metadata";
@@ -12,7 +12,7 @@ namespace Solcery.Services.Cache
         private const string MetadataFileName = ContentMetadataKey + ".json";
         private readonly JToken _metadataJToken;
         
-        public CacheService()
+        public CacheAccessor()
         {
             if (!JsonUtils.LoadFromFile(CacheFileDirectory + MetadataFileName, out _metadataJToken))
             {
