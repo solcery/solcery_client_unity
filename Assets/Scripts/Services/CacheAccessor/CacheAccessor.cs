@@ -17,6 +17,11 @@ namespace Solcery.Accessors.Cache
             if (!JsonUtils.LoadFromFile(CacheFileDirectory + MetadataFileName, out _metadataJToken))
             {
                 _metadataJToken = new JObject {{ContentMetadataKey, new JObject()}};
+                Debug.Log($"\"No cache for {MetadataFileName}\"!");
+            }
+            else
+            {
+                Debug.Log($"\"{MetadataFileName}\" was loaded from cache!");
             }
         }
 
