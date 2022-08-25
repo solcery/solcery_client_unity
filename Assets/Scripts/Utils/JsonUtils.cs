@@ -242,6 +242,12 @@ namespace Solcery.Utils
         public static bool SaveForFile<T>(this T data, string path) where T : JToken
         {
             var fullPath = Path.GetFullPath(path);
+            var directory = Path.GetDirectoryName(fullPath);
+            if (directory != null && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            
             using (var outputFile = new StreamWriter(fullPath))
             {
                 outputFile.WriteLine(data.ToString());
