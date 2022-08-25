@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Solcery.Accessors.Cache;
 using Solcery.Games;
 using Solcery.React;
 using Solcery.Utils;
@@ -70,15 +71,17 @@ namespace Solcery.Services.Transport
         private IJsonPackageData _gameContentPackageData;
         private IJsonPackageData _gameContentOverridesPackageData;
         private IJsonPackageData _gameStatePackageData;
+        private readonly ICacheAccessor _cacheAccessor;  
         
-        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks)
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
-            return new WebGlTransportService(gameTransportCallbacks);
+            return new WebGlTransportService(gameTransportCallbacks, cacheAccessor);
         }
 
-        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks)
+        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
             _gameTransportCallbacks = gameTransportCallbacks;
+            _cacheAccessor = cacheAccessor;
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
@@ -91,6 +94,7 @@ namespace Solcery.Services.Transport
 
         private void OnGameContentUpdate(string obj)
         {
+            const string key = "game_content";
             if (!string.IsNullOrEmpty(obj))
             {
                 if (_gameContentPackageData == null)
@@ -109,6 +113,7 @@ namespace Solcery.Services.Transport
 
                 if (_gameContentPackageData.JsonData is JObject gameContent)
                 {
+                    _cacheAccessor.UpdateMetadataForKey(key, gameContent);
                     _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
                 }
 
@@ -116,12 +121,13 @@ namespace Solcery.Services.Transport
             }
             else
             {
-                _gameTransportCallbacks?.OnReceivingGameContent(null);
+                _gameTransportCallbacks?.OnReceivingGameContent(_cacheAccessor.GetCacheForKey(key));
             }
         }
         
         private void OnGameContentOverridesUpdate(string obj)
         {
+            const string key = "game_content_overrides";
             if (!string.IsNullOrEmpty(obj))
             {
                 if (_gameContentOverridesPackageData == null)
@@ -140,6 +146,7 @@ namespace Solcery.Services.Transport
 
                 if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
                 {
+                    _cacheAccessor.UpdateMetadataForKey(key, gameContent);
                     _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
                 }
 
@@ -147,7 +154,7 @@ namespace Solcery.Services.Transport
             }
             else
             {
-                _gameTransportCallbacks?.OnReceivingGameContentOverrides(null);
+                _gameTransportCallbacks?.OnReceivingGameContentOverrides(_cacheAccessor.GetCacheForKey(key));
             }
         }
         

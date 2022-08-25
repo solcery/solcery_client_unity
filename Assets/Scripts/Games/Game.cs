@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using Solcery.Accessors.Cache;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
@@ -9,7 +10,6 @@ using Solcery.Games.Contents;
 using Solcery.Games.DTO;
 using Solcery.Games.States.New;
 using Solcery.Models.Play;
-using Solcery.Services.Cache;
 using Solcery.Services.GameContent;
 using Solcery.Services.Renderer;
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -124,7 +124,7 @@ namespace Solcery.Games
 #if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
-            _transportService = WebGlTransportService.Create(this);
+            _transportService = WebGlTransportService.Create(this, _cacheAccessor);
 #endif
 
             _serviceResource = ServiceResource.Create(this);
@@ -162,41 +162,23 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameContent(JObject gameContentJson)
         {
             Cleanup();
-            const string key = "game_content";
-            _cacheAccessor.ProcessCache(key, ref gameContentJson);
-            if (gameContentJson != null)
-            {
-                _serviceGameContent.UpdateGameContent(gameContentJson);
-                _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
+            _serviceGameContent.UpdateGameContent(gameContentJson);
+            _contentAttributes.UpdateAttributesFromGameContent(gameContentJson);
 
-                if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
-                    customBricks.TryGetValue("objects", out JArray customBricksArray))
-                {
-                    _serviceBricks.RegistrationCustomBricksData(customBricksArray);
-                }
-            }
-            else
+            if (gameContentJson.TryGetValue(GameJsonKeys.GlobalCustomBricks, out JObject customBricks) &&
+                customBricks.TryGetValue("objects", out JArray customBricksArray))
             {
-                Debug.LogError($"\"{key}.json\" is null!");
+                _serviceBricks.RegistrationCustomBricksData(customBricksArray);
             }
         }
 
         void IGameTransportCallbacks.OnReceivingGameContentOverrides(JObject gameContentOverridesJson)
         {
-            const string key = "game_content_overrides";
-            _cacheAccessor.ProcessCache(key, ref gameContentOverridesJson);
-            if (gameContentOverridesJson != null)
-            {
-                _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
-                LoaderScreen.SetTitle("Load resources.");
-                _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
-            }
-            else
-            {
-                Debug.LogError($"\"{key}.json\" is null!");
-            }
+            _serviceGameContent.UpdateGameContentOverrides(gameContentOverridesJson);
+            LoaderScreen.SetTitle("Load resources.");
+            _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
         }
-        
+
         void IGameResourcesCallback.OnResourcesLoad()
         {
             Init();

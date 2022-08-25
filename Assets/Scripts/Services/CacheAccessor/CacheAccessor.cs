@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 using UnityEngine;
 
-namespace Solcery.Services.Cache
+namespace Solcery.Accessors.Cache
 {
     public class CacheAccessor : ICacheAccessor
     {
@@ -45,18 +45,6 @@ namespace Solcery.Services.Cache
             else
             {
                 Debug.LogWarning($"Can't save metadata for \"{key}\" in cache!");
-            }
-        }
-
-        public void ProcessCache(string key, ref JObject dataJObject)
-        {
-            if (dataJObject == null)
-            {
-                dataJObject = GetCacheForKey(key);
-            }
-            else
-            {
-                UpdateMetadataForKey(key, dataJObject);
             }
         }
     }

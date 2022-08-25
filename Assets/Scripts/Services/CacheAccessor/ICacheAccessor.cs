@@ -1,12 +1,11 @@
 using Newtonsoft.Json.Linq;
 
-namespace Solcery.Services.Cache
+namespace Solcery.Accessors.Cache
 {
     public interface ICacheAccessor
     {
         public JObject GetMetadata();
         public JObject GetCacheForKey(string key);
         public void UpdateMetadataForKey(string key, JObject dataJObject);
-        public void ProcessCache(string key, ref JObject dataJObject);
     }
 }
