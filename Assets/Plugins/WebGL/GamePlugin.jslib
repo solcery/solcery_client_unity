@@ -1,7 +1,7 @@
 mergeInto(LibraryManager.library, {
-	OnUnityLoaded: function () {
+	OnUnityLoaded: function (metadata) {
 		try {
-			window.dispatchReactUnityEvent("OnUnityLoaded");
+			window.dispatchReactUnityEvent("OnUnityLoaded", Pointer_stringify(metadata));
 		} catch (e) {
 			console.warn("Failed to dispatch event");
 		}
