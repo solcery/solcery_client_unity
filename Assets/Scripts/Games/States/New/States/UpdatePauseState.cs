@@ -15,7 +15,7 @@ namespace Solcery.Games.States.New.States
         
         public UpdatePauseState(ContextGameStateTypes updateStateType) : base(updateStateType) { }
 
-        public override void Init(JObject updateStateData)
+        protected override void Init(JObject updateStateData)
         {
             _delay = updateStateData.GetValue<int>("delay");
         }

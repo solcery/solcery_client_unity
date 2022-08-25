@@ -55,6 +55,13 @@ namespace Solcery.Services.Resources.Loaders.Texture
 
         void ILoadTask.Run()
         {
+            if (_textureLoaderUriList.Count <= 0)
+            {
+                _callback?.Invoke(_textures);
+                Completed?.Invoke(true, this);
+                return;
+            }
+            
             _completedLoaderCount = _textureLoaderUriList.Count;
 
             while (_textureLoaderUriList.Count > 0)

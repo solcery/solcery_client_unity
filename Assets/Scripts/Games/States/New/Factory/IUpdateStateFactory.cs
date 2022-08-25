@@ -9,7 +9,7 @@ namespace Solcery.Games.States.New.Factory
     {
         void RegistrationCreationFunc(ContextGameStateTypes updateStateType, Func<ContextGameStateTypes, UpdateState> updateStateCreationFunc);
         void Init();
-        UpdateState ConstructFromJObject(JObject stateUpdateObject);
+        UpdateState ConstructFromJObject(JObject stateUpdateObject, bool isPredictable);
         void Deconstruct(UpdateState updateState);
     }
 }

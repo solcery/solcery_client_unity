@@ -409,16 +409,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
-            // //Debug.Log($"OnDrop Widget {dropWidget.ObjectId}");
-            // if (dropWidget is IEclipseCardInContainerWidget ew)
-            // {
-            //     Layout.AddCard(ew);
-            //     _cards.Add(dropWidget.ObjectId, ew);
-            //     _dropObjectId.Add(dropWidget.ObjectId);
-            // }
-            
-            //_dropObjectId.Add(dropWidget.ObjectId);
-
             if (discard)
             {
                 if (dropWidget is IEclipseCardInContainerWidget ew)
@@ -429,7 +419,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
             else
             {
-                Layout.Wait(true);
+                var isPredictable = Game.IsPredictable;
+#if LOCAL_SIMULATION
+                isPredictable = false;
+#endif
+                Layout.Wait(!isPredictable);
 
                 if (dropWidget is IPoolingWidget pw)
                 {

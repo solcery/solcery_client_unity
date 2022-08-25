@@ -56,7 +56,7 @@ namespace Solcery.Games.States.New.Factory
             _isInit = true;
         }
 
-        UpdateState IUpdateStateFactory.ConstructFromJObject(JObject stateUpdateObject)
+        UpdateState IUpdateStateFactory.ConstructFromJObject(JObject stateUpdateObject, bool isPredictable)
         {
             if (!_isInit)
             {
@@ -81,7 +81,7 @@ namespace Solcery.Games.States.New.Factory
                 result = _creators[type].Invoke(type);
             }
 
-            result.Init(stateUpdateObject.GetValue<JObject>("value"));
+            result.Init(stateUpdateObject.GetValue<JObject>("value"), isPredictable);
             return result;
         }
 

@@ -199,15 +199,6 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
 
         void IApplyDropWidget.OnDropWidget(IDraggableWidget dropWidget, Vector3 position, bool discard)
         {
-            // if (dropWidget is IEclipseCardNftInContainerWidget ew)
-            // {
-            //     Layout.AddCard(ew);
-            //     _cards.Add(dropWidget.ObjectId, ew);
-            //     _dropObjectId.Add(dropWidget.ObjectId);
-            // }
-            
-            //_dropObjectId.Add(dropWidget.ObjectId);
-
             if (discard)
             {
                 if (dropWidget is IEclipseCardNftInContainerWidget ew)
@@ -218,7 +209,11 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             }
             else
             {
-                Layout.Wait(true);
+                var isPredictable = Game.IsPredictable;
+#if LOCAL_SIMULATION
+                isPredictable = false;
+#endif
+                Layout.Wait(!isPredictable);
 
                 if (dropWidget is IPoolingWidget pw)
                 {
