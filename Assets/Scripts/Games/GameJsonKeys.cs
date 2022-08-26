@@ -43,7 +43,7 @@ namespace Solcery.Games
         public static readonly string PlaceFrameColor = "frame_color";
         public static readonly string PlaceTooltipId = "tooltip_id";
         public static readonly string PlaceCaption = "caption";
-        public static readonly string PlaceCaptionType = "caption_type";
+        public static readonly string PlaceCaptionPosition = "caption_position";
         public static readonly string PlaceCaptionColor = "caption_color";
         public static readonly string PlaceX1 = "x1";
         public static readonly string PlaceX2 = "x2";
