@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Solcery.Services.Resources.Patterns;
-using Solcery.Services.Resources.Patterns.Texture;
 using UnityEngine;
 
 namespace Solcery.Services.Resources.Loaders.Texture
@@ -9,27 +7,13 @@ namespace Solcery.Services.Resources.Loaders.Texture
     public sealed class TaskLoadTextureUri : ILoadTask
     {
         public event Action<bool, ILoadTask> Completed;
+        public event Action<float> Progress;
         
         private int _completedLoaderCount;
+        private int _allLoaderCount;
         private List<ITextureLoaderUri> _textureLoaderUriList;
         private Dictionary<string, Texture2D> _textures;
         private Action<Dictionary<string, Texture2D>> _callback;
-        
-        
-        public static ILoadTask Create(List<PatternData> patternDataList, Action<Dictionary<string, Texture2D>> callback)
-        {
-            var imageUriList = new List<string>(patternDataList.Count);
-            foreach (var patternRawData in patternDataList)
-            {
-                if (patternRawData is PatternUriTextureData patternData 
-                    && !imageUriList.Contains(patternData.Uri))
-                {
-                    imageUriList.Add(patternData.Uri);
-                }
-            }
-
-            return new TaskLoadTextureUri(imageUriList, callback);
-        }
 
         public static ILoadTask Create(List<string> imageUriList, Action<Dictionary<string, Texture2D>> callback)
         {
@@ -57,12 +41,14 @@ namespace Solcery.Services.Resources.Loaders.Texture
         {
             if (_textureLoaderUriList.Count <= 0)
             {
+                Progress?.Invoke(1f);
                 _callback?.Invoke(_textures);
                 Completed?.Invoke(true, this);
                 return;
             }
             
             _completedLoaderCount = _textureLoaderUriList.Count;
+            _allLoaderCount = _completedLoaderCount > 0 ? _completedLoaderCount : 1;
 
             while (_textureLoaderUriList.Count > 0)
             {
@@ -84,8 +70,13 @@ namespace Solcery.Services.Resources.Loaders.Texture
             
             if (_completedLoaderCount <= 0)
             {
+                Progress?.Invoke(1f);
                 _callback?.Invoke(_textures);
                 Completed?.Invoke(true, this);
+            }
+            else
+            {
+                Progress?.Invoke(1f - _completedLoaderCount / (float)_allLoaderCount);
             }
         }
 
