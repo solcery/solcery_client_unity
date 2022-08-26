@@ -1,6 +1,4 @@
-using Newtonsoft.Json.Linq;
 using Solcery.Services.GameContent;
-using Solcery.Services.GameContent.Items;
 using UnityEngine;
 
 namespace Solcery.Services.Resources

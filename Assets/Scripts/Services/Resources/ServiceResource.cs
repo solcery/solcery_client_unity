@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.React;
 using Solcery.Services.GameContent;
 using Solcery.Services.Resources.Loaders;
 using Solcery.Services.Resources.Loaders.Multi;
 using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
-// using Solcery.Services.Resources.Patterns;
-// using Solcery.Services.Resources.Patterns.Texture;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Attributes.Enum;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -33,19 +37,24 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(IServiceGameContent serviceGameContent)
         {
-            // var patternsProcessor = PatternsProcessor.Create();
-            // patternsProcessor.PatternRegistration(PatternUriTexture.Create());
-            // patternsProcessor.ProcessGameContent(gameContentJson);
-
+            UpdateLoadingProgress(0);
+            // Prepare widget list
+            var widgetResourcePaths = new List<string>();
+            var names = Enum.GetNames(typeof(PlaceWidgetTypes));
+            foreach (var name in names)
+            {
+                if (Enum.TryParse(name, out PlaceWidgetTypes value) 
+                    && EnumPlaceWidgetPrefabPathAttribute.TryGetPrefabPath(value, out var prefabPath)
+                    && !string.IsNullOrEmpty(prefabPath))
+                {
+                    widgetResourcePaths.Add(prefabPath);
+                }
+            }
+            
             _task = MultiLoadTask.Create();
             _task.Completed += OnCompletedAllTask;
-
-            // if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.UriTexture, out var imageUriList))
-            // {
-            //     _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
-            // }
             _task.AddTask(TaskLoadTextureUri.Create(serviceGameContent.ItemTypes.PictureUriList, OnImagesLoaded));
-            _task.AddTask(TaskLoadWidgetPrefab.Create(OnWidgetPrefabLoaded));
+            _task.AddTask(TaskLoadWidgetPrefab.Create(widgetResourcePaths, OnWidgetPrefabLoaded));
             _task.Run();
         }
 
@@ -58,6 +67,7 @@ namespace Solcery.Services.Resources
                 _task = null;
             }
 
+            UpdateLoadingProgress(100);
             _gameResourcesCallback?.OnResourcesLoad();
         }
 
@@ -110,6 +120,17 @@ namespace Solcery.Services.Resources
         {
             Cleanup();
             _gameResourcesCallback = null;
+        }
+
+        private void UpdateLoadingProgress(int progress)
+        {
+            var jProgress = new JObject
+            {
+                { "progress", new JValue(progress) },
+                { "state", new JObject() }
+            };
+
+            UnityToReact.Instance.CallOnUnityLoadProgress(jProgress.ToString(Formatting.None));
         }
     }
 }

@@ -15,21 +15,8 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         private int _completedLoaderCount;
         private Dictionary<string, GameObject> _widgetPrefabs;
 
-        public static ILoadTask Create(Action<Dictionary<string, GameObject>> callback)
+        public static ILoadTask Create(List<string> widgetResourcePaths, Action<Dictionary<string, GameObject>> callback)
         {
-            var widgetResourcePaths = new List<string>();
-            
-            var names = Enum.GetNames(typeof(PlaceWidgetTypes));
-            foreach (var name in names)
-            {
-                if (Enum.TryParse(name, out PlaceWidgetTypes value) 
-                    && EnumPlaceWidgetPrefabPathAttribute.TryGetPrefabPath(value, out var prefabPath)
-                    && !string.IsNullOrEmpty(prefabPath))
-                {
-                    widgetResourcePaths.Add(prefabPath);
-                }
-            }
-
             return new TaskLoadWidgetPrefab(widgetResourcePaths, callback);
         }
 
