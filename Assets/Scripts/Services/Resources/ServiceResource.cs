@@ -23,6 +23,8 @@ namespace Solcery.Services.Resources
         private readonly Dictionary<string, Texture2D> _textures;
         private readonly Dictionary<string, GameObject> _prefabs;
 
+        private int _lastProgress;
+
         public static IServiceResource Create(IGameResourcesCallback gameResourcesCallback)
         {
             return new ServiceResource(gameResourcesCallback);
@@ -37,7 +39,8 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(IServiceGameContent serviceGameContent)
         {
-            UpdateLoadingProgress(0);
+            _lastProgress = -1;
+            UpdateLoadingProgress(0f);
             // Prepare widget list
             var widgetResourcePaths = new List<string>();
             var names = Enum.GetNames(typeof(PlaceWidgetTypes));
@@ -53,6 +56,7 @@ namespace Solcery.Services.Resources
             
             _task = MultiLoadTask.Create();
             _task.Completed += OnCompletedAllTask;
+            _task.Progress += UpdateLoadingProgress;
             _task.AddTask(TaskLoadTextureUri.Create(serviceGameContent.ItemTypes.PictureUriList, OnImagesLoaded));
             _task.AddTask(TaskLoadWidgetPrefab.Create(widgetResourcePaths, OnWidgetPrefabLoaded));
             _task.Run();
@@ -63,11 +67,12 @@ namespace Solcery.Services.Resources
             if (_task == task)
             {
                 _task.Completed -= OnCompletedAllTask;
+                _task.Progress -= UpdateLoadingProgress;
                 _task.Destroy();
                 _task = null;
             }
 
-            UpdateLoadingProgress(100);
+            UpdateLoadingProgress(1f);
             _gameResourcesCallback?.OnResourcesLoad();
         }
 
@@ -122,11 +127,20 @@ namespace Solcery.Services.Resources
             _gameResourcesCallback = null;
         }
 
-        private void UpdateLoadingProgress(int progress)
+        private void UpdateLoadingProgress(float progress)
         {
+            var iProgress = (int)(progress * 100f);
+            
+            if (_lastProgress >= iProgress)
+            {
+                return;
+            }
+
+            _lastProgress = iProgress;
+            
             var jProgress = new JObject
             {
-                { "progress", new JValue(progress) },
+                { "progress", new JValue(iProgress) },
                 { "state", new JObject() }
             };
 

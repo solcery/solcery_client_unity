@@ -9,10 +9,12 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
     public sealed class TaskLoadWidgetPrefab : ILoadTask
     {
         public event Action<bool, ILoadTask> Completed;
+        public event Action<float> Progress;
 
         private List<IPrefabLoader> _prefabLoaders;
         private Action<Dictionary<string, GameObject>> _callback;
         private int _completedLoaderCount;
+        private int _allLoaderCount;
         private Dictionary<string, GameObject> _widgetPrefabs;
 
         public static ILoadTask Create(List<string> widgetResourcePaths, Action<Dictionary<string, GameObject>> callback)
@@ -37,12 +39,14 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
         {
             if (_prefabLoaders.Count <= 0)
             {
+                Progress?.Invoke(1f);
                 _callback?.Invoke(_widgetPrefabs);
                 Completed?.Invoke(true, this);
                 return;
             }
             
             _completedLoaderCount = _prefabLoaders.Count;
+            _allLoaderCount = _completedLoaderCount > 0 ? _completedLoaderCount : 1;
 
             while (_prefabLoaders.Count > 0)
             {
@@ -63,8 +67,13 @@ namespace Solcery.Services.Resources.Loaders.WidgetPrefab
 
             if (_completedLoaderCount <= 0)
             {
+                Progress?.Invoke(1f);
                 _callback?.Invoke(_widgetPrefabs);
                 Completed?.Invoke(true, this);
+            }
+            else
+            {
+                Progress?.Invoke(1f - _completedLoaderCount / (float)_allLoaderCount);
             }
         }
 
