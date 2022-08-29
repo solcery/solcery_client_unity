@@ -2,7 +2,6 @@ namespace Solcery.Games
 {
     public static class GameJsonKeys
     {
-        public const string EmptyString = "Empty value";
         // Commons
         public static readonly string Picture = "picture";
         

@@ -44,7 +44,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
             var displayedType = itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
                 ? valueDisplayedTypeToken.GetValue<string>()
-                : GameJsonKeys.EmptyString;
+                : string.Empty;
             var typeFontSize = itemType.TryGetValue(out var valueFontSizeToken, GameJsonKeys.CardTypeFontSize, objectId)
                 ? valueFontSizeToken.GetValue<int>()
                 : 5f;
