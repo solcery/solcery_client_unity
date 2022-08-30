@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Solcery.Services.Events;
 using Solcery.Services.Renderer.Widgets;
+using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
@@ -114,22 +116,22 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public void UpdateName(string newName, float fontSize)
         {
-            nameText.fontSize = fontSize;
             nameText.text = newName;
+            nameText.UpdateFontSize(fontSize);
         }
 
         public void UpdateDescription(string newDescription, float fontSize)
         {
             descriptionText.text = newDescription;
-            descriptionText.fontSize = fontSize;
+            descriptionText.UpdateFontSize(fontSize);
         }
 
         public void UpdateType(string displayedType, float fontSize)
         {
             typeText.text = displayedType;
-            typeText.fontSize = fontSize;
+            typeText.UpdateFontSize(fontSize);
         }
-        
+
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();

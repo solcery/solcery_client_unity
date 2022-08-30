@@ -13,7 +13,9 @@ namespace Solcery.Games
         public static readonly string CardTypes = "card_types";
         public static readonly string CardType = "type";
         public static readonly string CardDisplayedType = "displayed_type";
-        public static readonly string CardName = "name";
+        public static readonly string CardTypeFontSize = "type_font_size";
+        public static readonly string CardDisplayedName = "displayed_name";
+        public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescription = "description";
         public static readonly string CardTokenSlots = "token_slots";
         public static readonly string CardTimerText = "timer_text";
@@ -23,9 +25,7 @@ namespace Solcery.Games
         public static readonly string CardAnimCardFly = "anim_card_fly";
         public static readonly string CardAnimCardFlyFromPlace = "anim_card_fly_from_place";
         public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
-        public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescriptionFontSize = "description_font_size";
-        public static readonly string CardTypeFontSize = "type_font_size";
         public static readonly string CardDefaultTimerValue = "default_timer_value";
         public static readonly string CardAnimCardDestroy = "anim_destroy";
         public static readonly string CardAnimCardDestroyTime = "anim_card_destroy_time";

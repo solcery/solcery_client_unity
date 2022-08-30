@@ -34,7 +34,6 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
             if (!objectIdPool.Has(entityId))
             {
-                Layout.UpdateButtonText("No card id.");
                 return;
             }
             
@@ -47,18 +46,19 @@ namespace Solcery.Widgets_new.Simple.Buttons
             if (objectTypePool.Has(entityId)
                 && objectIdPool.Has(entityId))
             {
-                var id = objectIdPool.Get(entityId).Id;
+                var objectId = objectIdPool.Get(entityId).Id;
                 var tplid = objectTypePool.Get(entityId).TplId;
-                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "name", id))
+                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid))
                 {
-                    var name = valueToken.GetValue<string>();
-                    Layout.UpdateButtonText(name);
-                    return;
+                    var displayedName = itemType.TryGetValue(out var nameToken, GameJsonKeys.CardDisplayedName, objectId)
+                        ? nameToken.GetValue<string>()
+                        : string.Empty;
+                    var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize, objectId)
+                        ? valueNameFontSizeAttributeToken.GetValue<float>()
+                        : 0f;
+                    Layout.UpdateButtonText(displayedName, nameFontSize);
                 }
             }
-            
-            Layout.UpdateButtonText("No card type data.");
         }
 
         public override PlaceWidgetLayout LayoutForObjectId(int objectId)

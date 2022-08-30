@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Solcery.Services.Events;
+using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using TMPro;
@@ -65,14 +66,14 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         
         public void UpdateName(string newName, float fontSize)
         {
-            nameText.fontSize = fontSize;
             nameText.text = newName;
+            nameText.UpdateFontSize(fontSize);
         }
 
         public void UpdateDescription(string newDescription, float fontSize)
         {
             descriptionText.text = newDescription;
-            descriptionText.fontSize = fontSize;
+            descriptionText.UpdateFontSize(fontSize);
         }
         
         public void UpdateSprite(Texture2D texture)

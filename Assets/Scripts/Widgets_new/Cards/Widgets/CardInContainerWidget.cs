@@ -65,17 +65,17 @@ namespace Solcery.Widgets_new.Cards.Widgets
 
         void ICardInContainerWidget.UpdateFromCardTypeData(int objectId, IItemType itemType)
         {
-            if (itemType.TryGetValue(out var valueNameToken, "name", objectId))
-            {
-                _layout.UpdateName(valueNameToken.GetValue<string>());
-            }
-            
-            if (itemType.TryGetValue(out var valueDescriptionToken, "description", objectId))
-            {
-                _layout.UpdateDescription(valueDescriptionToken.GetValue<string>());
-            }
+            var displayedName = itemType.TryGetValue(out var valueNameToken, GameJsonKeys.CardDisplayedName, objectId)
+                ? valueNameToken.GetValue<string>()
+                : string.Empty;
+            _layout.UpdateName(displayedName);
 
-            if (itemType.TryGetValue(out var valuePictureToken, "picture", objectId) 
+            var description = itemType.TryGetValue(out var valueDescriptionToken, GameJsonKeys.CardDescription, objectId)
+                ? valueDescriptionToken.GetValue<string>()
+                : string.Empty;
+            _layout.UpdateDescription(description);
+
+            if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId) 
                 && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
                 _layout.UpdateSprite(texture);

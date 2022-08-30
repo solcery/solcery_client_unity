@@ -1,3 +1,4 @@
+using Solcery.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -19,12 +20,7 @@ namespace Solcery.Widgets_new
                 if (active)
                 {
                     caption.text = text;
-                    var autoSizeText = fontSize == 0f;
-                    caption.enableAutoSizing = autoSizeText;
-                    if (!autoSizeText)
-                    {
-                        caption.fontSize = fontSize;
-                    }
+                    caption.UpdateFontSize(fontSize);
                     SetCaptionType(position);
                 }
             }

@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.Widgets_new.Eclipse;
+using TMPro;
 using UnityEngine;
 
 namespace Solcery.Utils
@@ -19,6 +20,16 @@ namespace Solcery.Utils
             
             position = Vector3.zero;
             return false;
+        }
+        
+        public static void UpdateFontSize(this TMP_Text text, float fontSize)
+        {
+            var autoSizeText = fontSize == 0f;
+            text.enableAutoSizing = autoSizeText;
+            if (!autoSizeText)
+            {
+                text.fontSize = fontSize;
+            }
         }
     }
 }

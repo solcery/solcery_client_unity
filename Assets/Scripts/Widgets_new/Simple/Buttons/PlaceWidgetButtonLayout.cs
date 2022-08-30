@@ -1,3 +1,4 @@
+using Solcery.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,9 +13,10 @@ namespace Solcery.Widgets_new.Simple.Buttons
         [SerializeField]
         private TMP_Text buttonText;
 
-        public void UpdateButtonText(string text)
+        public void UpdateButtonText(string text, float fontSize)
         {
-            buttonText.text = text ?? "";
+            buttonText.text = text;
+            buttonText.UpdateFontSize(fontSize);
         }
 
         public void ClearAllOnClickListener()
