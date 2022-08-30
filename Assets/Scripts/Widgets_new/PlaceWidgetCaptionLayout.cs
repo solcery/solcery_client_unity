@@ -10,7 +10,7 @@ namespace Solcery.Widgets_new
         [SerializeField] private RectTransform placeAbove;
         [SerializeField] private RectTransform placeCentered;
         
-        public void UpdateCaption(string text, PlaceCaptionPosition position)
+        public void UpdateCaption(string text, PlaceCaptionPosition position, float fontSize)
         {
             if (caption != null)
             {
@@ -19,6 +19,12 @@ namespace Solcery.Widgets_new
                 if (active)
                 {
                     caption.text = text;
+                    var autoSizeText = fontSize == 0f;
+                    caption.enableAutoSizing = autoSizeText;
+                    if (!autoSizeText)
+                    {
+                        caption.fontSize = fontSize;
+                    }
                     SetCaptionType(position);
                 }
             }

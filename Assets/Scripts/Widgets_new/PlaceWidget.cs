@@ -110,11 +110,11 @@ namespace Solcery.Widgets_new
         {
             var caption = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaption, out string captionAttribute) ? captionAttribute : null;
             var captionPosition = placeDataObject.TryGetEnum(GameJsonKeys.PlaceCaptionPosition, out PlaceCaptionPosition captionTypeAttribute) ? captionTypeAttribute : PlaceCaptionPosition.Above;
-            Layout.UpdateCaption(caption, captionPosition);
+            var captionFontSize = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionSize, out float captionSizeAttribute) ? captionSizeAttribute : 0f;
+            Layout.UpdateCaption(caption, captionPosition, captionFontSize);
             
             var captionColor = placeDataObject.TryGetValue(GameJsonKeys.PlaceCaptionColor, out string captionColorAttribute) ? captionColorAttribute : null;
             Layout.UpdateCaptionColor(captionColor);
-
         }
 
         protected virtual void DestroyImpl() { }
