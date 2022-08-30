@@ -5,6 +5,7 @@ namespace Solcery.Games.States.New
 {
     public interface IUpdateStateQueue
     {
+        bool IsPredictable { get; }
         UpdateState CurrentState { get; }
         void PushGameState(JObject gameState);
         void Update(int deltaTimeMsec);

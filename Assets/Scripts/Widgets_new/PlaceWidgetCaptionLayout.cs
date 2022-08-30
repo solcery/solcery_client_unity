@@ -8,8 +8,9 @@ namespace Solcery.Widgets_new
         [SerializeField] private TextMeshProUGUI caption;
         [SerializeField] private RectTransform placeInside;
         [SerializeField] private RectTransform placeAbove;
+        [SerializeField] private RectTransform placeCentered;
         
-        public void UpdateCaption(string text, PlaceCaptionType type)
+        public void UpdateCaption(string text, PlaceCaptionPosition position)
         {
             if (caption != null)
             {
@@ -18,7 +19,7 @@ namespace Solcery.Widgets_new
                 if (active)
                 {
                     caption.text = text;
-                    SetCaptionType(type);
+                    SetCaptionType(position);
                 }
             }
         }
@@ -37,15 +38,18 @@ namespace Solcery.Widgets_new
             }        
         }
 
-        private void SetCaptionType(PlaceCaptionType type)
+        private void SetCaptionType(PlaceCaptionPosition position)
         {
-            switch (type)
+            switch (position)
             {
-                case PlaceCaptionType.Above:
+                case PlaceCaptionPosition.Above:
                     caption.transform.SetParent(placeAbove, false);
                     break;
-                case PlaceCaptionType.Inside:
+                case PlaceCaptionPosition.Inside:
                     caption.transform.SetParent(placeInside, false);
+                    break;
+                case PlaceCaptionPosition.Centered:
+                    caption.transform.SetParent(placeCentered, false);
                     break;
             }
         }

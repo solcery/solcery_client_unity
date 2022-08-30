@@ -14,7 +14,14 @@ namespace Solcery.Utils
         public static void LoadText(string path, Action<string> result)
         {
             var pathToGameContent = Path.Combine(Application.streamingAssetsPath, path);
-            result.Invoke(File.ReadAllText(pathToGameContent));
+            if (File.Exists(pathToGameContent))
+            {
+                result.Invoke(File.ReadAllText(pathToGameContent));
+            }
+            else
+            {
+                result.Invoke(null);
+            }
         }
 #endif
 

@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using Solcery.Accessors.Cache;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
@@ -44,6 +45,7 @@ namespace Solcery.Games
 {
     public sealed class Game : IGame, IGameTransportCallbacks, IGameResourcesCallback
     {
+        bool IGame.IsPredictable => _updateStateQueue is { IsPredictable: true };
         Camera IGame.MainCamera => _mainCamera;
         ITransportService IGame.TransportService => _transportService;
         IServiceBricks IGame.ServiceBricks => _serviceBricks;
@@ -76,6 +78,7 @@ namespace Solcery.Games
         private TooltipController _tooltipController;
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
+        private ICacheAccessor _cacheAccessor;
         
         // Widget pools
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
@@ -117,10 +120,11 @@ namespace Solcery.Games
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
+            _cacheAccessor = new CacheAccessor();
 #if UNITY_EDITOR || LOCAL_SIMULATION
             _transportService = EditorTransportService.Create(this, this);
 #elif UNITY_WEBGL
-            _transportService = WebGlTransportService.Create(this);
+            _transportService = WebGlTransportService.Create(this, _cacheAccessor);
 #endif
 
             _serviceResource = ServiceResource.Create(this);
@@ -145,7 +149,7 @@ namespace Solcery.Games
             ReactToUnity.AddCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
 #endif
             LoaderScreen.SetTitle("Load configuration.");
-            _transportService.CallUnityLoaded();
+            _transportService.CallUnityLoaded(_cacheAccessor.GetMetadata());
         }
 
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -174,7 +178,7 @@ namespace Solcery.Games
             LoaderScreen.SetTitle("Load resources.");
             _serviceResource.PreloadResourcesFromGameContent(_serviceGameContent);
         }
-        
+
         void IGameResourcesCallback.OnResourcesLoad()
         {
             Init();

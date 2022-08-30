@@ -14,7 +14,7 @@ namespace Solcery.Games.States.New.States
 
         private UpdateGameState(ContextGameStateTypes updateStateType) : base(updateStateType) { }
         
-        public override void Init(JObject updateStateData)
+        protected override void Init(JObject updateStateData)
         {
             GameState = updateStateData;
         }

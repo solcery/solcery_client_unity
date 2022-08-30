@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.React;
 using Solcery.Services.GameContent;
 using Solcery.Services.Resources.Loaders;
 using Solcery.Services.Resources.Loaders.Multi;
 using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
-// using Solcery.Services.Resources.Patterns;
-// using Solcery.Services.Resources.Patterns.Texture;
+using Solcery.Widgets_new;
+using Solcery.Widgets_new.Attributes.Enum;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -18,6 +22,8 @@ namespace Solcery.Services.Resources
         private IMultiLoadTask _task;
         private readonly Dictionary<string, Texture2D> _textures;
         private readonly Dictionary<string, GameObject> _prefabs;
+
+        private int _lastProgress;
 
         public static IServiceResource Create(IGameResourcesCallback gameResourcesCallback)
         {
@@ -33,19 +39,26 @@ namespace Solcery.Services.Resources
 
         void IServiceResource.PreloadResourcesFromGameContent(IServiceGameContent serviceGameContent)
         {
-            // var patternsProcessor = PatternsProcessor.Create();
-            // patternsProcessor.PatternRegistration(PatternUriTexture.Create());
-            // patternsProcessor.ProcessGameContent(gameContentJson);
-
+            _lastProgress = -1;
+            UpdateLoadingProgress(0f);
+            // Prepare widget list
+            var widgetResourcePaths = new List<string>();
+            var names = Enum.GetNames(typeof(PlaceWidgetTypes));
+            foreach (var name in names)
+            {
+                if (Enum.TryParse(name, out PlaceWidgetTypes value) 
+                    && EnumPlaceWidgetPrefabPathAttribute.TryGetPrefabPath(value, out var prefabPath)
+                    && !string.IsNullOrEmpty(prefabPath))
+                {
+                    widgetResourcePaths.Add(prefabPath);
+                }
+            }
+            
             _task = MultiLoadTask.Create();
             _task.Completed += OnCompletedAllTask;
-
-            // if (patternsProcessor.TryGetAllPatternDataForType(PatternTypes.UriTexture, out var imageUriList))
-            // {
-            //     _task.AddTask(TaskLoadTextureUri.Create(imageUriList, OnImagesLoaded));
-            // }
+            _task.Progress += UpdateLoadingProgress;
             _task.AddTask(TaskLoadTextureUri.Create(serviceGameContent.ItemTypes.PictureUriList, OnImagesLoaded));
-            _task.AddTask(TaskLoadWidgetPrefab.Create(OnWidgetPrefabLoaded));
+            _task.AddTask(TaskLoadWidgetPrefab.Create(widgetResourcePaths, OnWidgetPrefabLoaded));
             _task.Run();
         }
 
@@ -54,10 +67,12 @@ namespace Solcery.Services.Resources
             if (_task == task)
             {
                 _task.Completed -= OnCompletedAllTask;
+                _task.Progress -= UpdateLoadingProgress;
                 _task.Destroy();
                 _task = null;
             }
 
+            UpdateLoadingProgress(1f);
             _gameResourcesCallback?.OnResourcesLoad();
         }
 
@@ -110,6 +125,26 @@ namespace Solcery.Services.Resources
         {
             Cleanup();
             _gameResourcesCallback = null;
+        }
+
+        private void UpdateLoadingProgress(float progress)
+        {
+            var iProgress = (int)(progress * 100f);
+            
+            if (_lastProgress >= iProgress)
+            {
+                return;
+            }
+
+            _lastProgress = iProgress;
+            
+            var jProgress = new JObject
+            {
+                { "progress", new JValue(iProgress) },
+                { "state", new JObject() }
+            };
+
+            UnityToReact.Instance.CallOnUnityLoadProgress(jProgress.ToString(Formatting.None));
         }
     }
 }

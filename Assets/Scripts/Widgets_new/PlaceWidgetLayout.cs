@@ -109,11 +109,11 @@ namespace Solcery.Widgets_new
             }
         }
         
-        public void UpdateCaption(string text, PlaceCaptionType type)
+        public void UpdateCaption(string text, PlaceCaptionPosition position)
         {
             if (caption != null)
             {
-                caption.UpdateCaption(text, type);
+                caption.UpdateCaption(text, position);
             }
         }
 

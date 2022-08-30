@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Solcery.Accessors.Cache;
 using Solcery.Games;
 using Solcery.React;
 using Solcery.Utils;
@@ -70,69 +71,91 @@ namespace Solcery.Services.Transport
         private IJsonPackageData _gameContentPackageData;
         private IJsonPackageData _gameContentOverridesPackageData;
         private IJsonPackageData _gameStatePackageData;
+        private readonly ICacheAccessor _cacheAccessor;  
         
-        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks)
+        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
-            return new WebGlTransportService(gameTransportCallbacks);
+            return new WebGlTransportService(gameTransportCallbacks, cacheAccessor);
         }
 
-        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks)
+        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
             _gameTransportCallbacks = gameTransportCallbacks;
+            _cacheAccessor = cacheAccessor;
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
         }
 
-        void ITransportService.CallUnityLoaded()
+        void ITransportService.CallUnityLoaded(JObject metadata)
         {
-            UnityToReact.Instance.CallOnUnityLoaded();
+            UnityToReact.Instance.CallOnUnityLoaded(metadata.ToString());
         }
 
         private void OnGameContentUpdate(string obj)
         {
-            if (_gameContentPackageData == null)
+            const string key = "game_content";
+            if (!string.IsNullOrEmpty(obj))
             {
-                _gameContentPackageData = JsonPackageData.Create(obj);
+                if (_gameContentPackageData == null)
+                {
+                    _gameContentPackageData = JsonPackageData.Create(obj);
+                }
+                else
+                {
+                    _gameContentPackageData.Append(obj);
+                }
+
+                if (!_gameContentPackageData.Done)
+                {
+                    return;
+                }
+
+                if (_gameContentPackageData.JsonData is JObject gameContent)
+                {
+                    _cacheAccessor.UpdateMetadataForKey(key, gameContent);
+                    _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
+                }
+
+                _gameContentPackageData = null;
             }
             else
             {
-                _gameContentPackageData.Append(obj);
+                _gameTransportCallbacks?.OnReceivingGameContent(_cacheAccessor.GetCacheForKey(key));
             }
-
-            if (!_gameContentPackageData.Done)
-            {
-                return;
-            }
-            
-            if (_gameContentPackageData.JsonData is JObject gameContent)
-            {
-                _gameTransportCallbacks?.OnReceivingGameContent(gameContent);
-            }
-            _gameContentPackageData = null;
         }
         
         private void OnGameContentOverridesUpdate(string obj)
         {
-            if (_gameContentOverridesPackageData == null)
+            const string key = "game_content_overrides";
+            if (!string.IsNullOrEmpty(obj))
             {
-                _gameContentOverridesPackageData = JsonPackageData.Create(obj);
+                if (_gameContentOverridesPackageData == null)
+                {
+                    _gameContentOverridesPackageData = JsonPackageData.Create(obj);
+                }
+                else
+                {
+                    _gameContentOverridesPackageData.Append(obj);
+                }
+
+                if (!_gameContentOverridesPackageData.Done)
+                {
+                    return;
+                }
+
+                if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
+                {
+                    _cacheAccessor.UpdateMetadataForKey(key, gameContent);
+                    _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
+                }
+
+                _gameContentOverridesPackageData = null;
             }
             else
             {
-                _gameContentOverridesPackageData.Append(obj);
+                _gameTransportCallbacks?.OnReceivingGameContentOverrides(_cacheAccessor.GetCacheForKey(key));
             }
-
-            if (!_gameContentOverridesPackageData.Done)
-            {
-                return;
-            }
-            
-            if (_gameContentOverridesPackageData.JsonData is JObject gameContent)
-            {
-                _gameTransportCallbacks?.OnReceivingGameContentOverrides(gameContent);
-            }
-            _gameContentOverridesPackageData = null;
         }
         
         private void OnGameStateUpdate(string obj)

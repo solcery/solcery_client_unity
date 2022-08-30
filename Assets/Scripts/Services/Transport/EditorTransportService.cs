@@ -24,20 +24,20 @@ namespace Solcery.Services.Transport
             _gameTransportCallbacks = gameTransportCallbacks;
         }
         
-        void ITransportService.CallUnityLoaded()
+        void ITransportService.CallUnityLoaded(JObject metadata)
         {
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_content.json", OnGameContentLoaded);
         }
 
         private void OnGameContentLoaded(string obj)
         {
-            _gameTransportCallbacks.OnReceivingGameContent(JObject.Parse(obj));
+            _gameTransportCallbacks.OnReceivingGameContent(obj != null ? JObject.Parse(obj) : null);
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_content_overrides.json", OnGameContentOverridesLoaded);
         }
 
         private void OnGameContentOverridesLoaded(string obj)
         {
-            _gameTransportCallbacks.OnReceivingGameContentOverrides(JObject.Parse(obj));
+            _gameTransportCallbacks.OnReceivingGameContentOverrides(obj != null ? JObject.Parse(obj) : null);
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_state.json", OnGameStateLoaded);
         }
 

@@ -9,6 +9,7 @@ namespace Solcery.Games.States.New
 {
     public sealed class UpdateStateQueue : IUpdateStateQueue
     {
+        public bool IsPredictable { get; private set; }
         public UpdateState CurrentState { get; private set; }
 
         private readonly IUpdateStateFactory _updateStateFactory;
@@ -31,13 +32,14 @@ namespace Solcery.Games.States.New
 
         public void PushGameState(JObject gameState)
         {
+            var isPredictable = gameState.TryGetValue("predict", out bool ip) && ip;
             if (gameState.TryGetValue("states", out JArray updateStateArray))
             {
                 foreach (var updateStateToken in updateStateArray)
                 {
                     if (updateStateToken is JObject updateStateData)
                     {
-                        _updateStates.Enqueue(_updateStateFactory.ConstructFromJObject(updateStateData));
+                        _updateStates.Enqueue(_updateStateFactory.ConstructFromJObject(updateStateData, isPredictable));
                     }
                 }
             }
@@ -50,6 +52,7 @@ namespace Solcery.Games.States.New
             if (_updateStates.Count > 0)
             {
                 CurrentState = _updateStates.Peek();
+                IsPredictable = CurrentState.IsPredictable;
                 CurrentState.Update(deltaTimeMsec);
                 if (CurrentState.CanRemove())
                 {
