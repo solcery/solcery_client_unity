@@ -254,6 +254,29 @@ namespace Solcery.Games.Contexts.GameStates
             }
         }
         
+        private sealed class PlaySoundStateData : StateData
+        {
+            private readonly int _soundId;
+            
+            public static PlaySoundStateData Create(int soundId)
+            {
+                return new PlaySoundStateData(soundId);
+            }
+
+            private PlaySoundStateData(int soundId)
+            {
+                _soundId = soundId;
+            }
+            
+            public JObject ToJson()
+            {
+                return new JObject
+                {
+                    {"sound_id", new JValue(_soundId)}
+                };
+            }
+        }
+        
         public bool IsEmpty => _states.Count <= 0;
 
         private readonly EcsWorld _world;
@@ -343,6 +366,12 @@ namespace Solcery.Games.Contexts.GameStates
             _states.Add(timerStopState);
         }
 
+        void IContextGameStates.PushPlaySound(int soundId)
+        {
+            var playSoundState = PlaySoundStateData.Create(soundId);
+            _states.Add(playSoundState);
+        }
+
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
             gameState = new JObject();
@@ -365,6 +394,10 @@ namespace Solcery.Games.Contexts.GameStates
                     case GameStateData gsd:
                         stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.GameState, gsd.ToJson(previewGameStateData)));
                         previewGameStateData = gsd;
+                        break;
+                    
+                    case PlaySoundStateData pssd:
+                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.PlaySound, pssd.ToJson()));
                         break;
                 }
             }

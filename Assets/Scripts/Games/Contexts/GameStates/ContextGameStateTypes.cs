@@ -4,6 +4,7 @@ namespace Solcery.Games.Contexts.GameStates
     {
         GameState = 0,
         Delay = 1,
-        Timer = 2
+        Timer = 2,
+        PlaySound = 3
     }
 }

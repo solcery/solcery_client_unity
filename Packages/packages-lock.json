@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "304a056394b11ca127c3ce7b8488e351538db714"
+      "hash": "445003e2d0e48d67fb4e3fd83add677d2620db89"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -16,7 +16,7 @@
       "dependencies": {}
     },
     "com.unity.addressables": {
-      "version": "1.20.3",
+      "version": "1.20.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
