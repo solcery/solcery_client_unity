@@ -210,7 +210,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             eclipseCard.Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
             
             // anims
-            var animHighlight = attributes.TryGetValue("anim_highlight", out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
+            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
             eclipseCard.Layout.UpdateHighlight(animHighlight);
             
             // order
