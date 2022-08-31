@@ -1,6 +1,7 @@
 using Solcery.Games;
 using Solcery.Games.DTO;
 using Solcery.Services.Renderer.DTO;
+using Solcery.Services.Sound;
 using Solcery.Ui;
 using Solcery.Ui.DragDrop;
 using Solcery.Widgets_new.Canvas;
@@ -28,6 +29,8 @@ namespace Solcery
         private GameObject renderPrefab;
         [SerializeField]
         private Graphic raycastBlockTouches;
+        [SerializeField]
+        private SoundsLayout soundsLayout;
         
         private IGame _game;
 
@@ -51,7 +54,8 @@ namespace Solcery
             #endif
             _game = Games.Game.Create(GameInitDto.Create(rootCamera,
                 WidgetCanvas.Create(timer, worldGame, uiGame, dragDropCanvas),
-                ServiceRenderDto.Create(renderFrame, renderPrefab)));
+                ServiceRenderDto.Create(renderFrame, renderPrefab),
+                soundsLayout));
             _game.Init();
         }
 

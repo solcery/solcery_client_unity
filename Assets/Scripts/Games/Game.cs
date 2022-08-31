@@ -16,6 +16,7 @@ using Solcery.Services.Renderer;
 using Solcery.React;
 #endif
 using Solcery.Services.Resources;
+using Solcery.Services.Sound;
 using Solcery.Services.Transport;
 using Solcery.Ui;
 using Solcery.Utils;
@@ -58,6 +59,7 @@ namespace Solcery.Games
         IGameContentAttributes IGame.GameContentAttributes => _contentAttributes;
         IServiceRenderWidget IGame.ServiceRenderWidget => _serviceRenderWidget;
         IUpdateStateQueue IGame.UpdateStateQueue => _updateStateQueue;
+        IServiceSound IGame.ServiceSound => _serviceSound;
         
         // Widget pools
         IWidgetPool<ICardInContainerWidget> IGame.CardInContainerWidgetPool => _cardInContainerWidgetPool;
@@ -79,6 +81,7 @@ namespace Solcery.Games
         private readonly IGameContentAttributes _contentAttributes;
         private IUpdateStateQueue _updateStateQueue;
         private ICacheAccessor _cacheAccessor;
+        private IServiceSound _serviceSound;
         
         // Widget pools
         private IWidgetPool<ICardInContainerWidget> _cardInContainerWidgetPool;
@@ -116,6 +119,7 @@ namespace Solcery.Games
         {
             _serviceRenderWidget = ServiceRenderWidget.Create(dto.ServiceRenderDto);
             _serviceGameContent = ServiceGameContent.Create();
+            _serviceSound = ServiceSound.Create(dto.SoundsLayout, _serviceGameContent);
             
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
@@ -289,6 +293,7 @@ namespace Solcery.Games
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnOpenGameOverPopup, OnOpenGameOverPopup);
 #endif
             _playModel.Destroy();
+            _serviceSound.Cleanup();
             _serviceGameContent.Cleanup();
             _transportService.Cleanup();
             _serviceResource.Cleanup();
