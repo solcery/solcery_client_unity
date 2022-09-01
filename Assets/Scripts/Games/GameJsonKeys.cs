@@ -4,6 +4,7 @@ namespace Solcery.Games
     {
         // Commons
         public static readonly string Picture = "picture";
+        public static readonly string AnimHighlight = "anim_highlight";
         
         // Widgets
         public static readonly string WidgetPictureType = "picture_type";
