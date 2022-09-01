@@ -265,6 +265,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StartTimer, BrickActionStartTimer.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StopTimer, BrickActionStopTimer.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Transform, BrickActionTransform.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PlaySound, BrickActionPlaySound.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
