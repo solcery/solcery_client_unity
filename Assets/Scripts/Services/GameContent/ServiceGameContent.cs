@@ -35,7 +35,8 @@ namespace Solcery.Services.GameContent
             _tooltips = data.GetValue<JObject>("tooltips").GetValue<JArray>("objects");
 
             _sounds = new List<Tuple<int, string>>();
-            if (data.TryGetValue("sounds", out JArray soundsArray))
+            if (data.TryGetValue("sounds", out JObject soundsData)
+                && soundsData.TryGetValue("objects", out JArray soundsArray))
             {
                 foreach (var soundToken in soundsArray)
                 {

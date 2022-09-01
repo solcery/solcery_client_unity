@@ -119,8 +119,7 @@ namespace Solcery.Games
         {
             _serviceRenderWidget = ServiceRenderWidget.Create(dto.ServiceRenderDto);
             _serviceGameContent = ServiceGameContent.Create();
-            _serviceSound = ServiceSound.Create(dto.SoundsLayout, _serviceGameContent);
-            
+
             _serviceBricks = ServiceBricks.Create();
             RegistrationBrickTypes();
             
@@ -132,6 +131,7 @@ namespace Solcery.Games
 #endif
 
             _serviceResource = ServiceResource.Create(this);
+            _serviceSound = ServiceSound.Create(dto.SoundsLayout, _serviceResource);
             _placeWidgetFactory = PlaceWidgetFactory.Create(this, _widgetCanvas);
             RegistrationPlaceWidgetTypes();
 
