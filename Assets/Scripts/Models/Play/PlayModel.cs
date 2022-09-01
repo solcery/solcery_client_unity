@@ -10,6 +10,7 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Sound;
 using Solcery.Models.Play.Timer;
 using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
@@ -52,6 +53,9 @@ namespace Solcery.Models.Play
             
             // TODO обновляем таймер
             _systems.Add(SystemTimerUpdate.Create(game));
+            
+            // TODO время проиграть звуки
+            _systems.Add(SystemSoundPlay.Create());
             
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));
