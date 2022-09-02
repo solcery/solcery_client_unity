@@ -62,8 +62,10 @@ namespace Solcery.Games
         public static readonly string GlobalCardAttributes = "card_attributes";
         public static readonly string GlobalCardAttributeCode = "code";
         
-        // Custom Bricks
+        // Bricks
         public static readonly string GlobalCustomBricks = "custom_bricks";
+        public static readonly string VisibilityConditionBrick = "visibility_condition";
+        public static readonly string AvailabilityConditionBrick = "availability_condition";
         
         // Full card
         public static readonly string CardDescriptionFontSizeFull = "description_font_size_full";
