@@ -31,25 +31,22 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         public virtual void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
-            if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
-            {
-                var nameFontSize =
-                    itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize,
-                        objectId)
-                        ? valueNameFontSizeAttributeToken.GetValue<int>()
-                        : 20f;
-                UpdateName(valueCardNameToken.GetValue<string>(), nameFontSize);
-            }
+            var displayedName = itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardDisplayedName, objectId) 
+                ? valueCardNameToken.GetValue<string>()
+                : string.Empty;
+            var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize, objectId)
+                ? valueNameFontSizeAttributeToken.GetValue<float>()
+                : 0f;
+            UpdateName(displayedName, nameFontSize);
 
-            if (itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId))
-            {
-                var descriptionFontSize =
-                    itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken,
-                        GameJsonKeys.CardDescriptionFontSizeFull, objectId)
-                        ? valueDescriptionFontSizeAttributeToken.GetValue<int>()
-                        : 40f;
-                UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
-            }
+            var description = itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId)
+                ? valueCardDescriptionToken.GetValue<string>()
+                : string.Empty;
+                
+            var descriptionFontSize = itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken, GameJsonKeys.CardDescriptionFontSizeFull, objectId)
+                    ? valueDescriptionFontSizeAttributeToken.GetValue<float>()
+                    : 0f;
+            UpdateDescription(description, descriptionFontSize);
 
             if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId)
                 && game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
@@ -85,13 +82,13 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private void UpdateName(string newName, float fontSize)
         {
             nameText.text = newName;
-            nameText.fontSize = fontSize;
+            nameText.UpdateFontSize(fontSize);
         }
 
         private void UpdateDescription(string newDescription, float fontSize)
         {
             descriptionText.text = newDescription;
-            descriptionText.fontSize = fontSize;
+            descriptionText.UpdateFontSize(fontSize);
         }
         
         public override void UpdateAnchor(Vector2 anchorMin, Vector2 anchorMax)

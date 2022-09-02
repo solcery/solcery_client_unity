@@ -47,8 +47,9 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
             _layout.UpdateParent(parent);
         }
 
-        void ITokenInContainerWidget.UpdateFromCardTypeData(int objectId, int typeId, IItemType itemType)
+        void ITokenInContainerWidget.UpdateFromCardTypeData(int entityId, int objectId, int typeId, IItemType itemType)
         {
+            _layout.EntityId = entityId;
             _objectId = objectId;
             _typeId = typeId;
             
@@ -168,11 +169,11 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
 
         #region Ecs support
         
-        int IEntityId.AttachEntityId => _layout.entityId;
+        int IEntityId.AttachEntityId => _layout.AttachEntityId ?? -1;
 
         void IEntityId.UpdateAttachEntityId(int entityId)
         {
-            _layout.entityId = entityId;
+            _layout.AttachEntityId = entityId;
         }
         
         #endregion

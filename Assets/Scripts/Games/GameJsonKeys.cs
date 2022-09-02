@@ -4,6 +4,7 @@ namespace Solcery.Games
     {
         // Commons
         public static readonly string Picture = "picture";
+        public static readonly string AnimHighlight = "anim_highlight";
         
         // Widgets
         public static readonly string WidgetPictureType = "picture_type";
@@ -13,7 +14,9 @@ namespace Solcery.Games
         public static readonly string CardTypes = "card_types";
         public static readonly string CardType = "type";
         public static readonly string CardDisplayedType = "displayed_type";
-        public static readonly string CardName = "name";
+        public static readonly string CardTypeFontSize = "type_font_size";
+        public static readonly string CardDisplayedName = "displayed_name";
+        public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescription = "description";
         public static readonly string CardTokenSlots = "token_slots";
         public static readonly string CardTimerText = "timer_text";
@@ -23,9 +26,7 @@ namespace Solcery.Games
         public static readonly string CardAnimCardFly = "anim_card_fly";
         public static readonly string CardAnimCardFlyFromPlace = "anim_card_fly_from_place";
         public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
-        public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescriptionFontSize = "description_font_size";
-        public static readonly string CardTypeFontSize = "type_font_size";
         public static readonly string CardDefaultTimerValue = "default_timer_value";
         public static readonly string CardAnimCardDestroy = "anim_destroy";
         public static readonly string CardAnimCardDestroyTime = "anim_card_destroy_time";
@@ -42,6 +43,7 @@ namespace Solcery.Games
         public static readonly string PlaceFrameColor = "frame_color";
         public static readonly string PlaceTooltipId = "tooltip_id";
         public static readonly string PlaceCaption = "caption";
+        public static readonly string PlaceCaptionSize = "caption_size";
         public static readonly string PlaceCaptionPosition = "caption_position";
         public static readonly string PlaceCaptionColor = "caption_color";
         public static readonly string PlaceX1 = "x1";

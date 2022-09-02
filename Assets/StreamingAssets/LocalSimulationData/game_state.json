@@ -2475,7 +2475,7 @@
           },
           {
             "id": 14,
-            "tplId": 958,
+            "tplId": 328,
             "attrs": [
               {
                 "key": "anim_token_fly_from_card_id",
@@ -3591,7 +3591,7 @@
           },
           {
             "id": 20,
-            "tplId": 959,
+            "tplId": 349,
             "attrs": [
               {
                 "key": "anim_token_fly_from_card_id",
@@ -5079,7 +5079,7 @@
           },
           {
             "id": 28,
-            "tplId": 960,
+            "tplId": 407,
             "attrs": [
               {
                 "key": "anim_token_fly_from_card_id",

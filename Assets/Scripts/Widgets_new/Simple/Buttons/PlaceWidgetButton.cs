@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Services.Events;
+using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
@@ -34,7 +37,6 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
             if (!objectIdPool.Has(entityId))
             {
-                Layout.UpdateButtonText("No card id.");
                 return;
             }
             
@@ -44,21 +46,31 @@ namespace Solcery.Widgets_new.Simple.Buttons
             });
 
             var objectTypePool = world.GetPool<ComponentObjectType>();
-            if (objectTypePool.Has(entityId)
-                && objectIdPool.Has(entityId))
+            if (objectTypePool.Has(entityId) && objectIdPool.Has(entityId))
             {
-                var id = objectIdPool.Get(entityId).Id;
-                var tplid = objectTypePool.Get(entityId).TplId;
-                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "name", id))
+                if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId))
                 {
-                    var name = valueToken.GetValue<string>();
-                    Layout.UpdateButtonText(name);
-                    return;
+                    UpdateItemType(itemType, objectIdPool.Get(entityId).Id);
+                    UpdateAttributes(world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes);
                 }
             }
-            
-            Layout.UpdateButtonText("No card type data.");
+        }
+
+        private void UpdateItemType(IItemType itemType, int objectId)
+        {
+            var displayedName = itemType.TryGetValue(out var nameToken, GameJsonKeys.CardDisplayedName, objectId)
+                ? nameToken.GetValue<string>()
+                : string.Empty;
+            var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize, objectId)
+                ? valueNameFontSizeAttributeToken.GetValue<float>()
+                : 0f;
+            Layout.UpdateButtonText(displayedName, nameFontSize);
+        }
+
+        private void UpdateAttributes(Dictionary<string, IAttributeValue> attributes)
+        {
+            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
+            Layout.UpdateHighlight(animHighlight);
         }
 
         public override PlaceWidgetLayout LayoutForObjectId(int objectId)

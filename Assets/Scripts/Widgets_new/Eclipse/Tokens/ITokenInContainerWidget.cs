@@ -10,6 +10,6 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
         TokenInContainerWidgetLayout Layout { get; }
         int TypeId { get; }
         bool Active { get; set; }
-        void UpdateFromCardTypeData(int objectId, int typeId, IItemType itemType);
+        void UpdateFromCardTypeData(int entityId, int objectId, int typeId, IItemType itemType);
     }
 }

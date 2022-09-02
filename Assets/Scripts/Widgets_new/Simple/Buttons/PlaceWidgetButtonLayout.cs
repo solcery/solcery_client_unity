@@ -1,3 +1,4 @@
+using Solcery.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,14 +8,14 @@ namespace Solcery.Widgets_new.Simple.Buttons
 {
     public sealed class PlaceWidgetButtonLayout : PlaceWidgetSimpleLayout
     {
-        [SerializeField]
-        private Button button;
-        [SerializeField]
-        private TMP_Text buttonText;
+        [SerializeField] private Button button;
+        [SerializeField] private TMP_Text buttonText;
+        [SerializeField] private GameObject highlight;
 
-        public void UpdateButtonText(string text)
+        public void UpdateButtonText(string text, float fontSize)
         {
-            buttonText.text = text ?? "";
+            buttonText.text = text;
+            buttonText.UpdateFontSize(fontSize);
         }
 
         public void ClearAllOnClickListener()
@@ -27,7 +28,7 @@ namespace Solcery.Widgets_new.Simple.Buttons
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(onClick);
         }
-        
+
         public override void UpdateAlpha(int alpha)
         {
             if (canvasGroup == null)
@@ -39,6 +40,11 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
             var a = alpha / 100f;
             canvasGroup.alpha = a;
+        }
+
+        public void UpdateHighlight(bool active)
+        {
+            highlight.gameObject.SetActive(active);
         }
     }
 }

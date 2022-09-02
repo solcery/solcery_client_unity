@@ -10,7 +10,8 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
     public class TokenInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
     {
         [HideInInspector]
-        public int entityId;
+        public int EntityId;
+        public int? AttachEntityId;
         public PlaceWidget ParentPlaceWidget;
         
         [SerializeField]
@@ -86,7 +87,7 @@ namespace Solcery.Widgets_new.Eclipse.Tokens
                 Camera.current,
                 out var position
             );
-            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(entityId, position, eventData));
+            ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, AttachEntityId.Value, position, eventData));
         }
     }
 }

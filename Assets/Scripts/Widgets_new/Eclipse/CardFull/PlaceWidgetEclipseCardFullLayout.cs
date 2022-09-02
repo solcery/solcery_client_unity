@@ -27,14 +27,12 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             base.UpdateCardType(game, objectId, itemType);
 
-            var displayedType =
-                itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
+            var displayedType = itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
                     ? valueDisplayedTypeToken.GetValue<string>()
                     : string.Empty;
-            var typeFontSize =
-                itemType.TryGetValue(out var valueTypeFontSizeAttributeToken, GameJsonKeys.CardTypeFontSize, objectId)
-                    ? valueTypeFontSizeAttributeToken.GetValue<int>()
-                    : 20f;
+            var typeFontSize = itemType.TryGetValue(out var valueTypeFontSizeAttributeToken, GameJsonKeys.CardTypeFontSize, objectId)
+                    ? valueTypeFontSizeAttributeToken.GetValue<float>()
+                    : 0f;
             UpdateType(displayedType, typeFontSize);
 
             if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
@@ -50,7 +48,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private void UpdateType(string displayedType, float fontSize)
         {
             typeText.text = displayedType;
-            typeText.fontSize = fontSize;
+            typeText.UpdateFontSize(fontSize);
         }
     }
 }

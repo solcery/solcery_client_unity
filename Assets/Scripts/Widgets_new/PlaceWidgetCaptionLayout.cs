@@ -1,3 +1,4 @@
+using Solcery.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Solcery.Widgets_new
         [SerializeField] private RectTransform placeAbove;
         [SerializeField] private RectTransform placeCentered;
         
-        public void UpdateCaption(string text, PlaceCaptionPosition position)
+        public void UpdateCaption(string text, PlaceCaptionPosition position, float fontSize)
         {
             if (caption != null)
             {
@@ -19,6 +20,7 @@ namespace Solcery.Widgets_new
                 if (active)
                 {
                     caption.text = text;
+                    caption.UpdateFontSize(fontSize);
                     SetCaptionType(position);
                 }
             }

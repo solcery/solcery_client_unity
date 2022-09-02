@@ -46,29 +46,25 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 ? valueDisplayedTypeToken.GetValue<string>()
                 : string.Empty;
             var typeFontSize = itemType.TryGetValue(out var valueFontSizeToken, GameJsonKeys.CardTypeFontSize, objectId)
-                ? valueFontSizeToken.GetValue<int>()
-                : 5f;
+                ? valueFontSizeToken.GetValue<float>()
+                : 0f;
             _layout.UpdateType(displayedType, typeFontSize);
 
-            if (itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardName, objectId))
-            {
-                var nameFontSize =
-                    itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize,
-                        objectId)
-                        ? valueNameFontSizeAttributeToken.GetValue<int>()
-                        : 6f;
-                _layout.UpdateName(valueCardNameToken.GetValue<string>(), nameFontSize);
-            }
+            var displayedName = itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardDisplayedName, objectId)
+                ? valueCardNameToken.GetValue<string>()
+                : string.Empty;
+            var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize, objectId)
+                ? valueNameFontSizeAttributeToken.GetValue<float>() 
+                : 0f;
+            _layout.UpdateName(displayedName, nameFontSize);
             
-            if (itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId))
-            {
-                var descriptionFontSize =
-                    itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken,
-                        GameJsonKeys.CardDescriptionFontSize, objectId)
-                        ? valueDescriptionFontSizeAttributeToken.GetValue<int>()
-                        : 10f;
-                _layout.UpdateDescription(valueCardDescriptionToken.GetValue<string>(), descriptionFontSize);
-            }
+            var description = itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId) 
+                ? valueCardDescriptionToken.GetValue<string>()
+                : string.Empty;
+            var descriptionFontSize = itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken, GameJsonKeys.CardDescriptionFontSize, objectId)
+                ? valueDescriptionFontSizeAttributeToken.GetValue<float>()
+                : 0f;
+            _layout.UpdateDescription(description, descriptionFontSize);
 
             if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId) 
                 && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))

@@ -2,8 +2,6 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.DragDrop.Parameters;
-using Solcery.Models.Shared.Objects.Eclipse;
-using Solcery.Services.GameContent;
 using Solcery.Utils;
 
 namespace Solcery.Models.Play.DragDrop.Parameters
@@ -28,8 +26,10 @@ namespace Solcery.Models.Play.DragDrop.Parameters
             var tagPool = world.GetPool<ComponentDragDropParametersTag>();
             var idPool = world.GetPool<ComponentDragDropParametersId>();
             var destinationsPool = world.GetPool<ComponentDragDropParametersDestinations>();
-            var destinationConditionPool = world.GetPool<ComponentDragDropParametersDestinationCondition>();
-            var requiredEclipseCardTypesPool = world.GetPool<ComponentDragDropParametersRequiredEclipseCardTypes>();
+
+            // New brick conditions
+            var destinationConditionBrickPool = world.GetPool<ComponentDragDropBrickDestinationCondition>();
+            var originConditionBrickPool = world.GetPool<ComponentDragDropBrickOriginCondition>();
 
             foreach (var dndToken in serviceGameContent.DragDrop)
             {
@@ -45,16 +45,16 @@ namespace Solcery.Models.Play.DragDrop.Parameters
                         componentDestinations.PlaceIds.Add(destinationIdToken.Value<int>());
                     }
 
-                    destinationConditionPool.Add(entity).ParametersDestinationConditionType =
-                        dndObject.TryGetEnum("destination_condition", out DragDropParametersDestinationConditionTypes dct)
-                            ? dct
-                            : DragDropParametersDestinationConditionTypes.Any;
-
-                    ref var componentCardTypes = ref requiredEclipseCardTypesPool.Add(entity);
-                    foreach (var cardTypeToken in dndObject.GetValue<JArray>("required_card_types"))
+                    ref var dcb = ref destinationConditionBrickPool.Add(entity);
+                    if (!dndObject.TryGetValue("destination_cond", out dcb.ConditionBrick))
                     {
-                        var cardType = cardTypeToken.Value<int>();
-                        componentCardTypes.RequiredEclipseCardTypes.Add((EclipseCardTypes)cardType);
+                        dcb.ConditionBrick = null;
+                    }
+
+                    ref var ocb = ref originConditionBrickPool.Add(entity);
+                    if (!dndObject.TryGetValue("origin_cond", out ocb.ConditionBrick))
+                    {
+                        ocb.ConditionBrick = null;
                     }
                 }
             }
