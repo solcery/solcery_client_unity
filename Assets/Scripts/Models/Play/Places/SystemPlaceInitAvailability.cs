@@ -7,19 +7,19 @@ using Solcery.Utils;
 
 namespace Solcery.Models.Play.Places
 {
-    public interface ISystemPlaceInitVisibility : IEcsInitSystem
+    public interface ISystemPlaceInitAvailability : IEcsInitSystem
     {
     }
-
-    public sealed class SystemPlaceInitVisibility : ISystemPlaceInitVisibility
+    
+    public class SystemPlaceInitAvailability : ISystemPlaceInitAvailability
     {
-        public static ISystemPlaceInitVisibility Create()
+        public static ISystemPlaceInitAvailability Create()
         {
-            return new SystemPlaceInitVisibility();
+            return new SystemPlaceInitAvailability();
         }
         
-        private SystemPlaceInitVisibility() { }
-        
+        private SystemPlaceInitAvailability() { }
+
         void IEcsInitSystem.Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
@@ -30,9 +30,9 @@ namespace Solcery.Models.Play.Places
                 if (placeToken is JObject placeObject 
                     && placeObject.TryGetValue(GameJsonKeys.PlaceId, out int placeId))
                 {
-                    if (placeObject.TryGetValue(GameJsonKeys.VisibilityConditionBrick, out JObject visibilityBrick))
+                    if (placeObject.TryGetValue(GameJsonKeys.AvailabilityConditionBrick, out JObject availableBrick))
                     {
-                        placeHash.Add(placeId, visibilityBrick);
+                        placeHash.Add(placeId, availableBrick);
                         continue;
                     }
                         
@@ -42,13 +42,13 @@ namespace Solcery.Models.Play.Places
             
             var filterPlace = world.Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().End();
             var poolPlaceId = world.GetPool<ComponentPlaceId>();
-            var poolPlaceVisible = world.GetPool<ComponentPlaceIsVisible>();
-            var poolPlaceVisibilityBrick = world.GetPool<ComponentPlaceVisibilityBrick>();
+            var poolPlaceAvailable = world.GetPool<ComponentPlaceIsAvailable>();
+            var poolPlaceAvailableBrick = world.GetPool<ComponentPlaceAvailableBrick>();
             foreach (var placeEntityId in filterPlace)
             {
                 var placeId = poolPlaceId.Get(placeEntityId).Id;
-                poolPlaceVisible.Add(placeEntityId);
-                poolPlaceVisibilityBrick.Add(placeEntityId).VisibilityBrick =
+                poolPlaceAvailable.Add(placeEntityId);
+                poolPlaceAvailableBrick.Add(placeEntityId).AvailableBrick =
                     placeHash.ContainsKey(placeId) ? placeHash[placeId] : null;
             }
         }

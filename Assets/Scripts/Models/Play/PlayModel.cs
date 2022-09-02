@@ -40,6 +40,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemInitialDragDropTypes.Create());
             _systems.Add(SystemInitialGameContentPlaces.Create());
             _systems.Add(SystemPlaceInitVisibility.Create());
+            _systems.Add(SystemPlaceInitAvailability.Create());
             _systems.Add(SystemInitialGameContentPlaceWidgets.Create());
             _systems.Add(SystemInitialGameContentTooltips.Create());
 
@@ -48,6 +49,7 @@ namespace Solcery.Models.Play
             
             // TODO сюда добавляем новые системы и тд
             _systems.Add(SystemPlaceUpdateVisibility.Create(game.ServiceBricks as IServiceBricksInternal));
+            _systems.Add(SystemPlaceUpdateAvailability.Create(game.ServiceBricks as IServiceBricksInternal));
             _systems.Add(SystemPlaceUpdateWidgets.Create(game));
             
             // TODO обновляем таймер
