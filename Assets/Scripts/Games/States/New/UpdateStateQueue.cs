@@ -27,6 +27,7 @@ namespace Solcery.Games.States.New
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.GameState, UpdateGameState.Create);
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.Delay, UpdatePauseState.Create);
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.Timer, UpdateTimerState.Create);
+            _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.PlaySound, UpdatePlaySoundState.Create);
             _updateStateFactory.Init();
         }
 

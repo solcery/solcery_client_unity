@@ -5,6 +5,7 @@ using Solcery.Models.Play;
 using Solcery.Services.GameContent;
 using Solcery.Services.Renderer;
 using Solcery.Services.Resources;
+using Solcery.Services.Sound;
 using Solcery.Services.Transport;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Cards.Pools;
@@ -33,7 +34,8 @@ namespace Solcery.Games
         TooltipController TooltipController { get; }
         IGameContentAttributes GameContentAttributes { get; }
         IServiceRenderWidget ServiceRenderWidget { get; }
-        
+        IServiceSound ServiceSound { get; } 
+
         // Widget pools
         IWidgetPool<ICardInContainerWidget> CardInContainerWidgetPool { get; }
         IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }

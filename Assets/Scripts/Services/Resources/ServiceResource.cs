@@ -6,6 +6,7 @@ using Solcery.Games;
 using Solcery.React;
 using Solcery.Services.GameContent;
 using Solcery.Services.Resources.Loaders;
+using Solcery.Services.Resources.Loaders.Audio;
 using Solcery.Services.Resources.Loaders.Multi;
 using Solcery.Services.Resources.Loaders.Texture;
 using Solcery.Services.Resources.Loaders.WidgetPrefab;
@@ -21,6 +22,7 @@ namespace Solcery.Services.Resources
         private IGameResourcesCallback _gameResourcesCallback;
         private IMultiLoadTask _task;
         private readonly Dictionary<string, Texture2D> _textures;
+        private readonly Dictionary<int, AudioClip> _clips;
         private readonly Dictionary<string, GameObject> _prefabs;
 
         private int _lastProgress;
@@ -33,6 +35,7 @@ namespace Solcery.Services.Resources
         private ServiceResource(IGameResourcesCallback gameResourcesCallback)
         {
             _textures = new Dictionary<string, Texture2D>();
+            _clips = new Dictionary<int, AudioClip>();
             _prefabs = new Dictionary<string, GameObject>();
             _gameResourcesCallback = gameResourcesCallback;
         }
@@ -58,6 +61,7 @@ namespace Solcery.Services.Resources
             _task.Completed += OnCompletedAllTask;
             _task.Progress += UpdateLoadingProgress;
             _task.AddTask(TaskLoadTextureUri.Create(serviceGameContent.ItemTypes.PictureUriList, OnImagesLoaded));
+            _task.AddTask(TaskLoadAudioUri.Create(serviceGameContent.Sounds, OnAudioLoaded));
             _task.AddTask(TaskLoadWidgetPrefab.Create(widgetResourcePaths, OnWidgetPrefabLoaded));
             _task.Run();
         }
@@ -84,6 +88,14 @@ namespace Solcery.Services.Resources
             }
         }
         
+        private void OnAudioLoaded(Dictionary<int, AudioClip> obj)
+        {
+            foreach (var kv in obj)
+            {
+                _clips.Add(kv.Key, kv.Value);
+            }
+        }
+        
         private void OnWidgetPrefabLoaded(Dictionary<string, GameObject> obj)
         {
             foreach (var kv in obj)
@@ -95,6 +107,11 @@ namespace Solcery.Services.Resources
         bool IServiceResource.TryGetTextureForKey(string key, out Texture2D texture)
         {
             return _textures.TryGetValue(key, out texture);
+        }
+        
+        bool IServiceResource.TryGetSoundForId(int id, out AudioClip clip)
+        {
+            return _clips.TryGetValue(id, out clip);
         }
 
         bool IServiceResource.TryGetWidgetPrefabForKey(string key, out GameObject prefab)
@@ -117,7 +134,7 @@ namespace Solcery.Services.Resources
                 Addressables.Release(prefab.Value);
             }
             _prefabs.Clear();
-            
+            _clips.Clear();
             _textures.Clear();
         }
 
