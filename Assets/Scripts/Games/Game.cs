@@ -244,6 +244,8 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.SetVariable, BrickValueSetVariable.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMax, BrickValueIteratorMax.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.IteratorMin, BrickValueIteratorMin.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.GetScopeVariable, BrickValueGetScopeVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Value, BrickValueTypes.SetScopeVariable, BrickValueSetScopeVariable.Create);
 
             // Action bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Void, BrickActionVoid.Create);
@@ -266,6 +268,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.StopTimer, BrickActionStopTimer.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Transform, BrickActionTransform.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PlaySound, BrickActionPlaySound.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetScopeVariable, BrickActionSetScopeVariable.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);

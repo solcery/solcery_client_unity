@@ -4,6 +4,7 @@ using Solcery.BrickInterpretation.Runtime.Contexts;
 using Solcery.BrickInterpretation.Runtime.Contexts.Args;
 using Solcery.BrickInterpretation.Runtime.Contexts.Attrs;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Solcery.BrickInterpretation.Runtime.Contexts.LocalScopes;
 using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
 using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
@@ -25,6 +26,9 @@ namespace Solcery.Games.Contexts
         public IContextGameArgs GameArgs { get; }
         public IContextGameVars GameVars { get; }
         public IContextGameObjects GameObjects { get; }
+
+        public IContextLocalScopes LocalScopes { get; }
+
         public ILog Log { get; }
 
         private readonly EcsWorld _world;
@@ -79,6 +83,7 @@ namespace Solcery.Games.Contexts
             GameArgs = CurrentContextGameArgs.Create(world);
             GameVars = ComponentContextGameVars.Create(world);
             GameObjects = CurrentContextGameObjects.Create(game, world);
+            LocalScopes = CurrentContextLocalScopes.Create();
             Log = CurrentLog.Create();
 
             _world = world;
