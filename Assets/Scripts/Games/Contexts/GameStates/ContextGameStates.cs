@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Solcery.Games.Contexts.GameStates.Actions;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Objects;
 using UnityEngine;
@@ -253,36 +254,14 @@ namespace Solcery.Games.Contexts.GameStates
                 };
             }
         }
-        
-        private sealed class PlaySoundStateData : StateData
-        {
-            private readonly int _soundId;
-            
-            public static PlaySoundStateData Create(int soundId)
-            {
-                return new PlaySoundStateData(soundId);
-            }
 
-            private PlaySoundStateData(int soundId)
-            {
-                _soundId = soundId;
-            }
-            
-            public JObject ToJson()
-            {
-                return new JObject
-                {
-                    {"sound_id", new JValue(_soundId)}
-                };
-            }
-        }
-        
         public bool IsEmpty => _states.Count <= 0;
 
         private readonly EcsWorld _world;
         private readonly EcsFilter _filterGameAttributes;
         private readonly EcsFilter _filterEntities;
         private readonly List<StateData> _states;
+        private readonly IContextGameStateActions _actions;
 
         public static IContextGameStates Create(EcsWorld world)
         {
@@ -296,6 +275,7 @@ namespace Solcery.Games.Contexts.GameStates
             _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
                 .Inc<ComponentObjectAttributes>().End();
             _states = new List<StateData>();
+            _actions = ContextGameStateActions.Create();
         }
         
         void IContextGameStates.PushGameState()
@@ -346,6 +326,8 @@ namespace Solcery.Games.Contexts.GameStates
             }
 
             _states.Add(gameState);
+            _actions.SetTargetStateId(_states.IndexOf(gameState));
+            _actions.Push();
         }
 
         void IContextGameStates.PushDelay(int msec)
@@ -368,14 +350,14 @@ namespace Solcery.Games.Contexts.GameStates
 
         void IContextGameStates.PushPlaySound(int soundId)
         {
-            var playSoundState = PlaySoundStateData.Create(soundId);
-            _states.Add(playSoundState);
+            _actions.AddAction(ContextGameStateActionPlaySound.Create(soundId));
         }
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
             gameState = new JObject();
             var stateArray = new JArray();
+            gameState.Add("actions", _actions.ToJson());
             gameState.Add("states", stateArray);
             GameStateData previewGameStateData = null;
             
@@ -395,14 +377,11 @@ namespace Solcery.Games.Contexts.GameStates
                         stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.GameState, gsd.ToJson(previewGameStateData)));
                         previewGameStateData = gsd;
                         break;
-                    
-                    case PlaySoundStateData pssd:
-                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.PlaySound, pssd.ToJson()));
-                        break;
                 }
             }
 
             _states.Clear();
+            _actions.Cleanup();
 
             return true;
         }

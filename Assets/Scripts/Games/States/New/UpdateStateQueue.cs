@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games.Contexts.GameStates;
+using Solcery.Games.Contexts.GameStates.Actions;
+using Solcery.Games.States.New.Actions;
+using Solcery.Games.States.New.Actions.PlaySound;
 using Solcery.Games.States.New.Factory;
 using Solcery.Games.States.New.States;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Games.States.New
 {
@@ -14,6 +18,9 @@ namespace Solcery.Games.States.New
 
         private readonly IUpdateStateFactory _updateStateFactory;
         private readonly Queue<UpdateState> _updateStates;
+
+        private readonly IUpdateActionFactory _actionFactory;
+        private readonly SortedDictionary<int, List<UpdateAction>> _actions;
 
         public static IUpdateStateQueue Create()
         {
@@ -27,11 +34,14 @@ namespace Solcery.Games.States.New
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.GameState, UpdateGameState.Create);
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.Delay, UpdatePauseState.Create);
             _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.Timer, UpdateTimerState.Create);
-            _updateStateFactory.RegistrationCreationFunc(ContextGameStateTypes.PlaySound, UpdatePlaySoundState.Create);
             _updateStateFactory.Init();
+
+            _actions = new SortedDictionary<int, List<UpdateAction>>();
+            _actionFactory = UpdateActionFactory.Create();
+            _actionFactory.RegistrationCreationFunc(ContextGameStateActionTypes.PlaySound, UpdateActionPlaySound.Create);
         }
 
-        public void PushGameState(JObject gameState)
+        void IUpdateStateQueue.PushGameState(JObject gameState)
         {
             var isPredictable = gameState.TryGetValue("predict", out bool ip) && ip;
             if (gameState.TryGetValue("states", out JArray updateStateArray))
@@ -44,9 +54,27 @@ namespace Solcery.Games.States.New
                     }
                 }
             }
+
+            if (gameState.TryGetValue("actions", out JArray actionArray))
+            {
+                foreach (var actionToken in actionArray)
+                {
+                    if (actionToken is JObject actionObject
+                        && _actionFactory.TryGetActionFromJson(actionObject, out var action))
+                    {
+                        if (!_actions.ContainsKey(action.StateId))
+                        {
+                            _actions.Add(action.StateId, new List<UpdateAction>());
+                        }
+                        
+                        _actions[action.StateId].Add(action);
+                        //Debug.Log($"Add play sound {((UpdateActionPlaySound)action).SoundId} for state id {action.StateId}");
+                    }
+                }
+            }
         }
         
-        public void Update(int deltaTimeMsec)
+        void IUpdateStateQueue.Update(int deltaTimeMsec)
         {
             CurrentState = null;
 
@@ -60,6 +88,16 @@ namespace Solcery.Games.States.New
                     _updateStates.Dequeue();
                 }
             }
+        }
+
+        bool IUpdateStateQueue.TryGetActionForStateId(int stateId, out List<UpdateAction> actions)
+        {
+            return _actions.TryGetValue(stateId, out actions);
+        }
+
+        void IUpdateStateQueue.RemoveAllActionForStateId(int stateId)
+        {
+            _actions.Remove(stateId);
         }
     }
 }

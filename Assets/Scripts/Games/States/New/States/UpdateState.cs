@@ -1,12 +1,14 @@
 using Newtonsoft.Json.Linq;
 using Solcery.Games.Contexts.GameStates;
+using Solcery.Utils;
 
 namespace Solcery.Games.States.New.States
 {
     public abstract class UpdateState
     {
+        public int StateId { get; private set; }
         public bool IsPredictable { get; private set; }
-        public ContextGameStateTypes UpdateStateType { get; private set; }
+        public ContextGameStateTypes UpdateStateType { get; }
 
         protected UpdateState(ContextGameStateTypes updateStateType)
         {
@@ -14,9 +16,10 @@ namespace Solcery.Games.States.New.States
             UpdateStateType = updateStateType;
         }
 
-        public void Init(JObject updateStateData, bool isPredictable)
+        public void Init(int id, JObject updateStateData, bool isPredictable)
         {
             IsPredictable = isPredictable;
+            StateId = id;
             Init(updateStateData);
         }
         
