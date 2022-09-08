@@ -71,5 +71,9 @@ namespace Solcery.Games
         public static readonly string CardDescriptionFontSizeFull = "description_font_size_full";
         public static readonly string CardNameFontSizeFull = "name_font_size_full";
         public static readonly string CardTypeFontSizeFull = "type_font_size_full";
+        
+        // Picture with number
+        public static readonly string PictureNumber = "number";
+        public static readonly string PictureAnimNumber = "anim_number";
     }
 }
