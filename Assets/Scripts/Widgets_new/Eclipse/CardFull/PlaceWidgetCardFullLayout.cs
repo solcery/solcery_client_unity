@@ -34,7 +34,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             var displayedName = itemType.TryGetValue(out var valueCardNameToken, GameJsonKeys.CardDisplayedName, objectId) 
                 ? valueCardNameToken.GetValue<string>()
                 : string.Empty;
-            var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSize, objectId)
+            var nameFontSize = itemType.TryGetValue(out var valueNameFontSizeAttributeToken, GameJsonKeys.CardNameFontSizeFull, objectId)
                 ? valueNameFontSizeAttributeToken.GetValue<float>()
                 : 0f;
             UpdateName(displayedName, nameFontSize);

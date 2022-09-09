@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Number;
 
 namespace Solcery.Models.Shared.Game.StaticAttributes.Number
@@ -12,7 +13,7 @@ namespace Solcery.Models.Shared.Game.StaticAttributes.Number
         
         private StaticAttributeNumber() { }
         
-        string IStaticAttribute.Key => "number";
+        string IStaticAttribute.Key => GameJsonKeys.PictureNumber;
 
         void IStaticAttribute.Apply(EcsWorld world, int entity, int value)
         {

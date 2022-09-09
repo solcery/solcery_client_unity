@@ -81,7 +81,7 @@ namespace Solcery.Games.States.New.Factory
                 result = _creators[type].Invoke(type);
             }
 
-            result.Init(stateUpdateObject.GetValue<JObject>("value"), isPredictable);
+            result.Init(stateUpdateObject.GetValue<int>("id"), stateUpdateObject.GetValue<JObject>("value"), isPredictable);
             return result;
         }
 
