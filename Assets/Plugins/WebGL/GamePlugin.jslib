@@ -1,21 +1,21 @@
 mergeInto(LibraryManager.library, {
     OnUnityLoadProgress: function (progress) {
         try {
-            window.dispatchReactUnityEvent("OnUnityLoadProgress", Pointer_stringify(progress));
+            window.dispatchReactUnityEvent("OnUnityLoadProgress", UTF8ToString(progress));
         } catch (e) {
             console.warn("Failed to dispatch event OnUnityLoadProgress");
         }
     },
 	OnUnityLoaded: function (metadata) {
 		try {
-			window.dispatchReactUnityEvent("OnUnityLoaded", Pointer_stringify(metadata));
+			window.dispatchReactUnityEvent("OnUnityLoaded", UTF8ToString(metadata));
 		} catch (e) {
 			console.warn("Failed to dispatch event OnUnityLoaded");
 		}
 	},
 	SendCommand: function (command) {
 		try {
-			window.dispatchReactUnityEvent("SendCommand", Pointer_stringify(command));
+			window.dispatchReactUnityEvent("SendCommand", UTF8ToString(command));
 		} catch (e) {
 			console.warn("Failed to dispatch event SendCommand");
 		}
@@ -29,7 +29,7 @@ mergeInto(LibraryManager.library, {
 	},
 	OpenLinkInNewTab: function (link) {
 		try {
-			window.dispatchReactUnityEvent("OpenLinkInNewTab", Pointer_stringify(link));
+			window.dispatchReactUnityEvent("OpenLinkInNewTab", UTF8ToString(link));
 		} catch (e) {
 			console.warn("Failed to dispatch event OpenLinkInNewTab");
 		}
