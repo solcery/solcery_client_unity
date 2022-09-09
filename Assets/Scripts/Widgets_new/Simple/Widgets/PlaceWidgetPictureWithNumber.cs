@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
@@ -40,7 +42,7 @@ namespace Solcery.Widgets_new.Simple.Widgets
                 var id = objectIdPool.Get(entityId).Id;
                 var tplid = objectTypePool.Get(entityId).TplId;
                 if (Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, tplid)
-                    && itemType.TryGetValue(out var valueToken, "picture", id))
+                    && itemType.TryGetValue(out var valueToken, GameJsonKeys.Picture, id))
                 {
                     var picture = valueToken.GetValue<string>();
                     if (_lastPictureName != picture
@@ -52,16 +54,21 @@ namespace Solcery.Widgets_new.Simple.Widgets
                 }
             }
 
-            var objectAttributesPool = world.GetPool<ComponentObjectAttributes>();
-            if (objectAttributesPool.Has(entityId)
-                && objectAttributesPool.Get(entityId).Attributes.TryGetValue("number", out var number))
-            {
+            var attributesPool = world.GetPool<ComponentObjectAttributes>();
+            var attributes = attributesPool.Get(entityId).Attributes;
+            UpdateAttributes(world, attributes);
+        }
 
+        private void UpdateAttributes(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes.TryGetValue(GameJsonKeys.PictureNumber, out var number))
+            {
                 Layout.UpdateText(number.Current.ToString());
-                var diff =  number.Current - number.Old;
-                if (number.Changed)
+                
+                if (attributes.TryGetValue(GameJsonKeys.PictureAnimNumber, out var animCardFlyAttribute) &&
+                    animCardFlyAttribute.Current > 0)
                 {
-                    Layout.ShowDiff(diff);
+                    Layout.ShowDiff(number.Current - number.Old);
                 }
             }
         }
