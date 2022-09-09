@@ -52,7 +52,7 @@ namespace Solcery.Editor.CI.WebGl
         {
             BuildUtils.AddDefineSymbols(BuildConfigurationProd.Create());
             Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathReleaseWebGl),
-                BuildSettings.ReleaseWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Brotli, false,
+                BuildSettings.ReleaseWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled, true,
                 BuildOptions.None);
         }
         
