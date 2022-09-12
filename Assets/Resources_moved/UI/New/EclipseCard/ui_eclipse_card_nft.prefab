@@ -85,8 +85,8 @@ MonoBehaviour:
   nameText: {fileID: 1590490480440022254}
   descriptionText: {fileID: 5296461370271986105}
   raycastObjects:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5928400226779964143}
+  - {fileID: 8577367469958986176}
   defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
 --- !u!1 &1934859957571112704
 GameObject:
