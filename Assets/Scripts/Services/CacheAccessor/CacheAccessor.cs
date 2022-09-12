@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using Solcery.React;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -45,6 +46,7 @@ namespace Solcery.Accessors.Cache
                 metadataRootJToken[key] = dataJToken[MetadataKey];
                 _metadataJToken.SaveForFile(CacheFileDirectory + MetadataFileName);
                 dataJObject.SaveForFile(CacheFileDirectory + key + ".json");
+                UnityToReact.Instance.CallSyncFiles();
                 Debug.Log($"Metadata for \"{key}\" was saved in cache!");
             }
             else

@@ -9,6 +9,7 @@ namespace Solcery.React
         [DllImport("__Internal")] private static extern void OnGameOverPopupButtonClicked();
         [DllImport("__Internal")] private static extern void OpenLinkInNewTab(string link);
         [DllImport("__Internal")] private static extern void SendCommand(string command);
+        [DllImport("__Internal")] private static extern void SyncFiles();
 
         public void CallOnUnityLoadProgress(string progress)
         {
@@ -52,6 +53,15 @@ namespace Solcery.React
 
 #if (UNITY_WEBGL && !UNITY_EDITOR)
             SendCommand(command);
+#endif
+        }
+
+        public void CallSyncFiles()
+        {
+            UnityEngine.Debug.Log("CallSyncFiles");
+            
+#if (UNITY_WEBGL && !UNITY_EDITOR)
+            SyncFiles();
 #endif
         }
     }

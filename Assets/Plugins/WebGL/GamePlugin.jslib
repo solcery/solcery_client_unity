@@ -34,4 +34,9 @@ mergeInto(LibraryManager.library, {
 			console.warn("Failed to dispatch event OpenLinkInNewTab");
 		}
 	},
+	SyncFiles: function () {
+         FS.syncfs(false,function (err) {
+             // handle callback
+         });
+    }
 });
