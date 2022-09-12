@@ -1,9 +1,10 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts;
-using Solcery.BrickInterpretation.Runtime.Contexts.Args;
+//using Solcery.BrickInterpretation.Runtime.Contexts.Args;
 using Solcery.BrickInterpretation.Runtime.Contexts.Attrs;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Solcery.BrickInterpretation.Runtime.Contexts.LocalScopes;
 using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
 using Solcery.BrickInterpretation.Runtime.Contexts.Utils;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
@@ -13,6 +14,7 @@ using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Games.Contexts
 {
@@ -22,9 +24,12 @@ namespace Solcery.Games.Contexts
         public IContextObject Object { get; }
         public IContextObjectAttrs ObjectAttrs { get; }
         public IContextGameAttrs GameAttrs { get; }
-        public IContextGameArgs GameArgs { get; }
+        //public IContextGameArgs GameArgs { get; }
         public IContextGameVars GameVars { get; }
         public IContextGameObjects GameObjects { get; }
+
+        public IContextLocalScopes LocalScopes { get; }
+
         public ILog Log { get; }
 
         private readonly EcsWorld _world;
@@ -76,9 +81,11 @@ namespace Solcery.Games.Contexts
             Object = CurrentContextObject.Create(world);
             ObjectAttrs = CurrentContextObjectAttrs.Create(world);
             GameAttrs = CurrentContextGameAttrs.Create(world);
-            GameArgs = CurrentContextGameArgs.Create(world);
+            //GameArgs = CurrentContextGameArgs.Create(world);
             GameVars = ComponentContextGameVars.Create(world);
             GameObjects = CurrentContextGameObjects.Create(game, world);
+            LocalScopes = CurrentContextLocalScopes.Create();
+            LocalScopes.New();
             Log = CurrentLog.Create();
 
             _world = world;
@@ -155,8 +162,9 @@ namespace Solcery.Games.Contexts
             var entityId = (int) @object;
             var objectAttrsPool = _world.GetPool<ComponentObjectAttributes>();
 
-            if (objectAttrsPool.Has(entityId))
+            if (!objectAttrsPool.Has(entityId))
             {
+                Debug.Log($"Attrs not found for entityId {entityId}");
                 return false;
             }
 
