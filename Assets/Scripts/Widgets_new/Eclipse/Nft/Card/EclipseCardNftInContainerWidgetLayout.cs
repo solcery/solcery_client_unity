@@ -38,6 +38,8 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         private TMP_Text descriptionText;
         [SerializeField]
         private List<Graphic> raycastObjects;
+        [SerializeField]
+        private Texture2D defaultTexture;
         
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
@@ -57,6 +59,11 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
+
+            if (iconImage == null)
+            {
+                UpdateSprite(defaultTexture);
+            }
         }
         
         private void OnEnable()
@@ -79,6 +86,10 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();
+            if (texture == null)
+            {
+                texture = defaultTexture;
+            }
             _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100.0f);
             iconImage.sprite = _sprite;

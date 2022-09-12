@@ -75,14 +75,15 @@ MonoBehaviour:
   iconFrame: {fileID: 5459173099969767183}
   iconImage: {fileID: 2307604813889946526}
   iconRectTransform: {fileID: 5494814345806953102}
-  typeText: {fileID: 642263690928292624}
   nameText: {fileID: 5944324437145560819}
   descriptionText: {fileID: 1456061341918030656}
-  tokensLayout: {fileID: 1994152796848667027}
-  timerLayout: {fileID: 1629200007459241172}
   clickHandlers:
   - {fileID: 7572690508184455082}
   - {fileID: 8856032588703675510}
+  defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
+  typeText: {fileID: 642263690928292624}
+  tokensLayout: {fileID: 1994152796848667027}
+  timerLayout: {fileID: 1629200007459241172}
 --- !u!1 &1119832754873103734
 GameObject:
   m_ObjectHideFlags: 0

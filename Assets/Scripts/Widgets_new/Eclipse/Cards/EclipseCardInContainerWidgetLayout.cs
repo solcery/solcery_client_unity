@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Solcery.Services.Events;
 using Solcery.Services.Renderer.Widgets;
@@ -51,6 +50,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private GameObject[] highlights;
         [SerializeField]
         private List<Graphic> raycastObjects;
+        [SerializeField]
+        private Texture2D defaultTexture;
 
         private Sprite _sprite;
         private Vector2 _anchorMin;
@@ -79,6 +80,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
             effectLayout.gameObject.SetActive(false);
+            
+            if (iconImage == null)
+            {
+                UpdateSprite(defaultTexture);
+            }
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -135,6 +141,10 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public void UpdateSprite(Texture2D texture)
         {
             DestroySprite();
+            if (texture == null)
+            {
+                texture = defaultTexture;
+            }
             _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100.0f);
             iconImage.sprite = _sprite;

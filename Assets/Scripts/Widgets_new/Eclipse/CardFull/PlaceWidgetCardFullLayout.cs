@@ -1,5 +1,4 @@
 using Solcery.Games;
-using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Simple;
@@ -26,8 +25,18 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private TextMeshProUGUI descriptionText;
         [SerializeField] 
         private ClickHandlerBehaviour[] clickHandlers;
+        [SerializeField]
+        private Texture2D defaultTexture;
         
         private Sprite _sprite;
+
+        private void Awake()
+        {
+            if (iconImage == null)
+            {
+                UpdateSprite(defaultTexture);
+            }
+        }
 
         public virtual void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
@@ -100,6 +109,10 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private void UpdateSprite(Texture2D texture)
         {
             DestroySprite();
+            if (texture == null)
+            {
+                texture = defaultTexture;
+            }
             _sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100.0f);
             iconImage.sprite = _sprite;
