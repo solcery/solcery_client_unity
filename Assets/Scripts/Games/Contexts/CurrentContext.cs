@@ -14,6 +14,7 @@ using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Games.Contexts
 {
@@ -161,8 +162,9 @@ namespace Solcery.Games.Contexts
             var entityId = (int) @object;
             var objectAttrsPool = _world.GetPool<ComponentObjectAttributes>();
 
-            if (objectAttrsPool.Has(entityId))
+            if (!objectAttrsPool.Has(entityId))
             {
+                Debug.Log($"Attrs not found for entityId {entityId}");
                 return false;
             }
 
