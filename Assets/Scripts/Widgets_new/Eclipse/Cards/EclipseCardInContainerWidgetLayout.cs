@@ -59,7 +59,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
-        private CustomImage[] _images;
+        private CustomImages _images;
 
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
@@ -80,11 +80,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
             effectLayout.gameObject.SetActive(false);
-            _images = GetComponentsInChildren<CustomImage>();
             if (iconImage == null)
             {
                 UpdateSprite(defaultTexture);
             }
+            _images = gameObject.AddComponent<CustomImages>();
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -220,10 +220,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public void UpdateAvailable(bool available)
         {
-            foreach (var image in _images)
-            {
-                image.SetAvailable(available);
-            }
+            _images.UpdateAvailable(available);
         }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)

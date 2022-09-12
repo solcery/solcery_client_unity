@@ -50,7 +50,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
-        private CustomImage[] _images;
+        private CustomImages _images;
         
         private void Awake()
         {
@@ -60,11 +60,11 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
-            _images = GetComponentsInChildren<CustomImage>();
             if (iconImage == null)
             {
                 UpdateSprite(defaultTexture);
             }
+            _images = gameObject.AddComponent<CustomImages>();
         }
         
         private void OnEnable()
@@ -217,10 +217,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         
         public void UpdateAvailable(bool available)
         {
-            foreach (var image in _images)
-            {
-                image.SetAvailable(available);
-            }
+            _images.UpdateAvailable(available);
         }
     }
 }
