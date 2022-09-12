@@ -95,6 +95,7 @@ MonoBehaviour:
   raycastObjects:
   - {fileID: 8366717759231909589}
   - {fileID: 4344251751038860470}
+  defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
 --- !u!1 &1017863006671437930
 GameObject:
   m_ObjectHideFlags: 0
