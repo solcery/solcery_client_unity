@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Services.Events;
@@ -40,8 +39,6 @@ namespace Solcery.Widgets_new.Simple.Buttons
             {
                 return;
             }
-
-            UpdateAvailable(world, entityId);
             
             Layout.AddOnClickListener(() =>
             {
@@ -75,16 +72,7 @@ namespace Solcery.Widgets_new.Simple.Buttons
             var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
             Layout.UpdateHighlight(animHighlight);
         }
-
-        private void UpdateAvailable(EcsWorld world, int entityId)
-        {
-            var poolPlaceVisible = world.GetPool<ComponentPlaceIsAvailable>();
-            if (poolPlaceVisible.Has(entityId))
-            {
-                Layout.UpdateAvailable(poolPlaceVisible.Get(entityId).IsAvailable);
-            }
-        }
-
+        
         public override PlaceWidgetLayout LayoutForObjectId(int objectId)
         {
             return Layout;

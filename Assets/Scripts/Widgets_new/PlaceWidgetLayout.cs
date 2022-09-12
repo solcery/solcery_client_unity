@@ -25,6 +25,7 @@ namespace Solcery.Widgets_new
         private int _linkedEntityId;
         private PlaceWidget _placeWidget;
         private IPlaceWidgetTimer _widgetTimer;
+        private RectTransform _raycastBlocker;
         
         public void UpdatePlaceWidget(PlaceWidget placeWidget)
         {
@@ -144,6 +145,25 @@ namespace Solcery.Widgets_new
         public void StopTimer()
         {
             _widgetTimer?.Stop();
+        }
+
+        public virtual void UpdateAvailable(bool available)
+        {
+            if (_raycastBlocker == null)
+            {
+                var raycastBlockerObject = new GameObject("raycast_blocker");
+                raycastBlockerObject.transform.SetSiblingIndex(transform.childCount);
+                var raycastBlockerImage = raycastBlockerObject.AddComponent<Image>();
+                raycastBlockerImage.color = new Color(255, 255, 255, 0);
+                raycastBlockerImage.raycastTarget = true;
+                _raycastBlocker = raycastBlockerObject.GetComponent<RectTransform>();
+                _raycastBlocker.anchorMin = new Vector2(0, 0);
+                _raycastBlocker.anchorMax = new Vector2(1, 1);
+                _raycastBlocker.offsetMin = Vector2.zero;
+                _raycastBlocker.offsetMax = Vector2.zero;
+                _raycastBlocker.SetParent(rectTransform, false);
+            }
+            _raycastBlocker.gameObject.SetActive(!available);
         }
     }
 }

@@ -62,15 +62,18 @@ namespace Solcery.Models.Play.Places
             var world = systems.GetWorld();
             var poolPlaceId = world.GetPool<ComponentPlaceId>();
             var poolPlaceVisible = world.GetPool<ComponentPlaceIsVisible>();
+            var poolPlaceAvailable = world.GetPool<ComponentPlaceIsAvailable>();
             var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
             // TODO: New place widget update
             foreach (var entityId in _filterPlaceWithPlaceWidget)
             {
                 var placeId = poolPlaceId.Get(entityId).Id;
                 var placeIsVisible = poolPlaceVisible.Get(entityId).IsVisible;
+                var placeIsAvailable = poolPlaceAvailable.Get(entityId).IsAvailable;
                 var entityIds = entitiesInPlace.TryGetValue(placeId, out var eid) ? eid.ToArray() : new int[]{};
                 var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
                 placeWidget.Update(world, placeIsVisible, entityIds);
+                placeWidget.UpdateAvailability(placeIsAvailable);
             }
             
             PlaceWidget.RefreshPlaceWidgetOrderZ(_game.WidgetCanvas.GetUiCanvas());

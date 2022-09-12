@@ -48,6 +48,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
+        private CustomImage[] _images;
         
         private void Awake()
         {
@@ -57,6 +58,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
+            _images = GetComponentsInChildren<CustomImage>();
         }
         
         private void OnEnable()
@@ -201,6 +203,14 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             var width = iconSize.x;
             var height = iconAspect * width;
             iconRectTransform.sizeDelta = new Vector2(width, height);
+        }
+        
+        public void UpdateAvailable(bool available)
+        {
+            foreach (var image in _images)
+            {
+                image.SetAvailable(available);
+            }
         }
     }
 }

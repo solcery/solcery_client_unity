@@ -19,7 +19,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
     {
         [HideInInspector]
         public int EntityId;
-        [HideInInspector]
         public int? AttachEntityId = null;
         public PlaceWidget ParentPlaceWidget;
         
@@ -51,7 +50,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private GameObject[] highlights;
         [SerializeField]
         private List<Graphic> raycastObjects;
-
+        
         private Sprite _sprite;
         private Vector2 _anchorMin;
         private Vector2 _anchorMax;
@@ -59,7 +58,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _anchoredPosition;
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
-        
+        private CustomImage[] _images;
+
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
         public RectTransform RectTransform => rectTransform;
@@ -79,6 +79,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
             effectLayout.gameObject.SetActive(false);
+            _images = GetComponentsInChildren<CustomImage>();
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -205,6 +206,14 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             {
                 _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
                 raycastObject.raycastTarget = false;
+            }
+        }
+
+        public void UpdateAvailable(bool available)
+        {
+            foreach (var image in _images)
+            {
+                image.SetAvailable(available);
             }
         }
 

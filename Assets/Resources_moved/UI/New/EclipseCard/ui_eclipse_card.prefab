@@ -84,7 +84,7 @@ MonoBehaviour:
   timerLayout: {fileID: 1629200007459241172}
   tokensLayout: {fileID: 1994152796848667027}
   iconFrame: {fileID: 8826466598311310400}
-  iconImage: {fileID: 2307604813889946526}
+  iconImage: {fileID: 8366717759231909589}
   iconRectTransform: {fileID: 5494814345806953102}
   typeText: {fileID: 642263690928292624}
   nameText: {fileID: 5944324437145560819}
@@ -93,8 +93,8 @@ MonoBehaviour:
   - {fileID: 4253485212536572139}
   - {fileID: 2506881359650883961}
   raycastObjects:
-  - {fileID: 2307604813889946526}
-  - {fileID: 862396947281623709}
+  - {fileID: 8366717759231909589}
+  - {fileID: 4344251751038860470}
 --- !u!1 &1017863006671437930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,7 +5306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2229272377900265695}
   - component: {fileID: 1184761555433911948}
-  - component: {fileID: 7392823321701925536}
+  - component: {fileID: 7682834590933642780}
   m_Layer: 5
   m_Name: tokens_holder
   m_TagString: Untagged
@@ -5342,7 +5342,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3162493274191585656}
   m_CullTransparentMesh: 1
---- !u!114 &7392823321701925536
+--- !u!114 &7682834590933642780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5351,7 +5351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3162493274191585656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -5517,7 +5517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1936350674652909137}
   - component: {fileID: 1962473550508808856}
-  - component: {fileID: 862396947281623709}
+  - component: {fileID: 4344251751038860470}
   m_Layer: 5
   m_Name: button
   m_TagString: Untagged
@@ -5553,7 +5553,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322462664084228999}
   m_CullTransparentMesh: 1
---- !u!114 &862396947281623709
+--- !u!114 &4344251751038860470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5562,10 +5562,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3322462664084228999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5910,7 +5910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2512537526832023867}
   - component: {fileID: 6960606866610235439}
-  - component: {fileID: 6277469499118188866}
+  - component: {fileID: 6072510826978415738}
   - component: {fileID: 1629200007459241172}
   m_Layer: 5
   m_Name: timer
@@ -5950,7 +5950,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4665667094011274399}
   m_CullTransparentMesh: 1
---- !u!114 &6277469499118188866
+--- !u!114 &6072510826978415738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5959,10 +5959,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4665667094011274399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16276,7 +16276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7399350810823386790}
   - component: {fileID: 88468546350872964}
-  - component: {fileID: 8874493196178938328}
+  - component: {fileID: 6159437663205253467}
   m_Layer: 5
   m_Name: back
   m_TagString: Untagged
@@ -16312,7 +16312,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7593600817440874782}
   m_CullTransparentMesh: 1
---- !u!114 &8874493196178938328
+--- !u!114 &6159437663205253467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16321,10 +16321,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7593600817440874782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16352,7 +16352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5494814345806953102}
   - component: {fileID: 1822198868323060482}
-  - component: {fileID: 2307604813889946526}
+  - component: {fileID: 8366717759231909589}
   m_Layer: 5
   m_Name: image
   m_TagString: Untagged
@@ -16388,7 +16388,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9200944134476432295}
   m_CullTransparentMesh: 1
---- !u!114 &2307604813889946526
+--- !u!114 &8366717759231909589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16397,10 +16397,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9200944134476432295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16526,6 +16526,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183197286235664976, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
     - target: {fileID: 5899685871253082167, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -16657,6 +16661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183197286235664976, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
     - target: {fileID: 5899685871253082167, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -16788,6 +16796,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183197286235664976, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
     - target: {fileID: 5899685871253082167, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -16919,6 +16931,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183197286235664976, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
     - target: {fileID: 5899685871253082167, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17050,6 +17066,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183197286235664976, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
     - target: {fileID: 5899685871253082167, guid: 571055f4c7dff4eee81b93ff33c85f68, type: 3}
       propertyPath: m_IsActive
       value: 1

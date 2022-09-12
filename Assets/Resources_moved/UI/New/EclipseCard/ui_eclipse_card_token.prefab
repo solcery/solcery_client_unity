@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2322638522896186983}
   - component: {fileID: 5692319418841916916}
   - component: {fileID: 424668400473647901}
-  - component: {fileID: 3243646030891372755}
+  - component: {fileID: 4183197286235664976}
   m_Layer: 5
   m_Name: ui_eclipse_card_token
   m_TagString: Untagged
@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 112996827739128514}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.852}
   m_AnchorMax: {x: 1, y: 0.983}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 7336402836598634430}
---- !u!114 &3243646030891372755
+--- !u!114 &4183197286235664976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,10 +70,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046030947418638309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}

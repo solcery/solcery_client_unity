@@ -47,9 +47,10 @@ namespace Solcery.Widgets_new.Simple.Buttons
             highlight.gameObject.SetActive(active);
         }
 
-        public void UpdateAvailable(bool available)
+        public override void UpdateAvailable(bool available)
         {
             button.interactable = available;
+            base.UpdateAvailable(available);
         }
     }
 }

@@ -383,7 +383,16 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             position = Vector3.zero;
             return false;
         }
-        
+
+        public override void UpdateAvailability(bool available)
+        {
+            base.UpdateAvailability(available);
+            foreach (var card in _cards)
+            {
+                card.Value.Layout.UpdateAvailable(available);
+            }
+        }
+
         void UpdateDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardInContainerWidget eclipseCard)
         {
             // Remove old attached entity

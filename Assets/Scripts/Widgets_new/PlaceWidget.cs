@@ -34,13 +34,14 @@ namespace Solcery.Widgets_new
         public abstract void UpdatePlaceId(int placeId);
         public abstract void UpdateLinkedEntityId(int linkedEntityId);
         public abstract PlaceWidgetLayout LayoutForObjectId(int objectId);
+        public abstract void UpdateAvailability(bool available);
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
     {
         protected T Layout;
         protected IGame Game;
-        protected IWidgetCanvas WidgetCanvas;
+        protected readonly IWidgetCanvas WidgetCanvas;
         protected readonly PlaceWidgetCardFace CardFace;
         protected readonly bool InteractableForActiveLocalPlayer;
         protected readonly int PlaceId;
@@ -155,6 +156,11 @@ namespace Solcery.Widgets_new
         public override void UpdateLinkedEntityId(int linkedEntityId)
         {
             Layout.UpdateLinkedEntityId(linkedEntityId);
+        }
+
+        public override void UpdateAvailability(bool available)
+        {
+            Layout.UpdateAvailable(available);
         }
     }
 }

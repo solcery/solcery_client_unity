@@ -123,6 +123,15 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             eclipseCard.Layout.SetActive(true);
         }
         
+        public override void UpdateAvailability(bool available)
+        {
+            base.UpdateAvailability(available);
+            foreach (var card in _cards)
+            {
+                card.Value.Layout.UpdateAvailable(available);
+            }
+        }
+        
         void UpdateDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardNftInContainerWidget eclipseCard)
         {
             // Remove old attached entity
