@@ -44,7 +44,7 @@ namespace Solcery.Editor.CI.WebGl
             BuildUtils.AddDefineSymbols(BuildConfigurationDev.CreateWithLocalSimulation());
             Build(BuildUtils.GetOutputPath(BuildSettings.DefaultOutputPathWebGl),
                 BuildSettings.DevelopWebGlEmscriptenArgs, WebGLLinkerTarget.Wasm, WebGLCompressionFormat.Disabled,
-                false, BuildOptions.Development);
+                true, BuildOptions.Development);
             DocketUtils.DockerImageWebGlUp();
         }
 

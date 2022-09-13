@@ -33,5 +33,5 @@ mergeInto(LibraryManager.library, {
 		} catch (e) {
 			console.warn("Failed to dispatch event OpenLinkInNewTab");
 		}
-	},
+	}
 });

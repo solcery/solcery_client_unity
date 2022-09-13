@@ -47,7 +47,28 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "{{{ COMPANY_NAME }}}",
         productName: "{{{ PRODUCT_NAME }}}",
-        productVersion: "{{{ PRODUCT_VERSION }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}", 
+#if USE_DATA_CACHING
+        cacheControl: function (url) {
+          // Revalidate if file is up to date before loading from cache
+          if (url.match(/\.data/) 
+              || url.match(/\.bundle/)) {
+            return "must-revalidate";
+          }
+
+          // Load file from cache without revalidation.
+          if (url.match(/\.custom/)
+                  || url.match(/\.png/)
+                  || url.match(/\.jpg/)
+                  || url.match(/\.wav/)) {
+            return "immutable";
+          }
+
+          // Disable explicit caching for all other files.
+          // Note: the default browser cache may cache them anyway.
+          return "no-store";
+        },
+#endif
         // matchWebGLToCanvasSize: true, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
