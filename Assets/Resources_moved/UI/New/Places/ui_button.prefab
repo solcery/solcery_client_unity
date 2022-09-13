@@ -162,7 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5251829676436168910}
   - component: {fileID: 8535145824131572736}
-  - component: {fileID: 3477982140804809666}
+  - component: {fileID: 8888434193355201402}
   - component: {fileID: 1454105546520647339}
   m_Layer: 5
   m_Name: button
@@ -200,7 +200,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510507607544225734}
   m_CullTransparentMesh: 1
---- !u!114 &3477982140804809666
+--- !u!114 &8888434193355201402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,10 +209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2510507607544225734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ce5e2209c1147948599ba809983c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: abbe80d12089044a89b2a35391b06b42, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: d5145d77fd6be48a08621ea46a8fb2ba, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: d5145d77fd6be48a08621ea46a8fb2ba, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: 05266c74d306642aaa03e315aea48f73, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -270,7 +270,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3477982140804809666}
+  m_TargetGraphic: {fileID: 8888434193355201402}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

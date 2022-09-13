@@ -11,6 +11,13 @@ namespace Solcery.Widgets_new.Simple.Buttons
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text buttonText;
         [SerializeField] private GameObject highlight;
+        
+        private CustomImages _images;
+
+        private void Awake()
+        {
+            _images = gameObject.AddComponent<CustomImages>();
+        }
 
         public void UpdateButtonText(string text, float fontSize)
         {
@@ -49,7 +56,8 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
         public override void UpdateAvailable(bool available)
         {
-            button.interactable = available;
+            canvasGroup.alpha = available ? 1f : 0.4f;
+            _images.UpdateAvailable(available);
             base.UpdateAvailable(available);
         }
     }
