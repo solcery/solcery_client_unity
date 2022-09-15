@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Solcery.Services.Events;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Nft.Card
 {
-    public class EclipseCardNftInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
+    public class EclipseCardNftInContainerWidgetLayout : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
     {
         public RectTransform RectTransform => rectTransform;
         public RectTransform FrontTransform => frontTransform;
@@ -129,20 +130,51 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             }
         }
 
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        private Tweener _tween;
+        private bool _isClick;
+        
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            switch (eventData.button)
+            _isClick = true;
+            _tween = DOTween.To(value => { }, 0, 1, .5f);
+            _tween.OnComplete(OnRightClick);
+        }
+
+        private void OnRightClick()
+        {
+            _tween?.OnComplete(null);
+            _tween = null;
+            _isClick = false;
+            OnOnPointerRightButtonClick();
+        }
+
+        void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
+        {
+            _isClick = false;
+            _tween?.Kill();
+            _tween = null;
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            _tween?.Kill();
+            _tween = null;
+
+            if (_isClick)
             {
-                case PointerEventData.InputButton.Left:
-                    OnPointerLeftButtonClick(eventData);
-                    break;
-                case PointerEventData.InputButton.Right:
-                    OnPointerRightButtonClick();
-                    break;
+                switch (eventData.button)
+                {
+                    case PointerEventData.InputButton.Left:
+                        OnOnPointerLeftButtonClick(eventData);
+                        break;
+                    case PointerEventData.InputButton.Right:
+                        OnOnPointerRightButtonClick();
+                        break;
+                }
             }
         }
         
-        private void OnPointerLeftButtonClick(PointerEventData eventData)
+        private void OnOnPointerLeftButtonClick(PointerEventData eventData)
         {
             if (AttachEntityId == null)
             {
@@ -160,7 +192,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             ServiceEvents.Current.BroadcastEvent(OnDragEventData.Create(EntityId, AttachEntityId.Value, position, eventData));
         }
         
-        private void OnPointerRightButtonClick()
+        private void OnOnPointerRightButtonClick()
         {
             ServiceEvents.Current.BroadcastEvent(OnRightClickEventData.Create(EntityId));
         }

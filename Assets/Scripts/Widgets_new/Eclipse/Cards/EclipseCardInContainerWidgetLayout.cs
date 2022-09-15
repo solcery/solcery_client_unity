@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Solcery.Services.Events;
 using Solcery.Services.Renderer.Widgets;
 using Solcery.Utils;
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
-    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerClickHandler
+    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
     {
         [HideInInspector]
         public int EntityId;
@@ -223,16 +224,47 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _images.UpdateAvailable(available);
         }
 
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        private Tweener _tween;
+        private bool _isClick;
+        
+        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            switch (eventData.button)
+            _isClick = true;
+            _tween = DOTween.To(value => { }, 0, 1, .5f);
+            _tween.OnComplete(OnRightClick);
+        }
+
+        private void OnRightClick()
+        {
+            _tween?.OnComplete(null);
+            _tween = null;
+            _isClick = false;
+            OnOnPointerRightButtonClick();
+        }
+
+        void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
+        {
+            _isClick = false;
+            _tween?.Kill();
+            _tween = null;
+        }
+
+        void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+        {
+            _tween?.Kill();
+            _tween = null;
+
+            if (_isClick)
             {
-                case PointerEventData.InputButton.Left:
-                    OnOnPointerLeftButtonClick(eventData);
-                    break;
-                case PointerEventData.InputButton.Right:
-                    OnOnPointerRightButtonClick();
-                    break;
+                switch (eventData.button)
+                {
+                    case PointerEventData.InputButton.Left:
+                        OnOnPointerLeftButtonClick(eventData);
+                        break;
+                    case PointerEventData.InputButton.Right:
+                        OnOnPointerRightButtonClick();
+                        break;
+                }
             }
         }
 
