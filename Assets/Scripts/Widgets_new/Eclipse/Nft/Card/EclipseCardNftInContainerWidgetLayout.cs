@@ -150,9 +150,13 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
 
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
         {
-            _isClick = false;
-            _tween?.Kill();
-            _tween = null;
+            var comp = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<EclipseCardNftInContainerWidgetLayout>();
+            if (comp != this)
+            {
+                _isClick = false;
+                _tween?.Kill();
+                _tween = null;
+            }
         }
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)

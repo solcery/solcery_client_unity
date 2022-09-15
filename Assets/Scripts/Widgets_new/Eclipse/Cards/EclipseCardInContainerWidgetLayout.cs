@@ -244,9 +244,13 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
         {
-            _isClick = false;
-            _tween?.Kill();
-            _tween = null;
+            var comp = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<EclipseCardInContainerWidgetLayout>();
+            if (comp != this)
+            {
+                _isClick = false;
+                _tween?.Kill();
+                _tween = null;
+            }
         }
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
