@@ -80,7 +80,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
             effectLayout.gameObject.SetActive(false);
-            if (iconImage == null)
+            if (iconImage.sprite == null)
             {
                 UpdateSprite(defaultTexture);
             }

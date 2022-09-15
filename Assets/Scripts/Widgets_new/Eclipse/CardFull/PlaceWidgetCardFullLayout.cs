@@ -32,7 +32,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         private void Awake()
         {
-            if (iconImage == null)
+            if (iconImage.sprite == null)
             {
                 UpdateSprite(defaultTexture);
             }

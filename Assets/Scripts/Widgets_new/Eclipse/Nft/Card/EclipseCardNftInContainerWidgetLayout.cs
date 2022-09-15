@@ -60,7 +60,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Card
             _pivot = rectTransform.pivot;
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
-            if (iconImage == null)
+            if (iconImage.sprite == null)
             {
                 UpdateSprite(defaultTexture);
             }
