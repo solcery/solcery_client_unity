@@ -6,8 +6,8 @@ using Solcery.Games.States.New.Actions;
 using Solcery.Games.States.New.Actions.PlaySound;
 using Solcery.Games.States.New.Factory;
 using Solcery.Games.States.New.States;
+using Solcery.React;
 using Solcery.Utils;
-using UnityEngine;
 
 namespace Solcery.Games.States.New
 {
@@ -86,6 +86,10 @@ namespace Solcery.Games.States.New
                 if (CurrentState.CanRemove())
                 {
                     _updateStates.Dequeue();
+                    if (_updateStates.Count == 0)
+                    {
+                        UnityToReact.Instance.CallOnGameStateConfirmed();
+                    }
                 }
             }
         }

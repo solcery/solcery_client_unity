@@ -1,4 +1,11 @@
 mergeInto(LibraryManager.library, {
+	OnGameStateConfirmed: function () {
+		try {
+			window.dispatchReactUnityEvent("OnGameStateConfirmed");
+		} catch (e) {
+			console.warn("Failed to dispatch event OnGameStateConfirmed");
+		}s
+	},
     OnUnityLoadProgress: function (progress) {
         try {
             window.dispatchReactUnityEvent("OnUnityLoadProgress", UTF8ToString(progress));
