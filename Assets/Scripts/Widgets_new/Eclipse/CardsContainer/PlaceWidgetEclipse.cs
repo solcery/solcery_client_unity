@@ -192,6 +192,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (itemTypes.TryGetItemType(out var itemType, tplId))
             {
                 eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
+                eclipseCard.Layout.SetActive(true);
             }
         }
 
