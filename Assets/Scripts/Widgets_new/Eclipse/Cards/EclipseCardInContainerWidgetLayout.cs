@@ -226,10 +226,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         private Tweener _tween;
         private bool _isClick;
+        private Vector2 _downPosition;
         
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
             _isClick = true;
+            _downPosition = eventData.position;
             _tween = DOTween.To(value => { }, 0, 1, .5f);
             _tween.OnComplete(OnRightClick);
         }
@@ -238,15 +240,16 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _tween?.OnComplete(null);
             _tween = null;
+            _downPosition = Vector2.zero;
             _isClick = false;
             OnOnPointerRightButtonClick();
         }
 
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
         {
-            var comp = eventData.pointerCurrentRaycast.gameObject.GetComponentInParent<EclipseCardInContainerWidgetLayout>();
-            if (comp != this)
+            if (_isClick && (_downPosition - eventData.position).magnitude >= EventSystem.current.pixelDragThreshold)
             {
+                _downPosition = Vector2.zero;
                 _isClick = false;
                 _tween?.Kill();
                 _tween = null;
@@ -260,6 +263,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
             if (_isClick)
             {
+                _downPosition = Vector2.zero;
+                _isClick = false;
                 switch (eventData.button)
                 {
                     case PointerEventData.InputButton.Left:

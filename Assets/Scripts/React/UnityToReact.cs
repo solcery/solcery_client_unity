@@ -15,7 +15,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log("OnGameStateConfirmed");
             
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             OnGameStateConfirmed();
 #endif
         }
@@ -24,7 +24,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log($"CallOnUnityLoadProgress {progress}");
             
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             OnUnityLoadProgress (progress);
 #endif
         }
@@ -33,7 +33,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log("CallOnUnityLoaded");
             
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             OnUnityLoaded (metadata);
 #endif
         }
@@ -42,7 +42,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log("CallOnGameOverPopupButtonClicked");
 
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             OnGameOverPopupButtonClicked ();
 #endif
         }
@@ -51,7 +51,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log($"CallOpenLinkInNewTab {link}");
             
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             OpenLinkInNewTab (link);
 #endif
         }
@@ -60,7 +60,7 @@ namespace Solcery.React
         {
             UnityEngine.Debug.Log($"CallSendCommand: {command}");
 
-#if (UNITY_WEBGL && !UNITY_EDITOR)
+#if (UNITY_WEBGL && !UNITY_EDITOR && !LOCAL_SIMULATION)
             SendCommand(command);
 #endif
         }
