@@ -59,6 +59,9 @@ namespace Solcery.Models.Play
             // TODO время проиграть звуки
             _systems.Add(SystemSoundPlay.Create());
             
+            // TODO event data processor
+            _systems.Add(SystemProcessEventData.Create(game));
+            
             // TODO drag drop
             _systems.Add(SystemOnDrag.Create(game));
             _systems.Add(SystemOnDragMove.Create());
