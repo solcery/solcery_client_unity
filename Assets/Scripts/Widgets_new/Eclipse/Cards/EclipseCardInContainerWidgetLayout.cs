@@ -6,7 +6,6 @@ using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
-using Solcery.Widgets_new.Eclipse.DragDropSupport.EventsData;
 using Solcery.Widgets_new.Eclipse.Effects;
 using TMPro;
 using UnityEngine;
