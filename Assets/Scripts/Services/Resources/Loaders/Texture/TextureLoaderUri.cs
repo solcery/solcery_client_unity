@@ -29,6 +29,7 @@ namespace Solcery.Services.Resources.Loaders.Texture
             _texture = null;
             _inProgress = false;
             _webRequest = UnityWebRequestTexture.GetTexture(_uri);
+            _webRequest.timeout = 30;
         }
 
         void ITextureLoaderUri.Load(Action<ITextureLoaderUri> callback)

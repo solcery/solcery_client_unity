@@ -29,6 +29,7 @@ namespace Solcery.Services.Resources.Loaders.Audio
             _clip = null;
             _inProgress = false;
             _webRequest = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.WAV);
+            _webRequest.timeout = 30;
         }
 
         void IAudioLoaderUri.Load(Action<IAudioLoaderUri> callback)
