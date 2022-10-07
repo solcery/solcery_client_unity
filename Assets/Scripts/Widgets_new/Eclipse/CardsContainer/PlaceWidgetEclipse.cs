@@ -381,8 +381,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 return true;
             }
             
-            position = Vector3.zero;
-            return false;
+            position = Layout.transform.position;
+            return true;
         }
 
         public override void UpdateAvailability(bool available)

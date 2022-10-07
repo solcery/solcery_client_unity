@@ -10,10 +10,11 @@ using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
+using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardFull
 {
-    public class PlaceWidgetEclipseCardFull : PlaceWidget<PlaceWidgetEclipseCardFullLayout>
+    public class PlaceWidgetEclipseCardFull : PlaceWidget<PlaceWidgetEclipseCardFullLayout>, IPlaceWidgetTokenCollection
     {
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
@@ -145,6 +146,23 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     }
                 }
             }
+        }
+
+        private Vector3 GetTokenPosition(int slot)
+        {
+            var tokenLayout = Layout.TokensLayout.GetTokenByIndex(slot - 1);
+            if (tokenLayout != null)
+            {
+                return tokenLayout.transform.position;
+            }
+
+            return Layout.transform.position;
+        }
+        
+        public bool TryGetTokenPosition(EcsWorld world, int cardId, int slotId, out Vector3 position)
+        {
+            position = GetTokenPosition(slotId);
+            return true;
         }
     }
 }
