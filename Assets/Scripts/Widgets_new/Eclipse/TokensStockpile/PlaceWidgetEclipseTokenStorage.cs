@@ -181,8 +181,8 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
                 return true;
             }
 
-            position = Vector3.zero;
-            return false;
+            position = Layout.transform.position;
+            return true;
         }
         
         private void TokenAnimFly(ITokenInContainerWidget tokenLayout, Vector3 from, float timeSec, Color color)
