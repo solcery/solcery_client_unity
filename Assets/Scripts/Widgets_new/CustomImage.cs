@@ -9,9 +9,23 @@ namespace Solcery.Widgets_new
         private Material _material;
         public static readonly int GrayscaleId = Shader.PropertyToID("_Grayscale");
         
+        public override Material materialForRendering
+        {
+            get
+            {
+                var baseMaterial = base.materialForRendering;
+                baseMaterial.SetFloat(GrayscaleId, _isAvailable ? 0f : 1f);
+                return baseMaterial;
+            }
+        }
+
+        private bool _isAvailable = true;
+        private bool _isUpdated = true;
+        
         public void SetAvailable(bool available)
         {
-            _material.SetFloat(GrayscaleId, available ? 0f : 1f);
+            _isUpdated = _isAvailable != available;
+            _isAvailable = available;
         }
 
         protected override void Awake()
@@ -32,6 +46,16 @@ namespace Solcery.Widgets_new
                 Destroy(_material);
             }
             base.OnDestroy();
+        }
+
+        public void LateUpdate()
+        {
+            if (_isUpdated)
+            {
+                gameObject.SetActive(false);
+                gameObject.SetActive(true);
+                _isUpdated = false;
+            }
         }
     }
 }
