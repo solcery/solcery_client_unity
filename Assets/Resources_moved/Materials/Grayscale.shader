@@ -111,11 +111,8 @@ Shader "UI/Grayscale"
                 clip (color.a - 0.001);
                 #endif
 
-				float3 brtColor = color.rgb;
-				if (_Grayscale == true)
-				{
-					color.rgb = lerp(brtColor, dot(brtColor, float3(0.3, 0.6, 0.1)), 1);
-				}
+                float3 brtColor = color.rgb;
+                color.rgb = lerp(brtColor, dot(brtColor, float3(0.3, 0.6, 0.1)), _Grayscale);
 
             	return color;
             }
