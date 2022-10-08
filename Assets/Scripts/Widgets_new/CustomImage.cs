@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,19 +6,20 @@ namespace Solcery.Widgets_new
 {
     public class CustomImage : Image
     {
-        private bool _materialCreated;
+        private Material _material;
+        public static readonly int GrayscaleId = Shader.PropertyToID("_Grayscale");
         
         public void SetAvailable(bool available)
         {
-            material.SetFloat("_Grayscale", available ? 0f : 1f);
+            _material.SetFloat(GrayscaleId, available ? 0f : 1f);
         }
-        
+
         protected override void Awake()
         {
             if (Application.isPlaying)
             {
-                material = new Material(material);
-                _materialCreated = true;
+                _material = Instantiate(material);
+                material = _material;
             }
 
             base.Awake();
@@ -25,9 +27,9 @@ namespace Solcery.Widgets_new
 
         protected override void OnDestroy()
         {
-            if (_materialCreated)
+            if (_material != null)
             {
-                Destroy(material);
+                Destroy(_material);
             }
             base.OnDestroy();
         }

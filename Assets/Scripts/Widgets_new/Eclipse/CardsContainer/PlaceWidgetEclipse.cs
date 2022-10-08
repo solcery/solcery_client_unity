@@ -43,7 +43,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _defaultBlockRaycasts = Layout.BlockRaycasts;
         }
 
-        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
             Layout.Wait(false);
             RemoveCards(world, entityIds);
@@ -90,6 +90,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         if (!_cards.TryGetValue(objectId, out var eclipseCard))
                         {
                             eclipseCard = AttachCard(world, entityId, tplId, objectId, itemTypes);
+                            eclipseCard.Layout.UpdateAvailable(isAvailable);
                         }
 
                         // Update tplId
@@ -110,9 +111,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     }
                 }
             }
-
+            
             AttachTokensForCard(world, itemTypes);
             UpdatedCardsOrder();
+            UpdateCardsAvailable(isAvailable);
             UpdateCardsAnimation(world);
             _dropObjectId.Clear();
         }
@@ -120,6 +122,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         public override PlaceWidgetLayout LayoutForObjectId(int objectId)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void UpdateCardsAvailable(bool isAvailable)
+        {
+            foreach (var eclipseCard in _cards.Values)
+            {
+                eclipseCard.Layout.UpdateAvailable(isAvailable);
+            }            
         }
 
         private void UpdatedCardsOrder()
@@ -241,7 +251,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     UpdateFromCardTypeData(world, entityId, cardType, objectId, itemTypes, eclipseCard);
                     UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
                     PutCardToInPlace(objectId, eclipseCard);
-
                     return eclipseCard;
                 }
             }
@@ -383,15 +392,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             
             position = Layout.transform.position;
             return true;
-        }
-
-        public override void UpdateAvailability(bool available)
-        {
-            base.UpdateAvailability(available);
-            foreach (var card in _cards)
-            {
-                card.Value.Layout.UpdateAvailable(available);
-            }
         }
 
         void UpdateDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardInContainerWidget eclipseCard)
