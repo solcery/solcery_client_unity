@@ -7,9 +7,11 @@ namespace Solcery.Widgets_new
         [EnumPlaceWidgetPrefabPath("")]
         None = -10,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_nft")]
-        EclipseCardNft = -6,
+        EclipseCardNft = -7,
         [EnumPlaceWidgetPrefabPath("ui/ui_tooltip")]
-        Tooltip = -5,
+        Tooltip = -6,
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card_small")]
+        EclipseCardSmall = -5,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_card")]
         EclipseCard = -4,
         [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_token")]

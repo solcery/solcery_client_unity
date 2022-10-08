@@ -18,20 +18,21 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public sealed class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayoutBase>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
+    public class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayoutBase>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
     {
         private readonly HashSet<int> _dropObjectId;
         private readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
         private readonly Dictionary<int, List<int>> _tokensPerCardCache;
         private readonly bool _defaultBlockRaycasts;
-
+        protected IWidgetPool<IEclipseCardInContainerWidget> CardsPool;
+        
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
         {
             return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
         
-        private PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
+        protected PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject)
         {
@@ -41,6 +42,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             Layout.UpdateVisible(true);
             Layout.SetAnchor(TextAnchor.MiddleLeft);
             _defaultBlockRaycasts = Layout.BlockRaycasts;
+            CardsPool = Game.EclipseCardInContainerWidgetPool;
         }
 
         public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
@@ -246,7 +248,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
             {
-                if (Game.EclipseCardInContainerWidgetPool.TryPop(out var eclipseCard))
+                if (CardsPool.TryPop(out var eclipseCard))
                 {
                     UpdateFromCardTypeData(world, entityId, cardType, objectId, itemTypes, eclipseCard);
                     UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
@@ -285,7 +287,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 }
 
                 _cards[key].UpdateAttachEntityId();
-                Game.EclipseCardInContainerWidgetPool.Push(_cards[key]);
+                CardsPool.Push(_cards[key]);
                 _cards.Remove(key);
             }
         }
