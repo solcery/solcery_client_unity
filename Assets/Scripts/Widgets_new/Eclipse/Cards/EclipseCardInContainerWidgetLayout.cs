@@ -60,6 +60,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMax;
         private Vector2 _offsetMin;
         private CustomImages _images;
+        private Sequence _sequence;
+
+        private PlaceWidgetCardFace _cardFace;
 
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
@@ -170,14 +173,16 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public void SetActive(bool active)
         {
-            FrontTransform.gameObject.SetActive(active);
-
             if (active)
             {
+                frontTransform.gameObject.SetActive(_cardFace != PlaceWidgetCardFace.Down);
+                backTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
                 RaycastOn();
             }
             else
             {
+                FrontTransform.gameObject.SetActive(false);
+                BackTransform.gameObject.SetActive(false);
                 RaycastOff();
             }
         }
@@ -319,6 +324,38 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             var width = iconSize.x;
             var height = iconAspect * width;
             iconRectTransform.sizeDelta = new Vector2(width, height);
+        }
+        
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            if (withAnimation)
+            {
+                PlayCardTurn(cardFace);
+            }
+            else
+            {
+                UpdateView(cardFace);
+            }
+        }
+        
+        private void PlayCardTurn(PlaceWidgetCardFace cardFace)
+        {
+            _sequence?.Complete();
+            _sequence = DOTween.Sequence()
+                .Append(transform.DORotate(new Vector3(0, 90, 0), 0.3f))
+                .AppendCallback(() =>
+                {
+                    UpdateView(cardFace);
+                })
+                .Append(transform.DORotate(new Vector3(0, 0, 0), 0.3f))
+                .Play();
+        }
+        
+        private void UpdateView(PlaceWidgetCardFace cardFace)
+        {
+            _cardFace = cardFace;
+            frontTransform.gameObject.SetActive(_cardFace != PlaceWidgetCardFace.Down);
+            backTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
         }
     }
 }

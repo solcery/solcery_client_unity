@@ -19,5 +19,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         EclipseCardTokenLayout AttachToken(int slot, int objectId, IItemType itemType);
         Vector3 GetTokenPosition(int slot);
         void SetOrder(int order);
+        void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation);
     }
 }

@@ -1,5 +1,4 @@
 using Solcery.Games;
-using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
@@ -135,7 +134,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _order = order;
         }
-        
+
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            _layout.UpdateCardFace(cardFace, withAnimation);
+        }
+
         void IEclipseCardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
         {
             _layout.UpdateSiblingIndex(siblingIndex);

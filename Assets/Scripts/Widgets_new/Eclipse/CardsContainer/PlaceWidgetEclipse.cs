@@ -105,7 +105,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         //     //UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
                         // }
 
-                        UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard);
+                        UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard, CardFace);
                         break;
                     }
                 }
@@ -196,7 +196,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private void UpdateCard(EcsWorld world, int entityId, IEclipseCardInContainerWidget eclipseCard)
+        private void UpdateCard(EcsWorld world, int entityId, IEclipseCardInContainerWidget eclipseCard, PlaceWidgetCardFace cardFace)
         {
             var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
             
@@ -217,6 +217,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             // order
             var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
             eclipseCard.SetOrder(order);
+            
+            eclipseCard.UpdateCardFace(cardFace, false);
         }
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard, float timeSec)
