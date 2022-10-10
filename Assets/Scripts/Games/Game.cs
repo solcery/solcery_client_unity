@@ -220,6 +220,7 @@ namespace Solcery.Games
             
             // Eclipse
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseEventTracker, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseSmallEventTracker, PlaceWidgetEclipseSmall.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseNftSelector, PlaceWidgetEclipseNftSelector.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokenStorage, PlaceWidgetEclipseTokenStorage.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCard, PlaceWidgetEclipse.Create);
