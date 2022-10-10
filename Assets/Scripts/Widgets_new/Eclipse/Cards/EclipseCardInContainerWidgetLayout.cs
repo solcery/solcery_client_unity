@@ -132,9 +132,13 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             descriptionText.text = newDescription;
             descriptionText.UpdateFontSize(fontSize);
+        }
+
+        public void ShowDescription(bool active)
+        {
             if (descriptionArea != null)
             {
-                descriptionArea.gameObject.SetActive(!string.IsNullOrEmpty(newDescription));
+                descriptionArea.gameObject.SetActive(active);
             }
         }
 

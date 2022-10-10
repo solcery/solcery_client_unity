@@ -175,6 +175,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         : 3f;
                     AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
                 }
+                
+                var showDescription = attributes.TryGetValue(GameJsonKeys.CardShowDescription, out var showDescriptionAttribute) && showDescriptionAttribute.Current > 0;
+                eclipseCard.Layout.ShowDescription(showDescription);
             }
         }
 
