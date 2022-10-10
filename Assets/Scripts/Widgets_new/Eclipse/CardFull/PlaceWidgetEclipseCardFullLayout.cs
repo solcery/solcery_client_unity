@@ -18,6 +18,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private EclipseCardTokensLayout tokensLayout;
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
+        [SerializeField]
+        private GameObject[] highlights;
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
@@ -49,6 +51,14 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             typeText.text = displayedType;
             typeText.UpdateFontSize(fontSize);
+        }
+        
+        public void UpdateHighlight(bool active)
+        {
+            foreach (var highlight in highlights)
+            {
+                highlight.SetActive(active);
+            }
         }
     }
 }

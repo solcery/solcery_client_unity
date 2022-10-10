@@ -105,6 +105,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         private void UpdateCardAnimation(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
         {
+            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
+            Layout.UpdateHighlight(animHighlight);
             if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
                 animCardFlyAttribute.Current > 0)
             {
