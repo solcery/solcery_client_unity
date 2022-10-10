@@ -34,7 +34,7 @@ namespace Solcery.Widgets_new.Eclipse.TokensStockpile
             Layout.UpdateVisible(true);
         }
 
-        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
             RemoveTokens(world, entityIds);
             Layout.gameObject.SetActive(isVisible);

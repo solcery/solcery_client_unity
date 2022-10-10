@@ -104,13 +104,12 @@ namespace Solcery.Widgets_new.Effects
                 onMoveComplete?.Invoke();
             }).SetEase(Ease.Linear)).Play();
         }
-
-        public void DestroyEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+        
+        public void DestroyEclipseCard(EclipseCardEffectLayout effectLayout,
             IWidgetRenderData renderData,
             float time,
             Action onMoveComplete)
         {
-            var effectLayout = eclipseCard.Layout.EffectLayout;
             effectLayout.gameObject.SetActive(true);
             effectLayout.Image.material.SetFloat("_Destruct", 0f);
             effectLayout.Image.material.SetTexture("_MainTex", renderData.RenderTexture);

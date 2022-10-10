@@ -2,13 +2,14 @@ using System;
 using Solcery.Games;
 using Solcery.Services.Renderer.Widgets;
 using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Effects
 {
     public interface IWidgetEffects
     {
-        public void DestroyEclipseCard(IEclipseCardInContainerWidget eclipseCard,
+        public void DestroyEclipseCard(EclipseCardEffectLayout effectLayout,
             IWidgetRenderData renderData,
             float time,
             Action onMoveComplete);

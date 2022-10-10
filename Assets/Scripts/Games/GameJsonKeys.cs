@@ -18,6 +18,7 @@ namespace Solcery.Games
         public static readonly string CardDisplayedName = "displayed_name";
         public static readonly string CardNameFontSize = "name_font_size";
         public static readonly string CardDescription = "description";
+        public static readonly string CardShowDescription = "show_description";
         public static readonly string CardTokenSlots = "token_slots";
         public static readonly string CardTimerText = "timer_text";
         public static readonly string CardTooltipId = "tooltip_id";

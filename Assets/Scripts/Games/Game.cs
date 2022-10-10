@@ -66,6 +66,7 @@ namespace Solcery.Games
         IWidgetPool<ITokenInContainerWidget> IGame.TokenInContainerWidgetPool => _tokenInContainerWidgetPool;
         IWidgetPool<IListTokensInContainerWidget> IGame.ListTokensInContainerWidgetPool => _listTokensInContainerWidgetPool;
         IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardInContainerWidgetPool => _eclipseCardInContainerWidgetPool;
+        IWidgetPool<IEclipseCardInContainerWidget> IGame.EclipseCardSmallInContainerWidgetPool => _eclipseCardSmallInContainerWidgetPool;
         IWidgetPool<IEclipseCardNftInContainerWidget> IGame.EclipseCardNftInContainerWidgetPool => _eclipseCardNftInContainerWidgetPool;
 
         private Camera _mainCamera;
@@ -88,6 +89,7 @@ namespace Solcery.Games
         private IWidgetPool<ITokenInContainerWidget> _tokenInContainerWidgetPool;
         private IWidgetPool<IListTokensInContainerWidget> _listTokensInContainerWidgetPool;
         private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardInContainerWidgetPool;
+        private IWidgetPool<IEclipseCardInContainerWidget> _eclipseCardSmallInContainerWidgetPool;
         private IWidgetPool<IEclipseCardNftInContainerWidget> _eclipseCardNftInContainerWidgetPool;
         
         public static IGame Create(IGameInitDto dto)
@@ -143,6 +145,8 @@ namespace Solcery.Games
                 "ui/ui_eclipse_list_tokens", ListTokensInContainerWidget.Create);
             _eclipseCardInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card", EclipseCardInContainerWidget.Create);
+            _eclipseCardSmallInContainerWidgetPool = WidgetPool<IEclipseCardInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
+                "ui/ui_eclipse_card_small", EclipseCardInContainerWidget.Create);
             _eclipseCardNftInContainerWidgetPool = WidgetPool<IEclipseCardNftInContainerWidget>.Create(_widgetCanvas.GetUiCanvas(), this,
                 "ui/ui_eclipse_card_nft", EclipseCardNftInContainerWidget.Create);
         }
@@ -216,9 +220,11 @@ namespace Solcery.Games
             
             // Eclipse
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseEventTracker, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseSmallEventTracker, PlaceWidgetEclipseSmall.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseNftSelector, PlaceWidgetEclipseNftSelector.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseTokenStorage, PlaceWidgetEclipseTokenStorage.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCard, PlaceWidgetEclipse.Create);
+            _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCardSmall, PlaceWidgetEclipseSmall.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseOneCardFull, PlaceWidgetEclipseCardFull.Create);
             _placeWidgetFactory.RegistrationPlaceWidget(PlaceWidgetTypes.EclipseNftCardFull, PlaceWidgetEclipseCardNftFull.Create);
         }
@@ -337,6 +343,8 @@ namespace Solcery.Games
             _tokenInContainerWidgetPool = null;
             _eclipseCardInContainerWidgetPool.Destroy();
             _eclipseCardInContainerWidgetPool = null;
+            _eclipseCardSmallInContainerWidgetPool.Destroy();
+            _eclipseCardSmallInContainerWidgetPool = null;
             _eclipseCardNftInContainerWidgetPool.Destroy();
             _eclipseCardNftInContainerWidgetPool = null;
             _serviceResource.Destroy();

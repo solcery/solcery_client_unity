@@ -72,7 +72,7 @@ namespace Solcery.Models.Play.Places
                 var placeIsAvailable = poolPlaceAvailable.Get(entityId).IsAvailable;
                 var entityIds = entitiesInPlace.TryGetValue(placeId, out var eid) ? eid.ToArray() : new int[]{};
                 var placeWidget = poolPlaceWidgetNew.Get(entityId).Widget;
-                placeWidget.Update(world, placeIsVisible, entityIds);
+                placeWidget.Update(world, placeIsVisible, placeIsAvailable, entityIds);
                 placeWidget.UpdateAvailability(placeIsAvailable);
             }
             

@@ -26,7 +26,7 @@ namespace Solcery.Widgets_new
             }
         }
         
-        public abstract void Update(EcsWorld world, bool isVisible, int[] entityIds);
+        public abstract void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds);
         public abstract void Destroy();
         public abstract Vector2 GetPosition();
         public abstract PlaceWidgetCardFace GetPlaceWidgetCardFace();
@@ -35,6 +35,7 @@ namespace Solcery.Widgets_new
         public abstract void UpdateLinkedEntityId(int linkedEntityId);
         public abstract PlaceWidgetLayout LayoutForObjectId(int objectId);
         public abstract void UpdateAvailability(bool available);
+
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout

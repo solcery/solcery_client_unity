@@ -41,6 +41,7 @@ namespace Solcery.Games
         IWidgetPool<ITokenInContainerWidget> TokenInContainerWidgetPool { get; }
         IWidgetPool<IListTokensInContainerWidget> ListTokensInContainerWidgetPool { get; }
         IWidgetPool<IEclipseCardInContainerWidget> EclipseCardInContainerWidgetPool { get; }
+        IWidgetPool<IEclipseCardInContainerWidget> EclipseCardSmallInContainerWidgetPool { get; }
         IWidgetPool<IEclipseCardNftInContainerWidget> EclipseCardNftInContainerWidgetPool { get; }
 
         void Init();

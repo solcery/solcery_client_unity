@@ -37,7 +37,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             _defaultBlockRaycasts = Layout.BlockRaycasts;
         }
 
-        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
             Layout.Wait(false);
             RemoveCards(world, entityIds);
@@ -67,6 +67,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
                 if (!_cards.TryGetValue(objectId, out var eclipseCard))
                 {
                     eclipseCard = AttachCard(world, entityId, tplId, objectId, itemTypes);
+                    eclipseCard.Layout.UpdateAvailable(isAvailable);
                 }
 
                 // Update tplId
@@ -122,16 +123,7 @@ namespace Solcery.Widgets_new.Eclipse.Nft.Selector
             _cards.Add(objectId, eclipseCard);
             eclipseCard.Layout.SetActive(true);
         }
-        
-        public override void UpdateAvailability(bool available)
-        {
-            base.UpdateAvailability(available);
-            foreach (var card in _cards)
-            {
-                card.Value.Layout.UpdateAvailable(available);
-            }
-        }
-        
+
         void UpdateDragAndDrop(EcsWorld world, int entityId, int objectId, IEclipseCardNftInContainerWidget eclipseCard)
         {
             // Remove old attached entity

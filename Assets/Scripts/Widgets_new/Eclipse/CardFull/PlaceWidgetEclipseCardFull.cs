@@ -25,7 +25,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
         }
 
-        public override void Update(EcsWorld world, bool isVisible, int[] entityIds)
+        public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
             Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
             Layout.ClearAllOnClickListener();
@@ -105,6 +105,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 
         private void UpdateCardAnimation(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
         {
+            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
+            Layout.UpdateHighlight(animHighlight);
             if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
                 animCardFlyAttribute.Current > 0)
             {
@@ -120,6 +122,15 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 {
                     Layout.CardTransform.gameObject.SetActive(true);
                 });
+            }
+            
+            if (attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroy, out var animDestroyAttribute) &&
+                animDestroyAttribute.Current > 0)
+            {
+                var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroyTime, out var  animCardDestroyTimeAttribute)
+                    ? animCardDestroyTimeAttribute.Current.ToSec()
+                    : 3f;
+                AnimEclipseCardDestroy(animCardDestroyTimeSec);
             }
         }
         
@@ -163,6 +174,19 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             position = GetTokenPosition(slotId);
             return true;
+        }
+        
+        private void AnimEclipseCardDestroy(float timeSec)
+        {
+            var rttData = Game.ServiceRenderWidget.CreateWidgetRender(Layout.CardTransform);
+            if (rttData != null)
+            {
+                Layout.CardFrontTransform.gameObject.SetActive(false);
+                WidgetCanvas.GetEffects().DestroyEclipseCard(Layout.EffectLayout,
+                    rttData,
+                    timeSec,
+                    () => { Game.ServiceRenderWidget.ReleaseWidgetRender(Layout.CardTransform); });
+            }
         }
     }
 }
