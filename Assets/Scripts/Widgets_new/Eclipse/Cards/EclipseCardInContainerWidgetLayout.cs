@@ -46,6 +46,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private TMP_Text descriptionText;
         [SerializeField]
+        private GameObject descriptionArea;
+        [SerializeField]
         private GameObject[] highlights;
         [SerializeField]
         private List<Graphic> raycastObjects;
@@ -130,12 +132,19 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             descriptionText.text = newDescription;
             descriptionText.UpdateFontSize(fontSize);
+            if (descriptionArea != null)
+            {
+                descriptionArea.gameObject.SetActive(!string.IsNullOrEmpty(newDescription));
+            }
         }
 
         public void UpdateType(string displayedType, float fontSize)
         {
-            typeText.text = displayedType;
-            typeText.UpdateFontSize(fontSize);
+            if (typeText != null)
+            {
+                typeText.text = displayedType;
+                typeText.UpdateFontSize(fontSize);
+            }
         }
 
         public void UpdateSprite(Texture2D texture)
