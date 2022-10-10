@@ -1,4 +1,3 @@
-using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;

@@ -29,7 +29,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             Layout.UpdateVisible(entityIds.Length > 0 && isVisible);
             Layout.ClearAllOnClickListener();
-            
+
             if (entityIds.Length <= 0 || !isVisible)
             {
                 return;
@@ -86,6 +86,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 var objectId = poolObjectId.Get(entityId).Id;
                 var attributesPool = world.GetPool<ComponentObjectAttributes>();
                 var attributes = attributesPool.Get(entityId).Attributes;
+                UpdateCardFace(CardFace, false);
                 UpdateCardMainAttributes(attributes);
                 Layout.UpdateCardType(Game, objectId, itemType);
                 UpdateCardAnimation(world, attributes);
@@ -187,6 +188,11 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     timeSec,
                     () => { Game.ServiceRenderWidget.ReleaseWidgetRender(Layout.CardTransform); });
             }
+        }
+        
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            Layout.UpdateCardFace(cardFace, withAnimation);
         }
     }
 }

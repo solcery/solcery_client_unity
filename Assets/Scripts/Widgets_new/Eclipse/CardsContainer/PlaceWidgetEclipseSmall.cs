@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Widgets_new.Canvas;
-using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
     public class PlaceWidgetEclipseSmall : PlaceWidgetEclipse
     {
-        public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
+        public new static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
         {
             return new PlaceWidgetEclipseSmall(widgetCanvas, game, prefabPathKey, placeDataObject);

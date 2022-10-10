@@ -1,6 +1,5 @@
-using System;
+using DG.Tweening;
 using Solcery.Games;
-using Solcery.Models.Shared.Objects.Eclipse;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
@@ -13,6 +12,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
 {
     public class PlaceWidgetEclipseCardFullLayout : PlaceWidgetCardFullLayout
     {
+        [SerializeField]
+        private RectTransform cardBackTransform;
         [SerializeField]
         private TMP_Text typeText;
         [SerializeField]
@@ -27,6 +28,9 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
+        
+        private Sequence _sequence;
+        private PlaceWidgetCardFace _cardFace;
 
         public override void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
@@ -62,6 +66,38 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             {
                 highlight.SetActive(active);
             }
+        }
+        
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        {
+            if (withAnimation)
+            {
+                PlayCardTurn(cardFace);
+            }
+            else
+            {
+                UpdateView(cardFace);
+            }
+        }
+        
+        private void PlayCardTurn(PlaceWidgetCardFace cardFace)
+        {
+            _sequence?.Complete();
+            _sequence = DOTween.Sequence()
+                .Append(transform.DORotate(new Vector3(0, 90, 0), 0.3f))
+                .AppendCallback(() =>
+                {
+                    UpdateView(cardFace);
+                })
+                .Append(transform.DORotate(new Vector3(0, 0, 0), 0.3f))
+                .Play();
+        }
+        
+        private void UpdateView(PlaceWidgetCardFace cardFace)
+        {
+            _cardFace = cardFace;
+            CardFrontTransform.gameObject.SetActive(_cardFace != PlaceWidgetCardFace.Down);
+            cardBackTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
         }
     }
 }
