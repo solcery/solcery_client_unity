@@ -240,7 +240,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             if (rttData != null)
             {
                 eclipseCard.Layout.SetActive(false);
-                WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard,
+                WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard.Layout.EffectLayout,
                     rttData,
                     timeSec,
                     () => { Game.ServiceRenderWidget.ReleaseWidgetRender(eclipseCard.Layout.RectTransform); });

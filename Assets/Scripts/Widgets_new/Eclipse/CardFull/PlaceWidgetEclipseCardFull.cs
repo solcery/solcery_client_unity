@@ -123,6 +123,15 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     Layout.CardTransform.gameObject.SetActive(true);
                 });
             }
+            
+            if (attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroy, out var animDestroyAttribute) &&
+                animDestroyAttribute.Current > 0)
+            {
+                var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroyTime, out var  animCardDestroyTimeAttribute)
+                    ? animCardDestroyTimeAttribute.Current.ToSec()
+                    : 3f;
+                AnimEclipseCardDestroy(animCardDestroyTimeSec);
+            }
         }
         
         private void UpdateToken(EcsWorld world, int entityId, IItemType itemType)
@@ -165,6 +174,19 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             position = GetTokenPosition(slotId);
             return true;
+        }
+        
+        private void AnimEclipseCardDestroy(float timeSec)
+        {
+            var rttData = Game.ServiceRenderWidget.CreateWidgetRender(Layout.CardTransform);
+            if (rttData != null)
+            {
+                Layout.CardFrontTransform.gameObject.SetActive(false);
+                WidgetCanvas.GetEffects().DestroyEclipseCard(Layout.EffectLayout,
+                    rttData,
+                    timeSec,
+                    () => { Game.ServiceRenderWidget.ReleaseWidgetRender(Layout.CardTransform); });
+            }
         }
     }
 }

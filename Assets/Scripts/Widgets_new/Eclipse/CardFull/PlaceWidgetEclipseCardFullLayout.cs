@@ -5,6 +5,7 @@ using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
+using Solcery.Widgets_new.Eclipse.Effects;
 using TMPro;
 using UnityEngine;
 
@@ -19,11 +20,13 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         [SerializeField]
         private EclipseCardTimerLayout timerLayout;
         [SerializeField]
+        private EclipseCardEffectLayout effectLayout;
+        [SerializeField]
         private GameObject[] highlights;
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
-        public RectTransform CardTransform => cardTransform;
+        public EclipseCardEffectLayout EffectLayout => effectLayout;
 
         public override void UpdateCardType(IGame game, int objectId, IItemType itemType)
         {
