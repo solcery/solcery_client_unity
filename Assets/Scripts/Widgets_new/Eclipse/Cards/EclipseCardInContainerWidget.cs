@@ -81,6 +81,11 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _layout.TimerLayout.UpdateTimerTextActive(false);
             }
 
+            if (itemType.TryGetValue(out var valueTooltipIdToken, GameJsonKeys.CardTooltipId, objectId))
+            {
+                _layout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
+            }
+            
             _layout.EntityId = entityId;
         }
         

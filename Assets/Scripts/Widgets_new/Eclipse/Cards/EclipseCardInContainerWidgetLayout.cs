@@ -7,6 +7,7 @@ using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.Effects;
+using Solcery.Widgets_new.Tooltip;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -63,6 +64,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private Vector2 _offsetMin;
         private CustomImages _images;
         private Sequence _sequence;
+        private TooltipBehaviour _tooltipBehaviour;
 
         private PlaceWidgetCardFace _cardFace;
 
@@ -114,11 +116,24 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             rectTransform.SetSiblingIndex(siblingIndex);
         }
         
+        public void UpdateTooltip(int tooltipId)
+        {
+            if (_tooltipBehaviour == null)
+            {
+                _tooltipBehaviour = gameObject.AddComponent<RectTransformTooltipBehaviour>();
+            }
+            _tooltipBehaviour.SetTooltipId(tooltipId);
+        }
+        
         public void Cleanup()
         {
             tokensLayout.Cleanup();
             timerLayout.Cleanup();
-        }
+            if (_tooltipBehaviour != null)
+            {
+                Destroy(_tooltipBehaviour);
+            }
+            _tooltipBehaviour = null;        }
         
         private void OnDestroy()
         {
