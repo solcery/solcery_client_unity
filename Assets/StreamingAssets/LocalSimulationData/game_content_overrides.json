@@ -1,184 +1,71 @@
 {
-  "nfts": [
-    {
-      "id": 100,
-      "data": {
-        "name": "DegenApe",
-        "picture": "https://i.ibb.co/41xvB8N/degen-ape-1.jpg"
-      }
-    },
-    {
-      "id": 101,
-      "data": {
-        "name": "Blocksmith",
-        "picture": "https://i.ibb.co/rF0nPPL/blocksmiths-1.jpg"
-      }
-    },
-    {
-      "id": 102,
-      "data": {
-        "name": "Boryoku Baby Dragon",
-        "picture": "https://i.ibb.co/zhX5f95/boryoku-babies-1.jpg"
-      }
-    },
-    {
-      "id": 103,
-      "data": {
-        "name": "Boryoku Dragon",
-        "picture": "https://i.ibb.co/fDvvPss/boryoku-dragonz-3.jpg"
-      }
-    },
-    {
-      "id": 104,
-      "data": {
-        "name": "Catalina Whale",
-        "picture": "https://i.ibb.co/jV1sWyb/catalina-whale-mixer-1.jpg"
-      }
-    },
-    {
-      "id": 105,
-      "data": {
-        "name": "DeGod",
-        "picture": "https://i.ibb.co/j57YVdF/dead-god.jpg"
-      }
-    },
-    {
-      "id": 106,
-      "data": {
-        "name": "SOLGod",
-        "picture": "https://i.ibb.co/tsMZn0v/sol-gods-1.jpg"
-      }
-    },
-    {
-      "id": 107,
-      "data": {
-        "name": "Grim",
-        "picture": "https://i.ibb.co/vkJZ9ss/grim-2.jpg"
-      }
-    },
-    {
-      "id": 108,
-      "data": {
-        "name": "Degen Dojo Disciple",
-        "picture": "https://i.ibb.co/w4MgKQK/dojo-1.jpg"
-      }
-    },
-    {
-      "id": 109,
-      "data": {
-        "name": "Okay Bear",
-        "picture": "https://i.ibb.co/1GZzLpx/okay-bears-1.jpg"
-      }
-    },
-    {
-      "id": 110,
-      "data": {
-        "name": "SMB",
-        "picture": "https://i.ibb.co/jJSVyXt/smb-2.jpg"
-      }
-    }
-  ],
+  "nfts": [],
   "card_types": [
     {
-      "id": 18,
+      "id": 318,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 28,
+      "id": 328,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 34,
+      "id": 334,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 90,
+      "id": 335,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 120,
+      "id": 336,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 145,
+      "id": 337,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 199,
+      "id": 340,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 212,
+      "id": 341,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 381,
+      "id": 342,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 397,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 415,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 461,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 538,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 603,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 831,
+      "id": 343,
       "override_fields": [
         "displayed_name",
         "picture"
