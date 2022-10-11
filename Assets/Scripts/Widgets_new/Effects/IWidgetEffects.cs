@@ -1,7 +1,5 @@
 using System;
-using Solcery.Games;
 using Solcery.Services.Renderer.Widgets;
-using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 

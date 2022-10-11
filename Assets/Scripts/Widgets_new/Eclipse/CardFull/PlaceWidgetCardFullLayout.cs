@@ -16,6 +16,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         [SerializeField]
         private RectTransform cardFrontTransform;
         [SerializeField]
+        private RectTransform cardBackTransform;
+        [SerializeField]
         private RectTransform iconFrame;
         [SerializeField]
         private Image iconImage;
@@ -29,7 +31,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private ClickHandlerBehaviour[] clickHandlers;
         [SerializeField]
         private Texture2D defaultTexture;
-        
+
+        public RectTransform CardBackTransform => cardBackTransform;
         public RectTransform CardFrontTransform => cardFrontTransform;
         public RectTransform CardTransform => cardTransform;
         

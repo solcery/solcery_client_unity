@@ -163,7 +163,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         : 1f;
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                     eclipseCard.Layout.SetActive(false);
-                    WidgetCanvas.GetEffects().MoveEclipseCard(eclipseCard.Layout.FrontTransform, animCardFlyTimeSec, from, () =>
+                    WidgetCanvas.GetEffects().MoveEclipseCard(CardFace == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
                     {
                         eclipseCard.Layout.SetActive(true);
                     });

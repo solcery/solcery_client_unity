@@ -119,7 +119,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     : 1f;
                 var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                 Layout.CardTransform.gameObject.SetActive(false);
-                WidgetCanvas.GetEffects().MoveEclipseCard(Layout.CardTransform, animCardFlyTimeSec, from, () =>
+                WidgetCanvas.GetEffects().MoveEclipseCard(CardFace == PlaceWidgetCardFace.Up ? Layout.CardFrontTransform : Layout.CardBackTransform, animCardFlyTimeSec, from, () =>
                 {
                     Layout.CardTransform.gameObject.SetActive(true);
                 });

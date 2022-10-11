@@ -13,8 +13,6 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
     public class PlaceWidgetEclipseCardFullLayout : PlaceWidgetCardFullLayout
     {
         [SerializeField]
-        private RectTransform cardBackTransform;
-        [SerializeField]
         private TMP_Text typeText;
         [SerializeField]
         private EclipseCardTokensLayout tokensLayout;
@@ -97,7 +95,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         {
             _cardFace = cardFace;
             CardFrontTransform.gameObject.SetActive(_cardFace != PlaceWidgetCardFace.Down);
-            cardBackTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
+            CardBackTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
         }
     }
 }
