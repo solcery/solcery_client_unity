@@ -355,12 +355,26 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         {
             _sequence?.Complete();
             _sequence = DOTween.Sequence()
+                .AppendCallback(() =>
+                {
+                    var transform1 = transform;
+                    var position = transform1.localPosition;
+                    position.z = -100f;
+                    transform1.localPosition = position;
+                })
                 .Append(transform.DORotate(new Vector3(0, 90, 0), 0.3f))
                 .AppendCallback(() =>
                 {
                     UpdateView(cardFace);
                 })
                 .Append(transform.DORotate(new Vector3(0, 0, 0), 0.3f))
+                .AppendCallback(() =>
+                {
+                    var transform1 = transform;
+                    var position = transform1.localPosition;
+                    position.z = 0f;
+                    transform1.localPosition = position;
+                })
                 .Play();
         }
         

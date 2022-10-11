@@ -4,9 +4,11 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Play.DragDrop;
+using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Objects.Eclipse;
+using Solcery.Models.Shared.Places;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
@@ -233,7 +235,39 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
             eclipseCard.SetOrder(order);
             
-            eclipseCard.UpdateCardFace(cardFace, false);
+            // face
+            var faceChangeAnimation = false;
+            if (attributes.TryGetValue("place", out var place) && place.Changed)
+            {
+                var poolPlaceId = world.GetPool<ComponentPlaceId>();
+                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
+                var oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
+
+                if (oldWidget != null)
+                {
+                    faceChangeAnimation = oldWidget.GetPlaceWidgetCardFace() != CardFace;
+                }
+            }
+            
+            eclipseCard.UpdateCardFace(cardFace, faceChangeAnimation);
+        }
+        
+        private PlaceWidget GetPlaceWidget(
+            int placeId, 
+            EcsPool<ComponentPlaceId> poolPlaceId,
+            EcsPool<ComponentPlaceWidgetNew> poolPlaceWidgetNew)
+        {
+            PlaceWidget oldWidget = null; 
+            var widgetFilter = poolPlaceId.GetWorld().Filter<ComponentPlaceTag>().Inc<ComponentPlaceId>().Inc<ComponentPlaceWidgetNew>().End();
+            foreach (var entityId in widgetFilter)
+            {
+                if (poolPlaceId.Get(entityId).Id == placeId)
+                {
+                    oldWidget = poolPlaceWidgetNew.Get(entityId).Widget;
+                }
+            }
+
+            return oldWidget;
         }
 
         private void AnimEclipseCardDestroy(IEclipseCardInContainerWidget eclipseCard, float timeSec)
