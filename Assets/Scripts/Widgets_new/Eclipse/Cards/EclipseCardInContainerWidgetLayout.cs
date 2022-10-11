@@ -353,6 +353,12 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         
         private void PlayCardTurn(PlaceWidgetCardFace cardFace)
         {
+            if (_cardFace == cardFace)
+            {
+                UpdateView(cardFace);
+                return;
+            }
+            
             _sequence?.Complete();
             _sequence = DOTween.Sequence()
                 .AppendCallback(() =>
