@@ -100,7 +100,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         // Update tplId
                         if (tplId != eclipseCard.CardType)
                         {
-                            UpdateFromCardTypeData(world, entityId, tplId, objectId, itemTypes, eclipseCard);
+                            UpdateFromCardTypeData(entityId, tplId, objectId, itemTypes, eclipseCard);
                         }
                         
                         // // Update drag drop
@@ -203,9 +203,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
         
-        private void UpdateFromCardTypeData(EcsWorld world, int entityId, int tplId, int objectId, IItemTypes itemTypes, IEclipseCardInContainerWidget eclipseCard)
+        private void UpdateFromCardTypeData(int entityId, int tplId, int objectId, IItemTypes itemTypes, IEclipseCardInContainerWidget eclipseCard)
         {
-            var eclipseCartTypePool = world.GetPool<ComponentEclipseCardType>();
             if (itemTypes.TryGetItemType(out var itemType, tplId))
             {
                 eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
@@ -289,7 +288,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 if (CardsPool.TryPop(out var eclipseCard))
                 {
-                    UpdateFromCardTypeData(world, entityId, cardType, objectId, itemTypes, eclipseCard);
+                    UpdateFromCardTypeData(entityId, cardType, objectId, itemTypes, eclipseCard);
                     UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
                     PutCardToInPlace(objectId, eclipseCard);
                     return eclipseCard;
