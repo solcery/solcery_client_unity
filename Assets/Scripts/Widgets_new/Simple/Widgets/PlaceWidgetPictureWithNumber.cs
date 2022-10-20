@@ -63,13 +63,37 @@ namespace Solcery.Widgets_new.Simple.Widgets
         {
             if (attributes.TryGetValue(GameJsonKeys.PictureNumber, out var number))
             {
-                Layout.UpdateText(number.Current.ToString());
+                Layout.UpdateNumber(number.Current);
                 
                 if (attributes.TryGetValue(GameJsonKeys.PictureAnimNumber, out var animCardFlyAttribute) &&
                     animCardFlyAttribute.Current > 0)
                 {
                     Layout.ShowDiff(number.Current - number.Old);
                 }
+            }
+
+            Layout.ImageTransform.gameObject.SetActive(true);
+            
+            if (attributes.TryGetValue(GameJsonKeys.AnimDestroy, out var animDestroyAttribute) &&
+                animDestroyAttribute.Current > 0)
+            {
+                var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.AnimDestroyTime, out var  animCardDestroyTimeAttribute)
+                    ? animCardDestroyTimeAttribute.Current.ToSec()
+                    : 3f;
+                AnimDestroy(animCardDestroyTimeSec);
+            }
+        }
+
+        private void AnimDestroy(float timeSec)
+        {
+            var rttData = Game.ServiceRenderWidget.CreateWidgetRender(Layout.WidgetContentTransform);
+            if (rttData != null)
+            {
+                Layout.ImageTransform.gameObject.SetActive(false);
+                WidgetCanvas.GetEffects().DestroyEclipseCard(Layout.EffectLayout,
+                    rttData,
+                    timeSec,
+                    () => { Game.ServiceRenderWidget.ReleaseWidgetRender(Layout.WidgetContentTransform); });
             }
         }
 

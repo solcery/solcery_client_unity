@@ -5,7 +5,9 @@ namespace Solcery.Games
         // Commons
         public static readonly string Picture = "picture";
         public static readonly string AnimHighlight = "anim_highlight";
-        
+        public static readonly string AnimDestroy = "anim_destroy";
+        public static readonly string AnimDestroyTime = "anim_card_destroy_time";
+
         // Widgets
         public static readonly string WidgetPictureType = "picture_type";
         public static readonly string WidgetPicturePixelsPerUnitMultiplier = "picture_pixels_per_unit_multiplier";
@@ -29,8 +31,6 @@ namespace Solcery.Games
         public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
         public static readonly string CardDescriptionFontSize = "description_font_size";
         public static readonly string CardDefaultTimerValue = "default_timer_value";
-        public static readonly string CardAnimCardDestroy = "anim_destroy";
-        public static readonly string CardAnimCardDestroyTime = "anim_card_destroy_time";
         
         // Token
         public static readonly string TokenSlot = "slot";

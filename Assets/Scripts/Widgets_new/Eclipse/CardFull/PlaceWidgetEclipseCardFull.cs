@@ -125,10 +125,10 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 });
             }
             
-            if (attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroy, out var animDestroyAttribute) &&
+            if (attributes.TryGetValue(GameJsonKeys.AnimDestroy, out var animDestroyAttribute) &&
                 animDestroyAttribute.Current > 0)
             {
-                var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroyTime, out var  animCardDestroyTimeAttribute)
+                var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.AnimDestroyTime, out var  animCardDestroyTimeAttribute)
                     ? animCardDestroyTimeAttribute.Current.ToSec()
                     : 3f;
                 AnimEclipseCardDestroy(animCardDestroyTimeSec);

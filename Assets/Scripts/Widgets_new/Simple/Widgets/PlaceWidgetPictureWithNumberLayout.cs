@@ -1,3 +1,4 @@
+using Solcery.Widgets_new.Eclipse.Effects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,17 @@ namespace Solcery.Widgets_new.Simple.Widgets
         [SerializeField] 
         private Animator animatorDiff;
         [SerializeField] 
-        private TextMeshProUGUI textDiff = null;
+        private TextMeshProUGUI textDiff;
+        [SerializeField]
+        private EclipseCardEffectLayout effectLayout;
+        [SerializeField]
+        private RectTransform widgetContentTransform;
+        [SerializeField]
+        private RectTransform imageTransform;
+
+        public RectTransform WidgetContentTransform => widgetContentTransform;
+        public RectTransform ImageTransform => imageTransform;
+        public EclipseCardEffectLayout EffectLayout => effectLayout;
 
         private Sprite _sprite;
 
@@ -30,9 +41,9 @@ namespace Solcery.Widgets_new.Simple.Widgets
             image.sprite = _sprite;
         }
         
-        public void UpdateText(string newText)
+        public void UpdateNumber(int value)
         {
-            text.text = newText;
+            text.text = value.ToString();
         }
         
         public void ShowDiff(int diff)
