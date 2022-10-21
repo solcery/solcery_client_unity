@@ -480,7 +480,8 @@ MonoBehaviour:
   timer: {fileID: 946008858523115471}
   button: {fileID: 1454105546520647339}
   buttonText: {fileID: 416998793259155807}
-  highlight: {fileID: 218266635776902476}
+  highlight:
+  - {fileID: 230563352853081190}
 --- !u!225 &777092362560798080
 CanvasGroup:
   m_ObjectHideFlags: 0

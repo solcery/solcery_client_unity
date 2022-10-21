@@ -1,4 +1,5 @@
 using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.Cards;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,14 +7,16 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Simple.Buttons
 {
-    public sealed class PlaceWidgetButtonLayout : PlaceWidgetSimpleLayout
+    public sealed class PlaceWidgetButtonLayout : PlaceWidgetSimpleLayout, IWidgetLayoutHighlight
     {
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text buttonText;
-        [SerializeField] private GameObject highlight;
+        [SerializeField] private Image[] highlight;
         
         private CustomImages _images;
 
+        public Image[] Highlights => highlight;
+        
         private void Awake()
         {
             _images = gameObject.AddComponent<CustomImages>();
@@ -47,11 +50,6 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
             var a = alpha / 100f;
             canvasGroup.alpha = a;
-        }
-
-        public void UpdateHighlight(bool active)
-        {
-            highlight.gameObject.SetActive(active);
         }
 
         public override void UpdateAvailable(bool available)
