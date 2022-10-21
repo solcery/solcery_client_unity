@@ -48,7 +48,7 @@ namespace Solcery.Utils
             {
                 var r = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorR, out var animHighlightColorRAttribute)  ? animHighlightColorRAttribute.Current : 255;
                 var g = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorG, out var animHighlightColorGAttribute)  ? animHighlightColorGAttribute.Current : 255;
-                var b = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorG, out var animHighlightColorBAttribute)  ? animHighlightColorBAttribute.Current : 255;
+                var b = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorB, out var animHighlightColorBAttribute)  ? animHighlightColorBAttribute.Current : 255;
                 var color = new Color32((byte)r, (byte)g, (byte)b, 255);
                 foreach (var image in widgetLayout.Highlights)
                 {
