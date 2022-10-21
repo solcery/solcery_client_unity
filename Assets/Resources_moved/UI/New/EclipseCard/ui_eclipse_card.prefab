@@ -89,9 +89,10 @@ MonoBehaviour:
   typeText: {fileID: 642263690928292624}
   nameText: {fileID: 5944324437145560819}
   descriptionText: {fileID: 1456061341918030656}
+  descriptionArea: {fileID: 0}
   highlights:
-  - {fileID: 4253485212536572139}
-  - {fileID: 2506881359650883961}
+  - {fileID: 8831852920293205150}
+  - {fileID: 874012433515491588}
   raycastObjects:
   - {fileID: 8366717759231909589}
   - {fileID: 4344251751038860470}
@@ -6160,8 +6161,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8826466598311310400}
   - {fileID: 104112338597336947}
+  - {fileID: 8826466598311310400}
   - {fileID: 1936350674652909137}
   - {fileID: 2512537526832023867}
   - {fileID: 4048353978854294640}

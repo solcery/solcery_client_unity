@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
-    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
+    public sealed class EclipseCardInContainerWidgetLayout : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler, IWidgetLayoutHighlight
     {
         [HideInInspector]
         public int EntityId;
@@ -49,7 +49,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private GameObject descriptionArea;
         [SerializeField]
-        private GameObject[] highlights;
+        private Image[] highlights;
         [SerializeField]
         private List<Graphic> raycastObjects;
         [SerializeField]
@@ -74,9 +74,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public RectTransform FrontTransform => frontTransform;
         public RectTransform BackTransform => backTransform;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
-        
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
+        public Image[] Highlights => highlights;
 
         private void Awake()
         {
@@ -180,14 +180,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 new Vector2(0.5f, 0.5f), 100.0f);
             iconImage.sprite = _sprite;
             UpdateIconSize();
-        }
-
-        public void UpdateHighlight(bool active)
-        {
-            foreach (var highlight in highlights)
-            {
-                highlight.SetActive(active);
-            }
         }
 
         private void DestroySprite()

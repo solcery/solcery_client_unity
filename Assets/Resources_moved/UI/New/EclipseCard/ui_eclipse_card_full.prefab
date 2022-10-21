@@ -73,6 +73,7 @@ MonoBehaviour:
   timer: {fileID: 0}
   cardTransform: {fileID: 2599180590035948034}
   cardFrontTransform: {fileID: 328608894032969524}
+  cardBackTransform: {fileID: 570637452851525920}
   iconFrame: {fileID: 5459173099969767183}
   iconImage: {fileID: 2307604813889946526}
   iconRectTransform: {fileID: 5494814345806953102}
@@ -82,14 +83,13 @@ MonoBehaviour:
   - {fileID: 7572690508184455082}
   - {fileID: 8856032588703675510}
   defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
-  cardBackTransform: {fileID: 570637452851525920}
   typeText: {fileID: 642263690928292624}
   tokensLayout: {fileID: 1994152796848667027}
   timerLayout: {fileID: 1629200007459241172}
   effectLayout: {fileID: 5230068319725924198}
   highlights:
-  - {fileID: 6472499285211557840}
-  - {fileID: 8126283827110053343}
+  - {fileID: 91781599102297002}
+  - {fileID: 2910546326016739749}
 --- !u!1 &1119832754873103734
 GameObject:
   m_ObjectHideFlags: 0
@@ -11143,8 +11143,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5459173099969767183}
   - {fileID: 8885983806185258471}
+  - {fileID: 5459173099969767183}
   - {fileID: 1936350674652909137}
   - {fileID: 2512537526832023867}
   - {fileID: 4048353978854294640}

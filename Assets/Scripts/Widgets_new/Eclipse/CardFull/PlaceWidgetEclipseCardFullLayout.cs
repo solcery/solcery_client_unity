@@ -2,15 +2,17 @@ using DG.Tweening;
 using Solcery.Games;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
+using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.Effects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.CardFull
 {
-    public class PlaceWidgetEclipseCardFullLayout : PlaceWidgetCardFullLayout
+    public class PlaceWidgetEclipseCardFullLayout : PlaceWidgetCardFullLayout, IWidgetLayoutHighlight
     {
         [SerializeField]
         private TMP_Text typeText;
@@ -21,12 +23,13 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         [SerializeField]
         private EclipseCardEffectLayout effectLayout;
         [SerializeField]
-        private GameObject[] highlights;
+        private Image[] highlights;
 
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
-        
+        public Image[] Highlights => highlights;
+
         private Sequence _sequence;
         private PlaceWidgetCardFace _cardFace;
 
@@ -57,15 +60,7 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             typeText.text = displayedType;
             typeText.UpdateFontSize(fontSize);
         }
-        
-        public void UpdateHighlight(bool active)
-        {
-            foreach (var highlight in highlights)
-            {
-                highlight.SetActive(active);
-            }
-        }
-        
+
         public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
         {
             if (withAnimation)

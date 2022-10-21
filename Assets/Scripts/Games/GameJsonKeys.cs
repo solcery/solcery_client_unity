@@ -5,6 +5,9 @@ namespace Solcery.Games
         // Commons
         public static readonly string Picture = "picture";
         public static readonly string AnimHighlight = "anim_highlight";
+        public static readonly string AnimHighlightColorR = "anim_highlight_r";
+        public static readonly string AnimHighlightColorG = "anim_highlight_g";
+        public static readonly string AnimHighlightColorB = "anim_highlight_b";
         public static readonly string AnimDestroy = "anim_destroy";
         public static readonly string AnimDestroyTime = "anim_card_destroy_time";
 
