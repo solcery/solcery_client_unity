@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Solcery.Widgets_new.Eclipse.Cards

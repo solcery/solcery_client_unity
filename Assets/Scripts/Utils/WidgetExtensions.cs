@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Values;
+using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Eclipse;
 using Solcery.Widgets_new.Eclipse.Cards;
+using Solcery.Widgets_new.Eclipse.Cards.Timers;
 using TMPro;
 using UnityEngine;
 
@@ -49,7 +51,8 @@ namespace Solcery.Utils
                 var r = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorR, out var animHighlightColorRAttribute)  ? animHighlightColorRAttribute.Current : 255;
                 var g = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorG, out var animHighlightColorGAttribute)  ? animHighlightColorGAttribute.Current : 255;
                 var b = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorB, out var animHighlightColorBAttribute)  ? animHighlightColorBAttribute.Current : 255;
-                var color = new Color32((byte)r, (byte)g, (byte)b, 255);
+                var a = attributes.TryGetValue(GameJsonKeys.AnimHighlightColorA, out var animHighlightColorAAttribute)  ? animHighlightColorAAttribute.Current : 255;
+                var color = new Color32((byte)r, (byte)g, (byte)b, (byte)a);
                 foreach (var image in widgetLayout.Highlights)
                 {
                     image.color = color;

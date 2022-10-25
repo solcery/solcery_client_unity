@@ -71,24 +71,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 _layout.UpdateSprite(texture);
             }
 
-            if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
-            {
-                _layout.TimerLayout.UpdateTimerTextActive(true);
-                _layout.TimerLayout.UpdateTimerText(valueTimerTextToken.GetValue<string>());
-            }
-            else
-            {
-                _layout.TimerLayout.UpdateTimerTextActive(false);
-            }
-
             if (itemType.TryGetValue(out var valueTooltipIdToken, GameJsonKeys.CardTooltipId, objectId))
             {
                 _layout.UpdateTooltip(valueTooltipIdToken.GetValue<int>());
             }
-            
+
+            _layout.TimerLayout.UpdateTypeData(objectId, itemType);
             _layout.EntityId = entityId;
         }
-        
+
         EclipseCardTokenLayout GetToken(int slot)
         {
             return _layout.TokensLayout.GetTokenByIndex(slot - 1);

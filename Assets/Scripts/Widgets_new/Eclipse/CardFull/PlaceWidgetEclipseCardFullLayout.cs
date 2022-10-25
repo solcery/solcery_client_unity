@@ -44,17 +44,9 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                     ? valueTypeFontSizeAttributeToken.GetValue<float>()
                     : 0f;
             UpdateType(displayedType, typeFontSize);
-
-            if (itemType.TryGetValue(out var valueTimerTextToken, GameJsonKeys.CardTimerText, objectId))
-            {
-                TimerLayout.UpdateTimerTextActive(true);
-                TimerLayout.UpdateTimerText(valueTimerTextToken.GetValue<string>());
-            }
-            else
-            {
-                TimerLayout.UpdateTimerTextActive(false);
-            }        
+            TimerLayout.UpdateTypeData(objectId, itemType);
         }
+        
         private void UpdateType(string displayedType, float fontSize)
         {
             typeText.text = displayedType;
