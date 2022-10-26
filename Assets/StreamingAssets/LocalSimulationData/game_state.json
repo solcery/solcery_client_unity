@@ -1,16 +1,12 @@
 {
-  "actions": [],
+  "commands": [],
   "states": [
     {
       "state_type": 0,
       "value": {
         "attrs": [
           {
-            "key": "enemy_gold",
-            "value": 0
-          },
-          {
-            "key": "your_hp",
+            "key": "phase",
             "value": 0
           },
           {
@@ -18,20 +14,24 @@
             "value": 0
           },
           {
-            "key": "current_player",
-            "value": 0
-          },
-          {
-            "key": "phase",
-            "value": 0
+            "key": "your_hp",
+            "value": 20
           },
           {
             "key": "enemy_hp",
-            "value": 0
+            "value": 20
           },
           {
             "key": "your_gold",
             "value": 0
+          },
+          {
+            "key": "enemy_gold",
+            "value": 0
+          },
+          {
+            "key": "current_player",
+            "value": 1
           },
           {
             "key": "peace_envoy",
@@ -39,7 +39,7 @@
           },
           {
             "key": "game_mode",
-            "value": 0
+            "value": 1
           },
           {
             "key": "game_status",
@@ -51,7 +51,7 @@
           },
           {
             "key": "enemy_visible",
-            "value": 0
+            "value": 1
           },
           {
             "key": "nfts_stage",
@@ -65,15 +65,15 @@
         "objects": [
           {
             "id": 1,
-            "tplId": 76,
+            "tplId": 34,
             "attrs": [
               {
-                "key": "number",
-                "value": 0
+                "key": "place",
+                "value": 20
               },
               {
-                "key": "place",
-                "value": 21
+                "key": "number",
+                "value": 20
               },
               {
                 "key": "show_duration",
@@ -167,15 +167,15 @@
           },
           {
             "id": 2,
-            "tplId": 41,
+            "tplId": 36,
             "attrs": [
+              {
+                "key": "place",
+                "value": 21
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 23
               },
               {
                 "key": "show_duration",
@@ -269,14 +269,14 @@
           },
           {
             "id": 3,
-            "tplId": 41,
+            "tplId": 34,
             "attrs": [
               {
-                "key": "number",
-                "value": 0
+                "key": "place",
+                "value": 23
               },
               {
-                "key": "place",
+                "key": "number",
                 "value": 20
               },
               {
@@ -371,15 +371,15 @@
           },
           {
             "id": 4,
-            "tplId": 76,
+            "tplId": 36,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 22
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -473,15 +473,15 @@
           },
           {
             "id": 5,
-            "tplId": 25,
+            "tplId": 110,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -575,15 +575,15 @@
           },
           {
             "id": 6,
-            "tplId": 25,
+            "tplId": 110,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -677,15 +677,15 @@
           },
           {
             "id": 7,
-            "tplId": 25,
+            "tplId": 110,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -779,15 +779,15 @@
           },
           {
             "id": 8,
-            "tplId": 25,
+            "tplId": 110,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -881,15 +881,15 @@
           },
           {
             "id": 9,
-            "tplId": 130,
+            "tplId": 108,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -983,19 +983,19 @@
           },
           {
             "id": 10,
-            "tplId": 130,
+            "tplId": 108,
             "attrs": [
+              {
+                "key": "place",
+                "value": 41
+              },
               {
                 "key": "number",
                 "value": 0
               },
               {
-                "key": "place",
-                "value": 1
-              },
-              {
                 "key": "show_duration",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "duration",
@@ -1085,15 +1085,15 @@
           },
           {
             "id": 11,
-            "tplId": 130,
+            "tplId": 108,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1187,15 +1187,15 @@
           },
           {
             "id": 12,
-            "tplId": 26,
+            "tplId": 113,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1289,15 +1289,15 @@
           },
           {
             "id": 13,
-            "tplId": 26,
+            "tplId": 113,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1391,15 +1391,15 @@
           },
           {
             "id": 14,
-            "tplId": 136,
+            "tplId": 132,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1493,15 +1493,15 @@
           },
           {
             "id": 15,
-            "tplId": 136,
+            "tplId": 132,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1595,15 +1595,15 @@
           },
           {
             "id": 16,
-            "tplId": 98,
+            "tplId": 107,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1697,15 +1697,15 @@
           },
           {
             "id": 17,
-            "tplId": 98,
+            "tplId": 107,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1799,15 +1799,15 @@
           },
           {
             "id": 18,
-            "tplId": 98,
+            "tplId": 107,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -1901,15 +1901,15 @@
           },
           {
             "id": 19,
-            "tplId": 98,
+            "tplId": 107,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -2003,15 +2003,15 @@
           },
           {
             "id": 20,
-            "tplId": 63,
+            "tplId": 125,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2105,15 +2105,15 @@
           },
           {
             "id": 21,
-            "tplId": 63,
+            "tplId": 125,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2207,15 +2207,15 @@
           },
           {
             "id": 22,
-            "tplId": 66,
+            "tplId": 137,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2309,15 +2309,15 @@
           },
           {
             "id": 23,
-            "tplId": 66,
+            "tplId": 137,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -2411,15 +2411,15 @@
           },
           {
             "id": 24,
-            "tplId": 102,
+            "tplId": 127,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2513,15 +2513,15 @@
           },
           {
             "id": 25,
-            "tplId": 102,
+            "tplId": 127,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2615,15 +2615,15 @@
           },
           {
             "id": 26,
-            "tplId": 92,
+            "tplId": 99,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -2717,15 +2717,15 @@
           },
           {
             "id": 27,
-            "tplId": 92,
+            "tplId": 99,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -2819,15 +2819,15 @@
           },
           {
             "id": 28,
-            "tplId": 27,
+            "tplId": 115,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -2921,15 +2921,15 @@
           },
           {
             "id": 29,
-            "tplId": 27,
+            "tplId": 115,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3023,15 +3023,15 @@
           },
           {
             "id": 30,
-            "tplId": 96,
+            "tplId": 104,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 53
               },
               {
                 "key": "show_duration",
@@ -3125,15 +3125,15 @@
           },
           {
             "id": 31,
-            "tplId": 96,
+            "tplId": 104,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3227,15 +3227,15 @@
           },
           {
             "id": 32,
-            "tplId": 96,
+            "tplId": 104,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3329,15 +3329,15 @@
           },
           {
             "id": 33,
-            "tplId": 64,
+            "tplId": 129,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3431,15 +3431,15 @@
           },
           {
             "id": 34,
-            "tplId": 64,
+            "tplId": 129,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3533,15 +3533,15 @@
           },
           {
             "id": 35,
-            "tplId": 64,
+            "tplId": 129,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3635,15 +3635,15 @@
           },
           {
             "id": 36,
-            "tplId": 60,
+            "tplId": 109,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3737,15 +3737,15 @@
           },
           {
             "id": 37,
-            "tplId": 60,
+            "tplId": 109,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3839,15 +3839,15 @@
           },
           {
             "id": 38,
-            "tplId": 60,
+            "tplId": 109,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -3941,15 +3941,15 @@
           },
           {
             "id": 39,
-            "tplId": 60,
+            "tplId": 109,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4043,15 +4043,15 @@
           },
           {
             "id": 40,
-            "tplId": 29,
+            "tplId": 122,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4145,15 +4145,15 @@
           },
           {
             "id": 41,
-            "tplId": 29,
+            "tplId": 122,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4247,15 +4247,15 @@
           },
           {
             "id": 42,
-            "tplId": 29,
+            "tplId": 122,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -4349,15 +4349,15 @@
           },
           {
             "id": 43,
-            "tplId": 99,
+            "tplId": 114,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -4451,15 +4451,15 @@
           },
           {
             "id": 44,
-            "tplId": 99,
+            "tplId": 114,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4553,15 +4553,15 @@
           },
           {
             "id": 45,
-            "tplId": 28,
+            "tplId": 120,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -4655,15 +4655,15 @@
           },
           {
             "id": 46,
-            "tplId": 28,
+            "tplId": 120,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4757,15 +4757,15 @@
           },
           {
             "id": 47,
-            "tplId": 134,
+            "tplId": 124,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4859,15 +4859,15 @@
           },
           {
             "id": 48,
-            "tplId": 134,
+            "tplId": 124,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -4961,15 +4961,15 @@
           },
           {
             "id": 49,
-            "tplId": 134,
+            "tplId": 124,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5063,15 +5063,15 @@
           },
           {
             "id": 50,
-            "tplId": 105,
+            "tplId": 136,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5165,15 +5165,15 @@
           },
           {
             "id": 51,
-            "tplId": 105,
+            "tplId": 136,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -5267,15 +5267,15 @@
           },
           {
             "id": 52,
-            "tplId": 137,
+            "tplId": 118,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -5283,7 +5283,7 @@
               },
               {
                 "key": "duration",
-                "value": 7
+                "value": 3
               },
               {
                 "key": "order",
@@ -5359,7 +5359,7 @@
               },
               {
                 "key": "type",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "hero",
@@ -5369,15 +5369,15 @@
           },
           {
             "id": 53,
-            "tplId": 100,
+            "tplId": 118,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5471,15 +5471,15 @@
           },
           {
             "id": 54,
-            "tplId": 100,
+            "tplId": 118,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5573,23 +5573,23 @@
           },
           {
             "id": 55,
-            "tplId": 100,
+            "tplId": 116,
             "attrs": [
+              {
+                "key": "place",
+                "value": 38
+              },
               {
                 "key": "number",
                 "value": 0
               },
               {
-                "key": "place",
+                "key": "show_duration",
                 "value": 1
               },
               {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
                 "key": "duration",
-                "value": 3
+                "value": 7
               },
               {
                 "key": "order",
@@ -5675,15 +5675,15 @@
           },
           {
             "id": 56,
-            "tplId": 131,
+            "tplId": 116,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -5777,15 +5777,15 @@
           },
           {
             "id": 57,
-            "tplId": 131,
+            "tplId": 135,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5793,7 +5793,7 @@
               },
               {
                 "key": "duration",
-                "value": 7
+                "value": 9
               },
               {
                 "key": "order",
@@ -5879,15 +5879,15 @@
           },
           {
             "id": 58,
-            "tplId": 104,
+            "tplId": 135,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5981,15 +5981,15 @@
           },
           {
             "id": 59,
-            "tplId": 104,
+            "tplId": 100,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -5997,7 +5997,7 @@
               },
               {
                 "key": "duration",
-                "value": 9
+                "value": 4
               },
               {
                 "key": "order",
@@ -6083,15 +6083,15 @@
           },
           {
             "id": 60,
-            "tplId": 93,
+            "tplId": 100,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -6185,15 +6185,15 @@
           },
           {
             "id": 61,
-            "tplId": 93,
+            "tplId": 100,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -6287,15 +6287,15 @@
           },
           {
             "id": 62,
-            "tplId": 93,
+            "tplId": 112,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -6303,7 +6303,7 @@
               },
               {
                 "key": "duration",
-                "value": 4
+                "value": 3
               },
               {
                 "key": "order",
@@ -6389,15 +6389,15 @@
           },
           {
             "id": 63,
-            "tplId": 62,
+            "tplId": 112,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -6491,15 +6491,15 @@
           },
           {
             "id": 64,
-            "tplId": 62,
+            "tplId": 112,
             "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 52
               },
               {
                 "key": "show_duration",
@@ -6593,15 +6593,15 @@
           },
           {
             "id": 65,
-            "tplId": 62,
+            "tplId": 112,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -6695,15 +6695,15 @@
           },
           {
             "id": 66,
-            "tplId": 62,
+            "tplId": 126,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -6711,7 +6711,7 @@
               },
               {
                 "key": "duration",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "order",
@@ -6797,15 +6797,15 @@
           },
           {
             "id": 67,
-            "tplId": 31,
+            "tplId": 126,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -6899,15 +6899,15 @@
           },
           {
             "id": 68,
-            "tplId": 31,
+            "tplId": 126,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7001,15 +7001,15 @@
           },
           {
             "id": 69,
-            "tplId": 31,
+            "tplId": 126,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -7103,15 +7103,15 @@
           },
           {
             "id": 70,
-            "tplId": 31,
+            "tplId": 119,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -7119,7 +7119,7 @@
               },
               {
                 "key": "duration",
-                "value": 1
+                "value": 3
               },
               {
                 "key": "order",
@@ -7205,15 +7205,15 @@
           },
           {
             "id": 71,
-            "tplId": 101,
+            "tplId": 119,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7307,15 +7307,15 @@
           },
           {
             "id": 72,
-            "tplId": 101,
+            "tplId": 119,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7409,15 +7409,15 @@
           },
           {
             "id": 73,
-            "tplId": 101,
+            "tplId": 103,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7511,15 +7511,15 @@
           },
           {
             "id": 74,
-            "tplId": 129,
+            "tplId": 103,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -7613,15 +7613,15 @@
           },
           {
             "id": 75,
-            "tplId": 129,
+            "tplId": 103,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7715,15 +7715,15 @@
           },
           {
             "id": 76,
-            "tplId": 129,
+            "tplId": 102,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -7731,7 +7731,7 @@
               },
               {
                 "key": "duration",
-                "value": 3
+                "value": 5
               },
               {
                 "key": "order",
@@ -7817,15 +7817,15 @@
           },
           {
             "id": 77,
-            "tplId": 95,
+            "tplId": 102,
             "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 51
               },
               {
                 "key": "show_duration",
@@ -7919,15 +7919,15 @@
           },
           {
             "id": 78,
-            "tplId": 95,
+            "tplId": 98,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -8021,15 +8021,15 @@
           },
           {
             "id": 79,
-            "tplId": 103,
+            "tplId": 98,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -8037,7 +8037,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 5
               },
               {
                 "key": "order",
@@ -8123,15 +8123,15 @@
           },
           {
             "id": 80,
-            "tplId": 91,
+            "tplId": 98,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -8225,23 +8225,23 @@
           },
           {
             "id": 81,
-            "tplId": 91,
+            "tplId": 123,
             "attrs": [
+              {
+                "key": "place",
+                "value": 40
+              },
               {
                 "key": "number",
                 "value": 0
               },
               {
-                "key": "place",
+                "key": "show_duration",
                 "value": 1
               },
               {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
                 "key": "duration",
-                "value": 5
+                "value": 6
               },
               {
                 "key": "order",
@@ -8327,15 +8327,15 @@
           },
           {
             "id": 82,
-            "tplId": 91,
+            "tplId": 123,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -8343,7 +8343,7 @@
               },
               {
                 "key": "duration",
-                "value": 5
+                "value": 6
               },
               {
                 "key": "order",
@@ -8429,15 +8429,15 @@
           },
           {
             "id": 83,
-            "tplId": 30,
+            "tplId": 101,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -8531,15 +8531,15 @@
           },
           {
             "id": 84,
-            "tplId": 30,
+            "tplId": 101,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -8633,15 +8633,15 @@
           },
           {
             "id": 85,
-            "tplId": 94,
+            "tplId": 97,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -8649,7 +8649,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 2
               },
               {
                 "key": "order",
@@ -8735,15 +8735,15 @@
           },
           {
             "id": 86,
-            "tplId": 94,
+            "tplId": 97,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -8751,7 +8751,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 2
               },
               {
                 "key": "order",
@@ -8837,15 +8837,15 @@
           },
           {
             "id": 87,
-            "tplId": 90,
+            "tplId": 97,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -8939,19 +8939,19 @@
           },
           {
             "id": 88,
-            "tplId": 90,
+            "tplId": 97,
             "attrs": [
+              {
+                "key": "place",
+                "value": 37
+              },
               {
                 "key": "number",
                 "value": 0
               },
               {
-                "key": "place",
-                "value": 1
-              },
-              {
                 "key": "show_duration",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "duration",
@@ -9041,15 +9041,15 @@
           },
           {
             "id": 89,
-            "tplId": 90,
+            "tplId": 105,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9057,7 +9057,7 @@
               },
               {
                 "key": "duration",
-                "value": 2
+                "value": 5
               },
               {
                 "key": "order",
@@ -9143,15 +9143,15 @@
           },
           {
             "id": 90,
-            "tplId": 90,
+            "tplId": 105,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -9159,7 +9159,7 @@
               },
               {
                 "key": "duration",
-                "value": 2
+                "value": 5
               },
               {
                 "key": "order",
@@ -9245,15 +9245,15 @@
           },
           {
             "id": 91,
-            "tplId": 24,
+            "tplId": 105,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -9347,15 +9347,15 @@
           },
           {
             "id": 92,
-            "tplId": 24,
+            "tplId": 117,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9363,7 +9363,7 @@
               },
               {
                 "key": "duration",
-                "value": 5
+                "value": 6
               },
               {
                 "key": "order",
@@ -9439,7 +9439,7 @@
               },
               {
                 "key": "type",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "hero",
@@ -9449,15 +9449,15 @@
           },
           {
             "id": 93,
-            "tplId": 24,
+            "tplId": 117,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -9465,7 +9465,7 @@
               },
               {
                 "key": "duration",
-                "value": 5
+                "value": 6
               },
               {
                 "key": "order",
@@ -9541,7 +9541,7 @@
               },
               {
                 "key": "type",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "hero",
@@ -9551,15 +9551,15 @@
           },
           {
             "id": 94,
-            "tplId": 132,
+            "tplId": 121,
             "attrs": [
+              {
+                "key": "place",
+                "value": 15
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -9567,7 +9567,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 4
               },
               {
                 "key": "order",
@@ -9653,15 +9653,15 @@
           },
           {
             "id": 95,
-            "tplId": 132,
+            "tplId": 121,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9669,7 +9669,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 4
               },
               {
                 "key": "order",
@@ -9755,15 +9755,15 @@
           },
           {
             "id": 96,
-            "tplId": 133,
+            "tplId": 134,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9847,7 +9847,7 @@
               },
               {
                 "key": "type",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "hero",
@@ -9857,15 +9857,15 @@
           },
           {
             "id": 97,
-            "tplId": 133,
+            "tplId": 134,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9949,7 +9949,7 @@
               },
               {
                 "key": "type",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "hero",
@@ -9959,15 +9959,15 @@
           },
           {
             "id": 98,
-            "tplId": 32,
+            "tplId": 106,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -9975,7 +9975,7 @@
               },
               {
                 "key": "duration",
-                "value": 4
+                "value": 3
               },
               {
                 "key": "order",
@@ -10061,15 +10061,15 @@
           },
           {
             "id": 99,
-            "tplId": 32,
+            "tplId": 106,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -10077,7 +10077,7 @@
               },
               {
                 "key": "duration",
-                "value": 4
+                "value": 3
               },
               {
                 "key": "order",
@@ -10163,15 +10163,15 @@
           },
           {
             "id": 100,
-            "tplId": 97,
+            "tplId": 106,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -10265,15 +10265,15 @@
           },
           {
             "id": 101,
-            "tplId": 97,
+            "tplId": 111,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -10281,7 +10281,7 @@
               },
               {
                 "key": "duration",
-                "value": 3
+                "value": 5
               },
               {
                 "key": "order",
@@ -10367,15 +10367,15 @@
           },
           {
             "id": 102,
-            "tplId": 97,
+            "tplId": 111,
             "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
               {
                 "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -10383,7 +10383,7 @@
               },
               {
                 "key": "duration",
-                "value": 3
+                "value": 5
               },
               {
                 "key": "order",
@@ -10469,15 +10469,15 @@
           },
           {
             "id": 103,
-            "tplId": 61,
+            "tplId": 94,
             "attrs": [
+              {
+                "key": "place",
+                "value": 3
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10485,7 +10485,7 @@
               },
               {
                 "key": "duration",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "order",
@@ -10571,15 +10571,15 @@
           },
           {
             "id": 104,
-            "tplId": 61,
+            "tplId": 94,
             "attrs": [
+              {
+                "key": "place",
+                "value": 6
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10587,7 +10587,7 @@
               },
               {
                 "key": "duration",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "order",
@@ -10673,15 +10673,15 @@
           },
           {
             "id": 105,
-            "tplId": 23,
+            "tplId": 94,
             "attrs": [
+              {
+                "key": "place",
+                "value": 2
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10775,15 +10775,15 @@
           },
           {
             "id": 106,
-            "tplId": 23,
+            "tplId": 94,
             "attrs": [
+              {
+                "key": "place",
+                "value": 6
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10877,15 +10877,15 @@
           },
           {
             "id": 107,
-            "tplId": 23,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 6
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10979,15 +10979,15 @@
           },
           {
             "id": 108,
-            "tplId": 23,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 5
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -10999,7 +10999,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 3
               },
               {
                 "key": "anim_card_fly",
@@ -11081,15 +11081,15 @@
           },
           {
             "id": 109,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 5
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11101,7 +11101,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 2
               },
               {
                 "key": "anim_card_fly",
@@ -11183,15 +11183,15 @@
           },
           {
             "id": 110,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 3
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11285,15 +11285,15 @@
           },
           {
             "id": 111,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 2
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11305,7 +11305,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 4
               },
               {
                 "key": "anim_card_fly",
@@ -11387,15 +11387,15 @@
           },
           {
             "id": 112,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 5
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11407,7 +11407,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 4
               },
               {
                 "key": "anim_card_fly",
@@ -11489,15 +11489,15 @@
           },
           {
             "id": 113,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 2
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11509,7 +11509,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 2
               },
               {
                 "key": "anim_card_fly",
@@ -11591,15 +11591,15 @@
           },
           {
             "id": 114,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 3
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11693,15 +11693,15 @@
           },
           {
             "id": 115,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 5
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11713,7 +11713,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "anim_card_fly",
@@ -11795,15 +11795,15 @@
           },
           {
             "id": 116,
-            "tplId": 88,
+            "tplId": 95,
             "attrs": [
+              {
+                "key": "place",
+                "value": 2
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11815,7 +11815,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "anim_card_fly",
@@ -11897,15 +11897,15 @@
           },
           {
             "id": 117,
-            "tplId": 88,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 6
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -11999,15 +11999,15 @@
           },
           {
             "id": 118,
-            "tplId": 88,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 6
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12101,15 +12101,15 @@
           },
           {
             "id": 119,
-            "tplId": 89,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 5
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12203,15 +12203,15 @@
           },
           {
             "id": 120,
-            "tplId": 89,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 2
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12223,7 +12223,7 @@
               },
               {
                 "key": "order",
-                "value": 0
+                "value": 3
               },
               {
                 "key": "anim_card_fly",
@@ -12305,15 +12305,15 @@
           },
           {
             "id": 121,
-            "tplId": 89,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 3
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12407,15 +12407,15 @@
           },
           {
             "id": 122,
-            "tplId": 89,
+            "tplId": 96,
             "attrs": [
+              {
+                "key": "place",
+                "value": 3
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12509,15 +12509,15 @@
           },
           {
             "id": 123,
-            "tplId": 89,
+            "tplId": 73,
             "attrs": [
+              {
+                "key": "place",
+                "value": 90
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12525,7 +12525,7 @@
               },
               {
                 "key": "duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "order",
@@ -12581,7 +12581,7 @@
               },
               {
                 "key": "anim_highlight",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "nft_card",
@@ -12601,7 +12601,7 @@
               },
               {
                 "key": "type",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "hero",
@@ -12611,15 +12611,15 @@
           },
           {
             "id": 124,
-            "tplId": 89,
+            "tplId": 181,
             "attrs": [
+              {
+                "key": "place",
+                "value": 12
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
               },
               {
                 "key": "show_duration",
@@ -12627,7 +12627,7 @@
               },
               {
                 "key": "duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "order",
@@ -12703,7 +12703,7 @@
               },
               {
                 "key": "type",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "hero",
@@ -12713,15 +12713,15 @@
           },
           {
             "id": 125,
-            "tplId": 163,
+            "tplId": 245,
             "attrs": [
+              {
+                "key": "place",
+                "value": 105
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 11
               },
               {
                 "key": "show_duration",
@@ -12815,15 +12815,15 @@
           },
           {
             "id": 126,
-            "tplId": 120,
+            "tplId": 246,
             "attrs": [
+              {
+                "key": "place",
+                "value": 106
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 90
               },
               {
                 "key": "show_duration",
@@ -12917,15 +12917,15 @@
           },
           {
             "id": 127,
-            "tplId": 184,
+            "tplId": 340,
             "attrs": [
+              {
+                "key": "place",
+                "value": 54
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 12
               },
               {
                 "key": "show_duration",
@@ -13019,15 +13019,15 @@
           },
           {
             "id": 128,
-            "tplId": 216,
+            "tplId": 353,
             "attrs": [
+              {
+                "key": "place",
+                "value": 60
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 26
               },
               {
                 "key": "show_duration",
@@ -13121,15 +13121,15 @@
           },
           {
             "id": 129,
-            "tplId": 216,
+            "tplId": 356,
             "attrs": [
+              {
+                "key": "place",
+                "value": 61
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 27
               },
               {
                 "key": "show_duration",
@@ -13223,15 +13223,15 @@
           },
           {
             "id": 130,
-            "tplId": 254,
+            "tplId": 366,
             "attrs": [
+              {
+                "key": "place",
+                "value": 62
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 105
               },
               {
                 "key": "show_duration",
@@ -13325,15 +13325,15 @@
           },
           {
             "id": 131,
-            "tplId": 255,
+            "tplId": 337,
             "attrs": [
               {
-                "key": "number",
+                "key": "place",
                 "value": 0
               },
               {
-                "key": "place",
-                "value": 106
+                "key": "number",
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -13427,23 +13427,23 @@
           },
           {
             "id": 132,
-            "tplId": 31,
+            "tplId": 338,
             "attrs": [
+              {
+                "key": "place",
+                "value": 39
+              },
               {
                 "key": "number",
                 "value": 0
               },
               {
-                "key": "place",
-                "value": 2
-              },
-              {
                 "key": "show_duration",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "order",
@@ -13519,7 +13519,7 @@
               },
               {
                 "key": "type",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "hero",
@@ -13529,15 +13529,15 @@
           },
           {
             "id": 133,
-            "tplId": 134,
+            "tplId": 384,
             "attrs": [
+              {
+                "key": "place",
+                "value": 109
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 2
               },
               {
                 "key": "show_duration",
@@ -13545,7 +13545,7 @@
               },
               {
                 "key": "duration",
-                "value": 3
+                "value": 0
               },
               {
                 "key": "order",
@@ -13631,15 +13631,15 @@
           },
           {
             "id": 134,
-            "tplId": 352,
+            "tplId": 390,
             "attrs": [
+              {
+                "key": "place",
+                "value": 112
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 54
               },
               {
                 "key": "show_duration",
@@ -13733,15 +13733,15 @@
           },
           {
             "id": 135,
-            "tplId": 365,
+            "tplId": 387,
             "attrs": [
+              {
+                "key": "place",
+                "value": 111
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 60
               },
               {
                 "key": "show_duration",
@@ -13835,627 +13835,15 @@
           },
           {
             "id": 136,
-            "tplId": 368,
+            "tplId": 398,
             "attrs": [
+              {
+                "key": "place",
+                "value": 209
+              },
               {
                 "key": "number",
                 "value": 0
-              },
-              {
-                "key": "place",
-                "value": 61
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 137,
-            "tplId": 378,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 62
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 138,
-            "tplId": 349,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 139,
-            "tplId": 350,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 140,
-            "tplId": 396,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 109
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 141,
-            "tplId": 402,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 112
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 142,
-            "tplId": 399,
-            "attrs": [
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "place",
-                "value": 111
               },
               {
                 "key": "show_duration",
