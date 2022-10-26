@@ -5,7 +5,13 @@ namespace Solcery.Games
         // Commons
         public static readonly string Picture = "picture";
         public static readonly string AnimHighlight = "anim_highlight";
-        
+        public static readonly string AnimHighlightColorR = "anim_highlight_r";
+        public static readonly string AnimHighlightColorG = "anim_highlight_g";
+        public static readonly string AnimHighlightColorB = "anim_highlight_b";
+        public static readonly string AnimHighlightColorA = "anim_highlight_a";
+        public static readonly string AnimDestroy = "anim_destroy";
+        public static readonly string AnimDestroyTime = "anim_card_destroy_time";
+
         // Widgets
         public static readonly string WidgetPictureType = "picture_type";
         public static readonly string WidgetPicturePixelsPerUnitMultiplier = "picture_pixels_per_unit_multiplier";
@@ -24,14 +30,13 @@ namespace Solcery.Games
         public static readonly string CardTooltipId = "tooltip_id";
         public static readonly string CardShowDuration = "show_duration";
         public static readonly string CardDuration = "duration";
+        public static readonly string CardDurationFiling = "duration_color";
         public static readonly string CardAnimCardFly = "anim_card_fly";
         public static readonly string CardAnimCardFlyFromPlace = "anim_card_fly_from_place";
         public static readonly string CardAnimCardFlyTime = "anim_card_fly_time";
         public static readonly string CardDescriptionFontSize = "description_font_size";
         public static readonly string CardDefaultTimerValue = "default_timer_value";
-        public static readonly string CardAnimCardDestroy = "anim_destroy";
-        public static readonly string CardAnimCardDestroyTime = "anim_card_destroy_time";
-        
+
         // Token
         public static readonly string TokenSlot = "slot";
         

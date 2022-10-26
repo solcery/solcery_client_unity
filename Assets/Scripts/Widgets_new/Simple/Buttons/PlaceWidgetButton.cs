@@ -69,8 +69,7 @@ namespace Solcery.Widgets_new.Simple.Buttons
 
         private void UpdateAttributes(Dictionary<string, IAttributeValue> attributes)
         {
-            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
-            Layout.UpdateHighlight(animHighlight);
+            Layout.UpdateHighlights(attributes);
         }
         
         public override PlaceWidgetLayout LayoutForObjectId(int objectId)

@@ -169,10 +169,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     });
                 }
 
-                if (attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroy, out var animDestroyAttribute) &&
+                if (attributes.TryGetValue(GameJsonKeys.AnimDestroy, out var animDestroyAttribute) &&
                     animDestroyAttribute.Current > 0)
                 {
-                    var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardDestroyTime, out var  animCardDestroyTimeAttribute)
+                    var animCardDestroyTimeSec = attributes.TryGetValue(GameJsonKeys.AnimDestroyTime, out var  animCardDestroyTimeAttribute)
                         ? animCardDestroyTimeAttribute.Current.ToSec()
                         : 3f;
                     AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
@@ -226,10 +226,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var tokenSlots = attributes.TryGetValue(GameJsonKeys.CardTokenSlots, out var tokenSlotsAttribute) ? tokenSlotsAttribute.Current : 0;
             eclipseCard.Layout.TokensLayout.UpdateTokenSlots(tokenSlots);
             
-            // anims
-            var animHighlight = attributes.TryGetValue(GameJsonKeys.AnimHighlight, out var animHighlightAttribute) && animHighlightAttribute.Current > 0;
-            eclipseCard.Layout.UpdateHighlight(animHighlight);
-            
             // order
             var order = attributes.TryGetValue("order", out var orderAttributeY) ? orderAttributeY.Current : 0;
             eclipseCard.SetOrder(order);
@@ -249,6 +245,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
             
             eclipseCard.UpdateCardFace(cardFace, faceChangeAnimation);
+            
+            // highlights
+            eclipseCard.Layout.UpdateHighlights(attributes);
         }
         
         private PlaceWidget GetPlaceWidget(
