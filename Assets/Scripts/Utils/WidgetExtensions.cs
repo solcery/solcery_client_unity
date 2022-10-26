@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Models.Shared.Attributes.Values;
@@ -58,6 +59,24 @@ namespace Solcery.Utils
                     image.color = color;
                 }
             }
+        }
+
+        public static string UpdateAttributes(this string source, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes == null)
+                return source;
+            
+            return Regex.Replace(source, @"\<attr=(.*?)\>",
+                m =>
+                {
+                    var attributeKey = m.Groups[1].Value.Replace("\"", "");
+                    if (attributes.TryGetValue(attributeKey, out var attributeValue))
+                    {
+                        return attributeValue.Current.ToString();
+                    }
+
+                    return m.Groups[0].Value;
+                });
         }
     }
 }
