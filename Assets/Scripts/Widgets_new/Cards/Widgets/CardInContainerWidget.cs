@@ -1,7 +1,7 @@
 using System;
 using Solcery.Games;
-using Solcery.Models.Shared.Commands.Datas.OnClick;
-using Solcery.Models.Shared.Triggers.EntityTypes;
+using Solcery.Models.Shared.Commands.New;
+using Solcery.Models.Shared.Commands.New.OnClick;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;
@@ -83,7 +83,9 @@ namespace Solcery.Widgets_new.Cards.Widgets
             
             _layout.AddOnClickListener(() =>
             {
-                var command = CommandOnLeftClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
+                var command =
+                    CommandOnLeftClickDataNew.Create(
+                        _game.ServiceGameContent.CommandIdForType(CommandTypesNew.OnLeftClick), _game.PlayerIndex, objectId);
                 _game.TransportService.SendCommand(command.ToJson());
             });
         }

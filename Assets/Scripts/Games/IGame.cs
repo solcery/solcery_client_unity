@@ -21,6 +21,7 @@ namespace Solcery.Games
 {
     public interface IGame
     {
+        int PlayerIndex { get; }
         bool IsPredictable { get;}
         Camera MainCamera { get; }
         ITransportService TransportService { get; }

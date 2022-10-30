@@ -2,10 +2,9 @@
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
-using Solcery.Models.Shared.Commands;
+using Solcery.Models.Shared.Commands.New;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
-using Solcery.Models.Shared.Triggers.Apply;
 using Solcery.Models.Simulation.Game.Destroy;
 using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
@@ -40,18 +39,16 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemInitialGameContentTooltips.Create());
 
             // Process commands
-            _systems.Add(SystemProcessCommands.Create(serviceCommands));
-            
-            // Apply triggers
+            _systems.Add(SystemProcessCommandNew.Create(serviceCommands));
+            // Execute commands
             // TODO: fix it!!!
-            _systems.Add(SystemsTriggerApply.Create(applyGameState as IServiceLocalSimulationApplyGameStateNew));
-            
+            _systems.Add(SystemExecuteCommandNew.Create(applyGameState as IServiceLocalSimulationApplyGameStateNew));
             // Update static attributes
             _systems.Add(SystemStaticAttributesUpdate.Create());
-            
             // Create game state
             _systems.Add(SystemGameStateCreate.Create(applyGameState));
-            
+            // Remove consumed commands
+            _systems.Add(SystemRemoveConsumedCommandNew.Create());
             // Destroy objects
             _systems.Add(SystemDestroyObjects.Create());
             

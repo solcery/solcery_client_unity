@@ -2,10 +2,10 @@ using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Games.States.New.States;
 using Solcery.Models.Play.Places;
-using Solcery.Models.Shared.Commands.Datas.OnClick;
+using Solcery.Models.Shared.Commands.New;
+using Solcery.Models.Shared.Commands.New.OnClick;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
-using Solcery.Models.Shared.Triggers.EntityTypes;
 using UnityEngine;
 
 namespace Solcery.Models.Play.Timer
@@ -101,7 +101,8 @@ namespace Solcery.Models.Play.Timer
                     var targetObjectId = poolTimerTargetObjectId.Get(timerEntity).TargetObjectId;
                     StopTimer(world, timerEntity);
                     world.DelEntity(timerEntity);
-                    var command = CommandOnLeftClickData.CreateFromParameters(targetObjectId, TriggerTargetEntityTypes.Card);
+                    var command = CommandOnLeftClickDataNew.Create(
+                        _game.ServiceGameContent.CommandIdForType(CommandTypesNew.OnLeftClick), _game.PlayerIndex, targetObjectId);
                     _game.TransportService.SendCommand(command.ToJson());
                     _game.WidgetCanvas.GetTimer().text = "FINISH";
                 }

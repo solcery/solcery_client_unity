@@ -2,14 +2,35 @@
   "nfts": [],
   "card_types": [
     {
-      "id": 306,
+      "id": 303,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 316,
+      "id": 313,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 319,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 320,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 321,
       "override_fields": [
         "displayed_name",
         "picture"
@@ -23,20 +44,6 @@
       ]
     },
     {
-      "id": 323,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 324,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
       "id": 325,
       "override_fields": [
         "displayed_name",
@@ -44,28 +51,21 @@
       ]
     },
     {
+      "id": 326,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 327,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
       "id": 328,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 329,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 330,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 331,
       "override_fields": [
         "displayed_name",
         "picture"

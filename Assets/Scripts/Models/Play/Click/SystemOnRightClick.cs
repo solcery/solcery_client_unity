@@ -1,8 +1,5 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
-using Solcery.Models.Shared.Commands.Datas.OnClick;
-using Solcery.Models.Shared.Objects;
-using Solcery.Models.Shared.Triggers.EntityTypes;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 
@@ -54,9 +51,9 @@ namespace Solcery.Models.Play.Click
 
         private void OnRightClick(EcsWorld world, int entityId)
         {
-            var objectId = world.GetPool<ComponentObjectId>().Get(entityId).Id;
-            var command = CommandOnRightClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
-            _game.TransportService.SendCommand(command.ToJson());
+            // var objectId = world.GetPool<ComponentObjectId>().Get(entityId).Id;
+            // var command = CommandOnRightClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
+            // _game.TransportService.SendCommand(command.ToJson());
         }
 
         public void OnEvent(EventData eventData)

@@ -15,11 +15,11 @@
           },
           {
             "key": "your_hp",
-            "value": 20
+            "value": 0
           },
           {
             "key": "enemy_hp",
-            "value": 20
+            "value": 0
           },
           {
             "key": "your_gold",
@@ -31,7 +31,7 @@
           },
           {
             "key": "current_player",
-            "value": 1
+            "value": 0
           },
           {
             "key": "peace_envoy",
@@ -39,7 +39,7 @@
           },
           {
             "key": "game_mode",
-            "value": 1
+            "value": 0
           },
           {
             "key": "game_status",
@@ -51,7 +51,7 @@
           },
           {
             "key": "enemy_visible",
-            "value": 1
+            "value": 0
           },
           {
             "key": "nfts_stage",
@@ -60,6 +60,18 @@
           {
             "key": "show_notif",
             "value": 0
+          },
+          {
+            "key": "vs_player_status",
+            "value": 0
+          },
+          {
+            "key": "show_vs_screen",
+            "value": 0
+          },
+          {
+            "key": "show_nfts_screen",
+            "value": 3
           }
         ],
         "objects": [
@@ -73,7 +85,7 @@
               },
               {
                 "key": "number",
-                "value": 20
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -161,6 +173,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -264,6 +288,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -277,7 +313,7 @@
               },
               {
                 "key": "number",
-                "value": 20
+                "value": 0
               },
               {
                 "key": "show_duration",
@@ -365,6 +401,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -468,6 +516,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -569,6 +629,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -672,6 +744,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -774,6 +858,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -783,7 +879,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 71
               },
               {
                 "key": "number",
@@ -875,6 +971,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -885,7 +993,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -977,6 +1085,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -987,7 +1107,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 41
+                "value": 1
               },
               {
                 "key": "number",
@@ -995,7 +1115,7 @@
               },
               {
                 "key": "show_duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "duration",
@@ -1079,6 +1199,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -1182,6 +1314,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -1283,6 +1427,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -1386,6 +1542,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -1487,6 +1655,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -1590,6 +1770,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -1691,6 +1883,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -1794,6 +1998,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -1896,6 +2112,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -1905,7 +2133,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -1997,6 +2225,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -2100,6 +2340,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -2201,6 +2453,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -2304,6 +2568,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -2313,7 +2589,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -2405,6 +2681,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -2508,6 +2796,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -2610,6 +2910,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -2619,7 +2931,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -2711,6 +3023,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -2721,7 +3045,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -2813,6 +3137,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -2916,6 +3252,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3018,6 +3366,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3027,7 +3387,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -3119,6 +3479,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -3222,6 +3594,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3323,6 +3707,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -3426,6 +3822,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3527,6 +3935,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -3630,6 +4050,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3731,6 +4163,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -3834,6 +4278,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3936,6 +4392,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -3945,7 +4413,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 52
               },
               {
                 "key": "number",
@@ -4037,6 +4505,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -4140,6 +4620,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -4242,6 +4734,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -4251,7 +4755,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -4344,6 +4848,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -4353,7 +4869,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -4445,6 +4961,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -4548,6 +5076,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -4557,7 +5097,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 73
               },
               {
                 "key": "number",
@@ -4649,6 +5189,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -4752,6 +5304,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -4853,6 +5417,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -4956,6 +5532,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5057,6 +5645,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -5160,6 +5760,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5169,7 +5781,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -5262,6 +5874,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5271,7 +5895,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -5363,6 +5987,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -5466,6 +6102,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5568,6 +6216,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5577,7 +6237,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 38
+                "value": 1
               },
               {
                 "key": "number",
@@ -5585,7 +6245,7 @@
               },
               {
                 "key": "show_duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "duration",
@@ -5669,6 +6329,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -5679,7 +6351,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -5771,6 +6443,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -5874,6 +6558,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -5975,6 +6671,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -6078,6 +6786,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -6180,6 +6900,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -6189,7 +6921,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -6281,6 +7013,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -6384,6 +7128,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -6485,6 +7241,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -6588,6 +7356,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -6597,7 +7377,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -6689,6 +7469,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -6792,6 +7584,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -6893,6 +7697,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -6996,6 +7812,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7005,7 +7833,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -7098,6 +7926,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7107,7 +7947,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -7199,6 +8039,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -7302,6 +8154,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7404,6 +8268,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7413,7 +8289,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 51
               },
               {
                 "key": "number",
@@ -7505,6 +8381,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -7515,7 +8403,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -7607,6 +8495,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -7710,6 +8610,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7812,6 +8724,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -7821,7 +8745,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 72
               },
               {
                 "key": "number",
@@ -7913,6 +8837,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -7923,7 +8859,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -8015,6 +8951,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8025,7 +8973,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -8117,6 +9065,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8127,7 +9087,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -8220,6 +9180,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -8229,7 +9201,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 40
+                "value": 1
               },
               {
                 "key": "number",
@@ -8237,7 +9209,7 @@
               },
               {
                 "key": "show_duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "duration",
@@ -8321,6 +9293,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8424,6 +9408,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -8525,6 +9521,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8628,6 +9636,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -8729,6 +9749,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8832,6 +9864,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -8841,7 +9885,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -8933,6 +9977,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -8943,7 +9999,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 37
+                "value": 1
               },
               {
                 "key": "number",
@@ -8951,7 +10007,7 @@
               },
               {
                 "key": "show_duration",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "duration",
@@ -9036,6 +10092,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -9045,7 +10113,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 53
               },
               {
                 "key": "number",
@@ -9137,6 +10205,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -9147,7 +10227,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -9239,6 +10319,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -9249,7 +10341,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -9341,6 +10433,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -9444,6 +10548,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -9453,7 +10569,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -9546,6 +10662,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -9555,7 +10683,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 15
+                "value": 1
               },
               {
                 "key": "number",
@@ -9647,6 +10775,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -9750,6 +10890,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -9851,6 +11003,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -9954,6 +11118,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -10055,6 +11231,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10158,6 +11346,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -10259,6 +11459,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10362,6 +11574,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -10464,6 +11688,18 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
@@ -10473,7 +11709,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "number",
@@ -10565,6 +11801,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10575,7 +11823,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 6
+                "value": 1
               },
               {
                 "key": "number",
@@ -10667,6 +11915,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10677,7 +11937,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 2
+                "value": 1
               },
               {
                 "key": "number",
@@ -10769,6 +12029,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10779,7 +12051,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 6
+                "value": 1
               },
               {
                 "key": "number",
@@ -10871,6 +12143,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10881,7 +12165,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 6
+                "value": 1
               },
               {
                 "key": "number",
@@ -10973,6 +12257,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -10983,7 +12279,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "number",
@@ -10999,7 +12295,7 @@
               },
               {
                 "key": "order",
-                "value": 3
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11075,6 +12371,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11085,7 +12393,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "number",
@@ -11101,7 +12409,7 @@
               },
               {
                 "key": "order",
-                "value": 2
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11177,6 +12485,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11187,7 +12507,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "number",
@@ -11279,6 +12599,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11289,7 +12621,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 2
+                "value": 1
               },
               {
                 "key": "number",
@@ -11305,7 +12637,7 @@
               },
               {
                 "key": "order",
-                "value": 4
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11381,6 +12713,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11391,7 +12735,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "number",
@@ -11407,7 +12751,7 @@
               },
               {
                 "key": "order",
-                "value": 4
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11483,6 +12827,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11493,7 +12849,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 2
+                "value": 1
               },
               {
                 "key": "number",
@@ -11509,7 +12865,7 @@
               },
               {
                 "key": "order",
-                "value": 2
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11585,6 +12941,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11595,7 +12963,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "number",
@@ -11687,6 +13055,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11697,7 +13077,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "number",
@@ -11713,7 +13093,7 @@
               },
               {
                 "key": "order",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11789,6 +13169,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11799,7 +13191,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 2
+                "value": 1
               },
               {
                 "key": "number",
@@ -11815,7 +13207,7 @@
               },
               {
                 "key": "order",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -11891,6 +13283,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -11901,7 +13305,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 6
+                "value": 1
               },
               {
                 "key": "number",
@@ -11993,6 +13397,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12003,7 +13419,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 6
+                "value": 1
               },
               {
                 "key": "number",
@@ -12095,6 +13511,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12105,7 +13533,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 5
+                "value": 1
               },
               {
                 "key": "number",
@@ -12197,6 +13625,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12207,7 +13647,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 2
+                "value": 1
               },
               {
                 "key": "number",
@@ -12223,7 +13663,7 @@
               },
               {
                 "key": "order",
-                "value": 3
+                "value": 0
               },
               {
                 "key": "anim_card_fly",
@@ -12299,6 +13739,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12309,7 +13761,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "number",
@@ -12401,6 +13853,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12411,7 +13875,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 3
+                "value": 1
               },
               {
                 "key": "number",
@@ -12503,6 +13967,18 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
@@ -12581,7 +14057,7 @@
               },
               {
                 "key": "anim_highlight",
-                "value": 1
+                "value": 0
               },
               {
                 "key": "nft_card",
@@ -12605,115 +14081,25 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
           },
           {
             "id": 124,
-            "tplId": 181,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 12
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 125,
-            "tplId": 245,
+            "tplId": 242,
             "attrs": [
               {
                 "key": "place",
@@ -12810,12 +14196,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 126,
-            "tplId": 246,
+            "id": 125,
+            "tplId": 243,
             "attrs": [
               {
                 "key": "place",
@@ -12912,12 +14310,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 127,
-            "tplId": 340,
+            "id": 126,
+            "tplId": 337,
             "attrs": [
               {
                 "key": "place",
@@ -13014,12 +14424,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 128,
-            "tplId": 353,
+            "id": 127,
+            "tplId": 349,
             "attrs": [
               {
                 "key": "place",
@@ -13116,12 +14538,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 129,
-            "tplId": 356,
+            "id": 128,
+            "tplId": 352,
             "attrs": [
               {
                 "key": "place",
@@ -13218,12 +14652,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 130,
-            "tplId": 366,
+            "id": 129,
+            "tplId": 362,
             "attrs": [
               {
                 "key": "place",
@@ -13320,16 +14766,28 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 131,
-            "tplId": 337,
+            "id": 130,
+            "tplId": 334,
             "attrs": [
               {
                 "key": "place",
-                "value": 0
+                "value": 1
               },
               {
                 "key": "number",
@@ -13421,115 +14879,139 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 131,
+            "tplId": 335,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
           },
           {
             "id": 132,
-            "tplId": 338,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 39
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 1
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 133,
-            "tplId": 384,
+            "tplId": 380,
             "attrs": [
               {
                 "key": "place",
@@ -13626,12 +15108,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 134,
-            "tplId": 390,
+            "id": 133,
+            "tplId": 386,
             "attrs": [
               {
                 "key": "place",
@@ -13728,12 +15222,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 135,
-            "tplId": 387,
+            "id": 134,
+            "tplId": 383,
             "attrs": [
               {
                 "key": "place",
@@ -13830,12 +15336,24 @@
               {
                 "key": "hero",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
               }
             ]
           },
           {
-            "id": 136,
-            "tplId": 398,
+            "id": 135,
+            "tplId": 394,
             "attrs": [
               {
                 "key": "place",
@@ -13931,6 +15449,474 @@
               },
               {
                 "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 136,
+            "tplId": 337,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 504
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 137,
+            "tplId": 352,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 561
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 138,
+            "tplId": 477,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 511
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 139,
+            "tplId": 477,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 512
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
                 "value": 0
               }
             ]
