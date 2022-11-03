@@ -41,6 +41,7 @@ namespace Solcery.Games
         public static readonly string TokenSlot = "slot";
         
         // Place
+        public static readonly string Place = "place";
         public static readonly string PlaceId = "place_id";
         public static readonly string PlaceInteractableForActiveLocalPlayer = "interactable_for_active_local_player";
         public static readonly string PlaceZOrder = "z_order";

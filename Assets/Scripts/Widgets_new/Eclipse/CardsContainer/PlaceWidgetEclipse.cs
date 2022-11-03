@@ -170,7 +170,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         : 1f;
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                     eclipseCard.Layout.SetActive(false);
-                    WidgetCanvas.GetEffects().MoveEclipseCard(CardFace == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
+                    WidgetCanvas.GetEffects().MoveEclipseCard(GetOldPlaceWidgetCardFace(world, attributes) == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
                     {
                         eclipseCard.Layout.SetActive(true);
                     });
@@ -185,6 +185,23 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
                 }
             }
+        }
+
+        private PlaceWidgetCardFace GetOldPlaceWidgetCardFace(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes.TryGetValue(GameJsonKeys.Place, out var place) && place.Changed)
+            {
+                var poolPlaceId = world.GetPool<ComponentPlaceId>();
+                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
+                var oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
+
+                if (oldWidget != null)
+                {
+                    return oldWidget.GetPlaceWidgetCardFace();
+                }
+            }
+
+            return PlaceWidgetCardFace.Up;
         }
 
         private void PrepareToken(EcsWorld world, int entityId)
@@ -230,20 +247,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             eclipseCard.SetOrder(order);
             
             // face
-            var faceChangeAnimation = false;
-            if (attributes.TryGetValue("place", out var place) && place.Changed)
-            {
-                var poolPlaceId = world.GetPool<ComponentPlaceId>();
-                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
-                var oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
-
-                if (oldWidget != null)
-                {
-                    faceChangeAnimation = oldWidget.GetPlaceWidgetCardFace() != CardFace;
-                }
-            }
-            
-            eclipseCard.UpdateCardFace(cardFace, faceChangeAnimation);
+            eclipseCard.UpdateCardFace(cardFace, GetOldPlaceWidgetCardFace(world, attributes) != cardFace);
             
             // highlights
             eclipseCard.Layout.UpdateHighlights(attributes);
