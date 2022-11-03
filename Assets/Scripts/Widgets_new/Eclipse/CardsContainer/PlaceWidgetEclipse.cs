@@ -20,7 +20,7 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayoutBase>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
+    public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection where T : PlaceWidgetEclipseLayoutBase
     {
         private readonly HashSet<int> _dropObjectId;
         private readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
@@ -31,7 +31,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
         {
-            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject);
+            return new PlaceWidgetEclipse<T>(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
         
         protected PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
@@ -81,6 +81,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 }
 
                 var objectId = objectIdPool.Get(entityId).Id;
+                if (!eclipseCartTypePool.Has(entityId))
+                {
+                    continue;
+                }
+
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 var tplId = world.GetPool<ComponentObjectType>().Get(entityId).TplId;
 
@@ -151,6 +156,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(eclipseCard.EntityId).Attributes;
 
+                var showDescription = attributes.TryGetValue(GameJsonKeys.CardShowDescription, out var showDescriptionAttribute) && showDescriptionAttribute.Current > 0;
+                eclipseCard.Layout.ShowDescription(showDescription);
+                
                 if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
                     animCardFlyAttribute.Current > 0)
                 {
@@ -176,9 +184,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         : 3f;
                     AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
                 }
-                
-                var showDescription = attributes.TryGetValue(GameJsonKeys.CardShowDescription, out var showDescriptionAttribute) && showDescriptionAttribute.Current > 0;
-                eclipseCard.Layout.ShowDescription(showDescription);
             }
         }
 

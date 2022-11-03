@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using DG.Tweening;
 using Solcery.Games;
-using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Eclipse.Cards;

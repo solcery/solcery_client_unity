@@ -43,7 +43,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8b2ef1a32238840e4b17ea26d0356ff0
-    m_Address: ui/ui_stack
+    m_Address: ui/ui_eclipse_stack
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

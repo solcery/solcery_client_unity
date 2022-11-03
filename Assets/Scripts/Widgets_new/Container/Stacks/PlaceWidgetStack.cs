@@ -2,13 +2,13 @@ using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Widgets_new.Canvas;
-using Solcery.Widgets_new.Container.Hands;
+using Solcery.Widgets_new.Eclipse.CardsContainer;
 
 namespace Solcery.Widgets_new.Container.Stacks
 {
-    public sealed class PlaceWidgetStack : PlaceWidgetHand<PlaceWidgetStackLayout>
+    public sealed class PlaceWidgetStack : PlaceWidgetEclipse<PlaceWidgetStackLayout>
     {
-        public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
+        public new static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
         {
             return new PlaceWidgetStack(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
