@@ -67,6 +67,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private TooltipBehaviour _tooltipBehaviour;
 
         private PlaceWidgetCardFace _cardFace;
+        private bool _animChanging;
 
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
@@ -346,25 +347,30 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             iconRectTransform.sizeDelta = new Vector2(width, height);
         }
         
-        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation, float animationDelay)
         {
             if (withAnimation)
             {
-                PlayCardTurn(cardFace);
+                PlayCardTurn(cardFace, animationDelay);
             }
             else
             {
                 UpdateView(cardFace);
             }
         }
-        
-        private void PlayCardTurn(PlaceWidgetCardFace cardFace)
+
+        private void PlayCardTurn(PlaceWidgetCardFace cardFace, float animationDelay)
         {
+            if (_animChanging)
+                return;
+            
             if (_cardFace == cardFace)
             {
                 UpdateView(cardFace);
                 return;
             }
+
+            _animChanging = true;
             
             _sequence?.Complete();
             _sequence = DOTween.Sequence()
@@ -374,7 +380,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                     var position = transform1.localPosition;
                     position.z = -100f;
                     transform1.localPosition = position;
+                    transform1.localRotation = Quaternion.identity;
                 })
+                .AppendInterval(animationDelay)
                 .Append(transform.DORotate(new Vector3(0, 90, 0), 0.3f))
                 .AppendCallback(() =>
                 {
@@ -387,6 +395,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                     var position = transform1.localPosition;
                     position.z = 0f;
                     transform1.localPosition = position;
+                    _animChanging = false;
                 })
                 .Play();
         }

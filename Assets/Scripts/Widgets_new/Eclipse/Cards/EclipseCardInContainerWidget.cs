@@ -136,9 +136,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _order = order;
         }
 
-        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation, float animationDelay)
         {
-            _layout.UpdateCardFace(cardFace, withAnimation);
+            _layout.UpdateCardFace(cardFace, withAnimation, animationDelay);
         }
 
         void IEclipseCardInContainerWidget.UpdateSiblingIndex(int siblingIndex)
