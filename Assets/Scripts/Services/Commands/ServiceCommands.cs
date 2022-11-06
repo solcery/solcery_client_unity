@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Utils;
 
 namespace Solcery.Services.Commands
 {
     public sealed class ServiceCommands : IServiceCommands
     {
         private readonly Queue<JObject> _commands;
-        
+        private readonly HashSet<int> _consumableCommandIds;
+
         public static IServiceCommands Create()
         {
             return new ServiceCommands();
@@ -15,10 +17,16 @@ namespace Solcery.Services.Commands
         private ServiceCommands()
         {
             _commands = new Queue<JObject>();
+            _consumableCommandIds = new HashSet<int>();
         }
         
         void IServiceCommands.PushCommand(JObject command)
         {
+            if (command.TryGetValue("cid", out int cid) && _consumableCommandIds.Contains(cid))
+            {
+                return;
+            }
+            
             _commands.Enqueue(command);
         }
 
@@ -27,6 +35,13 @@ namespace Solcery.Services.Commands
             if (_commands.Count > 0)
             {
                 command = _commands.Dequeue();
+                
+                if (command.TryGetValue("cid", out int cid) 
+                    && !_consumableCommandIds.Contains(cid))
+                {
+                    _consumableCommandIds.Add(cid);
+                }
+                
                 return true;
             }
 
@@ -57,6 +72,7 @@ namespace Solcery.Services.Commands
         private void Cleanup()
         {
             _commands.Clear();
+            _consumableCommandIds.Clear();
         }
     }
 }

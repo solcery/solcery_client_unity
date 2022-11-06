@@ -1,8 +1,10 @@
 #if UNITY_EDITOR || LOCAL_SIMULATION
 using Newtonsoft.Json.Linq;
 using Solcery.Games;
+using Solcery.Services.EditorSimulation;
 using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
+//using UnityEngine;
 
 namespace Solcery.Services.Transport
 {
@@ -10,6 +12,7 @@ namespace Solcery.Services.Transport
     {
         private IGame _game;
         private IServiceLocalSimulation _localSimulation;
+        private IServiceEditorSimulation _editorSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         
         public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, IGame game)
@@ -21,9 +24,25 @@ namespace Solcery.Services.Transport
         {
             _game = game;
             _localSimulation = ServiceLocalSimulation.Create();
+            _editorSimulation = ServiceEditorSimulation.Create();
+            _editorSimulation.EventOnSendGameState += OnCommandsReceive;
             _gameTransportCallbacks = gameTransportCallbacks;
         }
-        
+
+        private void OnCommandsReceive(JObject obj)
+        {
+            if (obj.TryGetValue("commands", out JArray commands))
+            {
+                foreach (var commandToken in commands)
+                {
+                    if (commandToken is JObject command)
+                    {
+                        _localSimulation.PushCommand(command);
+                    }
+                }
+            }
+        }
+
         void ITransportService.CallUnityLoaded(JObject metadata)
         {
             StreamingAssetsUtils.LoadText("LocalSimulationData/game_content.json", OnGameContentLoaded);
@@ -56,12 +75,14 @@ namespace Solcery.Services.Transport
 
         void ITransportService.SendCommand(JObject command)
         {
+            _editorSimulation.SendCommand(command);
             _localSimulation.PushCommand(command);
         }
         
         void ITransportService.Update(float dt)
         {
             _localSimulation.Update(dt);
+            _editorSimulation.Update(dt);
         }
 
         void ITransportService.Cleanup()
@@ -75,6 +96,9 @@ namespace Solcery.Services.Transport
             _localSimulation.Destroy();
             _localSimulation = null;
             _gameTransportCallbacks = null;
+
+            _editorSimulation.EventOnSendGameState -= OnCommandsReceive;
+            _editorSimulation = null;
         }
 
         private void Cleanup()

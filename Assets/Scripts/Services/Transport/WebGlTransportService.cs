@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Accessors.Cache;
 using Solcery.Games;
 using Solcery.React;
+using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
 
 namespace Solcery.Services.Transport
@@ -66,25 +67,35 @@ namespace Solcery.Services.Transport
                 _currentCount++;
             }
         }
-    
+
+        private IGame _game;
+        private IServiceLocalSimulation _localSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         private IJsonPackageData _gameContentPackageData;
         private IJsonPackageData _gameContentOverridesPackageData;
         private IJsonPackageData _gameStatePackageData;
         private readonly ICacheAccessor _cacheAccessor;  
         
-        public static ITransportService Create(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
+        public static ITransportService Create(IGame game, IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
-            return new WebGlTransportService(gameTransportCallbacks, cacheAccessor);
+            return new WebGlTransportService(game, gameTransportCallbacks, cacheAccessor);
         }
 
-        private WebGlTransportService(IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
+        private WebGlTransportService(IGame game, IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
+            _game = game;
+            _localSimulation = ServiceLocalSimulation.Create();
+            _localSimulation.EventOnUpdateGameState += LocalSimulationOnEventOnUpdateGameState;
             _gameTransportCallbacks = gameTransportCallbacks;
             _cacheAccessor = cacheAccessor;
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
+        }
+
+        private void LocalSimulationOnEventOnUpdateGameState(JObject obj)
+        {
+            _gameTransportCallbacks?.OnReceivingGameState(obj);
         }
 
         void ITransportService.CallUnityLoaded(JObject metadata)
@@ -174,9 +185,23 @@ namespace Solcery.Services.Transport
                 return;
             }
             
-            if (_gameStatePackageData.JsonData is JObject gameContent)
+            if (_gameStatePackageData.JsonData is JObject gameState)
             {
-                _gameTransportCallbacks?.OnReceivingGameState(gameContent);
+                if (gameState.TryGetValue("commands", out JArray commands))
+                {
+                    foreach (var commandToken in commands)
+                    {
+                        if (commandToken is JObject command)
+                        {
+                            _localSimulation.PushCommand(command);
+                        }
+                    }
+                }
+                
+                if (gameState.ContainsKey("states"))
+                {
+                    _localSimulation.Init(_game, gameState);
+                }
             }
             _gameStatePackageData = null;
         }
@@ -184,11 +209,12 @@ namespace Solcery.Services.Transport
         void ITransportService.SendCommand(JObject command)
         {
             UnityToReact.Instance.CallSendCommand(command.ToString(Formatting.None));
+            _localSimulation.PushCommand(command);
         }
 
         void ITransportService.Update(float dt)
         {
-            
+            _localSimulation.Update(dt);
         }
 
         private void Cleanup()
@@ -196,6 +222,9 @@ namespace Solcery.Services.Transport
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameContentOverrides, OnGameContentOverridesUpdate);
             ReactToUnity.RemoveCallback(ReactToUnity.EventOnUpdateGameState, OnGameStateUpdate);
+            
+            _localSimulation.EventOnUpdateGameState -= LocalSimulationOnEventOnUpdateGameState;
+            _localSimulation.Cleanup();
         }
         
         void ITransportService.Cleanup()
@@ -206,7 +235,8 @@ namespace Solcery.Services.Transport
         void ITransportService.Destroy()
         {
             Cleanup();
-
+            _localSimulation.Destroy();
+            _localSimulation = null;
             _gameTransportCallbacks = null;
         }
     }

@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Objects;
-using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -144,12 +143,12 @@ namespace Solcery.Models.Simulation.Game.State
 
         private GameStateDiffLog _diff;
 
-        public static ISystemGameStateCreate Create(IServiceLocalSimulationApplyGameState applyGameState)
+        public static ISystemGameStateCreate Create()
         {
-            return new SystemGameStateCreate(applyGameState);
+            return new SystemGameStateCreate();
         }
         
-        private SystemGameStateCreate(IServiceLocalSimulationApplyGameState applyGameState)
+        private SystemGameStateCreate()
         {
             //_applyGameState = applyGameState;
         }

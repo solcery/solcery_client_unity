@@ -9,8 +9,16 @@ namespace Solcery.Models.Shared.Commands.New
         public int CommandId => _commandId;
         public CommandTypesNew CommandType => _commandType;
 
+        private static int _id = 0;
+
+        private readonly int _cid;
         private readonly int _commandId;
         private readonly CommandTypesNew _commandType;
+
+        public static void ResetId()
+        {
+            _id = 0;
+        }
         
         public static CommandTypesNew CommandTypeFromJson(JObject obj)
         {
@@ -21,6 +29,8 @@ namespace Solcery.Models.Shared.Commands.New
 
         protected CommandDataNew(int commandId, CommandTypesNew commandType)
         {
+            _id++;
+            _cid = _id;
             _commandId = commandId;
             _commandType = commandType;
         }
@@ -33,6 +43,7 @@ namespace Solcery.Models.Shared.Commands.New
         {
             var result = new JObject
             {
+                {"cid", new JValue(_cid)},
                 {"command_data_type", new JValue((int)_commandType)},
                 {"command_id", new JValue(_commandId)}
             };

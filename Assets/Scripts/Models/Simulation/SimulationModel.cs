@@ -27,7 +27,7 @@ namespace Solcery.Models.Simulation
 
         private SimulationModel() { }
 
-        void ISimulationModel.Init(IServiceLocalSimulationApplyGameState applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState)
+        void ISimulationModel.Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState)
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, game);
@@ -42,11 +42,11 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemProcessCommandNew.Create(serviceCommands));
             // Execute commands
             // TODO: fix it!!!
-            _systems.Add(SystemExecuteCommandNew.Create(applyGameState as IServiceLocalSimulationApplyGameStateNew));
+            _systems.Add(SystemExecuteCommandNew.Create(applyGameState));
             // Update static attributes
             _systems.Add(SystemStaticAttributesUpdate.Create());
             // Create game state
-            _systems.Add(SystemGameStateCreate.Create(applyGameState));
+            _systems.Add(SystemGameStateCreate.Create());
             // Remove consumed commands
             _systems.Add(SystemRemoveConsumedCommandNew.Create());
             // Destroy objects

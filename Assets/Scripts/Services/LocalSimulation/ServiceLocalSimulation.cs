@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation
 {
-    public sealed class ServiceLocalSimulation : IServiceLocalSimulation, IServiceLocalSimulationApplyGameState, IServiceLocalSimulationApplyGameStateNew
+    public sealed class ServiceLocalSimulation : IServiceLocalSimulation, IServiceLocalSimulationApplyGameStateNew
     {
         event Action<JObject> IServiceLocalSimulation.EventOnUpdateGameState
         {
@@ -69,11 +69,6 @@ namespace Solcery.Services.LocalSimulation
         {
             Debug.Log(command.ToString(Formatting.Indented));
             _serviceCommands.PushCommand(command);
-        }
-
-        void IServiceLocalSimulationApplyGameState.ApplySimulatedGameState(JObject gameState)
-        {
-            CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
         
         void IServiceLocalSimulationApplyGameStateNew.ApplySimulatedGameStates(IContextGameStates gameStates)

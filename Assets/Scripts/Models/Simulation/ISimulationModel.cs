@@ -13,7 +13,7 @@ namespace Solcery.Models.Simulation
     {
         EcsWorld World { get; }
 
-        void Init(IServiceLocalSimulationApplyGameState applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState);
+        void Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState);
         void Update(float dt);
         void Destroy();
     }
