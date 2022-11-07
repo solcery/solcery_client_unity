@@ -1,15 +1,37 @@
 {
-  "nfts": [],
+  "nfts": [
+    {
+      "id": 140,
+      "data": {
+        "displayed_name": "Fractal",
+        "picture": "https://i.ibb.co/RgYKx0L/fractal.jpg"
+      }
+    }
+  ],
   "card_types": [
     {
-      "id": 303,
+      "id": 301,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 313,
+      "id": 311,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 317,
+      "override_fields": [
+        "displayed_name",
+        "picture"
+      ]
+    },
+    {
+      "id": 318,
       "override_fields": [
         "displayed_name",
         "picture"
@@ -30,14 +52,14 @@
       ]
     },
     {
-      "id": 321,
+      "id": 323,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 322,
+      "id": 324,
       "override_fields": [
         "displayed_name",
         "picture"
@@ -52,20 +74,6 @@
     },
     {
       "id": 326,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 327,
-      "override_fields": [
-        "displayed_name",
-        "picture"
-      ]
-    },
-    {
-      "id": 328,
       "override_fields": [
         "displayed_name",
         "picture"
