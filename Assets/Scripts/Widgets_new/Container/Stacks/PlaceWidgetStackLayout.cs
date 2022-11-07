@@ -22,8 +22,8 @@ namespace Solcery.Widgets_new.Container.Stacks
         {
             text.gameObject.SetActive(visible);
         }
-
-        public override void SetAnchor(TextAnchor anchor)
+        
+        public override void SetLayout(EventTrackerLayout layout, TextAnchor anchor)
         {
         }
 

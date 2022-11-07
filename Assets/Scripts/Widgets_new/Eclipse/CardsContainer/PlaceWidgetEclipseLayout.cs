@@ -8,7 +8,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         [SerializeField]
         private RectTransform content;
         
-        public override void SetAnchor(TextAnchor anchor)
+        public override void SetLayout(EventTrackerLayout layout, TextAnchor anchor)
         {
         }
 

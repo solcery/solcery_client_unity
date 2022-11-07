@@ -7,8 +7,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     {
         [SerializeField]
         private GameObject waitDropFrame;
-        
-        public abstract void SetAnchor(TextAnchor anchor);
+
+        public abstract void SetLayout(EventTrackerLayout layout, TextAnchor anchor);
         public abstract void AddCard(IEclipseCardInContainerWidget eclipseCardInContainerWidget);
         public abstract void Rebuild();
         

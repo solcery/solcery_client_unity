@@ -54,6 +54,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private List<Graphic> raycastObjects;
         [SerializeField]
         private Texture2D defaultTexture;
+        [SerializeField]
+        private AspectRatioFitter aspectRatioFitter;
 
         private Sprite _sprite;
         private Vector2 _anchorMin;
@@ -78,6 +80,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public EclipseCardTokensLayout TokensLayout => tokensLayout;
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public Image[] Highlights => highlights;
+        public AspectRatioFitter AspectRatioFitter => aspectRatioFitter;
 
         private void Awake()
         {

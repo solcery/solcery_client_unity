@@ -20,6 +20,12 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
+    public enum EventTrackerLayout
+    {
+        Horizontal = 0,
+        Vertical = 1
+    }
+    
     public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection where T : PlaceWidgetEclipseLayoutBase
     {
         private readonly HashSet<int> _dropObjectId;
@@ -42,7 +48,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             _cards = new Dictionary<int, IEclipseCardInContainerWidget>();
             _tokensPerCardCache = new Dictionary<int, List<int>>();
             Layout.UpdateVisible(true);
-            Layout.SetAnchor(TextAnchor.MiddleLeft);
+            var eventTrackerLayout = placeDataObject.TryGetEnum("event_tracker_layout", out EventTrackerLayout res)
+                ? res
+                : EventTrackerLayout.Horizontal;
+            Layout.SetLayout(eventTrackerLayout, TextAnchor.MiddleLeft);
             _defaultBlockRaycasts = Layout.BlockRaycasts;
             CardsPool = Game.EclipseCardInContainerWidgetPool;
         }
