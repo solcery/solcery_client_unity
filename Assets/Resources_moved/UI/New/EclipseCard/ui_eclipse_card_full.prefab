@@ -1995,6 +1995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: destroy_effect
       objectReference: {fileID: 0}
+    - target: {fileID: 4040329759439911306, guid: 7bd7e38955b3d45fa9a6f4c51da95f51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6417855532114398928, guid: 7bd7e38955b3d45fa9a6f4c51da95f51, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
