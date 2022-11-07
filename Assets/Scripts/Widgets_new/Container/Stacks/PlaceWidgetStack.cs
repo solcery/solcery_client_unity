@@ -18,9 +18,9 @@ namespace Solcery.Widgets_new.Container.Stacks
 
         public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
-            var cardFaceVisible = CardFace != PlaceWidgetCardFace.Down;
-            Layout.UpdateTextVisible(!cardFaceVisible);
-            if (!cardFaceVisible)
+            var showCount = CardFace == PlaceWidgetCardFace.Down && entityIds.Length > 0;
+            Layout.UpdateTextVisible(showCount);
+            if (showCount)
             {
                 Layout.UpdateText(entityIds.Length.ToString());
             }
