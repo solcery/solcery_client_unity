@@ -1,49 +1,51 @@
-using System;
-using Leopotam.EcsLite;
+using System.Collections.Generic;
 using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
-using Solcery.Models.Shared.Context;
 
 namespace Solcery.Games.Contexts
 {
     internal class ComponentContextGameVars : IContextGameVars
     {
-        private readonly EcsWorld _world;
-        private readonly EcsFilter _filterContextGameVars;
+        private Dictionary<string, int> _vars;
 
-        public static IContextGameVars Create(EcsWorld world)
+        private void Set(string key, int value)
         {
-            return new ComponentContextGameVars(world);
+            if (!_vars.ContainsKey(key))
+            {
+                _vars.Add(key, value);
+                return;
+            }
+            
+            _vars[key] = value;
         }
 
-        private ComponentContextGameVars(EcsWorld world)
+        private bool TryGet(string key, out int value)
         {
-            _world = world;
-            _filterContextGameVars = _world.Filter<ComponentContextVars>().End();
+            if (!_vars.ContainsKey(key))
+            {
+                Set(key, 0);
+            }
+            
+            return _vars.TryGetValue(key, out value);
+        }
+
+        public static IContextGameVars Create()
+        {
+            return new ComponentContextGameVars();
+        }
+
+        private ComponentContextGameVars()
+        {
+            _vars = new Dictionary<string, int>();
         }
         
         void IContextGameVars.Update(string varName, int varValue)
         {
-            var pool = _world.GetPool<ComponentContextVars>();
-            foreach (var entityId in _filterContextGameVars)
-            {
-                ref var componentContextGameVars = ref pool.Get(entityId);
-                componentContextGameVars.Set(varName, varValue);
-                return;
-            }
-            
-            throw new Exception("ComponentContextVars not found!");
+            Set(varName, varValue);
         }
 
         bool IContextGameVars.TryGet(string varName, out int varValue)
         {
-            var pool = _world.GetPool<ComponentContextVars>();
-            foreach (var entityId in _filterContextGameVars)
-            {
-                ref var componentContextGameVars = ref pool.Get(entityId);
-                return componentContextGameVars.TryGet(varName, out varValue);
-            }
-            
-            throw new Exception("ComponentContextVars not found!");
+            return TryGet(varName, out varValue);
         }
     }
 }

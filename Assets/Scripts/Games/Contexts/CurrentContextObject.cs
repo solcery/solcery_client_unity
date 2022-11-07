@@ -1,23 +1,59 @@
-using Leopotam.EcsLite;
+using System.Collections.Generic;
 using Solcery.BrickInterpretation.Runtime.Contexts.Objects;
-using Solcery.Models.Shared.Context;
 
 namespace Solcery.Games.Contexts
 {
     internal class CurrentContextObject : IContextObject
     {
-        private readonly EcsWorld _world;
-        private readonly EcsFilter _filterContextObject;
+        private readonly Stack<object> _objects;
 
-        public static IContextObject Create(EcsWorld world)
+        private void Push(object @object)
         {
-            return new CurrentContextObject(world);
+            _objects.Push(@object);
+        }
+
+        private bool TryPop<T>(out T @object)
+        {
+            if (_objects.Count > 0)
+            {
+                var obj = _objects.Pop();
+                if (obj is T objT)
+                {
+                    @object = objT;
+                    return true;
+                }
+                
+                _objects.Push(obj);
+            }
+
+            @object = default;
+            return false;
+        }
+
+        private bool TryPeek<T>(out T @object)
+        {
+            if (_objects.Count > 0)
+            {
+                var obj = _objects.Peek();
+                if (obj is T objT)
+                {
+                    @object = objT;
+                    return true;
+                }
+            }
+
+            @object = default;
+            return false;
+        }
+
+        public static IContextObject Create()
+        {
+            return new CurrentContextObject();
         }
         
-        private CurrentContextObject(EcsWorld world)
+        private CurrentContextObject()
         {
-            _world = world;
-            _filterContextObject = _world.Filter<ComponentContextObject>().End();
+            _objects = new Stack<object>();
         }
         
         /// <summary>
@@ -26,12 +62,7 @@ namespace Solcery.Games.Contexts
         /// <param name="object"></param>
         void IContextObject.Push(object @object)
         {
-            var pool = _world.GetPool<ComponentContextObject>();
-            foreach (var entityId in _filterContextObject)
-            {
-                pool.Get(entityId).Push(@object);
-                return;
-            }
+            Push(@object);
         }
 
         /// <summary>
@@ -42,14 +73,7 @@ namespace Solcery.Games.Contexts
         /// <returns></returns>
         bool IContextObject.TryPop<T>(out T @object)
         {
-            var pool = _world.GetPool<ComponentContextObject>();
-            foreach (var entityId in _filterContextObject)
-            {
-                return pool.Get(entityId).TryPop(out @object);
-            }
-
-            @object = default;
-            return false;
+            return TryPop(out @object);
         }
 
         /// <summary>
@@ -60,14 +84,7 @@ namespace Solcery.Games.Contexts
         /// <returns></returns>
         bool IContextObject.TryPeek<T>(out T @object)
         {
-            var pool = _world.GetPool<ComponentContextObject>();
-            foreach (var entityId in _filterContextObject)
-            {
-                return pool.Get(entityId).TryPeek(out @object);
-            }
-
-            @object = default;
-            return false;
+            return TryPeek(out @object);
         }
     }
 }

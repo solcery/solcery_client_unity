@@ -11,7 +11,6 @@ using Solcery.BrickInterpretation.Runtime.Contexts.Vars;
 using Solcery.Games.Contexts.GameStates;
 using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Attributes.Values;
-using Solcery.Models.Shared.Context;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using UnityEngine;
@@ -39,50 +38,20 @@ namespace Solcery.Games.Contexts
 
         public static IContext Create(IGame game, EcsWorld world)
         {
-            DestroyPreviewContextEntity(world);
-            CreateContextEntity(world);
             return new CurrentContext(game, world);
         }
 
-        public static void Destroy(EcsWorld world, IContext context)
-        {
-            DestroyPreviewContextEntity(world);
-        }
-
-        private static void CreateContextEntity(EcsWorld world)
-        {
-            var contextObjectPool = world.GetPool<ComponentContextObject>();
-            var contextArgsPool = world.GetPool<ComponentContextArgs>();
-            var contextVarsPool = world.GetPool<ComponentContextVars>();
-            var contextEntityId = world.NewEntity();
-            contextObjectPool.Add(contextEntityId);
-            contextArgsPool.Add(contextEntityId);
-            contextVarsPool.Add(contextEntityId);
-        }
-
-        private static void DestroyPreviewContextEntity(EcsWorld world)
-        {
-            var filterContext = world.Filter<ComponentContextObject>()
-                .Inc<ComponentContextArgs>()
-                .Inc<ComponentContextVars>()
-                .End();
-            
-            foreach (var entityId in filterContext)
-            {
-                world.DelEntity(entityId);
-            }
-        }
-        
+        public static void Destroy(EcsWorld world, IContext context) { }
 
         private CurrentContext(IGame game, EcsWorld world)
         {
             _game = game;
             GameStates = ContextGameStates.Create(world);
-            Object = CurrentContextObject.Create(world);
+            Object = CurrentContextObject.Create();
             ObjectAttrs = CurrentContextObjectAttrs.Create(world);
             GameAttrs = CurrentContextGameAttrs.Create(world);
             //GameArgs = CurrentContextGameArgs.Create(world);
-            GameVars = ComponentContextGameVars.Create(world);
+            GameVars = ComponentContextGameVars.Create();
             GameObjects = CurrentContextGameObjects.Create(game, world);
             LocalScopes = CurrentContextLocalScopes.Create();
             LocalScopes.New();

@@ -1,51 +1,41 @@
-using System;
 using System.Collections.Generic;
-using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.Args;
-using Solcery.Models.Shared.Context;
 
 namespace Solcery.Games.Contexts
 {
     internal class CurrentContextGameArgs : IContextGameArgs
     {
-        private readonly EcsWorld _world;
-        private readonly EcsFilter _filterContextArgs;
+        private readonly Stack<Dictionary<string, JObject>> _argsStack;
 
-        public static IContextGameArgs Create(EcsWorld world)
+        private Dictionary<string, JObject> Pop()
         {
-            return new CurrentContextGameArgs(world);
+            return _argsStack.Pop();
+        }
+
+        private void Push(Dictionary<string, JObject> args)
+        {
+            _argsStack.Push(args);
+        }
+
+        public static IContextGameArgs Create()
+        {
+            return new CurrentContextGameArgs();
         }
         
-        private CurrentContextGameArgs(EcsWorld world)
+        private CurrentContextGameArgs()
         {
-            _world = world;
-            _filterContextArgs = _world.Filter<ComponentContextArgs>().End();
+            _argsStack = new Stack<Dictionary<string, JObject>>();
         }
         
         Dictionary<string, JObject> IContextGameArgs.Pop()
         {
-            var pool = _world.GetPool<ComponentContextArgs>();
-            foreach (var entityId in _filterContextArgs)
-            {
-                ref var componentContextArgs = ref pool.Get(entityId);
-                return componentContextArgs.Pop();
-            }
-
-            throw new Exception("ComponentContextArgs not found!");
+            return Pop();
         }
 
         void IContextGameArgs.Push(Dictionary<string, JObject> args)
         {
-            var pool = _world.GetPool<ComponentContextArgs>();
-            foreach (var entityId in _filterContextArgs)
-            {
-                ref var componentContextArgs = ref pool.Get(entityId);
-                componentContextArgs.Push(args);
-                return;
-            }
-            
-            throw new Exception("ComponentContextArgs not found!");
+            Push(args);
         }
     }
 }
