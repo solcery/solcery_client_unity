@@ -20,7 +20,7 @@ using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public class PlaceWidgetEclipse : PlaceWidget<PlaceWidgetEclipseLayoutBase>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection
+    public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection where T : PlaceWidgetEclipseLayoutBase
     {
         private readonly HashSet<int> _dropObjectId;
         private readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
@@ -31,7 +31,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         public static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
         {
-            return new PlaceWidgetEclipse(widgetCanvas, game, prefabPathKey, placeDataObject);
+            return new PlaceWidgetEclipse<T>(widgetCanvas, game, prefabPathKey, placeDataObject);
         }
         
         protected PlaceWidgetEclipse(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
@@ -81,6 +81,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 }
 
                 var objectId = objectIdPool.Get(entityId).Id;
+                if (!eclipseCartTypePool.Has(entityId))
+                {
+                    continue;
+                }
+
                 var eclipseCardType = eclipseCartTypePool.Get(entityId).CardType;
                 var tplId = world.GetPool<ComponentObjectType>().Get(entityId).TplId;
 
@@ -91,26 +96,25 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         break;
                     default:
                     {
-                        if (!_cards.TryGetValue(objectId, out var eclipseCard))
+                        if (itemTypes.TryGetItemType(out var itemType, tplId))
                         {
-                            eclipseCard = AttachCard(world, entityId, tplId, objectId, itemTypes);
-                            eclipseCard.Layout.UpdateAvailable(isAvailable);
-                        }
+                            var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
 
-                        // Update tplId
-                        if (tplId != eclipseCard.CardType)
-                        {
-                            UpdateFromCardTypeData(entityId, tplId, objectId, itemTypes, eclipseCard);
-                        }
-                        
-                        // // Update drag drop
-                        // if (_dropObjectId.Contains(objectId))
-                        // {
-                        //     _dropObjectId.Remove(objectId);
-                        //     //UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
-                        // }
+                            if (!_cards.TryGetValue(objectId, out var eclipseCard))
+                            {
+                                eclipseCard = AttachCard(world, entityId, tplId, objectId, itemType);
+                                eclipseCard.Layout.UpdateAvailable(isAvailable);
+                            }
 
-                        UpdateCard(world, entityId, /*tplId, objectId, cardTypes,*/ eclipseCard, CardFace);
+                            // Update tplId
+                            if (tplId != eclipseCard.CardType)
+                            {
+                                UpdateFromCardTypeData(entityId, tplId, objectId, itemType, eclipseCard);
+                            }
+
+                            eclipseCard.UpdateDescription(objectId, itemType, attributes);
+                            UpdateCardAttributes(world, attributes, eclipseCard, CardFace);
+                        }
                         break;
                     }
                 }
@@ -152,23 +156,19 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 var attributes = world.GetPool<ComponentObjectAttributes>().Get(eclipseCard.EntityId).Attributes;
 
-                if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
-                    animCardFlyAttribute.Current > 0)
+                var showDescription = attributes.TryGetValue(GameJsonKeys.CardShowDescription, out var showDescriptionAttribute) && showDescriptionAttribute.Current > 0;
+                eclipseCard.Layout.ShowDescription(showDescription);
+
+                if (GetCardMoveAnimation(attributes, out var fromPlaceId, out var animCardFlyTimeSec))
                 {
-                    var fromPlaceId = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyFromPlace, out var fromPlaceAttribute)
-                        ? fromPlaceAttribute.Current
-                        : 0;
-                    var animCardFlyTimeSec = attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyTime, out var  animCardFlyTimeAttribute)
-                        ? animCardFlyTimeAttribute.Current.ToSec()
-                        : 1f;
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
                     eclipseCard.Layout.SetActive(false);
-                    WidgetCanvas.GetEffects().MoveEclipseCard(CardFace == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
+                    WidgetCanvas.GetEffects().MoveEclipseCard(GetOldPlaceWidgetCardFace(world, attributes) == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
                     {
                         eclipseCard.Layout.SetActive(true);
                     });
                 }
-
+                
                 if (attributes.TryGetValue(GameJsonKeys.AnimDestroy, out var animDestroyAttribute) &&
                     animDestroyAttribute.Current > 0)
                 {
@@ -177,10 +177,45 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                         : 3f;
                     AnimEclipseCardDestroy(eclipseCard, animCardDestroyTimeSec);
                 }
-                
-                var showDescription = attributes.TryGetValue(GameJsonKeys.CardShowDescription, out var showDescriptionAttribute) && showDescriptionAttribute.Current > 0;
-                eclipseCard.Layout.ShowDescription(showDescription);
             }
+        }
+
+        private bool GetCardMoveAnimation(Dictionary<string, IAttributeValue> attributes, out int fromPlaceId, out float animCardFlyTimeSec)
+        {
+            if (attributes.TryGetValue(GameJsonKeys.CardAnimCardFly, out var animCardFlyAttribute) &&
+                animCardFlyAttribute.Current > 0)
+            {
+                fromPlaceId =
+                    attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyFromPlace, out var fromPlaceAttribute)
+                        ? fromPlaceAttribute.Current
+                        : 0;
+                animCardFlyTimeSec =
+                    attributes.TryGetValue(GameJsonKeys.CardAnimCardFlyTime, out var animCardFlyTimeAttribute)
+                        ? animCardFlyTimeAttribute.Current.ToSec()
+                        : 1f;
+                return true;
+            }
+
+            fromPlaceId = default;
+            animCardFlyTimeSec = default;
+            return false;
+        }
+
+        private PlaceWidgetCardFace GetOldPlaceWidgetCardFace(EcsWorld world, Dictionary<string, IAttributeValue> attributes)
+        {
+            if (attributes.TryGetValue(GameJsonKeys.Place, out var place) && place.Changed)
+            {
+                var poolPlaceId = world.GetPool<ComponentPlaceId>();
+                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
+                var oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
+
+                if (oldWidget != null)
+                {
+                    return oldWidget.GetPlaceWidgetCardFace();
+                }
+            }
+
+            return PlaceWidgetCardFace.Up;
         }
 
         private void PrepareToken(EcsWorld world, int entityId)
@@ -203,19 +238,14 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
         
-        private void UpdateFromCardTypeData(int entityId, int tplId, int objectId, IItemTypes itemTypes, IEclipseCardInContainerWidget eclipseCard)
+        private void UpdateFromCardTypeData(int entityId, int tplId, int objectId, IItemType itemType, IEclipseCardInContainerWidget eclipseCard)
         {
-            if (itemTypes.TryGetItemType(out var itemType, tplId))
-            {
-                eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
-                eclipseCard.Layout.SetActive(true);
-            }
+            eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
+            eclipseCard.Layout.SetActive(true);
         }
 
-        private void UpdateCard(EcsWorld world, int entityId, IEclipseCardInContainerWidget eclipseCard, PlaceWidgetCardFace cardFace)
+        private void UpdateCardAttributes(EcsWorld world, Dictionary<string, IAttributeValue> attributes, IEclipseCardInContainerWidget eclipseCard, PlaceWidgetCardFace cardFace)
         {
-            var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-            
             // timer
             var showTimer = attributes.TryGetValue(GameJsonKeys.CardShowDuration, out var showDurationAttribute) && showDurationAttribute.Current > 0;
             var timerDuration = attributes.TryGetValue(GameJsonKeys.CardDuration, out var durationAttribute) ? durationAttribute.Current : 0;
@@ -231,20 +261,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             eclipseCard.SetOrder(order);
             
             // face
-            var faceChangeAnimation = false;
-            if (attributes.TryGetValue("place", out var place) && place.Changed)
-            {
-                var poolPlaceId = world.GetPool<ComponentPlaceId>();
-                var poolPlaceWidgetNew = world.GetPool<ComponentPlaceWidgetNew>();
-                var oldWidget = GetPlaceWidget(place.Old, poolPlaceId, poolPlaceWidgetNew);
-
-                if (oldWidget != null)
-                {
-                    faceChangeAnimation = oldWidget.GetPlaceWidgetCardFace() != CardFace;
-                }
-            }
-            
-            eclipseCard.UpdateCardFace(cardFace, faceChangeAnimation);
+            GetCardMoveAnimation(attributes, out _, out var animCardFlyTimeSec);
+            eclipseCard.UpdateCardFace(cardFace, GetOldPlaceWidgetCardFace(world, attributes) != cardFace, animCardFlyTimeSec);
             
             // highlights
             eclipseCard.Layout.UpdateHighlights(attributes);
@@ -281,13 +299,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private IEclipseCardInContainerWidget AttachCard(EcsWorld world, int entityId, int cardType, int objectId, IItemTypes itemTypes)
+        private IEclipseCardInContainerWidget AttachCard(EcsWorld world, int entityId, int cardType, int objectId, IItemType itemType)
         {
             if (world.GetPool<ComponentEclipseCardTag>().Has(entityId))
             {
                 if (CardsPool.TryPop(out var eclipseCard))
                 {
-                    UpdateFromCardTypeData(entityId, cardType, objectId, itemTypes, eclipseCard);
+                    UpdateFromCardTypeData(entityId, cardType, objectId, itemType, eclipseCard);
                     UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
                     PutCardToInPlace(objectId, eclipseCard);
                     return eclipseCard;

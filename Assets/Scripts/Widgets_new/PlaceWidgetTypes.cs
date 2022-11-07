@@ -20,7 +20,7 @@ namespace Solcery.Widgets_new
         EclipseListTokens = -2,
         [EnumPlaceWidgetPrefabPath("ui/ui_card")]
         Card = -1,
-        [EnumPlaceWidgetPrefabPath("ui/ui_stack")]
+        [EnumPlaceWidgetPrefabPath("ui/ui_eclipse_stack")]
         Stacked = 0,
         [EnumPlaceWidgetPrefabPath("ui/ui_hand")]
         LayedOut = 1,

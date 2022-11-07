@@ -27,7 +27,8 @@ namespace Solcery.Widgets_new.Tooltip
             {
                 contentSizeFitter.enabled = false;
                 horizontalLayoutGroup.enabled = false;
-                eclipseCard.UpdateCardType(game, -1, itemType);
+                eclipseCard.UpdateCardTypeData(game, -1, itemType);
+                eclipseCard.UpdateDescription( -1, itemType, null);
                 eclipseCard.TokensLayout.UpdateTokenSlots(0);
                 if (itemType.TryGetValue(out var timeValueToken, GameJsonKeys.CardDefaultTimerValue))
                 {

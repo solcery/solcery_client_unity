@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Solcery.Games;
+using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Services.GameContent.Items;
 using Solcery.Widgets_new.Cards.Pools;
 using UnityEngine;
@@ -57,14 +59,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
                 : 0f;
             _layout.UpdateName(displayedName, nameFontSize);
             
-            var description = itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId) 
-                ? valueCardDescriptionToken.GetValue<string>()
-                : string.Empty;
-            var descriptionFontSize = itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken, GameJsonKeys.CardDescriptionFontSize, objectId)
-                ? valueDescriptionFontSizeAttributeToken.GetValue<float>()
-                : 0f;
-            _layout.UpdateDescription(description, descriptionFontSize);
-
             if (itemType.TryGetValue(out var valuePictureToken, GameJsonKeys.Picture, objectId) 
                 && _game.ServiceResource.TryGetTextureForKey(valuePictureToken.GetValue<string>(), out var texture))
             {
@@ -78,6 +72,17 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
             _layout.TimerLayout.UpdateTypeData(objectId, itemType);
             _layout.EntityId = entityId;
+        }
+
+        void IEclipseCardInContainerWidget.UpdateDescription(int objectId, IItemType itemType, Dictionary<string, IAttributeValue> attributes)
+        {
+            var description = itemType.TryGetValue(out var valueCardDescriptionToken, GameJsonKeys.CardDescription, objectId) 
+                ? valueCardDescriptionToken.GetValue<string>()
+                : string.Empty;
+            var descriptionFontSize = itemType.TryGetValue(out var valueDescriptionFontSizeAttributeToken, GameJsonKeys.CardDescriptionFontSize, objectId)
+                ? valueDescriptionFontSizeAttributeToken.GetValue<float>()
+                : 0f;
+            _layout.UpdateDescription(description.UpdateAttributes(attributes), descriptionFontSize);
         }
 
         EclipseCardTokenLayout GetToken(int slot)
@@ -131,9 +136,9 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _order = order;
         }
 
-        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation)
+        public void UpdateCardFace(PlaceWidgetCardFace cardFace, bool withAnimation, float animationDelay)
         {
-            _layout.UpdateCardFace(cardFace, withAnimation);
+            _layout.UpdateCardFace(cardFace, withAnimation, animationDelay);
         }
 
         void IEclipseCardInContainerWidget.UpdateSiblingIndex(int siblingIndex)

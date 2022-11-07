@@ -14,7 +14,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         
         public void Wait(bool isWait)
         {
-            waitDropFrame.SetActive(isWait);
+            if (waitDropFrame != null)
+            {
+                waitDropFrame.SetActive(isWait);
+            }
         }
     }
 }

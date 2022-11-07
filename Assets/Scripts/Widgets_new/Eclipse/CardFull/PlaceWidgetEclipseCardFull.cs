@@ -88,7 +88,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
                 var attributes = attributesPool.Get(entityId).Attributes;
                 UpdateCardFace(CardFace, false);
                 UpdateCardMainAttributes(attributes);
-                Layout.UpdateCardType(Game, objectId, itemType);
+                Layout.UpdateCardTypeData(Game, objectId, itemType);
+                Layout.UpdateDescription(objectId, itemType, attributes);
                 UpdateCardAnimation(world, attributes);
             }
         }

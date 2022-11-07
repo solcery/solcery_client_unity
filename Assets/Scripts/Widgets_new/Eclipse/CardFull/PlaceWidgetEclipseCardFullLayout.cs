@@ -33,9 +33,9 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private Sequence _sequence;
         private PlaceWidgetCardFace _cardFace;
 
-        public override void UpdateCardType(IGame game, int objectId, IItemType itemType)
+        public override void UpdateCardTypeData(IGame game, int objectId, IItemType itemType)
         {
-            base.UpdateCardType(game, objectId, itemType);
+            base.UpdateCardTypeData(game, objectId, itemType);
 
             var displayedType = itemType.TryGetValue(out var valueDisplayedTypeToken, GameJsonKeys.CardDisplayedType, objectId)
                     ? valueDisplayedTypeToken.GetValue<string>()

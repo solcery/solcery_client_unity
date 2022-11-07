@@ -69,7 +69,8 @@ namespace Solcery.Widgets_new.Eclipse.Nft.CardFull
                 && poolEclipseCardTag.Has(entityId))
             {
                 var objectId = poolObjectId.Get(entityId).Id;
-                Layout.UpdateCardType(Game, objectId, itemType);
+                Layout.UpdateCardTypeData(Game, objectId, itemType);
+                Layout.UpdateDescription(objectId, itemType, null);
             }
         }
         

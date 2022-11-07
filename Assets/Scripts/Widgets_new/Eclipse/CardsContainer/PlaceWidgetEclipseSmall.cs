@@ -4,7 +4,7 @@ using Solcery.Widgets_new.Canvas;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
 {
-    public class PlaceWidgetEclipseSmall : PlaceWidgetEclipse
+    public class PlaceWidgetEclipseSmall : PlaceWidgetEclipse<PlaceWidgetEclipseLayoutBase>
     {
         public new static PlaceWidget Create(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey,
             JObject placeDataObject)
