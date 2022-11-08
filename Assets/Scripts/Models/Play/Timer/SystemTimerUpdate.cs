@@ -3,7 +3,7 @@ using Solcery.Games;
 using Solcery.Games.States.New.States;
 using Solcery.Models.Play.Places;
 using Solcery.Models.Shared.Commands.New;
-using Solcery.Models.Shared.Commands.New.OnClick;
+using Solcery.Models.Shared.Commands.New.Cmd;
 using Solcery.Models.Shared.Objects;
 using Solcery.Models.Shared.Places;
 using UnityEngine;

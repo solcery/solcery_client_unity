@@ -1,54 +1,90 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 
 namespace Solcery.Models.Shared.Commands.New
 {
-    public abstract class CommandDataNew
+    public class CommandDataNew
     {
         public int CommandId => _commandId;
-        public CommandTypesNew CommandType => _commandType;
 
-        private static int _id = 0;
+        private static int _id = 20;
 
         private readonly int _cid;
         private readonly int _commandId;
-        private readonly CommandTypesNew _commandType;
+
+        protected readonly Dictionary<string, int> Ctx;
 
         public static void ResetId()
         {
-            _id = 0;
-        }
-        
-        public static CommandTypesNew CommandTypeFromJson(JObject obj)
-        {
-            return obj.TryGetEnum("command_data_type", out CommandTypesNew result) 
-                ? result 
-                : CommandTypesNew.None;
+            _id = 20;
         }
 
-        protected CommandDataNew(int commandId, CommandTypesNew commandType)
+        public static CommandDataNew CreateFromJson(JObject cmd)
+        {
+            return new CommandDataNew(cmd);
+        }
+
+        protected CommandDataNew(int commandId)
         {
             _id++;
             _cid = _id;
             _commandId = commandId;
-            _commandType = commandType;
+            Ctx = new Dictionary<string, int>();
         }
-        
-        protected abstract void ConvertCommandToJson(JObject obj);
-        
-        public abstract void ApplyCommandToWorld(EcsWorld world);
+
+        private CommandDataNew(JObject cmd)
+        {
+            _cid = cmd.GetValue<int>("id");
+
+            var data = cmd.GetValue<JObject>("data");
+            _commandId = data.GetValue<int>("command_id");
+            
+            Ctx = new Dictionary<string, int>();
+            var ctx = data.GetValue<JObject>("ctx");
+            foreach (var ctxI in ctx)
+            {
+                if (ctxI.Value != null)
+                {
+                    Ctx.Add(ctxI.Key, ctxI.Value.GetValue<int>());
+                }
+            }
+        }
+
+        public void ApplyCommandToWorld(EcsWorld world)
+        {
+            var entityId = world.NewEntity();
+            world.GetPool<ComponentCommandTag>().Add(entityId);
+            world.GetPool<ComponentCommandId>().Add(entityId).Id = CommandId;
+            ref var commandCtx = ref world.GetPool<ComponentCommandCtx>().Add(entityId);
+            foreach (var ctxI in Ctx)
+            {
+                commandCtx.Ctx.Add(ctxI.Key, ctxI.Value);
+            }
+        }
 
         public JObject ToJson()
         {
-            var result = new JObject
+            var ctx = new JObject();
+            foreach (var kv in Ctx)
             {
-                {"cid", new JValue(_cid)},
-                {"command_data_type", new JValue((int)_commandType)},
-                {"command_id", new JValue(_commandId)}
+                ctx.Add(kv.Key, new JValue(kv.Value));
+            }
+            
+            var data = new JObject
+            {
+                { "command_id", new JValue(_commandId) },
+                { "ctx", ctx }
             };
-            ConvertCommandToJson(result);
-            return result;
+            
+            var cmd = new JObject
+            {
+                { "id", new JValue(_cid) },
+                { "data", data }
+            };
+            
+            return cmd;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Solcery.Models.Shared.Commands.New
             
             _filterCommandsForExecute = world.Filter<ComponentCommandTag>()
                 .Inc<ComponentCommandId>()
-                .Inc<ComponentCommandType>()
                 .Inc<ComponentCommandCtx>()
                 .Exc<ComponentCommandConsumeTag>()
                 .End();
@@ -40,14 +39,13 @@ namespace Solcery.Models.Shared.Commands.New
             var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
             var poolCommandId = world.GetPool<ComponentCommandId>();
-            var poolCommandType = world.GetPool<ComponentCommandType>();
             var poolCommandCtx = world.GetPool<ComponentCommandCtx>();
             var poolCommandConsumeTag = world.GetPool<ComponentCommandConsumeTag>();
             
             foreach (var entityId in _filterCommandsForExecute)
             {
-                var commandType = poolCommandType.Get(entityId).Type;
-                if (game.ServiceGameContent.Commands.TryGetValue(commandType, out var brick))
+                var commandId = poolCommandId.Get(entityId).Id;
+                if (game.ServiceGameContent.TryGetCommand(commandId, out var brick))
                 {
                     var context = CurrentContext.Create(game, world);
                     var localScopes = context.LocalScopes.New();

@@ -14,15 +14,15 @@ namespace Solcery.Services.GameContent
         JArray IServiceGameContent.DragDrop => _dragDrop;
         JArray IServiceGameContent.Tooltips => _tooltips;
         List<Tuple<int, string>> IServiceGameContent.Sounds => _sounds;
-        Dictionary<CommandTypesNew, JObject> IServiceGameContent.Commands => _commands;
 
         private IItemTypes _itemTypes;
         private JArray _places;
         private JArray _dragDrop;
         private JArray _tooltips;
         private List<Tuple<int, string>> _sounds;
-        private Dictionary<CommandTypesNew, JObject> _commands;
-        private Dictionary<CommandTypesNew, int> _commandIfForType;
+        private Dictionary<CommandTypesNew, JObject> _commandsForType;
+        private Dictionary<int, JObject> _commandsForId;
+        private Dictionary<CommandTypesNew, int> _commandIdForType;
 
         public static IServiceGameContent Create()
         {
@@ -53,8 +53,9 @@ namespace Solcery.Services.GameContent
                 }
             }
 
-            _commands = new Dictionary<CommandTypesNew, JObject>();
-            _commandIfForType = new Dictionary<CommandTypesNew, int>();
+            _commandsForType = new Dictionary<CommandTypesNew, JObject>();
+            _commandsForId = new Dictionary<int, JObject>();
+            _commandIdForType = new Dictionary<CommandTypesNew, int>();
             if (data.TryGetValue("commands", out JObject commandsData)
                 && commandsData.TryGetValue("objects", out JArray commandsArray))
             {
@@ -65,8 +66,9 @@ namespace Solcery.Services.GameContent
                         && commandObject.TryGetEnum("command_type", out CommandTypesNew commandType)
                         && commandObject.TryGetValue("action", out JObject commandBrick))
                     {
-                        _commands.Add(commandType, commandBrick);
-                        _commandIfForType.Add(commandType, commandId);
+                        _commandsForType.Add(commandType, commandBrick);
+                        _commandsForId.Add(commandId, commandBrick);
+                        _commandIdForType.Add(commandType, commandId);
                     }
                 }
             }
@@ -74,7 +76,17 @@ namespace Solcery.Services.GameContent
 
         int IServiceGameContent.CommandIdForType(CommandTypesNew commandType)
         {
-            return _commandIfForType[commandType];
+            return _commandIdForType[commandType];
+        }
+
+        bool IServiceGameContent.TryGetCommand(int commandId, out JObject command)
+        {
+            return _commandsForId.TryGetValue(commandId, out command);
+        }
+
+        bool IServiceGameContent.TryGetCommand(CommandTypesNew commandType, out JObject command)
+        {
+            return _commandsForType.TryGetValue(commandType, out command);
         }
 
         void IServiceGameContent.UpdateGameContentOverrides(JObject data)
@@ -84,8 +96,9 @@ namespace Solcery.Services.GameContent
 
         void IServiceGameContent.Cleanup()
         {
-            _commandIfForType?.Clear();
-            _commands?.Clear();
+            _commandIdForType?.Clear();
+            _commandsForType?.Clear();
+            _commandsForId?.Clear();
             _itemTypes?.Cleanup();
             _itemTypes = null;
             _places = null;

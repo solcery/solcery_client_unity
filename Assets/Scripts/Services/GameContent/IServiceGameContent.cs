@@ -13,9 +13,10 @@ namespace Solcery.Services.GameContent
         JArray DragDrop { get; }
         JArray Tooltips { get; }
         List<Tuple<int, string>> Sounds { get; }
-        Dictionary<CommandTypesNew, JObject> Commands { get; }
 
         int CommandIdForType(CommandTypesNew commandType);
+        bool TryGetCommand(int commandId, out JObject command);
+        bool TryGetCommand(CommandTypesNew commandType, out JObject command);
         void UpdateGameContent(JObject data);
         void UpdateGameContentOverrides(JObject data);
         void Cleanup();

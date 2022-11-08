@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Models.Shared.Commands.New;
-using Solcery.Models.Shared.Commands.New.OnClick;
+using Solcery.Models.Shared.Commands.New.Cmd;
 using Solcery.Models.Shared.Objects;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;

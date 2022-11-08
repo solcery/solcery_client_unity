@@ -1,7 +1,7 @@
 using System;
 using Solcery.Games;
 using Solcery.Models.Shared.Commands.New;
-using Solcery.Models.Shared.Commands.New.OnClick;
+using Solcery.Models.Shared.Commands.New.Cmd;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 using Solcery.Widgets_new.Cards.Pools;

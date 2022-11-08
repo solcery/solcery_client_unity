@@ -23550,7 +23550,7 @@
         "y2": 2500,
         "face": 0,
         "caption": "<size=150%><b>Your Hand</b></size>",
-        "caption_position": 0,
+        "caption_position": null,
         "caption_color": "",
         "show_frame": true,
         "frame_color": "",
@@ -23710,29 +23710,10 @@
           ]
         },
         "availability_condition": {
-          "name": "Equal",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 2,
-          "params": [
-            {
-              "name": "value1",
-              "value": {
-                "name": "Player - Current",
-                "subtype": 10090,
-                "type": 2,
-                "params": []
-              }
-            },
-            {
-              "name": "value2",
-              "value": {
-                "name": "Player Selector - P2",
-                "subtype": 10044,
-                "type": 2,
-                "params": []
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 1350,
         "x2": 7350,
@@ -23740,7 +23721,7 @@
         "y2": 9500,
         "face": 1,
         "caption": "<size=150%><b>Enemy Hand</b></size>",
-        "caption_position": 0,
+        "caption_position": null,
         "caption_color": "",
         "show_frame": true,
         "frame_color": "",
@@ -23844,7 +23825,7 @@
         "show_frame": false,
         "frame_color": "",
         "drag_n_drops": [],
-        "fill_color": "#231e1ed9",
+        "fill_color": "",
         "picture_type": null
       },
       {
@@ -23943,7 +23924,7 @@
         "show_frame": false,
         "frame_color": "",
         "drag_n_drops": [],
-        "fill_color": "#231e1ed9",
+        "fill_color": "",
         "picture_type": null
       },
       {
@@ -23952,10 +23933,53 @@
         "z_order": 10,
         "layout": 4,
         "visibility_condition": {
-          "name": "@True",
-          "subtype": 10023,
+          "name": "And",
           "type": 1,
-          "params": []
+          "subtype": 7,
+          "params": [
+            {
+              "name": "cond1",
+              "value": {
+                "name": "Game Mode - Play",
+                "subtype": 10161,
+                "type": 1,
+                "params": []
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "Equal",
+                "type": 1,
+                "subtype": 2,
+                "params": [
+                  {
+                    "name": "value1",
+                    "value": {
+                      "name": "Player - Current",
+                      "subtype": 10090,
+                      "type": 2,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "value2",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         },
         "availability_condition": {
           "name": "Game Mode - Play",
@@ -24380,17 +24404,20 @@
           "type": 1,
           "params": []
         },
-        "x1": 9300,
-        "x2": 9301,
-        "y1": 2850,
-        "y2": 2851,
+        "x1": 8850,
+        "x2": 8851,
+        "y1": 2500,
+        "y2": 2501,
         "face": 0,
         "caption": "",
         "caption_size": 20,
         "caption_position": null,
         "show_frame": false,
         "frame_color": "",
-        "picture_type": null
+        "picture_type": null,
+        "caption_color": "",
+        "drag_n_drops": [],
+        "fill_color": ""
       },
       {
         "id": 210,
@@ -24476,15 +24503,18 @@
         },
         "x1": 9300,
         "x2": 9301,
-        "y1": 9800,
-        "y2": 9801,
+        "y1": 8100,
+        "y2": 8101,
         "face": 0,
         "caption": "",
         "caption_size": 20,
         "caption_position": null,
         "show_frame": false,
         "frame_color": "",
-        "picture_type": null
+        "picture_type": null,
+        "caption_color": "",
+        "drag_n_drops": [],
+        "fill_color": ""
       },
       {
         "id": 214,
@@ -26606,18 +26636,9 @@
             {
               "name": "cond1",
               "value": {
-                "name": "Game Mode - Play",
-                "subtype": 10161,
+                "name": "Equal",
                 "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
+                "subtype": 2,
                 "params": [
                   {
                     "name": "value1",
@@ -26628,7 +26649,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "show_confirm"
+                          "value": "current_player"
                         }
                       ]
                     }
@@ -26642,7 +26663,64 @@
                       "params": [
                         {
                           "name": "value",
-                          "value": 0
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Game Mode - Play",
+                      "subtype": 10161,
+                      "type": 1,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_confirm"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -26675,18 +26753,9 @@
             {
               "name": "cond1",
               "value": {
-                "name": "Game Mode - Play",
-                "subtype": 10161,
+                "name": "Equal",
                 "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
+                "subtype": 2,
                 "params": [
                   {
                     "name": "value1",
@@ -26697,7 +26766,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "show_confirm"
+                          "value": "current_player"
                         }
                       ]
                     }
@@ -26711,7 +26780,64 @@
                       "params": [
                         {
                           "name": "value",
-                          "value": 0
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Game Mode - Play",
+                      "subtype": 10161,
+                      "type": 1,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_confirm"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -26725,7 +26851,7 @@
         "x2": 6500,
         "y1": 3500,
         "y2": 7000,
-        "face": 0,
+        "face": null,
         "caption_position": null,
         "show_frame": true,
         "fill_color": "#231e1e",
@@ -26744,18 +26870,9 @@
             {
               "name": "cond1",
               "value": {
-                "name": "Game Mode - Play",
-                "subtype": 10161,
+                "name": "Equal",
                 "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
+                "subtype": 2,
                 "params": [
                   {
                     "name": "value1",
@@ -26766,7 +26883,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "show_confirm"
+                          "value": "current_player"
                         }
                       ]
                     }
@@ -26780,7 +26897,64 @@
                       "params": [
                         {
                           "name": "value",
-                          "value": 0
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Game Mode - Play",
+                      "subtype": 10161,
+                      "type": 1,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_confirm"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -26813,18 +26987,9 @@
             {
               "name": "cond1",
               "value": {
-                "name": "Game Mode - Play",
-                "subtype": 10161,
+                "name": "Equal",
                 "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
+                "subtype": 2,
                 "params": [
                   {
                     "name": "value1",
@@ -26835,7 +27000,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "show_confirm"
+                          "value": "current_player"
                         }
                       ]
                     }
@@ -26849,7 +27014,64 @@
                       "params": [
                         {
                           "name": "value",
-                          "value": 0
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "cond2",
+              "value": {
+                "name": "And",
+                "type": 1,
+                "subtype": 7,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "Game Mode - Play",
+                      "subtype": 10161,
+                      "type": 1,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "Equal",
+                      "type": 1,
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "value1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "show_confirm"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "value2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
@@ -27498,106 +27720,10 @@
         "z_order": 30,
         "layout": 4,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "availability_condition": {
           "name": "Greater than",
@@ -27719,112 +27845,16 @@
         "z_order": 30,
         "layout": 6,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 500,
         "x2": 3300,
         "y1": 1500,
         "y2": 8500,
-        "face": 0,
+        "face": null,
         "caption": "",
         "caption_position": null,
         "caption_color": "",
@@ -27840,112 +27870,16 @@
         "z_order": 30,
         "layout": 6,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 3600,
         "x2": 6400,
         "y1": 1500,
         "y2": 8500,
-        "face": 0,
+        "face": null,
         "caption": "",
         "caption_position": null,
         "caption_color": "",
@@ -27961,112 +27895,16 @@
         "z_order": 30,
         "layout": 6,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 6700,
         "x2": 9500,
         "y1": 1500,
         "y2": 8500,
-        "face": 0,
+        "face": null,
         "caption": "",
         "caption_position": null,
         "caption_color": "",
@@ -28140,55 +27978,16 @@
         "z_order": 30,
         "layout": 7,
         "visibility_condition": {
-          "name": "Greater than",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 3,
-          "params": [
-            {
-              "name": "value1",
-              "value": {
-                "name": "Number of Objects in [Place Id]",
-                "subtype": 10535,
-                "type": 2,
-                "params": [
-                  {
-                    "name": "Target Place",
-                    "value": {
-                      "name": "Place",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 501
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "value2",
-              "value": {
-                "name": "Constant",
-                "type": 2,
-                "subtype": 0,
-                "params": [
-                  {
-                    "name": "value",
-                    "value": 0
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 3400,
         "x2": 6600,
         "y1": 1500,
         "y2": 9500,
-        "face": 0,
+        "face": null,
         "caption_position": null,
         "picture_type": null
       },
@@ -28198,8 +27997,8 @@
         "z_order": 30,
         "layout": 3,
         "visibility_condition": {
-          "name": "Game Mode - Play",
-          "subtype": 10161,
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
           "params": []
         },
@@ -28430,64 +28229,16 @@
         "z_order": 32,
         "layout": 12,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Equal",
-                "type": 1,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "value1",
-                    "value": {
-                      "name": "Game Attribute",
-                      "type": 2,
-                      "subtype": 13,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "show_vs_screen"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "value2",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 2
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 3568,
         "x2": 6432,
         "y1": 1500,
         "y2": 8500,
-        "face": 0,
+        "face": null,
         "caption_position": null,
         "fill_color": "",
         "picture_type": null
@@ -28510,122 +28261,16 @@
         "z_order": 28,
         "layout": 6,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - Play",
-                "subtype": 10161,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_confirm"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Greater than",
-                      "type": 1,
-                      "subtype": 3,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Number of Objects in [Place Id]",
-                            "subtype": 10535,
-                            "type": 2,
-                            "params": [
-                              {
-                                "name": "Target Place",
-                                "value": {
-                                  "name": "Place",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 501
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 0
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 0,
         "x2": 10000,
         "y1": 0,
         "y2": 10000,
-        "face": 0,
+        "face": null,
         "caption_position": null,
         "show_frame": false,
         "fill_color": "#231e1ed9",
@@ -28979,106 +28624,10 @@
         "z_order": 31,
         "layout": 3,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Or",
-                "type": 1,
-                "subtype": 6,
-                "params": [
-                  {
-                    "name": "cond1",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 2
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "cond2",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Game Attribute",
-                            "type": 2,
-                            "subtype": 13,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "show_nfts_screen"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 3
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 0,
         "x2": 10000,
@@ -29307,58 +28856,10 @@
         "z_order": 31,
         "layout": 3,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - NFTS",
-                "subtype": 10162,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Equal",
-                "type": 1,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "value1",
-                    "value": {
-                      "name": "Game Attribute",
-                      "type": 2,
-                      "subtype": 13,
-                      "params": [
-                        {
-                          "name": "attr_name",
-                          "value": "show_vs_screen"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "value2",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 2
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 0,
         "x2": 10000,
@@ -29586,68 +29087,10 @@
         "z_order": 10,
         "layout": 3,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - Finish",
-                "subtype": 10170,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
-                "params": [
-                  {
-                    "name": "value1",
-                    "value": {
-                      "name": "Number of Objects in [Place Id]",
-                      "subtype": 10535,
-                      "type": 2,
-                      "params": [
-                        {
-                          "name": "Target Place",
-                          "value": {
-                            "name": "Place",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 204
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "value2",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 0,
         "x2": 10000,
@@ -29664,68 +29107,10 @@
         "z_order": 10,
         "layout": 3,
         "visibility_condition": {
-          "name": "And",
+          "name": "@False",
+          "subtype": 10011,
           "type": 1,
-          "subtype": 7,
-          "params": [
-            {
-              "name": "cond1",
-              "value": {
-                "name": "Game Mode - Finish",
-                "subtype": 10170,
-                "type": 1,
-                "params": []
-              }
-            },
-            {
-              "name": "cond2",
-              "value": {
-                "name": "Greater than",
-                "type": 1,
-                "subtype": 3,
-                "params": [
-                  {
-                    "name": "value1",
-                    "value": {
-                      "name": "Number of Objects in [Place Id]",
-                      "subtype": 10535,
-                      "type": 2,
-                      "params": [
-                        {
-                          "name": "Target Place",
-                          "value": {
-                            "name": "Place",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 205
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "value2",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 0
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "x1": 0,
         "x2": 10000,
@@ -35452,6 +34837,142 @@
                   {
                     "name": "value",
                     "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "duration_color": "af9421",
+        "description_font_size": 0,
+        "description_font_size_full": 40
+      },
+      {
+        "id": 132,
+        "name": "Grim Deal {TODO Update}",
+        "type": 1,
+        "displayed_name": "Grim Deal",
+        "displayed_type": "",
+        "picture": "https://i.ibb.co/n04JGhm/1-18-Curse.jpg",
+        "description": "Take 6 <b>Dmg</b>;\nEnd your current Turn, make your Opponent Skip his next Turn",
+        "action_on_left_click": {
+          "name": "Default OnLeftClick",
+          "subtype": 10063,
+          "type": 0,
+          "params": []
+        },
+        "action_on_right_click": {
+          "name": "Default OnRightClick",
+          "subtype": 10184,
+          "type": 0,
+          "params": []
+        },
+        "action_on_create": {
+          "name": "Set attribute",
+          "type": 0,
+          "subtype": 7,
+          "params": [
+            {
+              "name": "attr_name",
+              "value": "duration"
+            },
+            {
+              "name": "value",
+              "value": {
+                "name": "Constant",
+                "type": 2,
+                "subtype": 0,
+                "params": [
+                  {
+                    "name": "value",
+                    "value": 7
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "action_on_activation": {
+          "name": "Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Damage [Player] for [Amount]",
+                "subtype": 10058,
+                "type": 0,
+                "params": [
+                  {
+                    "name": "Player",
+                    "value": {
+                      "name": "Player - Current",
+                      "subtype": 10090,
+                      "type": 2,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "Amount",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 6
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Set variable",
+                      "type": 0,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "skip"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "End Turn",
+                      "subtype": 10087,
+                      "type": 0,
+                      "params": []
+                    }
                   }
                 ]
               }
