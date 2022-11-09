@@ -9,7 +9,8 @@ namespace Solcery.Services.LocalSimulation
     {
         event Action<JObject> EventOnUpdateGameState; 
 
-        void Init(IGame game, JObject gameState);
+        void Init(IGame game);
+        void PushGameState(JObject gameState);
         void PushCommand(JObject command);
         void Update(float dt);
         void Cleanup();

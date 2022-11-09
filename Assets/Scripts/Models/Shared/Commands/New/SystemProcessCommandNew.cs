@@ -1,5 +1,5 @@
 using Leopotam.EcsLite;
-using Solcery.Services.Commands;
+using Solcery.Services.LocalSimulation.Commands;
 
 namespace Solcery.Models.Shared.Commands.New
 {

@@ -1,6 +1,5 @@
 #if UNITY_EDITOR ||  LOCAL_SIMULATION
 using Leopotam.EcsLite;
-using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Models.Shared.Commands.New;
 using Solcery.Models.Shared.Game.Attributes;
@@ -8,8 +7,9 @@ using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Simulation.Game.Destroy;
 using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
-using Solcery.Services.Commands;
 using Solcery.Services.LocalSimulation;
+using Solcery.Services.LocalSimulation.Commands;
+using Solcery.Services.LocalSimulation.GameStates;
 
 namespace Solcery.Models.Simulation
 {
@@ -27,7 +27,7 @@ namespace Solcery.Models.Simulation
 
         private SimulationModel() { }
 
-        void ISimulationModel.Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState)
+        void ISimulationModel.Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, IServiceGameState serviceGameState)
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, game);
@@ -35,9 +35,9 @@ namespace Solcery.Models.Simulation
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
             _systems.Add(SystemInitialDragDropTypes.Create());
             _systems.Add(SystemInitialGameContentPlaces.Create());
-            _systems.Add(SystemGameStateInitial.Create(initialGameState));
             _systems.Add(SystemInitialGameContentTooltips.Create());
 
+            _systems.Add(SystemGameStateRollback.Create(serviceGameState));
             // Process commands
             _systems.Add(SystemProcessCommandNew.Create(serviceCommands));
             // Execute commands

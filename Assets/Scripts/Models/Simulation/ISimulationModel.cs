@@ -4,8 +4,9 @@ using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
-using Solcery.Services.Commands;
 using Solcery.Services.LocalSimulation;
+using Solcery.Services.LocalSimulation.Commands;
+using Solcery.Services.LocalSimulation.GameStates;
 
 namespace Solcery.Models.Simulation
 {
@@ -13,7 +14,7 @@ namespace Solcery.Models.Simulation
     {
         EcsWorld World { get; }
 
-        void Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, JObject initialGameState);
+        void Init(IServiceLocalSimulationApplyGameStateNew applyGameState, IGame game, IServiceCommands serviceCommands, IServiceGameState serviceGameState);
         void Update(float dt);
         void Destroy();
     }

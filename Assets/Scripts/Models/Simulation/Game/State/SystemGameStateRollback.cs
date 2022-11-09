@@ -11,86 +11,100 @@ using Solcery.Models.Shared.Game.StaticAttributes.Highlighted;
 using Solcery.Models.Shared.Game.StaticAttributes.Interactable;
 using Solcery.Models.Shared.Game.StaticAttributes.Place;
 using Solcery.Models.Shared.Objects;
+using Solcery.Services.LocalSimulation.GameStates;
 using Solcery.Utils;
 using UnityEngine;
 
 namespace Solcery.Models.Simulation.Game.State
 {
-    public interface ISystemGameStateInitial : IEcsInitSystem { }
+    public interface ISystemGameStateRollback : IEcsRunSystem
+    { }
 
-    public sealed class SystemGameStateInitial : ISystemGameStateInitial
+    public sealed class SystemGameStateRollback : ISystemGameStateRollback
     {
-        private JObject _initialGameState;
+        private readonly IServiceGameState _serviceGameState;
         private EcsFilter _filterObjectIdHash;
         private IStaticAttributes _staticAttributes;
-        
-        public static ISystemGameStateInitial Create(JObject initialGameState)
+
+        public static ISystemGameStateRollback Create(IServiceGameState serviceGameState)
         {
-            return new SystemGameStateInitial(initialGameState);
+            return new SystemGameStateRollback(serviceGameState);
+        }
+
+        private SystemGameStateRollback(IServiceGameState serviceGameState)
+        {
+            _serviceGameState = serviceGameState;
         }
         
-        private SystemGameStateInitial(JObject initialGameState)
+        void IEcsRunSystem.Run(IEcsSystems systems)
         {
-            _initialGameState = initialGameState;
-        }
-        
-        void IEcsInitSystem.Init(IEcsSystems systems)
-        {
-            if (_initialGameState == null)
+            if (!_serviceGameState.TryPopGameState(out var gameState))
             {
                 return;
             }
             
-            _staticAttributes = StaticAttributes.Create();
-            _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
-            _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
-            _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
-
-            var game = systems.GetShared<IGame>();
             var world = systems.GetWorld();
-            _filterObjectIdHash = world.Filter<ComponentObjectIdHash>().End();
-            var objectIdHashPool = world.GetPool<ComponentObjectIdHash>();
+            var game = systems.GetShared<IGame>();
 
-            foreach (var oih in _filterObjectIdHash)
+            // Delete all entities
             {
-                world.DelEntity(oih);
-            }
-
-            var objectIdHashPoolEntityId = world.NewEntity();
-            var objectIdHashes = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHashes;
-            
-            // Update game attributes
-            var gameAttributeArray = _initialGameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
-            var entityIndex = world.NewEntity();
-            ref var gameAttributesComponent =
-                ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
-            UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
-            
-            // Update game entity
-            var entityArray = _initialGameState.GetValue<JArray>("objects");
-            var entityHashMap = new Dictionary<int, JObject>(entityArray.Count);
-            foreach (var entityToken in entityArray)
-            {
-                if (entityToken is JObject entityObject)
+                var entities = new int[world.GetEntitiesCount()];
+                var entityCount = world.GetAllEntities(ref entities);
+                for (var entityIndex = 0; entityIndex < entityCount; entityIndex++)
                 {
-                    entityHashMap.Add(entityObject.GetValue<int>("id"), entityObject);
+                    var entity = entities[entityIndex];
+                    world.DelEntity(entity);
                 }
             }
 
-            var maxObjectId = 0;
-            
-            foreach (var entityObject in entityHashMap)
             {
-                maxObjectId = Mathf.Max(maxObjectId, entityObject.Key);
-                CreateEntity(world, game, entityObject.Value);
-            }
-            
-            objectIdHashes.UpdateHeadId(maxObjectId);
+                _staticAttributes = StaticAttributes.Create();
+                _staticAttributes.RegistrationStaticAttribute(StaticAttributeHighlighted.Create());
+                _staticAttributes.RegistrationStaticAttribute(StaticAttributeInteractable.Create());
+                _staticAttributes.RegistrationStaticAttribute(StaticAttributePlace.Create());
+                _filterObjectIdHash = world.Filter<ComponentObjectIdHash>().End();
+                var objectIdHashPool = world.GetPool<ComponentObjectIdHash>();
+
+                foreach (var oih in _filterObjectIdHash)
+                {
+                    world.DelEntity(oih);
+                }
+
+                var objectIdHashPoolEntityId = world.NewEntity();
+                var objectIdHashes = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHashes;
                 
-            entityHashMap.Clear();
-            _staticAttributes.Cleanup();
-            _staticAttributes = null;
-            _initialGameState = null;
+                // Update game attributes
+                var gameAttributeArray = gameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
+                var entityIndex = world.NewEntity();
+                ref var gameAttributesComponent =
+                    ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
+                UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
+                
+                // Update game entity
+                var entityArray = gameState.GetValue<JArray>("objects");
+                var entityHashMap = new Dictionary<int, JObject>(entityArray.Count);
+                foreach (var entityToken in entityArray)
+                {
+                    if (entityToken is JObject entityObject)
+                    {
+                        entityHashMap.Add(entityObject.GetValue<int>("id"), entityObject);
+                    }
+                }
+
+                var maxObjectId = 0;
+                
+                foreach (var entityObject in entityHashMap)
+                {
+                    maxObjectId = Mathf.Max(maxObjectId, entityObject.Key);
+                    CreateEntity(world, game, entityObject.Value);
+                }
+                
+                objectIdHashes.UpdateHeadId(maxObjectId);
+                    
+                entityHashMap.Clear();
+                _staticAttributes.Cleanup();
+                _staticAttributes = null;
+            }
         }
         
         private void UpdateAttributes(JArray gameAttributeArray, Dictionary<string, IAttributeValue> attributesHashMap)

@@ -68,7 +68,6 @@ namespace Solcery.Services.Transport
             }
         }
 
-        private IGame _game;
         private IServiceLocalSimulation _localSimulation;
         private IGameTransportCallbacks _gameTransportCallbacks;
         private IJsonPackageData _gameContentPackageData;
@@ -83,9 +82,9 @@ namespace Solcery.Services.Transport
 
         private WebGlTransportService(IGame game, IGameTransportCallbacks gameTransportCallbacks, ICacheAccessor cacheAccessor)
         {
-            _game = game;
             _localSimulation = ServiceLocalSimulation.Create();
             _localSimulation.EventOnUpdateGameState += LocalSimulationOnEventOnUpdateGameState;
+            _localSimulation.Init(game);
             _gameTransportCallbacks = gameTransportCallbacks;
             _cacheAccessor = cacheAccessor;
             ReactToUnity.AddCallback(ReactToUnity.EventOnUpdateGameContent, OnGameContentUpdate);
@@ -187,6 +186,11 @@ namespace Solcery.Services.Transport
             
             if (_gameStatePackageData.JsonData is JObject gameState)
             {
+                if (gameState.ContainsKey("states"))
+                {
+                    _localSimulation.PushGameState(gameState);
+                }
+                
                 if (gameState.TryGetValue("commands", out JArray commands))
                 {
                     foreach (var commandToken in commands)
@@ -196,11 +200,6 @@ namespace Solcery.Services.Transport
                             _localSimulation.PushCommand(command);
                         }
                     }
-                }
-                
-                if (gameState.ContainsKey("states"))
-                {
-                    _localSimulation.Init(_game, gameState);
                 }
             }
             _gameStatePackageData = null;

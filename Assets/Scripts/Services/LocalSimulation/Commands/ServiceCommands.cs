@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
 
-namespace Solcery.Services.Commands
+namespace Solcery.Services.LocalSimulation.Commands
 {
     public sealed class ServiceCommands : IServiceCommands
     {
@@ -47,6 +47,11 @@ namespace Solcery.Services.Commands
 
             command = null;
             return false;
+        }
+
+        void IServiceCommands.ClearAllCommand()
+        {
+            _commands.Clear();
         }
 
         bool IServiceCommands.IsEmpty()

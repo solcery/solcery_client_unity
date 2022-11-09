@@ -6,7 +6,8 @@ using Newtonsoft.Json.Linq;
 using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
 using Solcery.Games;
 using Solcery.Models.Simulation;
-using Solcery.Services.Commands;
+using Solcery.Services.LocalSimulation.Commands;
+using Solcery.Services.LocalSimulation.GameStates;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace Solcery.Services.LocalSimulation
 
         private readonly List<Action<JObject>> _listOnUpdateGameState;
         private ISimulationModel _simulationModel;
+        private IServiceGameState _serviceGameState;
         private IServiceCommands _serviceCommands;
 
         private Queue<IContextGameStates> _gameStates;
@@ -41,12 +43,18 @@ namespace Solcery.Services.LocalSimulation
         private ServiceLocalSimulation()
         {
             _listOnUpdateGameState = new List<Action<JObject>>();
+            _serviceGameState = ServiceGameState.Create();
             _serviceCommands = ServiceCommands.Create();
             _simulationModel = SimulationModel.Create();
             _gameStates = new Queue<IContextGameStates>();
         }
 
-        void IServiceLocalSimulation.Init(IGame game, JObject gameState)
+        void IServiceLocalSimulation.Init(IGame game)
+        {
+            _simulationModel.Init(this, game, _serviceCommands, _serviceGameState);
+        }
+
+        void IServiceLocalSimulation.PushGameState(JObject gameState)
         {
             if (!gameState.TryGetValue("states", out JArray states) 
                 || states.Count <= 0
@@ -60,8 +68,9 @@ namespace Solcery.Services.LocalSimulation
                 };
                 Debug.LogError("Invalid initial game state!");
             }
-            
-            _simulationModel.Init(this, game, _serviceCommands, gs);
+
+            _serviceCommands.ClearAllCommand();
+            _serviceGameState.PushGameState(gs);
             CallAllActionWithParams(_listOnUpdateGameState, gameState);
         }
 
