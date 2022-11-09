@@ -63,12 +63,15 @@ namespace Solcery.Services.GameContent
                 {
                     if (commandToken is JObject commandObject
                         && commandObject.TryGetValue("id", out int commandId)
-                        && commandObject.TryGetEnum("command_type", out CommandTypesNew commandType)
                         && commandObject.TryGetValue("action", out JObject commandBrick))
                     {
-                        _commandsForType.Add(commandType, commandBrick);
                         _commandsForId.Add(commandId, commandBrick);
-                        _commandIdForType.Add(commandType, commandId);
+
+                        if (commandObject.TryGetEnum("command_type", out CommandTypesNew commandType))
+                        {
+                            _commandsForType.Add(commandType, commandBrick);
+                            _commandIdForType.Add(commandType, commandId);
+                        }
                     }
                 }
             }

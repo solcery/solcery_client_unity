@@ -63,9 +63,9 @@ namespace Solcery.Services.Transport
         private void OnGameStateLoaded(string obj)
         {
             var gameState = JObject.Parse(obj);
-            OnCommandsReceive(gameState);
             _localSimulation.EventOnUpdateGameState += OnUpdateGameState;
             _localSimulation.Init(_game, gameState);
+            OnCommandsReceive(gameState);
         }
 
         private void OnUpdateGameState(JObject gameStateJson)
