@@ -7,12 +7,36 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     public class PlaceWidgetEclipseEventTrackerLayout : PlaceWidgetEclipseLayoutBase
     {
         [SerializeField]
-        private ScrollRect scroll;
-
+        protected ScrollRect scroll;
         [SerializeField]
-        private HorizontalLayoutGroup horizontalLayoutGroup;
+        protected HorizontalLayoutGroup horizontalLayoutGroup;
+        [SerializeField]
+        protected VerticalLayoutGroup verticalLayoutGroup;
 
-        public override void SetAnchor(TextAnchor anchor)
+        private EventTrackerLayout _eventTrackerLayout;
+
+
+        public override void SetLayout(EventTrackerLayout layout, TextAnchor anchor)
+        {
+            _eventTrackerLayout = layout;
+            horizontalLayoutGroup.gameObject.SetActive(_eventTrackerLayout == EventTrackerLayout.Horizontal);
+            verticalLayoutGroup.gameObject.SetActive(_eventTrackerLayout == EventTrackerLayout.Vertical);
+            scroll.horizontal = _eventTrackerLayout == EventTrackerLayout.Horizontal;
+            scroll.vertical = _eventTrackerLayout == EventTrackerLayout.Vertical;
+            switch (layout)
+            {
+                case EventTrackerLayout.Horizontal:
+                    scroll.content = horizontalLayoutGroup.GetComponent<RectTransform>();
+                    break;
+                case EventTrackerLayout.Vertical:
+                    scroll.content = verticalLayoutGroup.GetComponent<RectTransform>();
+                    break;
+            }
+
+            SetAnchor(anchor);
+        }
+
+        private void SetAnchor(TextAnchor anchor)
         {
             horizontalLayoutGroup.childAlignment = anchor;
             switch (anchor)
@@ -33,7 +57,21 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
             eclipseCardInContainerWidget.UpdateParent(scroll.content);
             eclipseCardInContainerWidget.UpdateSiblingIndex(eclipseCardInContainerWidget.Order);
-            scroll.horizontal = scroll.content.childCount > 1;
+            switch (_eventTrackerLayout)
+            {
+                case EventTrackerLayout.Horizontal:
+                    scroll.horizontal = scroll.content.childCount > 1;
+                    scroll.vertical = false;
+                    eclipseCardInContainerWidget.Layout.AspectRatioFitter.aspectMode =
+                        AspectRatioFitter.AspectMode.HeightControlsWidth;  
+                    break;
+                case EventTrackerLayout.Vertical:
+                    scroll.horizontal = false;
+                    scroll.vertical = scroll.content.childCount > 1;
+                    eclipseCardInContainerWidget.Layout.AspectRatioFitter.aspectMode =
+                        AspectRatioFitter.AspectMode.WidthControlsHeight;  
+                    break;
+            }
             Rebuild();
         }
 
