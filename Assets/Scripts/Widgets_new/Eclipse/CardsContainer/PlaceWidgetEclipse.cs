@@ -314,9 +314,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 if (CardsPool.TryPop(out var eclipseCard))
                 {
+                    PutCardToInPlace(objectId, eclipseCard);
                     UpdateFromCardTypeData(entityId, cardType, objectId, itemType, eclipseCard);
                     UpdateDragAndDrop(world, entityId, objectId, eclipseCard);
-                    PutCardToInPlace(objectId, eclipseCard);
                     return eclipseCard;
                 }
             }
@@ -326,9 +326,9 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void PutCardToInPlace(int objectId, IEclipseCardInContainerWidget eclipseCard)
         {
+            eclipseCard.Layout.SetActive(true);
             Layout.AddCard(eclipseCard);
             _cards.Add(objectId, eclipseCard);
-            eclipseCard.Layout.SetActive(true);
         }
 
         private void RemoveCards(EcsWorld world, int[] entityIds)
