@@ -75,7 +75,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrag
                         var originConditionBrick = world.GetPool<ComponentDragDropBrickOriginCondition>()
                             .Get(dragDropEntityId).ConditionBrick;
                         
-                        var context = CurrentContext.Create(game, world);
+                        var context = CurrentContext.Create(game, world, null);
                         context.Object.Push(onDragEventData.DragObjectEntityId);
 
                         if (originConditionBrick == null 

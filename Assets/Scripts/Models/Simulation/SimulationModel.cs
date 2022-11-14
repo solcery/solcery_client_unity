@@ -52,9 +52,9 @@ namespace Solcery.Models.Simulation
             // Destroy objects
             _systems.Add(SystemDestroyObjects.Create());
             
-#if UNITY_EDITOR
-            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-#endif
+// #if UNITY_EDITOR
+//             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+// #endif
 
             _systems.Init();
         }

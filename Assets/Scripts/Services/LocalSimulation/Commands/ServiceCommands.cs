@@ -32,10 +32,8 @@ namespace Solcery.Services.LocalSimulation.Commands
 
         bool IServiceCommands.TryPopCommand(out JObject command)
         {
-            if (_commands.Count > 0)
+            if (_commands.Count > 0 && _commands.TryDequeue(out command))
             {
-                command = _commands.Dequeue();
-                
                 if (command.TryGetValue("cid", out int cid) 
                     && !_consumableCommandIds.Contains(cid))
                 {

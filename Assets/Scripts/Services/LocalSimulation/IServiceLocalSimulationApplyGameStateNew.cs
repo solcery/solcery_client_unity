@@ -1,11 +1,11 @@
 #if UNITY_EDITOR || LOCAL_SIMULATION
-using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
+using Newtonsoft.Json.Linq;
 
 namespace Solcery.Services.LocalSimulation
 {
     public interface IServiceLocalSimulationApplyGameStateNew
     {
-        void ApplySimulatedGameStates(IContextGameStates gameStates);
+        void ApplySimulatedGameStates(JObject gameStates);
     }
 }
 #endif

@@ -58,7 +58,7 @@ namespace Solcery.Models.Play.Places
                 ref var placeIsVisible = ref poolPlaceVisible.Get(placeEntityId);
                 var placeVisibilityBrick = poolPlaceVisibilityBrick.Get(placeEntityId).VisibilityBrick;
                 
-                var context = CurrentContext.Create(game, world);
+                var context = CurrentContext.Create(game, world, null);
                 placeIsVisible.IsVisible = placeVisibilityBrick != null 
                                            && _serviceBricks.ExecuteConditionBrick(placeVisibilityBrick, context, 1, out var result) 
                                            && result;

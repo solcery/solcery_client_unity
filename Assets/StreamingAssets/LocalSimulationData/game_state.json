@@ -1,5 +1,4 @@
 {
-  "actions": [],
   "states": [
     {
       "state_type": 0,
@@ -71,7 +70,7 @@
           },
           {
             "key": "show_nfts_screen",
-            "value": 3
+            "value": 0
           },
           {
             "key": "bot_takeover_1",
@@ -79,7 +78,28 @@
           },
           {
             "key": "bot_takeover_2",
+            "value": 1
+          },
+          {
+            "key": "skipped_turns",
             "value": 0
+          }
+        ],
+        "objects": []
+      },
+      "id": 0
+    },
+    {
+      "state_type": 0,
+      "value": {
+        "attrs": [
+          {
+            "key": "bot_takeover_2",
+            "value": 1
+          },
+          {
+            "key": "show_nfts_screen",
+            "value": 3
           }
         ],
         "objects": [
@@ -201,6 +221,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -324,6 +352,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -445,6 +481,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -568,6 +612,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -689,6 +741,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -812,6 +872,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -933,6 +1001,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -1056,6 +1132,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -1177,6 +1261,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -1300,6 +1392,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -1421,6 +1521,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -1544,6 +1652,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -1553,7 +1669,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 73
+                "value": 71
               },
               {
                 "key": "number",
@@ -1665,6 +1781,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -1788,6 +1912,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -1910,6 +2042,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -1919,7 +2059,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 72
+                "value": 1
               },
               {
                 "key": "number",
@@ -2031,6 +2171,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -2154,6 +2302,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -2276,6 +2432,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -2285,7 +2449,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 53
               },
               {
                 "key": "number",
@@ -2397,6 +2561,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -2520,6 +2692,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -2641,6 +2821,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -2764,6 +2952,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -2885,6 +3081,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -3008,6 +3212,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -3129,6 +3341,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -3252,6 +3472,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -3373,6 +3601,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -3496,6 +3732,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -3617,6 +3861,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -3740,6 +3992,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -3861,6 +4121,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -3984,6 +4252,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -4105,6 +4381,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -4228,6 +4512,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -4237,7 +4529,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 52
+                "value": 1
               },
               {
                 "key": "number",
@@ -4349,6 +4641,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -4472,6 +4772,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -4593,6 +4901,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -4716,6 +5032,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -4837,6 +5161,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -4960,6 +5292,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -5081,6 +5421,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -5204,6 +5552,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -5325,6 +5681,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -5448,6 +5812,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -5569,6 +5941,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -5692,6 +6072,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -5813,6 +6201,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -5936,6 +6332,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -6057,6 +6461,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -6180,6 +6592,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -6301,6 +6721,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -6424,6 +6852,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -6545,6 +6981,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -6668,6 +7112,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -6789,6 +7241,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -6912,6 +7372,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -7033,6 +7501,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -7156,6 +7632,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -7165,7 +7649,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 72
               },
               {
                 "key": "number",
@@ -7277,6 +7761,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -7400,6 +7892,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -7521,6 +8021,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -7644,6 +8152,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -7653,7 +8169,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 52
               },
               {
                 "key": "number",
@@ -7765,6 +8281,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -7888,6 +8412,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -8009,6 +8541,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -8132,6 +8672,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -8253,6 +8801,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -8376,6 +8932,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -8498,6 +9062,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -8507,7 +9079,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 71
+                "value": 1
               },
               {
                 "key": "number",
@@ -8619,6 +9191,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -8742,6 +9322,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -8751,7 +9339,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 73
               },
               {
                 "key": "number",
@@ -8863,6 +9451,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -8986,6 +9582,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -9107,6 +9711,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -9230,6 +9842,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -9351,6 +9971,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -9474,6 +10102,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -9483,7 +10119,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 53
+                "value": 1
               },
               {
                 "key": "number",
@@ -9595,6 +10231,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -9718,6 +10362,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -9839,6 +10491,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -9962,6 +10622,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -10083,6 +10751,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -10206,6 +10882,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -10327,6 +11011,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -10450,6 +11142,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -10571,6 +11271,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -10694,6 +11402,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -10815,6 +11531,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -10938,6 +11662,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -11059,6 +11791,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -11182,6 +11922,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -11303,6 +12051,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -11426,6 +12182,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -11547,6 +12311,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -11670,6 +12442,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -11791,6 +12571,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -11914,6 +12702,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -12035,6 +12831,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -12158,6 +12962,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -12279,6 +13091,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -12402,6 +13222,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -12523,6 +13351,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -12646,6 +13482,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -12767,6 +13611,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -12890,6 +13742,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -13011,6 +13871,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -13134,6 +14002,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -13255,6 +14131,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -13378,6 +14262,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -13499,6 +14391,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -13622,6 +14522,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -13743,6 +14651,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -13866,6 +14782,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -13987,6 +14911,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -14110,6 +15042,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -14231,6 +15171,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -14354,6 +15302,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -14475,6 +15431,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -14598,6 +15562,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -14719,6 +15691,14 @@
               },
               {
                 "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
                 "value": 0
               }
             ]
@@ -14842,6 +15822,14 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
@@ -14964,11 +15952,409 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
             "id": 123,
+            "tplId": 132,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 7
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "placement_reason",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 124,
+            "tplId": 132,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 7
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "placement_reason",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 125,
+            "tplId": 132,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 7
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "placement_reason",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 126,
             "tplId": 72,
             "attrs": [
               {
@@ -15086,12 +16472,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 124,
-            "tplId": 241,
+            "id": 127,
+            "tplId": 240,
             "attrs": [
               {
                 "key": "place",
@@ -15208,12 +16602,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 125,
-            "tplId": 242,
+            "id": 128,
+            "tplId": 241,
             "attrs": [
               {
                 "key": "place",
@@ -15330,12 +16732,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 126,
-            "tplId": 335,
+            "id": 129,
+            "tplId": 333,
             "attrs": [
               {
                 "key": "place",
@@ -15452,12 +16862,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 127,
-            "tplId": 347,
+            "id": 130,
+            "tplId": 345,
             "attrs": [
               {
                 "key": "place",
@@ -15574,12 +16992,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 128,
-            "tplId": 350,
+            "id": 131,
+            "tplId": 348,
             "attrs": [
               {
                 "key": "place",
@@ -15696,12 +17122,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 129,
-            "tplId": 360,
+            "id": 132,
+            "tplId": 358,
             "attrs": [
               {
                 "key": "place",
@@ -15818,12 +17252,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 130,
-            "tplId": 332,
+            "id": 133,
+            "tplId": 330,
             "attrs": [
               {
                 "key": "place",
@@ -15940,12 +17382,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 131,
-            "tplId": 333,
+            "id": 134,
+            "tplId": 331,
             "attrs": [
               {
                 "key": "place",
@@ -16062,12 +17512,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 132,
-            "tplId": 378,
+            "id": 135,
+            "tplId": 376,
             "attrs": [
               {
                 "key": "place",
@@ -16184,12 +17642,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 133,
-            "tplId": 384,
+            "id": 136,
+            "tplId": 382,
             "attrs": [
               {
                 "key": "place",
@@ -16306,12 +17772,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 134,
-            "tplId": 381,
+            "id": 137,
+            "tplId": 379,
             "attrs": [
               {
                 "key": "place",
@@ -16428,12 +17902,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 135,
-            "tplId": 392,
+            "id": 138,
+            "tplId": 390,
             "attrs": [
               {
                 "key": "place",
@@ -16550,12 +18032,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 136,
-            "tplId": 335,
+            "id": 139,
+            "tplId": 333,
             "attrs": [
               {
                 "key": "place",
@@ -16672,12 +18162,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 137,
-            "tplId": 350,
+            "id": 140,
+            "tplId": 348,
             "attrs": [
               {
                 "key": "place",
@@ -16794,12 +18292,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 138,
-            "tplId": 475,
+            "id": 141,
+            "tplId": 472,
             "attrs": [
               {
                 "key": "place",
@@ -16916,12 +18422,20 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 139,
-            "tplId": 475,
+            "id": 142,
+            "tplId": 472,
             "attrs": [
               {
                 "key": "place",
@@ -17038,12 +18552,150 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           },
           {
-            "id": 140,
-            "tplId": 324,
+            "id": 143,
+            "tplId": 544,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 26
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "placement_reason",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 144,
+            "tplId": 316,
             "attrs": [
               {
                 "key": "place",
@@ -17160,13 +18812,179 @@
               {
                 "key": "card_owner",
                 "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
               }
             ]
           }
         ]
       },
-      "id": 0
+      "id": 1
+    },
+    {
+      "state_type": 1,
+      "value": {
+        "delay": 0
+      },
+      "id": 2
+    },
+    {
+      "state_type": 0,
+      "value": {
+        "attrs": [
+          {
+            "key": "show_nfts_screen",
+            "value": 1
+          },
+          {
+            "key": "show_vs_screen",
+            "value": 2
+          }
+        ],
+        "objects": [
+          {
+            "id": 13,
+            "tplId": 112,
+            "attrs": [
+              {
+                "key": "anim_highlight_r",
+                "value": 1
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 255
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 2
+              },
+              {
+                "key": "hero",
+                "value": 2
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 1
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 71
+              },
+              {
+                "key": "place",
+                "value": 580
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 500
+              }
+            ]
+          },
+          {
+            "id": 59,
+            "tplId": 99,
+            "attrs": [
+              {
+                "key": "anim_highlight",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 72,
+            "tplId": 118,
+            "attrs": [
+              {
+                "key": "anim_highlight",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 139,
+            "tplId": 333,
+            "attrs": [
+              {
+                "key": "anim_highlight_r",
+                "value": 1
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 255
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "id": 3
+    },
+    {
+      "state_type": 1,
+      "value": {
+        "delay": 550
+      },
+      "id": 4
+    },
+    {
+      "state_type": 0,
+      "value": {
+        "attrs": [],
+        "objects": [
+          {
+            "id": 13,
+            "tplId": 112,
+            "attrs": [
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "id": 5
     }
   ],
-  "predict": true
+  "commands": [
+    {
+      "id": 1,
+      "data": {
+        "type": "gameCommand",
+        "command_id": 504,
+        "ctx": {
+          "player_index": 2
+        }
+      }
+    }
+  ]
 }

@@ -12,6 +12,7 @@ using Solcery.Games.Contexts.GameStates;
 using Solcery.Models.Shared.Attributes.Place;
 using Solcery.Models.Shared.Attributes.Values;
 using Solcery.Models.Shared.Objects;
+using Solcery.Services.LocalSimulation;
 using Solcery.Utils;
 using UnityEngine;
 
@@ -36,17 +37,17 @@ namespace Solcery.Games.Contexts
 
         private IGame _game;
 
-        public static IContext Create(IGame game, EcsWorld world)
+        public static IContext Create(IGame game, EcsWorld world, IServiceLocalSimulationApplyGameStateNew applyGameStateNew)
         {
-            return new CurrentContext(game, world);
+            return new CurrentContext(game, world, applyGameStateNew);
         }
 
         public static void Destroy(EcsWorld world, IContext context) { }
 
-        private CurrentContext(IGame game, EcsWorld world)
+        private CurrentContext(IGame game, EcsWorld world, IServiceLocalSimulationApplyGameStateNew applyGameStateNew)
         {
             _game = game;
-            GameStates = ContextGameStates.Create(world);
+            GameStates = ContextGameStates.Create(world, applyGameStateNew);
             Object = CurrentContextObject.Create();
             ObjectAttrs = CurrentContextObjectAttrs.Create(world);
             GameAttrs = CurrentContextGameAttrs.Create(world);

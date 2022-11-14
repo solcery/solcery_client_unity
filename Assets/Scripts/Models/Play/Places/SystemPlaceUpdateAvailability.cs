@@ -56,7 +56,7 @@ namespace Solcery.Models.Play.Places
             {
                 ref var placeIsAvailable = ref poolPlaceAvailable.Get(placeEntityId);
                 var placeAvailableBrick = poolPlaceAvailableBrick.Get(placeEntityId).AvailableBrick;
-                var context = CurrentContext.Create(game, world);
+                var context = CurrentContext.Create(game, world, null);
                 if (placeAvailableBrick != null)
                 {
                     placeIsAvailable.IsAvailable = _serviceBricks.ExecuteConditionBrick(placeAvailableBrick, context, 1, out var result) 

@@ -141,7 +141,7 @@ namespace Solcery.Models.Play.DragDrop.OnDrop
             var destinationConditionBrick = world.GetPool<ComponentDragDropBrickDestinationCondition>()
                 .Get(dragDropEntityId).ConditionBrick;
             
-            var context = CurrentContext.Create(game, world);
+            var context = CurrentContext.Create(game, world, null);
             context.Object.Push(dragObjectEntityId);
             context.GameVars.Update("target_place", targetPlaceId);
 

@@ -47,7 +47,7 @@ namespace Solcery.Models.Shared.Commands.New
                 var commandId = poolCommandId.Get(entityId).Id;
                 if (game.ServiceGameContent.TryGetCommand(commandId, out var brick))
                 {
-                    var context = CurrentContext.Create(game, world);
+                    var context = CurrentContext.Create(game, world, _applyGameState);
                     var localScopes = context.LocalScopes.New();
                     var commandCtx = poolCommandCtx.Get(entityId).Ctx;
                     foreach (var ctx in commandCtx)
@@ -55,7 +55,7 @@ namespace Solcery.Models.Shared.Commands.New
                         localScopes.Vars.Update(ctx.Key, ctx.Value);
                     }
                     Debug.Log($"Action brick execute status {game.ServiceBricks.ExecuteBrick(brick, context, 1)}");
-                    _applyGameState.ApplySimulatedGameStates(context.GameStates);
+                    //_applyGameState.ApplySimulatedGameStates(context.GameStates);
                     context.LocalScopes.Pop();
                     CurrentContext.Destroy(world, context);
                 }

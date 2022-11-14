@@ -196,7 +196,7 @@ namespace Solcery.Games
         void IGameTransportCallbacks.OnReceivingGameState(JObject gameStateJson)
         {
             GameApplication.Instance.EnableBlockTouches(true);
-            DebugViewer.Instance.AddGameStatePackage(gameStateJson);
+            //DebugViewer.Instance.AddGameStatePackage(gameStateJson);
             _updateStateQueue.PushGameState(gameStateJson);
         }
 

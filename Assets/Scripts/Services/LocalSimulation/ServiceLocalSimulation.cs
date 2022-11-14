@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
 using Solcery.Games;
 using Solcery.Models.Simulation;
 using Solcery.Services.LocalSimulation.Commands;
@@ -29,11 +28,10 @@ namespace Solcery.Services.LocalSimulation
         }
 
         private readonly List<Action<JObject>> _listOnUpdateGameState;
+        private readonly Queue<JObject> _states;
         private ISimulationModel _simulationModel;
         private IServiceGameState _serviceGameState;
         private IServiceCommands _serviceCommands;
-
-        private Queue<IContextGameStates> _gameStates;
 
         public static IServiceLocalSimulation Create()
         {
@@ -46,7 +44,7 @@ namespace Solcery.Services.LocalSimulation
             _serviceGameState = ServiceGameState.Create();
             _serviceCommands = ServiceCommands.Create();
             _simulationModel = SimulationModel.Create();
-            _gameStates = new Queue<IContextGameStates>();
+            _states = new Queue<JObject>();
         }
 
         void IServiceLocalSimulation.Init(IGame game)
@@ -79,29 +77,24 @@ namespace Solcery.Services.LocalSimulation
             Debug.Log(command.ToString(Formatting.Indented));
             _serviceCommands.PushCommand(command);
         }
-        
-        void IServiceLocalSimulationApplyGameStateNew.ApplySimulatedGameStates(IContextGameStates gameStates)
+
+        void IServiceLocalSimulationApplyGameStateNew.ApplySimulatedGameStates(JObject gameStates)
         {
-            _gameStates.Enqueue(gameStates);
+            _states.Enqueue(gameStates);
         }
 
         void IServiceLocalSimulation.Update(float dt)
         {
+            if (_states.TryDequeue(out var gameStates))
+            {
+                CallAllActionWithParams(_listOnUpdateGameState, gameStates);
+            }
+
             if (!_serviceCommands.IsEmpty())
             {
-                dt /= _serviceCommands.CountCommand();
                 while (!_serviceCommands.IsEmpty())
                 {
-                    _simulationModel?.Update(dt);
-                }
-
-                while (_gameStates.Count > 0)
-                {
-                    var gss = _gameStates.Dequeue();
-                    if (gss.TryGetGameState((int) (Time.deltaTime * 1000), out var gsd))
-                    {
-                        CallAllActionWithParams(_listOnUpdateGameState, gsd);
-                    }
+                    _simulationModel?.Update(0.03f);
                 }
             }
         }
@@ -115,6 +108,7 @@ namespace Solcery.Services.LocalSimulation
         private void Cleanup()
         {
             _listOnUpdateGameState.Clear();
+            _states.Clear();
         }
 
         void IServiceLocalSimulation.Destroy()

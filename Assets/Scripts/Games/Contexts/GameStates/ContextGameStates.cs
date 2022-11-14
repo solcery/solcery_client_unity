@@ -5,6 +5,8 @@ using Solcery.BrickInterpretation.Runtime.Contexts.GameStates;
 using Solcery.Games.Contexts.GameStates.Actions;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Objects;
+using Solcery.Models.Simulation.Game.State;
+using Solcery.Services.LocalSimulation;
 using UnityEngine;
 
 namespace Solcery.Games.Contexts.GameStates
@@ -200,87 +202,33 @@ namespace Solcery.Games.Contexts.GameStates
                 return result;
             }
         }
-        
-        private sealed class PauseStateData : StateData
-        {
-            private readonly int _delayMSec;
 
-            public static PauseStateData Create(int delayMSec)
-            {
-                return new PauseStateData(delayMSec);
-            }
-
-            private PauseStateData(int delayMSec)
-            {
-                _delayMSec = delayMSec;
-            }
-
-            public JObject ToJson()
-            {
-                return new JObject {{"delay", new JValue(_delayMSec)}};
-            }
-        }
-        
-        private sealed class TimerStateData : StateData
-        {
-            private readonly bool _isStart;
-            private readonly int _durationMsec;
-            private readonly int _targetObjectId;
-            
-            public static TimerStateData CreateStartTimer(int durationMsec, int targetObjectId)
-            {
-                return new TimerStateData(true, durationMsec, targetObjectId);
-            }
-
-            public static TimerStateData CreateStopTimer()
-            {
-                return new TimerStateData(false, 0, -1);
-            }
-
-            private TimerStateData(bool isStart, int durationMsec, int targetObjectId)
-            {
-                _isStart = isStart;
-                _durationMsec = durationMsec;
-                _targetObjectId = targetObjectId;
-            }
-            
-            public JObject ToJson()
-            {
-                return new JObject
-                {
-                    {"start", new JValue(_isStart)},
-                    {"duration", new JValue(_durationMsec)},
-                    {"object_id", new JValue(_targetObjectId)}
-                };
-            }
-        }
-
-        public bool IsEmpty => _states.Count <= 0;
+        public bool IsEmpty => true;
 
         private readonly EcsWorld _world;
+        private readonly IServiceLocalSimulationApplyGameStateNew _applyGameStateNew;
         private readonly EcsFilter _filterGameAttributes;
         private readonly EcsFilter _filterEntities;
-        private readonly List<StateData> _states;
-        private readonly IContextGameStateActions _actions;
+        private readonly EcsFilter _filterGameStateIndex;
 
-        public static IContextGameStates Create(EcsWorld world)
+        public static IContextGameStates Create(EcsWorld world, IServiceLocalSimulationApplyGameStateNew applyGameStateNew)
         {
-            return new ContextGameStates(world);
+            return new ContextGameStates(world, applyGameStateNew);
         }
 
-        private ContextGameStates(EcsWorld world)
+        private ContextGameStates(EcsWorld world, IServiceLocalSimulationApplyGameStateNew applyGameStateNew)
         {
             _world = world;
+            _applyGameStateNew = applyGameStateNew;
             _filterGameAttributes = world.Filter<ComponentGameAttributes>().End();
             _filterEntities = world.Filter<ComponentObjectTag>().Inc<ComponentObjectId>().Inc<ComponentObjectType>()
                 .Inc<ComponentObjectAttributes>().End();
-            _states = new List<StateData>();
-            _actions = ContextGameStateActions.Create();
+            _filterGameStateIndex = world.Filter<ComponentGameStateIndex>().End();
         }
         
         void IContextGameStates.PushGameState()
         {
-            var gameState = GameStateData.Create();
+            var gameStateValue = GameStateData.Create();
             
             // Game attributes
             {
@@ -290,7 +238,7 @@ namespace Solcery.Games.Contexts.GameStates
 
                     foreach (var (key, value) in attrs)
                     {
-                        gameState.AddAttr(AttrData.Create(key, value.Current));
+                        gameStateValue.AddAttr(AttrData.Create(key, value.Current));
                     }
 
                     break;
@@ -308,7 +256,7 @@ namespace Solcery.Games.Contexts.GameStates
                     if (entityDeletedPool.Has(entityId))
                     {
                         Debug.Log($"Discard object at destroy tag with entity id {entityId}");
-                        gameState.AddDeletedObject(entityIdPool.Get(entityId).Id);
+                        gameStateValue.AddDeletedObject(entityIdPool.Get(entityId).Id);
                         continue;
                     }
 
@@ -321,79 +269,168 @@ namespace Solcery.Games.Contexts.GameStates
                         objData.AddAttr(AttrData.Create(key, value.Current));
                     }
 
-                    gameState.AddObject(objData);
+                    gameStateValue.AddObject(objData);
                 }
             }
-
-            _states.Add(gameState);
-            _actions.SetTargetStateId(_states.IndexOf(gameState));
-            _actions.Push();
+            
+            var gameState = new JObject
+            {
+                { "actions", new JArray() },
+                {
+                    "states", new JArray
+                    {
+                        new JObject
+                        {
+                            { "id", new JValue(GetGameStateIndex()) },
+                            { "state_type", new JValue((int)ContextGameStateTypes.GameState) },
+                            { "value", gameStateValue.ToJson(null) }
+                        }
+                    }
+                }
+            };
+            _applyGameStateNew.ApplySimulatedGameStates(gameState);
+            IncrementGameStateIndex();
         }
 
         void IContextGameStates.PushDelay(int msec)
         {
-            var delayState = PauseStateData.Create(msec);
-            _states.Add(delayState);
+            var gameState = new JObject
+            {
+                { "actions", new JArray() },
+                {
+                    "states", new JArray
+                    {
+                        new JObject
+                        {
+                            { "id", new JValue(-1) },
+                            { "state_type", new JValue((int)ContextGameStateTypes.Delay) },
+                            { "value", new JObject
+                                {
+                                    { "delay", new JValue(msec) }
+                                } 
+                            }
+                        }
+                    }
+                }
+            };
+            _applyGameStateNew.ApplySimulatedGameStates(gameState);
         }
 
         void IContextGameStates.PushStartTimer(int durationMsec, int targetObjectId)
         {
-            var timerStartState = TimerStateData.CreateStartTimer(durationMsec, targetObjectId);
-            _states.Add(timerStartState);
+            var gameState = new JObject
+            {
+                { "actions", new JArray() },
+                {
+                    "states", new JArray
+                    {
+                        new JObject
+                        {
+                            { "id", new JValue(-1) },
+                            { "state_type", new JValue((int)ContextGameStateTypes.Timer) },
+                            { "value", new JObject
+                                {
+                                    { "start", new JValue(true) },
+                                    { "duration", new JValue(durationMsec) },
+                                    { "object_id", new JValue(targetObjectId) }
+                                } 
+                            }
+                        }
+                    }
+                }
+            };
+            _applyGameStateNew.ApplySimulatedGameStates(gameState);
         }
 
         void IContextGameStates.PushStopTimer()
         {
-            var timerStopState = TimerStateData.CreateStopTimer();
-            _states.Add(timerStopState);
+            var gameState = new JObject
+            {
+                { "actions", new JArray() },
+                {
+                    "states", new JArray
+                    {
+                        new JObject
+                        {
+                            { "id", new JValue(-1) },
+                            { "state_type", new JValue((int)ContextGameStateTypes.Timer) },
+                            { "value", new JObject
+                                {
+                                    { "start", new JValue(false) },
+                                    { "duration", new JValue(0) },
+                                    { "object_id", new JValue(-1) }
+                                } 
+                            }
+                        }
+                    }
+                }
+            };
+            _applyGameStateNew.ApplySimulatedGameStates(gameState);
         }
 
         void IContextGameStates.PushPlaySound(int soundId)
         {
-            _actions.AddAction(ContextGameStateActionPlaySound.Create(soundId));
+            var gameState = new JObject
+            {
+                {
+                    "actions", new JArray
+                    {
+                        new JObject
+                        {
+                            { "state_id", new JValue(GetGameStateIndex()) },
+                            { "action_type", new JValue((int)ContextGameStateActionTypes.PlaySound) },
+                            {
+                                "value", new JObject
+                                {
+                                    { "sound_id", new JValue(soundId) }
+                                }
+                            }
+                        }
+                    }
+                },
+                { "states", new JArray() }
+            };
+            _applyGameStateNew.ApplySimulatedGameStates(gameState);
         }
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
             gameState = new JObject();
-            var stateArray = new JArray();
-            gameState.Add("actions", _actions.ToJson());
-            gameState.Add("states", stateArray);
-            GameStateData previewGameStateData = null;
-            
-            foreach (var state in _states)
-            {
-                switch (state)
-                {
-                    case PauseStateData psd:
-                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.Delay, psd.ToJson()));
-                        break;
-                    
-                    case TimerStateData tsd:
-                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.Timer, tsd.ToJson()));
-                        break;
-                    
-                    case GameStateData gsd:
-                        stateArray.Add(CreateState(_states.IndexOf(state), ContextGameStateTypes.GameState, gsd.ToJson(previewGameStateData)));
-                        previewGameStateData = gsd;
-                        break;
-                }
-            }
-
-            _states.Clear();
-            _actions.Cleanup();
-
             return true;
         }
 
-        private static JObject CreateState(int id, ContextGameStateTypes type, JToken value)
+        private int GetGameStateIndex()
         {
-            return new JObject
+            if (_filterGameStateIndex.GetEntitiesCount() <= 0)
             {
-                {"id", new JValue(id)},
-                {"state_type", new JValue((int) type)},
-                {"value", value}
-            };
+                var entity = _world.NewEntity();
+                _world.GetPool<ComponentGameStateIndex>().Add(entity).Index = 0;
+                return 0;
+            }
+
+            foreach (var entity in _filterGameStateIndex)
+            {
+                return _world.GetPool<ComponentGameStateIndex>().Get(entity).Index;
+            }
+
+            return -1;
+        }
+
+        private void IncrementGameStateIndex()
+        {
+            if (_filterGameStateIndex.GetEntitiesCount() <= 0)
+            {
+                var entity = _world.NewEntity();
+                _world.GetPool<ComponentGameStateIndex>().Add(entity).Index = 0;
+                return;
+            }
+            
+            foreach (var entity in _filterGameStateIndex)
+            {
+                var index = _world.GetPool<ComponentGameStateIndex>().Get(entity).Index;
+                _world.GetPool<ComponentGameStateIndex>().Get(entity).Index = index + 1;
+                return;
+            }
         }
     }
 }
