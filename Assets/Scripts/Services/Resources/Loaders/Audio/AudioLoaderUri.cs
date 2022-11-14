@@ -52,7 +52,7 @@ namespace Solcery.Services.Resources.Loaders.Audio
             {
                 _loadedIsSuccess = true;
                 _clip = ((DownloadHandlerAudioClip) _webRequest.downloadHandler).audioClip;
-                Debug.Log($"Load clip {_soundId} type {_clip.loadType}");
+                //Debug.Log($"Load clip {_soundId} type {_clip.loadType}");
             }
             
             _webRequest.Dispose();
