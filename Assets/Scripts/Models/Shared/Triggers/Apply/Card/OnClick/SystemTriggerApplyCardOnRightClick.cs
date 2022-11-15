@@ -79,6 +79,8 @@ namespace Solcery.Models.Shared.Triggers.Apply.Card.OnClick
 
                     
                     var context = CurrentContext.Create(game, world);
+                    // todo remove after refactoring 
+                    context.GameVars.Update("player_index", 1);
                     context.Object.Push(entityId);
                     Debug.Log($"Action brick execute status {game.ServiceBricks.ExecuteBrick(brick, context, 1)}");
                     _applyGameState.ApplySimulatedGameStates(context.GameStates);
