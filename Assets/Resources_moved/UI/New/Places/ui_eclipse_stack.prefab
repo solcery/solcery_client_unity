@@ -134,8 +134,11 @@ MonoBehaviour:
   caption: {fileID: 6035317733512003057}
   frame: {fileID: 2462939963024495263}
   timer: {fileID: 0}
+  waitDropFrame: {fileID: 0}
+  capacity: 4
+  offset: 0.04
   content: {fileID: 3143025930282575442}
-  spacing: 0
+  textArea: {fileID: 3143025929257725079}
   text: {fileID: 3143025929730252714}
 --- !u!1 &3143025929257725072
 GameObject:

@@ -29,7 +29,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
     public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection where T : PlaceWidgetEclipseLayoutBase
     {
         private readonly HashSet<int> _dropObjectId;
-        private readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
+        protected readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
         private readonly Dictionary<int, List<int>> _tokensPerCardCache;
         private readonly bool _defaultBlockRaycasts;
         protected IWidgetPool<IEclipseCardInContainerWidget> CardsPool;
@@ -131,6 +131,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             
             AttachTokensForCard(world, itemTypes);
             UpdatedCardsOrder();
+            UpdateCardsPosition();
             UpdateCardsAvailable(isAvailable);
             UpdateCardsAnimation(world);
             _dropObjectId.Clear();
@@ -156,6 +157,11 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             {
                 cardsSorted[i].UpdateSiblingIndex(i);
             }
+
+        }
+
+        protected virtual void UpdateCardsPosition()
+        {
         }
 
         private void UpdateCardsAnimation(EcsWorld world)

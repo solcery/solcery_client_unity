@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Widgets_new.Canvas;
 using Solcery.Widgets_new.Eclipse.CardsContainer;
+using UnityEngine;
 
 namespace Solcery.Widgets_new.Container.Stacks
 {
@@ -16,9 +17,20 @@ namespace Solcery.Widgets_new.Container.Stacks
         private PlaceWidgetStack(IWidgetCanvas widgetCanvas, IGame game, string prefabPathKey, JObject placeDataObject)
             : base(widgetCanvas, game, prefabPathKey, placeDataObject) { }
 
+        protected override void UpdateCardsPosition()
+        {
+            foreach (var card in _cards)
+            {
+                var cardTransform = card.Value.Layout.transform;
+                var cardIndex = cardTransform.GetSiblingIndex();
+                var localPosition = cardTransform.localPosition;
+                cardTransform.localPosition = new Vector3(Layout.GetCardOffset(cardIndex), localPosition.y, localPosition.z);;
+            }
+        }
+
         public override void Update(EcsWorld world, bool isVisible, bool isAvailable, int[] entityIds)
         {
-            var showCount = CardFace == PlaceWidgetCardFace.Down && entityIds.Length > 0;
+            var showCount = CardFace == PlaceWidgetCardFace.Down && entityIds.Length >= Layout.Capacity;
             Layout.UpdateTextVisible(showCount);
             if (showCount)
             {
