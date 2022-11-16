@@ -266,7 +266,10 @@ namespace Solcery.Games.Contexts.GameStates
 
                     foreach (var (key, value) in attrs)
                     {
-                        objData.AddAttr(AttrData.Create(key, value.Current));
+                        if (value.Changed)
+                        {
+                            objData.AddAttr(AttrData.Create(key, value.Current));
+                        }
                     }
 
                     gameStateValue.AddObject(objData);

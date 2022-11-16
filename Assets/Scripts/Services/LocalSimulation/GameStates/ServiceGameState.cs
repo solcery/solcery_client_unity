@@ -5,6 +5,8 @@ namespace Solcery.Services.LocalSimulation.GameStates
 {
     public sealed class ServiceGameState : IServiceGameState
     {
+        bool IServiceGameState.IsEmpty => _gameState.Count <= 0;
+        
         private readonly Stack<JObject> _gameState;
 
         public static IServiceGameState Create()

@@ -5,7 +5,6 @@ using Solcery.Models.Shared.Commands.New;
 using Solcery.Models.Shared.Game.Attributes;
 using Solcery.Models.Shared.Initial.Game.Content;
 using Solcery.Models.Simulation.Game.Destroy;
-using Solcery.Models.Simulation.Game.DragDrop.Prameters;
 using Solcery.Models.Simulation.Game.State;
 using Solcery.Services.LocalSimulation;
 using Solcery.Services.LocalSimulation.Commands;
@@ -33,7 +32,6 @@ namespace Solcery.Models.Simulation
             _systems = new EcsSystems(_world, game);
             
             // TODO: чистые инициализационные системы, вызываются один раз, по порядку (важно!)
-            _systems.Add(SystemInitialDragDropTypes.Create());
             _systems.Add(SystemInitialGameContentPlaces.Create());
             _systems.Add(SystemInitialGameContentTooltips.Create());
 
@@ -45,8 +43,6 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemExecuteCommandNew.Create(applyGameState));
             // Update static attributes
             _systems.Add(SystemStaticAttributesUpdate.Create());
-            // Create game state
-            _systems.Add(SystemGameStateCreate.Create());
             // Remove consumed commands
             _systems.Add(SystemRemoveConsumedCommandNew.Create());
             // Destroy objects

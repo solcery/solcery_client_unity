@@ -73,6 +73,11 @@ namespace Solcery.Models.Play.Game.State
                 var entityIndex = world.NewEntity();
                 ref var gameAttributesComponent =
                     ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
+                var gameAttributes = game.ServiceGameContent.GameAttributes;
+                foreach (var gameAttribute in gameAttributes)
+                {
+                    gameAttributesComponent.Attributes.Add(gameAttribute, AttributeValue.Create(0));
+                }
                 UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
             }
             else
@@ -181,8 +186,14 @@ namespace Solcery.Models.Play.Game.State
             world.GetPool<ComponentObjectTag>().Add(entityIndex);
             world.GetPool<ComponentObjectId>().Add(entityIndex);
             world.GetPool<ComponentObjectType>().Add(entityIndex);
-            world.GetPool<ComponentObjectAttributes>().Add(entityIndex).Attributes =
-                new Dictionary<string, IAttributeValue>();
+            ref var objectAttributes = ref world.GetPool<ComponentObjectAttributes>().Add(entityIndex);
+            
+            // Set default object attributes
+            var cardAttributes = game.ServiceGameContent.CardAttributes;
+            foreach (var cardAttribute in cardAttributes)
+            {
+                objectAttributes.Attributes.Add(cardAttribute, AttributeValue.Create(0));
+            }
 
             UpdateEntity(world, entityIndex, game, entityData);
         }

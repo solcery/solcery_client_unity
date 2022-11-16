@@ -75,13 +75,13 @@ namespace Solcery.Models.Play
             _systems.Add(SystemOnTooltipShow.Create(game));
             _systems.Add(SystemOnTooltipHide.Create());
             
+            // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
+            _systems.Add(SystemGameStateRemoveUpdateTag.Create());
+            
 
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif
-            
-            // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
-            _systems.Add(SystemGameStateRemoveUpdateTag.Create());
 
             _systems.Init();
 

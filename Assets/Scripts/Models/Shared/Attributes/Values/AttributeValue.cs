@@ -30,7 +30,7 @@ namespace Solcery.Models.Shared.Attributes.Values
         private AttributeValue(int value)
         {
             _init = true;
-            _changed = false;
+            _changed = true;
             _current = value;
             _old = value;
         }
@@ -40,7 +40,7 @@ namespace Solcery.Models.Shared.Attributes.Values
             if (!_init)
             {
                 _init = true;
-                _changed = false;
+                _changed = true;
                 _current = value;
                 _old = value;
                 return;

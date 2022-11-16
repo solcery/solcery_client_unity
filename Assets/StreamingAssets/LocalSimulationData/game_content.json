@@ -1361,113 +1361,17 @@
                                                 {
                                                   "name": "action1",
                                                   "value": {
-                                                    "name": "@If-then",
-                                                    "subtype": 10010,
+                                                    "name": "Update Widgets",
+                                                    "subtype": 10059,
                                                     "type": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "Condition",
-                                                        "value": {
-                                                          "name": "Or",
-                                                          "type": 1,
-                                                          "subtype": 6,
-                                                          "params": [
-                                                            {
-                                                              "name": "cond1",
-                                                              "value": {
-                                                                "name": "@Lesser or equal",
-                                                                "subtype": 10004,
-                                                                "type": 1,
-                                                                "params": [
-                                                                  {
-                                                                    "name": "Value 1",
-                                                                    "value": {
-                                                                      "name": "Game Attribute",
-                                                                      "type": 2,
-                                                                      "subtype": 13,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "attr_name",
-                                                                          "value": "enemy_hp"
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  },
-                                                                  {
-                                                                    "name": "Value 2",
-                                                                    "value": {
-                                                                      "name": "Constant",
-                                                                      "type": 2,
-                                                                      "subtype": 0,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "value",
-                                                                          "value": 0
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  }
-                                                                ]
-                                                              }
-                                                            },
-                                                            {
-                                                              "name": "cond2",
-                                                              "value": {
-                                                                "name": "@Lesser or equal",
-                                                                "subtype": 10004,
-                                                                "type": 1,
-                                                                "params": [
-                                                                  {
-                                                                    "name": "Value 1",
-                                                                    "value": {
-                                                                      "name": "Game Attribute",
-                                                                      "type": 2,
-                                                                      "subtype": 13,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "attr_name",
-                                                                          "value": "your_hp"
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  },
-                                                                  {
-                                                                    "name": "Value 2",
-                                                                    "value": {
-                                                                      "name": "Constant",
-                                                                      "type": 2,
-                                                                      "subtype": 0,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "value",
-                                                                          "value": 0
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  }
-                                                                ]
-                                                              }
-                                                            }
-                                                          ]
-                                                        }
-                                                      },
-                                                      {
-                                                        "name": "Action",
-                                                        "value": {
-                                                          "name": "End Game",
-                                                          "subtype": 10171,
-                                                          "type": 0,
-                                                          "params": []
-                                                        }
-                                                      }
-                                                    ]
+                                                    "params": []
                                                   }
                                                 },
                                                 {
                                                   "name": "action2",
                                                   "value": {
-                                                    "name": "Update Widgets",
-                                                    "subtype": 10059,
+                                                    "name": "Check Game End",
+                                                    "subtype": 10565,
                                                     "type": 0,
                                                     "params": []
                                                   }
@@ -4065,10 +3969,29 @@
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Update Widgets",
-                            "subtype": 10059,
+                            "name": "Two actions",
                             "type": 0,
-                            "params": []
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Update Widgets",
+                                  "subtype": 10059,
+                                  "type": 0,
+                                  "params": []
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Check Game End",
+                                  "subtype": 10565,
+                                  "type": 0,
+                                  "params": []
+                                }
+                              }
+                            ]
                           }
                         }
                       ]
@@ -8255,24 +8178,52 @@
                         {
                           "name": "action2",
                           "value": {
-                            "name": "Set game attribute",
+                            "name": "Two actions",
                             "type": 0,
-                            "subtype": 9,
+                            "subtype": 1,
                             "params": [
                               {
-                                "name": "attr_name",
-                                "value": "game_status"
-                              },
-                              {
-                                "name": "value",
+                                "name": "action1",
                                 "value": {
-                                  "name": "Variable",
-                                  "type": 2,
-                                  "subtype": 1,
+                                  "name": "Console log",
+                                  "type": 0,
+                                  "subtype": 0,
                                   "params": [
                                     {
-                                      "name": "var_name",
-                                      "value": "winner_id"
+                                      "name": "message",
+                                      "value": "End game {vars.winner_id}"
+                                    },
+                                    {
+                                      "name": "level",
+                                      "value": "log"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Set game attribute",
+                                  "type": 0,
+                                  "subtype": 9,
+                                  "params": [
+                                    {
+                                      "name": "attr_name",
+                                      "value": "game_status"
+                                    },
+                                    {
+                                      "name": "value",
+                                      "value": {
+                                        "name": "Variable",
+                                        "type": 2,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "winner_id"
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
@@ -15914,10 +15865,29 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "NFTS - Move Hero & Enemy to Avatars & Hands",
-                            "subtype": 10365,
+                            "name": "Set game attribute",
                             "type": 0,
-                            "params": []
+                            "subtype": 9,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "current_player"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
                           }
                         },
                         {
@@ -15930,8 +15900,8 @@
                               {
                                 "name": "action1",
                                 "value": {
-                                  "name": "Init - Players",
-                                  "subtype": 10092,
+                                  "name": "NFTS - Move Hero & Enemy to Avatars & Hands",
+                                  "subtype": 10365,
                                   "type": 0,
                                   "params": []
                                 }
@@ -15946,25 +15916,10 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Pause",
+                                        "name": "Init - Players",
+                                        "subtype": 10092,
                                         "type": 0,
-                                        "subtype": 10,
-                                        "params": [
-                                          {
-                                            "name": "duration",
-                                            "value": {
-                                              "name": "Constant",
-                                              "type": 2,
-                                              "subtype": 0,
-                                              "params": [
-                                                {
-                                                  "name": "value",
-                                                  "value": 500
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
+                                        "params": []
                                       }
                                     },
                                     {
@@ -15977,10 +15932,25 @@
                                           {
                                             "name": "action1",
                                             "value": {
-                                              "name": "Init - Shop",
-                                              "subtype": 10165,
+                                              "name": "Pause",
                                               "type": 0,
-                                              "params": []
+                                              "subtype": 10,
+                                              "params": [
+                                                {
+                                                  "name": "duration",
+                                                  "value": {
+                                                    "name": "Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 500
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
                                             }
                                           },
                                           {
@@ -15993,25 +15963,10 @@
                                                 {
                                                   "name": "action1",
                                                   "value": {
-                                                    "name": "Pause",
+                                                    "name": "Init - Shop",
+                                                    "subtype": 10165,
                                                     "type": 0,
-                                                    "subtype": 10,
-                                                    "params": [
-                                                      {
-                                                        "name": "duration",
-                                                        "value": {
-                                                          "name": "Constant",
-                                                          "type": 2,
-                                                          "subtype": 0,
-                                                          "params": [
-                                                            {
-                                                              "name": "value",
-                                                              "value": 500
-                                                            }
-                                                          ]
-                                                        }
-                                                      }
-                                                    ]
+                                                    "params": []
                                                   }
                                                 },
                                                 {
@@ -16024,10 +15979,25 @@
                                                       {
                                                         "name": "action1",
                                                         "value": {
-                                                          "name": "Init - Draw Player Hands",
-                                                          "subtype": 10369,
+                                                          "name": "Pause",
                                                           "type": 0,
-                                                          "params": []
+                                                          "subtype": 10,
+                                                          "params": [
+                                                            {
+                                                              "name": "duration",
+                                                              "value": {
+                                                                "name": "Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": 500
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
                                                         }
                                                       },
                                                       {
@@ -16040,8 +16010,8 @@
                                                             {
                                                               "name": "action1",
                                                               "value": {
-                                                                "name": "Init - Second Player Handicap",
-                                                                "subtype": 10536,
+                                                                "name": "Init - Draw Player Hands",
+                                                                "subtype": 10369,
                                                                 "type": 0,
                                                                 "params": []
                                                               }
@@ -16056,25 +16026,10 @@
                                                                   {
                                                                     "name": "action1",
                                                                     "value": {
-                                                                      "name": "Pause",
+                                                                      "name": "Init - Second Player Handicap",
+                                                                      "subtype": 10536,
                                                                       "type": 0,
-                                                                      "subtype": 10,
-                                                                      "params": [
-                                                                        {
-                                                                          "name": "duration",
-                                                                          "value": {
-                                                                            "name": "Constant",
-                                                                            "type": 2,
-                                                                            "subtype": 0,
-                                                                            "params": [
-                                                                              {
-                                                                                "name": "value",
-                                                                                "value": 500
-                                                                              }
-                                                                            ]
-                                                                          }
-                                                                        }
-                                                                      ]
+                                                                      "params": []
                                                                     }
                                                                   },
                                                                   {
@@ -16087,10 +16042,25 @@
                                                                         {
                                                                           "name": "action1",
                                                                           "value": {
-                                                                            "name": "Phase - Fill Shop",
-                                                                            "subtype": 10081,
+                                                                            "name": "Pause",
                                                                             "type": 0,
-                                                                            "params": []
+                                                                            "subtype": 10,
+                                                                            "params": [
+                                                                              {
+                                                                                "name": "duration",
+                                                                                "value": {
+                                                                                  "name": "Constant",
+                                                                                  "type": 2,
+                                                                                  "subtype": 0,
+                                                                                  "params": [
+                                                                                    {
+                                                                                      "name": "value",
+                                                                                      "value": 500
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ]
                                                                           }
                                                                         },
                                                                         {
@@ -16103,25 +16073,10 @@
                                                                               {
                                                                                 "name": "action1",
                                                                                 "value": {
-                                                                                  "name": "Pause",
+                                                                                  "name": "Phase - Fill Shop",
+                                                                                  "subtype": 10081,
                                                                                   "type": 0,
-                                                                                  "subtype": 10,
-                                                                                  "params": [
-                                                                                    {
-                                                                                      "name": "duration",
-                                                                                      "value": {
-                                                                                        "name": "Constant",
-                                                                                        "type": 2,
-                                                                                        "subtype": 0,
-                                                                                        "params": [
-                                                                                          {
-                                                                                            "name": "value",
-                                                                                            "value": 500
-                                                                                          }
-                                                                                        ]
-                                                                                      }
-                                                                                    }
-                                                                                  ]
+                                                                                  "params": []
                                                                                 }
                                                                               },
                                                                               {
@@ -16134,20 +16089,20 @@
                                                                                     {
                                                                                       "name": "action1",
                                                                                       "value": {
-                                                                                        "name": "PvP2 - Show 'Your/Enemy Turn' Msgs",
-                                                                                        "subtype": 10447,
+                                                                                        "name": "Pause",
                                                                                         "type": 0,
+                                                                                        "subtype": 10,
                                                                                         "params": [
                                                                                           {
-                                                                                            "name": "Player Index",
+                                                                                            "name": "duration",
                                                                                             "value": {
-                                                                                              "name": "Game Attribute",
+                                                                                              "name": "Constant",
                                                                                               "type": 2,
-                                                                                              "subtype": 13,
+                                                                                              "subtype": 0,
                                                                                               "params": [
                                                                                                 {
-                                                                                                  "name": "attr_name",
-                                                                                                  "value": "current_player"
+                                                                                                  "name": "value",
+                                                                                                  "value": 500
                                                                                                 }
                                                                                               ]
                                                                                             }
@@ -16165,24 +16120,20 @@
                                                                                           {
                                                                                             "name": "action1",
                                                                                             "value": {
-                                                                                              "name": "Set game attribute",
+                                                                                              "name": "PvP2 - Show 'Your/Enemy Turn' Msgs",
+                                                                                              "subtype": 10447,
                                                                                               "type": 0,
-                                                                                              "subtype": 9,
                                                                                               "params": [
                                                                                                 {
-                                                                                                  "name": "attr_name",
-                                                                                                  "value": "current_player"
-                                                                                                },
-                                                                                                {
-                                                                                                  "name": "value",
+                                                                                                  "name": "Player Index",
                                                                                                   "value": {
-                                                                                                    "name": "Constant",
+                                                                                                    "name": "Game Attribute",
                                                                                                     "type": 2,
-                                                                                                    "subtype": 0,
+                                                                                                    "subtype": 13,
                                                                                                     "params": [
                                                                                                       {
-                                                                                                        "name": "value",
-                                                                                                        "value": 1
+                                                                                                        "name": "attr_name",
+                                                                                                        "value": "current_player"
                                                                                                       }
                                                                                                     ]
                                                                                                   }
@@ -25211,6 +25162,112 @@
                     }
                   }
                 ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 565,
+        "name": "Check Game End",
+        "brick": {
+          "name": "@If-then",
+          "subtype": 10010,
+          "type": 0,
+          "params": [
+            {
+              "name": "Condition",
+              "value": {
+                "name": "Or",
+                "type": 1,
+                "subtype": 6,
+                "params": [
+                  {
+                    "name": "cond1",
+                    "value": {
+                      "name": "@Lesser or equal",
+                      "subtype": 10004,
+                      "type": 1,
+                      "params": [
+                        {
+                          "name": "Value 1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "enemy_hp"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Value 2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "cond2",
+                    "value": {
+                      "name": "@Lesser or equal",
+                      "subtype": 10004,
+                      "type": 1,
+                      "params": [
+                        {
+                          "name": "Value 1",
+                          "value": {
+                            "name": "Game Attribute",
+                            "type": 2,
+                            "subtype": 13,
+                            "params": [
+                              {
+                                "name": "attr_name",
+                                "value": "your_hp"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Value 2",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Action",
+              "value": {
+                "name": "End Game",
+                "subtype": 10171,
+                "type": 0,
+                "params": []
               }
             }
           ]
@@ -35878,138 +35935,57 @@
             {
               "name": "action2",
               "value": {
-                "name": "Affect Card with [Condition] with [Action]",
-                "subtype": 10541,
+                "name": "Two actions",
                 "type": 0,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "Condition",
+                    "name": "action1",
                     "value": {
-                      "name": "And",
-                      "type": 1,
-                      "subtype": 7,
+                      "name": "Iterator",
+                      "type": 0,
+                      "subtype": 5,
                       "params": [
                         {
-                          "name": "cond1",
+                          "name": "condition",
                           "value": {
-                            "name": "@Is in place [X]",
-                            "subtype": 10018,
+                            "name": "And",
                             "type": 1,
+                            "subtype": 7,
                             "params": [
                               {
-                                "name": "Place Id",
+                                "name": "cond1",
                                 "value": {
-                                  "name": "Place",
-                                  "type": 2,
-                                  "subtype": 0,
+                                  "name": "@Is in place [X]",
+                                  "subtype": 10018,
+                                  "type": 1,
                                   "params": [
                                     {
-                                      "name": "value",
-                                      "value": 12
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Equal",
-                            "type": 1,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "value1",
-                                "value": {
-                                  "name": "Attribute",
-                                  "type": 2,
-                                  "subtype": 2,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "order"
+                                      "name": "Place Id",
+                                      "value": {
+                                        "name": "Place",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 12
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
                               },
                               {
-                                "name": "value2",
+                                "name": "cond2",
                                 "value": {
-                                  "name": "Max Iterator",
-                                  "type": 2,
-                                  "subtype": 16,
+                                  "name": "Equal",
+                                  "type": 1,
+                                  "subtype": 2,
                                   "params": [
                                     {
-                                      "name": "iter_condition",
-                                      "value": {
-                                        "name": "And",
-                                        "type": 1,
-                                        "subtype": 7,
-                                        "params": [
-                                          {
-                                            "name": "cond1",
-                                            "value": {
-                                              "name": "@Is in place [X]",
-                                              "subtype": 10018,
-                                              "type": 1,
-                                              "params": [
-                                                {
-                                                  "name": "Place Id",
-                                                  "value": {
-                                                    "name": "Place",
-                                                    "type": 2,
-                                                    "subtype": 0,
-                                                    "params": [
-                                                      {
-                                                        "name": "value",
-                                                        "value": 12
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          },
-                                          {
-                                            "name": "cond2",
-                                            "value": {
-                                              "name": "Equal",
-                                              "type": 1,
-                                              "subtype": 2,
-                                              "params": [
-                                                {
-                                                  "name": "value1",
-                                                  "value": {
-                                                    "name": "Attribute",
-                                                    "type": 2,
-                                                    "subtype": 2,
-                                                    "params": [
-                                                      {
-                                                        "name": "attr_name",
-                                                        "value": "placement_reason"
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                {
-                                                  "name": "value2",
-                                                  "value": {
-                                                    "name": "Placement Reason - Played",
-                                                    "subtype": 10519,
-                                                    "type": 2,
-                                                    "params": []
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "value",
+                                      "name": "value1",
                                       "value": {
                                         "name": "Attribute",
                                         "type": 2,
@@ -36023,15 +35999,106 @@
                                       }
                                     },
                                     {
-                                      "name": "fallback",
+                                      "name": "value2",
                                       "value": {
-                                        "name": "Constant",
+                                        "name": "Max Iterator",
                                         "type": 2,
-                                        "subtype": 0,
+                                        "subtype": 16,
                                         "params": [
                                           {
+                                            "name": "iter_condition",
+                                            "value": {
+                                              "name": "And",
+                                              "type": 1,
+                                              "subtype": 7,
+                                              "params": [
+                                                {
+                                                  "name": "cond1",
+                                                  "value": {
+                                                    "name": "@Is in place [X]",
+                                                    "subtype": 10018,
+                                                    "type": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "Place Id",
+                                                        "value": {
+                                                          "name": "Place",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 12
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "cond2",
+                                                  "value": {
+                                                    "name": "Equal",
+                                                    "type": 1,
+                                                    "subtype": 2,
+                                                    "params": [
+                                                      {
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Attribute",
+                                                          "type": 2,
+                                                          "subtype": 2,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "placement_reason"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Placement Reason - Played",
+                                                          "subtype": 10519,
+                                                          "type": 2,
+                                                          "params": []
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
                                             "name": "value",
-                                            "value": 0
+                                            "value": {
+                                              "name": "Attribute",
+                                              "type": 2,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "order"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "fallback",
+                                            "value": {
+                                              "name": "Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 0
+                                                }
+                                              ]
+                                            }
                                           }
                                         ]
                                       }
@@ -36041,40 +36108,73 @@
                               }
                             ]
                           }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "Set scope variable",
+                            "type": 0,
+                            "subtype": 19,
+                            "params": [
+                              {
+                                "name": "var_name",
+                                "value": "target_type_id"
+                              },
+                              {
+                                "name": "value",
+                                "value": {
+                                  "name": "Card type Id",
+                                  "type": 2,
+                                  "subtype": 12,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "limit",
+                          "value": {
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 1
+                              }
+                            ]
+                          }
                         }
                       ]
                     }
                   },
                   {
-                    "name": "Action",
+                    "name": "action2",
                     "value": {
-                      "name": "Two actions",
+                      "name": "Affect Card with [Condition] with [Action]",
+                      "subtype": 10541,
                       "type": 0,
-                      "subtype": 1,
                       "params": [
                         {
-                          "name": "action1",
+                          "name": "Condition",
                           "value": {
-                            "name": "Set attribute",
-                            "type": 0,
+                            "name": "And",
+                            "type": 1,
                             "subtype": 7,
                             "params": [
                               {
-                                "name": "attr_name",
-                                "value": "order"
-                              },
-                              {
-                                "name": "value",
+                                "name": "cond1",
                                 "value": {
-                                  "name": "Number of Objects in [Place Id]",
-                                  "subtype": 10532,
-                                  "type": 2,
+                                  "name": "@Is in place [X]",
+                                  "subtype": 10018,
+                                  "type": 1,
                                   "params": [
                                     {
-                                      "name": "Target Place",
+                                      "name": "Place Id",
                                       "value": {
-                                        "name": "Place - Player [X] Hand",
-                                        "subtype": 10077,
+                                        "name": "Place - Player [X] Discard",
+                                        "subtype": 10078,
                                         "type": 2,
                                         "params": [
                                           {
@@ -36091,12 +36191,45 @@
                                     }
                                   ]
                                 }
+                              },
+                              {
+                                "name": "cond2",
+                                "value": {
+                                  "name": "Equal",
+                                  "type": 1,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Card type Id",
+                                        "type": 2,
+                                        "subtype": 12,
+                                        "params": []
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Scope variable",
+                                        "type": 2,
+                                        "subtype": 18,
+                                        "params": [
+                                          {
+                                            "name": "var_name",
+                                            "value": "target_type_id"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
                               }
                             ]
                           }
                         },
                         {
-                          "name": "action2",
+                          "name": "Action",
                           "value": {
                             "name": "Two actions",
                             "type": 0,
@@ -36116,15 +36249,10 @@
                                     {
                                       "name": "value",
                                       "value": {
-                                        "name": "Constant",
+                                        "name": "Placement Reason - Stolen",
+                                        "subtype": 10530,
                                         "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 0
-                                          }
-                                        ]
+                                        "params": []
                                       }
                                     }
                                   ]
@@ -36133,43 +36261,28 @@
                               {
                                 "name": "action2",
                                 "value": {
-                                  "name": "Two actions",
+                                  "name": "Set attribute",
                                   "type": 0,
-                                  "subtype": 1,
+                                  "subtype": 7,
                                   "params": [
                                     {
-                                      "name": "action1",
-                                      "value": {
-                                        "name": "@Disable Highlight",
-                                        "subtype": 10292,
-                                        "type": 0,
-                                        "params": []
-                                      }
+                                      "name": "attr_name",
+                                      "value": "destination"
                                     },
                                     {
-                                      "name": "action2",
+                                      "name": "value",
                                       "value": {
-                                        "name": "@Fly To Place - Normal Speed",
-                                        "subtype": 10149,
-                                        "type": 0,
+                                        "name": "Place - Player [X] Hand",
+                                        "subtype": 10077,
+                                        "type": 2,
                                         "params": [
                                           {
-                                            "name": "Place",
+                                            "name": "Player",
                                             "value": {
-                                              "name": "Place - Player [X] Hand",
-                                              "subtype": 10077,
+                                              "name": "Player - Current",
+                                              "subtype": 10090,
                                               "type": 2,
-                                              "params": [
-                                                {
-                                                  "name": "Player",
-                                                  "value": {
-                                                    "name": "Player - Current",
-                                                    "subtype": 10090,
-                                                    "type": 2,
-                                                    "params": []
-                                                  }
-                                                }
-                                              ]
+                                              "params": []
                                             }
                                           }
                                         ]
@@ -36465,12 +36578,16 @@
                   {
                     "name": "Action",
                     "value": {
-                      "name": "@Fly To Place - Normal Speed",
-                      "subtype": 10149,
+                      "name": "Set attribute",
                       "type": 0,
+                      "subtype": 7,
                       "params": [
                         {
-                          "name": "Place",
+                          "name": "attr_name",
+                          "value": "destination"
+                        },
+                        {
+                          "name": "value",
                           "value": {
                             "name": "Place - Player [X] Hand",
                             "subtype": 10077,
@@ -41130,14 +41247,14 @@
         }
       },
       {
-        "id": 504,
+        "id": 564,
         "action": {
-          "name": "Enable Bot for [Player Index]",
-          "subtype": 10506,
+          "name": "Damage [Player] for [Amount]",
+          "subtype": 10058,
           "type": 0,
           "params": [
             {
-              "name": "Player Index",
+              "name": "Player",
               "value": {
                 "name": "Scope variable",
                 "type": 2,
@@ -41149,6 +41266,30 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "Amount",
+              "value": {
+                "name": "Player [X] HP",
+                "subtype": 10038,
+                "type": 2,
+                "params": [
+                  {
+                    "name": "Player",
+                    "value": {
+                      "name": "Scope variable",
+                      "type": 2,
+                      "subtype": 18,
+                      "params": [
+                        {
+                          "name": "var_name",
+                          "value": "player_index"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
             }
           ]
         }
@@ -41156,6 +41297,6 @@
     ]
   },
   "metadata": {
-    "revision": 245
+    "revision": 249
   }
 }

@@ -12,6 +12,8 @@ namespace Solcery.Services.GameContent
         JArray Places { get; }
         JArray DragDrop { get; }
         JArray Tooltips { get; }
+        HashSet<string> GameAttributes { get; }
+        HashSet<string> CardAttributes { get; }
         List<Tuple<int, string>> Sounds { get; }
 
         int CommandIdForType(CommandTypesNew commandType);

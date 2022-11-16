@@ -13,12 +13,16 @@ namespace Solcery.Services.GameContent
         JArray IServiceGameContent.Places => _places;
         JArray IServiceGameContent.DragDrop => _dragDrop;
         JArray IServiceGameContent.Tooltips => _tooltips;
+        HashSet<string> IServiceGameContent.GameAttributes => _gameAttributes;
+        HashSet<string> IServiceGameContent.CardAttributes => _cardAttributes;
         List<Tuple<int, string>> IServiceGameContent.Sounds => _sounds;
 
         private IItemTypes _itemTypes;
         private JArray _places;
         private JArray _dragDrop;
         private JArray _tooltips;
+        private HashSet<string> _gameAttributes;
+        private HashSet<string> _cardAttributes;
         private List<Tuple<int, string>> _sounds;
         private Dictionary<CommandTypesNew, JObject> _commandsForType;
         private Dictionary<int, JObject> _commandsForId;
@@ -37,6 +41,39 @@ namespace Solcery.Services.GameContent
             _places = data.GetValue<JObject>("places").GetValue<JArray>("objects");
             _dragDrop = data.GetValue<JObject>("drag_n_drops").GetValue<JArray>("objects");
             _tooltips = data.GetValue<JObject>("tooltips").GetValue<JArray>("objects");
+
+            _gameAttributes ??= new HashSet<string>();
+            _gameAttributes.Clear();
+            if (data.TryGetValue("card_attributes", out JObject gad) 
+                && gad.TryGetValue("objects", out JArray gaa))
+            {
+                foreach (var gaToken in gaa)
+                {
+                    if (gaToken is JObject gaData 
+                        && gaData.TryGetValue("code", out string key)
+                        && !_gameAttributes.Contains(key))
+                    {
+                        _gameAttributes.Add(key);
+                    }
+                }
+            }
+            
+            
+            _cardAttributes ??= new HashSet<string>();
+            _cardAttributes.Clear();
+            if (data.TryGetValue("card_attributes", out JObject cad) 
+                && cad.TryGetValue("objects", out JArray caa))
+            {
+                foreach (var caToken in caa)
+                {
+                    if (caToken is JObject caData 
+                        && caData.TryGetValue("code", out string key)
+                        && !_cardAttributes.Contains(key))
+                    {
+                        _cardAttributes.Add(key);
+                    }
+                }
+            }
 
             _sounds = new List<Tuple<int, string>>();
             if (data.TryGetValue("sounds", out JObject soundsData)
@@ -99,6 +136,8 @@ namespace Solcery.Services.GameContent
 
         void IServiceGameContent.Cleanup()
         {
+            _gameAttributes?.Clear();
+            _cardAttributes?.Clear();
             _commandIdForType?.Clear();
             _commandsForType?.Clear();
             _commandsForId?.Clear();

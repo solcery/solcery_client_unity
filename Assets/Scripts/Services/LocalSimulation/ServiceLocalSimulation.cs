@@ -90,12 +90,9 @@ namespace Solcery.Services.LocalSimulation
                 CallAllActionWithParams(_listOnUpdateGameState, gameStates);
             }
 
-            if (!_serviceCommands.IsEmpty())
+            if (!_serviceGameState.IsEmpty || !_serviceCommands.IsEmpty())
             {
-                while (!_serviceCommands.IsEmpty())
-                {
-                    _simulationModel?.Update(0.03f);
-                }
+                _simulationModel?.Update(0.03f);
             }
         }
 

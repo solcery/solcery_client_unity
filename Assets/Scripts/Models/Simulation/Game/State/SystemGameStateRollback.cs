@@ -74,12 +74,20 @@ namespace Solcery.Models.Simulation.Game.State
                 var objectIdHashes = objectIdHashPool.Add(objectIdHashPoolEntityId).ObjectIdHashes;
                 
                 // Update game attributes
-                var gameAttributeArray = gameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
-                var entityIndex = world.NewEntity();
-                ref var gameAttributesComponent =
-                    ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
-                UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
-                
+                {
+                    var gameAttributeArray = gameState.TryGetValue("attrs", out JArray attrs) ? attrs : null;
+                    var entityIndex = world.NewEntity();
+                    ref var gameAttributesComponent =
+                        ref world.GetPool<ComponentGameAttributes>().Add(entityIndex);
+                    var gameAttributes = game.ServiceGameContent.GameAttributes;
+                    foreach (var gameAttribute in gameAttributes)
+                    {
+                        gameAttributesComponent.Attributes.Add(gameAttribute, AttributeValue.Create(0));
+                    }
+                    
+                    UpdateAttributes(gameAttributeArray, gameAttributesComponent.Attributes);
+                }
+
                 // Update game entity
                 var entityArray = gameState.GetValue<JArray>("objects");
                 var entityHashMap = new Dictionary<int, JObject>(entityArray.Count);
@@ -138,7 +146,14 @@ namespace Solcery.Models.Simulation.Game.State
             world.GetPool<ComponentObjectTag>().Add(entityIndex);
             world.GetPool<ComponentObjectId>().Add(entityIndex);
             world.GetPool<ComponentObjectType>().Add(entityIndex);
-            world.GetPool<ComponentObjectAttributes>().Add(entityIndex);
+            ref var objectAttributes = ref world.GetPool<ComponentObjectAttributes>().Add(entityIndex);
+
+            // Set default object attributes
+            var cardAttributes = game.ServiceGameContent.CardAttributes;
+            foreach (var cardAttribute in cardAttributes)
+            {
+                objectAttributes.Attributes.Add(cardAttribute, AttributeValue.Create(0));
+            }
 
             UpdateEntity(world, entityIndex, game, entityData);
         }
