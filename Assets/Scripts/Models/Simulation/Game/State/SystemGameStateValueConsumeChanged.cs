@@ -26,6 +26,7 @@ namespace Solcery.Models.Simulation.Game.State
                 .End();
             
             _filterGameEntities = world.Filter<ComponentObjectTag>()
+                .Inc<ComponentObjectType>()
                 .Inc<ComponentObjectAttributes>()
                 .Exc<ComponentObjectDeletedTag>()
                 .End();
@@ -48,11 +49,14 @@ namespace Solcery.Models.Simulation.Game.State
                 }
             }
 
-            // Consume changing in objects attributes
+            // Consume changing in objects
             {
+                var tplIdPool = world.GetPool<ComponentObjectType>();
                 var attrsPool = world.GetPool<ComponentObjectAttributes>();
                 foreach (var entity in _filterGameEntities)
                 {
+                    tplIdPool.Get(entity).ConsumeChanged();
+                    
                     ref var attrs = ref attrsPool.Get(entity);
                     foreach (var attr in attrs.Attributes)
                     {
