@@ -11668,7 +11668,7 @@
                       "params": [
                         {
                           "name": "attr_name",
-                          "value": "anim_highlight_r"
+                          "value": "anim_highlight_a"
                         },
                         {
                           "name": "value",
@@ -22372,7 +22372,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 1
+                    "value": 255
                   }
                 ]
               }
@@ -23192,7 +23192,7 @@
       },
       {
         "id": 531,
-        "name": "Steal",
+        "name": "Steal into [Destination]",
         "brick": {
           "name": "Two actions",
           "type": 0,
@@ -23254,10 +23254,29 @@
                   {
                     "name": "action2",
                     "value": {
-                      "name": "Set Destination to Owner's Discard",
-                      "subtype": 10560,
+                      "name": "Set attribute",
                       "type": 0,
-                      "params": []
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "destination"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Argument",
+                            "type": 2,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "name",
+                                "value": "Destination"
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
@@ -23422,108 +23441,74 @@
             {
               "name": "action1",
               "value": {
-                "name": "Loop",
+                "name": "Two actions",
                 "type": 0,
-                "subtype": 3,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "counter_var",
-                    "value": "i"
-                  },
-                  {
-                    "name": "iterations",
+                    "name": "action1",
                     "value": {
-                      "name": "Shop size",
-                      "subtype": 10079,
-                      "type": 2,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "action",
-                    "value": {
-                      "name": "@If-then",
-                      "subtype": 10010,
+                      "name": "Set scope variable",
                       "type": 0,
+                      "subtype": 19,
                       "params": [
                         {
-                          "name": "Condition",
+                          "name": "var_name",
+                          "value": "damage_value"
+                        },
+                        {
+                          "name": "value",
                           "value": {
-                            "name": "@Is the [Place] Empty",
-                            "subtype": 10407,
-                            "type": 1,
+                            "name": "Constant",
+                            "type": 2,
+                            "subtype": 0,
                             "params": [
                               {
-                                "name": "Place",
-                                "value": {
-                                  "name": "Addition",
-                                  "type": 2,
-                                  "subtype": 5,
-                                  "params": [
-                                    {
-                                      "name": "value1",
-                                      "value": {
-                                        "name": "Place",
-                                        "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 37
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "value2",
-                                      "value": {
-                                        "name": "Variable",
-                                        "type": 2,
-                                        "subtype": 1,
-                                        "params": [
-                                          {
-                                            "name": "var_name",
-                                            "value": "i"
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
+                                "name": "value",
+                                "value": 1
                               }
                             ]
                           }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Loop",
+                      "type": 0,
+                      "subtype": 3,
+                      "params": [
+                        {
+                          "name": "counter_var",
+                          "value": "i"
                         },
                         {
-                          "name": "Action",
+                          "name": "iterations",
                           "value": {
-                            "name": "Two actions",
+                            "name": "Shop size",
+                            "subtype": 10079,
+                            "type": 2,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "action",
+                          "value": {
+                            "name": "@If-then",
+                            "subtype": 10010,
                             "type": 0,
-                            "subtype": 1,
                             "params": [
                               {
-                                "name": "action1",
+                                "name": "Condition",
                                 "value": {
-                                  "name": "CreateEntity",
-                                  "type": 0,
-                                  "subtype": 12,
+                                  "name": "@Is the [Place] Empty",
+                                  "subtype": 10407,
+                                  "type": 1,
                                   "params": [
                                     {
-                                      "name": "card_type",
-                                      "value": {
-                                        "name": "Card type",
-                                        "type": 2,
-                                        "subtype": 0,
-                                        "params": [
-                                          {
-                                            "name": "value",
-                                            "value": 205
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "place",
+                                      "name": "Place",
                                       "value": {
                                         "name": "Addition",
                                         "type": 2,
@@ -23538,7 +23523,7 @@
                                               "params": [
                                                 {
                                                   "name": "value",
-                                                  "value": 42
+                                                  "value": 37
                                                 }
                                               ]
                                             }
@@ -23559,41 +23544,12 @@
                                           }
                                         ]
                                       }
-                                    },
-                                    {
-                                      "name": "action",
-                                      "value": {
-                                        "name": "Fly Token To [Receptacle]",
-                                        "subtype": 10214,
-                                        "type": 0,
-                                        "params": [
-                                          {
-                                            "name": "Receptacle",
-                                            "value": {
-                                              "name": "[Player] Damage Receptacle",
-                                              "subtype": 10226,
-                                              "type": 2,
-                                              "params": [
-                                                {
-                                                  "name": "Player",
-                                                  "value": {
-                                                    "name": "Player - Current",
-                                                    "subtype": 10090,
-                                                    "type": 2,
-                                                    "params": []
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
                                     }
                                   ]
                                 }
                               },
                               {
-                                "name": "action2",
+                                "name": "Action",
                                 "value": {
                                   "name": "Two actions",
                                   "type": 0,
@@ -23602,29 +23558,87 @@
                                     {
                                       "name": "action1",
                                       "value": {
-                                        "name": "Change [Player] HP for [Value]",
-                                        "subtype": 10047,
+                                        "name": "CreateEntity",
                                         "type": 0,
+                                        "subtype": 12,
                                         "params": [
                                           {
-                                            "name": "Player",
+                                            "name": "card_type",
                                             "value": {
-                                              "name": "Player - Current",
-                                              "subtype": 10090,
-                                              "type": 2,
-                                              "params": []
-                                            }
-                                          },
-                                          {
-                                            "name": "Value",
-                                            "value": {
-                                              "name": "Constant",
+                                              "name": "Card type",
                                               "type": 2,
                                               "subtype": 0,
                                               "params": [
                                                 {
                                                   "name": "value",
-                                                  "value": -1
+                                                  "value": 205
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "place",
+                                            "value": {
+                                              "name": "Addition",
+                                              "type": 2,
+                                              "subtype": 5,
+                                              "params": [
+                                                {
+                                                  "name": "value1",
+                                                  "value": {
+                                                    "name": "Place",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 42
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "value2",
+                                                  "value": {
+                                                    "name": "Variable",
+                                                    "type": 2,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "i"
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action",
+                                            "value": {
+                                              "name": "Fly Token To [Receptacle]",
+                                              "subtype": 10214,
+                                              "type": 0,
+                                              "params": [
+                                                {
+                                                  "name": "Receptacle",
+                                                  "value": {
+                                                    "name": "[Player] Damage Receptacle",
+                                                    "subtype": 10226,
+                                                    "type": 2,
+                                                    "params": [
+                                                      {
+                                                        "name": "Player",
+                                                        "value": {
+                                                          "name": "Player - Current",
+                                                          "subtype": 10090,
+                                                          "type": 2,
+                                                          "params": []
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
                                                 }
                                               ]
                                             }
@@ -23635,10 +23649,139 @@
                                     {
                                       "name": "action2",
                                       "value": {
-                                        "name": "Update Widgets",
-                                        "subtype": 10059,
+                                        "name": "Two actions",
                                         "type": 0,
-                                        "params": []
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "Change [Player] HP for [Value]",
+                                              "subtype": 10047,
+                                              "type": 0,
+                                              "params": [
+                                                {
+                                                  "name": "Player",
+                                                  "value": {
+                                                    "name": "Player - Current",
+                                                    "subtype": 10090,
+                                                    "type": 2,
+                                                    "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "Value",
+                                                  "value": {
+                                                    "name": "Subtraction",
+                                                    "type": 2,
+                                                    "subtype": 6,
+                                                    "params": [
+                                                      {
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 0
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Scope variable",
+                                                          "type": 2,
+                                                          "subtype": 18,
+                                                          "params": [
+                                                            {
+                                                              "name": "var_name",
+                                                              "value": "damage_value"
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Set scope variable",
+                                                    "type": 0,
+                                                    "subtype": 19,
+                                                    "params": [
+                                                      {
+                                                        "name": "var_name",
+                                                        "value": "damage_value"
+                                                      },
+                                                      {
+                                                        "name": "value",
+                                                        "value": {
+                                                          "name": "Addition",
+                                                          "type": 2,
+                                                          "subtype": 5,
+                                                          "params": [
+                                                            {
+                                                              "name": "value1",
+                                                              "value": {
+                                                                "name": "Scope variable",
+                                                                "type": 2,
+                                                                "subtype": 18,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "var_name",
+                                                                    "value": "damage_value"
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "value2",
+                                                              "value": {
+                                                                "name": "Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": 1
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Update Widgets",
+                                                    "subtype": 10059,
+                                                    "type": 0,
+                                                    "params": []
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
                                       }
                                     }
                                   ]
@@ -23656,106 +23799,10 @@
             {
               "name": "action2",
               "value": {
-                "name": "@If-then",
-                "subtype": 10010,
+                "name": "Check Game End",
+                "subtype": 10565,
                 "type": 0,
-                "params": [
-                  {
-                    "name": "Condition",
-                    "value": {
-                      "name": "Or",
-                      "type": 1,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "@Lesser or equal",
-                            "subtype": 10004,
-                            "type": 1,
-                            "params": [
-                              {
-                                "name": "Value 1",
-                                "value": {
-                                  "name": "Game Attribute",
-                                  "type": 2,
-                                  "subtype": 13,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "your_hp"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "Value 2",
-                                "value": {
-                                  "name": "Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 0
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "@Lesser or equal",
-                            "subtype": 10004,
-                            "type": 1,
-                            "params": [
-                              {
-                                "name": "Value 1",
-                                "value": {
-                                  "name": "Game Attribute",
-                                  "type": 2,
-                                  "subtype": 13,
-                                  "params": [
-                                    {
-                                      "name": "attr_name",
-                                      "value": "enemy_hp"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "Value 2",
-                                "value": {
-                                  "name": "Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 0
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "Action",
-                    "value": {
-                      "name": "End Game",
-                      "subtype": 10171,
-                      "type": 0,
-                      "params": []
-                    }
-                  }
-                ]
+                "params": []
               }
             }
           ]
@@ -25272,6 +25319,925 @@
             }
           ]
         }
+      },
+      {
+        "id": 571,
+        "name": "Play Card",
+        "brick": {
+          "name": "Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Play sound",
+                "type": 0,
+                "subtype": 18,
+                "params": [
+                  {
+                    "name": "sound_id",
+                    "value": 265
+                  }
+                ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "@Fly To Place - Normal Speed",
+                      "subtype": 10149,
+                      "type": 0,
+                      "params": [
+                        {
+                          "name": "Place",
+                          "value": {
+                            "name": "Place",
+                            "type": 2,
+                            "subtype": 0,
+                            "params": [
+                              {
+                                "name": "value",
+                                "value": 19
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Event",
+                            "type": 0,
+                            "subtype": 11,
+                            "params": [
+                              {
+                                "name": "event_name",
+                                "value": "activation"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Pause",
+                                  "type": 0,
+                                  "subtype": 10,
+                                  "params": [
+                                    {
+                                      "name": "duration",
+                                      "value": {
+                                        "name": "Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 200
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "@If-then",
+                                        "subtype": 10010,
+                                        "type": 0,
+                                        "params": [
+                                          {
+                                            "name": "Condition",
+                                            "value": {
+                                              "name": "Equal",
+                                              "type": 1,
+                                              "subtype": 2,
+                                              "params": [
+                                                {
+                                                  "name": "value1",
+                                                  "value": {
+                                                    "name": "Attribute",
+                                                    "type": 2,
+                                                    "subtype": 2,
+                                                    "params": [
+                                                      {
+                                                        "name": "attr_name",
+                                                        "value": "placement_reason"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "value2",
+                                                  "value": {
+                                                    "name": "Constant",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 0
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "Action",
+                                            "value": {
+                                              "name": "Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Set attribute",
+                                                    "type": 0,
+                                                    "subtype": 7,
+                                                    "params": [
+                                                      {
+                                                        "name": "attr_name",
+                                                        "value": "placement_reason"
+                                                      },
+                                                      {
+                                                        "name": "value",
+                                                        "value": {
+                                                          "name": "Placement Reason - Played",
+                                                          "subtype": 10519,
+                                                          "type": 2,
+                                                          "params": []
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "@If-then",
+                                                          "subtype": 10010,
+                                                          "type": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "Condition",
+                                                              "value": {
+                                                                "name": "Equal",
+                                                                "type": 1,
+                                                                "subtype": 2,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value1",
+                                                                    "value": {
+                                                                      "name": "Attribute",
+                                                                      "type": 2,
+                                                                      "subtype": 2,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "attr_name",
+                                                                          "value": "destination"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "name": "value2",
+                                                                    "value": {
+                                                                      "name": "Constant",
+                                                                      "type": 2,
+                                                                      "subtype": 0,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "value",
+                                                                          "value": 0
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "Action",
+                                                              "value": {
+                                                                "name": "Set Destination to Owner's Discard",
+                                                                "subtype": 10560,
+                                                                "type": 0,
+                                                                "params": []
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "action2",
+                                                        "value": {
+                                                          "name": "Add Card to Turn History",
+                                                          "subtype": 10525,
+                                                          "type": 0,
+                                                          "params": []
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Two actions",
+                                        "type": 0,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "Handle Affected Card Move To History",
+                                              "subtype": 10542,
+                                              "type": 0,
+                                              "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "Update Widgets",
+                                                    "subtype": 10059,
+                                                    "type": 0,
+                                                    "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Check Game End",
+                                                    "subtype": 10565,
+                                                    "type": 0,
+                                                    "params": []
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 572,
+        "name": "End Turn {ACTION}",
+        "brick": {
+          "name": "Two actions",
+          "type": 0,
+          "subtype": 1,
+          "params": [
+            {
+              "name": "action1",
+              "value": {
+                "name": "Clean Turn History",
+                "subtype": 10533,
+                "type": 0,
+                "params": []
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "Two actions",
+                "type": 0,
+                "subtype": 1,
+                "params": [
+                  {
+                    "name": "action1",
+                    "value": {
+                      "name": "Phase - Discard all [Player] cards",
+                      "subtype": 10082,
+                      "type": 0,
+                      "params": [
+                        {
+                          "name": "Player",
+                          "value": {
+                            "name": "Player - Current",
+                            "subtype": 10090,
+                            "type": 2,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "action2",
+                    "value": {
+                      "name": "Two actions",
+                      "type": 0,
+                      "subtype": 1,
+                      "params": [
+                        {
+                          "name": "action1",
+                          "value": {
+                            "name": "Phase - Lose all Gold of [Player]",
+                            "subtype": 10084,
+                            "type": 0,
+                            "params": [
+                              {
+                                "name": "Player",
+                                "value": {
+                                  "name": "Player - Current",
+                                  "subtype": 10090,
+                                  "type": 2,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "action2",
+                          "value": {
+                            "name": "Two actions",
+                            "type": 0,
+                            "subtype": 1,
+                            "params": [
+                              {
+                                "name": "action1",
+                                "value": {
+                                  "name": "Phase - Draw full hand for [Player]",
+                                  "subtype": 10137,
+                                  "type": 0,
+                                  "params": [
+                                    {
+                                      "name": "Player",
+                                      "value": {
+                                        "name": "Player - Current",
+                                        "subtype": 10090,
+                                        "type": 2,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Two actions",
+                                  "type": 0,
+                                  "subtype": 1,
+                                  "params": [
+                                    {
+                                      "name": "action1",
+                                      "value": {
+                                        "name": "Iterator",
+                                        "type": 0,
+                                        "subtype": 5,
+                                        "params": [
+                                          {
+                                            "name": "condition",
+                                            "value": {
+                                              "name": "@Is card type",
+                                              "subtype": 10003,
+                                              "type": 1,
+                                              "params": [
+                                                {
+                                                  "name": "Card Type Id",
+                                                  "value": {
+                                                    "name": "Card type",
+                                                    "type": 2,
+                                                    "subtype": 0,
+                                                    "params": [
+                                                      {
+                                                        "name": "value",
+                                                        "value": 72
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action",
+                                            "value": {
+                                              "name": "@Disable Highlight",
+                                              "subtype": 10292,
+                                              "type": 0,
+                                              "params": []
+                                            }
+                                          },
+                                          {
+                                            "name": "limit",
+                                            "value": {
+                                              "name": "Constant",
+                                              "type": 2,
+                                              "subtype": 0,
+                                              "params": [
+                                                {
+                                                  "name": "value",
+                                                  "value": 1
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "action2",
+                                      "value": {
+                                        "name": "Two actions",
+                                        "type": 0,
+                                        "subtype": 1,
+                                        "params": [
+                                          {
+                                            "name": "action1",
+                                            "value": {
+                                              "name": "@If-then",
+                                              "subtype": 10010,
+                                              "type": 0,
+                                              "params": [
+                                                {
+                                                  "name": "Condition",
+                                                  "value": {
+                                                    "name": "Equal",
+                                                    "type": 1,
+                                                    "subtype": 2,
+                                                    "params": [
+                                                      {
+                                                        "name": "value1",
+                                                        "value": {
+                                                          "name": "Game Attribute",
+                                                          "type": 2,
+                                                          "subtype": 13,
+                                                          "params": [
+                                                            {
+                                                              "name": "attr_name",
+                                                              "value": "skipped_turns"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "value2",
+                                                        "value": {
+                                                          "name": "Constant",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 0
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "name": "Action",
+                                                  "value": {
+                                                    "name": "Set game attribute",
+                                                    "type": 0,
+                                                    "subtype": 9,
+                                                    "params": [
+                                                      {
+                                                        "name": "attr_name",
+                                                        "value": "current_player"
+                                                      },
+                                                      {
+                                                        "name": "value",
+                                                        "value": {
+                                                          "name": "Subtraction",
+                                                          "type": 2,
+                                                          "subtype": 6,
+                                                          "params": [
+                                                            {
+                                                              "name": "value1",
+                                                              "value": {
+                                                                "name": "Constant",
+                                                                "type": 2,
+                                                                "subtype": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "value",
+                                                                    "value": 3
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "value2",
+                                                              "value": {
+                                                                "name": "Player - Current",
+                                                                "subtype": 10090,
+                                                                "type": 2,
+                                                                "params": []
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "action2",
+                                            "value": {
+                                              "name": "Two actions",
+                                              "type": 0,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "action1",
+                                                  "value": {
+                                                    "name": "End Turn - Game Attrs",
+                                                    "subtype": 10142,
+                                                    "type": 0,
+                                                    "params": []
+                                                  }
+                                                },
+                                                {
+                                                  "name": "action2",
+                                                  "value": {
+                                                    "name": "Two actions",
+                                                    "type": 0,
+                                                    "subtype": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "action1",
+                                                        "value": {
+                                                          "name": "Phase - Fill Shop",
+                                                          "subtype": 10081,
+                                                          "type": 0,
+                                                          "params": []
+                                                        }
+                                                      },
+                                                      {
+                                                        "name": "action2",
+                                                        "value": {
+                                                          "name": "Two actions",
+                                                          "type": 0,
+                                                          "subtype": 1,
+                                                          "params": [
+                                                            {
+                                                              "name": "action1",
+                                                              "value": {
+                                                                "name": "PvP2 - Show 'Your/Enemy Turn' Msgs",
+                                                                "subtype": 10447,
+                                                                "type": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "Player Index",
+                                                                    "value": {
+                                                                      "name": "Game Attribute",
+                                                                      "type": 2,
+                                                                      "subtype": 13,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "attr_name",
+                                                                          "value": "current_player"
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            },
+                                                            {
+                                                              "name": "action2",
+                                                              "value": {
+                                                                "name": "@If-then",
+                                                                "subtype": 10010,
+                                                                "type": 0,
+                                                                "params": [
+                                                                  {
+                                                                    "name": "Condition",
+                                                                    "value": {
+                                                                      "name": "Bot Active for [Player Index]",
+                                                                      "subtype": 10507,
+                                                                      "type": 1,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "Player Index",
+                                                                          "value": {
+                                                                            "name": "Player - Current",
+                                                                            "subtype": 10090,
+                                                                            "type": 2,
+                                                                            "params": []
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  },
+                                                                  {
+                                                                    "name": "Action",
+                                                                    "value": {
+                                                                      "name": "Bot - Make turn for [Player Index]",
+                                                                      "subtype": 10250,
+                                                                      "type": 0,
+                                                                      "params": [
+                                                                        {
+                                                                          "name": "Player Index",
+                                                                          "value": {
+                                                                            "name": "Player - Current",
+                                                                            "subtype": 10090,
+                                                                            "type": 2,
+                                                                            "params": []
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 573,
+        "name": "End Turn {BUTTON}",
+        "brick": {
+          "name": "Button Click with [Action]",
+          "subtype": 10278,
+          "type": 0,
+          "params": [
+            {
+              "name": "Action",
+              "value": {
+                "name": "If-Then-Else",
+                "type": 0,
+                "subtype": 2,
+                "params": [
+                  {
+                    "name": "if",
+                    "value": {
+                      "name": "Or",
+                      "type": 1,
+                      "subtype": 6,
+                      "params": [
+                        {
+                          "name": "cond1",
+                          "value": {
+                            "name": "Player Can Buy Something",
+                            "subtype": 10373,
+                            "type": 1,
+                            "params": []
+                          }
+                        },
+                        {
+                          "name": "cond2",
+                          "value": {
+                            "name": "Greater than",
+                            "type": 1,
+                            "subtype": 3,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "@Number of Objects with [Cond] in [Place Id]",
+                                  "subtype": 10080,
+                                  "type": 2,
+                                  "params": [
+                                    {
+                                      "name": "Target Place",
+                                      "value": {
+                                        "name": "Place - Player [X] Hand",
+                                        "subtype": 10077,
+                                        "type": 2,
+                                        "params": [
+                                          {
+                                            "name": "Player",
+                                            "value": {
+                                              "name": "Player - Current",
+                                              "subtype": 10090,
+                                              "type": 2,
+                                              "params": []
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "Cond",
+                                      "value": {
+                                        "name": "And",
+                                        "type": 1,
+                                        "subtype": 7,
+                                        "params": [
+                                          {
+                                            "name": "cond1",
+                                            "value": {
+                                              "name": "Not",
+                                              "type": 1,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "condition",
+                                                  "value": {
+                                                    "name": "@Is card type",
+                                                    "subtype": 10003,
+                                                    "type": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "Card Type Id",
+                                                        "value": {
+                                                          "name": "Card type",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 128
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "name": "cond2",
+                                            "value": {
+                                              "name": "Not",
+                                              "type": 1,
+                                              "subtype": 1,
+                                              "params": [
+                                                {
+                                                  "name": "condition",
+                                                  "value": {
+                                                    "name": "@Is card type",
+                                                    "subtype": 10003,
+                                                    "type": 1,
+                                                    "params": [
+                                                      {
+                                                        "name": "Card Type Id",
+                                                        "value": {
+                                                          "name": "Card type",
+                                                          "type": 2,
+                                                          "subtype": 0,
+                                                          "params": [
+                                                            {
+                                                              "name": "value",
+                                                              "value": 93
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "then",
+                    "value": {
+                      "name": "Show/Hide Turn Confirmation Notification",
+                      "subtype": 10378,
+                      "type": 0,
+                      "params": []
+                    }
+                  },
+                  {
+                    "name": "else",
+                    "value": {
+                      "name": "End Turn",
+                      "subtype": 10087,
+                      "type": 0,
+                      "params": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
       }
     ]
   },
@@ -25839,8 +26805,8 @@
         },
         "x1": 7800,
         "x2": 9000,
-        "y1": 4600,
-        "y2": 5400,
+        "y1": 4950,
+        "y2": 5750,
         "face": null,
         "caption_position": null,
         "picture_type": null
@@ -26826,8 +27792,8 @@
           "type": 1,
           "params": []
         },
-        "x1": 8530,
-        "x2": 8900,
+        "x1": 8730,
+        "x2": 9100,
         "y1": 2550,
         "y2": 2800,
         "face": null,
@@ -26894,8 +27860,8 @@
             }
           ]
         },
-        "x1": 8530,
-        "x2": 9025,
+        "x1": 8730,
+        "x2": 9100,
         "y1": 9550,
         "y2": 9800,
         "face": null,
@@ -29276,8 +30242,8 @@
             }
           ]
         },
-        "x1": 750,
-        "x2": 1350,
+        "x1": 700,
+        "x2": 1300,
         "y1": 6650,
         "y2": 6950,
         "face": 0,
@@ -29368,8 +30334,8 @@
           "type": 1,
           "params": []
         },
-        "x1": 4100,
-        "x2": 4600,
+        "x1": 450,
+        "x2": 950,
         "y1": 2550,
         "y2": 2800,
         "face": 0,
@@ -29399,8 +30365,8 @@
           "type": 1,
           "params": []
         },
-        "x1": 4050,
-        "x2": 4650,
+        "x1": 400,
+        "x2": 1000,
         "y1": 9550,
         "y2": 9800,
         "face": 0,
@@ -30958,6 +31924,106 @@
         "face": null,
         "caption_position": null,
         "picture_type": null
+      },
+      {
+        "id": 566,
+        "place_id": 257,
+        "z_order": 2,
+        "layout": 6,
+        "visibility_condition": {
+          "name": "Game Mode - Play",
+          "subtype": 10161,
+          "type": 1,
+          "params": []
+        },
+        "availability_condition": {
+          "name": "Game Mode - Play",
+          "subtype": 10161,
+          "type": 1,
+          "params": []
+        },
+        "x1": 7650,
+        "x2": 8250,
+        "y1": 2550,
+        "y2": 2800,
+        "face": 0,
+        "caption": "",
+        "caption_position": null,
+        "caption_color": "",
+        "show_frame": false,
+        "frame_color": "",
+        "drag_n_drops": [],
+        "fill_color": "#231e1ed9",
+        "picture_type": null
+      },
+      {
+        "id": 567,
+        "place_id": 258,
+        "z_order": 2,
+        "layout": 6,
+        "visibility_condition": {
+          "name": "Game Mode - Play",
+          "subtype": 10161,
+          "type": 1,
+          "params": []
+        },
+        "availability_condition": {
+          "name": "Game Mode - Play",
+          "subtype": 10161,
+          "type": 1,
+          "params": []
+        },
+        "x1": 7600,
+        "x2": 8300,
+        "y1": 9550,
+        "y2": 9800,
+        "face": 0,
+        "caption": "",
+        "caption_position": null,
+        "caption_color": "",
+        "show_frame": false,
+        "frame_color": "",
+        "drag_n_drops": [],
+        "fill_color": "#231e1ed9",
+        "picture_type": null
+      },
+      {
+        "id": 568,
+        "place_id": 259,
+        "z_order": 10,
+        "layout": 3,
+        "visibility_condition": {
+          "name": "@True",
+          "subtype": 10023,
+          "type": 1,
+          "params": []
+        },
+        "x1": 7800,
+        "x2": 9000,
+        "y1": 5800,
+        "y2": 6100,
+        "face": null,
+        "caption_position": null,
+        "picture_type": null
+      },
+      {
+        "id": 574,
+        "place_id": 260,
+        "z_order": 10,
+        "layout": 3,
+        "visibility_condition": {
+          "name": "@True",
+          "subtype": 10023,
+          "type": 1,
+          "params": []
+        },
+        "x1": 7800,
+        "x2": 9000,
+        "y1": 5800,
+        "y2": 6100,
+        "face": null,
+        "caption_position": null,
+        "picture_type": null
       }
     ]
   },
@@ -31082,189 +32148,10 @@
         "type": 0,
         "displayed_name": "End Turn",
         "action_on_left_click": {
-          "name": "Button Click with [Action]",
-          "subtype": 10278,
+          "name": "End Turn {BUTTON}",
+          "subtype": 10573,
           "type": 0,
-          "params": [
-            {
-              "name": "Action",
-              "value": {
-                "name": "If-Then-Else",
-                "type": 0,
-                "subtype": 2,
-                "params": [
-                  {
-                    "name": "if",
-                    "value": {
-                      "name": "Or",
-                      "type": 1,
-                      "subtype": 6,
-                      "params": [
-                        {
-                          "name": "cond1",
-                          "value": {
-                            "name": "Player Can Buy Something",
-                            "subtype": 10373,
-                            "type": 1,
-                            "params": []
-                          }
-                        },
-                        {
-                          "name": "cond2",
-                          "value": {
-                            "name": "Greater than",
-                            "type": 1,
-                            "subtype": 3,
-                            "params": [
-                              {
-                                "name": "value1",
-                                "value": {
-                                  "name": "@Number of Objects with [Cond] in [Place Id]",
-                                  "subtype": 10080,
-                                  "type": 2,
-                                  "params": [
-                                    {
-                                      "name": "Target Place",
-                                      "value": {
-                                        "name": "Place - Player [X] Hand",
-                                        "subtype": 10077,
-                                        "type": 2,
-                                        "params": [
-                                          {
-                                            "name": "Player",
-                                            "value": {
-                                              "name": "Player - Current",
-                                              "subtype": 10090,
-                                              "type": 2,
-                                              "params": []
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    {
-                                      "name": "Cond",
-                                      "value": {
-                                        "name": "And",
-                                        "type": 1,
-                                        "subtype": 7,
-                                        "params": [
-                                          {
-                                            "name": "cond1",
-                                            "value": {
-                                              "name": "Not",
-                                              "type": 1,
-                                              "subtype": 1,
-                                              "params": [
-                                                {
-                                                  "name": "condition",
-                                                  "value": {
-                                                    "name": "@Is card type",
-                                                    "subtype": 10003,
-                                                    "type": 1,
-                                                    "params": [
-                                                      {
-                                                        "name": "Card Type Id",
-                                                        "value": {
-                                                          "name": "Card type",
-                                                          "type": 2,
-                                                          "subtype": 0,
-                                                          "params": [
-                                                            {
-                                                              "name": "value",
-                                                              "value": 128
-                                                            }
-                                                          ]
-                                                        }
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          },
-                                          {
-                                            "name": "cond2",
-                                            "value": {
-                                              "name": "Not",
-                                              "type": 1,
-                                              "subtype": 1,
-                                              "params": [
-                                                {
-                                                  "name": "condition",
-                                                  "value": {
-                                                    "name": "@Is card type",
-                                                    "subtype": 10003,
-                                                    "type": 1,
-                                                    "params": [
-                                                      {
-                                                        "name": "Card Type Id",
-                                                        "value": {
-                                                          "name": "Card type",
-                                                          "type": 2,
-                                                          "subtype": 0,
-                                                          "params": [
-                                                            {
-                                                              "name": "value",
-                                                              "value": 93
-                                                            }
-                                                          ]
-                                                        }
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "value2",
-                                "value": {
-                                  "name": "Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 0
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "then",
-                    "value": {
-                      "name": "Show/Hide Turn Confirmation Notification",
-                      "subtype": 10378,
-                      "type": 0,
-                      "params": []
-                    }
-                  },
-                  {
-                    "name": "else",
-                    "value": {
-                      "name": "End Turn",
-                      "subtype": 10087,
-                      "type": 0,
-                      "params": []
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "params": []
         },
         "name_font_size": 30,
         "name_font_size_full": 40
@@ -31344,7 +32231,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "name_font_size": 15,
         "name_font_size_full": 40,
         "type_font_size": 40,
@@ -31427,7 +32314,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "name_font_size": 15,
         "name_font_size_full": 40,
         "type_font_size": 40,
@@ -31483,7 +32370,7 @@
           "params": []
         },
         "tooltip_id": 417,
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -31559,7 +32446,7 @@
           ]
         },
         "tooltip_id": 417,
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -31678,7 +32565,7 @@
           ]
         },
         "tooltip_id": 417,
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -31753,7 +32640,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -31764,7 +32651,7 @@
         "displayed_name": "Plague Burglar",
         "displayed_type": "",
         "picture": "https://i.ibb.co/nwtjqQX/plague-burglar.jpg",
-        "description": "Get 1 <b>Gold</b>;\nSteal a random Card from the Shop",
+        "description": "Get 1 <b>Gold</b>;\nSteal a random Card from the Shop into your Discard",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -31862,10 +32749,30 @@
                         {
                           "name": "action1",
                           "value": {
-                            "name": "Steal",
+                            "name": "Steal into [Destination]",
                             "subtype": 10531,
                             "type": 0,
-                            "params": []
+                            "params": [
+                              {
+                                "name": "Destination",
+                                "value": {
+                                  "name": "Place - Player [X] Discard",
+                                  "subtype": 10078,
+                                  "type": 2,
+                                  "params": [
+                                    {
+                                      "name": "Player",
+                                      "value": {
+                                        "name": "Player - Current",
+                                        "subtype": 10090,
+                                        "type": 2,
+                                        "params": []
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
                           }
                         },
                         {
@@ -31904,7 +32811,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32108,7 +33015,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32279,7 +33186,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32412,7 +33319,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32506,7 +33413,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32639,7 +33546,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32757,7 +33664,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -32890,7 +33797,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33037,7 +33944,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33213,7 +34120,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33224,7 +34131,7 @@
         "displayed_name": "Feral Mugger",
         "displayed_type": "",
         "picture": "https://i.ibb.co/Wz4Cmwd/feral-mugger.jpg",
-        "description": "Deal 2 <b>Dmg</b>;\n<b>Heal</b> for 2 HP",
+        "description": "Deal 2 <b>Dmg</b>;\n<b>Heal</b> for 1 HP",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -33331,7 +34238,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33406,7 +34313,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33524,7 +34431,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33535,7 +34442,7 @@
         "displayed_name": "Failed Experiment",
         "displayed_type": "",
         "picture": "https://i.ibb.co/SnWM0Zr/failed-experiment.jpg",
-        "description": "Get 2 <b>Gold</b>;\nGet 2 more <b>Gold</b> if you have more than 15 HP",
+        "description": "Get 2 <b>Gold</b>;\nGet 2 more <b>Gold</b> if you have more than 12 HP",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -33649,7 +34556,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 15
+                                "value": 12
                               }
                             ]
                           }
@@ -33695,7 +34602,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33794,7 +34701,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33805,7 +34712,7 @@
         "displayed_name": "Borrowed Power",
         "displayed_type": "",
         "picture": "https://i.ibb.co/LCfX0tf/borrowed-power.jpg",
-        "description": "Take 4 <b>Dmg</b>;\nDraw 3 Cards",
+        "description": "Take 3 <b>Dmg</b>;\nDraw 2 Cards",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -33832,7 +34739,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 5
+                    "value": 4
                   }
                 ]
               }
@@ -33912,7 +34819,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -33987,7 +34894,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34105,7 +35012,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34238,7 +35145,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34375,7 +35282,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34508,7 +35415,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34684,7 +35591,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34695,7 +35602,7 @@
         "displayed_name": "Snarling Bodyguard",
         "displayed_type": "",
         "picture": "https://i.ibb.co/k9sBkXR/snarling-bodyguard.jpg",
-        "description": "<b>Heal</b> 3 HP;\nIf you have more HP than the enemy, deal 3 <b>Dmg</b>",
+        "description": "Deal 3 <b>Dmg</b>;\nIf you have more HP than the enemy, <b>Heal</b> 2 HP",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -34722,7 +35629,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 4
+                    "value": 5
                   }
                 ]
               }
@@ -34737,15 +35644,15 @@
             {
               "name": "action1",
               "value": {
-                "name": "Heal [Player] for [Amount]",
-                "subtype": 10060,
+                "name": "Damage [Player] for [Amount]",
+                "subtype": 10058,
                 "type": 0,
                 "params": [
                   {
                     "name": "Player",
                     "value": {
-                      "name": "Player - Current",
-                      "subtype": 10090,
+                      "name": "Player - Opponent",
+                      "subtype": 10089,
                       "type": 2,
                       "params": []
                     }
@@ -34825,15 +35732,15 @@
                   {
                     "name": "Action",
                     "value": {
-                      "name": "Damage [Player] for [Amount]",
-                      "subtype": 10058,
+                      "name": "Heal [Player] for [Amount]",
+                      "subtype": 10060,
                       "type": 0,
                       "params": [
                         {
                           "name": "Player",
                           "value": {
-                            "name": "Player - Opponent",
-                            "subtype": 10089,
+                            "name": "Player - Current",
+                            "subtype": 10090,
                             "type": 2,
                             "params": []
                           }
@@ -34847,7 +35754,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 3
+                                "value": 2
                               }
                             ]
                           }
@@ -34860,7 +35767,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -34871,7 +35778,7 @@
         "displayed_name": "Fluff Alpha",
         "displayed_type": "",
         "picture": "https://i.ibb.co/mzMm61p/fluff-alpha.jpg",
-        "description": "Get 1 <b>Gold</b>;\nDeal 2 <b>Dmg</b>;\nAdd a Cutie Puff to enemy Discard",
+        "description": "Get 1 <b>Gold</b>;\nDeal 2 <b>Dmg</b>;\nAdd a Cutie Puff into enemy Deck",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -35092,10 +35999,34 @@
                                           {
                                             "name": "action2",
                                             "value": {
-                                              "name": "Set Destination to Owner's Discard",
-                                              "subtype": 10560,
+                                              "name": "Set attribute",
                                               "type": 0,
-                                              "params": []
+                                              "subtype": 7,
+                                              "params": [
+                                                {
+                                                  "name": "attr_name",
+                                                  "value": "destination"
+                                                },
+                                                {
+                                                  "name": "value",
+                                                  "value": {
+                                                    "name": "Place - Player [X] Deck",
+                                                    "subtype": 10076,
+                                                    "type": 2,
+                                                    "params": [
+                                                      {
+                                                        "name": "Player",
+                                                        "value": {
+                                                          "name": "Player - Opponent",
+                                                          "subtype": 10089,
+                                                          "type": 2,
+                                                          "params": []
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
                                             }
                                           }
                                         ]
@@ -35124,7 +36055,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -35304,7 +36235,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -35484,7 +36415,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -35616,7 +36547,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -35627,7 +36558,7 @@
         "displayed_name": "Tireless Collector",
         "displayed_type": "",
         "picture": "https://i.ibb.co/SBC8TrR/tireless-collector.jpg",
-        "description": "Deal 4 <b>Dmg</b>;\nTake 8 <b>Dmg</b> when this card is bought",
+        "description": "Deal 4 <b>Dmg</b>;\nTake 6 <b>Dmg</b> when this card is bought",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -35721,7 +36652,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -35849,7 +36780,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36302,7 +37233,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36350,7 +37281,7 @@
           "subtype": 0,
           "params": []
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36425,7 +37356,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36467,7 +37398,7 @@
           "subtype": 0,
           "params": []
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36478,7 +37409,7 @@
         "displayed_name": "Back from the Grave",
         "displayed_type": "",
         "picture": "https://i.ibb.co/vBd0CJr/back-from-the-grave.jpg",
-        "description": "Return 2 Cards from you Discard pile to your Hand",
+        "description": "Return 2 Cards from you Discard pile to your Hand\nDestroy this card",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -36509,7 +37440,7 @@
                 "params": [
                   {
                     "name": "value",
-                    "value": 5
+                    "value": 3
                   }
                 ]
               }
@@ -36613,7 +37544,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36773,7 +37704,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -36891,7 +37822,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -37144,7 +38075,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -37155,7 +38086,7 @@
         "displayed_name": "Phantom Thief",
         "displayed_type": "",
         "picture": "https://i.ibb.co/BLSKgny/phantom-thief.jpg",
-        "description": "Get 2 <b>Gold</b>;\nSteal a Card from enemy Hand",
+        "description": "Get 2 <b>Gold</b>;\nSteal a Card from enemy Hand into yours",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -37266,10 +38197,30 @@
                   {
                     "name": "Action",
                     "value": {
-                      "name": "Steal",
+                      "name": "Steal into [Destination]",
                       "subtype": 10531,
                       "type": 0,
-                      "params": []
+                      "params": [
+                        {
+                          "name": "Destination",
+                          "value": {
+                            "name": "Place - Player [X] Hand",
+                            "subtype": 10077,
+                            "type": 2,
+                            "params": [
+                              {
+                                "name": "Player",
+                                "value": {
+                                  "name": "Player - Current",
+                                  "subtype": 10090,
+                                  "type": 2,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
@@ -37277,7 +38228,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -37288,7 +38239,7 @@
         "displayed_name": "Disloyal Minion",
         "displayed_type": "",
         "picture": "https://i.ibb.co/TTmmkh7/disloyal-minion.jpg",
-        "description": "Deal 2 <b>Dmg</b>;\nMove this Card to enemy Discard",
+        "description": "Deal 2 <b>Dmg</b>;\nMove this Card to enemy Deck",
         "action_on_left_click": {
           "name": "Default OnLeftClick",
           "subtype": 10063,
@@ -37363,21 +38314,64 @@
             {
               "name": "action2",
               "value": {
-                "name": "Set attribute",
+                "name": "Two actions",
                 "type": 0,
-                "subtype": 7,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "attr_name",
-                    "value": "card_owner"
+                    "name": "action1",
+                    "value": {
+                      "name": "Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "card_owner"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Player - Opponent",
+                            "subtype": 10089,
+                            "type": 2,
+                            "params": []
+                          }
+                        }
+                      ]
+                    }
                   },
                   {
-                    "name": "value",
+                    "name": "action2",
                     "value": {
-                      "name": "Player - Opponent",
-                      "subtype": 10089,
-                      "type": 2,
-                      "params": []
+                      "name": "Set attribute",
+                      "type": 0,
+                      "subtype": 7,
+                      "params": [
+                        {
+                          "name": "attr_name",
+                          "value": "destination"
+                        },
+                        {
+                          "name": "value",
+                          "value": {
+                            "name": "Place - Player [X] Deck",
+                            "subtype": 10076,
+                            "type": 2,
+                            "params": [
+                              {
+                                "name": "Player",
+                                "value": {
+                                  "name": "Player - Opponent",
+                                  "subtype": 10089,
+                                  "type": 2,
+                                  "params": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
@@ -37385,7 +38379,7 @@
             }
           ]
         },
-        "duration_color": "af9421",
+        "duration_color": "#a98f20",
         "description_font_size": 0,
         "description_font_size_full": 40
       },
@@ -40218,7 +41212,7 @@
         "id": 544,
         "name": "Refresh Shop Button",
         "type": 0,
-        "displayed_name": "Refresh Shop<br>2 <b>Gold</b>",
+        "displayed_name": "Refresh Shop<br>3 <b>Gold</b>",
         "action_on_left_click": {
           "name": "Button Click with [Action]",
           "subtype": 10278,
@@ -40266,7 +41260,7 @@
                             "params": [
                               {
                                 "name": "value",
-                                "value": 1
+                                "value": 2
                               }
                             ]
                           }
@@ -40306,7 +41300,7 @@
                                   "params": [
                                     {
                                       "name": "value",
-                                      "value": 2
+                                      "value": 3
                                     }
                                   ]
                                 }
@@ -40409,6 +41403,20 @@
         },
         "name_font_size": 17,
         "name_font_size_full": 27
+      },
+      {
+        "id": 569,
+        "name": "Msg - Your Turn Text",
+        "type": 0,
+        "displayed_type": "",
+        "description": "<b><color=#F5F5F5>Your Turn</color></b>"
+      },
+      {
+        "id": 570,
+        "name": "Msg - Enemy Turn Text",
+        "type": 0,
+        "displayed_type": "",
+        "description": "<b><color=#F5F5F5>Enemy Turn</color></b>"
       }
     ]
   },
@@ -41249,30 +42257,16 @@
       {
         "id": 564,
         "action": {
-          "name": "Damage [Player] for [Amount]",
-          "subtype": 10058,
+          "name": "Two actions",
           "type": 0,
+          "subtype": 1,
           "params": [
             {
-              "name": "Player",
+              "name": "action1",
               "value": {
-                "name": "Scope variable",
-                "type": 2,
-                "subtype": 18,
-                "params": [
-                  {
-                    "name": "var_name",
-                    "value": "player_index"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Amount",
-              "value": {
-                "name": "Player [X] HP",
-                "subtype": 10038,
-                "type": 2,
+                "name": "Set player [Player] HP to [Value]",
+                "subtype": 10045,
+                "type": 0,
                 "params": [
                   {
                     "name": "Player",
@@ -41287,16 +42281,45 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "name": "Value",
+                    "value": {
+                      "name": "Constant",
+                      "type": 2,
+                      "subtype": 0,
+                      "params": [
+                        {
+                          "name": "value",
+                          "value": 0
+                        }
+                      ]
+                    }
                   }
                 ]
+              }
+            },
+            {
+              "name": "action2",
+              "value": {
+                "name": "End Game",
+                "subtype": 10171,
+                "type": 0,
+                "params": []
               }
             }
           ]
         }
+      },
+      {
+        "id": 575
+      },
+      {
+        "id": 576
       }
     ]
   },
   "metadata": {
-    "revision": 249
+    "revision": 251
   }
 }
