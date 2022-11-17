@@ -55,7 +55,6 @@ namespace Solcery.Models.Shared.Commands.New
                         localScopes.Vars.Update(ctx.Key, ctx.Value);
                     }
                     Debug.Log($"Action brick execute status {game.ServiceBricks.ExecuteBrick(brick, context, 1)}");
-                    //_applyGameState.ApplySimulatedGameStates(context.GameStates);
                     context.LocalScopes.Pop();
                     CurrentContext.Destroy(world, context);
                 }

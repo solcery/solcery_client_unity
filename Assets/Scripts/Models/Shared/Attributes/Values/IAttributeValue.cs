@@ -6,6 +6,7 @@ namespace Solcery.Models.Shared.Attributes.Values
         int Current { get; }
         bool Changed { get; }
         void UpdateValue(int value);
+        void ConsumeChanged();
         void Cleanup();
     }
 }

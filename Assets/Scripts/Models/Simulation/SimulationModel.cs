@@ -45,6 +45,8 @@ namespace Solcery.Models.Simulation
             _systems.Add(SystemStaticAttributesUpdate.Create());
             // Remove consumed commands
             _systems.Add(SystemRemoveConsumedCommandNew.Create());
+            // Consume changed in value
+            _systems.Add(SystemGameStateValueConsumeChanged.Create());
             // Destroy objects
             _systems.Add(SystemDestroyObjects.Create());
             

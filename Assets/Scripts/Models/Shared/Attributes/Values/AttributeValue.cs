@@ -51,6 +51,11 @@ namespace Solcery.Models.Shared.Attributes.Values
             _changed = _old != _current;
         }
 
+        void IAttributeValue.ConsumeChanged()
+        {
+            _changed = false;
+        }
+
         void IAttributeValue.Cleanup()
         {
             _init = false;
