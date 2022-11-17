@@ -1,8 +1,8 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Solcery.Services.Renderer.Widgets;
 using Solcery.Ui;
-using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 using Object = UnityEngine.Object;

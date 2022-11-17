@@ -136,7 +136,8 @@ MonoBehaviour:
   timer: {fileID: 0}
   waitDropFrame: {fileID: 0}
   capacity: 4
-  offset: 0.04
+  offsetX: 0.04
+  offsetY: 0.01
   content: {fileID: 3143025930282575442}
   textArea: {fileID: 3143025929257725079}
   text: {fileID: 3143025929730252714}

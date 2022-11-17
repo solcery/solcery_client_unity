@@ -11,7 +11,10 @@ namespace Solcery.Widgets_new.Container.Stacks
         private int capacity = 1;
         
         [SerializeField] [Range(0f, 1f)]
-        private float offset;
+        private float offsetX;
+        
+        [SerializeField] [Range(0f, 1f)]
+        private float offsetY;
         
         [SerializeField]
         private RectTransform content;
@@ -24,16 +27,16 @@ namespace Solcery.Widgets_new.Container.Stacks
 
         public int Capacity => capacity;
 
-        public float GetCardOffset(int index)
+        public Vector3 GetCardOffset(int index)
         {
             index = index >= capacity - 1  ? capacity - 1 : index;
-            return content.rect.width * offset * index;
+            return new Vector3(content.rect.width * offsetX * index, content.rect.height * offsetY * index, 0f);
         }
-
+        
         public void UpdateText(string newText)
         {
             text.text = newText;
-            textArea.localPosition = new Vector3 (GetCardOffset(capacity), 0, 0);
+            textArea.localPosition = GetCardOffset(capacity);
         }
 
         public void UpdateTextVisible(bool visible)
