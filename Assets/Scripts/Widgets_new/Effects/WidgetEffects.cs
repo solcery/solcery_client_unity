@@ -22,6 +22,7 @@ namespace Solcery.Widgets_new.Effects
         private WidgetEffects(RootUiEffects effectRoot)
         {
             _effectRoot = effectRoot;
+            DOTween.SetTweensCapacity(600, 150);
         }
 
         public void MoveToken(RectTransform rectTransform, 
