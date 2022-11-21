@@ -84,6 +84,14 @@
           {
             "key": "skipped_turns",
             "value": 0
+          },
+          {
+            "key": "skipped_turns_p1",
+            "value": 0
+          },
+          {
+            "key": "skipped_turns_p2",
+            "value": 0
           }
         ],
         "objects": [
@@ -613,7 +621,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 51
               },
               {
                 "key": "number",
@@ -1003,7 +1011,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 52
+                "value": 1
               },
               {
                 "key": "number",
@@ -1393,7 +1401,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 72
+                "value": 1
               },
               {
                 "key": "number",
@@ -4903,7 +4911,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 580
               },
               {
                 "key": "number",
@@ -4995,15 +5003,15 @@
               },
               {
                 "key": "hero",
-                "value": 0
+                "value": 2
               },
               {
                 "key": "anim_highlight_r",
-                "value": 0
+                "value": 255
               },
               {
                 "key": "anim_highlight_g",
-                "value": 0
+                "value": 255
               },
               {
                 "key": "anim_highlight_b",
@@ -5015,11 +5023,11 @@
               },
               {
                 "key": "card_owner",
-                "value": 0
+                "value": 2
               },
               {
                 "key": "anim_highlight_a",
-                "value": 0
+                "value": 255
               },
               {
                 "key": "destination",
@@ -5293,7 +5301,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 52
               },
               {
                 "key": "number",
@@ -5423,7 +5431,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 580
+                "value": 1
               },
               {
                 "key": "number",
@@ -5515,15 +5523,15 @@
               },
               {
                 "key": "hero",
-                "value": 2
+                "value": 0
               },
               {
                 "key": "anim_highlight_r",
-                "value": 255
+                "value": 0
               },
               {
                 "key": "anim_highlight_g",
-                "value": 255
+                "value": 0
               },
               {
                 "key": "anim_highlight_b",
@@ -5535,11 +5543,11 @@
               },
               {
                 "key": "card_owner",
-                "value": 2
+                "value": 0
               },
               {
                 "key": "anim_highlight_a",
-                "value": 255
+                "value": 0
               },
               {
                 "key": "destination",
@@ -8283,7 +8291,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 73
               },
               {
                 "key": "number",
@@ -9323,7 +9331,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 53
+                "value": 1
               },
               {
                 "key": "number",
@@ -12443,7 +12451,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 73
+                "value": 1
               },
               {
                 "key": "number",
@@ -12703,7 +12711,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 72
               },
               {
                 "key": "number",
@@ -13223,7 +13231,7 @@
             "attrs": [
               {
                 "key": "place",
-                "value": 1
+                "value": 53
               },
               {
                 "key": "number",
@@ -15949,396 +15957,6 @@
           },
           {
             "id": 123,
-            "tplId": 132,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 7
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 124,
-            "tplId": 132,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 7
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 125,
-            "tplId": 132,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 1
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 7
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 126,
             "tplId": 72,
             "attrs": [
               {
@@ -16468,397 +16086,7 @@
             ]
           },
           {
-            "id": 127,
-            "tplId": 173,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 16
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 128,
-            "tplId": 175,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 17
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 129,
-            "tplId": 194,
-            "attrs": [
-              {
-                "key": "place",
-                "value": 18
-              },
-              {
-                "key": "number",
-                "value": 0
-              },
-              {
-                "key": "show_duration",
-                "value": 0
-              },
-              {
-                "key": "duration",
-                "value": 0
-              },
-              {
-                "key": "order",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_card_fly_time",
-                "value": 0
-              },
-              {
-                "key": "anim_destroy",
-                "value": 0
-              },
-              {
-                "key": "anim_card_destroy_time",
-                "value": 0
-              },
-              {
-                "key": "origin_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_slot",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_from_place",
-                "value": 0
-              },
-              {
-                "key": "anim_token_fly_time",
-                "value": 0
-              },
-              {
-                "key": "linked_card_id",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight",
-                "value": 0
-              },
-              {
-                "key": "nft_card",
-                "value": 0
-              },
-              {
-                "key": "nft_transform_to_cardtype",
-                "value": 0
-              },
-              {
-                "key": "progress",
-                "value": 0
-              },
-              {
-                "key": "uses",
-                "value": 0
-              },
-              {
-                "key": "type",
-                "value": 0
-              },
-              {
-                "key": "hero",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_r",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_g",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_b",
-                "value": 0
-              },
-              {
-                "key": "placement_reason",
-                "value": 0
-              },
-              {
-                "key": "card_owner",
-                "value": 0
-              },
-              {
-                "key": "anim_highlight_a",
-                "value": 0
-              },
-              {
-                "key": "destination",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "id": 130,
+            "id": 124,
             "tplId": 240,
             "attrs": [
               {
@@ -16988,7 +16216,7 @@
             ]
           },
           {
-            "id": 131,
+            "id": 125,
             "tplId": 241,
             "attrs": [
               {
@@ -17118,7 +16346,7 @@
             ]
           },
           {
-            "id": 132,
+            "id": 126,
             "tplId": 333,
             "attrs": [
               {
@@ -17248,7 +16476,7 @@
             ]
           },
           {
-            "id": 133,
+            "id": 127,
             "tplId": 345,
             "attrs": [
               {
@@ -17378,7 +16606,7 @@
             ]
           },
           {
-            "id": 134,
+            "id": 128,
             "tplId": 348,
             "attrs": [
               {
@@ -17508,7 +16736,7 @@
             ]
           },
           {
-            "id": 135,
+            "id": 129,
             "tplId": 358,
             "attrs": [
               {
@@ -17638,7 +16866,7 @@
             ]
           },
           {
-            "id": 136,
+            "id": 130,
             "tplId": 330,
             "attrs": [
               {
@@ -17768,7 +16996,7 @@
             ]
           },
           {
-            "id": 137,
+            "id": 131,
             "tplId": 331,
             "attrs": [
               {
@@ -17898,7 +17126,7 @@
             ]
           },
           {
-            "id": 138,
+            "id": 132,
             "tplId": 376,
             "attrs": [
               {
@@ -18028,7 +17256,7 @@
             ]
           },
           {
-            "id": 139,
+            "id": 133,
             "tplId": 382,
             "attrs": [
               {
@@ -18158,7 +17386,7 @@
             ]
           },
           {
-            "id": 140,
+            "id": 134,
             "tplId": 379,
             "attrs": [
               {
@@ -18288,7 +17516,7 @@
             ]
           },
           {
-            "id": 141,
+            "id": 135,
             "tplId": 390,
             "attrs": [
               {
@@ -18418,7 +17646,7 @@
             ]
           },
           {
-            "id": 142,
+            "id": 136,
             "tplId": 333,
             "attrs": [
               {
@@ -18548,7 +17776,7 @@
             ]
           },
           {
-            "id": 143,
+            "id": 137,
             "tplId": 348,
             "attrs": [
               {
@@ -18678,7 +17906,7 @@
             ]
           },
           {
-            "id": 144,
+            "id": 138,
             "tplId": 472,
             "attrs": [
               {
@@ -18808,7 +18036,7 @@
             ]
           },
           {
-            "id": 145,
+            "id": 139,
             "tplId": 472,
             "attrs": [
               {
@@ -18938,7 +18166,7 @@
             ]
           },
           {
-            "id": 146,
+            "id": 140,
             "tplId": 544,
             "attrs": [
               {
@@ -19068,12 +18296,12 @@
             ]
           },
           {
-            "id": 147,
-            "tplId": 316,
+            "id": 141,
+            "tplId": 569,
             "attrs": [
               {
                 "key": "place",
-                "value": 51
+                "value": 1
               },
               {
                 "key": "number",
@@ -19085,7 +18313,7 @@
               },
               {
                 "key": "duration",
-                "value": 6
+                "value": 0
               },
               {
                 "key": "order",
@@ -19145,7 +18373,137 @@
               },
               {
                 "key": "nft_card",
+                "value": 0
+              },
+              {
+                "key": "nft_transform_to_cardtype",
+                "value": 0
+              },
+              {
+                "key": "progress",
+                "value": 0
+              },
+              {
+                "key": "uses",
+                "value": 0
+              },
+              {
+                "key": "type",
+                "value": 0
+              },
+              {
+                "key": "hero",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_r",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_g",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_b",
+                "value": 0
+              },
+              {
+                "key": "placement_reason",
+                "value": 0
+              },
+              {
+                "key": "card_owner",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight_a",
+                "value": 0
+              },
+              {
+                "key": "destination",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": 142,
+            "tplId": 570,
+            "attrs": [
+              {
+                "key": "place",
                 "value": 1
+              },
+              {
+                "key": "number",
+                "value": 0
+              },
+              {
+                "key": "show_duration",
+                "value": 0
+              },
+              {
+                "key": "duration",
+                "value": 0
+              },
+              {
+                "key": "order",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_card_fly_time",
+                "value": 0
+              },
+              {
+                "key": "anim_destroy",
+                "value": 0
+              },
+              {
+                "key": "anim_card_destroy_time",
+                "value": 0
+              },
+              {
+                "key": "origin_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_slot",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_from_place",
+                "value": 0
+              },
+              {
+                "key": "anim_token_fly_time",
+                "value": 0
+              },
+              {
+                "key": "linked_card_id",
+                "value": 0
+              },
+              {
+                "key": "anim_highlight",
+                "value": 0
+              },
+              {
+                "key": "nft_card",
+                "value": 0
               },
               {
                 "key": "nft_transform_to_cardtype",

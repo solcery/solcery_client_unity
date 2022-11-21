@@ -348,9 +348,9 @@ namespace Solcery.Games.Contexts.GameStates
             _states.Add(timerStopState);
         }
 
-        void IContextGameStates.PushPlaySound(int soundId)
+        void IContextGameStates.PushPlaySound(int soundId, int volume)
         {
-            _actions.AddAction(ContextGameStateActionPlaySound.Create(soundId));
+            _actions.AddAction(ContextGameStateActionPlaySound.Create(soundId, volume));
         }
 
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)

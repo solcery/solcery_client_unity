@@ -1,13 +1,5 @@
 {
-  "nfts": [
-    {
-      "id": 147,
-      "data": {
-        "displayed_name": "Meta",
-        "picture": "https://i.ibb.co/mBCCWSj/metaops.jpg"
-      }
-    }
-  ],
+  "nfts": [],
   "card_types": [
     {
       "id": 299,

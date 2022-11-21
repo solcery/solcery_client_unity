@@ -206,7 +206,6 @@ namespace Solcery.Services.Transport
         void ITransportService.Destroy()
         {
             Cleanup();
-
             _gameTransportCallbacks = null;
         }
     }

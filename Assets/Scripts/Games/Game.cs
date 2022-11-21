@@ -329,6 +329,9 @@ namespace Solcery.Games
             _playModel = null;
             _updateStateQueue = null;
             
+            _serviceSound.Destroy();
+            _serviceSound = null;
+            
             _serviceBricks.Destroy();
             _serviceBricks = null;
             _transportService.Destroy();

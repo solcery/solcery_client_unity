@@ -1,7 +1,6 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Games.States.New.Actions.PlaySound;
-using UnityEngine;
 
 namespace Solcery.Models.Play.Sound
 {
@@ -27,17 +26,11 @@ namespace Solcery.Models.Play.Sound
                 {
                     if (action is UpdateActionPlaySound actionPlaySound)
                     {
-                        game.ServiceSound.Play(actionPlaySound.SoundId);
-                        //Debug.Log($"Play sound {actionPlaySound.SoundId} for state id {action.StateId}");
+                        game.ServiceSound.Play(actionPlaySound.SoundId, actionPlaySound.Volume);
                     }
                 }
             }
             game.UpdateStateQueue.RemoveAllActionForStateId(stateId);
-            
-            // if (updateState is UpdatePlaySoundState updatePlaySoundState)
-            // {
-            //     game.ServiceSound.Play(updatePlaySoundState.SoundId);
-            // }
         }
     }
 }

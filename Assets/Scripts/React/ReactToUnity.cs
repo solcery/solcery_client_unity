@@ -12,6 +12,7 @@ namespace Solcery.React
         public const string EventOnUpdateGameContentOverrides = "EventOnUpdateGameContentOverrides";
         public const string EventOnUpdateGameDisplay = "EventOnUpdateGameDisplay";
         public const string EventOnUpdateGameState = "EventOnUpdateGameState";
+        public const string EventOnSetMasterVolume = "EventOnSetMasterVolume";
         
         private static readonly Dictionary<string, List<Action<string>>> Callbacks = new Dictionary<string, List<Action<string>>>();
 
@@ -80,6 +81,15 @@ namespace Solcery.React
         {
             Debug.Log("Execute UpdateGameState");
             CallAllCallbackForEventKey(EventOnUpdateGameState, data);
+        }
+        
+        public void SetMasterVolume(string data)
+        {
+            // {
+            //     "volume": 65 // Целое число от 0 до 100 включительно. 
+            // }
+            Debug.Log($"Set master volume {data}");
+            CallAllCallbackForEventKey(EventOnSetMasterVolume, data);
         }
     }
 }
