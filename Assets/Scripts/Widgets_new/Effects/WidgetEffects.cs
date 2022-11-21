@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Solcery.Services.Renderer.Widgets;
 using Solcery.Ui;
-using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -14,7 +13,6 @@ namespace Solcery.Widgets_new.Effects
     public class WidgetEffects : IWidgetEffects
     {
         private readonly RootUiEffects _effectRoot;
-        private readonly Stack<RectTransform> _transformsPool;
         
         public static IWidgetEffects Create(RootUiEffects effectRoot)
         {
@@ -24,27 +22,9 @@ namespace Solcery.Widgets_new.Effects
         private WidgetEffects(RootUiEffects effectRoot)
         {
             _effectRoot = effectRoot;
-            _transformsPool = new Stack<RectTransform>();
             DOTween.SetTweensCapacity(600, 150);
         }
 
-        private RectTransform PopCardEffectFromPool(Vector2 size)
-        {
-            if (!_transformsPool.TryPop(out var rectTransform))
-            {
-                rectTransform = Object.Instantiate(_effectRoot.CardEffect, _effectRoot.transform, false)
-                    .GetComponent<RectTransform>();
-            }
-            
-            rectTransform.sizeDelta = size;
-            return rectTransform;
-        }
-
-        private void PushCardEffectToPool(RectTransform rectTransform)
-        {
-            _transformsPool.Push(rectTransform);
-        }
-        
         public void MoveToken(RectTransform rectTransform, 
             Sprite sprite,
             Vector3 from,
@@ -105,25 +85,6 @@ namespace Solcery.Widgets_new.Effects
                 .Play();
         }
 
-        public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard, 
-            PlaceWidgetCardFace cardFace, 
-            Vector2 size,
-            float time, 
-            Vector3 from,
-            Vector3 to,
-            Action onMoveComplete)
-        {
-            var effectRectTransform = PopCardEffectFromPool(size);
-            effectRectTransform.position = from;
-            eclipseCard.UpdateCardFace(cardFace, false);
-            eclipseCard.Layout.UpdateParent(effectRectTransform);
-            DOTween.Sequence(effectRectTransform.DOMove(to, time).OnComplete(() =>
-            {
-                PushCardEffectToPool(effectRectTransform);
-                onMoveComplete?.Invoke();
-            }).SetEase(Ease.Linear)).Play();
-        }
-        
         public void MoveEclipseCard(RectTransform eclipseCard,
             float time,
             Vector3 from,

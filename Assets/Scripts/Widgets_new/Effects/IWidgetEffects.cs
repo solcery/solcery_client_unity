@@ -1,6 +1,5 @@
 using System;
 using Solcery.Services.Renderer.Widgets;
-using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Effects;
 using UnityEngine;
 
@@ -16,14 +15,6 @@ namespace Solcery.Widgets_new.Effects
         public void MoveEclipseCard(RectTransform eclipseCard,
             float time,
             Vector3 from,
-            Action onMoveComplete);
-        
-        public void MoveEclipseCard(IEclipseCardInContainerWidget eclipseCard,
-            PlaceWidgetCardFace cardFace,
-            Vector2 size,
-            float time,
-            Vector3 from,
-            Vector3 to,
             Action onMoveComplete);
         
         public void MoveToken(RectTransform rectTransform,
