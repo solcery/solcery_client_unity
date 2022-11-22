@@ -186,7 +186,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                     if (CardsPool.TryPop(out var effectCardWidget))
                     {
                         UpdateCardData(world, eclipseCard.EntityId, effectCardWidget);
-                        // токены?
+                        AttachTokenForCard(world, effectCardWidget);
                         WidgetCanvas.GetEffects().MoveEclipseCard(effectCardWidget,
                             GetOldPlaceWidgetCardFace(world, attributes),
                             eclipseCard.Layout.RectTransform.rect.size,
@@ -383,37 +383,38 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             }
         }
 
-        private void AttachTokensForCard(EcsWorld world)
+        private void AttachTokenForCard(EcsWorld world, IEclipseCardInContainerWidget card)
         {
-            foreach (var tokensPerCard in _tokensPerCardCache)
+            if (_tokensPerCardCache.TryGetValue(card.ObjectId, out var tokens))
             {
-                if (_cards.TryGetValue(tokensPerCard.Key, out var cardWidget))
+                var objectIdPool = world.GetPool<ComponentObjectId>();
+                var objectTypePool = world.GetPool<ComponentObjectType>();
+                foreach (var entityId in tokens)
                 {
-                    var objectIdPool = world.GetPool<ComponentObjectId>();
-                    var objectTypePool = world.GetPool<ComponentObjectType>();
-                    foreach (var entityId in tokensPerCard.Value)
+                    if (objectIdPool.Has(entityId)
+                        && objectTypePool.Has(entityId)
+                        && Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId))
                     {
-                        if (objectIdPool.Has(entityId)
-                            && objectTypePool.Has(entityId)
-                            && Game.ServiceGameContent.ItemTypes.TryGetItemType(out var itemType, objectTypePool.Get(entityId).TplId))
+                        var objectId = objectIdPool.Get(entityId).Id;
+                        var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
+                        if (attributes.TryGetValue(GameJsonKeys.TokenSlot, out var tokenSlotAttribute))
                         {
-                            var objectId = objectIdPool.Get(entityId).Id;
-                            var attributes = world.GetPool<ComponentObjectAttributes>().Get(entityId).Attributes;
-                            if (attributes.TryGetValue(GameJsonKeys.TokenSlot, out var tokenSlotAttribute))
+                            var tokenLayout = card.AttachToken(tokenSlotAttribute.Current, objectId, itemType);
+                            if (tokenLayout != null)
                             {
-                                var tokenLayout = cardWidget.AttachToken(tokenSlotAttribute.Current, objectId, itemType);
-                                if (tokenLayout != null)
-                                {
-                                    ProcessTokenAttributes(world, tokenLayout, objectId, itemType, attributes);
-                                }
+                                ProcessTokenAttributes(world, tokenLayout, objectId, itemType, attributes);
                             }
                         }
                     }
-                }
-                else
-                {
-                    Debug.LogWarning($"Can't attach tokens card_id = {tokensPerCard.Key}, place = {PlaceId}!");
-                }
+                }                
+            }            
+        }
+
+        private void AttachTokensForCard(EcsWorld world)
+        {
+            foreach (var card in _cards)
+            {
+                AttachTokenForCard(world, card.Value);
             }
 
             _tokensPerCardCache.Clear();
