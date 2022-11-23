@@ -1,5 +1,8 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
+using Solcery.Models.Shared.Commands.New;
+using Solcery.Models.Shared.Commands.New.Cmd;
+using Solcery.Models.Shared.Objects;
 using Solcery.Services.Events;
 using Solcery.Widgets_new.Eclipse.Cards.EventsData;
 
@@ -41,19 +44,23 @@ namespace Solcery.Models.Play.Click
                 return;
             }
             
+            var game = systems.GetShared<IGame>();
+            
             if (_uiEventData is OnRightClickEventData eventData)
             {
-                OnRightClick(systems.GetWorld(), eventData.EntityId);
+                OnRightClick(game, systems.GetWorld(), eventData.EntityId);
             }
             
             _uiEventData = null;
         }
 
-        private void OnRightClick(EcsWorld world, int entityId)
+        private void OnRightClick(IGame game, EcsWorld world, int entityId)
         {
-            // var objectId = world.GetPool<ComponentObjectId>().Get(entityId).Id;
-            // var command = CommandOnRightClickData.CreateFromParameters(objectId, TriggerTargetEntityTypes.Card);
-            // _game.TransportService.SendCommand(command.ToJson());
+            var objectId = world.GetPool<ComponentObjectId>().Get(entityId).Id;
+            var command =
+                CommandOnRightClickDataNew.Create(game.ServiceGameContent.CommandIdForType(CommandTypesNew.OnRightClick),
+                    game.PlayerIndex, objectId);
+            _game.TransportService.SendCommand(command.ToJson());
         }
 
         public void OnEvent(EventData eventData)
