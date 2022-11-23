@@ -14,17 +14,18 @@ namespace Solcery.Services.Sound.Play
         private Tween _delay;
         private bool _isPlaying;
 
-        public void Play(AudioClip clip)
+        public void Play(AudioClip clip, float volume)
         {
             gameObject.SetActive(true);
             audioSource.clip = clip;
+            audioSource.volume = volume;
             
             if (audioSource.clip != null)
             {
                 audioSource.Play();
             }
 
-            _delay = DOTween.To(value => { }, 0f, 0f, clip.length + 0.1f);
+            _delay = DOTween.To(_ => { }, 0f, 0f, clip.length + 0.1f);
             _delay.SetRecyclable(true);
             _delay.OnComplete(OnPlayFinish);
             _delay.OnKill(OnPlayFinish);

@@ -209,7 +209,7 @@ namespace Solcery.Games.Contexts.GameStates
             _applyGameStateNew.ApplySimulatedGameStates(gameState);
         }
 
-        void IContextGameStates.PushPlaySound(int soundId)
+        void IContextGameStates.PushPlaySound(int soundId, int volume)
         {
             var gameState = new JObject
             {
@@ -223,7 +223,8 @@ namespace Solcery.Games.Contexts.GameStates
                             {
                                 "value", new JObject
                                 {
-                                    { "sound_id", new JValue(soundId) }
+                                    { "sound_id", new JValue(soundId) },
+                                    { "volume", new JValue(volume) }
                                 }
                             }
                         }
