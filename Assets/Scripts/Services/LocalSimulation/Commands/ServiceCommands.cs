@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Solcery.Utils;
+using UnityEngine;
 
 namespace Solcery.Services.LocalSimulation.Commands
 {
@@ -22,8 +23,9 @@ namespace Solcery.Services.LocalSimulation.Commands
         
         void IServiceCommands.PushCommand(JObject command)
         {
-            if (command.TryGetValue("cid", out int cid) && _consumableCommandIds.Contains(cid))
+            if (command.TryGetValue("id", out int cid) && _consumableCommandIds.Contains(cid))
             {
+                Debug.Log($"Discard consumable command {cid}");
                 return;
             }
             
@@ -34,7 +36,7 @@ namespace Solcery.Services.LocalSimulation.Commands
         {
             if (_commands.Count > 0 && _commands.TryDequeue(out command))
             {
-                if (command.TryGetValue("cid", out int cid) 
+                if (command.TryGetValue("id", out int cid) 
                     && !_consumableCommandIds.Contains(cid))
                 {
                     _consumableCommandIds.Add(cid);

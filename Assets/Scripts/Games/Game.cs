@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Newtonsoft.Json.Linq;
 using Solcery.Accessors.Cache;
 using Solcery.BrickInterpretation.Runtime;
@@ -100,6 +101,8 @@ namespace Solcery.Games
 
         private Game(IGameInitDto dto)
         {
+            DOTween.SetTweensCapacity(2000, 200);
+            
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
             _updateStateQueue = UpdateStateQueue.Create();
