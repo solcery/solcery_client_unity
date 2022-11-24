@@ -96,7 +96,7 @@ MonoBehaviour:
   raycastObjects:
   - {fileID: 8366717759231909589}
   - {fileID: 4344251751038860470}
-  - {fileID: 771520338233843172}
+  - {fileID: 1456061341918030656}
   defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
   aspectRatioFitter: {fileID: 348070657124763928}
 --- !u!1 &2061060884062705053
