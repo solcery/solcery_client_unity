@@ -64,6 +64,9 @@ namespace Solcery.Games
         public static readonly string TooltipFillColor = "fill_color";
         public static readonly string TooltipFontSize = "font_size";
         public static readonly string TooltipCardTypeId = "card_type_id";
+        public static readonly string TooltipWidth = "width";
+        public static readonly string TooltipHeight = "height";
+        public static readonly string TooltipOffset = "offset";
         
         // Global Card Attribute
         public static readonly string GlobalCardAttributes = "card_attributes";

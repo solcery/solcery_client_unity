@@ -10,7 +10,6 @@ namespace Solcery.Widgets_new.Tooltip
     public class TooltipController
     {
         private const float BorderOffset = 50f;
-        private const float VerticalOffset = 30f;
         private const string PrefabPathKey = "ui/ui_tooltip";
         private float? _delaySec;
         private readonly IWidgetCanvas _widgetCanvas;
@@ -18,7 +17,7 @@ namespace Solcery.Widgets_new.Tooltip
         private TooltipLayout _tooltipLayout;
         private int _tooltipId = -1;
 
-        private bool _positionUpdated;
+        private float _verticalOffset;
         private Vector3 _targetPosition;
         
         public static TooltipController Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
@@ -42,13 +41,11 @@ namespace Solcery.Widgets_new.Tooltip
                 {
                     _delaySec = null;
                     SetTooltipActive(true);
-                    // because layout don't rebuild content on inactive object
-                    _tooltipLayout.RebuildLayouts();
                 }
             }
-            if (_positionUpdated && _tooltipLayout.gameObject.activeSelf)
+
+            if (_tooltipLayout != null && _tooltipLayout.gameObject.activeSelf)
             {
-                _positionUpdated = false;
                 _tooltipLayout.RectTransform.anchoredPosition = GameApplication.Instance.WorldToCanvas(GetPosition(_targetPosition));
             }
         }
@@ -62,13 +59,13 @@ namespace Solcery.Widgets_new.Tooltip
 
             if (_tooltipId != tooltipId)
             {
+                UpdateTooltipSize(tooltipDataObject);
                 UpdateTooltipContent(game, tooltipDataObject);
                 UpdateTooltipDelay(tooltipDataObject);
-                _tooltipLayout.ToDefaultAnchors();
                 _tooltipId = tooltipId;
             }
 
-            UpdateTooltipPosition(tooltipDataObject, targetPosition);
+            _targetPosition = targetPosition;
         }
 
         private void UpdateTooltipContent(IGame game, JObject tooltipDataObject)
@@ -87,21 +84,14 @@ namespace Solcery.Widgets_new.Tooltip
             _tooltipLayout.UpdateFillColor(tooltipDataObject);
         }
 
-        private void UpdateTooltipPosition(JObject tooltipDataObject, Vector2 targetPosition)
+        private void UpdateTooltipSize(JObject tooltipDataObject)
         {
-            var x1 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceX1, out int xt1) ? xt1 / GameConsts.AnchorDivider : 0f;
-            var x2 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceX2, out int xt2) ? xt2 / GameConsts.AnchorDivider : 0f;
-            var y1 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceY1, out int yt1) ? yt1 / GameConsts.AnchorDivider : 0f;
-            var y2 = tooltipDataObject.TryGetValue(GameJsonKeys.PlaceY2, out int yt2) ? yt2 / GameConsts.AnchorDivider : 0f;
-            if (x1 == 0 && x2 == 0 && y1 == 0 && y2 == 0)
-            {
-                _targetPosition = targetPosition;
-                _positionUpdated = true;
-            }
-            else
-            {
-                _tooltipLayout.UpdateAnchor(new Vector2(x1, y1), new Vector2(x2, y2));
-            }
+            var width = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipWidth, out int widthValue) ? widthValue : 200;
+            var height = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipHeight, out int heightValue) ? heightValue : 100;
+            _tooltipLayout.RectTransform.sizeDelta = new Vector2(width, height);
+            _tooltipLayout.RectTransform.anchorMin = Vector2.zero;
+            _tooltipLayout.RectTransform.anchorMax = Vector2.zero;
+            _verticalOffset = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffset, out int offsetValue) ? offsetValue : 30;
         }
 
         private void UpdateTooltipDelay(JObject tooltipDataObject)
@@ -118,7 +108,6 @@ namespace Solcery.Widgets_new.Tooltip
         {
             _tooltipId = -1;
             _delaySec = null;
-            _positionUpdated = false;
             SetTooltipActive(false);
         }
 
@@ -149,11 +138,11 @@ namespace Solcery.Widgets_new.Tooltip
             var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
 
             var newX = targetPosition.x;
-            var newY = targetPosition.y + halfTooltipHeight + VerticalOffset * scaleFactor;
+            var newY = targetPosition.y + halfTooltipHeight + _verticalOffset * scaleFactor;
             
             if (newY > topLimit)
             {
-                newY = targetPosition.y - halfTooltipHeight - VerticalOffset * scaleFactor;
+                newY = targetPosition.y - halfTooltipHeight - _verticalOffset * scaleFactor;
             }
 
             newX = Mathf.Clamp(newX, leftLimit, rightLimit);
