@@ -43,6 +43,42 @@ namespace Solcery.Games.Contexts.GameStates.Actions
             return result;
         }
     }
+
+    public sealed class ContextGameStateActionPushAction : ContextGameStateAction
+    {
+        private readonly int _actionType;
+        private readonly IReadOnlyDictionary<string, int> _values;
+        
+        public static ContextGameStateAction Create(int actionType, IReadOnlyDictionary<string, int> values)
+        {
+            return new ContextGameStateActionPushAction(actionType, values);
+        }
+
+        private ContextGameStateActionPushAction(int actionType, IReadOnlyDictionary<string, int> values)
+        {
+            _actionType = actionType;
+            _values = new Dictionary<string, int>(values);
+        }
+
+        public override JObject ToJson(int id, int stateId)
+        {
+            var result = new JObject
+            {
+                { "id", new JValue(id) },
+                { "state_id", new JValue(stateId) },
+                { "action_type", new JValue(_actionType) }
+            };
+
+            var value = new JObject();
+            foreach (var val in _values)
+            {
+                value.Add(val.Key, new JValue(val.Value));
+            }
+            result.Add("value", value);
+
+            return result;
+        }
+    }
     
     public sealed class ContextGameStateActions : IContextGameStateActions
     {
@@ -51,7 +87,7 @@ namespace Solcery.Games.Contexts.GameStates.Actions
             private int _stateId;
             private readonly List<ContextGameStateAction> _actions;
 
-            public static Actions Create()
+            public static Actions CreateAction()
             {
                 return new Actions();
             }
@@ -95,14 +131,14 @@ namespace Solcery.Games.Contexts.GameStates.Actions
 
         void IContextGameStateActions.Push()
         {
-            _actions.Push(Actions.Create());
+            _actions.Push(Actions.CreateAction());
         }
 
         void IContextGameStateActions.AddAction(ContextGameStateAction action)
         {
             if (_actions.Count <= 0)
             {
-                _actions.Push(Actions.Create());
+                _actions.Push(Actions.CreateAction());
             }
             
             _actions.Peek().AddAction(action);

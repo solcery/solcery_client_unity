@@ -8,7 +8,10 @@ namespace Solcery.Games.Contexts
 {
     sealed class CurrentContextLocalScopeVars : IContextLocalScopeVars
     {
+        IReadOnlyList<string> IContextLocalScopeVars.AllVarName => _varsName;
+        
         private readonly Dictionary<string, int> _variables;
+        private readonly List<string> _varsName;
 
         public static IContextLocalScopeVars Create()
         {
@@ -18,6 +21,7 @@ namespace Solcery.Games.Contexts
         private CurrentContextLocalScopeVars()
         {
             _variables = new Dictionary<string, int>();
+            _varsName = new List<string>();
         }
         
         void IContextLocalScopeVars.Update(string name, int value)
@@ -25,6 +29,7 @@ namespace Solcery.Games.Contexts
             if (!_variables.ContainsKey(name))
             {
                 _variables.Add(name, 0);
+                _varsName.Add(name);
             }
 
             _variables[name] = value;
@@ -35,6 +40,7 @@ namespace Solcery.Games.Contexts
             if (!_variables.ContainsKey(name))
             {
                 _variables.Add(name, 0);
+                _varsName.Add(name);
             }
 
             return _variables.TryGetValue(name, out value);
