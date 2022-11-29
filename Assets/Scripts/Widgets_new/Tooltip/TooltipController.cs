@@ -135,22 +135,24 @@ namespace Solcery.Widgets_new.Tooltip
             var halfTooltipWidth = tooltipSizeDelta.x * scaleFactor * 0.5f;
             var halfTooltipHeight = tooltipSizeDelta.y * scaleFactor * 0.5f;
 
+            var offsetX = halfTooltipWidth + _offsetX * scaleFactor;
             if (targetPosition.x <= Screen.safeArea.width / 2f)
             {
-                targetPosition.x += halfTooltipWidth + _offsetX * scaleFactor;
+                targetPosition.x += offsetX;
             }
             else
             {
-                targetPosition.x -= halfTooltipWidth - _offsetX * scaleFactor;
+                targetPosition.x -= offsetX;
             }
 
+            var offsetY = halfTooltipHeight + _offsetY * scaleFactor;
             if (targetPosition.y <= Screen.safeArea.height / 2f)
             {
-                targetPosition.y += halfTooltipHeight + _offsetY * scaleFactor;
+                targetPosition.y += offsetY;
             }
             else
             {
-                targetPosition.y -= halfTooltipHeight - _offsetY * scaleFactor;
+                targetPosition.y -= offsetY;
             }
             
             return targetPosition;
