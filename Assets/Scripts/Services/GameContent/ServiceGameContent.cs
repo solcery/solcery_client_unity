@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Services.GameContent.Animations;
 using Solcery.Services.GameContent.Items;
 using Solcery.Utils;
 
@@ -13,12 +14,14 @@ namespace Solcery.Services.GameContent
         JArray IServiceGameContent.DragDrop => _dragDrop;
         JArray IServiceGameContent.Tooltips => _tooltips;
         List<Tuple<int, string>> IServiceGameContent.Sounds => _sounds;
+        IAnimationTypes IServiceGameContent.Animations => _animations;
         
         private IItemTypes _itemTypes;
         private JArray _places;
         private JArray _dragDrop;
         private JArray _tooltips;
         private List<Tuple<int, string>> _sounds;
+        private IAnimationTypes _animations;
 
         public static IServiceGameContent Create()
         {
@@ -48,6 +51,8 @@ namespace Solcery.Services.GameContent
                     }
                 }
             }
+            
+            _animations = AnimationTypes.Create(data.GetValue<JObject>("animations").GetValue<JArray>("objects"));
         }
 
         void IServiceGameContent.UpdateGameContentOverrides(JObject data)
@@ -62,6 +67,8 @@ namespace Solcery.Services.GameContent
             _places = null;
             _dragDrop = null;
             _tooltips = null;
+            _sounds?.Clear();
+            _animations?.Cleanup();
         }
     }
 }

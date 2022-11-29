@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games.Contexts.GameStates;
 using Solcery.Games.Contexts.GameStates.Actions;
 using Solcery.Games.States.New.Actions;
+using Solcery.Games.States.New.Actions.Animation;
 using Solcery.Games.States.New.Actions.PlaySound;
 using Solcery.Games.States.New.Factory;
 using Solcery.Games.States.New.States;
@@ -22,12 +23,12 @@ namespace Solcery.Games.States.New
         private readonly IUpdateActionFactory _actionFactory;
         private readonly SortedDictionary<int, List<UpdateAction>> _actions;
 
-        public static IUpdateStateQueue Create()
+        public static IUpdateStateQueue Create(IGame game)
         {
-            return new UpdateStateQueue();
+            return new UpdateStateQueue(game);
         }
 
-        private UpdateStateQueue()
+        private UpdateStateQueue(IGame game)
         {
             _updateStates = new Queue<UpdateState>();
             _updateStateFactory = UpdateStateFactory.Create();
@@ -39,6 +40,11 @@ namespace Solcery.Games.States.New
             _actions = new SortedDictionary<int, List<UpdateAction>>();
             _actionFactory = UpdateActionFactory.Create();
             _actionFactory.RegistrationCreationFunc(ContextGameStateActionTypes.PlaySound, UpdateActionPlaySound.Create);
+            _actionFactory.RegistrationCreationFunc(ContextGameStateActionTypes.Animation, UpdateActionAnimationFactory
+                .Create(game)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.CardMove, UpdateActionAnimationCardMove.Create)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.CardRotate, UpdateActionAnimationCardRotate.Create)
+                .CreateAction);
         }
 
         void IUpdateStateQueue.PushGameState(JObject gameState)

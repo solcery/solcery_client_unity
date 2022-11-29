@@ -101,7 +101,7 @@ namespace Solcery.Games
         {
             _mainCamera = dto.MainCamera;
             _widgetCanvas = dto.WidgetCanvas;
-            _updateStateQueue = UpdateStateQueue.Create();
+            _updateStateQueue = UpdateStateQueue.Create(this);
             CreateModel();
             CreateServices(dto);
             _tooltipController = TooltipController.Create(_widgetCanvas, _serviceResource);
@@ -275,6 +275,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.Transform, BrickActionTransform.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PlaySound, BrickActionPlaySound.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetScopeVariable, BrickActionSetScopeVariable.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PushAction, BrickActionPushAction.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);

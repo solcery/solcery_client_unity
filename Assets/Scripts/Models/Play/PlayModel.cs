@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Games.States.New;
+using Solcery.Models.Play.Actions;
 using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
@@ -56,7 +57,7 @@ namespace Solcery.Models.Play
             // TODO обновляем таймер
             _systems.Add(SystemTimerUpdate.Create(game));
             
-            // TODO время проиграть звуки
+            // TODO проигрываем звуки
             _systems.Add(SystemSoundPlay.Create());
             
             // TODO event data processor
@@ -79,6 +80,9 @@ namespace Solcery.Models.Play
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif
+            
+            // TODO тут удаляем все экшены для данного гейм стейта
+            _systems.Add(SystemRemoveActionForCurrentGameState.Create());
             
             // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
             _systems.Add(SystemGameStateRemoveUpdateTag.Create());

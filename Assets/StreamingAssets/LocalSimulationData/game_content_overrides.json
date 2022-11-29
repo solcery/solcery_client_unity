@@ -2,70 +2,70 @@
   "nfts": [],
   "card_types": [
     {
-      "id": 299,
+      "id": 149,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 309,
+      "id": 166,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 315,
+      "id": 167,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 316,
+      "id": 168,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 317,
+      "id": 295,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 318,
+      "id": 313,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 321,
+      "id": 319,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 322,
+      "id": 448,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 323,
+      "id": 514,
       "override_fields": [
         "displayed_name",
         "picture"
       ]
     },
     {
-      "id": 324,
+      "id": 515,
       "override_fields": [
         "displayed_name",
         "picture"

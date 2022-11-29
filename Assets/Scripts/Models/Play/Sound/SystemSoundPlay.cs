@@ -30,7 +30,6 @@ namespace Solcery.Models.Play.Sound
                     }
                 }
             }
-            game.UpdateStateQueue.RemoveAllActionForStateId(stateId);
         }
     }
 }
