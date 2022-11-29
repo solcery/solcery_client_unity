@@ -92,7 +92,7 @@ namespace Solcery.Widgets_new.Tooltip
             _tooltipLayout.RectTransform.anchorMin = Vector2.zero;
             _tooltipLayout.RectTransform.anchorMax = Vector2.zero;
             _offsetX = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffsetX, out int offsetXValue) ? offsetXValue : 0;
-            _offsetY = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffsetX, out int offsetYValue) ? offsetYValue : 0;
+            _offsetY = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffsetY, out int offsetYValue) ? offsetYValue : 0;
         }
 
         private void UpdateTooltipDelay(JObject tooltipDataObject)
