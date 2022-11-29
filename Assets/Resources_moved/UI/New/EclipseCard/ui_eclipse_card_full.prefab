@@ -83,6 +83,12 @@ MonoBehaviour:
   - {fileID: 7572690508184455082}
   - {fileID: 8856032588703675510}
   defaultTexture: {fileID: 2800000, guid: b65ce997acaaf5a4985bda595d860258, type: 3}
+  raycastObjects:
+  - {fileID: 6930697276916120158}
+  - {fileID: 2307604813889946526}
+  - {fileID: 862396947281623709}
+  - {fileID: 5387889632993687297}
+  - {fileID: 1456061341918030656}
   typeText: {fileID: 642263690928292624}
   tokensLayout: {fileID: 1994152796848667027}
   timerLayout: {fileID: 1504411219326706429}
@@ -261,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1278,7 +1284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

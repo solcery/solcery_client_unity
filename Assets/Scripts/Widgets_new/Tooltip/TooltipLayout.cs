@@ -36,6 +36,7 @@ namespace Solcery.Widgets_new.Tooltip
                 {
                     eclipseCard.TimerLayout.gameObject.SetActive(false);
                 }
+                eclipseCard.RaycastOff();
                 eclipseCard.gameObject.SetActive(true);
             }
         }

@@ -9,7 +9,6 @@ namespace Solcery.Widgets_new.Tooltip
 {
     public class TooltipController
     {
-        private const float BorderOffset = 50f;
         private const string PrefabPathKey = "ui/ui_tooltip";
         private float? _delaySec;
         private readonly IWidgetCanvas _widgetCanvas;
@@ -17,7 +16,8 @@ namespace Solcery.Widgets_new.Tooltip
         private TooltipLayout _tooltipLayout;
         private int _tooltipId = -1;
 
-        private float _verticalOffset;
+        private float _offsetX;
+        private float _offsetY;
         private Vector3 _targetPosition;
         
         public static TooltipController Create(IWidgetCanvas widgetCanvas, IServiceResource serviceResource)
@@ -91,7 +91,8 @@ namespace Solcery.Widgets_new.Tooltip
             _tooltipLayout.RectTransform.sizeDelta = new Vector2(width, height);
             _tooltipLayout.RectTransform.anchorMin = Vector2.zero;
             _tooltipLayout.RectTransform.anchorMax = Vector2.zero;
-            _verticalOffset = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffset, out int offsetValue) ? offsetValue : 30;
+            _offsetX = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffsetX, out int offsetXValue) ? offsetXValue : 0;
+            _offsetY = tooltipDataObject.TryGetValue(GameJsonKeys.TooltipOffsetX, out int offsetYValue) ? offsetYValue : 0;
         }
 
         private void UpdateTooltipDelay(JObject tooltipDataObject)
@@ -128,27 +129,30 @@ namespace Solcery.Widgets_new.Tooltip
         
         private Vector2 GetPosition(Vector2 targetPosition)
         {
-            var sizeDelta = _tooltipLayout.RectTransform.sizeDelta;
             var scaleFactor = _widgetCanvas.GetScaleFactor();
-            var halfTooltipWidth = sizeDelta.x * scaleFactor * 0.5f;
-            var halfTooltipHeight = sizeDelta.y * scaleFactor * 0.5f;
-            var leftLimit = Screen.safeArea.x + halfTooltipWidth + BorderOffset;
-            var rightLimit = Screen.safeArea.width - halfTooltipWidth - BorderOffset;
-            var topLimit = Screen.safeArea.height - halfTooltipHeight - BorderOffset;
-            var bottomLimit = Screen.safeArea.y + halfTooltipHeight + BorderOffset;
+            var tooltipSizeDelta = _tooltipLayout.RectTransform.sizeDelta;
+            var halfTooltipWidth = tooltipSizeDelta.x * scaleFactor * 0.5f;
+            var halfTooltipHeight = tooltipSizeDelta.y * scaleFactor * 0.5f;
 
-            var newX = targetPosition.x;
-            var newY = targetPosition.y + halfTooltipHeight + _verticalOffset * scaleFactor;
-            
-            if (newY > topLimit)
+            if (targetPosition.x <= Screen.safeArea.width / 2f)
             {
-                newY = targetPosition.y - halfTooltipHeight - _verticalOffset * scaleFactor;
+                targetPosition.x += halfTooltipWidth + _offsetX * scaleFactor;
+            }
+            else
+            {
+                targetPosition.x -= halfTooltipWidth - _offsetX * scaleFactor;
             }
 
-            newX = Mathf.Clamp(newX, leftLimit, rightLimit);
-            newY = Mathf.Clamp(newY, bottomLimit, topLimit);
-
-            return new Vector2(newX, newY);
+            if (targetPosition.y <= Screen.safeArea.height / 2f)
+            {
+                targetPosition.y += halfTooltipHeight + _offsetY * scaleFactor;
+            }
+            else
+            {
+                targetPosition.y -= halfTooltipHeight - _offsetY * scaleFactor;
+            }
+            
+            return targetPosition;
         }
 
         private void SetTooltipActive(bool value)

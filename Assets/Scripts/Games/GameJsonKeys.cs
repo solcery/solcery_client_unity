@@ -66,7 +66,8 @@ namespace Solcery.Games
         public static readonly string TooltipCardTypeId = "card_type_id";
         public static readonly string TooltipWidth = "width";
         public static readonly string TooltipHeight = "height";
-        public static readonly string TooltipOffset = "offset";
+        public static readonly string TooltipOffsetX = "offset_x";
+        public static readonly string TooltipOffsetY = "offset_y";
         
         // Global Card Attribute
         public static readonly string GlobalCardAttributes = "card_attributes";

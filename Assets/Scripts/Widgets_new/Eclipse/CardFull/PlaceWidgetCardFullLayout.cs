@@ -33,6 +33,8 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
         private ClickHandlerBehaviour[] clickHandlers;
         [SerializeField]
         private Texture2D defaultTexture;
+        [SerializeField]
+        private List<Graphic> raycastObjects;
 
         public RectTransform CardBackTransform => cardBackTransform;
         public RectTransform CardFrontTransform => cardFrontTransform;
@@ -96,6 +98,14 @@ namespace Solcery.Widgets_new.Eclipse.CardFull
             foreach (var clickHandler in clickHandlers)
             {
                 clickHandler.OnRightClick = onRightClick;
+            }
+        }
+        
+        public void RaycastOff()
+        {
+            foreach (var raycastObject in raycastObjects)
+            {
+                raycastObject.raycastTarget = false;
             }
         }
         
