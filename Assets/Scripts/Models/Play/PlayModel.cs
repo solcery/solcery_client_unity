@@ -3,6 +3,8 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Games.States.New;
 using Solcery.Models.Play.Actions;
+using Solcery.Models.Play.Actions.Animations;
+using Solcery.Models.Play.Actions.Sound;
 using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
@@ -11,7 +13,6 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
-using Solcery.Models.Play.Sound;
 using Solcery.Models.Play.Timer;
 using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
@@ -59,6 +60,9 @@ namespace Solcery.Models.Play
             
             // TODO проигрываем звуки
             _systems.Add(SystemSoundPlay.Create());
+            
+            // TODO вызов проигрывания анимации движения карты (для примера)
+            _systems.Add(SystemCardMoveAnimation.Create());
             
             // TODO event data processor
             _systems.Add(SystemProcessEventData.Create(game));

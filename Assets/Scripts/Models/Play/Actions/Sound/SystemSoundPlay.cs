@@ -2,7 +2,7 @@ using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Games.States.New.Actions.PlaySound;
 
-namespace Solcery.Models.Play.Sound
+namespace Solcery.Models.Play.Actions.Sound
 {
     public interface ISystemSoundPlay : IEcsRunSystem { }
 
