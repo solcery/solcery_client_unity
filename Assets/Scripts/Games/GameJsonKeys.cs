@@ -60,7 +60,7 @@ namespace Solcery.Games
 
         // Tooltip
         public static readonly string TooltipText = "text";
-        public static readonly string TooltipDelay = "font_size";
+        public static readonly string TooltipDelay = "delay";
         public static readonly string TooltipFillColor = "fill_color";
         public static readonly string TooltipFontSize = "font_size";
         public static readonly string TooltipCardTypeId = "card_type_id";

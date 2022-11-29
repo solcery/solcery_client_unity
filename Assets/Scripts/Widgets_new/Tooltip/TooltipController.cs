@@ -101,8 +101,9 @@ namespace Solcery.Widgets_new.Tooltip
             if (delaySec > 0)
             {
                 Hide();
-                _delaySec = delaySec;
             }
+            
+            _delaySec = delaySec;
         }
 
         public void Hide()
