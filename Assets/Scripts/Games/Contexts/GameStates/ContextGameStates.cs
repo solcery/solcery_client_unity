@@ -353,6 +353,11 @@ namespace Solcery.Games.Contexts.GameStates
             _actions.AddAction(ContextGameStateActionPlaySound.Create(soundId, volume));
         }
 
+        void IContextGameStates.PushAction(int actionType, IReadOnlyDictionary<string, int> value)
+        {
+            _actions.AddAction(ContextGameStateActionPushAction.Create(actionType, value));
+        }
+
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
             gameState = new JObject();

@@ -81,6 +81,14 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         public EclipseCardTimerLayout TimerLayout => timerLayout;
         public Image[] Highlights => highlights;
         public AspectRatioFitter AspectRatioFitter => aspectRatioFitter;
+        
+        private enum RaycastSettings
+        {
+            None,
+            Save
+        }
+
+        private RaycastSettings _raycastSettings = RaycastSettings.None;
 
         private void Awake()
         {
@@ -91,11 +99,21 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             _offsetMin = rectTransform.offsetMin;
             _offsetMax = rectTransform.offsetMax;
             effectLayout.gameObject.SetActive(false);
+            
             if (iconImage.sprite == null)
             {
                 UpdateSprite(defaultTexture);
             }
             _images = gameObject.AddComponent<CustomImages>();
+
+            if (_raycastSettings != RaycastSettings.Save)
+            {
+                foreach (var raycastObject in raycastObjects)
+                {
+                    _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
+                }
+                _raycastSettings = RaycastSettings.Save;
+            }
         }
 
         public void UpdateParent(Transform parent, bool isDragDrop = false)
@@ -239,12 +257,17 @@ namespace Solcery.Widgets_new.Eclipse.Cards
 
         public void RaycastOff()
         {
-            _raycastTargetSettings.Clear();
             foreach (var raycastObject in raycastObjects)
             {
-                _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
+                if (_raycastSettings != RaycastSettings.Save)
+                {
+                    _raycastTargetSettings.Add(raycastObject, raycastObject.raycastTarget);
+                }
+
                 raycastObject.raycastTarget = false;
             }
+            
+            _raycastSettings = RaycastSettings.Save;
         }
 
         public void UpdateAvailable(bool available)
