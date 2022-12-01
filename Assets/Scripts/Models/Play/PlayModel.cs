@@ -62,7 +62,7 @@ namespace Solcery.Models.Play
             _systems.Add(SystemSoundPlay.Create());
             
             // TODO вызов проигрывания анимации движения карты (для примера)
-            _systems.Add(SystemCardMoveAnimation.Create());
+            _systems.Add(SystemCardMoveAnimation.Create(game.WidgetCanvas));
             
             // TODO event data processor
             _systems.Add(SystemProcessEventData.Create(game));

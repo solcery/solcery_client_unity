@@ -25,6 +25,8 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         [SerializeField]
         private RectTransform rectTransform;
         [SerializeField]
+        private RectTransform cardTransform;
+        [SerializeField]
         private RectTransform frontTransform;
         [SerializeField]
         private RectTransform backTransform;
@@ -74,6 +76,7 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         private readonly Dictionary<Graphic, bool> _raycastTargetSettings = new Dictionary<Graphic, bool>();
         
         public RectTransform RectTransform => rectTransform;
+        public RectTransform CardTransform => cardTransform;
         public RectTransform FrontTransform => frontTransform;
         public RectTransform BackTransform => backTransform;
         public EclipseCardEffectLayout EffectLayout => effectLayout;
@@ -213,22 +216,6 @@ namespace Solcery.Widgets_new.Eclipse.Cards
             }
         }
 
-        public void SetActive(bool active)
-        {
-            if (active)
-            {
-                frontTransform.gameObject.SetActive(_cardFace != PlaceWidgetCardFace.Down);
-                backTransform.gameObject.SetActive(_cardFace == PlaceWidgetCardFace.Down);
-                RaycastOn();
-            }
-            else
-            {
-                FrontTransform.gameObject.SetActive(false);
-                BackTransform.gameObject.SetActive(false);
-                RaycastOff();
-            }
-        }
-        
         //private Material m_Material;
 
         public void PlayDestroyAnimation(IWidgetRenderData widgetRenderData)

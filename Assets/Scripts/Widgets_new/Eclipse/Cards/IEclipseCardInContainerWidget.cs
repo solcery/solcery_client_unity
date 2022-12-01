@@ -5,11 +5,12 @@ using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Eclipse.EcsSupport;
+using Solcery.Widgets_new.Effects;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.Cards
 {
-    public interface IEclipseCardInContainerWidget : IPoolingWidget, IDraggableWidget, IEntityId
+    public interface IEclipseCardInContainerWidget : IPoolingWidget, IDraggableWidget, IEntityId, IAnimatedObject
     {
         int Order { get; }
         int EntityId { get; }

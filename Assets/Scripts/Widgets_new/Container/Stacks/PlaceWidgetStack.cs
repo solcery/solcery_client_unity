@@ -26,7 +26,7 @@ namespace Solcery.Widgets_new.Container.Stacks
                 var localPosition = cardTransform.localPosition;
                 var offset = Layout.GetCardOffset(cardIndex);
                 cardTransform.localPosition = new Vector3(offset.x, offset.y, localPosition.z);;
-                card.Value.Layout.SetActive(cardIndex < Layout.Capacity || cardIndex == _cards.Count - 1);
+                card.Value.SetActive(cardIndex < Layout.Capacity || cardIndex == _cards.Count - 1);
             }
         }
 

@@ -16,6 +16,7 @@ using Solcery.Widgets_new.Cards.Pools;
 using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
+using Solcery.Widgets_new.Effects;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
@@ -120,7 +121,8 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                             {
                                 UpdateFromCardTypeData(entityId, tplId, objectId, itemType, eclipseCard);
                             }
-
+                            
+                            eclipseCard.SetActive(true);
                             eclipseCard.UpdateDescription(objectId, itemType, attributes);
                             UpdateCardAttributes(world, attributes, eclipseCard, CardFace);
                         }
@@ -164,6 +166,16 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         {
         }
 
+        public override IAnimatedObject GetAnimatedObject(int objectId)
+        {
+            if (_cards.TryGetValue(objectId, out var card))
+            {
+                return card;
+            }
+
+            return null;
+        }
+
         private void UpdateCardsAnimation(EcsWorld world)
         {
             Layout.Rebuild();
@@ -177,10 +189,10 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
                 if (GetCardMoveAnimation(attributes, out var fromPlaceId, out var animCardFlyTimeSec))
                 {
                     var from = world.GetPlaceWidget(fromPlaceId).GetPosition();
-                    eclipseCard.Layout.SetActive(false);
+                    eclipseCard.SetActive(false);
                     WidgetCanvas.GetEffects().MoveEclipseCard(GetOldPlaceWidgetCardFace(world, attributes) == PlaceWidgetCardFace.Up ? eclipseCard.Layout.FrontTransform : eclipseCard.Layout.BackTransform, animCardFlyTimeSec, from, () =>
                     {
-                        eclipseCard.Layout.SetActive(true);
+                        eclipseCard.SetActive(true);
                     });
                 }
                 
@@ -256,7 +268,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         private void UpdateFromCardTypeData(int entityId, int tplId, int objectId, IItemType itemType, IEclipseCardInContainerWidget eclipseCard)
         {
             eclipseCard.UpdateFromCardTypeData(entityId, objectId, tplId, itemType);
-            eclipseCard.Layout.SetActive(true);
         }
 
         private void UpdateCardAttributes(EcsWorld world, Dictionary<string, IAttributeValue> attributes, IEclipseCardInContainerWidget eclipseCard, PlaceWidgetCardFace cardFace)
@@ -306,7 +317,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
             var rttData = Game.ServiceRenderWidget.CreateWidgetRender(eclipseCard.Layout.RectTransform);
             if (rttData != null)
             {
-                eclipseCard.Layout.SetActive(false);
+                eclipseCard.SetActive(false);
                 WidgetCanvas.GetEffects().DestroyEclipseCard(eclipseCard.Layout.EffectLayout,
                     rttData,
                     timeSec,
@@ -332,7 +343,6 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
 
         private void PutCardToInPlace(int objectId, IEclipseCardInContainerWidget eclipseCard)
         {
-            eclipseCard.Layout.SetActive(true);
             Layout.AddCard(eclipseCard);
             _cards.Add(objectId, eclipseCard);
         }

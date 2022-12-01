@@ -239,5 +239,15 @@ namespace Solcery.Widgets_new.Eclipse.Cards
         }
 
         #endregion
+
+        public RectTransform GetAnimatedRect(PlaceWidgetCardFace face)
+        {
+            return face == PlaceWidgetCardFace.Up ? _layout.FrontTransform : _layout.BackTransform;
+        }
+
+        public void SetActive(bool active)
+        {
+            _layout.CardTransform.gameObject.SetActive(active);
+        }
     }
 }

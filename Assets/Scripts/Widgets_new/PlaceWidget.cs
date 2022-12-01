@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Solcery.Games;
 using Solcery.Utils;
 using Solcery.Widgets_new.Canvas;
+using Solcery.Widgets_new.Effects;
 using Solcery.Widgets_new.StaticOrderZ;
 using Solcery.Widgets_new.Tooltip;
 using UnityEngine;
@@ -35,7 +36,7 @@ namespace Solcery.Widgets_new
         public abstract void UpdateLinkedEntityId(int linkedEntityId);
         public abstract PlaceWidgetLayout LayoutForObjectId(int objectId);
         public abstract void UpdateAvailability(bool available);
-
+        public abstract IAnimatedObject GetAnimatedObject(int objectId);
     }
 
     public abstract class PlaceWidget<T> : PlaceWidget where T : PlaceWidgetLayout
@@ -163,5 +164,11 @@ namespace Solcery.Widgets_new
         {
             Layout.UpdateAvailable(available);
         }
+
+        public override IAnimatedObject GetAnimatedObject(int objectId)
+        {
+            return null;
+        }
+
     }
 }
