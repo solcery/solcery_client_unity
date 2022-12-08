@@ -360,6 +360,12 @@ namespace Solcery.Games.Contexts.GameStates
             _actions.AddAction(ContextGameStateActionPushAction.Create(actionType, value));
         }
 
+        public void PushActionJToken(int actionType, JToken value)
+        {
+            // TODO add jtoken parser
+            _actions.AddAction(ContextGameStateActionPushActionJToken.Create(actionType, value));
+        }
+
         public bool TryGetGameState(int deltaTimeMsec, out JObject gameState)
         {
             gameState = new JObject();

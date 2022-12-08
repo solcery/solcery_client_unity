@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
-      "hash": "089e7cbe2f8d4a82baf0f72923495c47691edeaa"
+      "hash": "ee8751fbd9c178712e36d0f1389a8b26702d3275"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -46,7 +46,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.16",
+      "version": "3.0.17",
       "depth": 0,
       "source": "registry",
       "dependencies": {

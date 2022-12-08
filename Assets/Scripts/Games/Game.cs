@@ -3,6 +3,8 @@ using Solcery.Accessors.Cache;
 using Solcery.BrickInterpretation.Runtime;
 using Solcery.BrickInterpretation.Runtime.Actions;
 using Solcery.BrickInterpretation.Runtime.Conditions;
+using Solcery.BrickInterpretation.Runtime.Jsons;
+using Solcery.BrickInterpretation.Runtime.Jsons.JKeyValues;
 using Solcery.BrickInterpretation.Runtime.Values;
 using Solcery.DebugViewers;
 //using Solcery.DebugViewers;
@@ -276,6 +278,7 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PlaySound, BrickActionPlaySound.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.SetScopeVariable, BrickActionSetScopeVariable.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PushAction, BrickActionPushAction.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.Action, BrickActionTypes.PushActionJToken, BrickActionPushActionJToken.Create);
             
             // Condition bricks
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Constant, BrickConditionConst.Create);
@@ -288,6 +291,15 @@ namespace Solcery.Games
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.Argument, BrickConditionArgument.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorOr, BrickConditionIteratorOr.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.Condition, BrickConditionTypes.IteratorAnd, BrickConditionIteratorAnd.Create);
+            
+            // JKeyValuePair
+            _serviceBricks.RegistrationBrickType(BrickTypes.JKeyValue, BrickJKeyValueTypes.Base, BrickJKeyValueBase.Create);
+            
+            // JToken
+            _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Int, BrickJTokenInt.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.String, BrickJTokenString.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Object, BrickJTokenObject.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Array, BrickJTokenArray.Create);
 
             if (!_serviceBricks.TryCheckAllBrickRegistration(out var unregisteredBrickList))
             {
