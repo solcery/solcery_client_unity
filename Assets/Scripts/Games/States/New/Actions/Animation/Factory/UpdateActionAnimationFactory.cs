@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using Solcery.Games.States.New.Actions.Animation.Empty;
 using Solcery.Utils;
 
-namespace Solcery.Games.States.New.Actions.Animation
+namespace Solcery.Games.States.New.Actions.Animation.Factory
 {
-    public sealed class UpdateActionAnimationFactory
+    public sealed class UpdateActionAnimationFactory : IUpdateActionAnimationFactory
     {
         private readonly IGame _game;
-        private readonly Dictionary<UpdateActionAnimationTypes, Func<JObject, UpdateAction>> _creationFuncs;
+        private readonly Dictionary<UpdateActionAnimationTypes, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation>> _creationFuncs;
         
-        public static UpdateActionAnimationFactory Create(IGame game)
+        public static IUpdateActionAnimationFactory Create(IGame game)
         {
             return new UpdateActionAnimationFactory(game);
         }
@@ -18,10 +19,10 @@ namespace Solcery.Games.States.New.Actions.Animation
         private UpdateActionAnimationFactory(IGame game)
         {
             _game = game;
-            _creationFuncs = new Dictionary<UpdateActionAnimationTypes, Func<JObject, UpdateAction>>();
+            _creationFuncs = new Dictionary<UpdateActionAnimationTypes, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation>>();
         }
         
-        public UpdateActionAnimationFactory RegistrationCreationFunc(UpdateActionAnimationTypes animationType, Func<JObject, UpdateAction> creationFunc)
+        public UpdateActionAnimationFactory RegistrationCreationFunc(UpdateActionAnimationTypes animationType, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation> creationFunc)
         {
             if (_creationFuncs.ContainsKey(animationType))
             {
@@ -41,14 +42,13 @@ namespace Solcery.Games.States.New.Actions.Animation
         //         "animation_id": 596
         //     }
         // }
-        public UpdateAction CreateAction(JObject data)
+        public UpdateActionAnimation CreateAction(int stateId, JObject value)
         {
-            if (data.TryGetValue("value", out JObject value)
-                && value.TryGetValue("animation_id", out int animationId)
+            if (value.TryGetValue("animation_id", out int animationId)
                 && _game.ServiceGameContent.Animations.TryTypeForId(animationId, out var animationType)
                 && _creationFuncs.TryGetValue(animationType, out var creationFunc))
             {
-                return creationFunc.Invoke(data);
+                return creationFunc.Invoke(this, stateId, value);
             }
             
             return UpdateActionAnimationEmpty.Create();

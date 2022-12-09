@@ -8,7 +8,7 @@ namespace Solcery.Games.States.New.Actions
 {
     public sealed class UpdateActionFactory : IUpdateActionFactory
     {
-        private readonly Dictionary<ContextGameStateActionTypes, Func<JObject, UpdateAction>> _creationFuncs;
+        private readonly Dictionary<ContextGameStateActionTypes, Func<int, JObject, UpdateAction>> _creationFuncs;
 
         public static IUpdateActionFactory Create()
         {
@@ -17,10 +17,10 @@ namespace Solcery.Games.States.New.Actions
 
         private UpdateActionFactory()
         {
-            _creationFuncs = new Dictionary<ContextGameStateActionTypes, Func<JObject, UpdateAction>>();
+            _creationFuncs = new Dictionary<ContextGameStateActionTypes, Func<int, JObject, UpdateAction>>();
         }
 
-        void IUpdateActionFactory.RegistrationCreationFunc(ContextGameStateActionTypes actionType, Func<JObject, UpdateAction> creationFunc)
+        void IUpdateActionFactory.RegistrationCreationFunc(ContextGameStateActionTypes actionType, Func<int, JObject, UpdateAction> creationFunc)
         {
             if (_creationFuncs.ContainsKey(actionType))
             {
@@ -33,13 +33,15 @@ namespace Solcery.Games.States.New.Actions
         bool IUpdateActionFactory.TryGetActionFromJson(JObject actionObject, out UpdateAction action)
         {
             action = null;
-            if (!actionObject.TryGetEnum("action_type", out ContextGameStateActionTypes actionType)
-                || !_creationFuncs.TryGetValue(actionType, out var creationFunc))
+            if (!actionObject.TryGetValue("state_id", out int stateId)
+                || !actionObject.TryGetEnum("action_type", out ContextGameStateActionTypes actionType)
+                || !_creationFuncs.TryGetValue(actionType, out var creationFunc)
+                || !actionObject.TryGetValue("value", out JObject value))
             {
                 return false;
             }
             
-            action = creationFunc.Invoke(actionObject);
+            action = creationFunc.Invoke(stateId, value);
             return true;
         }
 

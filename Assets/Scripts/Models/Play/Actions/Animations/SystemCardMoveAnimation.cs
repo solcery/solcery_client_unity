@@ -1,6 +1,7 @@
 using Leopotam.EcsLite;
 using Solcery.Games;
 using Solcery.Games.States.New.Actions.Animation;
+using Solcery.Games.States.New.Actions.Animation.Move;
 using Solcery.Models.Shared.Objects;
 using Solcery.Utils;
 using Solcery.Widgets_new;
@@ -35,7 +36,7 @@ namespace Solcery.Models.Play.Actions.Animations
             {
                 foreach (var action in actions)
                 {
-                    if (action is UpdateActionAnimationCardMove actionAnimationCardMove)
+                    if (action is UpdateActionAnimationMove actionAnimationCardMove)
                     {
                         Debug.Log($"Play card move animation objId {actionAnimationCardMove.ObjectId} duration {actionAnimationCardMove.DurationMsec} face {actionAnimationCardMove.Face} from place {actionAnimationCardMove.FromPlaceId}");
                         

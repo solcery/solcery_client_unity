@@ -4,6 +4,11 @@ using Solcery.Games.Contexts.GameStates;
 using Solcery.Games.Contexts.GameStates.Actions;
 using Solcery.Games.States.New.Actions;
 using Solcery.Games.States.New.Actions.Animation;
+using Solcery.Games.States.New.Actions.Animation.Factory;
+using Solcery.Games.States.New.Actions.Animation.Move;
+using Solcery.Games.States.New.Actions.Animation.Rotate;
+using Solcery.Games.States.New.Actions.Animation.Sequence;
+using Solcery.Games.States.New.Actions.Animation.Visibility;
 using Solcery.Games.States.New.Actions.PlaySound;
 using Solcery.Games.States.New.Factory;
 using Solcery.Games.States.New.States;
@@ -42,8 +47,10 @@ namespace Solcery.Games.States.New
             _actionFactory.RegistrationCreationFunc(ContextGameStateActionTypes.PlaySound, UpdateActionPlaySound.Create);
             _actionFactory.RegistrationCreationFunc(ContextGameStateActionTypes.Animation, UpdateActionAnimationFactory
                 .Create(game)
-                .RegistrationCreationFunc(UpdateActionAnimationTypes.CardMove, UpdateActionAnimationCardMove.Create)
-                .RegistrationCreationFunc(UpdateActionAnimationTypes.CardRotate, UpdateActionAnimationCardRotate.Create)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.Move, UpdateActionAnimationMove.Create)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.Rotate, UpdateActionAnimationRotate.Create)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.Visibility, UpdateActionAnimationVisibility.Create)
+                .RegistrationCreationFunc(UpdateActionAnimationTypes.Sequence, UpdateActionAnimationSequence.Create)
                 .CreateAction);
         }
 

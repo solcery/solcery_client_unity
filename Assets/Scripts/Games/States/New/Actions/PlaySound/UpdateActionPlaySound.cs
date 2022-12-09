@@ -8,14 +8,13 @@ namespace Solcery.Games.States.New.Actions.PlaySound
         public int SoundId { get; }
         public int Volume { get; }
 
-        public static UpdateAction Create(JObject data)
+        public static UpdateAction Create(int stateId, JObject value)
         {
-            return new UpdateActionPlaySound(data);
+            return new UpdateActionPlaySound(stateId, value);
         }
 
-        private UpdateActionPlaySound(JObject data) : base(data)
+        private UpdateActionPlaySound(int stateId, JObject value) : base(stateId)
         {
-            var value = data.GetValue<JObject>("value");
             SoundId = value.GetValue<int>("sound_id");
             Volume = value.GetValue<int>("volume");
         }

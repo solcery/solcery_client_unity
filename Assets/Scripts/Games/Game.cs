@@ -294,12 +294,14 @@ namespace Solcery.Games
             
             // JKeyValuePair
             _serviceBricks.RegistrationBrickType(BrickTypes.JKeyValue, BrickJKeyValueTypes.Base, BrickJKeyValueBase.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.JKeyValue, BrickJKeyValueTypes.Argument, BrickJKeyValueArgument.Create);
             
             // JToken
             _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Int, BrickJTokenInt.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.String, BrickJTokenString.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Object, BrickJTokenObject.Create);
             _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Array, BrickJTokenArray.Create);
+            _serviceBricks.RegistrationBrickType(BrickTypes.JToken, BrickJTokenTypes.Argument, BrickJTokenArgument.Create);
 
             if (!_serviceBricks.TryCheckAllBrickRegistration(out var unregisteredBrickList))
             {
