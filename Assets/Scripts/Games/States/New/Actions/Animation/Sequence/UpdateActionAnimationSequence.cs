@@ -7,7 +7,7 @@ namespace Solcery.Games.States.New.Actions.Animation.Sequence
 {
     public sealed class UpdateActionAnimationSequence : UpdateActionAnimation
     {
-        public IReadOnlyList<UpdateAction> Actions => _actions;
+        public IReadOnlyList<UpdateActionAnimation> Actions => _actions;
 
         private readonly List<UpdateActionAnimation> _actions;
         private readonly int _durationMsec;
