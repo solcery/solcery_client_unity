@@ -1,1 +1,39 @@
-{"actions":[],"states":[{"state_type":0,"value":{"attrs":[{"key":"testAttr","value":0}],"objects":[{"id":1,"tplId":4,"attrs":[{"key":"place","value":1}]},{"id":2,"tplId":8,"attrs":[{"key":"place","value":10}]}],"deleted_objects":[]}}]}
+{
+  "actions": [],
+  "states": [
+    {
+      "state_type": 0,
+      "value": {
+        "attrs": [
+          {
+            "key": "testAttr",
+            "value": 0
+          }
+        ],
+        "objects": [
+          {
+            "id": 1,
+            "tplId": 4,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "tplId": 8,
+            "attrs": [
+              {
+                "key": "place",
+                "value": 10
+              }
+            ]
+          }
+        ],
+        "deleted_objects": []
+      }
+    }
+  ]
+}

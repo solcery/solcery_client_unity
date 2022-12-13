@@ -3,8 +3,10 @@ using Solcery.BrickInterpretation.Runtime;
 using Solcery.Games;
 using Solcery.Games.States.New;
 using Solcery.Models.Play.Actions;
-using Solcery.Models.Play.Actions.Animations;
-using Solcery.Models.Play.Actions.Sound;
+using Solcery.Models.Play.Animation;
+using Solcery.Models.Play.Animation.Move;
+using Solcery.Models.Play.Animation.Rotate;
+using Solcery.Models.Play.Animation.Visibility;
 using Solcery.Models.Play.Click;
 using Solcery.Models.Play.DragDrop.OnDrag;
 using Solcery.Models.Play.DragDrop.OnDragMove;
@@ -13,6 +15,7 @@ using Solcery.Models.Play.DragDrop.Parameters;
 using Solcery.Models.Play.Game.State;
 using Solcery.Models.Play.Initial.Game.Content;
 using Solcery.Models.Play.Places;
+using Solcery.Models.Play.Sound;
 using Solcery.Models.Play.Timer;
 using Solcery.Models.Play.Tooltip;
 using Solcery.Models.Shared.Initial.Game.Content;
@@ -49,6 +52,8 @@ namespace Solcery.Models.Play
 
             // TODO первым делом проверяем наличие нового game state
             _systems.Add(SystemGameStateUpdate.Create(game));
+            // TODO обработаем все экшены для данного гейм стейта
+            _systems.Add(SystemActionApply.Create());
             
             // TODO сюда добавляем новые системы и тд
             _systems.Add(SystemPlaceUpdateVisibility.Create(game.ServiceBricks as IServiceBricksInternal));
@@ -62,7 +67,10 @@ namespace Solcery.Models.Play
             _systems.Add(SystemSoundPlay.Create());
             
             // TODO вызов проигрывания анимации движения карты (для примера)
-            _systems.Add(SystemCardMoveAnimation.Create(game.WidgetCanvas));
+            _systems.Add(SystemAnimationUpdateDelay.Create());
+            _systems.Add(SystemAnimationMove.Create(game.WidgetCanvas));
+            _systems.Add(SystemAnimationRotate.Create());
+            _systems.Add(SystemAnimationVisibility.Create());
             
             // TODO event data processor
             _systems.Add(SystemProcessEventData.Create(game));
@@ -84,9 +92,6 @@ namespace Solcery.Models.Play
 #if UNITY_EDITOR
             _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif
-            
-            // TODO тут удаляем все экшены для данного гейм стейта
-            _systems.Add(SystemRemoveActionForCurrentGameState.Create());
             
             // TODO Система удаляет компонет в конце цикла, возможно стоит вынести в отдельные подсистемы
             _systems.Add(SystemGameStateRemoveUpdateTag.Create());

@@ -22,7 +22,7 @@ namespace Solcery.Games.States.New.Actions.Animation.Factory
             _creationFuncs = new Dictionary<UpdateActionAnimationTypes, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation>>();
         }
         
-        public UpdateActionAnimationFactory RegistrationCreationFunc(UpdateActionAnimationTypes animationType, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation> creationFunc)
+        IUpdateActionAnimationFactory IUpdateActionAnimationFactory.RegistrationCreationFunc(UpdateActionAnimationTypes animationType, Func<IUpdateActionAnimationFactory, int, JObject, UpdateActionAnimation> creationFunc)
         {
             if (_creationFuncs.ContainsKey(animationType))
             {
@@ -42,7 +42,7 @@ namespace Solcery.Games.States.New.Actions.Animation.Factory
         //         "animation_id": 596
         //     }
         // }
-        public UpdateActionAnimation CreateAction(int stateId, JObject value)
+        UpdateActionAnimation IUpdateActionAnimationFactory.CreateAction(int stateId, JObject value)
         {
             if (value.TryGetValue("animation_id", out int animationId)
                 && _game.ServiceGameContent.Animations.TryTypeForId(animationId, out var animationType)

@@ -19,7 +19,12 @@
   },
   "sounds": {
     "name": "sounds",
-    "objects": []
+    "objects": [
+      {
+        "id": 26,
+        "sound": "https://shdw-drive.genesysgo.net/3z3S6uauaRisPpVkZsSmURx7mvgqE3pDwzVL9KJaFm3m/DnD%20-%20Drop%20Confirmed.wav"
+      }
+    ]
   },
   "commands": {
     "name": "commands",
@@ -758,7 +763,7 @@
                               "params": [
                                 {
                                   "name": "value",
-                                  "value": 15
+                                  "value": 18
                                 }
                               ]
                             }
@@ -1403,6 +1408,92 @@
             }
           ]
         }
+      },
+      {
+        "id": 27,
+        "name": "Sound - Test Sound",
+        "brick": {
+          "name": "Object",
+          "type": 5,
+          "subtype": 2,
+          "params": [
+            {
+              "name": "value",
+              "value": [
+                {
+                  "name": "Base",
+                  "type": 4,
+                  "subtype": 0,
+                  "params": [
+                    {
+                      "name": "key",
+                      "value": "sound_id"
+                    },
+                    {
+                      "name": "value",
+                      "value": {
+                        "name": "Int",
+                        "type": 5,
+                        "subtype": 0,
+                        "params": [
+                          {
+                            "name": "value",
+                            "value": {
+                              "name": "Sound Id",
+                              "type": 2,
+                              "subtype": 0,
+                              "params": [
+                                {
+                                  "name": "value",
+                                  "value": 26
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "Base",
+                  "type": 4,
+                  "subtype": 0,
+                  "params": [
+                    {
+                      "name": "key",
+                      "value": "volume"
+                    },
+                    {
+                      "name": "value",
+                      "value": {
+                        "name": "Int",
+                        "type": 5,
+                        "subtype": 0,
+                        "params": [
+                          {
+                            "name": "value",
+                            "value": {
+                              "name": "Constant",
+                              "type": 2,
+                              "subtype": 0,
+                              "params": [
+                                {
+                                  "name": "value",
+                                  "value": 100
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },
@@ -1538,122 +1629,21 @@
             {
               "name": "action1",
               "value": {
-                "name": "Iterator",
+                "name": "Client action JSON",
                 "type": 0,
-                "subtype": 5,
+                "subtype": 21,
                 "params": [
                   {
-                    "name": "condition",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Attribute",
-                            "type": 2,
-                            "subtype": 2,
-                            "params": [
-                              {
-                                "name": "attr_name",
-                                "value": "place"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Place",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 10
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
+                    "name": "action_type",
+                    "value": 1
                   },
                   {
-                    "name": "action",
+                    "name": "data",
                     "value": {
-                      "name": "Two actions",
-                      "type": 0,
-                      "subtype": 1,
-                      "params": [
-                        {
-                          "name": "action1",
-                          "value": {
-                            "name": "Move card to [Place]",
-                            "subtype": 10016,
-                            "type": 0,
-                            "params": [
-                              {
-                                "name": "Place",
-                                "value": {
-                                  "name": "Place",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 11
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "action2",
-                          "value": {
-                            "name": "Set scope variable",
-                            "type": 0,
-                            "subtype": 19,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "moved"
-                              },
-                              {
-                                "name": "value",
-                                "value": {
-                                  "name": "Constant",
-                                  "type": 2,
-                                  "subtype": 0,
-                                  "params": [
-                                    {
-                                      "name": "value",
-                                      "value": 1
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "limit",
-                    "value": {
-                      "name": "Constant",
-                      "type": 2,
-                      "subtype": 0,
-                      "params": [
-                        {
-                          "name": "value",
-                          "value": 1
-                        }
-                      ]
+                      "name": "Sound - Test Sound",
+                      "subtype": 10027,
+                      "type": 5,
+                      "params": []
                     }
                   }
                 ]
@@ -1662,50 +1652,12 @@
             {
               "name": "action2",
               "value": {
-                "name": "If-Then-Else",
+                "name": "Two actions",
                 "type": 0,
-                "subtype": 2,
+                "subtype": 1,
                 "params": [
                   {
-                    "name": "if",
-                    "value": {
-                      "name": "Equal",
-                      "type": 1,
-                      "subtype": 2,
-                      "params": [
-                        {
-                          "name": "value1",
-                          "value": {
-                            "name": "Scope variable",
-                            "type": 2,
-                            "subtype": 18,
-                            "params": [
-                              {
-                                "name": "var_name",
-                                "value": "moved"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "name": "value2",
-                          "value": {
-                            "name": "Constant",
-                            "type": 2,
-                            "subtype": 0,
-                            "params": [
-                              {
-                                "name": "value",
-                                "value": 0
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "then",
+                    "name": "action1",
                     "value": {
                       "name": "Iterator",
                       "type": 0,
@@ -1741,7 +1693,7 @@
                                   "params": [
                                     {
                                       "name": "value",
-                                      "value": 11
+                                      "value": 10
                                     }
                                   ]
                                 }
@@ -1752,20 +1704,58 @@
                         {
                           "name": "action",
                           "value": {
-                            "name": "Move card to [Place]",
-                            "subtype": 10016,
+                            "name": "Two actions",
                             "type": 0,
+                            "subtype": 1,
                             "params": [
                               {
-                                "name": "Place",
+                                "name": "action1",
                                 "value": {
-                                  "name": "Place",
-                                  "type": 2,
-                                  "subtype": 0,
+                                  "name": "Move card to [Place]",
+                                  "subtype": 10016,
+                                  "type": 0,
                                   "params": [
                                     {
+                                      "name": "Place",
+                                      "value": {
+                                        "name": "Place",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 11
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action2",
+                                "value": {
+                                  "name": "Set scope variable",
+                                  "type": 0,
+                                  "subtype": 19,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "moved"
+                                    },
+                                    {
                                       "name": "value",
-                                      "value": 10
+                                      "value": {
+                                        "name": "Constant",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 1
+                                          }
+                                        ]
+                                      }
                                     }
                                   ]
                                 }
@@ -1791,12 +1781,146 @@
                     }
                   },
                   {
-                    "name": "else",
+                    "name": "action2",
                     "value": {
-                      "name": "Void",
+                      "name": "If-Then-Else",
                       "type": 0,
-                      "subtype": 0,
-                      "params": []
+                      "subtype": 2,
+                      "params": [
+                        {
+                          "name": "if",
+                          "value": {
+                            "name": "Equal",
+                            "type": 1,
+                            "subtype": 2,
+                            "params": [
+                              {
+                                "name": "value1",
+                                "value": {
+                                  "name": "Scope variable",
+                                  "type": 2,
+                                  "subtype": 18,
+                                  "params": [
+                                    {
+                                      "name": "var_name",
+                                      "value": "moved"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "value2",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 0
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "then",
+                          "value": {
+                            "name": "Iterator",
+                            "type": 0,
+                            "subtype": 5,
+                            "params": [
+                              {
+                                "name": "condition",
+                                "value": {
+                                  "name": "Equal",
+                                  "type": 1,
+                                  "subtype": 2,
+                                  "params": [
+                                    {
+                                      "name": "value1",
+                                      "value": {
+                                        "name": "Attribute",
+                                        "type": 2,
+                                        "subtype": 2,
+                                        "params": [
+                                          {
+                                            "name": "attr_name",
+                                            "value": "place"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "value2",
+                                      "value": {
+                                        "name": "Place",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 11
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "action",
+                                "value": {
+                                  "name": "Move card to [Place]",
+                                  "subtype": 10016,
+                                  "type": 0,
+                                  "params": [
+                                    {
+                                      "name": "Place",
+                                      "value": {
+                                        "name": "Place",
+                                        "type": 2,
+                                        "subtype": 0,
+                                        "params": [
+                                          {
+                                            "name": "value",
+                                            "value": 10
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "limit",
+                                "value": {
+                                  "name": "Constant",
+                                  "type": 2,
+                                  "subtype": 0,
+                                  "params": [
+                                    {
+                                      "name": "value",
+                                      "value": 1
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "else",
+                          "value": {
+                            "name": "Void",
+                            "type": 0,
+                            "subtype": 0,
+                            "params": []
+                          }
+                        }
+                      ]
                     }
                   }
                 ]
@@ -1855,6 +1979,6 @@
   },
   "metadata": {
     "revision": 260,
-    "hash": "4531c1397569306d39dfdaae1e64bbf1"
+    "hash": "a79b4b5fa99408ee04d935167898777f"
   }
 }

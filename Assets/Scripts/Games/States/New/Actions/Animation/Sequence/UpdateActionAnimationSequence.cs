@@ -47,6 +47,7 @@ namespace Solcery.Games.States.New.Actions.Animation.Sequence
                     if (animationValueToken is JObject animationValue)
                     {
                         var updateAction = factory.CreateAction(stateId, animationValue);
+                        updateAction.UpdateDelay(_durationMsec);
                         _durationMsec += updateAction.GetDurationMsec();
                         _actions.Add(updateAction);
                     }
