@@ -1,6 +1,8 @@
 using Leopotam.EcsLite;
 using Solcery.Models.Play.Actions.Animation;
 using Solcery.Models.Play.Actions.Animation.Visibility;
+using Solcery.Utils;
+using Solcery.Widgets_new.Interfaces;
 using UnityEngine;
 
 namespace Solcery.Models.Play.Animation.Visibility
@@ -38,6 +40,12 @@ namespace Solcery.Models.Play.Animation.Visibility
             {
                 var objectId = objectIdPool.Get(entityId).ObjectId;
                 var visible = visiblePool.Get(entityId).Visible;
+                var currentPlace = world.GetPlaceWidgetForObjectId(objectId);
+
+                if (currentPlace is IObjectInContainerVisibility visibility)
+                {
+                    visibility.SetVisibility(objectId, visible);
+                }
                 
                 Debug.Log($"Play visible animation objId {objectId} visible {visible}");
                 

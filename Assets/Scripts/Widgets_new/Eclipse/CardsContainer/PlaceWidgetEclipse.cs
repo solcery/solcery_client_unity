@@ -17,6 +17,7 @@ using Solcery.Widgets_new.Eclipse.Cards;
 using Solcery.Widgets_new.Eclipse.Cards.Tokens;
 using Solcery.Widgets_new.Eclipse.DragDropSupport;
 using Solcery.Widgets_new.Effects;
+using Solcery.Widgets_new.Interfaces;
 using UnityEngine;
 
 namespace Solcery.Widgets_new.Eclipse.CardsContainer
@@ -27,7 +28,7 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         Vertical = 1
     }
     
-    public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection where T : PlaceWidgetEclipseLayoutBase
+    public class PlaceWidgetEclipse<T> : PlaceWidget<T>, IApplyDragWidget, IApplyDropWidget, IPlaceWidgetTokenCollection, IObjectInContainerVisibility where T : PlaceWidgetEclipseLayoutBase
     {
         private readonly HashSet<int> _dropObjectId;
         protected readonly Dictionary<int, IEclipseCardInContainerWidget> _cards;
@@ -535,5 +536,13 @@ namespace Solcery.Widgets_new.Eclipse.CardsContainer
         }
 
         #endregion
+
+        void IObjectInContainerVisibility.SetVisibility(int objectId, bool visibility)
+        {
+            if (_cards.TryGetValue(objectId, out var cardInContainerWidget))
+            {
+                //cardInContainerWidget.Layout.gameObject.SetActive(visibility);
+            }
+        }
     }
 }
